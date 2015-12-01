@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Vdc list</h1>
+
+    <table class="records_list table table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                
+                <th>Name</th>
+                <th>District</th>
+                <th>Region</th>
+                <th>Dist Code</th>
+                
+                <th>VDC Code</th>
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('vdc_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                <td>{{ entity.district }}</td>
+                <td>{{ entity.region }}</td>
+                <td>{{ entity.districtCode }}</td>
+                
+                <td>{{ entity.code }}</td>
+                
+                <td>
+                <a href="{{ path('vdc_show', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-success">Show</button></a>
+                    <a href="{{ path('vdc_edit', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-info">Edit</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+       
+    {% endblock %}

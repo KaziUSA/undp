@@ -1,0 +1,91 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Vdc list</h1>
+
+    <table class="records_list table table-striped table-bordered table-hover dataTables-example">
+        <thead>
+            <tr>
+                
+                <th>Name</th>
+                <th>District</th>
+                <th>Region</th>
+                <th>Dist Code</th>
+                
+                <th>VDC Code</th>
+                
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('vdc_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                <td><a href="{{ path('vdc_show_district', { 'district': entity.district }) }}">{{ entity.district }}</a></td>
+                <td>{{ entity.region }}</td>
+                <td>{{ entity.districtCode }}</td>
+                
+                <td>{{ entity.code }}</td>
+                
+                <td>
+                <a href="{{ path('vdc_show', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-success">Show</button></a>
+                    <a href="{{ path('vdc_edit', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-info">Edit</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('vdc_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
+{% block scriptIncludes %}
+<script>
+        $(document).ready(function() {
+            $('.dataTables-example').dataTable({
+                responsive: true,
+                "dom": 'T<"clear">lfrtip',
+                "tableTools": {
+                    "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+                }
+            });
+        });
+
+        
+    </script>
+<style>
+    body.DTTT_Print {
+        background: #fff;
+
+    }
+    .DTTT_Print #page-wrapper {
+        margin: 0;
+        background:#fff;
+    }
+
+    button.DTTT_button, div.DTTT_button, a.DTTT_button {
+        border: 1px solid #e7eaec;
+        background: #fff;
+        color: #676a6c;
+        box-shadow: none;
+        padding: 6px 8px;
+    }
+    button.DTTT_button:hover, div.DTTT_button:hover, a.DTTT_button:hover {
+        border: 1px solid #d2d2d2;
+        background: #fff;
+        color: #676a6c;
+        box-shadow: none;
+        padding: 6px 8px;
+    }
+
+    .dataTables_filter label {
+        margin-right: 5px;
+
+    }
+</style>
+{% endblock %}

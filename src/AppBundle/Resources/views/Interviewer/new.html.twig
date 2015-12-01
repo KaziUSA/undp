@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Interviewer creation</h1>
+
+    {{ form(form) }}
+
+        <br /><br />
+        <a href="{{ path('interviewer') }}">
+            <button type="button" class="btn btn-xs btn-success">Back to the list</button>
+        </a>
+    
+{% endblock %}

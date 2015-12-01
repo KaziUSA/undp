@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Ethnicity creation</h1>
+
+    {{ form(form) }}
+
+        <br /><br />
+        <a href="{{ path('ethnicity') }}">
+            <button type="button" class="btn btn-xs btn-info">
+            Back to the list
+            </button>
+        </a>
+        
+        <a href="{{ path('ethnicity_new') }}">
+            <button type="button" class="btn btn-xs btn-success">
+                Create a new entry
+            </button>
+        </a>
+    </li>
+</ul>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Ethnicity</h1>
+
+    <table class="record_properties  table table-condensed table-hover table-striped" width="200px">
+        <tbody>
+            
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        
+        <a href="{{ path('ethnicity') }}">
+            <button type="button" class="btn btn-xs btn-warning">
+                Back to the list
+            </button>
+        </a>
+    
+        <a href="{{ path('ethnicity_edit', { 'id': entity.id }) }}">
+            <button type="button" class="btn btn-xs btn-success">
+            Edit
+            </button>
+        </a>
+    
+        <a href="{{ path('ethnicity_new') }}">
+            <button type="button" class="btn btn-xs btn-info">
+                Create a new entry
+            </button>
+        </a>
+    {{ form(delete_form) }}
+
+{% endblock %}

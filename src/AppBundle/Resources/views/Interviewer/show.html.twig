@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Interviewer</h1>
+
+    <table class="record_properties table table-condensed table-hover table-striped">
+        <tbody>
+            
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Agency</th>
+                <td>{{ entity.agency }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ entity.phone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        
+        <a href="{{ path('interviewer') }}">
+            <button type="button" class="btn btn-xs btn-warning">Back to the list</button>
+        </a>
+    
+        <a href="{{ path('interviewer_edit', { 'id': entity.id }) }}">
+            <button type="button" class="btn btn-xs btn-success">Edit</button>
+        </a>
+        <a href="{{ path('interviewer_new') }}">
+            <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
+        </a>
+    
+    {{ form(delete_form) }}
+</ul>
+{% endblock %}

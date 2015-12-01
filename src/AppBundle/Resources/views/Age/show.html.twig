@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Age</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Age Group: </th>
+                <td>{{ entity.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+      <a href="{{ path('age') }}">
+            <button type="button" class="btn btn-xs btn-warning">
+                Back to the list
+            </button>
+        </a>
+    
+        <a href="{{ path('age_edit', { 'id': entity.id }) }}">
+            <button type="button" class="btn btn-xs btn-success">
+            Edit
+            </button>
+        </a>
+    
+        <a href="{{ path('age_new') }}">
+            <button type="button" class="btn btn-xs btn-info">
+                Create a new entry
+            </button>
+        </a>
+    {{ form(delete_form) }}
+
+{% endblock %}

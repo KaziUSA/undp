@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Interviewer list</h1>
+
+    <table class="records_list table table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                
+                <th>Name</th>
+                <th>Agency</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.agency }}</td>
+                <td>{{ entity.phone }}</td>
+                <td>{{ entity.email }}</td>
+                <td>
+               
+                        <a href="{{ path('interviewer_show', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-success">Show</button></a>
+                        <a href="{{ path('interviewer_edit', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-info">Edit</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        
+            <a href="{{ path('interviewer_new') }}">
+                <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
+            </a>
+        
+    {% endblock %}
