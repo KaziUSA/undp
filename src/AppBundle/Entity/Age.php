@@ -108,6 +108,6 @@ class Age
         return $this->survey;
     }
     public function __toString() {
-    return $this->name;
-}
+        return $this->name;
+    }
 }

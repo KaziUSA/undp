@@ -34,6 +34,13 @@ class Survey
      * @ORM\Column(name="term", type="integer")
      */
     private $term;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ward", type="integer")
+     */
+    private $ward;
 
     /**
      * @var integer
@@ -47,7 +54,43 @@ class Survey
      * @ORM\JoinColumn(name="age_id", referencedColumnName="id")
      */
     protected $age;
-
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="District", inversedBy="surveys")
+     * @ORM\JoinColumn(name="district_id", referencedColumnName="id")
+     */
+    protected $district;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Ethnicity", inversedBy="surveys")
+     * @ORM\JoinColumn(name="ethnicity_id", referencedColumnName="id")
+     */
+    protected $ethnicity;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Gender", inversedBy="surveys")
+     * @ORM\JoinColumn(name="gender_id", referencedColumnName="id")
+     */
+    protected $gender;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Interviewer", inversedBy="surveys")
+     * @ORM\JoinColumn(name="interviewer_id", referencedColumnName="id")
+     */
+    protected $interviewer;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Occupation", inversedBy="surveys")
+     * @ORM\JoinColumn(name="occupation_id", referencedColumnName="id")
+     */
+    protected $occupation;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Vdc", inversedBy="surveys")
+     * @ORM\JoinColumn(name="vdc_id", referencedColumnName="id")
+     */
+    protected $vdc;
+    
     /**
      * Get id
      *
@@ -105,6 +148,30 @@ class Survey
     {
         return $this->term;
     }
+    
+    /**
+     * Set ward
+     *
+     * @param integer $ward
+     *
+     * @return Survey
+     */
+    public function setWard($ward)
+    {
+        $this->ward = $ward;
+
+        return $this;
+    }
+
+    /**
+     * Get ward
+     *
+     * @return integer
+     */
+    public function getWard()
+    {
+        return $this->ward;
+    }
 
     /**
      * Set disability
@@ -152,5 +219,149 @@ class Survey
     public function getAge()
     {
         return $this->age;
+    }
+
+    /**
+     * Set district
+     *
+     * @param \AppBundle\Entity\District $district
+     *
+     * @return Survey
+     */
+    public function setDistrict(\AppBundle\Entity\District $district = null)
+    {
+        $this->district = $district;
+
+        return $this;
+    }
+
+    /**
+     * Get district
+     *
+     * @return \AppBundle\Entity\District
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * Set ethnicity
+     *
+     * @param \AppBundle\Entity\Ethnicity $ethnicity
+     *
+     * @return Survey
+     */
+    public function setEthnicity(\AppBundle\Entity\Ethnicity $ethnicity = null)
+    {
+        $this->ethnicity = $ethnicity;
+
+        return $this;
+    }
+
+    /**
+     * Get ethnicity
+     *
+     * @return \AppBundle\Entity\Ethnicity
+     */
+    public function getEthnicity()
+    {
+        return $this->ethnicity;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param \AppBundle\Entity\Gender $gender
+     *
+     * @return Survey
+     */
+    public function setGender(\AppBundle\Entity\Gender $gender = null)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return \AppBundle\Entity\Gender
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Set interviewer
+     *
+     * @param \AppBundle\Entity\Interviewer $interviewer
+     *
+     * @return Survey
+     */
+    public function setInterviewer(\AppBundle\Entity\Interviewer $interviewer = null)
+    {
+        $this->interviewer = $interviewer;
+
+        return $this;
+    }
+
+    /**
+     * Get interviewer
+     *
+     * @return \AppBundle\Entity\Interviewer
+     */
+    public function getInterviewer()
+    {
+        return $this->interviewer;
+    }
+
+    /**
+     * Set occupation
+     *
+     * @param \AppBundle\Entity\Occupation $occupation
+     *
+     * @return Survey
+     */
+    public function setOccupation(\AppBundle\Entity\Occupation $occupation = null)
+    {
+        $this->occupation = $occupation;
+
+        return $this;
+    }
+
+    /**
+     * Get occupation
+     *
+     * @return \AppBundle\Entity\Occupation
+     */
+    public function getOccupation()
+    {
+        return $this->occupation;
+    }
+
+    /**
+     * Set vdc
+     *
+     * @param \AppBundle\Entity\Vdc $vdc
+     *
+     * @return Survey
+     */
+    public function setVdc(\AppBundle\Entity\Vdc $vdc = null)
+    {
+        $this->vdc = $vdc;
+
+        return $this;
+    }
+
+    /**
+     * Get vdc
+     *
+     * @return \AppBundle\Entity\Vdc
+     */
+    public function getVdc()
+    {
+        return $this->vdc;
     }
 }

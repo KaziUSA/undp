@@ -3,43 +3,46 @@
 {% block body -%}
     <h1>Survey list</h1>
 
-    <table class="records_list">
+    <table class="records_list table table-condensed table-hover table-striped">
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Date</th>
-                <th>Term</th>
-                <th>Disability</th>
+                <th>Age Group</th>
+                <th>Gender</th>
+                <th>Ethnicity</th>
+                <th>Occupation</th>
+                <th>Disabled</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('survey_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.term }}</td>
-                <td>{{ entity.disability }}</td>
+                
+                <td>{% if entity.date %}{{ entity.date|date('M Y') }}{% endif %}</td>
+                <td>{{ entity.age }}</td>
+                <td>{{ entity.gender }}</td>
+                <td>{{ entity.ethnicity }}</td>
+                <td>{{ entity.occupation }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('survey_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('survey_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    {% if entity.disability == 0 %}NO{% else %}YES{% endif %}
+                    
+                </td>
+                <td>
+                
+                        <a href="{{ path('survey_show', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-success">Show</button></a>
+                        <a href="{{ path('survey_edit', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-info">Edit</button></a>
+                    
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
+        
             <a href="{{ path('survey_new') }}">
-                Create a new entry
+                <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
             </a>
-        </li>
-    </ul>
+        
     {% endblock %}
