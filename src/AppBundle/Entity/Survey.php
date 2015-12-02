@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Survey
@@ -91,6 +92,19 @@ class Survey
      */
     protected $vdc;
     
+    /**
+     * @ORM\OneToMany(targetEntity="SurveyResponse", mappedBy="survey")
+     */
+    protected $surveyresponses;
+    
+    public function __construct()
+    {
+        $this->surveyresponses = new ArrayCollection();
+    }
+    
+    public function __toString() {
+        return $this->name;
+    }
     /**
      * Get id
      *
@@ -363,5 +377,39 @@ class Survey
     public function getVdc()
     {
         return $this->vdc;
+    }
+
+    /**
+     * Add surveyresponse
+     *
+     * @param \AppBundle\Entity\SurveyResponse $surveyresponse
+     *
+     * @return Survey
+     */
+    public function addSurveyresponse(\AppBundle\Entity\SurveyResponse $surveyresponse)
+    {
+        $this->surveyresponses[] = $surveyresponse;
+
+        return $this;
+    }
+
+    /**
+     * Remove surveyresponse
+     *
+     * @param \AppBundle\Entity\SurveyResponse $surveyresponse
+     */
+    public function removeSurveyresponse(\AppBundle\Entity\SurveyResponse $surveyresponse)
+    {
+        $this->surveyresponses->removeElement($surveyresponse);
+    }
+
+    /**
+     * Get surveyresponses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSurveyresponses()
+    {
+        return $this->surveyresponses;
     }
 }

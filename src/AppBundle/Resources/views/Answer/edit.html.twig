@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Answer edit</h1>
+
+<a href="{{ path('answer') }}">
+            <button type="button" class="btn btn-xs btn-info">Back to the list</button>
+        </a>
+    {{ form(edit_form) }}
+<br />
+    {{ form(delete_form) }}   
+        
+    
+    
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>AnswerGroup </h1>
+{{ form(delete_form) }}<br />
+    <table class="record_properties table table-condensed table-hover table-striped">
+        <tbody>
+            <tr>
+                
+                
+                <th>{{ entity.name }}</th>
+                
+                
+            </tr>
+            {% for answer in answers %}
+            <tr>
+                <td>
+                    - {{ answer.name|e }}
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+<a href="{{ path('answergroup') }}"><button type="button" class="btn btn-xs btn-info">Back to the list</button></a>
+                    <a href="{{ path('answergroup_edit', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-success">Edit</button></a>
+
+{{ form(delete_form) }}
+        
+{% endblock %}

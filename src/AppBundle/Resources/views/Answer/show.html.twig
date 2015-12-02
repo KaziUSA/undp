@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Answer</h1>
+
+    <table class="record_properties table table-condensed table-hover table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <th>Answer</th>
+                <th>Weight</th>
+                <th>Actions</th>
+                
+            </tr>
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.weight }}</td>
+                <td>
+                <a href="{{ path('answer_edit', { 'id': entity.id }) }}">
+                    <button type="button" class="btn btn-xs btn-success">Edit</button>    
+                </a>
+                
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+<a href="{{ path('answer_new') }}">
+    <button type="button" class="btn btn-xs btn-info">
+        Create a new entry
+    </button>
+</a>
+<a href="{{ path('answer') }}">
+    <button type="button" class="btn btn-xs btn-info">Back to the list</button>
+</a>
+        {{ form(delete_form) }}
+{% endblock %}
