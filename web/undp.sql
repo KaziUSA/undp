@@ -33,6 +33,16 @@ INSERT INTO `age` (`id`, `name`) VALUES
 (6, 'Refused');
 
 --
+-- Dumping data for table `answer_group`
+--
+
+INSERT INTO `answer_group` (`id`, `name`) VALUES
+(1, 'Yes/No'),
+(2, 'Problem Areas'),
+(3, 'Not Satisfied Reason'),
+(4, 'Need Information About');
+
+--
 -- Dumping data for table `answer`
 --
 
@@ -74,27 +84,6 @@ INSERT INTO `answer` (`id`, `name`, `weight`, `answer_group_id`) VALUES
 (35, 'Government does not know what it''s doing', 1, 3),
 (36, 'Other', 1, 3);
 
---
--- Dumping data for table `answeroption`
---
-
-INSERT INTO `answeroption` (`id`, `answer_group_id`, `answer_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 1, 4),
-(5, 1, 5),
-(6, 1, 6);
-
---
--- Dumping data for table `answer_group`
---
-
-INSERT INTO `answer_group` (`id`, `name`) VALUES
-(1, 'Yes/No'),
-(2, 'Problem Areas'),
-(3, 'Not Satisfied Reason'),
-(4, 'Need Information About');
 
 --
 -- Dumping data for table `district`
@@ -252,13 +241,6 @@ INSERT INTO `question` (`id`, `number`, `name`, `answer_group_id`) VALUES
 (7, '2b', 'What is the second reason you are not satisfied with government?', 3),
 (8, '3', 'Do you have the information you need to get relief and support?', 1);
 
---
--- Dumping data for table `survey`
---
-
-INSERT INTO `survey` (`id`, `age_id`, `date`, `term`, `disability`, `district_id`, `ethnicity_id`, `gender_id`, `interviewer_id`, `occupation_id`, `vdc_id`, `ward`) VALUES
-(1, 3, '2015-09-30', 1, 0, 27, 2, 2, 1, 5, 1625, 0),
-(2, 4, '2015-09-26', 1, 0, 27, 2, 1, 1, 2, 1625, 0);
 
 --
 -- Dumping data for table `vdc`
@@ -4242,6 +4224,15 @@ INSERT INTO `vdc` (`id`, `district`, `region`, `district_code`, `name`, `code`, 
 (3970, 'Darchula', 'Far-Western Region', 75, 'Sunsera', 75039, 0, 0, ''),
 (3971, 'Darchula', 'Far-Western Region', 75, 'Tapoban', 75040, 0, 0, ''),
 (3972, 'Darchula', 'Far-Western Region', 75, 'Uku', 75041, 0, 0, '');
+
+--
+-- Dumping data for table `survey`
+--
+
+INSERT INTO `survey` (`id`, `age_id`, `date`, `term`, `disability`, `district_id`, `ethnicity_id`, `gender_id`, `interviewer_id`, `occupation_id`, `vdc_id`, `ward`) VALUES
+(1, 3, '2015-09-30', 1, 0, 27, 2, 2, 1, 5, 1625, 0),
+(2, 4, '2015-09-26', 1, 0, 27, 2, 1, 1, 2, 1625, 0);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
