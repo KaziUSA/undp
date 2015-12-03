@@ -119,4 +119,7 @@ class SurveyResponse
     {
         return $this->answer;
     }
+    public function __toString() {
+        return $this->name;
+    }
 }

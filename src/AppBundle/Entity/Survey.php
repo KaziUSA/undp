@@ -103,7 +103,12 @@ class Survey
     }
     
     public function __toString() {
-        return $this->name;
+        try {
+            return (string) $this->id;
+        } catch (Exception $exception) {
+            return '';
+        }
+        
     }
     /**
      * Get id

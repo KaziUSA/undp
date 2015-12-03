@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 01, 2015 at 08:21 AM
+-- Generation Time: Dec 03, 2015 at 05:42 AM
 -- Server version: 5.6.13
 -- PHP Version: 5.5.29
 
@@ -31,6 +31,70 @@ INSERT INTO `age` (`id`, `name`) VALUES
 (4, '55+'),
 (5, 'Don''t Know'),
 (6, 'Refused');
+
+--
+-- Dumping data for table `answer`
+--
+
+INSERT INTO `answer` (`id`, `name`, `weight`, `answer_group_id`) VALUES
+(1, 'Not at all', 2, 1),
+(2, 'Not very much', 1, 1),
+(3, 'Neutral', 0, 1),
+(4, 'Somewhat yes', 1, 1),
+(5, 'Completely yes', 2, 1),
+(6, 'Don''t Know', -1, 1),
+(7, 'Short Term Shelter (tent/shelterbox)', 1, 2),
+(8, 'Long-Term shelter (housing)', 1, 2),
+(9, 'Clean Water', 1, 2),
+(10, 'Financial Support', 1, 2),
+(11, 'Education', 1, 2),
+(12, 'Healthcare', 1, 2),
+(13, 'Psychosocial counseling', 1, 2),
+(14, 'Seeds and fertilizers', 1, 2),
+(15, 'Food', 1, 2),
+(16, 'Toilets/sanitation', 1, 2),
+(17, 'Livelihoods', 1, 2),
+(18, 'Housing inspections', 1, 2),
+(19, 'Other', 1, 2),
+(20, 'Relief distributed based on caste', 1, 3),
+(21, 'Relief distributed based on political parties', 1, 3),
+(22, 'Renters excluded from distribution', 1, 3),
+(23, 'Government plans unclear', 1, 3),
+(24, 'Was promised relief but never received', 1, 3),
+(25, 'Not included in distributions', 1, 3),
+(26, 'Can''t get to distribution sites', 1, 3),
+(27, 'Don''t know how to register for relief/services', 1, 3),
+(28, 'Do not trust government', 1, 3),
+(29, 'Reconstruction process taking too long', 1, 3),
+(30, 'Don''t know where distribution sites are', 1, 3),
+(31, 'Relief distributed based on sever damage', 1, 3),
+(32, 'Relief distributed based on distance from road', 1, 3),
+(33, 'Relief distributed based on first come, first served', 1, 3),
+(34, 'Government does not listen to my concerns', 1, 3),
+(35, 'Government does not know what it''s doing', 1, 3),
+(36, 'Other', 1, 3);
+
+--
+-- Dumping data for table `answeroption`
+--
+
+INSERT INTO `answeroption` (`id`, `answer_group_id`, `answer_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6);
+
+--
+-- Dumping data for table `answer_group`
+--
+
+INSERT INTO `answer_group` (`id`, `name`) VALUES
+(1, 'Yes/No'),
+(2, 'Problem Areas'),
+(3, 'Not Satisfied Reason'),
+(4, 'Need Information About');
 
 --
 -- Dumping data for table `district`
@@ -164,11 +228,37 @@ INSERT INTO `interviewer` (`id`, `name`, `agency`, `phone`, `email`) VALUES
 (8, 'Umesh Thapa', 'Accountability', NULL, NULL);
 
 --
+-- Dumping data for table `occupation`
+--
+
+INSERT INTO `occupation` (`id`, `name`) VALUES
+(1, 'Farmer/Laborer'),
+(2, 'Skilled worker (i.e. carpenter)'),
+(3, 'NGO worker/Business'),
+(4, 'Government ( i.e. teacher, health worker, army )'),
+(5, 'Other');
+
+--
+-- Dumping data for table `question`
+--
+
+INSERT INTO `question` (`id`, `number`, `name`, `answer_group_id`) VALUES
+(1, '1', 'Are your main problems being addressed?', 1),
+(2, '1a', 'What is your biggest problem?', 2),
+(3, '1b', 'What is your second biggest problem?', 2),
+(4, '1c', 'What is your third biggest problem?', 2),
+(5, '2', 'Are you satisfied with what the government is doing for you after the earthquake?', 1),
+(6, '2a', 'What is the first reason you are not satisfied with government?', 3),
+(7, '2b', 'What is the second reason you are not satisfied with government?', 3),
+(8, '3', 'Do you have the information you need to get relief and support?', 1);
+
+--
 -- Dumping data for table `survey`
 --
 
-INSERT INTO `survey` (`id`, `age_id`, `date`, `term`, `disability`) VALUES
-(1, 2, '2015-04-03', 1, 0);
+INSERT INTO `survey` (`id`, `age_id`, `date`, `term`, `disability`, `district_id`, `ethnicity_id`, `gender_id`, `interviewer_id`, `occupation_id`, `vdc_id`, `ward`) VALUES
+(1, 3, '2015-09-30', 1, 0, 27, 2, 2, 1, 5, 1625, 0),
+(2, 4, '2015-09-26', 1, 0, 27, 2, 1, 1, 2, 1625, 0);
 
 --
 -- Dumping data for table `vdc`
