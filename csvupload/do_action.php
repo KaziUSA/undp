@@ -66,6 +66,17 @@ $cid = mysql_select_db($database, $connect); // supply your database name
         $theData = fgets($csvfile);
 
         #adding interviewer: Name of Interviewer, Agency
+        //added so commented for not adding again
+        //uncomment the following code in production
+        $csv_interviewer[] = [];//created empty array to store and check unique interviewer and add only those unique interviewer in database
+        $query_retrive_interviewer = "SELECT name from interviewer";
+        $retrived_interviewer = mysql_query($query_retrive_interviewer, $connect);
+        while($row = mysql_fetch_assoc($retrived_interviewer)) {
+          $csv_interviewer[] = $row['name'];
+        }
+        //print_r($csv_interviewer);
+        //exit(0);
+
         $i = 0;//0
         while (!feof($csvfile)) {
           $csv_data[] = fgets($csvfile, 1024);
@@ -75,15 +86,27 @@ $cid = mysql_select_db($database, $connect); // supply your database name
           $insert_csv['name_of_interviewer'] = $csv_array[0];
           $insert_csv['agency'] = $csv_array[1];
 
-          //execute only if there is data: other wise blank row will be inserted at the last
-          if($insert_csv['name_of_interviewer'] != '') {
-            $query = "INSERT INTO interviewer(name,agency)
-            VALUES(' " . $insert_csv['name_of_interviewer'] . "','" . $insert_csv['agency'] . "')";
-            
-            $n=mysql_query($query, $connect );
-          }
-          $i++;
+          //if(in_array($insert_csv['name_of_interviewer'], $csv_interviewer)) {
+          if(!is_numeric(array_search($insert_csv['name_of_interviewer'], $csv_interviewer))) {
+            //returns empty value if exists in array
+
+            //add to table interviewer only if there interviewer is not present in array
+            //execute only if there is data: other wise blank row will be inserted at the last
+            if($insert_csv['name_of_interviewer'] != '') {
+              $query = "INSERT INTO interviewer(name,agency)
+              VALUES(' " . $insert_csv['name_of_interviewer'] . "','" . $insert_csv['agency'] . "')";
+              
+              $n=mysql_query($query, $connect );
+            }
+          
+            //updating array after adding in database table
+            $csv_interviewer[] = $insert_csv['name_of_interviewer'];
+          }//end else
+
+          $i++;//incrementing i to read new line
         }//end while
+
+        //print_r($csv_interviewer);
         #adding interviewer complete
 
         fclose($csvfile);
