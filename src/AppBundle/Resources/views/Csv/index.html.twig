@@ -1,0 +1,144 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}CSV Upload{% endblock %}
+
+{% block header %}
+<div class="row">
+            <div class="col-lg-12">
+                
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        
+                        <table class="records_list table table-striped table-bordered table-hover dataTables-example">
+                            {% set excludeColumns = { 0:0, 1:2, 2:3, 3:4, 4:5, 5:6, 6:7, 7:14, 8:63, 9: 54, 10:55, 11:56, 12:57, 13:58, 14:59, 15:60, 16:61, 17:62 } %}
+                            
+                            {% set count = 0  %}
+                            
+                            {% set numColumns = 10 %}
+                            
+                            {% for entity in fileInfo %}
+                                {% if count == 0 %}
+                                    {% set count = 1 %}
+                                {% elseif count == 1 %}
+                            
+                                <thead>
+                                    <tr>
+                                        {% set columncount = 0 %}
+                                        {% for val in entity %}
+                                            {% if columncount in excludeColumns %}
+                                        
+                                            {% else %}
+                                                <th>{{ val }}</a></th>
+                                            {% endif %}
+                                            {% set columncount = columncount + 1 %}
+                                        {% endfor %}
+                                        
+                                        
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% set count = 2  %}
+                                
+                                {% else %}
+                                
+                                    
+                                
+                                    <tr>
+                                        {% set columncount = 0 %}
+                                        {% for val in entity %}
+                                            {% if columncount in excludeColumns %}
+                                        
+                                            {% else %}
+                                                <td>{{ val }}</td>
+                                            {% endif %}
+                                            {% set columncount = columncount + 1 %}
+                                        {% endfor %}
+                                    </tr>
+                                
+                                {% endif %}
+                            {% endfor %}    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+ 
+
+{% endblock %}
+{% block body %}
+<h1>Welcome to the Csv upload page</h1>
+
+<p>
+<form action="">
+    <div id="appbundle_csvupload">
+        <div>
+            <label for="appbundle_csvupload_name" class="required">Name</label>
+            <input type="text" id="appbundle_csvupload_name" name="appbundle_csvupload[name]" required="required" maxlength="255">
+        </div>
+        <div>
+            <label for="appbundle_csvupload_agency" class="required">Agency</label>
+            <input type="text" id="appbundle_csvupload_agency" name="appbundle_csvupload[agency]" required="required" maxlength="255">
+        </div>
+        <div>
+            <label for="appbundle_csvupload_phone">Phone</label>
+            <input type="text" id="appbundle_csvupload_phone" name="appbundle_csvupload[phone]" maxlength="255">
+        </div>
+        <div>
+            <label for="appbundle_csvupload_email">Email</label>
+            <input type="text" id="appbundle_csvupload_email" name="appbundle_csvupload[email]" maxlength="255">
+        </div>
+        <div>
+            <button type="submit" id="appbundle_csvupload_submit" name="appbundle_csvupload[submit]">Create</button>
+        </div>
+        <input type="hidden" id="appbundle_csvupload__token" name="appbundle_csvupload[_token]" value="cYGDFrZlbimLAxxDo4xO-P0j_kzjoDeBRUK3z5wb3sc">
+    </div>
+</form>
+</p>
+{% endblock %}
+{% block scriptIncludes %}
+<script>
+        $(document).ready(function() {
+            $('.dataTables-example').dataTable({
+                responsive: true,
+                "dom": 'T<"clear">lfrtip',
+                "tableTools": {
+                    "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+                }
+            });
+        });
+
+        
+    </script>
+<style>
+    body.DTTT_Print {
+        background: #fff;
+
+    }
+    .DTTT_Print #page-wrapper {
+        margin: 0;
+        background:#fff;
+    }
+
+    button.DTTT_button, div.DTTT_button, a.DTTT_button {
+        border: 1px solid #e7eaec;
+        background: #fff;
+        color: #676a6c;
+        box-shadow: none;
+        padding: 6px 8px;
+    }
+    button.DTTT_button:hover, div.DTTT_button:hover, a.DTTT_button:hover {
+        border: 1px solid #d2d2d2;
+        background: #fff;
+        color: #676a6c;
+        box-shadow: none;
+        padding: 6px 8px;
+    }
+
+    .dataTables_filter label {
+        margin-right: 5px;
+
+    }
+</style>
+{% endblock %}
