@@ -17,9 +17,9 @@
 		  	<p>Currently if you upload Round_3_Survey.csv which is present in /undp/csvupload/uploads:</p>
 		  	<ul>
 		  		<li>Name_of_interviewer, Agency will be uploaded in table:interviewer</li>
-		  		<li>Age will be uploaded in table:age</li>
-		  		<li>Caste_Ethnicity will be uploaded in table:ethnicity</li>
-		  		<li>Occupation will be uploaded in table:occupation</li>
+		  		<!--<li>Commented: Age will be uploaded in table:age</li>
+		  		<li>Commented: Caste_Ethnicity will be uploaded in table:ethnicity</li>
+		  		<li>Commented: Occupation will be uploaded in table:occupation</li>-->
 		  	</ul>
 		  </div>
 

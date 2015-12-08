@@ -117,8 +117,9 @@ $cid = mysql_select_db($database, $connect); // supply your database name
         
         
         #adding Age in table:age
+        //we don't need this, there is alreay age group in database
         
-        $csvfile = fopen($csv_file, 'r');//re-opening the file
+        /*$csvfile = fopen($csv_file, 'r');//re-opening the file
         $theData = fgets($csvfile);
         $csv_age[] = [];//created empty array to store and check unique age group and add only those unique age_group in database
         $query_retrive_age = "SELECT name from age";
@@ -155,7 +156,7 @@ $cid = mysql_select_db($database, $connect); // supply your database name
           }//end else
 
           $i++;//incrementing i to read new line
-        }//end while
+        }//end while*/
 
         //print_r($csv_age);
         #adding Age group complete
@@ -164,8 +165,9 @@ $cid = mysql_select_db($database, $connect); // supply your database name
 
 
         #adding Caste_ethnicity in table:ethnicity
+        //we don't need this, there is already ethnicity
         
-        $csvfile = fopen($csv_file, 'r');//re-opening the file
+        /*$csvfile = fopen($csv_file, 'r');//re-opening the file
         $theData = fgets($csvfile);
         $csv_ethnicity[] = [];//created empty array to store and check unique ethnicity and add only those unique ethnicity in database
         $query_retrive_ethnicity = "SELECT name from ethnicity";
@@ -202,7 +204,7 @@ $cid = mysql_select_db($database, $connect); // supply your database name
           }//end else
 
           $i++;//incrementing i to read new line
-        }//end while
+        }//end while*/
 
         //print_r($csv_ethnicity);
         #adding ethnicity complete
@@ -210,8 +212,9 @@ $cid = mysql_select_db($database, $connect); // supply your database name
 
 
         #adding Occupation in table:occupation
-        
-        $csvfile = fopen($csv_file, 'r');//re-opening the file
+        //we don't need this, there is already occupation in database
+
+        /*$csvfile = fopen($csv_file, 'r');//re-opening the file
         $theData = fgets($csvfile);
         $csv_occupation[] = [];//created empty array to store and check unique occupation and add only those unique occupation in database
         $query_retrive_occupation = "SELECT name from occupation";
@@ -248,7 +251,7 @@ $cid = mysql_select_db($database, $connect); // supply your database name
           }//end else
 
           $i++;//incrementing i to read new line
-        }//end while
+        }//end while*/
 
         //print_r($csv_occupation);
         #adding occupation complete
