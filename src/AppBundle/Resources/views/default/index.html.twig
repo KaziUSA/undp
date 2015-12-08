@@ -15,6 +15,25 @@
     <link href="/css/leaflet.css" rel="stylesheet">
     <link href="/css/custom.css" rel="stylesheet">
 {% endblock %}
+
+
+{% block header %}
+<div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Bar Chart Example</h5>
+                            <div ibox-tools=""></div>
+                        </div>
+                        <div class="ibox-content">
+                            <div>
+                                <canvas id="barChart" height="494" width="1060" style="width: 530px; height: 247px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
+
+
 {% block scriptIncludes %}
 <script type="text/javascript">
 		//change these variables
@@ -24,4 +43,47 @@
 <script type="text/javascript" src="/js/leaflet.js"></script>
 <script type="text/javascript" src="/js/nepal-districts.js"></script>
 <script type="text/javascript" src="/js/custom.js"></script>
+<!-- ChartJS-->
+<script src="/js/plugins/chartJs/Chart.min.js"></script>
+<script type="text/javascript">
+
+var barData = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(26,179,148,0.5)",
+                strokeColor: "rgba(26,179,148,0.8)",
+                highlightFill: "rgba(26,179,148,0.75)",
+                highlightStroke: "rgba(26,179,148,1)",
+                data: [28, 48, 40, 19, 86, 27, 90]
+            }
+        ]
+    };
+
+    var barOptions = {
+        scaleBeginAtZero: true,
+        scaleShowGridLines: true,
+        scaleGridLineColor: "rgba(0,0,0,.05)",
+        scaleGridLineWidth: 1,
+        barShowStroke: true,
+        barStrokeWidth: 2,
+        barValueSpacing: 5,
+        barDatasetSpacing: 1,
+        responsive: true,
+    }
+
+
+    var ctx = document.getElementById("barChart").getContext("2d");
+    var myNewChart = new Chart(ctx).Bar(barData, barOptions);
+</script>
 {% endblock %}
+

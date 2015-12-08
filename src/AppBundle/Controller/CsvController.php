@@ -17,54 +17,9 @@ class CsvController extends Controller
     public function indexAction()
     {
         
-        $file_name = 'survey.xlsx';
+        $file_name = 'uploads/round2/survey.xlsx';
         $sheet_name = 'uploaded_form_g54cmb';
-        
-        $objReader = PHPExcel_IOFactory::createReaderForFile($file_name);
-        $objReader->setLoadSheetsOnly(array($sheet_name));
-        $objReader->setReadDataOnly(true);
-        
-        $objPHPExcel = $objReader->load($file_name);
-        
-        $highestColumm = $objPHPExcel->setActiveSheetIndex(0)->getHighestColumn();
-        $highestRow = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-        
-        
-        $fileInfo = array();
-        $rowCount = 0;
-        //echo '<table border="1">';
-        
-        foreach ($objPHPExcel->setActiveSheetIndex(0)->getRowIterator() as $row) {
-            $cellIterator = $row->getCellIterator();
-            $cellIterator->setIterateOnlyExistingCells(false);
-            //echo '<tr>';
-            $row = array();
-            foreach ($cellIterator as $cell) {
-                if (!is_null($cell)) {
-                    $columnCount = 0;
-                    $value = $cell->getCalculatedValue();
-                    
-                    //echo '<td>';
-                    //echo $value;
-                    //echo '</td>';
-                    $fileInfo[$rowCount][$columnCount] = $value;
-                    array_push($row, $value);
-                    $columnCount++;
-        
-                }
-                //array_push($file
-                
-            }
-            array_push($fileInfo, $row);
-                           $rowCount++;
-        
-          //  echo '</tr>';
-        }
-        
-        //echo '</table>';
-		
-        //var_dump($fileInfo);
-        //exit();
+            $fileInfo = $this->getCsvData($file_name);
         
         return array(
                 'fileInfo' => $fileInfo
@@ -76,8 +31,52 @@ class CsvController extends Controller
      */
     public function uploadAction()
     {
+        
         return array(
                 // ...
-            );    }
+            );    
+    }
+    /**
+     * Get CSV Data
+     * Takes in a file name to read data from
+     * If sheet_name is specified, then that particular sheet is read
+     */
+    private function getCsvData($file_name, $sheet_name = null){
+        $objReader = PHPExcel_IOFactory::createReaderForFile($file_name);
+        //If specific Sheet, then use this
+        if($sheet_name != null){
+            $objReader->setLoadSheetsOnly(array($sheet_name));
+        }
+        $objReader->setReadDataOnly(true);
+        
+        $objPHPExcel = $objReader->load($file_name);
+        
+        $highestColumm = $objPHPExcel->setActiveSheetIndex(0)->getHighestColumn();
+        $highestRow = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+        
+        
+        $fileInfo = array();
+        $rowCount = 0;
+        
+        
+        foreach ($objPHPExcel->setActiveSheetIndex(0)->getRowIterator() as $row) {
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(false);
+            
+            $row = array();
+            foreach ($cellIterator as $cell) {
+                if (!is_null($cell)) {
+                    $columnCount = 0;
+                    $value = $cell->getCalculatedValue();
+                    array_push($row, $value);
+                    $columnCount++;
+        
+                    }
+                }
+                array_push($fileInfo, $row);
+                $rowCount++;
+            }
+            return $fileInfo;
+        }
 
 }
