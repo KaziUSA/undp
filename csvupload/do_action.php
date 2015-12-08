@@ -62,12 +62,17 @@ $cid = mysql_select_db($database, $connect); // supply your database name
         //after uploading write to the database
         $csv_file = CSV_PATH . $file_name; // Name of your CSV file
 
-        $csvfile = fopen($csv_file, 'r');
-        $theData = fgets($csvfile);
-
-        #adding interviewer: Name of Interviewer, Agency
+        
         //added so commented for not adding again
         //uncomment the following code in production
+
+
+
+        #adding Name of Interviewer, Agency in table:interviewer
+
+        $csvfile = fopen($csv_file, 'r');
+        $theData = fgets($csvfile);
+        
         $csv_interviewer[] = [];//created empty array to store and check unique interviewer and add only those unique interviewer in database
         $query_retrive_interviewer = "SELECT name from interviewer";
         $retrived_interviewer = mysql_query($query_retrive_interviewer, $connect);
@@ -108,6 +113,148 @@ $cid = mysql_select_db($database, $connect); // supply your database name
 
         //print_r($csv_interviewer);
         #adding interviewer complete
+
+        
+        
+        #adding Age in table:age
+        
+        $csvfile = fopen($csv_file, 'r');//re-opening the file
+        $theData = fgets($csvfile);
+        $csv_age[] = [];//created empty array to store and check unique age group and add only those unique age_group in database
+        $query_retrive_age = "SELECT name from age";
+        $retrived_age = mysql_query($query_retrive_age, $connect);
+        while($row = mysql_fetch_assoc($retrived_age)) {
+          $csv_age[] = $row['name'];
+        }
+        //print_r($csv_age);
+        //exit(0);
+
+        $i = 0;//0
+        while (!feof($csvfile)) {
+          $csv_data[] = fgets($csvfile, 1024);
+          $csv_array = explode(",", $csv_data[$i]);
+          $insert_csv = array();
+          
+          $insert_csv['name_of_age'] = $csv_array[11];//O - A, 9 - J
+
+          //if(in_array($insert_csv['name_of_age'], $csv_age)) {
+          if(!is_numeric(array_search($insert_csv['name_of_age'], $csv_age))) {
+            //returns empty value if exists in array
+
+            //add to table age only if there age is not present in array
+            //execute only if there is data: other wise blank row will be inserted at the last
+            if($insert_csv['name_of_age'] != '') {
+              $query = "INSERT INTO age(name)
+              VALUES(' " . $insert_csv['name_of_age'] . " ') ";
+              
+              $n=mysql_query($query, $connect );
+            }
+          
+            //updating array after adding in database table
+            $csv_age[] = $insert_csv['name_of_age'];
+          }//end else
+
+          $i++;//incrementing i to read new line
+        }//end while
+
+        //print_r($csv_age);
+        #adding Age group complete
+
+
+
+
+        #adding Caste_ethnicity in table:ethnicity
+        
+        $csvfile = fopen($csv_file, 'r');//re-opening the file
+        $theData = fgets($csvfile);
+        $csv_ethnicity[] = [];//created empty array to store and check unique ethnicity and add only those unique ethnicity in database
+        $query_retrive_ethnicity = "SELECT name from ethnicity";
+        $retrived_ethnicity = mysql_query($query_retrive_ethnicity, $connect);
+        while($row = mysql_fetch_assoc($retrived_ethnicity)) {
+          $csv_ethnicity[] = $row['name'];
+        }
+        //print_r($csv_ethnicity);
+        //exit(0);
+
+        $i = 0;//0
+        while (!feof($csvfile)) {
+          $csv_data[] = fgets($csvfile, 1024);
+          $csv_array = explode(",", $csv_data[$i]);
+          $insert_csv = array();
+          
+          $insert_csv['ethnicity'] = $csv_array[13];//O - A, 9 - J
+
+          //if(in_array($insert_csv['name_of_ethnicity'], $csv_ethnicity)) {
+          if(!is_numeric(array_search($insert_csv['ethnicity'], $csv_ethnicity))) {
+            //returns empty value if exists in array
+
+            //add to table ethnicity only if there ethnicity is not present in array
+            //execute only if there is data: other wise blank row will be inserted at the last
+            if($insert_csv['ethnicity'] != '') {
+              $query = "INSERT INTO ethnicity(name)
+              VALUES(' " . $insert_csv['ethnicity'] . " ') ";
+              
+              $n=mysql_query($query, $connect );
+            }
+          
+            //updating array after adding in database table
+            $csv_ethnicity[] = $insert_csv['ethnicity'];
+          }//end else
+
+          $i++;//incrementing i to read new line
+        }//end while
+
+        //print_r($csv_ethnicity);
+        #adding ethnicity complete
+
+
+
+        #adding Occupation in table:occupation
+        
+        $csvfile = fopen($csv_file, 'r');//re-opening the file
+        $theData = fgets($csvfile);
+        $csv_occupation[] = [];//created empty array to store and check unique occupation and add only those unique occupation in database
+        $query_retrive_occupation = "SELECT name from occupation";
+        $retrived_occupation = mysql_query($query_retrive_occupation, $connect);
+        while($row = mysql_fetch_assoc($retrived_occupation)) {
+          $csv_occupation[] = $row['name'];
+        }
+        //print_r($csv_occupation);
+        //exit(0);
+
+        $i = 0;//0
+        while (!feof($csvfile)) {
+          $csv_data[] = fgets($csvfile, 1024);
+          $csv_array = explode(",", $csv_data[$i]);
+          $insert_csv = array();
+          
+          $insert_csv['occupation'] = $csv_array[15];//O - A, 9 - J, 15 - P
+
+          //if(in_array($insert_csv['name_of_occupation'], $csv_occupation)) {
+          if(!is_numeric(array_search($insert_csv['occupation'], $csv_occupation))) {
+            //returns empty value if exists in array
+
+            //add to table occupation only if there occupation is not present in array
+            //execute only if there is data: other wise blank row will be inserted at the last
+            if($insert_csv['occupation'] != '') {
+              $query = "INSERT INTO occupation(name)
+              VALUES(' " . $insert_csv['occupation'] . " ') ";
+              
+              $n=mysql_query($query, $connect );
+            }
+          
+            //updating array after adding in database table
+            $csv_occupation[] = $insert_csv['occupation'];
+          }//end else
+
+          $i++;//incrementing i to read new line
+        }//end while
+
+        //print_r($csv_occupation);
+        #adding occupation complete
+
+        
+
 
         fclose($csvfile);
 
