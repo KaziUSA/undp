@@ -25,12 +25,12 @@ SET time_zone = "+00:00";
 --
 
 INSERT INTO `age` (`id`, `name`) VALUES
-(1, '15 - 20'),
-(2, '25 - 39'),
-(3, '40 - 54'),
-(4, '55+'),
-(5, 'Don''t Know'),
-(6, 'Refused');
+(1, '15_24'),
+(2, '25_39'),
+(3, '40_54'),
+(4, '55_greater'),
+(5, 'don_t_know'),
+(6, 'refused');
 
 --
 -- Dumping data for table `answer_group`
@@ -191,7 +191,7 @@ INSERT INTO `ethnicity` (`id`, `name`) VALUES
 (6, 'Dalit'),
 (7, 'Chhetri'),
 (8, 'Brahmin'),
-(9, 'Other');
+(9, 'other');
 
 --
 -- Dumping data for table `gender`
@@ -221,11 +221,11 @@ INSERT INTO `interviewer` (`id`, `name`, `agency`, `phone`, `email`) VALUES
 --
 
 INSERT INTO `occupation` (`id`, `name`) VALUES
-(1, 'Farmer/Laborer'),
-(2, 'Skilled worker (i.e. carpenter)'),
-(3, 'NGO worker/Business'),
-(4, 'Government ( i.e. teacher, health worker, army )'),
-(5, 'Other');
+(1, 'farmer_laborer'),
+(2, 'skilled_worker'),
+(3, 'ngo_worker_bus'),
+(4, 'government_ser'),
+(5, 'other');
 
 --
 -- Dumping data for table `question`
