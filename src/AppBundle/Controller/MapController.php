@@ -64,7 +64,7 @@ class MapController extends Controller
         $properties['id'] = $entity->getId();
         $properties['name'] = $entity->getName();
         $properties['boys'] = 0;
-        $properties['girls'] = 0;
+        $properties['girls'] = 1;
         $properties['total'] = 11;
         
         $geoJSON['properties'] = $properties;
