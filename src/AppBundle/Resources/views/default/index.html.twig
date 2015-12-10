@@ -18,10 +18,10 @@
 
 
 {% block header %}
-<div class="col-lg-6">
+<div class="col-lg-8">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Bar Chart Example</h5>
+                            <h5>Are your main problems being addressed?</h5>
                             <div ibox-tools=""></div>
                         </div>
                         <div class="ibox-content">
@@ -48,23 +48,31 @@
 <script type="text/javascript">
 
 var barData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Tamang", "Newar", "Muslim", "Janajati", "Gurung", "Dalit", "Chhetri", "Brahmin", "Other"],
         datasets: [
             {
-                label: "My First dataset",
+                label: "Yes",
                 fillColor: "rgba(220,220,220,0.5)",
                 strokeColor: "rgba(220,220,220,0.8)",
                 highlightFill: "rgba(220,220,220,0.75)",
                 highlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: [{% for num in yes %} {{num}} ,{% endfor %}]
             },
             {
-                label: "My Second dataset",
+                label: "No",
                 fillColor: "rgba(26,179,148,0.5)",
                 strokeColor: "rgba(26,179,148,0.8)",
                 highlightFill: "rgba(26,179,148,0.75)",
                 highlightStroke: "rgba(26,179,148,1)",
-                data: [28, 48, 40, 19, 86, 27, 90]
+                data: [{% for num in no %} {{num}} ,{% endfor %}]
+            },
+            {
+                label: "Neutral/Don't know",
+                fillColor: "rgba(100,100,148,0.5)",
+                strokeColor: "rgba(100,100,148,0.8)",
+                highlightFill: "rgba(100,100,148,0.75)",
+                highlightStroke: "rgba(100,100,148,1)",
+                data: [{% for num in other %} {{num}} ,{% endfor %}]
             }
         ]
     };
@@ -79,6 +87,8 @@ var barData = {
         barValueSpacing: 5,
         barDatasetSpacing: 1,
         responsive: true,
+        scaleShowLabels: true,
+        multiTooltipTemplate: "<%= value %>",
     }
 
 
