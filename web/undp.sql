@@ -33,6 +33,16 @@ INSERT INTO `age` (`id`, `name`) VALUES
 (6, 'Refused');
 
 --
+-- Dumping data for table `answer_group`
+--
+
+INSERT INTO `answer_group` (`id`, `name`) VALUES
+(1, 'Yes/No'),
+(2, 'Problem Areas'),
+(3, 'Not Satisfied Reason'),
+(4, 'Need Information About');
+
+--
 -- Dumping data for table `answer`
 --
 
@@ -76,15 +86,7 @@ INSERT INTO `answer` (`id`, `name`, `weight`, `answer_group_id`) VALUES
 
 
 
---
--- Dumping data for table `answer_group`
---
 
-INSERT INTO `answer_group` (`id`, `name`) VALUES
-(1, 'Yes/No'),
-(2, 'Problem Areas'),
-(3, 'Not Satisfied Reason'),
-(4, 'Need Information About');
 
 --
 -- Dumping data for table `answeroption`
