@@ -30,6 +30,8 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    profiler:
+        collect: false
 
 # Twig Configuration
 twig:
