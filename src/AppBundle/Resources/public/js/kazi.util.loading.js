@@ -14,6 +14,21 @@ KAZI.util.loading = (function() {
     //Initializing the object
     var init = function(){
         
+        createDivs();
+    };
+    //Public Methods
+    var show = function() {
+        // Turn on loading
+        $(mainDiv).show();
+        
+        return mainDiv;
+    };
+    var hide = function() {
+        $(mainDiv).hide();
+        return mainDiv;
+        
+    };
+    var createDivs = function() {
         //Creating the loading Elements and appending it to the DOM
         d= document.createElement('div');
         $(d).addClass('sk-spinner');
@@ -58,20 +73,7 @@ KAZI.util.loading = (function() {
         $('body').append($(mainDiv));
         
         $('#' + options.id).hide();
-    };
-    //Public Methods
-    var show = function() {
-        // Turn on loading
-        $(mainDiv).show();
-        
-        return mainDiv;
-    };
-    var hide = function() {
-        $(mainDiv).hide();
-        return mainDiv;
-        
-    };
-    
+    }    
     //Getters and Setters
     
     return {
