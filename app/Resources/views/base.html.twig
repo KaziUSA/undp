@@ -4,6 +4,11 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Kazi Studios{% endblock %}</title>
         {% block stylesheets %}
+
+            {% stylesheets 'bundles/app/css/*' filter='cssrewrite' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+
             <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css' />
             <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css' />
             <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css' />
@@ -731,11 +736,18 @@
         
     <!-- Toastr -->
     <script src="/js/plugins/toastr/toastr.min.js"></script>
-        {%block scriptIncludes %}{% endblock %}
-    <script type="text/javascript">
         
-            {% block javascripts %}
+        {%block scriptIncludes %}{% endblock %}
+    
+        
+        {% block javascripts %}
+                {% javascripts '@AppBundle/Resources/public/js/*' %}
+                    <script type="text/javascript" src="{{ asset_url }}"></script>
+                {% endjavascripts %}
+        {% endblock %}
+    <script type="text/javascript">        
             $(document).ready(function() {
+                KAZI.util.loading.init();
                 {% for flash_message in app.session.flashbag.get('notice') %}
                     toastr.info('{{ flash_message }}', 'Notice');  
                 {% endfor %}
@@ -750,29 +762,10 @@
                 {% endfor %}
                 });
                 
-            {% endblock %}
+            
         
     </script>
         
-    <script>
-        $(document).ready(function() {
-
-            setTimeout(function() {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-                //toastr.success('You have successfully loaded', 'Welcome to KAZI ADMIN');
-
-            }, 1300);
-            
-
-
-            
-
-        });
-    </script>
+ 
     </body>
 </html>
