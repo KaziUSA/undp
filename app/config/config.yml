@@ -31,7 +31,7 @@ framework:
     fragments:       ~
     http_method_override: true
     profiler:
-        collect: false
+        collect: true
 
 # Twig Configuration
 twig:

@@ -31,6 +31,16 @@
                         </div>
                     </div>
                 </div>
+<div class="col-lg-4">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>Cube grid</h5>
+                        </div>
+                        <div class="ibox-content">
+                            
+                        </div>
+                    </div>
+                </div>
 {% endblock %}
 
 
@@ -51,7 +61,7 @@ var barData = {
         labels: ["Tamang", "Newar", "Muslim", "Janajati", "Gurung", "Dalit", "Chhetri", "Brahmin", "Other"],
         datasets: [
             {
-                label: "Yes",
+                label: "No",
                 fillColor: "rgba(220,220,220,0.5)",
                 strokeColor: "rgba(220,220,220,0.8)",
                 highlightFill: "rgba(220,220,220,0.75)",
@@ -59,7 +69,7 @@ var barData = {
                 data: [{% for num in yes %} {{num}} ,{% endfor %}]
             },
             {
-                label: "No",
+                label: "Yes",
                 fillColor: "rgba(26,179,148,0.5)",
                 strokeColor: "rgba(26,179,148,0.8)",
                 highlightFill: "rgba(26,179,148,0.75)",
