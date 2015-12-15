@@ -14,7 +14,7 @@ KAZI.map.util = (function() {
     
     //Set all options here
     var options = {
-            url:"/admin/nepal"
+            url:"/nepal"
             
         };
     var style = {
