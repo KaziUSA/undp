@@ -28,6 +28,8 @@ class SecurityController extends Controller
         $router = $this->container->get('router');
 
         if ($securityContext->isGranted('ROLE_ADMIN')) {
+            //does not come flashbag message here
+
             return new RedirectResponse($router->generate('age'), 307);
         } 
 
@@ -52,15 +54,28 @@ class SecurityController extends Controller
         // get the error if any (works with forward and redirect -- see below)
         if ($request->attributes->has($authErrorKey)) {
             $error = $request->attributes->get($authErrorKey);
+            //message
+
+            //Flash Bag doesn't come
+            
         } elseif (null !== $session && $session->has($authErrorKey)) {
             $error = $session->get($authErrorKey);
             $session->remove($authErrorKey);
+
+            //Flash Bag if username and password didn't match
+            $this->get('session')->getFlashBag()->add('error', 'Username and password did not match. Please try again.');
         } else {
             $error = null;
+
+            //Flashbag comes each time you visit /login page
         }
 
         if (!$error instanceof AuthenticationException) {
             $error = null; // The value does not come from the security component.
+
+            //flashbag message comes each time you visit /login page
+        } else {
+            //Flashbag doesnot work here
         }
 
         // last username entered by the user

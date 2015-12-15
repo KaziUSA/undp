@@ -27,6 +27,9 @@ class AgeController extends Controller
      */
     public function indexAction()
     {
+        //Flashbag
+        $this->get('session')->getFlashBag()->add('success', 'Welcome!');
+
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('AppBundle:Age')->findAll();
