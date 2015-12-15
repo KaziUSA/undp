@@ -1,0 +1,83 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<button>Jan-Mar</button>
+<button>Apr-Jun</button>
+<button>Jul-Sep</button>
+<button>Oct-Dec</button>
+
+{{ form(form.questions) }}
+{{ form(form.districts) }}
+{{ form(form.agegroups) }}
+{{ form(form.ethnicities) }}
+<div>
+    <canvas id="canvas" height="140"></canvas>
+</div>
+{% endblock %}
+{%block scriptIncludes %}
+<script src="js/Chart.HorizontalBar.js"></script>
+    <script>
+window.onload = function(){
+    var barData = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.8)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: [65, 59, 80, 81, 56, 55, 40]
+            },
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(26,179,148,0.5)",
+                strokeColor: "rgba(26,179,148,0.8)",
+                highlightFill: "rgba(26,179,148,0.75)",
+                highlightStroke: "rgba(26,179,148,1)",
+                data: [28, 48, 40, 19, 86, 27, 90]
+            }
+        ]
+    };
+
+    var barOptions = {
+        scaleBeginAtZero: true,
+        scaleShowGridLines: true,
+        scaleGridLineColor: "rgba(0,0,0,.05)",
+        scaleGridLineWidth: 1,
+        barShowStroke: true,
+        barStrokeWidth: 2,
+        barValueSpacing: 5,
+        barDatasetSpacing: 1,
+        responsive: true,
+    }
+
+
+            var ctx = document.getElementById("canvas").getContext("2d");
+
+          var chart = new Chart(ctx).HorizontalBar(barData, barOptions);
+        };
+    //Ajax call
+    function aButtonPressed(){
+    var questions=document.getElementById('form_questions').selectedIndex;
+    questions=document.getElementsByTagName("option")[questions].value;
+    alert(questions);
+
+    $.post('{{path('myajax')}}',               
+                {data_question: questions, data2:'mydata2'}, 
+            function(response){
+                    if(response.code == 100 && response.success){
+                    	console.log(questions);
+                    }
+
+    }, "json");    
+
+};
+
+$(document).ready(function() {     
+  $('button').on('click', function(){aButtonPressed();});
+});
+
+    </script>
+
+{% endblock %}
