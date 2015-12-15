@@ -18,7 +18,17 @@
 
 		// control that shows state info on hover
 		var info = L.control();
-
+		var value = {
+            max_height: 30,
+            max_width: 400
+            
+        };
+		$('.girl').css('height',value.max_height);
+        $('.girl').css('width', 0.5*value.max_width);
+		$('.boy').css('height',value.max_height);
+        $('.boy').css('width', 0.5*value.max_width);
+		$('.total-tile').css('height',value.max_height);
+        $('.total-tile').css('width', value.max_width);
 		info.onAdd = function (map) {
 			this._div = L.DomUtil.create('div', 'info');
 			this.update();
@@ -29,15 +39,17 @@
 			
 			this._div.innerHTML = 
 				(props ? '<div class="district-name">' + props.name + '</div><br />' +
-				'<div class="girls item"><div class="label"><div class="icon"></div><div class="label-name">Girls</div></div><div class="value">' + props.girls + '%</div></div><div class="clear"></div>'+
-				'<div class="boys item"><div class="label"><div class="icon"></div><div class="label-name">Boys</div></div><div class="value">' + props.boys + '%</div></div><div class="clear"></div>'+
-				'<div class="total item"><div class="label"><div class="icon"></div><div class="label-name">Total</div></div><div class="value">' + props.total + '%</div></div><div class="clear"></div>' : '<div class="hover-district">Hover over a district</div>');//props.girls, props.boys
+				'<div class="girls item"><div class="label"><div class="icon"></div><div class="label-name">Girls</div></div><div class="value">' + KAZI.util(value,props.girls,"g",props.total) + '%</div></div><div class="clear"></div>'+
+				'<div class="boys item"><div class="label"><div class="icon"></div><div class="label-name">Boys</div></div><div class="value">' + KAZI.util(value,props.boys,"b",props.total) + '%</div></div><div class="clear"></div>'+
+				'<div class="total item"><div class="label"><div class="icon"></div><div class="label-name">Total</div></div><div class="value">' + props.total+ '%</div></div><div class="clear"></div>' : '<div class="hover-district">Hover over a district</div>');//props.girls, props.boys
+			
 		};
-
 		info.addTo(map);
 
 
 		// get color depending on population density value
+		//TODO: theme_color needs to be changed
+		theme_color = '0,0,0';
 		function getColor(d) {
 			
 			//black
