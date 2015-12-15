@@ -14,7 +14,7 @@ KAZI.map.util = (function() {
     
     //Set all options here
     var options = {
-            url:"/nepal"
+            url:"/admin/nepal"
             
         };
     var style = {
@@ -37,7 +37,7 @@ KAZI.map.util = (function() {
     //Public Methods
     var getMapData = function() {
         $.ajax({
-            url: '/nepal',
+            url: options.url,
             success: function( data ) {
     
       geojson = L.geoJson(data, {style:style, onEachFeature: onEachFeature}).addTo(map);
