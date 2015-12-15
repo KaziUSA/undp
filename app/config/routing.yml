@@ -1,7 +1,3 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-
-AcmeHomeBundle_ajax_update_mydata:
-  pattern:  /update/data/from/ajax/call
-  defaults: { _controller: AppBundle:MyAjax:updateData }
