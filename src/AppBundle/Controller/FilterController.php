@@ -21,6 +21,7 @@ class FilterController extends Controller
 	/**
 	*
 	*@Route("/filter")	
+	*@Method("GET")
     *@Template()	
 	*/
 		public function indexAction(){
@@ -99,15 +100,8 @@ class FilterController extends Controller
 		    return array(	
 					//'questions' => $questions,
 					'form' => $choices
-					);
- 	
+					); 	
 
-		}
-
-		public function graphgenerate(){
-			 $num= 1234;
-			 return $num;
-					
-		}
+		}	
 	
 }
