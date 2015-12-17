@@ -89,17 +89,19 @@
         <div class="navbar-header">
             
             <img src="/img/logo.png" width="50px" /><span class="m-r-sm text-muted welcome-message logo-grey">INTER-AGENCY COMMON FEEDBACK PROJECT</span>
+            
         </div>
             <ul class="nav navbar-top-links navbar-right">
+                
                 <li>
                     <a href="{{ path('fos_user_security_logout') }}">
                         <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                    
+                    </a>                    
                 </li>
                 <li>
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                 </li>
+                
                 
             </ul>
 
@@ -257,7 +259,7 @@
     
         
         {% block javascripts %}
-                {% javascripts '@AppBundle/Resources/public/js/*' %}
+                {% javascripts '@AppBundle/Resources/public/js/*' filter='uglifyjs2' %}
                     <script type="text/javascript" src="{{ asset_url }}"></script>
                 {% endjavascripts %}
         {% endblock %}

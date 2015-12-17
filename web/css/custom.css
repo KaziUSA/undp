@@ -304,3 +304,6 @@
   .flex-direction-nav a.flex-prev {
   	background-image: url(../images/arrow-prev.png);
   }
+.navbar-header {
+    padding: 25px 0px 0px 25px;
+}
