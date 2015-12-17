@@ -1,27 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="graph">
-    
-    <div class="index">
-    <div class="index-title"><h3>Girl</h3></div>
-    <div class="girl index-bar"></div>
-    </div>
-    <div class="clear"></div>
 
-    <div class="index">
-    <div class="index-title"><h3>Boy</h3></div>
-    <div class="boy index-bar"></div>
-    </div>
-    <div class="clear"></div>
 
-    <div class="index">
-    <div class="index-title"><h3>Total</h3></div>
-    <div class="total-tile index-bar"></div>
-    </div>
-    
-
-</div>
 <div id="map" class="theme-default">
     <ul class="data-type clearfix hidden">
         <li class="active"><a href="new-enrollment.html">New Enrollment</a></li><!-- change this -->
@@ -119,3 +100,31 @@ var barData = {
 </script>
 {% endblock %}
 
+{% block sidebar %}
+<div class="ibox-title">
+                        
+                        <h5>Graphical Representation</h5>
+                    </div>
+<div class="graph-content">
+<div class="graph clearfix">
+    
+    <div class="index">
+    <div class="index-title"><h3>Girl</h3></div>
+    <div class="girl index-bar"></div>
+    </div>
+    <div class="clear"></div>
+
+    <div class="index">
+    <div class="index-title"><h3>Boy</h3></div>
+    <div class="boy index-bar"></div>
+    </div>
+    <div class="clear"></div>
+
+    <div class="index">
+    <div class="index-title"><h3>Total</h3></div>
+    <div class="total-tile index-bar"></div>
+    </div>
+
+</div>
+</div>
+{% endblock %}

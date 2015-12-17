@@ -1,5 +1,5 @@
 #map {
-	width: 735px; /* 800px */
+	width: 670px; /* 800px */
 	height: 500px; /* 500px */
 }
 
@@ -306,8 +306,12 @@
   	background-image: url(../images/arrow-prev.png);
   }
   .graph{
-    height:auto;
+    min-height:1px;
     width: auto;
+    padding-right: 7px;
+  padding-left: 7px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   }
   .index {
     float: left;
@@ -317,7 +321,7 @@
     clear: both;
   }
   .index-title {
-    width: 100px;
+    width: 75px;
     float: left;
   }
   .index-bar {    
@@ -336,3 +340,11 @@
   }
 
 
+.graph-content {
+  background-color: #ffffff;
+  color: inherit;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 1px 0px;
+}

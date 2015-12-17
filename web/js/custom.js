@@ -20,7 +20,7 @@
 		var info = L.control();
 		var value = {
             max_height: 30,
-            max_width: 400
+            max_width: 225
             
         };
 		$('.girl').css('height',value.max_height);
