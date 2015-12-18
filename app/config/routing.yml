@@ -11,3 +11,7 @@ app:
 #FOS User Bundle
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+#phax for commandline calling controller
+phax:
+    resource: "@PhaxCoreBundle/Resources/config/routing.yml"

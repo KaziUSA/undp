@@ -21,7 +21,8 @@
         "PHPOffice/PHPExcel": "^1.8",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "symfony/process": "^2.8",
-        "ircmaxell/password-compat": "*"
+        "ircmaxell/password-compat": "*",
+        "phax/phax-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

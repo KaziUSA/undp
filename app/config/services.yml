@@ -3,8 +3,13 @@
 parameters:
 #    parameter_name: value
 
-services:
+#services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+services:
+    phax.CsvController:
+        class: AppBundle\Controller\CsvController
+        calls:
+            - [setContainer, ["@service_container"]]

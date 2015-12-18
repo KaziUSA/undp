@@ -18,6 +18,9 @@ use AppBundle\Entity\Question;
 use AppBundle\Entity\Answer;
 use AppBundle\Entity\SurveyResponse;
 
+use Symfony\Component\HttpFoundation\Response;//for response
+use Phax\CoreBundle\Model\PhaxAction;//for phax commandline
+use Phax\CoreBundle\Model\PhaxReaction;//for phax commandline
 
 class CsvController extends Controller
 {
@@ -40,16 +43,18 @@ class CsvController extends Controller
      * @Route("/upload")
      * @Template()
      */
-    public function uploadAction()
+    public function uploadAction()//PhaxAction $phaxAction
     {
-        //$fileInfo = $this->getCsvData('uploads/survey1.xlsx');
+        /*$fileInfo = $this->getCsvData('C:/wamp/www/undp/web/uploads/survey1.xlsx');*/
+        
         //$fileInfo = $this->getCsvData('uploads/survey2.xlsx');
         //$fileInfo = $this->getCsvData('uploads/survey3.xlsx');
-        $fileInfo = '';
+
+        //$fileInfo = '';
         
         
         //Grabbing the Labels from the CSV
-        $titles = array_shift($fileInfo);
+        /*$titles = array_shift($fileInfo);
         
         foreach ($fileInfo as $row){
             
@@ -117,7 +122,18 @@ class CsvController extends Controller
         
         return array(
                 'fileInfo' => $this->getCsvData('uploads/survey1.xlsx', 'uploaded_form_g54cmb')
-            );   
+            );*/
+
+        
+
+        // Return a phax reation with a success or failure notification
+        $phaxReaction = new PhaxReaction();
+        echo 'Status: ';
+
+        // This will disable the javascript callback
+        $phaxReaction->setMetaMessage('The file has been uploaded.');
+
+        return $phaxReaction;
     }
     /**
      * Get CSV Data
