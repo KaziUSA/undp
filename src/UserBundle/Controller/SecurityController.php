@@ -107,6 +107,14 @@ class SecurityController extends Controller
      */
     protected function renderLogin(array $data)
     {
+        //0 - log out
+        //$_SESSION["login_success"] = "0";
+        if(isset($_SESSION["login_success"])) {
+            if($_SESSION["login_success"] == "0") {
+                $this->get('session')->getFlashBag()->add('success', 'You have successfully log out!');
+                $_SESSION["login_success"] = "";
+            }
+        }
         return $this->render('FOSUserBundle:Security:login.html.twig', $data);
     }
 
@@ -117,6 +125,8 @@ class SecurityController extends Controller
 
     public function logoutAction()
     {
+        $_SESSION["login_success"] = "0";
+        //exit(0);
         throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
 }

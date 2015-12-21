@@ -36,7 +36,7 @@ class LoginListener
 	{
 		if ($this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
 			// user has just logged in
-			$_SESSION["success"] = "1";
+			$_SESSION["login_success"] = "1";
 		}
 		
 		if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {

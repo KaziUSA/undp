@@ -30,9 +30,11 @@ class AgeController extends Controller
         //Flashbag: value 1 is stored just after user logged in in LoginLister.php
         //1 - just logged in
         //2 - already logged in (or to not repeat Welcome message again and again)
-        if($_SESSION["success"] == "1") {
-            $this->get('session')->getFlashBag()->add('success', 'Welcome!');
-            $_SESSION["success"] = "2";
+        if(isset($_SESSION['login_success'])) 
+            if($_SESSION["login_success"] == "1") {
+                $this->get('session')->getFlashBag()->add('success', 'Welcome!');
+                $_SESSION["login_success"] = "2";
+            }
         }
 
         $em = $this->getDoctrine()->getManager();
