@@ -107,12 +107,20 @@ class SecurityController extends Controller
      */
     protected function renderLogin(array $data)
     {
-        //0 - log out
-        if(!isset($_SESSION["login_success"])) {//session get destroy after log out
-            $this->get('session')->getFlashBag()->add('success', 'You have successfully log out!');
-            $_SESSION["login_success"] = "3";//for already shown logout message
+        //log out: disabled log out message for the person visiting login page for the first time
+        //using php cookie
+        //since session is not set at the first time and as well as after log out
+        if(!isset($_COOKIE['firstvisit'])) {
+            setcookie('firstvisit', time()); //set a cookie containing the timestamp of when this user first visited the page
         }
-        
+        else {
+            //it's not their first visit because the cookie already exists            
+            if(!isset($_SESSION["login_success"])) {//session get destroy after log out
+                $this->get('session')->getFlashBag()->add('success', 'You have successfully log out!');
+                $_SESSION["login_success"] = "3";//for already shown logout message
+            }
+        }
+
         return $this->render('FOSUserBundle:Security:login.html.twig', $data);
     }
 
