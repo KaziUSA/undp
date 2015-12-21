@@ -263,7 +263,7 @@
         {% endblock %}
     <script type="text/javascript">        
             $(document).ready(function() {
-                KAZI.util.loading.init();
+                //KAZI.util.loading.init();//KAZI is not defined error in console and doesnot works flashbag message
                 {% for flash_message in app.session.flashbag.get('notice') %}
                     toastr.info('{{ flash_message }}', 'Notice');  
                 {% endfor %}
