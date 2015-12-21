@@ -108,13 +108,11 @@ class SecurityController extends Controller
     protected function renderLogin(array $data)
     {
         //0 - log out
-        //$_SESSION["login_success"] = "0";
-        if(isset($_SESSION["login_success"])) {
-            if($_SESSION["login_success"] == "0") {
-                $this->get('session')->getFlashBag()->add('success', 'You have successfully log out!');
-                $_SESSION["login_success"] = "";
-            }
+        if(!isset($_SESSION["login_success"])) {//session get destroy after log out
+            $this->get('session')->getFlashBag()->add('success', 'You have successfully log out!');
+            $_SESSION["login_success"] = "3";//for already shown logout message
         }
+        
         return $this->render('FOSUserBundle:Security:login.html.twig', $data);
     }
 
