@@ -28,10 +28,11 @@ class AgeController extends Controller
     public function indexAction()
     {
         //Flashbag: value 1 is stored just after user logged in in LoginLister.php
-        //$_SESSION["success"] = "1";
+        //1 - just logged in
+        //2 - already logged in (or to not repeat Welcome message again and again)
         if($_SESSION["success"] == "1") {
             $this->get('session')->getFlashBag()->add('success', 'Welcome!');
-            $_SESSION["success"] = "0";
+            $_SESSION["success"] = "2";
         }
 
         $em = $this->getDoctrine()->getManager();
