@@ -18,15 +18,14 @@ KAZI.util.animate = (function() {
     //Initializing the object
     var init = function(p){
         
-        catchPercentage(p);
-        return p;
+        return catchPercentage(p);
+        
     };
-   
+   //percentage to animate
     var catchPercentage = function(g) {
         //Creating the loading Elements and appending it to the DOM
-       animateTo(g);
+       return animateTo(g);
        //prev_value=g;
-       return g;
     }    
     //Getters and Setters
     var animateTo = function(g){
