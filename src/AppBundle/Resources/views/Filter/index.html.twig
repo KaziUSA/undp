@@ -11,12 +11,17 @@
 {{ form(form.agegroups) }}
 {{ form(form.ethnicities) }}
 <div>
-    <canvas id="canvas" height="140"></canvas>
+<div id="canvas" style="min-wdth: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+    <!-- <canvas id="canvas" height="140"></canvas> -->
 </div>
 {% endblock %}
 {%block scriptIncludes %}
-<script src="js/Chart.HorizontalBar.js"></script>
+<script type="text/javascript" src="js/highcharts.js"></script>
+<script type="text/javascript" src="js/exporting.js"></script>
+<!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script>
+
+//Chart.js script start
 // window.onload = function(){
 //     var barData = {
 //         labels: ["January", "February", "March", "April", "May", "June", "July",],
@@ -57,69 +62,111 @@
 
 //           var chart = new Chart(ctx).HorizontalBar(barData, barOptions);
 //         };
+//Chart.js script end
     //Ajax call
     function aButtonPressed(){
+    //store selected question in questions variable
     var questions=document.getElementById('form_questions').selectedIndex;
     questions=document.getElementsByTagName("option")[questions].value;
     alert(questions);
+    //store checked ages in ageVals array
+    var ageVals = [];
+     $('#form_ages :checked').each(function() {
+       ageVals.push($(this).next("label").text());
+     });
+     alert(ageVals);
 
     $.post('{{path('myajax')}}',               
-                { data_question:questions,data2:'test'}, 
+                { data_question:questions,data_age:ageVals}, 
             function(response){ 
-//             var description = new Array();
-// description.push('a');
-// description.push('b');
-// var myvalues = new Array();
-// myvalues.push('c');
-// myvalues.push('d');   
-					
-
-//document.getElementById("canvas").context.clearRect(0, 0, canvas.width, canvas.height);
-
-
                     var val=new Array();
                     var dt= new Array();
                     if(response.code == 100 && response.success){
                     	console.log(response);
+                    	//saving graph index to val array
                     	$.each(response.result.label, function( index, value ) {
 					  		val.push(value);
 						});
+						//saving graph data to dt array
 						$.each(response.result.count, function( index, value ) {
-					  		dt.push(value);
+					  		dt.push(Number(value)); //Typecasting to number,string doesn't work
 						});
-						alert(dt);
+						console.log(dt);
 						alert(val);
+$('#canvas').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Answers by the people'
+        },
+        subtitle: {
+            text: 'Source: UNDP Annual Report'
+        },
+        xAxis: {
+            categories: val,
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'People'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y} people</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'QA',
+            data: dt
 
-                    var barData = {
-				        labels:  val ,
-				        datasets: [
-				            {
-				                label: "My First dataset",
-				                fillColor: "rgba(220,220,220,0.5)",
-				                strokeColor: "rgba(220,220,220,0.8)",
-				                highlightFill: "rgba(220,220,220,0.75)",
-				                highlightStroke: "rgba(220,220,220,1)",
-				                data: dt
-				            }
-				        ]
-				    };
+        }],
+         credits: {
+    		enabled: false
+  		},
+    	
+    });
+    //                 var barData = {
+				//         labels:  val ,
+				//         datasets: [
+				//             {
+				//                 label: "My First dataset",
+				//                 fillColor: "rgba(220,220,220,0.5)",
+				//                 strokeColor: "rgba(220,220,220,0.8)",
+				//                 highlightFill: "rgba(220,220,220,0.75)",
+				//                 highlightStroke: "rgba(220,220,220,1)",
+				//                 data: dt
+				//             }
+				//         ]
+				//     };
 
-    var barOptions = {
-        scaleBeginAtZero: true,
-        scaleShowGridLines: true,
-        scaleGridLineColor: "rgba(0,0,0,.05)",
-        scaleGridLineWidth: 1,
-        barShowStroke: true,
-        barStrokeWidth: 2,
-        barValueSpacing: 5,
-        barDatasetSpacing: 1,
-        responsive: true,
-    }
+    // var barOptions = {
+    //     scaleBeginAtZero: true,
+    //     scaleShowGridLines: true,
+    //     scaleGridLineColor: "rgba(0,0,0,.05)",
+    //     scaleGridLineWidth: 1,
+    //     barShowStroke: true,
+    //     barStrokeWidth: 2,
+    //     barValueSpacing: 5,
+    //     barDatasetSpacing: 1,
+    //     responsive: true,
+    // }
 
 
-            var ctx = document.getElementById("canvas").getContext("2d");
+    //         var ctx = document.getElementById("canvas").getContext("2d");
 
-          var chart = new Chart(ctx).HorizontalBar(barData, barOptions);
+    //       var chart = new Chart(ctx).HorizontalBar(barData, barOptions);
                     
                     }
 

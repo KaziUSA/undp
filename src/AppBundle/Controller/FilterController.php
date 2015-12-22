@@ -37,6 +37,7 @@ class FilterController extends Controller
 			))
 		    ->getForm();
 		    $choices['questions'] = $form->createView();
+		    
 		    //AgeGroup Multiple choices as checkbox
 		    $form = $this->createFormbuilder()
 		    ->add('ages', 'entity',array(
@@ -45,7 +46,7 @@ class FilterController extends Controller
 		                         return $er->createQueryBuilder('a')
 		                             ->orderBy('a.name', 'ASC');
 		                     },
-		    'choices_as_values' => true,	    
+		    'choices_as_values' => false,	    
 			'expanded' => true,
 			'multiple' => true
 			))
