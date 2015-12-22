@@ -27,7 +27,7 @@ KAZI.util.animate = (function() {
        return animateTo(g);
        //prev_value=g;
     }    
-    //Getters and Setters
+    //animate from previous data
     var animateTo = function(g){
     		var pt=(g*options.max_width)/total;
     	if (gender=="g"){
