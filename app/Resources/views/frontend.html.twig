@@ -12,7 +12,7 @@
 		{% endblock %}
 	</head>
 	<body style="display: none;">{# to show better page after loading complete #}
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default clearfix">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
@@ -37,6 +37,7 @@
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
+		<div class="clear"></div>
 
 		{% block body %}
 
@@ -69,6 +70,7 @@
     <script src="/js/less.min.js"></script>
     {# http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js #}
 
+    <script src="/js/frontend/highcharts.js"></script>
     <script src="/js/frontend/custom.js"></script>
     {% endblock %}
 	</body>

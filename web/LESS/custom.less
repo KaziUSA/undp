@@ -75,6 +75,72 @@
 ul li {
 	list-style: none;
 }
+.clear {
+	clear: both;
+}
+.clearfix:before,
+.clearfix:after,
+.dl-horizontal dd:before,
+.dl-horizontal dd:after,
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after,
+.row:before,
+.row:after,
+.form-horizontal .form-group:before,
+.form-horizontal .form-group:after,
+.btn-toolbar:before,
+.btn-toolbar:after,
+.btn-group-vertical > .btn-group:before,
+.btn-group-vertical > .btn-group:after,
+.nav:before,
+.nav:after,
+.navbar:before,
+.navbar:after,
+.navbar-header:before,
+.navbar-header:after,
+.navbar-collapse:before,
+.navbar-collapse:after,
+.pager:before,
+.pager:after,
+.panel-body:before,
+.panel-body:after,
+.modal-footer:before,
+.modal-footer:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after,
+.dl-horizontal dd:after,
+.container:after,
+.container-fluid:after,
+.row:after,
+.form-horizontal .form-group:after,
+.btn-toolbar:after,
+.btn-group-vertical > .btn-group:after,
+.nav:after,
+.navbar:after,
+.navbar-header:after,
+.navbar-collapse:after,
+.pager:after,
+.panel-body:after,
+.modal-footer:after {
+  clear: both;
+}
+
+.row-no-padding {
+	margin-left: 0;
+	margin-right: 0;
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+html, body {
+	height: auto;
+}
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 	font-size: 14px;	
 	line-height: 20px;
@@ -227,8 +293,10 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	float: none;
 }
 .navbar-brand {
-	float: none;
 	padding: 0;
+	@media (min-width: 768px) {
+		float: none;		
+	}
 }
 .navbar-toggle {
 	background: none;
@@ -257,6 +325,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	}
 	@media (min-width: 768px) {
 		.horizontal_gradient(#414042, #242425);//to get consistent with mobile nav dropdown background
+		overflow: hidden;
 
 		.navbar-header {
 			float: left;
@@ -307,6 +376,17 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	}
 }
 
+.transparent-grd {
+	//css-hat
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d4e411+0,0a6c88+100 */
+	background: rgb(212,228,17); /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  rgba(212,228,17,1) 0%, rgba(10,108,136,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  rgba(212,228,17,1) 0%,rgba(10,108,136,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg,  rgba(212,228,17,1) 0%,rgba(10,108,136,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e411', endColorstr='#0a6c88',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+	opacity: 0.85;
+}
 .content.home,
 .transparent-grd {
   min-height: 800px;	
@@ -347,23 +427,30 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	}
 }
 
-.transparent-grd {
-	//css-hat
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d4e411+0,0a6c88+100 */
-	background: rgb(212,228,17); /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  rgba(212,228,17,1) 0%, rgba(10,108,136,1) 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(-45deg,  rgba(212,228,17,1) 0%,rgba(10,108,136,1) 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(135deg,  rgba(212,228,17,1) 0%,rgba(10,108,136,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e411', endColorstr='#0a6c88',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-	opacity: 0.85;
+//sticky footer
+html {
+  position: relative;
+  min-height: 100%;
 }
-
+body {
+  /* Margin bottom by footer height */
+  @media (min-width: 768px) {
+  	//sticky footer
+  	margin-bottom: 40px;	
+  }
+}
 footer {
 	background: @footer-bg;
 	min-height: 20px;	
-	padding: 10px 0;	
-	@media (min-width: 768px) {
+	padding: 10px 0;
+	@media (min-width: 768px) {	
+		//sticky footer
+	  position: absolute;
+	  bottom: 0;
+	  width: 100%;
+	  /* Set the fixed height of the footer here */
+	  //height: 40px;
+
 		.footer-right {
 			float: right;
 		}
@@ -389,6 +476,88 @@ footer {
 }
 footer, footer a {
 	color: #ffffff;
+}
+
+
+/* Platform Page CSS */
+aside {
+	background: #dcdcdc;
+}
+
+//tab fixes
+.nav-tabs > li > a {
+	border: 0;
+	border-radius: 0;
+	padding: 0px 8px;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+	border: 0;
+	color: @white;
+}
+.filter {
+	.feedback-tab {
+		background: #88d8ef;
+		display: table;
+		padding: 0 15px;
+		width: 100%;
+		.tab-head {
+			color: #3e7180;
+			display: table-cell;
+			font-size: 12px;
+			line-height: 12px;
+			vertical-align: middle;
+			text-transform: uppercase;
+			width: 70px;
+		}
+	}
+	.nav-tabs {
+		float: left;
+		height: 40px;
+		li {
+			a {
+				color: @white;
+				height: 40px;
+				line-height: 40px;
+			}
+			&.active {
+				background: #e23239;
+				a {
+				}
+			}
+		}
+	}
+}
+.main-content {
+	.question {
+		background: #99bc44;
+		color: @white;
+		font-size: 18px;
+		height: 40px;
+		line-height: 40px;
+		padding-left: 30px;
+		span {
+			color: #59731a;
+			font-size: 18px;
+			margin-right: 20px;
+		}
+	}
+	.search {
+		height: 40px;
+		line-height: 40px;
+		padding: 0 30px;
+	}
+}
+
+.high-chart {
+	padding-top: 30px;
+}
+/* High Chart CSS
+TODO: style to be given by High Chart jquery 
+Column Color
+*/
+.highcharts-axis-labels text {
+	font-size: 14px !important;	
+	text-transform: uppercase;
 }
 
 /* Only demo */
