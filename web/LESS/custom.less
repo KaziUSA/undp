@@ -1,6 +1,368 @@
+/* Global Style */
+@roboto: 'Roboto', sans-serif;
+@arial: 'Arial', sans-serif;
+
+@heading-font-family: @roboto;
+@second-font-family: @arial;
+
+
+@black: #000000;
+@white: #ffffff;
+@gray: #636363;
+@light-gray: #a1a1a1;
+
+@body-bg: @white;
+@header-bg: #414042;//logo bg color
+@theme-color: @light-blue;
+@link-color: @theme-color;
+@heading-color: @black;
+@footer-bg: @light-gray;
+
+@paragraph-spacing: 15px;
+
+//functions
+.transition (@transition) {
+	-webkit-transition: @transition;  
+	-moz-transition:    @transition;
+	-ms-transition:     @transition; 
+	-o-transition:      @transition;  
+}
+.scale (@scale) {	
+   -webkit-transform: scale(@scale);
+   -moz-transform: scale(@scale);
+   -o-transform: scale(@scale);
+   -ms-transform: scale(@scale);
+   transform: scale(@scale);
+}
+.css-gradient(@from: #20416A, @to: #3D69A5) {
+  background-color: @to;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(@from),  to(@to));
+  background-image: -webkit-linear-gradient(top, @from, @to);
+  background-image: -moz-linear-gradient(top, @from, @to);
+  background-image: -o-linear-gradient(top, @from, @to);
+  background-image: -ms-linear-gradient(top, @from, @to);
+  background-image: linear-gradient(top, @from, @to);
+}
+
+.horizontal_gradient(@start_color, @end_color) {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#414042+0,242425+100 */
+	background: @start_color; /* Old browsers */
+	background: -moz-linear-gradient(left,  @start_color 0%, @end_color 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left,  @start_color 0%, @end_color 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right,  @start_color 0%, @end_color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@start_color', endColorstr='@end_color',GradientType=1 ); /* IE6-9 */
+}
+
+.css-column(@column) {
+	@media (min-width: 768px) {	
+		-webkit-column-count: @column; /* Chrome, Safari, Opera */
+	  -moz-column-count: @column; /* Firefox */
+	  column-count: @column;	
+	}
+}
+.css-column-gap(@column_gap) {
+	-webkit-column-gap: @column_gap; /* Chrome, Safari, Opera */
+    -moz-column-gap: @column_gap; /* Firefox */
+    column-gap: @column_gap;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+ul li {
+	list-style: none;
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+	font-size: 14px;	
+	line-height: 20px;
+}
+
+//headings
+h1, h2 {
+	margin-top: 0;
+}
+h1 {
+	color: @blue;
+	font-size: 30px;
+	line-height: 30px;
+	font-family: @heading-font-family;
+	margin-bottom: 12px;//2px
+}
+h2 {
+	color: @light-blue;
+	font-size: 24px;
+	line-height: 26px;
+	font-family: @heading-font-family;
+	margin-bottom: 15px;
+}
+h3 {
+	color: @light-blue;
+	font-size: 18px;
+	line-height: 20px;
+}
+h4 {
+	font-size: 16px;
+	line-height: 18px;
+}
+h5 {
+	color: @blue;
+	font-size: 14px !important;
+}
+h1, h2, h3, h4, h5 {
+	margin-top: 0;
+}
+a {
+	&:hover {
+		color: @gray;
+	}
+}
+//paragraph
+p {
+	margin-bottom: @paragraph-spacing;
+}
+//cover image
+.img-cover {
+	background-color: #f2f2f2;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	width: 100%;
+}
+
+body {
+	background-color: @body-bg;
+	background-position: top right !important;
+	font: 12px/18px @roboto;
+}
+//buttons
+.button-group {
+	margin-top: 20px;
+}
+button, .btn {
+	.transition(50ms all ease);
+}
+button, input[type="button"], input[type="reset"], input[type="submit"] {
+	border-radius: 0;
+	padding: 5px 15px;
+}
+.btn {
+	background-color: @theme-color !important;
+	border-radius: 0;
+	color: @white !important;
+	display: inline-block;
+	font-size: 14px;
+	margin: 0;
+	padding: 6px 15px;
+	&:hover {
+		background-color: @gray !important;//blue
+	}
+	&.btn-cancel {
+		background-color: @gray !important;
+		&:hover {
+			background-color: @gray !important;//blue
+		}
+	}
+}
+button, input[type="button"], input[type="reset"], input[type="submit"] {
+	margin: 0;
+}
+
+/* Social Media Icons */
+.social-icons {
+	ul {
+		li {
+			float: left;
+			margin-right: 10px;
+			a {
+				background-repeat: no-repeat;
+				background-position: 0 0;
+				display: inline-block;
+				height: 19px;
+				width: 19px;
+				&:hover {
+					opacity: 0.7;
+				}
+			}
+			&.facebook {
+				a {
+					background-image: url(../img/frontend/icons/icon-facebook.png);
+				}
+			}
+			&.youtube {
+				a {
+					background-image: url(../img/frontend/icons/icon-youtube.png);
+				}
+			}
+			&.flicker {
+				a {
+					background-image: url(../img/frontend/icons/icon-flicker.png);
+				}
+			}
+			&.twitter {
+				a {
+					background-image: url(../img/frontend/icons/icon-twitter.png);
+				}
+			}
+			&.wordpress {
+				a {
+					background-image: url(../img/frontend/icons/icon-wordpress.png);
+				}
+			}
+		}
+	}
+}
+
+/* Nav bar fixes */
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+	border: 0;
+}
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+.navbar-header {
+	float: none;
+}
+.navbar-brand {
+	padding: 0;
+}
+.navbar-toggle {
+	background: none;
+	border: 0;
+	border-radius: 0;
+	padding: 10px 12px;
+}
+.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
+	background: none;
+	color: @light-gray;
+}
+
+/* Main Style */
+.navbar-default {
+	background-color: @header-bg;
+	height: 100px;
+	.navbar-nav {	
+		li {
+			a {
+				color: @white;
+				font-size: 16px;
+				font-weight: bold;
+				text-transform: uppercase;
+			}
+		}
+	}
+	@media (min-width: 768px) {
+		.horizontal_gradient(#414042, #242425);//to get consistent with mobile nav dropdown background
+
+		.navbar-header {
+			float: left;
+			.navbar-brand {
+				margin-top: 20px;
+			}
+		}
+		.navbar-collapse {
+			float: right;
+			padding: 0;
+			.navbar-nav {
+				background: none;
+				margin-top: 55px;
+				li {
+					margin-right: 20px;
+					a {
+						padding: 0;
+					}
+					&:last-child {
+						margin-right: 0;
+					}
+				}
+			}
+		}
+	}
+	@media (min-width: 992px) {//overriding min-width: 768px
+		.navbar-header {
+			margin-right: 90px;
+		}
+		.navbar-collapse {
+			float: left;
+			.navbar-nav {
+				li {
+					margin-right: 45px;
+				}
+			}
+		}
+	}
+	@media (max-width: 767px) {
+		.navbar-collapse {
+			position: absolute;
+			width: 100%;
+			z-index: 2;
+		}
+		.navbar-nav {
+			background-color: @header-bg;
+		}
+	}
+}
+
+.content.home {
+	background-image: url(../img/frontend/intro.jpg);
+	background-position: center center !important;
+	background-repeat: no-repeat;
+	background-size: cover;
+  //background-attachment: fixed; //mountain gets hide under header
+}
+.content.home,
+.transparent-grd {
+  min-height: 800px;	
+}
+
+.transparent-grd {
+	//css-hat
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d4e411+0,0a6c88+100 */
+	background: rgb(212,228,17); /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  rgba(212,228,17,1) 0%, rgba(10,108,136,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(-45deg,  rgba(212,228,17,1) 0%,rgba(10,108,136,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(135deg,  rgba(212,228,17,1) 0%,rgba(10,108,136,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e411', endColorstr='#0a6c88',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+	opacity: 0.85;
+}
+
+footer {
+	background: @footer-bg;
+	min-height: 20px;	
+	padding: 10px 0;	
+	@media (min-width: 768px) {
+		.footer-right {
+			float: right;
+		}
+	}
+	@media (max-width: 767px) {
+		.social-icons {
+			margin-right: 10px;
+		}
+	}
+	@media (max-width: 480px) {
+		.social-icons {
+			margin-bottom: 5px;
+			float: none !important;
+		}
+	}
+	.footer-right {
+		a {
+			&:hover {
+
+			}
+		}
+	}
+}
+footer, footer a {
+	color: #ffffff;
+}
+
 /* Only demo */
 @media (max-width: 1000px) {
-  .welcome-message {
+  /* .welcome-message {
     display: none;
-  }
+  } */
 }

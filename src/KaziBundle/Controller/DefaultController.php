@@ -15,8 +15,18 @@ class DefaultController extends Controller
      * @Template()
      */
     public function indexAction()
-    {
-        
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
+
+    /**
+     * @Route("/chart")
+     * @Template
+     */
+    public function chartAction() { 
+        //copied for backup from indexAction created by Manish Shrestha
        $sql = "SELECT COUNT(*) as count FROM `survey_response` INNER JOIN `survey` ON survey.id = survey_response.survey_id INNER JOIN ethnicity ON survey.ethnicity_id = ethnicity.id WHERE `answer_id` = :id OR `answer_id` = :id2 GROUP BY survey.ethnicity_id";
         $em = $this->getDoctrine()->getEntityManager();
         $connection = $em->getConnection();
@@ -64,6 +74,7 @@ class DefaultController extends Controller
             'other' => $other
         );
     }
+
     /**
      * @Route("/nepal")
      * @Template()
