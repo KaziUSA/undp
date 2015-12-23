@@ -1,9 +1,11 @@
 /* Global Style */
 @roboto: 'Roboto', sans-serif;
+@helvetica: 'Helvetica', sans-serif;
 @arial: 'Arial', sans-serif;
 
 @heading-font-family: @roboto;
-@second-font-family: @arial;
+@second-font-family: @helvetica;
+@third-font-family: @arial;
 
 
 @black: #000000;
@@ -147,20 +149,20 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	padding: 5px 15px;
 }
 .btn {
-	background-color: @theme-color !important;
 	border-radius: 0;
-	color: @white !important;
 	display: inline-block;
-	font-size: 14px;
-	margin: 0;
-	padding: 6px 15px;
 	&:hover {
-		background-color: @gray !important;//blue
 	}
-	&.btn-cancel {
-		background-color: @gray !important;
+	&.btn-bordered {
+		border: 1px solid @white;
+		background: none;
+		color: @white;
+		font: bold 16px @third-font-family;
+		padding: 10px;
+		text-transform: uppercase;
 		&:hover {
-			background-color: @gray !important;//blue
+			background: @white;
+			color: @light-gray;
 		}
 	}
 }
@@ -225,6 +227,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	float: none;
 }
 .navbar-brand {
+	float: none;
 	padding: 0;
 }
 .navbar-toggle {
@@ -304,16 +307,44 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	}
 }
 
+.content.home,
+.transparent-grd {
+  min-height: 800px;	
+}
 .content.home {
 	background-image: url(../img/frontend/intro.jpg);
 	background-position: center center !important;
 	background-repeat: no-repeat;
 	background-size: cover;
   //background-attachment: fixed; //mountain gets hide under header
-}
-.content.home,
-.transparent-grd {
-  min-height: 800px;	
+  .banner-caption {
+  	color: @white;
+		font-family: @third-font-family;
+  	margin-top: 260px;
+		padding-bottom: 20px;
+		.caption-head {
+			font: bold 50px/50px @second-font-family;
+			margin-bottom: 25px;
+		}
+		p {
+			font-size: 18px;
+			line-height: 24px;
+			margin-bottom: 20px;
+		}
+	}
+	@media (min-width: 1200px) {
+		.banner-caption {
+			padding-left: 60px;
+		}
+	}
+	@media (max-width: 767px) {
+		.banner-caption {
+			.caption-head {
+				font-size: 30px;
+				line-height: 30px;
+			}
+		}
+	}
 }
 
 .transparent-grd {
