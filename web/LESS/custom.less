@@ -230,6 +230,14 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 			background: @white;
 			color: @light-gray;
 		}
+		&.gray {
+			border-color: #898989;
+			color: #898989;
+			font-size: 12px;
+			font-weight: normal;
+			padding-top: 6px;
+			padding-bottom: 6px;
+		}
 	}
 }
 button, input[type="button"], input[type="reset"], input[type="submit"] {
@@ -519,10 +527,26 @@ body {
 				height: 40px;
 				line-height: 40px;
 			}
+			&:hover {
+				background: #3e7180;
+				a {
+					background: none;
+				}
+			}
 			&.active {
 				background: #e23239;
-				a {
-				}
+				&:before {
+					content: "";
+			    width: 0;
+			    height: 0;
+			    position: absolute;
+			    bottom: -7px;
+			    left: 50%;
+			    border-width: 7px 7px 0px 7px;
+			    border-style: solid;
+			    border-color: #e23239 transparent;
+			    margin-left: -7px;
+		    }
 			}
 		}
 	}
@@ -532,25 +556,181 @@ body {
 }
 .main-content {
 	background: #ffffff;
-	.question {
-		background: #99bc44;
-		color: @white;
-		font-size: 18px;
-		height: 40px;
-		line-height: 40px;
-		padding-left: 30px;
-		span {
-			color: #59731a;
-			font-size: 18px;
-			margin-right: 20px;
-		}
-	}
-	.search {
-		height: 40px;
-		line-height: 40px;
-		padding: 0 30px;
+}
+.search {
+	height: 40px;
+	line-height: 40px;
+	padding: 0 30px;
+	span {
+		display: inline-block;
+		font-weight: bold;
+		margin-right: 5px;
+		text-transform: uppercase;
 	}
 }
+.question {
+	background: #99bc44;
+	color: @white;
+	font-size: 18px;
+	height: 40px;
+	letter-spacing: 1px;
+	line-height: 40px;
+	position: relative;
+	.number {
+		color: #59731a;
+		float: left;
+		font-size: 18px;
+		line-height: 40px;
+		margin-right: 20px;
+	}
+	.next, .prev {
+		background-repeat: no-repeat;
+		background-position: center center;
+		border-left: 1px solid #ffffff;
+		height: 40px;
+		position: absolute;
+		width: 55px;
+	}
+	.next {
+		background-image: url(../img/frontend/icons/arrow-next.png);
+		right: 0;
+	}
+	.prev {
+		background-image: url(../img/frontend/icons/arrow-prev.png);
+		right: 55px;
+	}
+}
+
+/* custom drop down */
+.wrapper-dropdown-3 {
+    /* Size and position */
+    position: relative;
+    /* width: 200px; */
+    margin-right: 110px;
+    padding: 10px 0;
+
+    /* Styles */
+    cursor: pointer;
+    outline: none;
+}
+
+.wrapper-dropdown-3:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    margin-top: -3px;
+    border-width: 6px 6px 0 6px;
+    border-style: solid;
+    border-color: #ffffff transparent;
+}
+
+.wrapper-dropdown-3 .question-dropdown {
+  /* Size & position */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    /* Styles */
+    background: #99bc44;
+    border-radius: inherit;
+    border-bottom: 1px solid rgba(0,0,0,0.17);
+    font-weight: normal;
+    -webkit-transition: all 0.5s ease-in;
+    -moz-transition: all 0.5s ease-in;
+    -ms-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+    list-style: none;
+
+    /* Hiding */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wrapper-dropdown-3 .question-dropdown:after {
+    /* content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 100%;
+    right: 15px;
+    border-width: 0 6px 6px 6px;
+    border-style: solid;
+    border-color: #fff transparent;     */
+}
+
+.wrapper-dropdown-3 .question-dropdown:before {
+    /* content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: 100%;
+    right: 13px;
+    border-width: 0 8px 8px 8px;
+    border-style: solid;
+    border-color: rgba(0,0,0,0.1) transparent;     */
+}
+
+.wrapper-dropdown-3 .question-dropdown li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    border-top: 1px solid #ffffff;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.wrapper-dropdown-3 .question-dropdown li i {
+    float: right;
+    color: inherit;
+}
+
+.wrapper-dropdown-3 .question-dropdown li:first-of-type a {
+}
+
+.wrapper-dropdown-3 .question-dropdown li:last-of-type a {
+}
+
+/* Hover state */
+
+.wrapper-dropdown-3 .question-dropdown li:hover a {
+    background: #73731a;
+}
+
+/* Active state */
+
+.wrapper-dropdown-3.active .question-dropdown {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* No CSS3 support */
+
+.no-opacity .wrapper-dropdown-3 .question-dropdown,
+.no-pointerevents .wrapper-dropdown-3 .question-dropdown {
+    display: none;
+    opacity: 1; /* If opacity support but no pointer-events support */
+    pointer-events: auto; /* If pointer-events support but no pointer-events support */
+}
+
+.no-opacity .wrapper-dropdown-3.active .question-dropdown,
+.no-pointerevents .wrapper-dropdown-3.active .question-dropdown {
+    display: block;
+}
+.wrapper-dropdown-3 span,
+.wrapper-dropdown-3 .question-dropdown li a {
+	padding-left: 30px;
+}
+
 
 /* css for accordion */
 .accordion {
@@ -695,6 +875,7 @@ body {
   -moz-transition: background-color 0.4s linear;
   transition: background-color 0.4s linear;
 }
+
 
 .high-chart {
 	padding-top: 30px;
