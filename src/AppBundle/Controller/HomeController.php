@@ -40,9 +40,9 @@ class HomeController extends Controller
         $statement->execute();
         //prepare the response
         $response = array("code" => 100, "success" => true);
-        //return result as JSON
+        
         $em = $this->getDoctrine()->getManager();
-
+        //set the entities
         $entities = $em->getRepository('AppBundle:Home')->findAll();
         return array(
             'entities' => $entities,
