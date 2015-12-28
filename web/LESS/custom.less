@@ -154,14 +154,16 @@ h1 {
 	color: @blue;
 	font-size: 30px;
 	line-height: 30px;
-	font-family: @heading-font-family;
+	font-family: @heading-font-family;	
+	letter-spacing: 1px;
 	margin-bottom: 12px;//2px
 }
 h2 {
 	color: @light-blue;
 	font-size: 24px;
 	line-height: 26px;
-	font-family: @heading-font-family;
+	font-family: @heading-font-family;	
+	letter-spacing: 1px;
 	margin-bottom: 15px;
 }
 h3 {
@@ -421,6 +423,9 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 
 	opacity: 0.85;
 }
+.content {
+	letter-spacing: 1px;
+}
 .content.home,
 .transparent-grd {
   min-height: 800px;	
@@ -431,6 +436,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	background-repeat: no-repeat;
 	background-size: cover;
   //background-attachment: fixed; //mountain gets hide under header
+	letter-spacing: 0px;
   .banner-caption {
   	color: @white;
 		font-family: @third-font-family;
@@ -599,7 +605,6 @@ body {
 	color: @white;
 	font-size: 18px;
 	min-height: 40px;
-	letter-spacing: 1px;
 	line-height: 40px;
 	position: relative;
 	.number {
@@ -904,10 +909,92 @@ body {
 }
 
 
+/* Chart CSS */
+.icon {
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	&.icon-download {
+		background-image: url(../img/frontend/icons/icon-download.png);
+	}
+	&.icon-share {
+		background-image: url(../img/frontend/icons/icon-share.png);
+	}
+}
 .high-chart {
 	padding-top: 30px;
-	padding-bottom: 80px;
+	position: relative;
+	@media (min-width: 767px) {
+		padding-bottom: 80px;		
+	}
+	.legend-box {
+		@media (min-width: 600px) {
+			padding-left: 20%;
+			position: absolute;
+			top: 300px;
+			width: 100%;
+			z-index: 1;			
+		}
+		@media (max-width: 1199px) {
+			padding-left: 25%;
+		}
+		@media (max-width: 599px) {
+			padding-left: 0;
+		}
+	}
+	.legend {
+		float: left;
+		padding-right: 30px;
+		margin-bottom: 30px;
+		width: 20%;
+		@media (max-width: 1199px) {
+			width: 25%;
+		}
+		@media (max-width: 991px) {
+			width: 33%;
+		}
+		@media (max-width: 599px) {
+			width: 100%;
+			padding: 0 15px;
+		}
+		.legend-head {
+			color: #159c02;
+			font-size: 14px;
+			font-family: @heading-font-family;	
+			margin-bottom: 20px;
+		}
+		ul {
+			li {
+				font-size: 12px;
+				a {
+					font-size: 12px;
+					color: #4c4c4c;
+				}
+			}
+		}
+		&.legend1 {
+		}		
+		&.legend2 {
+		}		
+		&.legend3 {
+		}
+		&.download {
+			li {
+				line-height: 20px;
+				margin-bottom: 8px;
+				a {
+					span {
+						float: left;
+						margin: 2px 10px 10px 0;
+					}
+				}
+			}
+		}
+	}
 }
+
 /* High Chart CSS
 TODO: style to be given by High Chart jquery 
 Column Color

@@ -66,6 +66,11 @@ $(document).ready(function () {
       floating: false,
       itemDistance: winWidth,//margin-right to the size of width
       itemMarginBottom: 15,
+      itemStyle: {'fontWeight':'normal'},
+      symbolHeight: 15,
+      symbolWidth: 15,
+      x: 10,//distance of legend from left
+      y: 20,
     },
     plotOptions: {
     	column: {
