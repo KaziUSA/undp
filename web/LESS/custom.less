@@ -12,6 +12,11 @@
 @white: #ffffff;
 @gray: #636363;
 @light-gray: #a1a1a1;
+@green: #159c02;
+
+@table-heading-top-bg: @green;
+@table-heading-bottom-bg: #86d7eb;
+@table-body-bg: #e1e1e1;
 
 @body-bg: @white;
 @header-bg: #414042;//logo bg color
@@ -930,8 +935,8 @@ body {
 .high-chart {
 	padding-top: 30px;
 	position: relative;
-	@media (min-width: 767px) {
-		padding-bottom: 80px;		
+	@media (min-width: 768px) {
+		padding-bottom: 20px;
 	}
 	.legend-box {
 		@media (min-width: 600px) {
@@ -964,7 +969,7 @@ body {
 			padding: 0 15px;
 		}
 		.legend-head {
-			color: #159c02;
+			color: @green;
 			font-size: 14px;
 			font-family: @heading-font-family;	
 			margin-bottom: 20px;
@@ -997,7 +1002,21 @@ body {
 			}
 		}
 	}
-}
+	.chart-table {
+		padding: 15px;	
+		.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+			background: @table-heading-top-bg;
+			color: @white;
+		}
+		.table-bordered > tbody > tr > th {
+			background: @table-heading-bottom-bg;
+			color: @white;
+		}
+		.table-bordered > tbody > tr > td {
+			background: @table-body-bg;
+		}	
+	}
+}//end high-chart
 
 /* High Chart CSS
 TODO: style to be given by High Chart jquery 
