@@ -47,13 +47,6 @@ $(document).ready(function () {
 	//For all charts
 	Highcharts.setOptions({
     chart: {
-      /*backgroundColor: {
-          linearGradient: [0, 0, 500, 500],
-          stops: [
-              [0, 'rgb(255, 255, 255)'],
-              [1, 'rgb(240, 240, 255)']
-              ]
-      },*/
       backgroundColor: '#ffffff',
       borderWidth: 0,
       plotBorderWidth: 0,
@@ -64,11 +57,14 @@ $(document).ready(function () {
       	fontSize: '12px',
       },
     },
+    colors: ['#99bc44', '#159c02', '#349de7', '#88d8ef'],
+    legend: {
+      align: 'left',
+      floating: false,
+    },
     plotOptions: {
     	column: {
     		borderWidth: 0,
-      	colors: ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c'],
-    		//maxPointWidth: 50,
     		pointPadding: 0,
     		groupPadding: 0.2,
     	}
@@ -79,17 +75,17 @@ $(document).ready(function () {
 	var options1 = {
     chart: {
         renderTo: 'container',//#container
-        type: 'column'//bar
+        type: 'column'//possible type: bar, column
     },
     title: {
-        text: ''//Fruit Consumption
+        text: ''//Text if needed
     },
     xAxis: {
         categories: ['January', 'February', 'March'],
     },
     yAxis: {
         title: {
-            text: ''//Fruit eaten
+            text: ''//Text if needed
         },
     		gridLineColor: '#e5e5e5',
     },
