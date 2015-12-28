@@ -1,3 +1,5 @@
+var winWidth = $(window).width();
+
 /* drop down */
 function DropDown(el) {
   this.dd = el;
@@ -60,7 +62,10 @@ $(document).ready(function () {
     colors: ['#99bc44', '#159c02', '#349de7', '#88d8ef'],
     legend: {
       align: 'left',
+      enabled: true,//true, false
       floating: false,
+      itemDistance: winWidth,//margin-right to the size of width
+      itemMarginBottom: 15,
     },
     plotOptions: {
     	column: {
