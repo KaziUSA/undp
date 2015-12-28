@@ -42,22 +42,28 @@ $(function() {
   });
 });
 
+
+
 $(document).ready(function () {
 	$('body').show();//show after loading all elements to appear properly
 	
 	/* High Chart Initialize with setting */
+
 	//For all charts
 	Highcharts.setOptions({
     chart: {
       backgroundColor: '#ffffff',
       borderWidth: 0,
+      height: 400,
       plotBorderWidth: 0,
       plotShadow: true,
+      //renderTo: 'container',//#container: Not needed now
       spacingRight: 0,
       style: {
-      	fontFamily: 'Roboto, Arial, sans-serif',
-      	fontSize: '12px',
+        fontFamily: 'Roboto, Arial, sans-serif',
+        fontSize: '12px',
       },
+      type: 'column'//possible type: bar, column
     },
     colors: ['#99bc44', '#159c02', '#349de7', '#88d8ef'],
     legend: {
@@ -72,33 +78,31 @@ $(document).ready(function () {
       x: 10,//distance of legend from left
       y: 20,
     },
+    navigation: {
+      buttonOptions: {
+        y: 10,
+      },
+    },
     plotOptions: {
-    	column: {
-    		borderWidth: 0,
-    		pointPadding: 0,
-    		groupPadding: 0.2,
-    	}
+      column: {
+        borderWidth: 0,
+        pointPadding: 0,
+        groupPadding: 0.2,
+      }
+    },
+    title: {
+        text: ''//Default: Chart title
+    },
+    yAxis: {
+        title: {
+            text: ''//Default: Values
+        },
+        gridLineColor: '#e5e5e5',
     },
 	});
 
 	//for chart1 only
-	var options1 = {
-    chart: {
-        renderTo: 'container',//#container
-        type: 'column'//possible type: bar, column
-    },
-    title: {
-        text: ''//Text if needed
-    },
-    xAxis: {
-        categories: ['January', 'February', 'March'],
-    },
-    yAxis: {
-        title: {
-            text: ''//Text if needed
-        },
-    		gridLineColor: '#e5e5e5',
-    },
+	var options1 = {    
     series: [{
         name: 'not at all',
         data: [18, 25, 42]
@@ -111,7 +115,28 @@ $(document).ready(function () {
     }, {
         name: 'yes',
         data: [65, 50, 65]
-    }]//end series
+    }],//end series
+    xAxis: {
+        categories: ['January', 'February', 'March'],
+    },
 	};
-	var chart1 = new Highcharts.Chart(options1);
+  $('#container').highcharts(options1);
+
+
+  //chart from data table
+  var options2 = {
+      data: {
+          table: 'datatable'
+      },
+      yAxis: {
+          allowDecimals: false,
+      },
+      tooltip: {
+          formatter: function () {
+              return '<b>' + this.series.name + '</b><br/>' +
+                  this.point.y + ' ' + this.point.name.toLowerCase();
+          }
+      }
+  };
+  $('#container2').highcharts(options2);
 });

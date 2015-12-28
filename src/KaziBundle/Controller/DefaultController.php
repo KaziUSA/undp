@@ -33,6 +33,17 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/platform2")
+     * @Template()
+     */
+    public function platform2Action()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
+
+    /**
      * @Route("/chart")
      * @Template
      */

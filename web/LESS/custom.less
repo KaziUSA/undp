@@ -347,7 +347,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 /* Main Style */
 .navbar-default {
 	background-color: @header-bg;
-	height: 100px;
+	min-height: 100px;
 	.navbar-nav {	
 		li {
 			a {
@@ -375,6 +375,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 			.navbar-nav {
 				background: none;
 				margin-top: 55px;
+				margin-bottom: 20px;
 				li {
 					margin-right: 20px;
 					a {
@@ -922,6 +923,9 @@ body {
 	&.icon-share {
 		background-image: url(../img/frontend/icons/icon-share.png);
 	}
+}
+#container, #container2 {
+	height:400px;
 }
 .high-chart {
 	padding-top: 30px;
