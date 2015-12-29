@@ -929,20 +929,24 @@ body {
 		background-image: url(../img/frontend/icons/icon-share.png);
 	}
 }
-#container, #container2 {
-	height:400px;
-}
 .high-chart {
 	padding-top: 30px;
-	position: relative;
+	padding-bottom: 20px;
 	@media (min-width: 768px) {
-		padding-bottom: 20px;
+	}
+	.high-chart-wrap {
+		height: 400px;	
+		position: relative;
+		#container, #container2 {
+			height:400px;
+		}
 	}
 	.legend-box {
 		@media (min-width: 600px) {
+			height: 104px;//height of high chart legend with four answer or option
 			padding-left: 20%;
 			position: absolute;
-			top: 300px;
+			bottom: 18px;
 			width: 100%;
 			z-index: 1;			
 		}
@@ -950,7 +954,7 @@ body {
 			padding-left: 25%;
 		}
 		@media (max-width: 599px) {
-			padding-left: 0;
+			padding: 0 15px;
 		}
 	}
 	.legend {
@@ -959,13 +963,14 @@ body {
 		margin-bottom: 30px;
 		width: 20%;
 		@media (max-width: 1199px) {
-			width: 25%;
+			width: 27%;
 		}
 		@media (max-width: 991px) {
 			width: 33%;
 		}
 		@media (max-width: 599px) {
 			width: 100%;
+			margin: 10px 0;
 			padding: 0 15px;
 		}
 		.legend-head {
