@@ -1042,6 +1042,14 @@ Column Color
 	text-transform: uppercase;
 }
 
+@media print {
+	.content aside .filter,
+	.legend.download,
+	.footer-right {
+		display: none;
+	}
+}
+
 /* Only demo */
 @media (max-width: 1000px) {
   /* .welcome-message {
