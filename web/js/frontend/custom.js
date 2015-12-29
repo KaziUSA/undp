@@ -46,7 +46,13 @@ $(function() {
 
 $(document).ready(function () {
 	$('body').show();//show after loading all elements to appear properly
+
+  //TODO: align center horizontally the table data having attribute colspan
+  /*if($('.chart-table table th').hasAttr('colspan')) {
+    $('.chart-table table th').css({'text-align': 'center'});
+  }*/
 	
+  
 	/* High Chart Initialize with setting */
 
 	//For all charts

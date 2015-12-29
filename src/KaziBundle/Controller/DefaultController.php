@@ -55,6 +55,17 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/table")
+     * @Template()
+     */
+    public function tableAction()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
+
+    /**
      * @Route("/chart")
      * @Template
      */

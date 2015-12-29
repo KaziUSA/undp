@@ -594,6 +594,9 @@ body {
 }
 .main-content {
 	background: #ffffff;
+	@media (min-width: 768px) {
+		min-height: 520px;
+	}
 }
 .search {
 	height: 40px;
@@ -1015,10 +1018,14 @@ body {
 		.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
 			background: @table-heading-top-bg;
 			color: @white;
+			text-transform: uppercase;
+			font-weight: normal;
 		}
 		.table-bordered > tbody > tr > th {
 			background: @table-heading-bottom-bg;
 			color: @white;
+			text-transform: uppercase;
+			font-weight: normal;
 		}
 		.table-bordered > tbody > tr > td {
 			background: @table-body-bg;
