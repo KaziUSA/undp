@@ -8,11 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Question;
 use AppBundle\Entity\Age;
 use AppBundle\Entity\District;
 use AppBundle\Entity\Ethnicity;
+use AppBundle\Entity\Gender;
 
 
 
@@ -83,6 +84,20 @@ class FilterController extends Controller
 		    ->getForm();
 		    $choices['ethnicities'] = $form->createView();
 		    
+		    //Gender Multiple Choice as checkbox
+			$form = $this->createFormbuilder()
+		    ->add('gender', 'entity',array(
+			    'class' => 'AppBundle:Gender',
+			    'query_builder' => function(EntityRepository $er) {
+			                         return $er->createQueryBuilder('gender')
+			                             ->orderBy('gender.name', 'ASC');
+			                     },
+			    'choices_as_values' => false,
+			    'expanded' => true,
+				'multiple' => true			    
+			))
+		    ->getForm();
+		    $choices['gender'] = $form->createView();
 		    //Single choice Month as selectbox
 		 //    $form = $this->createFormbuilder()
 		 //    ->add('agegroups', 'entity',array(

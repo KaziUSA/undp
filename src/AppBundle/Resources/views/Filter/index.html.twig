@@ -7,6 +7,7 @@
 <button>Oct-Dec</button>
 
 {{ form(form.questions) }}
+{{ form(form.gender) }}
 {{ form(form.districts) }}
 {{ form(form.agegroups) }}
 {{ form(form.ethnicities) }}
@@ -16,7 +17,8 @@
 </div>
 {% endblock %}
 {%block scriptIncludes %}
-<script type="text/javascript" src="js/highcharts.js"></script>
+
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
 <script type="text/javascript" src="js/exporting.js"></script>
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script>
@@ -75,24 +77,44 @@
        ageVals.push($(this).next("label").text());
      });
      alert(ageVals);
+     //store selected gender in genderVals array
+    var genderVals = [];
+     $('#form_gender :checked').each(function() {
+       genderVals.push($(this).next("label").text());
+     });
+     alert(genderVals);
 
     $.post('{{path('myajax')}}',               
-                { data_question:questions,data_age:ageVals}, 
+                { data_question:questions,data_age:ageVals,data_gender:genderVals }, 
             function(response){ 
                     var val=new Array();
                     var dt= new Array();
                     if(response.code == 100 && response.success){
                     	console.log(response);
                     	//saving graph index to val array
-                    	$.each(response.result.label, function( index, value ) {
-					  		val.push(value);
-						});
+      //               	$.each(response.result.label, function( index, value ) {
+					 //  		val.push(value);
+						// });
 						//saving graph data to dt array
-						$.each(response.result.count, function( index, value ) {
-					  		dt.push(Number(value)); //Typecasting to number,string doesn't work
-						});
-						console.log(dt);
-						alert(val);
+						// $.each(response.result.count, function( index, value ) {
+					 //  		dt.push(Number(value)); //Typecasting to number,string doesn't work
+						// });
+					
+
+		//var obj=JSON.stringify(response.result.series);			
+    //obj=$.parseJSON(obj);
+   // console.log(obj);
+    var test=[{name: 'Yes', data : [2,0,0]},
+            {name: 'No', data: [0,3,0]},
+            {name: 'OK', data: [0,0,1]} ];
+    //console.log(test);
+					// $.each(response.result.series, function( index, value ) {
+					//   		alert(dt['name'].push(value)); //Typecasting to number,string doesn't work
+					// 	});
+						console.log(response.result.label);
+						console.log(response.result.series);
+						//console.log(dt);
+						//alert(val);
 $('#canvas').highcharts({
         chart: {
             type: 'column'
@@ -104,8 +126,13 @@ $('#canvas').highcharts({
             text: 'Source: UNDP Annual Report'
         },
         xAxis: {
-            categories: val,
-            crosshair: true
+            categories: response.result.label,
+            
+            min: 0,
+            max:2	
+        },
+        scrollbar: {
+            enabled: true
         },
         yAxis: {
             min: 0,
@@ -127,14 +154,25 @@ $('#canvas').highcharts({
                 borderWidth: 0
             }
         },
-        series: [{
-            name: 'QA',
-            data: dt
-
-        }],
+        series: response.result.series,
          credits: {
     		enabled: false
   		},
+        scrollbar: {
+                enabled: true,
+                barBackgroundColor: 'gray',
+                barBorderRadius: 7,
+                barBorderWidth: 0,
+                buttonBackgroundColor: 'gray',
+                buttonBorderWidth: 0,
+                buttonArrowColor: 'yellow',
+                buttonBorderRadius: 7,
+                rifleColor: 'yellow',
+                trackBackgroundColor: 'white',
+                trackBorderWidth: 1,
+                trackBorderColor: 'silver',
+                trackBorderRadius: 7
+            }
     	
     });
     //                 var barData = {
