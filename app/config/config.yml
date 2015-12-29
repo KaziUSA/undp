@@ -80,3 +80,14 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+#inline support for ckeditor
+# ivory_ck_editor:
+#     default_config: my_config
+#     inline: true
+#     jquery: true
+#     jquery_path: "js/jquery-2.1.1.js"
+#     input_sync: true
+#     configs:
+#         my_config:
+#             skin: "ckeditor/skins//" # ex: ckeditor/skins/moono/ if you placed in the web directory
