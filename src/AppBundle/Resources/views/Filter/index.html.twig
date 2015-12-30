@@ -24,10 +24,10 @@
                         <div class="tab-content-wrap">
                             <div class="filter-title">Filter By</div>
 
-                            <button>Jan-Mar</button>
+                            <!-- <button>Jan-Mar</button>
                             <button>Apr-Jun</button>
                             <button>Jul-Sep</button>
-                            <button>Oct-Dec</button>
+                            <button>Oct-Dec</button> -->
 
                             <div class="accordion">                                                                 
                                     <form action="">
@@ -152,16 +152,7 @@
                     <a href="#" class="next"></a>
                     <a href="#" class="prev"></a>
 
-                    <div id="dd" class="wrapper-dropdown-3 hidden" tabindex="1">
-                        <span>Question 1 Are your main problems being adressed ?</span>
-                        <ul class="question-dropdown">
-                            <li><a href="http://tympanus.net/Tutorials/CustomDropDownListStyling/index3.html#"><i class="icon-envelope icon-large"></i>Question 1 Are your main problems being adressed ?</a></li>
-                            <li><a href="http://tympanus.net/Tutorials/CustomDropDownListStyling/index3.html#"><i class="icon-truck icon-large"></i>Question 2 Test Question ?</a></li>
-                            <li><a href="http://tympanus.net/Tutorials/CustomDropDownListStyling/index3.html#"><i class="icon-plane icon-large"></i>Question 3 Test Question ?</a></li>
-                        </ul>
-                    </div>
-
-                    {{ form(form.questions) }}
+                    <div id="zelect">{{ form(form.questions) }}</div>
                 </div>
 
                 <div class="chart">
@@ -204,10 +195,12 @@
 {% endblock %}
 {%block scriptIncludes %}
 
-<script src="http://code.highcharts.com/stock/highstock.js"></script>
-<script type="text/javascript" src="js/exporting.js"></script>
+<!--<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script type="text/javascript" src="js/exporting.js"></script>-->
+
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script>
+    
 
 //Chart.js script start
 // window.onload = function(){
@@ -399,7 +392,7 @@ $('#canvas').highcharts({
 };
 
 $(document).ready(function() {     
-  $('button').on('click', function(){aButtonPressed();});
+  $('button, input[type="submit"]').on('click', function(){aButtonPressed();});
 });
 
     </script>

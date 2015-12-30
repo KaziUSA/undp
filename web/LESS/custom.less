@@ -772,6 +772,67 @@ body {
   display: block;
 }
 
+/* Zelect */
+#zelect .zelect {
+  cursor: pointer;
+  line-height: 36px;
+  position: relative;
+  margin-right: 110px;
+}
+#zelect .zelected {
+  padding-left: 10px;
+  height: 40px;
+  line-height: 40px;
+}
+#zelect .zelected.placeholder {
+  color: @white;
+}
+#zelect .zelected:hover {
+  border-color: #c0c4ab;
+  box-shadow: inset 0px 5px 8px -6px #dbdece;
+}
+#zelect .zelect.open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+#zelect .dropdown {
+  background-color: #99bc44;
+  border-top: none;
+  position: absolute;
+  left:0px;
+  right:0px;
+  top: 40px;
+  z-index: 2;
+}
+#zelect .dropdown input {
+	display: none;
+  font-family: sans-serif;
+  outline: none;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #dbdece;
+  box-sizing: border-box;
+  width: 100%;
+}
+#zelect .dropdown ol {
+  padding: 0;
+  list-style-type: none;
+  margin-bottom: 0;
+  /* max-height: 150px;
+  overflow-y: scroll; */
+}
+#zelect .dropdown li {
+	padding: 10px;
+}
+#zelect .dropdown li.current {
+  background-color: #59731a;
+}
+#zelect .dropdown .no-results {
+  margin-left: 10px;
+}
+#zelect label {
+	display: none;
+}
 
 /* css for accordion */
 .accordion {
@@ -788,6 +849,7 @@ body {
   display: block;
   cursor: pointer;
   transition: background-color .15s ease-in-out;
+  font-weight: normal;
 }
 
 .ac-input:checked + label, .ac-label:hover {
