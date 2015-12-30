@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 
+                <th>ID</th>
                 <th>Name</th>
                 <th>Weight</th>
                 <th>Group</th>
@@ -16,7 +17,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                
+                <td>{{ entity.id }}</td>
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.weight }}</td>
                 <td>{{ entity.answergroup }}</td>

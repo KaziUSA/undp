@@ -108,7 +108,6 @@
 
 
         <div class="wrapper wrapper-content">
-            {% block header %}{% endblock %}
             <div class="row">
             <div class="col-lg-8">
                 <div class="ibox float-e-margins">
@@ -119,10 +118,6 @@
                 
             </div>
             <div class="col-lg-4">
-                
-                    
-                    
-                    
                     {% block sidebar %}
                     <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -184,6 +179,8 @@
                     {% endblock %}
                 
             </div>
+            
+            {% block header %}{% endblock %}
         </div>
             {% block footercontent %}
             

@@ -1,0 +1,221 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<button>Jan-Mar</button>
+<button>Apr-Jun</button>
+<button>Jul-Sep</button>
+<button>Oct-Dec</button>
+
+{{ form(form.questions) }}
+{{ form(form.gender) }}
+{{ form(form.districts) }}
+{{ form(form.agegroups) }}
+{{ form(form.ethnicities) }}
+<div>
+<div id="canvas" style="min-wdth: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+    <!-- <canvas id="canvas" height="140"></canvas> -->
+</div>
+{% endblock %}
+{%block scriptIncludes %}
+
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script type="text/javascript" src="js/exporting.js"></script>
+<!-- <script src="js/Chart.HorizontalBar.js"></script> -->
+    <script>
+
+//Chart.js script start
+// window.onload = function(){
+//     var barData = {
+//         labels: ["January", "February", "March", "April", "May", "June", "July",],
+//         datasets: [
+//             {
+//                 label: "My First dataset",
+//                 fillColor: "rgba(220,220,220,0.5)",
+//                 strokeColor: "rgba(220,220,220,0.8)",
+//                 highlightFill: "rgba(220,220,220,0.75)",
+//                 highlightStroke: "rgba(220,220,220,1)",
+//                 data: [65, 59, 80, 81, 56, 55, 40]
+//             },
+//             {
+//                 label: "My Second dataset",
+//                 fillColor: "rgba(26,179,148,0.5)",
+//                 strokeColor: "rgba(26,179,148,0.8)",
+//                 highlightFill: "rgba(26,179,148,0.75)",
+//                 highlightStroke: "rgba(26,179,148,1)",
+//                 data: [28, 48, 40, 19, 86, 27, 90]
+//             }
+//         ]
+//     };
+
+//     var barOptions = {
+//         scaleBeginAtZero: true,
+//         scaleShowGridLines: true,
+//         scaleGridLineColor: "rgba(0,0,0,.05)",
+//         scaleGridLineWidth: 1,
+//         barShowStroke: true,
+//         barStrokeWidth: 2,
+//         barValueSpacing: 5,
+//         barDatasetSpacing: 1,
+//         responsive: true,
+//     }
+
+
+//             var ctx = document.getElementById("canvas").getContext("2d");
+
+//           var chart = new Chart(ctx).HorizontalBar(barData, barOptions);
+//         };
+//Chart.js script end
+    //Ajax call
+    function aButtonPressed(){
+    //store selected question in questions variable
+    var questions=document.getElementById('form_questions').selectedIndex;
+    questions=document.getElementsByTagName("option")[questions].value;
+    alert(questions);
+    //store checked ages in ageVals array
+    var ageVals = [];
+     $('#form_ages :checked').each(function() {
+       ageVals.push($(this).next("label").text());
+     });
+     alert(ageVals);
+     //store selected gender in genderVals array
+    var genderVals = [];
+     $('#form_gender :checked').each(function() {
+       genderVals.push($(this).next("label").text());
+     });
+     alert(genderVals);
+
+    $.post('{{path('myajax')}}',               
+                { data_question:questions,data_age:ageVals,data_gender:genderVals }, 
+            function(response){ 
+                    var val=new Array();
+                    var dt= new Array();
+                    if(response.code == 100 && response.success){
+                    	console.log(response);
+                    	//saving graph index to val array
+      //               	$.each(response.result.label, function( index, value ) {
+					 //  		val.push(value);
+						// });
+						//saving graph data to dt array
+						// $.each(response.result.count, function( index, value ) {
+					 //  		dt.push(Number(value)); //Typecasting to number,string doesn't work
+						// });
+					
+
+		//var obj=JSON.stringify(response.result.series);			
+    //obj=$.parseJSON(obj);
+   // console.log(obj);
+    var test=[{name: 'Yes', data : [2,0,0]},
+            {name: 'No', data: [0,3,0]},
+            {name: 'OK', data: [0,0,1]} ];
+    //console.log(test);
+					// $.each(response.result.series, function( index, value ) {
+					//   		alert(dt['name'].push(value)); //Typecasting to number,string doesn't work
+					// 	});
+						console.log(response.result.label);
+						console.log(response.result.series);
+						//console.log(dt);
+						//alert(val);
+$('#canvas').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Answers by the people'
+        },
+        subtitle: {
+            text: 'Source: UNDP Annual Report'
+        },
+        xAxis: {
+            categories: response.result.label,
+            
+            min: 0,
+            max:2	
+        },
+        scrollbar: {
+            enabled: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'People'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y} people</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: response.result.series,
+         credits: {
+    		enabled: false
+  		},
+        scrollbar: {
+                enabled: true,
+                barBackgroundColor: 'gray',
+                barBorderRadius: 7,
+                barBorderWidth: 0,
+                buttonBackgroundColor: 'gray',
+                buttonBorderWidth: 0,
+                buttonArrowColor: 'yellow',
+                buttonBorderRadius: 7,
+                rifleColor: 'yellow',
+                trackBackgroundColor: 'white',
+                trackBorderWidth: 1,
+                trackBorderColor: 'silver',
+                trackBorderRadius: 7
+            }
+    	
+    });
+    //                 var barData = {
+				//         labels:  val ,
+				//         datasets: [
+				//             {
+				//                 label: "My First dataset",
+				//                 fillColor: "rgba(220,220,220,0.5)",
+				//                 strokeColor: "rgba(220,220,220,0.8)",
+				//                 highlightFill: "rgba(220,220,220,0.75)",
+				//                 highlightStroke: "rgba(220,220,220,1)",
+				//                 data: dt
+				//             }
+				//         ]
+				//     };
+
+    // var barOptions = {
+    //     scaleBeginAtZero: true,
+    //     scaleShowGridLines: true,
+    //     scaleGridLineColor: "rgba(0,0,0,.05)",
+    //     scaleGridLineWidth: 1,
+    //     barShowStroke: true,
+    //     barStrokeWidth: 2,
+    //     barValueSpacing: 5,
+    //     barDatasetSpacing: 1,
+    //     responsive: true,
+    // }
+
+
+    //         var ctx = document.getElementById("canvas").getContext("2d");
+
+    //       var chart = new Chart(ctx).HorizontalBar(barData, barOptions);
+                    
+                    }
+
+    }, "json");    
+
+};
+
+$(document).ready(function() {     
+  $('button').on('click', function(){aButtonPressed();});
+});
+
+    </script>
+
+{% endblock %}

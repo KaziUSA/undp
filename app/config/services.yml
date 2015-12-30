@@ -7,7 +7,6 @@ parameters:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-
 services:
     #for command line csv upload - PhaxCoreBundle
     phax.CsvController:

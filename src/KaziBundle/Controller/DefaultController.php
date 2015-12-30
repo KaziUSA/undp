@@ -33,6 +33,39 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/platform2")
+     * @Template()
+     */
+    public function platform2Action()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
+
+    /**
+     * @Route("/platform3")
+     * @Template()
+     */
+    public function platform3Action()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
+
+    /**
+     * @Route("/table")
+     * @Template()
+     */
+    public function tableAction()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
+
+    /**
      * @Route("/chart")
      * @Template
      */
