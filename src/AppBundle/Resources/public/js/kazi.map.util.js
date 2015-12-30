@@ -46,7 +46,7 @@ KAZI.map.util = (function() {
     return;
   }
 });   
-    }
+    };
     
     var showMap = function() {
       map = L.map('map', { 
@@ -87,7 +87,7 @@ KAZI.map.util = (function() {
 		legend.addTo(map);
         return ;
         
-    }
+   };
     var showLabel = function() {
         
         // control that shows state info on hover
@@ -124,7 +124,7 @@ KAZI.map.util = (function() {
 			       d > 20   ? 'rgba('+ theme_color +',0.5)' :
 			       d > 10   ? 'rgba('+ theme_color +',0.4)' :
 			                  '#ccc';
-		}
+		};
 
 		
 
@@ -143,18 +143,18 @@ KAZI.map.util = (function() {
 			}
 
 			info.update(layer.feature.properties);
-		}
+		};
 
 		var geojson;
 
 		var resetHighlight = function (e) {
 			geojson.resetStyle(e.target);
 			info.update();
-		}
+		};
 
 		var zoomToFeature = function (e) {
 			map.fitBounds(e.target.getBounds());
-		}
+		};
 
 		var onEachFeature = function (feature, layer) {
 			layer.on({
@@ -162,7 +162,7 @@ KAZI.map.util = (function() {
 				mouseout: resetHighlight,
 				//click: zoomToFeature //removed movement of map on click
 			});
-		}
+		};
     //Getters and Setters
     
     return {
