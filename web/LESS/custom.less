@@ -535,6 +535,10 @@ body {
 	border: 0;
 	border-radius: 0;
 	padding: 0px 8px;
+	font-weight: normal;
+	@media (max-width: 800px) {
+		padding: 0px 5px;		
+	}
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
 	border: 0;
@@ -544,7 +548,7 @@ body {
 	.feedback-tab {
 		background: #88d8ef;
 		display: table;
-		padding: 0 15px;
+		padding: 0 0 0 15px;
 		width: 100%;
 		.tab-head {
 			color: #3e7180;
@@ -559,6 +563,7 @@ body {
 	.nav-tabs {
 		float: left;
 		height: 40px;
+		border: 0;
 		li {
 			a {
 				color: @white;
@@ -780,9 +785,9 @@ body {
   margin-right: 110px;
 }
 #zelect .zelected {
-  padding-left: 10px;
-  height: 40px;
-  line-height: 40px;
+  padding: 10px;
+  /* height: 40px;
+  line-height: 40px; */
 }
 #zelect .zelected.placeholder {
   color: @white;
@@ -830,7 +835,8 @@ body {
 #zelect .dropdown .no-results {
   margin-left: 10px;
 }
-#zelect label {
+.filter #form label.required,
+#zelect label.required {
 	display: none;
 }
 
