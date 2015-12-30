@@ -43,6 +43,27 @@ $(function() {
 });
 
 
+//change the select value on click
+function btnPrevQuestion_Click() {
+    var selectedIndex = $("#form_questions").prop("selectedIndex");
+    if (selectedIndex > 0) {
+        $("#form_questions").prop("selectedIndex", selectedIndex - 1);
+    }
+    //console.log(selectedIndex);
+    $('.zelected').text($('#form_questions option:selected').text());
+}
+function btnNextQuestion_Click() {
+    //  Note:  the JQuery "prop" function requires JQuery v1.6 or later
+    var selectedIndex = $("#form_questions").prop("selectedIndex");
+    var itemsInDropDownList = $("#form_questions option").length;
+
+    //  If we're not already selecting the last item in the drop down list, then increment the SelectedIndex
+    if (selectedIndex < (itemsInDropDownList - 1)) {
+        $("#form_questions").prop("selectedIndex", selectedIndex + 1);
+    }
+    //console.log(selectedIndex);
+    $('.zelected').text($('#form_questions option:selected').text());
+}
 
 $(document).ready(function () {
 	$('body').show();//show after loading all elements to appear properly
