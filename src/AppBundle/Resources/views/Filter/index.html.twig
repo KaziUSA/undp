@@ -308,8 +308,8 @@ $('#canvas').highcharts({
         xAxis: {
             categories: response.result.label,
             
-            min: 0,
-            max:2	
+            min: 0
+            	
         },
         scrollbar: {
             enabled: true
@@ -320,14 +320,22 @@ $('#canvas').highcharts({
                 text: ''//There is no text in design: People
             }
         },
-        tooltip: {
+        /*tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                 '<td style="padding:0"><b>{point.y} people</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
-        },
+        },*/
+        
+        tooltip: {
+              formatter: function () {
+                  return this.point.y + '% says<br>' + 
+                  this.series.name.toLowerCase();
+                    //+ this.point.name.toLowerCase();
+              }
+          },
         plotOptions: {
             column: {
                 pointPadding: 0.2,
