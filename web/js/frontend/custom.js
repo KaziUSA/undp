@@ -1,6 +1,6 @@
 var winWidth = $(window).width();
 
-/* drop down */
+/* drop down: used in frontend - replaced by plugins/zelect */
 function DropDown(el) {
   this.dd = el;
   this.placeholder = this.dd.children('span');
@@ -32,7 +32,6 @@ DropDown.prototype = {
     return this.index;
   }
 }
-
 $(function() {
   var dd = new DropDown( $('#dd') );
 
@@ -41,9 +40,11 @@ $(function() {
     $('.wrapper-dropdown-3').removeClass('active');
   });
 });
+//end custom dropdown
 
 
 //change the select value on click
+//TODO: add current class in ol > li on clicking next and prev to show selected question in dropdown
 function btnPrevQuestion_Click() {
     var selectedIndex = $("#form_questions").prop("selectedIndex");
     if (selectedIndex > 0) {
