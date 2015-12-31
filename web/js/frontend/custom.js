@@ -71,6 +71,8 @@ $(document).ready(function () {
 
   //custom select
   $('#zelect select').zelect({ placeholder:'Please select question' });
+
+
   //TODO: align center horizontally the table data having attribute colspan
   /*if($('.chart-table table th').hasAttr('colspan')) {
     $('.chart-table table th').css({'text-align': 'center'});

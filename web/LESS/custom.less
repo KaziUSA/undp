@@ -437,6 +437,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 }
 .content {
 	letter-spacing: 1px;
+	overflow: hidden;//fixing long height
 }
 .content.home,
 .transparent-grd {
@@ -707,6 +708,7 @@ body {
 	}
 	.legend-box {
 		@media (min-width: 600px) {
+			display: none;//if highchart legend height is less than 104px
 			height: 104px;//height of high chart legend with four answer or option
 			padding-left: 20%;
 			position: absolute;
