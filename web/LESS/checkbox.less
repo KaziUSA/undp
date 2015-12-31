@@ -1,0 +1,99 @@
+/* Base for label styling */
+.checkbox-style [type="checkbox"]:not(:checked),
+.checkbox-style [type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+  }
+
+.checkbox-style [type="checkbox"]:not(:checked) + label,
+.checkbox-style [type="checkbox"]:checked + label {
+    position: relative;
+    padding-right: 25px;
+    cursor: pointer;
+    height: 21px;
+    display: block;
+  }
+
+
+  /* checkbox aspect */
+
+.checkbox-style [type="checkbox"]:not(:checked) + label:before,
+.checkbox-style [type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 1px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #aaa;
+    background: #f8f8f8;
+    border-radius: 50%;
+  }
+
+
+  /* checked mark aspect */
+
+.checkbox-style [type="checkbox"]:not(:checked) + label:after,
+.checkbox-style [type="checkbox"]:checked + label:after {
+    /* content: '✔'; */
+    content: '';
+    height: 12px;
+    margin-top: -8px;
+    width: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    font-size: 18px;
+    line-height: 0.8;
+    color: #09ad7e;
+    transition: all .2s;
+    background: #159c02;
+  }
+
+
+  /* checked mark aspect changes */
+
+.checkbox-style [type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+.checkbox-style [type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+
+  /* disabled checkbox */
+
+.checkbox-style [type="checkbox"]:disabled:not(:checked) + label:before,
+.checkbox-style [type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+  }
+
+.checkbox-style [type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+  }
+
+.checkbox-style [type="checkbox"]:disabled + label {
+    color: #aaa;
+  }
+
+
+  /* accessibility */
+
+.checkbox-style [type="checkbox"]:checked:focus + label:before,
+.checkbox-style [type="checkbox"]:not(:checked):focus + label:before {
+    border: 1px dotted blue;
+  }
+
+
+  /* hover style just for information */
+
+.checkbox-style label:hover:before {
+    border: 1px solid #4778d9!important;
+  }
+
