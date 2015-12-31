@@ -36,12 +36,12 @@
                                         <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
                                         <label class="ac-label" for="ac-1">Month</label>
                                         
-                                        <ul class="ac-text">
-                                            <li><input type="radio" id="month1" />
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="month1" />
                                                 <label for="month1">January<span></span></label></li>
-                                            <li><input type="radio" id="month2" />
+                                            <li><input type="checkbox" id="month2" />
                                                 <label for="month2">Feburary<span></span></label></li>
-                                            <li><input type="radio" id="month3" />
+                                            <li><input type="checkbox" id="month3" />
                                                 <label for="month3">March<span></span></label></li>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
@@ -52,15 +52,6 @@
                                         <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
                                         <label class="ac-label" for="ac-2">District</label>
                                         
-                                        <ul class="ac-text hidden">
-                                            <li><input type="radio" id="all-district" />
-                                                <label for="all-district">All<span></span></label></li>
-                                            <li><input type="radio" id="kathmandu" />
-                                                <label for="kathmandu">Kathmandu<span></span></label></li>
-                                            <li><input type="radio" id="bhaktapur" />
-                                                <label for="bhaktapur">Bhaktapur<span></span></label></li>
-                                        </ul><!--/ac-text-->
-
                                         <ul class="ac-text checkbox-style">
                                             {{ form(form.districts) }}
                                         </ul>
@@ -72,13 +63,6 @@
                                         <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
                                         <label class="ac-label" for="ac-3">Gender</label>
                                         
-                                        <ul class="ac-text hidden">
-                                            <li><input type="radio" id="male" name="gender" />
-                                                <label for="male">Male<span></span></label></li>
-                                            <li><input type="radio" id="female" name="gender" />
-                                                <label for="female">Female<span></span></label></li>
-                                        </ul><!--/ac-text-->
-
                                         <ul class="ac-text checkbox-style">
                                             {{ form(form.gender) }}
                                         </ul>
@@ -90,10 +74,6 @@
                                         <input class="ac-input" id="ac-4" name="ac-4" type="checkbox" />
                                         <label class="ac-label" for="ac-4">Ethnicity</label>
                                         
-                                        <ul class="ac-text hidden">
-                                            <li><input type="radio" id="all-ethnicity" />
-                                                <label for="all-ethnicity">All<span></span></label></li>
-                                        </ul><!--/ac-text-->
                                         <ul class="ac-text checkbox-style">
                                             {{ form(form.ethnicities) }}
                                         </ul>
@@ -105,10 +85,6 @@
                                         <input class="ac-input" id="ac-5" name="ac-5" type="checkbox" />
                                         <label class="ac-label" for="ac-5">Age Group</label>
                                         
-                                        <ul class="ac-text hidden">
-                                            <li><input type="radio" id="all-age" />
-                                                <label for="all-age">All<span></span></label></li>
-                                        </ul><!--/ac-text-->
                                         <ul class="ac-text checkbox-style">
                                             {{ form(form.agegroups) }}
                                         </ul>
@@ -120,8 +96,8 @@
                                         <input class="ac-input" id="ac-6" name="ac-6" type="checkbox" />
                                         <label class="ac-label" for="ac-6">Disability</label>
                                         
-                                        <ul class="ac-text">
-                                            <li><input type="radio" id="all-disability" />
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="all-disability" />
                                                 <label for="all-disability">All<span></span></label></li>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
@@ -299,10 +275,10 @@ $('#canvas').highcharts({
             type: 'column'
         },
         title: {
-            text: 'Answers by the people'
+            text: ''//There is no text in design: Answers by the people
         },
         subtitle: {
-            text: 'Source: UNDP Annual Report'
+            text: ''//There is no text in design: Source: UNDP Annual Report
         },
         xAxis: {
             categories: response.result.label,
@@ -316,7 +292,7 @@ $('#canvas').highcharts({
         yAxis: {
             min: 0,
             title: {
-                text: 'People'
+                text: ''//There is no text in design: People
             }
         },
         tooltip: {

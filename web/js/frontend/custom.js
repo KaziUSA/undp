@@ -129,13 +129,13 @@ $(document).ready(function () {
           },
           gridLineColor: '#e5e5e5',
       },
-      tooltip: {
+      /*tooltip: {
           formatter: function () {
               return this.point.y + '% says<br>'
                 + this.series.name.toLowerCase();
                 //+ this.point.name.toLowerCase();
           }
-      }
+      }*/
 	});
 
 	//for chart1 only

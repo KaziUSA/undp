@@ -27,8 +27,12 @@
   position: absolute;
   left:0px;
   right:0px;
-  top: 40px;
+  top: 100%;
   z-index: 2;
+  display: none !important;//forcing to hide if not hovered: problem occurred is next time you don't have to click
+}
+#zelect .zelect.open.hover .dropdown {
+  display: block !important;
 }
 #zelect .dropdown input {
 	display: none;
