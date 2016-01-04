@@ -176,50 +176,6 @@
 
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script>
-    
-
-//Chart.js script start
-// window.onload = function(){
-//     var barData = {
-//         labels: ["January", "February", "March", "April", "May", "June", "July",],
-//         datasets: [
-//             {
-//                 label: "My First dataset",
-//                 fillColor: "rgba(220,220,220,0.5)",
-//                 strokeColor: "rgba(220,220,220,0.8)",
-//                 highlightFill: "rgba(220,220,220,0.75)",
-//                 highlightStroke: "rgba(220,220,220,1)",
-//                 data: [65, 59, 80, 81, 56, 55, 40]
-//             },
-//             {
-//                 label: "My Second dataset",
-//                 fillColor: "rgba(26,179,148,0.5)",
-//                 strokeColor: "rgba(26,179,148,0.8)",
-//                 highlightFill: "rgba(26,179,148,0.75)",
-//                 highlightStroke: "rgba(26,179,148,1)",
-//                 data: [28, 48, 40, 19, 86, 27, 90]
-//             }
-//         ]
-//     };
-
-//     var barOptions = {
-//         scaleBeginAtZero: true,
-//         scaleShowGridLines: true,
-//         scaleGridLineColor: "rgba(0,0,0,.05)",
-//         scaleGridLineWidth: 1,
-//         barShowStroke: true,
-//         barStrokeWidth: 2,
-//         barValueSpacing: 5,
-//         barDatasetSpacing: 1,
-//         responsive: true,
-//     }
-
-
-//             var ctx = document.getElementById("canvas").getContext("2d");
-
-//           var chart = new Chart(ctx).HorizontalBar(barData, barOptions);
-//         };
-//Chart.js script end
     //Ajax call
     function aButtonPressed(){
     //store selected question in questions variable
@@ -238,167 +194,124 @@
        genderVals.push($(this).next("label").text());
      });
      alert(genderVals);
+    //store selected ethnicity in ethnicityVals
+    var ethnicityVals = [];
+     $('#form_ethnicities :checked').each(function() {
+       ethnicityVals.push($(this).next("label").text());
+     });
+     alert(ethnicityVals);
+
 
     $.post('{{path('myajax')}}',               
-                { data_question:questions,data_age:ageVals,data_gender:genderVals }, 
-            function(response){ 
-                    var val=new Array();
-                    var dt= new Array();
-                    if(response.code == 100 && response.success){
-                    	console.log(response);
-                    	//saving graph index to val array
-      //               	$.each(response.result.label, function( index, value ) {
-					 //  		val.push(value);
-						// });
-						//saving graph data to dt array
-						// $.each(response.result.count, function( index, value ) {
-					 //  		dt.push(Number(value)); //Typecasting to number,string doesn't work
-						// });
-					
+        { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals }, 
+        function(response){ 
+            var val=new Array();
+            var dt= new Array();
+            if(response.code == 100 && response.success){
+                console.log(response);
+                //show custom legend on chart if number of items in legend is greater and equal to 4
+                var legend_item_height = 29;
+                var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
+                //height of last legend is 15 without margin
+                if(response.result.series.length >= 4) {
+                    $('.legend-box').height(legend_height);
+                    $('.legend-box').show();
+                } else {
+                    $('.legend-box').hide();
+                }
 
-		//var obj=JSON.stringify(response.result.series);			
-    //obj=$.parseJSON(obj);
-   // console.log(obj);
-    var test=[{name: 'Yes', data : [2,0,0]},
-            {name: 'No', data: [0,3,0]},
-            {name: 'OK', data: [0,0,1]} ];
-    //console.log(test);
-					// $.each(response.result.series, function( index, value ) {
-					//   		alert(dt['name'].push(value)); //Typecasting to number,string doesn't work
-					// 	});
-						console.log(response.result.label);
-						console.log(response.result.series);
-						//console.log(dt);
-						//alert(val);
+                $('#canvas').highcharts({
+                    chart: {
+                        backgroundColor: '#ffffff',
+                        borderWidth: 0,
+                        height: 400,
+                        plotBorderWidth: 0,
+                        plotShadow: true,
+                        //renderTo: 'container',//#container: Not needed now
+                        spacingRight: 0,
+                        style: {
+                          fontFamily: 'Roboto, Arial, sans-serif',
+                          fontSize: '12px',
+                        },
 
-    
-                      //show custom legend on chart if number of items in legend is greater and equal to 4
-                      var legend_item_height = 29;
-                      var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
-                      //height of last legend is 15 without margin
-                      if(response.result.series.length >= 4) {
-                        $('.legend-box').height(legend_height);
-                        $('.legend-box').show();
-                      } else {
-                        $('.legend-box').hide();
-                      }
-
-$('#canvas').highcharts({
-        chart: {
-            backgroundColor: '#ffffff',
-            borderWidth: 0,
-            height: 400,
-            plotBorderWidth: 0,
-            plotShadow: true,
-            //renderTo: 'container',//#container: Not needed now
-            spacingRight: 0,
-            style: {
-              fontFamily: 'Roboto, Arial, sans-serif',
-              fontSize: '12px',
-            },
-
-            type: 'column'
-        },
-        title: {
-            text: ''//There is no text in design: Answers by the people
-        },
-        subtitle: {
-            text: ''//There is no text in design: Source: UNDP Annual Report
-        },
-        xAxis: {
-            categories: response.result.label,
-            
-            min: 0
-            	
-        },
-        scrollbar: {
-            enabled: true
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: ''//There is no text in design: People
-            }
-        },
-        /*tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y} people</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },*/
-        
-        tooltip: {
-              formatter: function () {
-                  return this.point.y + '% says<br>' + 
-                  this.series.name.toLowerCase();
-                    //+ this.point.name.toLowerCase();
-              }
-          },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        series: response.result.series,
-         credits: {
-    		enabled: false
-  		},
-        scrollbar: {
-                enabled: true,
-                barBackgroundColor: 'gray',
-                barBorderRadius: 7,
-                barBorderWidth: 0,
-                buttonBackgroundColor: 'gray',
-                buttonBorderWidth: 0,
-                buttonArrowColor: 'yellow',
-                buttonBorderRadius: 7,
-                rifleColor: 'yellow',
-                trackBackgroundColor: 'white',
-                trackBorderWidth: 1,
-                trackBorderColor: 'silver',
-                trackBorderRadius: 7
-            }
-    	
-    });
-    //                 var barData = {
-				//         labels:  val ,
-				//         datasets: [
-				//             {
-				//                 label: "My First dataset",
-				//                 fillColor: "rgba(220,220,220,0.5)",
-				//                 strokeColor: "rgba(220,220,220,0.8)",
-				//                 highlightFill: "rgba(220,220,220,0.75)",
-				//                 highlightStroke: "rgba(220,220,220,1)",
-				//                 data: dt
-				//             }
-				//         ]
-				//     };
-
-    // var barOptions = {
-    //     scaleBeginAtZero: true,
-    //     scaleShowGridLines: true,
-    //     scaleGridLineColor: "rgba(0,0,0,.05)",
-    //     scaleGridLineWidth: 1,
-    //     barShowStroke: true,
-    //     barStrokeWidth: 2,
-    //     barValueSpacing: 5,
-    //     barDatasetSpacing: 1,
-    //     responsive: true,
-    // }
-
-
-    //         var ctx = document.getElementById("canvas").getContext("2d");
-
-    //       var chart = new Chart(ctx).HorizontalBar(barData, barOptions);
+                        type: 'column'
+                    },
+                    title: {
+                        text: ''//There is no text in design: Answers by the people
+                    },
+                    subtitle: {
+                        text: ''//There is no text in design: Source: UNDP Annual Report
+                    },
+                    xAxis: {
+                        categories: response.result.label,
+                        
+                        min: 0
+                        	
+                    },
+                    scrollbar: {
+                        enabled: true
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: ''//There is no text in design: People
+                        }
+                    },
+                    /*tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y} people</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },*/
                     
+                    tooltip: {
+                          formatter: function () {
+                              return this.point.y + '% says<br>' + 
+                              this.series.name.toLowerCase();
+                                //+ this.point.name.toLowerCase();
+                          }
+                      },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0.2,
+                            borderWidth: 0
+                        }
+                    },
+                    series: response.result.series,
+                     credits: {
+                		enabled: false
+              		},
+                    scrollbar: {
+                        enabled: true,
+                        barBackgroundColor: 'gray',
+                        barBorderRadius: 7,
+                        barBorderWidth: 0,
+                        buttonBackgroundColor: 'gray',
+                        buttonBorderWidth: 0,
+                        buttonArrowColor: 'yellow',
+                        buttonBorderRadius: 7,
+                        rifleColor: 'yellow',
+                        trackBackgroundColor: 'white',
+                        trackBorderWidth: 1,
+                        trackBorderColor: 'silver',
+                        trackBorderRadius: 7
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: response.result.stack
+                        }
                     }
+    	
+                });//Highchart end
+    
+                    
+            }//Ajax success end
 
-    }, "json");    
+        }, "json"); //.post end   
 
-};
+    }; //abuttonpressed end
 
 $(document).ready(function() {     
   $('button, input[type="submit"]').on('click', function(){aButtonPressed();});

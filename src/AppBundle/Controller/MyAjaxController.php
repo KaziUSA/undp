@@ -23,7 +23,7 @@ class MyAjaxController extends Controller
 	
 	/**    
      * @Route("/", name="myajax")
-     * @Method("POST")
+     * @Method("GET")
      * @Template()
      */
 	public function indexAction(Request $request){
@@ -37,9 +37,12 @@ class MyAjaxController extends Controller
 		// $obj['series']['data']=array();
 		 $data_question = $request->request->get('data_question');
 		 $data_age = $request->request->get('data_age');
-		// $data_question = 1;
-		 //$data_age = ['15 - 24','40 - 54'];
-		
+		 $data_gender = $request->request->get('data_gender');
+		 $data_ethnicity= $request->request->get('data_ethnicity');
+		 $data_question = 1;
+		 $data_age = ['15 - 24','40 - 54'];
+		$data_gender= ['Male','Female'];
+		$data_ethnicity=['Brahmin','Chhetri','Dalit']
 		//Handle data
 		
 		//Store the answers of the selected question in $obj['answer']\
@@ -52,18 +55,9 @@ class MyAjaxController extends Controller
 	    }
 		unset($num);   
 		//Any filters not selected		
-		if(!isset($data_age)){ 			
+		if(!isset($data_age,$data_gender,$data_ethnicity)){ 			
 		    
-		    foreach ($obj['answer'] as $num){
-		  //   	$sql= 'SELECT count(*) as count
-				// FROM `survey_response` AS s INNER JOIN answer AS a ON s.answer_id=a.id 
-				//  WHERE s.question_id = :qnid AND a.name = :name';
-				// $connection = $em->getConnection();		
-				// $statement = $connection->prepare($sql);
-				// $statement->bindValue('qnid', $data_question);
-				// $statement->bindValue('name', $num);
-				// $statement->execute();
-			 // 	$results = $statement->fetchAll();
+		    foreach ($obj['answer'] as $num){		  
 		    	$results = $em->getRepository('AppBundle\Entity\Query')->getBasicArray($data_question,$num);
 			 	foreach ($results as $arr){
 		        	//array_push($obj['count'], (int)$arr['count']);   
@@ -74,18 +68,11 @@ class MyAjaxController extends Controller
 		    }			 
 		}
 		//Only age filter selected
-		if(isset($data_age)){
+		if(isset($data_age) && !isset($data_gender,$data_ethnicity)){
 			$i=0;
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
-				foreach ($data_age as $age){					
-					// $sql='SELECT count(*) as count FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id INNER JOIN answer AS a ON sr.answer_id=a.id INNER JOIN `age` AS ag ON s.age_id=ag.id WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name  ';
-					// $statement = $connection->prepare($sql);
-					// $statement->bindValue('agname', $age);
-					// $statement->bindValue('qnid', $data_question);
-					// $statement->bindValue('name', $num);
-					// $statement->execute();
-				 	//$results = $statement->fetchAll();
+				foreach ($data_age as $age){
 					$results= $em->getRepository('AppBundle\Entity\Query')->getAgeFilteredArray($data_question,$num,$age);
 					foreach ($results as $arr){		        		
 		        		$obj['series'][$i]['data'][]= (int)$arr['count'];   
@@ -94,6 +81,42 @@ class MyAjaxController extends Controller
 			$i++;
 			}
 			$obj['label']=$data_age;
+		}
+
+		//Age and Gender filter selected
+		if(isset($data_age,$data_gender) && !isset($data_ethnicity)){
+			$i=0;
+			$obj['stack']='normal';
+			foreach ($data_gender as $gender) {				
+				foreach ($obj['answer'] as $num){	
+					$obj['series'][$i]['name']= $num;  //Alternative to array_push
+					$obj['series'][$i]['stack']=$gender;
+					foreach ($data_age as $age){				
+						$results= $em->getRepository('AppBundle\Entity\Query')->getAgeGender($data_question,$num,$age,$gender);
+						foreach ($results as $arr){		        		
+			        		$obj['series'][$i]['data'][]= (int)$arr['count'];   
+			    		}					
+					}				
+					$i++;
+				}
+				$obj['label']=$data_age;
+			}
+		}
+
+		//Only ethnicity filter selected
+		if(isset($data_ethnicity) && !isset($data_age,$data_gender)){
+			$i=0;
+			foreach ($obj['answer'] as $num){	
+				$obj['series'][$i]['name']= $num;  //Alternative to array_push
+				foreach ($data_ethnicity as $ethnicity){
+					$results= $em->getRepository('AppBundle\Entity\Query')->getEthnicityFilteredArray($data_question,$num,$ethnicity);
+					foreach ($results as $arr){		        		
+		        		$obj['series'][$i]['data'][]= (int)$arr['count'];   
+		    		}					
+				}				
+			$i++;
+			}
+			$obj['label']=$data_ethnicity;
 		}
 		//prepare the response
 		$response = array("code" => 100, "success" => true, "result"=> $obj);
