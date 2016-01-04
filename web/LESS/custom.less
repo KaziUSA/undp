@@ -544,7 +544,10 @@ body {
 	padding: 0px 8px;
 	font-weight: normal;
 	@media (max-width: 800px) {
-		padding: 0px 5px;		
+		padding: 0px 6px;		
+	}
+	@media (max-width: 767px) {
+		padding: 0px 15px;				
 	}
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
@@ -568,9 +571,10 @@ body {
 		}
 	}
 	.nav-tabs {
-		float: left;
+		float: right;
 		height: 40px;
 		border: 0;
+		margin-right: 5px;
 		li {
 			a {
 				color: @white;
