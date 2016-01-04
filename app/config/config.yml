@@ -91,3 +91,12 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
 
+vich_uploader:
+    db_driver: orm
+    mappings:
+        product_image:
+            uri_prefix:         /img
+            upload_destination: %kernel.root_dir%/../web/img
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true

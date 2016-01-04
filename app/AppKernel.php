@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
             new KaziBundle\KaziBundle(),
             new Phax\CoreBundle\PhaxCoreBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
