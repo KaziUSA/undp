@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="legend legend3 download">
                                     <ul>
-                                        <li><a href="#!"><span class="icon icon-download"></span> Download Report</a></li>
+                                        <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Report</a></li>
                                         <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li>
                                     </ul>
                                 </div>
@@ -275,9 +275,20 @@
                       },
                     plotOptions: {
                         column: {
-                            pointPadding: 0.2,
-                            borderWidth: 0
+                            pointPadding: 0,
+                            borderWidth: 0,
+                            groupPadding: 0.2,
                         }
+                    },
+                    exporting: {
+                        buttons: {
+                            contextButton: {
+                                enabled: false,
+                                verticalAlign: "top",
+                                y: 0,
+                            }
+                        },
+                        type: 'application/pdf',
                     },
                     series: response.result.series,
                      credits: {
@@ -305,6 +316,11 @@
                     }
     	
                 });//Highchart end
+
+                $('#download-report').click(function () {
+                    var chart = $('#canvas').highcharts();
+                    chart.exportChart();
+                });
     
                     
             }//Ajax success end
