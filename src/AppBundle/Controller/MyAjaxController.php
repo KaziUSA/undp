@@ -23,7 +23,7 @@ class MyAjaxController extends Controller
 	
 	/**    
      * @Route("/", name="myajax")
-     * @Method("GET")
+     * @Method("POST")
      * @Template()
      */
 	public function indexAction(Request $request){
@@ -39,10 +39,9 @@ class MyAjaxController extends Controller
 		 $data_age = $request->request->get('data_age');
 		 $data_gender = $request->request->get('data_gender');
 		 $data_ethnicity= $request->request->get('data_ethnicity');
-		 $data_question = 1;
-		 $data_age = ['15 - 24','40 - 54'];
-		$data_gender= ['Male','Female'];
-		$data_ethnicity=['Brahmin','Chhetri','Dalit']
+		//  $data_question = 1;
+		//  $data_age = ['15 - 24','40 - 54'];
+		// $data_gender= ['Male','Female'];
 		//Handle data
 		
 		//Store the answers of the selected question in $obj['answer']\
