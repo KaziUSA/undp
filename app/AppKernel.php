@@ -5,6 +5,12 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+     public function init()
+    {
+        date_default_timezone_set( 'Asia/Kathmandu' );
+        parent::init();
+    }
+    
     public function registerBundles()
     {
         $bundles = array(
@@ -16,8 +22,12 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            //new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new AppBundle\AppBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new UserBundle\UserBundle(),
+            new KaziBundle\KaziBundle(),
+            new Phax\CoreBundle\PhaxCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

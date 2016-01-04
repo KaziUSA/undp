@@ -112,7 +112,7 @@
     
 $.ajax({
   
-  url: '/nepal',
+  url: '/admin/nepal',
   success: function( data ) {
     
       geojson = L.geoJson(data, {style:style, onEachFeature: onEachFeature}).addTo(map);

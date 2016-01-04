@@ -50,7 +50,7 @@ h5 {
 }
 .navbar-default .nav > li > a:hover,
 .navbar-default .nav > li > a:focus {
-  background-color: #293846;
+  background-color: #225384;
   color: white;
 }
 .nav .open > a,
@@ -157,14 +157,14 @@ h5 {
 }
 .nav-header {
   padding: 33px 25px;
-  background: url("patterns/header-profile.png") no-repeat;
+  background: #4892db;
 }
 .pace-done .nav-header {
   transition: all 0.5s;
 }
 .nav > li.active {
-  border-left: 4px solid #19aa8d;
-  background: #293846;
+  border-left: 4px solid #d2232a;
+  background: #2a67a3;
 }
 .nav.nav-second-level > li.active {
   border: none;
@@ -356,7 +356,7 @@ body.canvas-menu .logo-element {
 }
 body.mini-navbar .nav-header {
   padding: 0;
-  background-color: #1ab394;
+  background-color: #225384;
 }
 body.canvas-menu .nav-header {
   padding: 33px 25px;
@@ -594,8 +594,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   color: #fff;
 }
 .btn-primary {
-  background-color: #1ab394;
-  border-color: #1ab394;
+  background-color: #225384;
+  border-color: #225384;
   color: #FFFFFF;
 }
 .btn-primary:hover,
@@ -603,8 +603,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  background-color: #18a689;
-  border-color: #18a689;
+  background-color: #225384;
+  border-color: #225384;
   color: #FFFFFF;
 }
 .btn-primary:active,
@@ -3136,7 +3136,7 @@ a.forum-item-title:hover {
 }
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: #2f4050;
+  background-color: #4892db;
   font-size: 13px;
   color: #676a6c;
   overflow-x: hidden;
@@ -7507,3 +7507,9 @@ body.DTTT_Print {
         margin-right: 5px;
 
     }
+.logo-grey {
+    background:#414042;
+    color:#ffffff;
+    padding:4px 35px;
+    margin-left:4px;
+}

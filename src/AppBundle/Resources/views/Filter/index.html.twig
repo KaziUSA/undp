@@ -1,27 +1,182 @@
-{% extends '::base.html.twig' %}
+{% extends '::frontend.html.twig' %}
 
 {% block body -%}
-<button>Jan-Mar</button>
-<button>Apr-Jun</button>
-<button>Jul-Sep</button>
-<button>Oct-Dec</button>
+<section class="content">
+    <div class="row row-no-padding">
+        <div class="col-sm-3 col-md-3 col-lg-2">
+            <aside>
+                <div class="filter">
+                  <!-- Nav tabs -->
+                  <div class="feedback-tab clearfix">
+                    <div class="tab-head">Feedback Round</div>
 
-{{ form(form.questions) }}
-{{ form(form.gender) }}
-{{ form(form.districts) }}
-{{ form(form.agegroups) }}
-{{ form(form.ethnicities) }}
-<div>
-<div id="canvas" style="min-wdth: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
-    <!-- <canvas id="canvas" height="140"></canvas> -->
-</div>
+                      <ul id="" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
+                        <li role="presentation"><a href="#round2" aria-controls="profile" role="tab" data-toggle="tab">2</a></li>
+                        <li role="presentation"><a href="#round3" aria-controls="messages" role="tab" data-toggle="tab">3</a></li>
+                        <li role="presentation"><a href="#round4" aria-controls="settings" role="tab" data-toggle="tab">4</a></li>
+                      </ul>
+                  </div>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="round1">
+                        <div class="tab-content-wrap">
+                            <div class="filter-title">Filter By</div>
+
+                            <!-- <button>Jan-Mar</button>
+                            <button>Apr-Jun</button>
+                            <button>Jul-Sep</button>
+                            <button>Oct-Dec</button> -->
+
+                            <div class="accordion">                                                                 
+                                    <form action="">
+                                      <div class="ac">              
+                                        {# ac-1 #}
+                                        <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
+                                        <label class="ac-label" for="ac-1">Month</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="month1" />
+                                                <label for="month1">January<span></span></label></li>
+                                            <li><input type="checkbox" id="month2" />
+                                                <label for="month2">Feburary<span></span></label></li>
+                                            <li><input type="checkbox" id="month3" />
+                                                <label for="month3">March<span></span></label></li>
+                                        </ul><!--/ac-text-->
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-2 #}
+                                        <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
+                                        <label class="ac-label" for="ac-2">District</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            {{ form(form.districts) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-3 #}
+                                        <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
+                                        <label class="ac-label" for="ac-3">Gender</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            {{ form(form.gender) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-4 #}
+                                        <input class="ac-input" id="ac-4" name="ac-4" type="checkbox" />
+                                        <label class="ac-label" for="ac-4">Ethnicity</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            {{ form(form.ethnicities) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-5 #}
+                                        <input class="ac-input" id="ac-5" name="ac-5" type="checkbox" />
+                                        <label class="ac-label" for="ac-5">Age Group</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            {{ form(form.agegroups) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-6 #}
+                                        <input class="ac-input" id="ac-6" name="ac-6" type="checkbox" />
+                                        <label class="ac-label" for="ac-6">Disability</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="all-disability" />
+                                                <label for="all-disability">All<span></span></label></li>
+                                        </ul><!--/ac-text-->
+                                      </div><!--/ac-->
+
+                                      <input type="submit" value="Submit" class="btn btn-bordered gray">
+                                  </form>
+
+                            </div><!--/accordion-->
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="round2">Same as in Round 1</div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="round3">Same as in Round 1</div>
+
+                    <div role="tabpanel" class="tab-pane fade" id="round4">Same as in Round 1</div>
+                  </div>
+                </div>
+            </aside>
+        </div>
+
+        <div class="col-sm-9 col-md-9 col-lg-10">
+            <!-- main content -->
+            <div class="main-content">
+                <div class="question">
+                    <!--<div class="number">Question 9</div> 
+                    Are your main problems being adressed ?-->
+                    <a href="#" class="next" onclick="btnNextQuestion_Click()"></a>
+                    <a href="#" class="prev" onclick="btnPrevQuestion_Click()"></a>
+
+                    <div id="zelect">{{ form(form.questions) }}</div>
+                </div>
+
+                <div class="chart">
+                    <div class="search"><span>Search</span>  Month / District / Age Group / Gender</div>
+
+                    <div class="high-chart">
+                        <div class="high-chart-wrap">
+                            <div id="canvas" class="chart-container"></div>
+                            <!-- <canvas id="canvas" height="140"></canvas> -->
+
+                            <!-- custom legend -->
+                            <div class="legend-box clearfix">
+                                <div class="legend legend1">
+                                    <div class="legend-head">Priority need</div>
+                                    <ul>
+                                        <li>Temporary shelter</li>
+                                        <li>Fresh Food</li>
+                                    </ul>
+                                </div>
+                                <div class="legend legend2">
+                                    <div class="legend-head">Respondents</div>
+                                    <ul>
+                                        <li>1400</li>
+                                    </ul>
+                                </div>
+                                <div class="legend legend3 download">
+                                    <ul>
+                                        <li><a href="#!"><span class="icon icon-download"></span> Download Report</a></li>
+                                        <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.main-content -->
+        </div>
+    </div>
+</section>
 {% endblock %}
 {%block scriptIncludes %}
 
-<script src="http://code.highcharts.com/stock/highstock.js"></script>
-<script type="text/javascript" src="js/exporting.js"></script>
+<!--<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script type="text/javascript" src="js/exporting.js"></script>-->
+
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script>
+    
 
 //Chart.js script start
 // window.onload = function(){
@@ -115,21 +270,46 @@
 						console.log(response.result.series);
 						//console.log(dt);
 						//alert(val);
+
+    
+                      //show custom legend on chart if number of items in legend is greater and equal to 4
+                      var legend_item_height = 29;
+                      var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
+                      //height of last legend is 15 without margin
+                      if(response.result.series.length >= 4) {
+                        $('.legend-box').height(legend_height);
+                        $('.legend-box').show();
+                      } else {
+                        $('.legend-box').hide();
+                      }
+
 $('#canvas').highcharts({
         chart: {
+            backgroundColor: '#ffffff',
+            borderWidth: 0,
+            height: 400,
+            plotBorderWidth: 0,
+            plotShadow: true,
+            //renderTo: 'container',//#container: Not needed now
+            spacingRight: 0,
+            style: {
+              fontFamily: 'Roboto, Arial, sans-serif',
+              fontSize: '12px',
+            },
+
             type: 'column'
         },
         title: {
-            text: 'Answers by the people'
+            text: ''//There is no text in design: Answers by the people
         },
         subtitle: {
-            text: 'Source: UNDP Annual Report'
+            text: ''//There is no text in design: Source: UNDP Annual Report
         },
         xAxis: {
             categories: response.result.label,
             
-            min: 0,
-            max:2	
+            min: 0
+            	
         },
         scrollbar: {
             enabled: true
@@ -137,17 +317,25 @@ $('#canvas').highcharts({
         yAxis: {
             min: 0,
             title: {
-                text: 'People'
+                text: ''//There is no text in design: People
             }
         },
-        tooltip: {
+        /*tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                 '<td style="padding:0"><b>{point.y} people</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
-        },
+        },*/
+        
+        tooltip: {
+              formatter: function () {
+                  return this.point.y + '% says<br>' + 
+                  this.series.name.toLowerCase();
+                    //+ this.point.name.toLowerCase();
+              }
+          },
         plotOptions: {
             column: {
                 pointPadding: 0.2,
@@ -213,7 +401,7 @@ $('#canvas').highcharts({
 };
 
 $(document).ready(function() {     
-  $('button').on('click', function(){aButtonPressed();});
+  $('button, input[type="submit"]').on('click', function(){aButtonPressed();});
 });
 
     </script>

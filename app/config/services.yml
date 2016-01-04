@@ -3,7 +3,19 @@
 parameters:
 #    parameter_name: value
 
-services:
+#services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+services:
+    #for command line csv upload - PhaxCoreBundle
+    phax.CsvController:
+        class: AppBundle\Controller\CsvController
+        calls:
+            - [setContainer, ["@service_container"]]
+    #for storing value in session after login
+    login_listener:
+        class: 'UserBundle\Listener\LoginListener'
+        arguments: ['@security.context', '@doctrine']
+        tags:
+            - { name: 'kernel.event_listener', event: 'security.interactive_login' }

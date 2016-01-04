@@ -1,6 +1,8 @@
 #map {
+
+	height: 500px; /* 400px */
+
 	width: 670px; /* 800px */
-	height: 500px; /* 500px */
 }
 
 .info {
@@ -305,6 +307,10 @@
   .flex-direction-nav a.flex-prev {
   	background-image: url(../images/arrow-prev.png);
   }
+
+.navbar-header {
+    padding: 25px 0px 0px 25px;
+}
   .graph{
     min-height:1px;
     width: auto;
@@ -347,4 +353,5 @@
   border-image: none;
   border-style: solid solid none;
   border-width: 1px 0px;
+>>>>>>> graph
 }

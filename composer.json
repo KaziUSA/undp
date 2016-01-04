@@ -19,7 +19,10 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "PHPOffice/PHPExcel": "^1.8",
-        "egeloen/ckeditor-bundle": "^4.0"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "symfony/process": "^2.8",
+        "ircmaxell/password-compat": "*",
+        "phax/phax-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
