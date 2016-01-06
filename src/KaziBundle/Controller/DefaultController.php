@@ -77,6 +77,17 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/contact")
+     * @Template()
+     */
+    public function contactAction()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
+
+    /**
      * @Route("/chart")
      * @Template
      */
