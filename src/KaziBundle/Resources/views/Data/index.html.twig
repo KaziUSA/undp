@@ -1,0 +1,61 @@
+{% extends '::frontend.html.twig' %}
+
+{% block body -%}
+    {# TODO: Need to add share button with functionality #}
+    <div class="page-title"><h1>Community Perception Survey Report</h1></div>
+
+    <table class="records_list table table-condensed table-hover table-striped dataTables">
+        <thead>
+            <tr>
+                
+                <th>Date</th>
+                <th>Interviewer</th>
+                <th>Age Group</th>
+                <th>Gender</th>
+                <th>Ethnicity</th>
+                <th>Occupation</th>
+                <th>Disabled</th>
+                <th>District</th>
+                <th>VDC</th>
+                <th>Ward</th>
+                <th>Term</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                
+                <td>{% if entity.date %}{{ entity.date|date('M Y') }}{% endif %}</td>
+                <td>{{ entity.interviewer }}</td>
+                <td>{{ entity.age }}</td>
+                <td>{{ entity.gender }}</td>
+                <td>{{ entity.ethnicity }}</td>
+                <td>{{ entity.occupation }}</td>
+                <td>
+                    {% if entity.disability == 0 %}NO{% else %}YES{% endif %}                    
+                </td>
+                <td>{{ entity.district }}</td>
+                <td>{{ entity.vdc }}</td>
+                <td>{{ entity.ward }}</td>
+                <td>{{ entity.term }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        
+    {% endblock %}
+{% block scriptIncludes %}
+<script>
+        $(document).ready(function() {
+            $('.dataTables').dataTable({
+                responsive: true,
+                "dom": 'T<"clear">lfrtip',
+                "tableTools": {
+                    "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+                }
+            });
+        });
+
+        
+    </script>
+{% endblock %}

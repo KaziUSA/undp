@@ -137,7 +137,7 @@
                     <div class="high-chart">
                         <div class="high-chart-wrap">
                             <div id="canvas" class="chart-container"></div>
-                            <div id="table1"></div>
+                            <div id="table1" class="chart-table table-responsive"></div>
                             <!-- <canvas id="canvas" height="140"></canvas> -->
 
                             <!-- custom legend -->
@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="legend legend3 download">
                                     <ul>
-                                        <li><a href="#!"><span class="icon icon-download"></span> Download Report</a></li>
+                                        <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Report</a></li>
                                         <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li>
                                     </ul>
                                 </div>
@@ -231,7 +231,7 @@
                         renderTo: 'canvas',
                         backgroundColor: '#ffffff',
                         borderWidth: 0,
-                        height: 400,
+                        height: 514,
                         plotBorderWidth: 0,
                         plotShadow: true,
                         //renderTo: 'container',//#container: Not needed now
@@ -250,6 +250,9 @@
                         text: ''//There is no text in design: Source: UNDP Annual Report
                     },
                     xAxis: {
+                        labels: {
+                            style: {'color': '#898989', 'fontSize': '14px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
+                        },
                         categories: response.result.label,
                         
                         min: 0
@@ -259,6 +262,9 @@
                         enabled: true
                     },
                     yAxis: {
+                        labels: {
+                            style: {'color': '#959595', 'fontSize': '12px'}
+                        },
                         min: 0,
                         title: {
                             text: ''//There is no text in design: People
@@ -282,9 +288,20 @@
                       },
                     plotOptions: {
                         column: {
-                            pointPadding: 0.2,
-                            borderWidth: 0
+                            pointPadding: 0,
+                            borderWidth: 0,
+                            groupPadding: 0.2,
                         }
+                    },
+                    exporting: {
+                        buttons: {
+                            contextButton: {
+                                enabled: false,
+                                verticalAlign: "top",
+                                y: 0,
+                            }
+                        },
+                        type: 'application/pdf',
                     },
                     series: response.result.series,
                      credits: {
@@ -309,12 +326,15 @@
                         column: {
                             stacking: response.result.stack
                         }
-                    }
+                    }    	
+                });//Highchart end
+                $('#table1').html(chart.getTable());
+                $('#download-report').click(function () {
+                    var chart = $('#canvas').highcharts();
+                    chart.exportChart();
                 });
 
-            
-                $('#table1').html(chart.getTable());
-    
+                $('#table1 table').addClass('table-bordered table');
                     
             }//Ajax success end
 

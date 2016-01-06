@@ -41,10 +41,10 @@ class MyAjaxController extends Controller
 		$data_ethnicity= $request->request->get('data_ethnicity');
 		$data_district = $request->request->get('data_district');
 		$data_question = 1;
-		$data_age = ['15 - 24','40 - 54'];
-		$data_gender= ['Male','Female'];
+		// $data_age = ['15 - 24','40 - 54'];
+		// $data_gender= ['Male','Female'];
 		//$data_ethnicity=['Brahmin','Chhetri','Dalit'];
-		$data_district=['Kathmandu','Dolakha'];
+		//$data_district=['Kathmandu','Dolakha'];
 		//Handle data
 		
 		//Store the answers of the selected question in $obj['answer']\
@@ -147,14 +147,18 @@ class MyAjaxController extends Controller
 		//Age,Gender,District Filter selected
 		if(!isset($data_ethnicity) && isset($data_gender) && isset($data_age) && isset($data_district)){
 			$i=0;
-			$district_span=count($data_age)*2;
-			$gender_span=count($data_age);
-			$obj['stack']='normal'; //For stack chart
-			$obj['html']="<table id='' class='table table-bordered'><thead>";
-			$obj['html']=$obj['html']."<tr><th>City</th><th colspan='".$district_span."'>"."District_name"."</th></tr>";
-			$obj['html']=$obj['html']."<tr><th>Gender</th><th colspan='".$gender_span."'>"."GENDER_NAME_LOOP"."</th></tr>";
-			$obj['html']=$obj['html']."<tr><th>Age Group</th><th>"."AGE_GROUP LOOP"."</th></tr></thead>";				        
-							       
+			foreach ($data_district as $district) {
+				$district_span=count($data_age)*2;
+				$gender_span=count($data_age);
+				$obj['stack']='normal'; //For stack chart
+				$obj['html']="<table id='' class='table table-bordered'><thead>";
+				$obj['html']=$obj['html']."<tr><th>City</th><th colspan='".$district_span."'>"."District_name"."</th></tr>";
+				$obj['html']=$obj['html']."<tr><th>Gender</th><th colspan='".$gender_span."'>"."GENDER_NAME_LOOP"."</th></tr>";
+				$obj['html']=$obj['html']."<tr><th>Age Group</th><th>"."AGE_GROUP LOOP"."</th></tr></thead>";				        
+				foreach ($data_gender as $gender) {
+							       	
+							       }				       
+			}
 							 //        <tr>
 							 //            <th>Age Group</th>
 							 //            <th>15 - 24</th>
