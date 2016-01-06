@@ -88,6 +88,17 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/reports")
+     * @Template()
+     */
+    public function reportsAction()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
+
+    /**
      * @Route("/chart")
      * @Template
      */
