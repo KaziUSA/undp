@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    
+	<h1>Upload File</h1>
+
+<form action="new" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+<br>
+    <input id="JQueryClick" type="submit" value="Upload Document" />
+</form>
+
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('document') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
