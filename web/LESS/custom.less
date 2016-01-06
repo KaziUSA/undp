@@ -214,6 +214,9 @@ p {
 	&.about {
 		background-image: url(../img/frontend/about.jpg);		
 	}
+	&.contact {
+		background-image: url(../img/frontend/about.jpg);		
+	}
 }
 
 body {
@@ -240,8 +243,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 		border: 1px solid @white;
 		background: none;
 		color: @white;
-		font: bold 16px @third-font-family;
-		padding: 10px;
+		padding: 6px 10px 6px;
 		text-transform: uppercase;
 		&:hover {
 			background: @white;
@@ -252,8 +254,6 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 			color: #898989;
 			font-size: 12px;
 			font-weight: normal;
-			padding-top: 6px;
-			padding-bottom: 6px;
 		}
 	}
 }
@@ -469,6 +469,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	letter-spacing: 1px;
 	overflow: hidden;//fixing long height
 }
+.content.contact,
 .content.about,
 .content.home,
 .transparent-grd {
@@ -490,6 +491,10 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 			font-size: 18px;
 			line-height: 24px;
 			margin-bottom: 20px;
+		}
+		.btn-bordered {
+			font: bold 16px @third-font-family;
+			padding: 10px;
 		}
 	}
 	@media (min-width: 1200px) {
@@ -567,6 +572,52 @@ footer, footer a {
 	@media (max-width: 767px) {
 		margin: 15px 0;
 		padding: 15px;
+	}
+}
+
+/* Contact Page */
+.contact {
+	.form-bordered {
+		.form-group {
+			position: relative;
+			margin-bottom: 5px;
+			.form-control {
+				padding: 0;
+			}
+		}
+		label {
+			background-color: #99bc44;
+			position: absolute;
+			left: 0;
+			top: 0;
+			font-size: 16px;
+			font-weight: normal;
+			height: 43px;
+			line-height: 60px;
+			width: 95px;
+			padding-right: 10px;
+		}
+		input[type=text],
+		input[type=email] {
+			background: none;
+			border: 0;
+			border-bottom: 1px solid @white;
+			height: 43px;
+			line-height: 60px;
+			text-indent: 95px;
+			&:focus {
+				border-color: @white !important;
+			}
+		}
+		textarea {
+			background: url(../img/frontend/textarea-border.png) repeat 0 0;
+			border: 0;
+			outline: 0;
+			height: 220px;
+			line-height: 60px;
+			text-indent: 95px;
+			margin-bottom: 10px;
+		}
 	}
 }
 
