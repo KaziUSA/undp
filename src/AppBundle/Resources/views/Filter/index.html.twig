@@ -121,7 +121,7 @@
 
         <div class="col-sm-9 col-md-9 col-lg-10">
             <!-- main content -->
-            <div class="main-content">
+            <div class="main-content" style="height:4000px;">
                 <div class="question">
                     <!--<div class="number">Question 9</div> 
                     Are your main problems being adressed ?-->
@@ -137,6 +137,7 @@
                     <div class="high-chart">
                         <div class="high-chart-wrap">
                             <div id="canvas" class="chart-container"></div>
+                            <div id="table1"></div>
                             <!-- <canvas id="canvas" height="140"></canvas> -->
 
                             <!-- custom legend -->
@@ -173,7 +174,7 @@
 
 <!--<script src="http://code.highcharts.com/stock/highstock.js"></script>
 <script type="text/javascript" src="js/exporting.js"></script>-->
-
+<script src="http://highcharts.github.io/export-csv/export-csv.js"></script>
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script>
     //Ajax call
@@ -200,15 +201,21 @@
        ethnicityVals.push($(this).next("label").text());
      });
      alert(ethnicityVals);
-
+     //store selected district in districtVals
+     var districtVals = [];
+     $('#form_districts :checked').each(function() {
+       districtVals.push($(this).next("label").text());
+     });
+     alert(districtVals);
 
     $.post('{{path('myajax')}}',               
-        { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals }, 
+        { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals }, 
         function(response){ 
             var val=new Array();
             var dt= new Array();
             if(response.code == 100 && response.success){
                 console.log(response);
+                console.log(JSON.stringify(response.result.html));
                 //show custom legend on chart if number of items in legend is greater and equal to 4
                 var legend_item_height = 29;
                 var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
@@ -219,9 +226,9 @@
                 } else {
                     $('.legend-box').hide();
                 }
-
-                $('#canvas').highcharts({
-                    chart: {
+                var chart=new Highcharts.chart({
+                chart: {
+                        renderTo: 'canvas',
                         backgroundColor: '#ffffff',
                         borderWidth: 0,
                         height: 400,
@@ -246,7 +253,7 @@
                         categories: response.result.label,
                         
                         min: 0
-                        	
+                            
                     },
                     scrollbar: {
                         enabled: true
@@ -281,8 +288,8 @@
                     },
                     series: response.result.series,
                      credits: {
-                		enabled: false
-              		},
+                        enabled: false
+                    },
                     scrollbar: {
                         enabled: true,
                         barBackgroundColor: 'gray',
@@ -303,8 +310,10 @@
                             stacking: response.result.stack
                         }
                     }
-    	
-                });//Highchart end
+                });
+
+            
+                $('#table1').html(chart.getTable());
     
                     
             }//Ajax success end

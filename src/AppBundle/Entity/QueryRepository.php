@@ -92,4 +92,22 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
 		$results = $statement->fetchAll();
     	return $results;
     }
+
+    /**
+    * Get ethnicity and gender filtered data when age and gender filter is selected
+    * @return array
+    */
+    public function getEthnicityGender($que_id,$ans_name,$ethnicity_name,$gender_name){
+    	$sql='SELECT count(*) as count FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id INNER JOIN answer AS a ON sr.answer_id=a.id INNER JOIN `ethnicity` AS e ON s.age_id=e.id INNER JOIN `gender` AS g ON g.id=s.gender_id WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname ';
+		$em = $this->getEntityManager();
+		$connection = $em->getConnection();	
+		$statement = $connection->prepare($sql);
+		$statement->bindValue('ename', $ethnicity_name);
+		$statement->bindValue('qnid', $que_id);
+		$statement->bindValue('name', $ans_name);
+		$statement->bindValue('gname', $gender_name);
+		$statement->execute();
+		$results = $statement->fetchAll();
+    	return $results;
+    }
 }
