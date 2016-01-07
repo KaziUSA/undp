@@ -51,7 +51,8 @@ class Document
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
-        $avatarExt = pathinfo($file, PATHINFO_BASENAME);
+        //$avatarExt = pathinfo($file, PATHINFO_BASENAME);
+        $avatarExt = $this->file->getClientOriginalName();
         // check if we have an old image path
         if (isset($this->path)) {
             // store the old name to delete after the update
@@ -127,7 +128,7 @@ class Document
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
     }
 
     protected function getUploadDir()

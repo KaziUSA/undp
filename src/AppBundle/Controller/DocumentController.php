@@ -102,7 +102,7 @@ class DocumentController extends Controller
             $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
-                // $document->upload();
+                $document->upload();
                 $em->persist($document);
                 $em->flush();
 
@@ -261,29 +261,4 @@ class DocumentController extends Controller
             ->getForm()
         ;
     }
-
-
-    public function upload()
-        {
-            // the file property can be empty if the field is not required
-            if (null === $this->getFile()) {
-                return;
-            }
-
-            // use the original file name here but you should
-            // sanitize it at least to avoid any security issues
-
-            // move takes the target directory and then the
-            // target filename to move to
-            $this->getFile()->move(
-                $this->getUploadRootDir(),
-                $this->getFile()->getClientOriginalName()
-            );
-
-            // set the path property to the filename where you've saved the file
-            $this->path = $this->getFile()->getClientOriginalName();
-
-            // clean up the file property as you won't need it anymore
-            $this->file = null;
-        }
 }
