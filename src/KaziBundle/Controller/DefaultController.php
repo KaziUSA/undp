@@ -2,209 +2,258 @@
 
 namespace KaziBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Home;
+use AppBundle\Form\HomeType;
 
 class DefaultController extends Controller
 {
+
     /**
+     * Lists all Home entities.
+     *
      * @Route("/")
+     * 
      * @Template()
      */
-    public function indexAction()
-    { 
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        );
-    }
-
-    /**
-     * @Route("/platform")
-     * @Template()
-     */
-    public function platformAction()
-    { 
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        );
-    }
-
-    /**
-     * @Route("/platform2")
-     * @Template()
-     */
-    public function platform2Action()
-    { 
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        );
-    }
-
-    /**
-     * @Route("/platform3")
-     * @Template()
-     */
-    public function platform3Action()
-    { 
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        );
-    }
-
-    /**
-     * @Route("/table")
-     * @Template()
-     */
-    public function tableAction()
-    { 
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        );
-    }
-
-    /**
-     * @Route("/chart")
-     * @Template
-     */
-    public function chartAction() { 
-        //copied for backup from indexAction created by Manish Shrestha
-       $sql = "SELECT COUNT(*) as count FROM `survey_response` INNER JOIN `survey` ON survey.id = survey_response.survey_id INNER JOIN ethnicity ON survey.ethnicity_id = ethnicity.id WHERE `answer_id` = :id OR `answer_id` = :id2 GROUP BY survey.ethnicity_id";
+    public function indexAction(Request $request)
+    {
+        
+        
+        $data_id = $request->request->get('data_id');
+        $data_title = $request->request->get('data_title');
+        $data_description = $request->request->get('data_description');
+        $sql= "UPDATE home SET title='$data_title',description='$data_description' WHERE id='$data_id'";
         $em = $this->getDoctrine()->getEntityManager();
         $connection = $em->getConnection();
         $statement = $connection->prepare($sql);
-        $statement->bindValue('id', 1);
-        $statement->bindValue('id2', 2);
+        $statement->bindValue('id', $data_id);
         $statement->execute();
-        $results = $statement->fetchAll();
+        //prepare the response
+        $response = array("code" => 100, "success" => true);
         
-        
-        $yes = array();
-        
-        foreach ($results as $num){
-            array_push($yes, $num["count"]);   
-        }
-        
-        $statement = $connection->prepare($sql);
-        $statement->bindValue('id', 4);
-        $statement->bindValue('id2', 5);
-        $statement->execute();
-        $negresults = $statement->fetchAll();
-        
-        $no = array();
-        foreach ($negresults as $num){
-            array_push($no, $num["count"]);   
-        }
-        
-        $statement = $connection->prepare($sql);
-        $statement->bindValue('id', 3);
-        $statement->bindValue('id2', 6);
-        $statement->execute();
-        $otherresults = $statement->fetchAll();
-        
-        $other = array();
-        foreach ($otherresults as $num){
-            array_push($other, $num["count"]);   
-        }
-        
-        
-        
+        $em = $this->getDoctrine()->getManager();
+        //set the entities
+        $entities = $em->getRepository('AppBundle:Home')->findAll();
         return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'yes'=> $yes,
-            'no'  => $no,
-            'other' => $other
+            'entities' => $entities,
+            json_encode($response)
+        );
+    }
+    /**
+     * Creates a new Home entity.
+     *
+     * @Route("/", name="home_create")
+     * @Method("POST")
+     * @Template("AppBundle:Home:new.html.twig")
+     */
+    public function createAction(Request $request)
+    {
+        $entity = new Home();
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('home_show', array('id' => $entity->getId())));
+        }
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
         );
     }
 
     /**
-     * @Route("/nepal")
-     * @Template()
+     * Creates a form to create a Home entity.
+     *
+     * @param Home $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
      */
-    public function nepalAction()
+    private function createCreateForm(Home $entity)
     {
-        
-        $geoJSON = array();
-        $geoJSON['type'] = "FeatureCollection";
-        $features = array();
-        for ($i = 1; $i < 76; $i++){
-               array_push($features, $this->districtJson($i));
-                //$features[$i-1]['properties']['total'] = $features[$i-1]['properties']['id'];
-        }
-        
-        $geoJSON['features'] = $features;
-        
-        $response = new Response();
-        $response->setContent(json_encode($geoJSON));
-        $response->headers->set('Content-Type', 'application/json');
-        
-        return $response;
+        $form = $this->createForm(new HomeType(), $entity, array(
+            'action' => $this->generateUrl('home_create'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
     }
-    
+
     /**
-     * @Route("/map/{id}", name="district_map")
+     * Displays a form to create a new Home entity.
+     *
+     * @Route("/new", name="home_new")
      * @Method("GET")
      * @Template()
      */
-    public function districtAction($id)
+    public function newAction()
     {
-       $geoJSON = $this->districtJson($id);
-        
-        $response = new Response();
-        $response->setContent(json_encode($geoJSON));
-        $response->headers->set('Content-Type', 'application/json');
-        
-        return $response;
+        $entity = new Home();
+        $form   = $this->createCreateForm($entity);
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
     }
-    
+
     /**
-     * Prepares district information into JSONArray for all districts
+     * Finds and displays a Home entity.
+     *
+     * @Route("/{id}", name="home_show")
+     * @Method("GET")
+     * @Template()
      */
-    private function districtJson($id)
+    public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AppBundle:District')->find($id);
-        
-        $geoJSON = array();
-        $geoJSON['type'] = "Feature";
-        $properties = array();
-        $properties['id'] = $entity->getId();
-        $properties['name'] = $entity->getName();
-        $properties['boys'] = 0;
-        $properties['girls'] = 0;
-        $properties['total'] = 11;
-        
-        $geoJSON['properties'] = $properties;
-        
-        $geometry = array();
-        $geometry['type'] = 'Polygon';
-        $geometry['coordinates'] = $this->fixDistrictData($entity->getShape());
-        $geoJSON['geometry'] = $geometry;
 
-        return $geoJSON;
+        $entity = $em->getRepository('AppBundle:Home')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Home entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+     * Displays a form to edit an existing Home entity.
+     *
+     * @Route("/{id}/edit", name="home_edit")
+     * @Method("GET")
+     * @Template()
+     */
+    public function editAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AppBundle:Home')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Home entity.');
+        }
+
+        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+    /**
+    * Creates a form to edit a Home entity.
+    *
+    * @param Home $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createEditForm(Home $entity)
+    {
+        $form = $this->createForm(new HomeType(), $entity, array(
+            'action' => $this->generateUrl('home_update', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Update'));
+
+        return $form;
     }
     /**
-     * Fixes District Data, parses it and sets it up in an object
-     * Takes in a chunk of shape data
+     * Edits an existing Home entity.
+     *
+     * @Route("/{id}", name="home_update")
+     * @Method("PUT")
+     * @Template("AppBundle:Home:edit.html.twig")
      */
-    private function fixDistrictData($shape){
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
-        $shape = str_replace('],', ']', $shape);
-        $shape = str_replace('[', '', $shape);
-        //$entity = str_replace('\n', '', $entity);
-        $shape = trim(preg_replace('/\s\s+/', ' ', $shape));
-        
-        $points = str_getcsv($shape, ']');
-        
-        $response = array();
-        foreach($points as $point){
-            $singlePoint = str_getcsv($point);
-            array_push($response, $singlePoint);
+        $entity = $em->getRepository('AppBundle:Home')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Home entity.');
         }
-        array_pop($response);
-        return array($response);
+
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('home_edit', array('id' => $id)));
+        }
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
     }
+    /**
+     * Deletes a Home entity.
+     *
+     * @Route("/{id}", name="home_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $form = $this->createDeleteForm($id);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('AppBundle:Home')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Home entity.');
+            }
+
+            $em->remove($entity);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('home'));
+    }
+
+    /**
+     * Creates a form to delete a Home entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('home_delete', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->getForm()
+        ;
+    }
+
+
 
 }
