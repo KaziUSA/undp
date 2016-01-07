@@ -19,6 +19,7 @@ use AppBundle\Form\DocumentType;
 class DocumentController extends Controller
 {
 
+
     /**
      * Lists all Document entities.
      *
@@ -95,6 +96,7 @@ class DocumentController extends Controller
         $form = $this->createFormBuilder($document)
             ->add('name')
             ->add('file')
+            ->add('date')
             ->getForm()
         ;
 

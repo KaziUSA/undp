@@ -37,11 +37,20 @@ class Document
     private $name;
 
     /**
+     * @var date
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
     private $path;
+
+    public $file_path = '/../../../uploads/documents/';
 
     public function getFile()
     {
@@ -95,6 +104,30 @@ class Document
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set date
+     *
+     * @param date $date
+     *
+     * @return Document
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return date
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 
     public function setPath($path)
