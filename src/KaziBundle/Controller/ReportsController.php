@@ -23,7 +23,7 @@ class ReportsController extends Controller
     /**
      * Lists all Document entities.
      *
-     * @Route("/", name="document")
+     * @Route("/", name="reports")
      * @Method("GET")
      * @Template()
      */

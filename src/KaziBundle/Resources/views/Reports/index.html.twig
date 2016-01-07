@@ -1,6 +1,6 @@
 {% extends 'frontend.html.twig' %}
 
-{% block body %}
+{% block body -%}
 	<div class="page-title"><h3>Reports Archive</h3></div>
 	<section class="content report">
 		<div class="row row-no-padding">
@@ -51,70 +51,25 @@
 				<div class="main-content">
 					<div class="wrapper clearfix">
 						<div class="">
-							<div class="col-lg-3 col-md-4 col-sm-6">
+							<!-- <div class="col-lg-3 col-md-4 col-sm-6">
 								<div class="r-box">
 									<a href="#!" class="report-link"></a>
-
+							
 									<a href="#download" title="Download" class="icon download"></a>
 									<a href="#share" title="Share" class="icon share"></a>
 								</div>
-							</div>
-							<div class="col-lg-3 col-md-4 col-sm-6">
-								<div class="r-box">
-									<a href="#!" class="report-link"></a>
+							</div> -->
 
-									<a href="#download" title="Download" class="icon download"></a>
-									<a href="#share" title="Share" class="icon share"></a>
+							{% for entity in entities %}
+								<div class="col-lg-3 col-md-4 col-sm-6">
+									<div class="r-box">
+										<a href="{{ entity.file_path }}{{ entity.path }}" class="report-link"></a>
+								
+										<a href="{{ entity.file_path }}{{ entity.path }}" title="Download {{ entity.name }}" class="icon download"></a>
+										<a href="#share" title="Share" class="icon share"></a>
+									</div>
 								</div>
-							</div>
-							<div class="col-lg-3 col-md-4 col-sm-6">
-								<div class="r-box">
-									<a href="#!" class="report-link"></a>
-
-									<a href="#download" title="Download" class="icon download"></a>
-									<a href="#share" title="Share" class="icon share"></a>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-4 col-sm-6">
-								<div class="r-box">
-									<a href="#!" class="report-link"></a>
-
-									<a href="#download" title="Download" class="icon download"></a>
-									<a href="#share" title="Share" class="icon share"></a>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-4 col-sm-6">
-								<div class="r-box">
-									<a href="#!" class="report-link"></a>
-
-									<a href="#download" title="Download" class="icon download"></a>
-									<a href="#share" title="Share" class="icon share"></a>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-4 col-sm-6">
-								<div class="r-box">
-									<a href="#!" class="report-link"></a>
-
-									<a href="#download" title="Download" class="icon download"></a>
-									<a href="#share" title="Share" class="icon share"></a>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-4 col-sm-6">
-								<div class="r-box">
-									<a href="#!" class="report-link"></a>
-
-									<a href="#download" title="Download" class="icon download"></a>
-									<a href="#share" title="Share" class="icon share"></a>
-								</div>
-							</div>
-							<div class="col-lg-3 col-md-4 col-sm-6">
-								<div class="r-box">
-									<a href="#!" class="report-link"></a>
-
-									<a href="#download" title="Download" class="icon download"></a>
-									<a href="#share" title="Share" class="icon share"></a>
-								</div>
-							</div>
+		        	{% endfor %}
 						</div>
 					</div>
 				</div><!-- /.main-content -->
