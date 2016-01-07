@@ -96,7 +96,18 @@ class Document
         return $this->name;
     }
 
-    
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+     public function getPath()
+    {
+        return $this->path;
+            
+    }
     
     public function getAbsolutePath()
     {
