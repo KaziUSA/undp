@@ -86,7 +86,7 @@ $(document).ready(function () {
       chart: {
         backgroundColor: '#ffffff',
         borderWidth: 0,
-        height: 400,
+        height: 514,
         plotBorderWidth: 0,
         plotShadow: true,
         //renderTo: 'container',//#container: Not needed now

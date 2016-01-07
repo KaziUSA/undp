@@ -4,9 +4,15 @@
 		<title>{% block title %}Inter-Agency Common Feedback Project{% endblock %}</title>
 
 		{% block stylesheets %}
-			<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+			<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
 
 			<link href="/css/bootstrap.min.css" rel="stylesheet">
+
+      <link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+      <link href="/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+      <link href="/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
 
 			<link href="/LESS/style.less" rel="stylesheet/less">
 		{% endblock %}
@@ -22,7 +28,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#">
+		      <a class="navbar-brand" href="/">
 		      	<img src="/img/frontend/logo.png" alt="">
 		      	<span class="logo-title">
 		      		<span class="logo">Inter-Agency Common Feedback Project</span>
@@ -35,10 +41,11 @@
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
 		        <li><a href="/platform">Platform</a></li>
-		        <li><a href="#">Data</a></li>
-		        <li><a href="#">Reports</a></li>
-		        <li><a href="/admin/contactform">Contact</a></li>
-		        <li><a href="#">About</a></li>
+
+		        <li><a href="/data">Data</a></li>
+		        <li><a href="/reports">Reports</a></li>
+		        <li><a href="/contact">Contact</a></li>
+		        <li><a href="/about">About</a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
@@ -81,6 +88,15 @@
     <script src="/js/plugins/highcharts/exporting.js"></script>
 
     <script src="/js/plugins/zelect/zelect.js"></script>
+
+    
+    <!-- Data Tables -->
+    <script src="/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="/js/plugins/dataTables/dataTables.responsive.js"></script>
+    <script src="/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+
+
     <script src="/js/frontend/custom.js"></script>
     {% endblock %}
 
