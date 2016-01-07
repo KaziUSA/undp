@@ -107,6 +107,11 @@ class DocumentController extends Controller
                 $em->flush();
 
                 $this->redirect($this->generateUrl('document'));
+
+                if(isset($_SESSION['document_upload'])) {
+                    $this->get('session')->getFlashBag()->add('success', 'File uploaded successfully.');
+                    $_SESSION['document_upload'] = '';//remove success message after showing until next upload
+                }
             }
             else{
                throw $this->createNotFoundException('Form error'); 

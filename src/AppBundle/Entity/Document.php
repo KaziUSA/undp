@@ -174,6 +174,9 @@ class Document
             $this->temp = null;
         }
         $this->file = null;
+
+        //for flashbag message
+        $_SESSION["document_upload"] = "1";
     }
 
     /**
