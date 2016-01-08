@@ -110,4 +110,43 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
 		$results = $statement->fetchAll();
     	return $results;
     }
+
+    /**
+    * Get age,gender,district filtered data 
+    * @return array
+    */
+    public function getAgeDistrictGender($que_id,$ans_name,$district_name,$gender_name,$age_name){
+    	$sql='SELECT count(*) as count FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id INNER JOIN answer AS a ON sr.answer_id=a.id INNER JOIN `age` AS ag ON s.age_id=ag.id INNER JOIN `gender` AS g ON g.id=s.gender_id INNER JOIN `district` AS d ON d.id=s.district_id WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND d.name=:dname ';
+		$em = $this->getEntityManager();
+		$connection = $em->getConnection();	
+		$statement = $connection->prepare($sql);
+		$statement->bindValue('dname', $district_name);
+		$statement->bindValue('qnid', $que_id);
+		$statement->bindValue('name', $ans_name);
+		$statement->bindValue('gname', $gender_name);
+		$statement->bindValue('agname', $age_name);
+		$statement->execute();
+		$results = $statement->fetchAll();
+    	return $results;
+    }
+
+	/**
+    * Get ethnicity,gender,district filtered data 
+    * @return array
+    */    
+    public function getEthnicityDistrictGender($que_id,$ans_name,$district_name,$gender_name,$ethnicity_name){
+    	$sql='SELECT count(*) as count FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id INNER JOIN answer AS a ON sr.answer_id=a.id INNER JOIN `ethnicity` AS e ON s.age_id=e.id INNER JOIN `gender` AS g ON g.id=s.gender_id INNER JOIN `district` AS d ON d.id=s.district_id WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND d.name=:dname ';
+		$em = $this->getEntityManager();
+		$connection = $em->getConnection();	
+		$statement = $connection->prepare($sql);
+		$statement->bindValue('dname', $district_name);
+		$statement->bindValue('qnid', $que_id);
+		$statement->bindValue('name', $ans_name);
+		$statement->bindValue('gname', $gender_name);
+		$statement->bindValue('ename', $ethnicity_name);
+		$statement->execute();
+		$results = $statement->fetchAll();
+    	return $results;
+    }
+
 }

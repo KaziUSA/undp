@@ -329,6 +329,7 @@
                     }    	
                 });//Highchart end
                 $('#table1').html(chart.getTable());
+                $('#table1').html(response.result.html);
                 $('#download-report').click(function () {
                     var chart = $('#canvas').highcharts();
                     chart.exportChart();
