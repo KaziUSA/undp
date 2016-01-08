@@ -76,6 +76,9 @@
                         <li class="{% if app.request.get('_route') == 'answer' %} active {% endif %}"><a href="{{ path('answer') }}">All answers</a></li>
                     </ul>
                 </li>
+                <li class="{% if (app.request.get('_route') == 'document') or (app.request.get('_route') == 'document_new') or (app.request.get('_route') == 'document_show') or (app.request.get('_route') == 'document_edit') %} active {% endif %}">
+                    <a href="{{ path('document') }}"><i class="fa fa-book"></i> <span class="nav-label">Reports</span> </a>
+                </li>
             </ul>
             {% endblock %}
         </div>
