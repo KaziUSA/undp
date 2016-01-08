@@ -1,59 +1,58 @@
 <?php
 
-namespace KaziBundle\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Home;
-use AppBundle\Form\HomeType;
+use AppBundle\Entity\ContactForm;
+use AppBundle\Form\ContactFormType;
 
-class DefaultController extends Controller
+/**
+ * ContactForm controller.
+ *
+ * @Route("/contactform")
+ */
+class ContactFormController extends Controller
 {
 
     /**
-     * Lists all Home entities.
+     * Lists all ContactForm entities.
      *
-     * @Route("/")
-     * 
+     * @Route("/", name="contactform")
+     * @Method("GET")
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        
-        
-        $data_id = $request->request->get('data_id');
-        $data_title = $request->request->get('data_title');
-        $data_description = $request->request->get('data_description');
-        $sql= "UPDATE home SET title='$data_title',description='$data_description' WHERE id='$data_id'";
-        $em = $this->getDoctrine()->getEntityManager();
-        $connection = $em->getConnection();
-        $statement = $connection->prepare($sql);
-        $statement->bindValue('id', $data_id);
-        $statement->execute();
-        //prepare the response
-        $response = array("code" => 100, "success" => true);
-        
-        $em = $this->getDoctrine()->getManager();
-        //set the entities
-        $entities = $em->getRepository('AppBundle:Home')->findAll();
+       $entity = new ContactForm();
+        $form   = $this->createCreateForm($entity);
+
         return array(
-            'entities' => $entities,
-            json_encode($response)
+            'entity' => $entity,
+            'form'   => $form->createView(),
         );
+        
+        // $em = $this->getDoctrine()->getManager();
+
+        // $entities = $em->getRepository('AppBundle:ContactForm')->findAll();
+
+        // return array(
+        //     'entities' => $entities,
+        // );
     }
     /**
-     * Creates a new Home entity.
+     * Creates a new ContactForm entity.
      *
-     * @Route("/", name="home_create")
+     * @Route("/", name="contactform_create")
      * @Method("POST")
-     * @Template("AppBundle:Home:new.html.twig")
+     * @Template("AppBundle:ContactForm:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Home();
+        $entity = new ContactForm();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -62,7 +61,7 @@ class DefaultController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('home_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('contactform_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,34 +71,34 @@ class DefaultController extends Controller
     }
 
     /**
-     * Creates a form to create a Home entity.
+     * Creates a form to create a ContactForm entity.
      *
-     * @param Home $entity The entity
+     * @param ContactForm $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Home $entity)
+    private function createCreateForm(ContactForm $entity)
     {
-        $form = $this->createForm(new HomeType(), $entity, array(
-            'action' => $this->generateUrl('home_create'),
+        $form = $this->createForm(new ContactFormType(), $entity, array(
+            'action' => $this->generateUrl('contactform_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Send'));
 
         return $form;
     }
 
     /**
-     * Displays a form to create a new Home entity.
+     * Displays a form to create a new ContactForm entity.
      *
-     * @Route("/new", name="home_new")
+     * @Route("/new", name="contactform_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Home();
+        $entity = new ContactForm();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -109,9 +108,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * Finds and displays a Home entity.
+     * Finds and displays a ContactForm entity.
      *
-     * @Route("/{id}", name="home_show")
+     * @Route("/{id}", name="contactform_show")
      * @Method("GET")
      * @Template()
      */
@@ -119,10 +118,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Home')->find($id);
+        $entity = $em->getRepository('AppBundle:ContactForm')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Home entity.');
+            throw $this->createNotFoundException('Unable to find ContactForm entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -134,9 +133,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Home entity.
+     * Displays a form to edit an existing ContactForm entity.
      *
-     * @Route("/{id}/edit", name="home_edit")
+     * @Route("/{id}/edit", name="contactform_edit")
      * @Method("GET")
      * @Template()
      */
@@ -144,10 +143,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Home')->find($id);
+        $entity = $em->getRepository('AppBundle:ContactForm')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Home entity.');
+            throw $this->createNotFoundException('Unable to find ContactForm entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -161,16 +160,16 @@ class DefaultController extends Controller
     }
 
     /**
-    * Creates a form to edit a Home entity.
+    * Creates a form to edit a ContactForm entity.
     *
-    * @param Home $entity The entity
+    * @param ContactForm $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Home $entity)
+    private function createEditForm(ContactForm $entity)
     {
-        $form = $this->createForm(new HomeType(), $entity, array(
-            'action' => $this->generateUrl('home_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new ContactFormType(), $entity, array(
+            'action' => $this->generateUrl('contactform_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -179,20 +178,20 @@ class DefaultController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Home entity.
+     * Edits an existing ContactForm entity.
      *
-     * @Route("/{id}", name="home_update")
+     * @Route("/{id}", name="contactform_update")
      * @Method("PUT")
-     * @Template("AppBundle:Home:edit.html.twig")
+     * @Template("AppBundle:ContactForm:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Home')->find($id);
+        $entity = $em->getRepository('AppBundle:ContactForm')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Home entity.');
+            throw $this->createNotFoundException('Unable to find ContactForm entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -202,7 +201,7 @@ class DefaultController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('home_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('contactform_edit', array('id' => $id)));
         }
 
         return array(
@@ -212,9 +211,9 @@ class DefaultController extends Controller
         );
     }
     /**
-     * Deletes a Home entity.
+     * Deletes a ContactForm entity.
      *
-     * @Route("/{id}", name="home_delete")
+     * @Route("/{id}", name="contactform_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -224,21 +223,21 @@ class DefaultController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Home')->find($id);
+            $entity = $em->getRepository('AppBundle:ContactForm')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Home entity.');
+                throw $this->createNotFoundException('Unable to find ContactForm entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('home'));
+        return $this->redirect($this->generateUrl('contactform'));
     }
 
     /**
-     * Creates a form to delete a Home entity by id.
+     * Creates a form to delete a ContactForm entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -247,13 +246,10 @@ class DefaultController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('home_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('contactform_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
-
-
-
 }

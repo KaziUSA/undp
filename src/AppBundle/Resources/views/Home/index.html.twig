@@ -3,11 +3,10 @@
 {% block body -%}
 {% for entity in entities %}
     <article id="content1" class="ckeditor" contenteditable="true">
-        {{ entity.title }}
-        <br/>
+        {{ entity.title | raw}}
     </article>
     <article id="content2" class="ckeditor" contenteditable="true">
-        {{ entity.description }}
+        {{ entity.description | raw }}
     </article>
 {% endfor %}
     
@@ -18,7 +17,6 @@
 
 $("#content1, #content2").keyup(function()
  {  
-  
   var name = {id:1, title:$("#content1").html(), description:$("#content2").html()};
     $.post('{{path('home')}}',               
         { data_id:name.id,data_title:name.title,data_description:name.description}, 

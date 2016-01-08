@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Pdf creation</h1>
+
+    
+    {{ form_start() }}
+	    {# ... #}
+
+	    {{ form_row(form.brochure) }}
+	{{ form_end() }}
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('pdf') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

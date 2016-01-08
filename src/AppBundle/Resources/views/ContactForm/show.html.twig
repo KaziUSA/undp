@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>ContactForm</h1>
+        <h3> Your message has been sent</h3>
+      
+        <a href="{{ path('contactform') }}">
+            Back to the form
+        </a>
+{% endblock %}

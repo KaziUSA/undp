@@ -1,59 +1,51 @@
 <?php
 
-namespace KaziBundle\Controller;
+namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Home;
-use AppBundle\Form\HomeType;
+use AppBundle\Entity\Pdf;
+use AppBundle\Form\PdfType;
+use Symfony\Component\HttpFoundation\File\File;
 
-class DefaultController extends Controller
+/**
+ * Pdf controller.
+ *
+ * @Route("/pdf")
+ */
+class PdfController extends Controller
 {
 
     /**
-     * Lists all Home entities.
+     * Lists all Pdf entities.
      *
-     * @Route("/")
-     * 
+     * @Route("/", name="pdf")
+     * @Method("GET")
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        
-        
-        $data_id = $request->request->get('data_id');
-        $data_title = $request->request->get('data_title');
-        $data_description = $request->request->get('data_description');
-        $sql= "UPDATE home SET title='$data_title',description='$data_description' WHERE id='$data_id'";
-        $em = $this->getDoctrine()->getEntityManager();
-        $connection = $em->getConnection();
-        $statement = $connection->prepare($sql);
-        $statement->bindValue('id', $data_id);
-        $statement->execute();
-        //prepare the response
-        $response = array("code" => 100, "success" => true);
-        
         $em = $this->getDoctrine()->getManager();
-        //set the entities
-        $entities = $em->getRepository('AppBundle:Home')->findAll();
+
+        $entities = $em->getRepository('AppBundle:Pdf')->findAll();
+
         return array(
             'entities' => $entities,
-            json_encode($response)
         );
     }
     /**
-     * Creates a new Home entity.
+     * Creates a new Pdf entity.
      *
-     * @Route("/", name="home_create")
+     * @Route("/", name="pdf_create")
      * @Method("POST")
-     * @Template("AppBundle:Home:new.html.twig")
+     * @Template("AppBundle:Pdf:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Home();
+        $entity = new Pdf();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -62,7 +54,7 @@ class DefaultController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('home_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('pdf_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,16 +64,16 @@ class DefaultController extends Controller
     }
 
     /**
-     * Creates a form to create a Home entity.
+     * Creates a form to create a Pdf entity.
      *
-     * @param Home $entity The entity
+     * @param Pdf $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Home $entity)
+    private function createCreateForm(Pdf $entity)
     {
-        $form = $this->createForm(new HomeType(), $entity, array(
-            'action' => $this->generateUrl('home_create'),
+        $form = $this->createForm(new PdfType(), $entity, array(
+            'action' => $this->generateUrl('pdf_create'),
             'method' => 'POST',
         ));
 
@@ -91,15 +83,15 @@ class DefaultController extends Controller
     }
 
     /**
-     * Displays a form to create a new Home entity.
+     * Displays a form to create a new Pdf entity.
      *
-     * @Route("/new", name="home_new")
+     * @Route("/new", name="pdf_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Home();
+        $entity = new Pdf();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -109,9 +101,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * Finds and displays a Home entity.
+     * Finds and displays a Pdf entity.
      *
-     * @Route("/{id}", name="home_show")
+     * @Route("/{id}", name="pdf_show")
      * @Method("GET")
      * @Template()
      */
@@ -119,10 +111,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Home')->find($id);
+        $entity = $em->getRepository('AppBundle:Pdf')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Home entity.');
+            throw $this->createNotFoundException('Unable to find Pdf entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -134,9 +126,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Home entity.
+     * Displays a form to edit an existing Pdf entity.
      *
-     * @Route("/{id}/edit", name="home_edit")
+     * @Route("/{id}/edit", name="pdf_edit")
      * @Method("GET")
      * @Template()
      */
@@ -144,10 +136,10 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Home')->find($id);
+        $entity = $em->getRepository('AppBundle:Pdf')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Home entity.');
+            throw $this->createNotFoundException('Unable to find Pdf entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -161,16 +153,16 @@ class DefaultController extends Controller
     }
 
     /**
-    * Creates a form to edit a Home entity.
+    * Creates a form to edit a Pdf entity.
     *
-    * @param Home $entity The entity
+    * @param Pdf $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Home $entity)
+    private function createEditForm(Pdf $entity)
     {
-        $form = $this->createForm(new HomeType(), $entity, array(
-            'action' => $this->generateUrl('home_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new PdfType(), $entity, array(
+            'action' => $this->generateUrl('pdf_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -179,20 +171,20 @@ class DefaultController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Home entity.
+     * Edits an existing Pdf entity.
      *
-     * @Route("/{id}", name="home_update")
+     * @Route("/{id}", name="pdf_update")
      * @Method("PUT")
-     * @Template("AppBundle:Home:edit.html.twig")
+     * @Template("AppBundle:Pdf:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Home')->find($id);
+        $entity = $em->getRepository('AppBundle:Pdf')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Home entity.');
+            throw $this->createNotFoundException('Unable to find Pdf entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -202,7 +194,7 @@ class DefaultController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('home_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('pdf_edit', array('id' => $id)));
         }
 
         return array(
@@ -212,9 +204,9 @@ class DefaultController extends Controller
         );
     }
     /**
-     * Deletes a Home entity.
+     * Deletes a Pdf entity.
      *
-     * @Route("/{id}", name="home_delete")
+     * @Route("/{id}", name="pdf_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -224,21 +216,21 @@ class DefaultController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Home')->find($id);
+            $entity = $em->getRepository('AppBundle:Pdf')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Home entity.');
+                throw $this->createNotFoundException('Unable to find Pdf entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('home'));
+        return $this->redirect($this->generateUrl('pdf'));
     }
 
     /**
-     * Creates a form to delete a Home entity by id.
+     * Creates a form to delete a Pdf entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -247,13 +239,10 @@ class DefaultController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('home_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('pdf_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
-
-
-
 }
