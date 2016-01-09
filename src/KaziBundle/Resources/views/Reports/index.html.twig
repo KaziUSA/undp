@@ -1,0 +1,92 @@
+{% extends 'frontend.html.twig' %}
+
+{% block body -%}
+	<div class="page-title"><h3>Reports Archive</h3></div>
+	<section class="content report">
+		<div class="row row-no-padding">
+			
+			<div class="col-sm-3 col-md-3 col-lg-2">
+				<aside>
+					<div class="filter report">
+					  <!-- Tab panes -->
+					  <div class="tab-content">
+					    <div role="tabpanel" class="tab-pane fade in active" id="round1">
+					    	<div class="tab-content-wrap">
+					    		<div class="filter-title">Filter By</div>
+					    		<ul class="checkbox-style">
+							    	<li><input type="checkbox" id="month1" />
+											<label for="month1">January<span></span></label></li>
+							    	<li><input type="checkbox" id="month2" />
+											<label for="month2">Feburary<span></span></label></li>
+							    	<li><input type="checkbox" id="month3" />
+											<label for="month3">March<span></span></label></li>
+							    	<li><input type="checkbox" id="month4" />
+											<label for="month4">April<span></span></label></li>
+							    	<li><input type="checkbox" id="month5" />
+											<label for="month5">May<span></span></label></li>
+							    	<li><input type="checkbox" id="month6" />
+											<label for="month6">June<span></span></label></li>
+							    	<li><input type="checkbox" id="month7" />
+											<label for="month7">July<span></span></label></li>
+							    	<li><input type="checkbox" id="month8" />
+											<label for="month8">August<span></span></label></li>
+							    	<li><input type="checkbox" id="month9" />
+											<label for="month9">September<span></span></label></li>
+							    	<li><input type="checkbox" id="month10" />
+											<label for="month10">October<span></span></label></li>
+							    	<li><input type="checkbox" id="month11" />
+											<label for="month11">November<span></span></label></li>
+							    	<li><input type="checkbox" id="month12" />
+											<label for="month12">December<span></span></label></li>
+							    </ul>
+					    	</div>
+					    </div>
+					  </div>
+					</div>
+				</aside>
+			</div>
+
+			<div class="col-sm-9 col-md-9 col-lg-10">
+				<!-- main content -->
+				<div class="main-content">
+					<div class="wrapper clearfix">
+						<div class="">
+							<!-- <div class="col-lg-3 col-md-4 col-sm-6">
+								<div class="r-box">
+									<a href="#!" class="report-link"></a>
+							
+									<a href="#download" title="Download" class="icon download"></a>
+									<a href="#share" title="Share" class="icon share"></a>
+								</div>
+							</div> -->
+
+							{% if entities is empty %}
+								<p>There are currently no reports available for download.</p>
+							{% else %}							
+								{% for entity in entities %}
+									<div class="col-lg-3 col-md-4 col-sm-6">
+										<div class="r-box">
+											<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-m-d') }}" class="report-link"></a>
+									
+											<ul class="share-icons">
+												<li><a href="#share" class="fa fa-share-alt"></a>
+													<ul>		
+														{# TODO: Need to change localhost:8000 to dynamic url path #}											
+														<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
+														<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
+														<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+													</ul>
+												</li>
+												<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-m-d') }}" class="fa fa-download"></a></li>
+											</ul>
+										</div>
+									</div>
+			        	{% endfor %}
+							{% endif %}
+						</div>
+					</div>
+				</div><!-- /.main-content -->
+			</div>
+		</div>
+	</section>
+{% endblock %}

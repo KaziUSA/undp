@@ -601,32 +601,46 @@ footer, footer a {
 		margin-right: 30px;
 	}
 	&:hover {
-		background-color: #427482;
+		background-color: #6BC1DA;
 	}
 	a.report-link {
 		display: block;
 		width: 100%;
 		height: 100%;
 	}
-	a.icon {
-		background-color: @white;
-		background-position: center center;
-		background-repeat: no-repeat;
-		height: 33px;
+	.share-icons {
+		margin-bottom: 0;
 		position: absolute;
 		bottom: 0;
 		z-index: 1;
-		width: 33px;
-		&.share {
-			background-image: url(../img/frontend/icons/icon-share-blue.png);
-			right: 3px;
-		}
-		&.download {
-			background-image: url(../img/frontend/icons/icon-download-blue.png);
-			right: 39px;
-		}
-		&:hover {
-			background-color: #f2f2f2;
+		right: 3px;
+		li {
+			background-color: @white;
+			float: left;
+			a {
+				background-position: center center;
+				background-repeat: no-repeat;
+				display: block;
+				height: 33px;
+				line-height: 33px;
+				text-align: center;
+				width: 33px;
+				&:before {
+					font-size: 18px;
+				}
+			}
+			ul {
+				display: none;
+				position: absolute;
+				left: -150%;
+				top: 0;
+			}
+			&:hover {
+				background-color: #f2f2f2;
+				ul {
+					display: block;
+				}
+			}
 		}
 	}
 }

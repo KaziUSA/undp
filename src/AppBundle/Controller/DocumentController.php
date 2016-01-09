@@ -19,6 +19,7 @@ use AppBundle\Form\DocumentType;
 class DocumentController extends Controller
 {
 
+
     /**
      * Lists all Document entities.
      *
@@ -95,6 +96,7 @@ class DocumentController extends Controller
         $form = $this->createFormBuilder($document)
             ->add('name')
             ->add('file')
+            ->add('date')
             ->getForm()
         ;
 
@@ -215,7 +217,7 @@ class DocumentController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('document_edit', array('id' => $id)));
+        return $this->redirect($this->generateUrl('document'));
         }
 
         return array(
@@ -232,24 +234,22 @@ class DocumentController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Document')->find($id);
+        $entity = $em->getRepository('AppBundle:Document')->find($id);
+        $entity->setPath('php'.uniqid());
+        $entity->setStatus(0);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Document entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Document entity.');
         }
 
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+
+        $em->flush();
         return $this->redirect($this->generateUrl('document'));
     }
-
     /**
      * Creates a form to delete a Document entity by id.
      *

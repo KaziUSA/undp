@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Document</h1>
 
-    <table class="record_properties">
+    <table class="record_properties table table-condensed table-hover table-striped">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -14,23 +14,26 @@
                 <td>{{ entity.name }}</td>
             </tr>
             <tr>
-                <th>Path</th>
-                <td>{{ entity.path }}</td>
+                <th>Download</th>
+                <td><a href="{{ entity.file_path }}{{ entity.path }}">Download</a></td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date|date('Y/m/d') }}</td>
             </tr>
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('document') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('document_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <a href="{{ path('document') }}">
+        <button type="button" class="btn btn-xs btn-warning">Back to the list</button>
+    </a>
+
+    <a href="{{ path('document_edit', { 'id': entity.id }) }}">
+        <button type="button" class="btn btn-xs btn-success">Edit</button>
+    </a>
+    <a href="{{ path('document_new') }}">
+        <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
+    </a>
+
+    {{ form(delete_form) }}
 {% endblock %}
