@@ -43,6 +43,13 @@ class Document
      */
     private $path;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
     public function getFile()
     {
         return $this->file;
@@ -95,6 +102,30 @@ class Document
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set name
+     *
+     * @param integer $status
+     *
+     * @return Document
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return status
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     public function setPath($path)
@@ -184,9 +215,9 @@ class Document
      */
     public function removeUpload()
     {
-        $file = $this->getAbsolutePath();
+         $file = $this->getAbsolutePath(); 
         if ($file) {
-            unlink($file);
+
         }
     }
 }

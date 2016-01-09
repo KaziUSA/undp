@@ -28,7 +28,10 @@
     						{% endfor %}
 						 {% endif %}
 						
-							<a href="#" class="btn btn-bordered">Go to Platform</a>
+							<a href="#" class="btn btn-bordered">
+								Go to Platform
+							</a>
+							<img id="loader" class="hide" src="img/frontend/loading.GIF">
 						</div>
 					</div>
 				</div>
@@ -37,21 +40,31 @@
 	</section>
 {% endblock %}
 {%block scriptIncludes %}
-     <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
-<script>
 
+<script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
+
+<script>
+var i=0, j=0;
 $("#content1, #content2").keyup(function()
  {  
   var name = {id:1, title:$("#content1").html(), description:$("#content2").html()};
-    $.post('{{path('home')}}',               
-        { data_id:name.id,data_title:name.title,data_description:name.description}, 
-            function(response){ 
-            console.log("Request Sent");
-            }
-    );
+  i=i+1;
+  $("#loader").removeClass("hide");
+  $("#loader").addClass("show");
+  console.log("Request Sent");
+	    $.post('{{path('home')}}',               
+	        { data_id:name.id,data_title:name.title,data_description:name.description}, 
+	            function(response){
+	            	j=j+1
+	            	if (j==i){
+		            	console.log("hidden");
+						$("#loader").removeClass("show");
+						$("#loader").addClass("hide");	
+					}
 
-  return false;
-   
+	            }        
+	    );
+	    return false;
   });
 </script>
 
