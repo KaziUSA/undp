@@ -30,8 +30,8 @@ class DocumentController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AppBundle:Document')->findAll();
+        $criteria = array('status'=> 1);
+        $entities = $em->getRepository('AppBundle:Document')->findBy($criteria);
 
         return array(
             'entities' => $entities,
