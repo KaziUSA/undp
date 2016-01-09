@@ -217,7 +217,7 @@ class DocumentController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-        return $this->redirect($this->generateUrl('document'));
+        return $this->redirect($this->generateUrl('document_show', array('id' => $id)));
         }
 
         return array(
