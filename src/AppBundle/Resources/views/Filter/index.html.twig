@@ -35,36 +35,7 @@
                                             <li><input type="checkbox" id="month-all" value="" />
                                                 <label for="month-all">All<span></span></label></li>
                                             <div class="form_months" id="form_months">
-                                                <li><input type="checkbox" id="month1" value="1" />
-                                                    <label for="month1">January<span></span></label></li>
-                                                <li><input type="checkbox" id="month2" value="2"/>
-                                                    <label for="month2">Feburary<span></span></label></li>
-                                                <li><input type="checkbox" id="month3" value="3"/>
-                                                    <label for="month3">March<span></span></label></li>
-                                            </div>
-                                            <div class="form_months" id="form_months2">
-                                                <li><input type="checkbox" id="month4" value="4" />
-                                                    <label for="month4">April<span></span></label></li>
-                                                <li><input type="checkbox" id="month5" value="5"/>
-                                                    <label for="month5">May<span></span></label></li>
-                                                <li><input type="checkbox" id="month6" value="6"/>
-                                                    <label for="month6">June<span></span></label></li>
-                                            </div>
-                                            <div class="form_months" id="form_months3">
-                                                <li><input type="checkbox" id="month7" value="7" />
-                                                    <label for="month7">July<span></span></label></li>
-                                                <li><input type="checkbox" id="month8" value="8"/>
-                                                    <label for="month8">August<span></span></label></li>
-                                                <li><input type="checkbox" id="month9" value="9"/>
-                                                    <label for="month9">September<span></span></label></li>
-                                            </div>
-                                            <div class="form_months" id="form_months4">
-                                                <li><input type="checkbox" id="month10" value="10" />
-                                                    <label for="month10">October<span></span></label></li>
-                                                <li><input type="checkbox" id="month11" value="11"/>
-                                                    <label for="month11">November<span></span></label></li>
-                                                <li><input type="checkbox" id="month12" value="12"/>
-                                                    <label for="month12">December<span></span></label></li>
+                                                <li><input type="checkbox" id="month1" value="1" /><label for="month1">January<span></span></label></li><li><input type="checkbox" id="month2" value="2"/><label for="month2">Feburary<span></span></label></li><li><input type="checkbox" id="month3" value="3"/><label for="month3">March<span></span></label></li>
                                             </div>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
@@ -159,6 +130,7 @@
                     <div class="high-chart">
                         <div class="high-chart-wrap">
                             <div id="canvas" class="chart-container"></div>
+
                             <!-- <canvas id="canvas" height="140"></canvas> -->
 
                             <!-- custom legend -->
@@ -203,26 +175,22 @@
 
         $('.nav-tabs li.round1').click(function (e) {
             e.preventDefault();
-            $('.form_months').hide();
-            $('.form_months#form_months').show();
+            $('.form_months#form_months').html('<li><input type="checkbox" id="month1" value="1" /><label for="month1">January<span></span></label></li><li><input type="checkbox" id="month2" value="2"/><label for="month2">Feburary<span></span></label></li><li><input type="checkbox" id="month3" value="3"/><label for="month3">March<span></span></label></li>');
         });
 
         $('.nav-tabs li.round2').click(function (e) {
             e.preventDefault();
-            $('.form_months').hide();
-            $('.form_months#form_months2').show();
+            $('.form_months#form_months').html('<li><input type="checkbox" id="month4" value="4" /><label for="month4">April<span></span></label></li><li><input type="checkbox" id="month5" value="5"/><label for="month5">May<span></span></label></li><li><input type="checkbox" id="month6" value="6"/><label for="month6">June<span></span></label></li>');
         });
 
         $('.nav-tabs li.round3').click(function (e) {
             e.preventDefault();
-            $('.form_months').hide();
-            $('.form_months#form_months3').show();
+            $('.form_months#form_months').html('<li><input type="checkbox" id="month7" value="7" /><label for="month7">July<span></span></label></li><li><input type="checkbox" id="month8" value="8"/><label for="month8">August<span></span></label></li><li><input type="checkbox" id="month9" value="9"/><label for="month9">September<span></span></label></li>');
         });
 
         $('.nav-tabs li.round4').click(function (e) {
             e.preventDefault();
-            $('.form_months').hide();
-            $('.form_months#form_months4').show();
+            $('.form_months#form_months').html('<li><input type="checkbox" id="month10" value="10" /><label for="month10">October<span></span></label></li><li><input type="checkbox" id="month11" value="11"/><label for="month11">November<span></span></label></li><li><input type="checkbox" id="month12" value="12"/><label for="month12">December<span></span></label></li>');
         });
 
         
@@ -233,37 +201,37 @@
     //store selected question in questions variable
     var questions=document.getElementById('form_questions').selectedIndex;
     questions=document.getElementsByTagName("option")[questions].value;
-    alert(questions);
+    //alert(questions);
     //store checked ages in ageVals array
     var ageVals = [];
      $('#form_ages :checked').each(function() {
        ageVals.push($(this).next("label").text());
      });
-     alert(ageVals);
+     //alert(ageVals);
      //store selected gender in genderVals array
     var genderVals = [];
      $('#form_gender :checked').each(function() {
        genderVals.push($(this).next("label").text());
      });
-     alert(genderVals);
+     //alert(genderVals);
     //store selected ethnicity in ethnicityVals
     var ethnicityVals = [];
      $('#form_ethnicities :checked').each(function() {
        ethnicityVals.push($(this).next("label").text());
      });
-     alert(ethnicityVals);
+     //alert(ethnicityVals);
      //store selected district in districtVals
      var districtVals = [];
      $('#form_districts :checked').each(function() {
        districtVals.push($(this).next("label").text());
      });
-     alert(districtVals);
+     //alert(districtVals);
      //store selected month in monthVals
      var monthVals = [];
      $('#form_months :checked').each(function() {
        monthVals.push($(this).next("label").text());
      });
-     alert(monthVals);
+     //alert(monthVals);
 
     $.post('{{path('myajax')}}',               
         { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
@@ -395,8 +363,7 @@
                     chart.exportChart();
                 });
 
-                $('#table1 table').addClass('table-bordered table');
-                    
+                $('#table1 table').addClass('table-bordered table');                  
             }//Ajax success end
 
         }, "json"); //.post end   

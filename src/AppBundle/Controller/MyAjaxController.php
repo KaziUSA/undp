@@ -45,8 +45,8 @@ class MyAjaxController extends Controller
 		$colors=['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459','#B0A472','#333332','#D7D1CA','#EB65A0','#982395','#CDCDCD','#CD92BA','#DAFFA6','#85BACD','#B0A472','#D94E67',' #0241E2', '#F7F960'];
 		$data_question = 1;
 		//$data_age = ['15 - 24','25 - 39','40 - 54'];
-		//$data_gender= ['Male','Female'];
-		//$data_ethnicity=['Brahmin','Chhetri','Dalit'];
+		// $data_gender= ['Male','Female'];
+		// $data_ethnicity=['Brahmin','Chhetri','Dalit'];
 		//$data_district=['Kathmandu','Dolakha'];
 		//$data_month=['January','July','August','September'];
 		//Handle data

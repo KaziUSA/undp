@@ -31,8 +31,8 @@ class FilterController extends Controller
 		    ->add('questions', 'entity',array(
 			    'class' => 'AppBundle:Question',
 			    'query_builder' => function(EntityRepository $er) {
-			                         return $er->createQueryBuilder('e')
-			                             ->orderBy('e.name', 'ASC');
+			                         return $er->createQueryBuilder('q')
+			                             ->orderBy('q.id', 'ASC');
 			                     },
 			    'choices_as_values' => false,		    
 			))
