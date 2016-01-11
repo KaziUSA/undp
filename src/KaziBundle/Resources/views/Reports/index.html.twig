@@ -61,7 +61,11 @@
 							</div> -->
 
 							{% if entities is empty %}
-								<p>There are currently no reports available for download.</p>
+								<p>There are currently no reports available for download.
+								{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+									<a href="{{ path('document') }}">Upload Reports</a>
+								{% endif %}
+								</p>
 							{% else %}							
 								{% for entity in entities %}
 									<div class="col-lg-3 col-md-4 col-sm-6">

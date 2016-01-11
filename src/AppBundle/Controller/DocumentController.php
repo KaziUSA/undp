@@ -94,9 +94,12 @@ class DocumentController extends Controller
     {
         $document = new Document();
         $form = $this->createFormBuilder($document)
-            ->add('name')
-            ->add('file')
-            ->add('date')
+            //->add('name')
+            ->add('name', 'text', array( 'attr' => array( 'class' => 'form-control' ) ))
+            //->add('file')
+            ->add('file', 'file', array( 'attr' => array( 'class' => 'form-control' ) ))
+            //->add('date')
+            ->add('date', 'date', array( 'attr' => array( 'class' => 'form-control' ) ))
             ->getForm()
         ;
 

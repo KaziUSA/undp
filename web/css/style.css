@@ -7515,6 +7515,7 @@ body.DTTT_Print {
 }
 
 /* FOS Register */
-#fos_user_registration_form > div {
+#fos_user_registration_form > div,
+#form > div {
   margin-bottom: 15px;
 }
