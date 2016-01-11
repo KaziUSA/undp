@@ -130,6 +130,7 @@
                     <div class="high-chart">
                         <div class="high-chart-wrap">
                             <div id="canvas" class="chart-container"></div>
+
                             <!-- <canvas id="canvas" height="140"></canvas> -->
 
                             <!-- custom legend -->
@@ -200,37 +201,37 @@
     //store selected question in questions variable
     var questions=document.getElementById('form_questions').selectedIndex;
     questions=document.getElementsByTagName("option")[questions].value;
-    alert(questions);
+    //alert(questions);
     //store checked ages in ageVals array
     var ageVals = [];
      $('#form_ages :checked').each(function() {
        ageVals.push($(this).next("label").text());
      });
-     alert(ageVals);
+     //alert(ageVals);
      //store selected gender in genderVals array
     var genderVals = [];
      $('#form_gender :checked').each(function() {
        genderVals.push($(this).next("label").text());
      });
-     alert(genderVals);
+     //alert(genderVals);
     //store selected ethnicity in ethnicityVals
     var ethnicityVals = [];
      $('#form_ethnicities :checked').each(function() {
        ethnicityVals.push($(this).next("label").text());
      });
-     alert(ethnicityVals);
+     //alert(ethnicityVals);
      //store selected district in districtVals
      var districtVals = [];
      $('#form_districts :checked').each(function() {
        districtVals.push($(this).next("label").text());
      });
-     alert(districtVals);
+     //alert(districtVals);
      //store selected month in monthVals
      var monthVals = [];
      $('#form_months :checked').each(function() {
        monthVals.push($(this).next("label").text());
      });
-     alert(monthVals);
+     //alert(monthVals);
 
     $.post('{{path('myajax')}}',               
         { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
@@ -252,6 +253,13 @@
                 } else {
                     $('.legend-box').hide();
                 }*/
+              // easing added from https://github.com/danro/easing-js/blob/master/easing.js
+              Math.customEase = function(pos) {
+                var s = 1.70158;
+                if((pos/=0.5) < 1) return 0.5*(pos*pos*(((s*=(1.525))+1)*pos -s));
+                return 0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos +s) +2);
+              };
+
                 var chart=new Highcharts.chart({
                 chart: {
                         renderTo: 'canvas',
@@ -267,7 +275,7 @@
                           fontSize: '12px',
                         },
 
-                        type: 'column'
+                        type: 'column',
                     },
                     colors:['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459'],
                     title: {
@@ -339,8 +347,14 @@
                     plotOptions: {
                         column: {
                             stacking: response.result.stack
+                        },
+                        series: {
+                            animation: {
+                                duration: 1000,
+                                easing: 'customEase'
+                            }
                         }
-                    }    	
+                    },    	
                 });//Highchart end
                 $('#table1').html(chart.getTable());
                 $('#table1').html(response.result.html);
@@ -349,8 +363,7 @@
                     chart.exportChart();
                 });
 
-                $('#table1 table').addClass('table-bordered table');
-                    
+                $('#table1 table').addClass('table-bordered table');                  
             }//Ajax success end
 
         }, "json"); //.post end   
