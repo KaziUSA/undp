@@ -7513,3 +7513,8 @@ body.DTTT_Print {
     padding:4px 35px;
     margin-left:4px;
 }
+
+/* FOS Register */
+#fos_user_registration_form > div {
+  margin-bottom: 15px;
+}
