@@ -11,10 +11,10 @@
                     <div class="tab-head">Feedback Round</div>
 
                       <ul id="" class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
-                        <li role="presentation"><a href="#round2" aria-controls="profile" role="tab" data-toggle="tab">2</a></li>
-                        <li role="presentation"><a href="#round3" aria-controls="messages" role="tab" data-toggle="tab">3</a></li>
-                        <li role="presentation"><a href="#round4" aria-controls="settings" role="tab" data-toggle="tab">4</a></li>
+                        <li role="presentation" class="active round1"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
+                        <li role="presentation" class="round2"><a href="#round1" aria-controls="profile" role="tab" data-toggle="tab">2</a></li>
+                        <li role="presentation" class="round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab">3</a></li>
+                        <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">4</a></li>
                       </ul>
                   </div>
 
@@ -24,7 +24,7 @@
                         <div class="tab-content-wrap">
                             <div class="filter-title">Filter By</div>
 
-                            <div class="accordion">                                                                 
+                            <div class="accordion">                                        
                                     <form action="">
                                       <div class="ac">              
                                         {# ac-1 #}
@@ -32,15 +32,39 @@
                                         <label class="ac-label" for="ac-1">Month</label>
                                         
                                         <ul class="ac-text checkbox-style">
-                                            <div id="form_months">
-                                                <li><input type="checkbox" id="month-all" value="" />
-                                                    <label for="month-all">All<span></span></label></li>
+                                            <li><input type="checkbox" id="month-all" value="" />
+                                                <label for="month-all">All<span></span></label></li>
+                                            <div class="form_months" id="form_months">
                                                 <li><input type="checkbox" id="month1" value="1" />
                                                     <label for="month1">January<span></span></label></li>
                                                 <li><input type="checkbox" id="month2" value="2"/>
                                                     <label for="month2">Feburary<span></span></label></li>
                                                 <li><input type="checkbox" id="month3" value="3"/>
                                                     <label for="month3">March<span></span></label></li>
+                                            </div>
+                                            <div class="form_months" id="form_months2">
+                                                <li><input type="checkbox" id="month4" value="4" />
+                                                    <label for="month4">April<span></span></label></li>
+                                                <li><input type="checkbox" id="month5" value="5"/>
+                                                    <label for="month5">May<span></span></label></li>
+                                                <li><input type="checkbox" id="month6" value="6"/>
+                                                    <label for="month6">June<span></span></label></li>
+                                            </div>
+                                            <div class="form_months" id="form_months3">
+                                                <li><input type="checkbox" id="month7" value="7" />
+                                                    <label for="month7">July<span></span></label></li>
+                                                <li><input type="checkbox" id="month8" value="8"/>
+                                                    <label for="month8">August<span></span></label></li>
+                                                <li><input type="checkbox" id="month9" value="9"/>
+                                                    <label for="month9">September<span></span></label></li>
+                                            </div>
+                                            <div class="form_months" id="form_months4">
+                                                <li><input type="checkbox" id="month10" value="10" />
+                                                    <label for="month10">October<span></span></label></li>
+                                                <li><input type="checkbox" id="month11" value="11"/>
+                                                    <label for="month11">November<span></span></label></li>
+                                                <li><input type="checkbox" id="month12" value="12"/>
+                                                    <label for="month12">December<span></span></label></li>
                                             </div>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
@@ -112,12 +136,6 @@
                             </div><!--/accordion-->
                         </div>
                     </div>
-
-                    <div role="tabpanel" class="tab-pane fade" id="round2">Same as in Round 1</div>
-
-                    <div role="tabpanel" class="tab-pane fade" id="round3">Same as in Round 1</div>
-
-                    <div role="tabpanel" class="tab-pane fade" id="round4">Same as in Round 1</div>
                   </div>
                 </div>
             </aside>
@@ -180,6 +198,36 @@
 <script type="text/javascript" src="js/exporting.js"></script>-->
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script>
+    $(document).ready(function() {        
+        $('.form_months#form_months').show();
+
+        $('.nav-tabs li.round1').click(function (e) {
+            e.preventDefault();
+            $('.form_months').hide();
+            $('.form_months#form_months').show();
+        });
+
+        $('.nav-tabs li.round2').click(function (e) {
+            e.preventDefault();
+            $('.form_months').hide();
+            $('.form_months#form_months2').show();
+        });
+
+        $('.nav-tabs li.round3').click(function (e) {
+            e.preventDefault();
+            $('.form_months').hide();
+            $('.form_months#form_months3').show();
+        });
+
+        $('.nav-tabs li.round4').click(function (e) {
+            e.preventDefault();
+            $('.form_months').hide();
+            $('.form_months#form_months4').show();
+        });
+
+        
+    });
+
     //Ajax call
     function aButtonPressed(){
     //store selected question in questions variable
