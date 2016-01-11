@@ -37,12 +37,14 @@
                                         <label class="ac-label" for="ac-1">Month</label>
                                         
                                         <ul class="ac-text checkbox-style">
-                                            <li><input type="checkbox" id="month1" />
-                                                <label for="month1">January<span></span></label></li>
-                                            <li><input type="checkbox" id="month2" />
-                                                <label for="month2">Feburary<span></span></label></li>
-                                            <li><input type="checkbox" id="month3" />
-                                                <label for="month3">March<span></span></label></li>
+                                            <div id="form_months">
+                                                <li><input type="checkbox" id="month1" value="1" />
+                                                    <label for="month1">January<span></span></label></li>
+                                                <li><input type="checkbox" id="month2" value="2"/>
+                                                    <label for="month2">Feburary<span></span></label></li>
+                                                <li><input type="checkbox" id="month3" value="3"/>
+                                                    <label for="month3">March<span></span></label></li>
+                                            </div>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
 
@@ -174,7 +176,6 @@
 
 <!--<script src="http://code.highcharts.com/stock/highstock.js"></script>
 <script type="text/javascript" src="js/exporting.js"></script>-->
-<script src="http://highcharts.github.io/export-csv/export-csv.js"></script>
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script>
     //Ajax call
@@ -207,9 +208,15 @@
        districtVals.push($(this).next("label").text());
      });
      alert(districtVals);
+     //store selected month in monthVals
+     var monthVals = [];
+     $('#form_months :checked').each(function() {
+       monthVals.push($(this).next("label").text());
+     });
+     alert(monthVals);
 
     $.post('{{path('myajax')}}',               
-        { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals }, 
+        { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
         function(response){ 
             var val=new Array();
             var dt= new Array();
@@ -243,6 +250,7 @@
 
                         type: 'column'
                     },
+                    colors:['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459'],
                     title: {
                         text: ''//There is no text in design: Answers by the people
                     },
@@ -254,9 +262,11 @@
                             style: {'color': '#898989', 'fontSize': '14px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
                         },
                         categories: response.result.label,
-                        
-                        min: 0
+                        title: {
+                            enabled: false,
+                            text: response.result.xlabel,// For x-axis label on table
                             
+                        }                           
                     },
                     scrollbar: {
                         enabled: true
@@ -281,7 +291,7 @@
                     
                     tooltip: {
                           formatter: function () {
-                              return this.point.y + '% says<br>' + 
+                              return this.point.y + ' people says<br>' + 
                               this.series.name.toLowerCase();
                                 //+ this.point.name.toLowerCase();
                           }
@@ -306,21 +316,6 @@
                     series: response.result.series,
                      credits: {
                         enabled: false
-                    },
-                    scrollbar: {
-                        enabled: true,
-                        barBackgroundColor: 'gray',
-                        barBorderRadius: 7,
-                        barBorderWidth: 0,
-                        buttonBackgroundColor: 'gray',
-                        buttonBorderWidth: 0,
-                        buttonArrowColor: 'yellow',
-                        buttonBorderRadius: 7,
-                        rifleColor: 'yellow',
-                        trackBackgroundColor: 'white',
-                        trackBorderWidth: 1,
-                        trackBorderColor: 'silver',
-                        trackBorderRadius: 7
                     },
                     plotOptions: {
                         column: {
