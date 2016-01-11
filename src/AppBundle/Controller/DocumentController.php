@@ -99,7 +99,7 @@ class DocumentController extends Controller
             //->add('file')
             ->add('file', 'file', array( 'attr' => array( 'class' => 'form-control' ) ))
             //->add('date')
-            ->add('date', 'date', array( 'attr' => array( 'class' => 'form-control' ) ))
+            ->add('date', 'text', array( 'attr' => array( 'class' => 'form-control date' ) ))
             ->getForm()
         ;
 

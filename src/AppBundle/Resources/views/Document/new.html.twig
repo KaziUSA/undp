@@ -17,3 +17,18 @@
             </button>
         </a>
 {% endblock %}
+
+
+{%block scriptIncludes %}
+<script>
+$(document).ready(function() {
+	$('.date').datepicker({
+	    todayBtn: "linked",
+	    keyboardNavigation: false,
+	    forceParse: false,
+	    calendarWeeks: true,
+	    autoclose: true
+	});
+});
+</script>
+{% endblock %}
