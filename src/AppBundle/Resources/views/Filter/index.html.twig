@@ -139,7 +139,7 @@
                     <div class="high-chart">
                         <div class="high-chart-wrap">
                             <div id="canvas" class="chart-container"></div>
-                            <div id="table1" class="chart-table table-responsive"></div>
+                            <div id="table1" class="chart-table table-responsive dataTable"></div>
                             <!-- <canvas id="canvas" height="140"></canvas> -->
 
                             <!-- custom legend -->
@@ -183,37 +183,37 @@
     //store selected question in questions variable
     var questions=document.getElementById('form_questions').selectedIndex;
     questions=document.getElementsByTagName("option")[questions].value;
-    alert(questions);
+    //alert(questions);
     //store checked ages in ageVals array
     var ageVals = [];
      $('#form_ages :checked').each(function() {
        ageVals.push($(this).next("label").text());
      });
-     alert(ageVals);
+     //alert(ageVals);
      //store selected gender in genderVals array
     var genderVals = [];
      $('#form_gender :checked').each(function() {
        genderVals.push($(this).next("label").text());
      });
-     alert(genderVals);
+     //alert(genderVals);
     //store selected ethnicity in ethnicityVals
     var ethnicityVals = [];
      $('#form_ethnicities :checked').each(function() {
        ethnicityVals.push($(this).next("label").text());
      });
-     alert(ethnicityVals);
+     //alert(ethnicityVals);
      //store selected district in districtVals
      var districtVals = [];
      $('#form_districts :checked').each(function() {
        districtVals.push($(this).next("label").text());
      });
-     alert(districtVals);
+     //alert(districtVals);
      //store selected month in monthVals
      var monthVals = [];
      $('#form_months :checked').each(function() {
        monthVals.push($(this).next("label").text());
      });
-     alert(monthVals);
+     //alert(monthVals);
 
     $.post('{{path('myajax')}}',               
         { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
@@ -330,8 +330,7 @@
                     chart.exportChart();
                 });
 
-                $('#table1 table').addClass('table-bordered table');
-                    
+                $('#table1 table').addClass('table-bordered table');                  
             }//Ajax success end
 
         }, "json"); //.post end   
