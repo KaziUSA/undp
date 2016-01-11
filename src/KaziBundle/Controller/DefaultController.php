@@ -23,25 +23,11 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         
-        
-        $data_id = $request->request->get('data_id');
-        $data_title = $request->request->get('data_title');
-        $data_description = $request->request->get('data_description');
-        $sql= "UPDATE home SET title='$data_title',description='$data_description' WHERE id='$data_id'";
-        $em = $this->getDoctrine()->getEntityManager();
-        $connection = $em->getConnection();
-        $statement = $connection->prepare($sql);
-        $statement->bindValue('id', $data_id);
-        $statement->execute();
-        //prepare the response
-        $response = array("code" => 100, "success" => true);
-        
         $em = $this->getDoctrine()->getManager();
         //set the entities
         $entities = $em->getRepository('AppBundle:Home')->findAll();
         return array(
             'entities' => $entities,
-            json_encode($response)
         );
     }
     /**

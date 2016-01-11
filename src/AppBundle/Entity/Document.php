@@ -49,7 +49,12 @@ class Document
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
     private $path;
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status=1;
     public $file_path = '/../../../uploads/documents/';
 
     public function getFile()
@@ -107,7 +112,27 @@ class Document
     }
 
     /**
-     * Set date
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Document
+     */
+    public function setStatus($status)
+    {
+        return $this->status = $status;
+    }
+    /**
+     * Get status
+     *
+     * @return status
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+     /* Set date
      *
      * @param date $date
      *
@@ -120,8 +145,8 @@ class Document
         return $this;
     }
 
-    /**
-     * Get date
+    
+    /* Get date
      *
      * @return date
      */
@@ -217,9 +242,9 @@ class Document
      */
     public function removeUpload()
     {
-        $file = $this->getAbsolutePath();
+         $file = $this->getAbsolutePath(); 
         if ($file) {
-            unlink($file);
+            $this->status=0;
         }
     }
 }

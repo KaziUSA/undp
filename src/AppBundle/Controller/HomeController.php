@@ -46,7 +46,7 @@ class HomeController extends Controller
         $entities = $em->getRepository('AppBundle:Home')->findAll();
         return array(
             'entities' => $entities,
-            json_encode($response)
+            json_encode($response),
         );
     }
     /**

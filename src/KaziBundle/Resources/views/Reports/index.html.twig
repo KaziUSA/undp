@@ -60,16 +60,29 @@
 								</div>
 							</div> -->
 
-							{% for entity in entities %}
-								<div class="col-lg-3 col-md-4 col-sm-6">
-									<div class="r-box">
-										<a href="{{ entity.file_path }}{{ entity.path }}" class="report-link"></a>
-								
-										<a href="{{ entity.file_path }}{{ entity.path }}" title="Download {{ entity.name }}" class="icon download"></a>
-										<a href="#share" title="Share" class="icon share"></a>
+							{% if entities is empty %}
+								<p>There are currently no reports available for download.</p>
+							{% else %}							
+								{% for entity in entities %}
+									<div class="col-lg-3 col-md-4 col-sm-6">
+										<div class="r-box">
+											<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-m-d') }}" class="report-link"></a>
+									
+											<ul class="share-icons">
+												<li><a href="#share" class="fa fa-share-alt"></a>
+													<ul>		
+														{# TODO: Need to change localhost:8000 to dynamic url path #}											
+														<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
+														<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
+														<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+													</ul>
+												</li>
+												<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-m-d') }}" class="fa fa-download"></a></li>
+											</ul>
+										</div>
 									</div>
-								</div>
-		        	{% endfor %}
+			        	{% endfor %}
+							{% endif %}
 						</div>
 					</div>
 				</div><!-- /.main-content -->
