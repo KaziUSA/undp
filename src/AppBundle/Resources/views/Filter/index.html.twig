@@ -38,6 +38,8 @@
                                         
                                         <ul class="ac-text checkbox-style">
                                             <div id="form_months">
+                                                <li><input type="checkbox" id="month-all" value="" />
+                                                    <label for="month-all">All<span></span></label></li>
                                                 <li><input type="checkbox" id="month1" value="1" />
                                                     <label for="month1">January<span></span></label></li>
                                                 <li><input type="checkbox" id="month2" value="2"/>
@@ -55,6 +57,8 @@
                                         <label class="ac-label" for="ac-2">District</label>
                                         
                                         <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="district-all" value="" />
+                                                <label for="district-all">All<span></span></label></li>
                                             {{ form(form.districts) }}
                                         </ul>
                                       </div><!--/ac-->
@@ -66,6 +70,8 @@
                                         <label class="ac-label" for="ac-3">Gender</label>
                                         
                                         <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="gender-all" value="" />
+                                                <label for="gender-all">All<span></span></label></li>
                                             {{ form(form.gender) }}
                                         </ul>
                                       </div><!--/ac-->
@@ -77,6 +83,8 @@
                                         <label class="ac-label" for="ac-4">Ethnicity</label>
                                         
                                         <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="ethnicity-all" value="" />
+                                                <label for="ethnicity-all">All<span></span></label></li>
                                             {{ form(form.ethnicities) }}
                                         </ul>
                                       </div><!--/ac-->
@@ -88,6 +96,8 @@
                                         <label class="ac-label" for="ac-5">Age Group</label>
                                         
                                         <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="age-all" value="" />
+                                                <label for="age-all">All<span></span></label></li>
                                             {{ form(form.agegroups) }}
                                         </ul>
                                       </div><!--/ac-->
@@ -123,7 +133,7 @@
 
         <div class="col-sm-9 col-md-9 col-lg-10">
             <!-- main content -->
-            <div class="main-content" style="height:4000px;">
+            <div class="main-content">
                 <div class="question">
                     <!--<div class="number">Question 9</div> 
                     Are your main problems being adressed ?-->
@@ -139,7 +149,6 @@
                     <div class="high-chart">
                         <div class="high-chart-wrap">
                             <div id="canvas" class="chart-container"></div>
-                            <div id="table1" class="chart-table table-responsive"></div>
                             <!-- <canvas id="canvas" height="140"></canvas> -->
 
                             <!-- custom legend -->
@@ -165,6 +174,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="table1" class="chart-table table-responsive"></div>
                     </div>
                 </div>
             </div><!-- /.main-content -->
@@ -225,14 +235,16 @@
                 console.log(JSON.stringify(response.result.html));
                 //show custom legend on chart if number of items in legend is greater and equal to 4
                 var legend_item_height = 29;
-                var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
+
+                $('.legend-box').show();
+                /*var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
                 //height of last legend is 15 without margin
                 if(response.result.series.length >= 4) {
                     $('.legend-box').height(legend_height);
                     $('.legend-box').show();
                 } else {
                     $('.legend-box').hide();
-                }
+                }*/
                 var chart=new Highcharts.chart({
                 chart: {
                         renderTo: 'canvas',
