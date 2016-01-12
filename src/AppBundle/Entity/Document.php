@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Document
  *
@@ -53,6 +55,13 @@ class Document
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
     private $path;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="DocumentType", inversedBy="documents")
+     * @ORM\JoinColumn(name="document_type_id", referencedColumnName="id")
+     */
+    protected $documenttype;
+
     /**
      * @var integer
      *
@@ -159,6 +168,12 @@ class Document
         return $this->date;
     }
 
+     /* Set path
+     *
+     * @param path $path
+     *
+     * @return Document
+     */
     public function setPath($path)
     {
         $this->path = $path;
@@ -166,9 +181,38 @@ class Document
         return $this;
     }
 
+
+    
+    /* Get path
+     *
+     * @return path
+     */
      public function getPath()
     {
         return $this->path;
+            
+    }
+
+     /* Set type
+     *
+     * @param type $type
+     *
+     * @return Document
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /* Get type
+     *
+     * @return type
+     */
+     public function getType()
+    {
+        return $this->type;
             
     }
     
@@ -250,6 +294,30 @@ class Document
         if ($file) {
             $this->status=0;
         }
+    }
+
+    /**
+     * Set documenttype
+     *
+     * @param \AppBundle\Entity\DocumentType $documentType
+     *
+     * @return Document
+     */
+    public function setDocumentType(\AppBundle\Entity\DocumentType $documentType = null)
+    {
+        $this->documenttype = $documentType;
+
+        return $this;
+    }
+
+    /**
+     * Get documentType
+     *
+     * @return \AppBundle\Entity\DocumentType
+     */
+    public function getDocumentType()
+    {
+        return $this->documenttype;
     }
 }
 

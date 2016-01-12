@@ -102,7 +102,8 @@ class DocumentController extends Controller
             ->add('date', 'date', array( 'attr' => array( //text
                 'class' => 'form-control',//date
                 //'value' => date('Y-m-d'),
-                ) ))
+                )) )
+            ->add('documenttype')
             ->getForm()
         ;
 

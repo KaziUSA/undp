@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DocumentType extends AbstractType
+class DocumentTypeType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,9 +15,7 @@ class DocumentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array('attr'=>array('class'=>'form-control')))
-            ->add('date', 'date', array('attr'=>array('class'=>'form-control')))
-            ->add('documenttype')
+            ->add('name')
         ;
     }
     
@@ -27,7 +25,7 @@ class DocumentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Document'
+            'data_class' => 'AppBundle\Entity\DocumentType'
         ));
     }
 
@@ -36,6 +34,6 @@ class DocumentType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_document';
+        return 'appbundle_documenttype';
     }
 }
