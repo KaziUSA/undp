@@ -8639,8 +8639,23 @@ INSERT INTO `survey_response` (`id`, `survey_id`, `question_id`, `answer_id`) VA
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 --
+-- Dumping data for table `document_type`
+--
+
+INSERT INTO `document_type` (`id`, `name`) VALUES
+(1, 'National Reports'),
+(2, 'District Reports'),
+(3, 'Issue in Focus Reports'),
+(4, 'Others');
+
+
+--
 -- Dumping data for table `document`
 --
 
-INSERT INTO `document` (`id`, `name`, `date`, `path`, `status`) VALUES
-(1, 'Loadshedding Report', '2016-01-01', '1714loadshedding.pdf', 1);
+INSERT INTO `document` (`id`, `name`, `date`, `path`, `status`, `document_type_id`) VALUES
+(6, 'CFP September Report Print', '2015-09-01', 'CFP September Report Print.pdf', 1, 1),
+(8, 'CFP Report_July', '2015-07-01', 'CFP Report_July.pdf', 1, 1),
+(11, 'CFP October Report Print', '2011-10-01', 'CFP October Report Print.pdf', 1, 1),
+(12, 'CFP November Report', '2015-11-01', 'CFP November Report.pdf', 1, 1),
+(13, 'CFP August Report_Email Version', '2015-08-01', 'CFP August Report_Email Version.pdf', 1, 1);

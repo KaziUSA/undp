@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Download</th>
+                <th>Document Type</th>
                 <th>Date</th>
                 <th>Actions</th>
             </tr>
@@ -16,7 +16,7 @@
         {% for entity in entities %}
             <tr>
                 <td>{{ entity.name }}</td>
-                <td><a href="{{ entity.file_path }}{{ entity.path }}">Download</a></td>
+                <td>{{ entity.documenttype }}</td>
                 <td>{{ entity.date|date('Y/m/d') }}</td>
                 <td>
                         <a href="{{ path('document_show', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-success">Show</button></a>
