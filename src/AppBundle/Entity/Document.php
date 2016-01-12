@@ -16,7 +16,11 @@ class Document
 {
      private $temp;
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\File(
+     * maxSize="10M",
+     * mimeTypes = {"application/pdf", "application/x-pdf"},
+     * mimeTypesMessage = "Please upload a valid PDF"
+     * )
      */
     public $file;
 

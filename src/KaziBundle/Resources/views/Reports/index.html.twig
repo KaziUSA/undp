@@ -13,30 +13,32 @@
 					    <div role="tabpanel" class="tab-pane fade in active" id="round1">
 					    	<div class="tab-content-wrap">
 					    		<div class="filter-title">Filter By</div>
-					    		<ul class="checkbox-style">
-							    	<li><input type="checkbox" id="month1" />
-											<label for="month1">January<span></span></label></li>
-							    	<li><input type="checkbox" id="month2" />
-											<label for="month2">Feburary<span></span></label></li>
-							    	<li><input type="checkbox" id="month3" />
-											<label for="month3">March<span></span></label></li>
-							    	<li><input type="checkbox" id="month4" />
-											<label for="month4">April<span></span></label></li>
-							    	<li><input type="checkbox" id="month5" />
-											<label for="month5">May<span></span></label></li>
-							    	<li><input type="checkbox" id="month6" />
-											<label for="month6">June<span></span></label></li>
-							    	<li><input type="checkbox" id="month7" />
-											<label for="month7">July<span></span></label></li>
-							    	<li><input type="checkbox" id="month8" />
-											<label for="month8">August<span></span></label></li>
-							    	<li><input type="checkbox" id="month9" />
-											<label for="month9">September<span></span></label></li>
-							    	<li><input type="checkbox" id="month10" />
+					    		<ul id="month-wise-report" class="checkbox-style">
+							    	<li><input type="checkbox" id="monthall" checked="checked" />
+											<label for="monthall">All<span></span></label></li>
+							    	<li><input type="checkbox" id="month01" class="month" checked="checked" />
+											<label for="month01">January<span></span></label></li>
+							    	<li><input type="checkbox" id="month02" class="month" checked="checked" />
+											<label for="month02">Feburary<span></span></label></li>
+							    	<li><input type="checkbox" id="month03" class="month" checked="checked" />
+											<label for="month03">March<span></span></label></li>
+							    	<li><input type="checkbox" id="month04" class="month" checked="checked" />
+											<label for="month04">April<span></span></label></li>
+							    	<li><input type="checkbox" id="month05" class="month" checked="checked" />
+											<label for="month05">May<span></span></label></li>
+							    	<li><input type="checkbox" id="month06" class="month" checked="checked" />
+											<label for="month06">June<span></span></label></li>
+							    	<li><input type="checkbox" id="month07" class="month" checked="checked" />
+											<label for="month07">July<span></span></label></li>
+							    	<li><input type="checkbox" id="month08" class="month" checked="checked" />
+											<label for="month08">August<span></span></label></li>
+							    	<li><input type="checkbox" id="month09" class="month" checked="checked" />
+											<label for="month09">September<span></span></label></li>
+							    	<li><input type="checkbox" id="month10" class="month" checked="checked" />
 											<label for="month10">October<span></span></label></li>
-							    	<li><input type="checkbox" id="month11" />
+							    	<li><input type="checkbox" id="month11" class="month" checked="checked" />
 											<label for="month11">November<span></span></label></li>
-							    	<li><input type="checkbox" id="month12" />
+							    	<li><input type="checkbox" id="month12" class="month" checked="checked" />
 											<label for="month12">December<span></span></label></li>
 							    </ul>
 					    	</div>
@@ -68,9 +70,9 @@
 								</p>
 							{% else %}							
 								{% for entity in entities %}
-									<div class="col-lg-3 col-md-4 col-sm-6">
+									<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }}">
 										<div class="r-box">
-											<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-m-d') }}" class="report-link"></a>
+											<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
 									
 											<ul class="share-icons">
 												<li><a href="#share" class="fa fa-share-alt"></a>
@@ -81,7 +83,7 @@
 														<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
 													</ul>
 												</li>
-												<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-m-d') }}" class="fa fa-download"></a></li>
+												<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
 											</ul>
 										</div>
 									</div>
@@ -93,4 +95,46 @@
 			</div>
 		</div>
 	</section>
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+	$(document).ready(function() {
+		$("#monthall").change(function(){
+      $(".month").prop('checked', $(this).prop("checked"));
+      if(!$(this).is(':checked')){
+      	$('.month').hide();
+      }
+      else {
+      	$('.month').show();
+      }
+    });
+
+		function filter_report(month) {
+			$('#month-wise-report #month'+month).change(function(){
+				/*$('.month').hide();
+	      $('.month.'+month).show();*/
+	      
+	      //$('.month').hide();
+	      if(!$(this).is(':checked')){
+	      	$('.month.'+month).hide();	
+	      } else {
+	      	$('.month.'+month).show();
+	      }
+	    });
+    }
+    filter_report('01');
+    filter_report('02');
+    filter_report('03');
+    filter_report('04');
+    filter_report('05');
+    filter_report('06');
+    filter_report('07');
+    filter_report('08');
+    filter_report('09');
+    filter_report('10');
+    filter_report('11');
+    filter_report('12');
+	});
+</script>
 {% endblock %}

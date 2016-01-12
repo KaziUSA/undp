@@ -243,7 +243,7 @@ class DocumentController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Document')->find($id);
-        $entity->setPath('php'.uniqid());
+        //$entity->setPath('php'.uniqid());//do not need to encrypt or change file or path name
         $entity->setStatus(0);
 
         if (!$entity) {

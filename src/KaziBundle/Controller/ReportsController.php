@@ -30,8 +30,9 @@ class ReportsController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $criteria = array('status'=> 1);
 
-        $entities = $em->getRepository('AppBundle:Document')->findAll();
+        $entities = $em->getRepository('AppBundle:Document')->findBy($criteria);
 
         return array(
             'entities' => $entities,
