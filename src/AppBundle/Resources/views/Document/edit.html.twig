@@ -5,12 +5,12 @@
 
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('document') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+
+    <a href="{{ path('document') }}">
+    	<button type="button" class="btn btn-xs btn-info">
+        Back to the list
+      </button>
+    </a>
+
+    {{ form(delete_form) }}
 {% endblock %}

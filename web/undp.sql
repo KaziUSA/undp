@@ -8637,3 +8637,10 @@ INSERT INTO `survey_response` (`id`, `survey_id`, `question_id`, `answer_id`) VA
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Dumping data for table `document`
+--
+
+INSERT INTO `document` (`id`, `name`, `date`, `path`, `status`) VALUES
+(1, 'Loadshedding Report', '2016-01-01', '1714loadshedding.pdf', 1);
