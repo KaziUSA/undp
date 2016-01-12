@@ -123,7 +123,7 @@ class DocumentController extends Controller
                 }
             }
             else{
-               throw $this->createNotFoundException('Form error'); 
+               throw $this->createNotFoundException('Form error');
             }
         }
 

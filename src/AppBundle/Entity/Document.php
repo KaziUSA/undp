@@ -19,7 +19,7 @@ class Document
      private $temp;
     /**
      * @Assert\File(
-     * maxSize="10M",
+     * maxSize="10737418240",
      * mimeTypes = {"application/pdf", "application/x-pdf"},
      * mimeTypesMessage = "Please upload a valid PDF"
      * )
