@@ -69,25 +69,83 @@
 								{% endif %}
 								</p>
 							{% else %}							
-								{% for entity in entities %}
-									<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }}">
-										<div class="r-box">
-											<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
-									
-											<ul class="share-icons">
-												<li><a href="#share" class="fa fa-share-alt"></a>
-													<ul>		
-														{# TODO: Need to change localhost:8000 to dynamic url path #}											
-														<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
-														<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
-														<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
-													</ul>
-												</li>
-												<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
-											</ul>
+								<div class="report-group clearfix">
+									<h2>National Reports</h2>
+									{% for entity in entities %}
+										{# TODO: need to change 'National Reports' to ID #}
+										{% if entity.documenttype == 'National Reports' %}
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+											<div class="r-box">
+												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+										
+												<ul class="share-icons">
+													<li><a href="#share" class="fa fa-share-alt"></a>
+														<ul>		
+															{# TODO: Need to change localhost:8000 to dynamic url path #}											
+															<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
+															<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
+															<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+														</ul>
+													</li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+												</ul>
+											</div>
 										</div>
-									</div>
-			        	{% endfor %}
+										{% endif %}
+				        	{% endfor %}
+			        	</div>
+
+								<div class="report-group clearfix">
+									<h2>District Reports</h2>
+									{% for entity in entities %}
+										{# TODO: need to change 'District Reports' to ID #}
+										{% if entity.documenttype == 'District Reports' %}
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+											<div class="r-box">
+												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+										
+												<ul class="share-icons">
+													<li><a href="#share" class="fa fa-share-alt"></a>
+														<ul>		
+															{# TODO: Need to change localhost:8000 to dynamic url path #}											
+															<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
+															<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
+															<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+														</ul>
+													</li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+												</ul>
+											</div>
+										</div>
+										{% endif %}
+				        	{% endfor %}
+			        	</div>
+
+								<div class="report-group clearfix">
+									<h2>Issue in Focus Reports</h2>
+									{% for entity in entities %}
+										{# TODO: need to change 'Issue in Focus Reports' to ID #}
+										{% if entity.documenttype == 'Issue in Focus Reports' %}
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+											<div class="r-box">
+												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+										
+												<ul class="share-icons">
+													<li><a href="#share" class="fa fa-share-alt"></a>
+														<ul>		
+															{# TODO: Need to change localhost:8000 to dynamic url path #}											
+															<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
+															<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
+															<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+														</ul>
+													</li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+												</ul>
+											</div>
+										</div>
+										{% endif %}
+				        	{% endfor %}
+			        	</div>
 							{% endif %}
 						</div>
 					</div>

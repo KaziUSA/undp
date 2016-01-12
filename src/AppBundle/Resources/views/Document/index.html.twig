@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Document list</h1>
 
-    <table class="records_list table table-condensed table-hover table-striped">
+    <table class="records_list table table-condensed table-hover table-striped dataTables">
         <thead>
             <tr>
                 <th>Name</th>
@@ -31,3 +31,18 @@
                 <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
             </a>
     {% endblock %}
+{% block scriptIncludes %}
+<script>
+        $(document).ready(function() {
+            $('.dataTables').dataTable({
+                responsive: true,
+                "dom": 'T<"clear">lfrtip',
+                "tableTools": {
+                    "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+                }
+            });
+        });
+
+        
+    </script>
+{% endblock %}
