@@ -20,8 +20,8 @@ class Document
     /**
      * @Assert\File(
      * maxSize="10737418240",
-     * mimeTypes = {"application/pdf", "application/x-pdf"},
-     * mimeTypesMessage = "Please upload a valid PDF"
+     * mimeTypes = {"application/pdf", "application/x-pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
+     * mimeTypesMessage = "Please upload a valid Document"
      * )
      */
     public $file;
@@ -253,7 +253,7 @@ class Document
         if (null !== $this->getFile()) {
             // do whatever you want to generate a unique name
             $filename = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename.'.'.$this->getFile()->guessExtension();
+            $this->path = $filename.'.'.$this->getFile()->getExtension();
         }
     }
 
