@@ -16,6 +16,7 @@
 	        						{{ entity.description | raw }}
 	    						</article></p>
     						{% endfor %}
+    						<input type="button" id="save" class="btn btn-bordered pull-right" value="Save">
 						    
 						 {% else %}
 						    {% for entity in entities %}
@@ -45,7 +46,8 @@
 
 <script>
 var i=0, j=0;
-$("#content1, #content2").keyup(function()
+//$("#content1, #content2").keyup(function()
+$('#save').click(function()
  {  
   var name = {id:1, title:$("#content1").html(), description:$("#content2").html()};
   i=i+1;
