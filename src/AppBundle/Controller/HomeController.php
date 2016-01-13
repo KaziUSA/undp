@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
         
         
-        $data_id = $request->request->get('data_id');
+        /*$data_id = $request->request->get('data_id');
         $data_title = $request->request->get('data_title');
         $data_description = $request->request->get('data_description');
         $sql= "UPDATE home SET title='$data_title',description='$data_description' WHERE id='$data_id'";
@@ -47,6 +47,12 @@ class HomeController extends Controller
         return array(
             'entities' => $entities,
             json_encode($response),
+        );*/
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('AppBundle:Home')->findAll();
+
+        return array(
+            'entities' => $entities,
         );
     }
     /**
