@@ -68,110 +68,147 @@
 									<a href="{{ path('document') }}">Upload Reports</a>
 								{% endif %}
 								</p>
-							{% else %}							
-								<div class="report-group clearfix">
-									<h2>National Reports</h2>
-									{% for entity in entities %}
-										{# TODO: need to change 'National Reports' to ID #}
-										{% if entity.documenttype == 'National Reports' %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
-											<div class="r-box">
-												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
-										
-												<ul class="share-icons">
-													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>		
-															{# TODO: Need to change localhost:8000 to dynamic url path #}											
-															<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
-															<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
-															<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
-														</ul>
-													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
-												</ul>
-											</div>
-										</div>
-										{% endif %}
-				        	{% endfor %}
-			        	</div>
+							{% else %}			
 
-								<div class="report-group clearfix">
-									<h2>District Reports</h2>
-									{% for entity in entities %}
-										{# TODO: need to change 'District Reports' to ID #}
-										{% if entity.documenttype == 'District Reports' %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
-											<div class="r-box">
-												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
-										
-												<ul class="share-icons">
-													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>		
-															{# TODO: Need to change localhost:8000 to dynamic url path #}											
-															<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
-															<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
-															<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
-														</ul>
-													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
-												</ul>
-											</div>
+							<div class="panel-group report-acc" id="accordion" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-default">
+									<div class="report-group clearfix">
+										<div class="panel-heading" role="tab" id="headingOne">
+											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">National Reports</a></h2>
 										</div>
-										{% endif %}
-				        	{% endfor %}
-			        	</div>
+										<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      										<div class="panel-body">
+												{% for entity in entities %}
+													{# TODO: need to change 'National Reports' to ID #}
+													{% if entity.documenttype == 'National Reports' %}
+													<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+														<div class="r-box">
+															<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+													
+															<ul class="share-icons">
+																<li><a href="#share" class="fa fa-share-alt"></a>
+																	<ul>		
+																		{# TODO: Need to change localhost:8000 to dynamic url path #}											
+																		<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
+																		<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
+																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+																	</ul>
+																</li>
+																<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+															</ul>
+														</div>
+													</div>
+													{% endif %}
+									        	{% endfor %}
+							        		</div> <!-- /.panel-body -->
+							        	</div><!-- /.collapseOne -->
+						        	</div><!-- /.report-group clearfix -->
+					        	</div> <!-- /.panel panel-default -->
 
-								<div class="report-group clearfix">
-									<h2>Issue in Focus Reports</h2>
-									{% for entity in entities %}
-										{# TODO: need to change 'Issue in Focus Reports' to ID #}
-										{% if entity.documenttype == 'Issue in Focus Reports' %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
-											<div class="r-box">
-												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
-										
-												<ul class="share-icons">
-													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>		
-															{# TODO: Need to change localhost:8000 to dynamic url path #}											
-															<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
-															<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
-															<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
-														</ul>
-													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
-												</ul>
-											</div>
+					        	<div class="panel panel-default">
+									<div class="report-group clearfix">
+										<div class="panel-heading" role="tab" id="headingTwo">
+											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">District Reports</a></h2>
 										</div>
-										{% endif %}
-				        	{% endfor %}
-			        	</div>
+										<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+      										<div class="panel-body">
+      											{% for entity in entities %}
+												{# TODO: need to change 'District Reports' to ID #}
+												{% if entity.documenttype == 'District Reports' %}
+												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+													<div class="r-box">
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+												
+														<ul class="share-icons">
+															<li><a href="#share" class="fa fa-share-alt"></a>
+																<ul>		
+																	{# TODO: Need to change localhost:8000 to dynamic url path #}											
+																	<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
+																	<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
+																	<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+																</ul>
+															</li>
+															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+														</ul>
+													</div>
+												</div>
+												{% endif %}
+								        	{% endfor %}
+      										</div> <!-- /.panel-body -->
+							        	</div><!-- /.collapseTwo -->
+						        	</div><!-- /.report-group clearfix -->
+					        	</div> <!-- /.panel panel-default -->
 
-								<div class="report-group clearfix">
-									<h2>Others</h2>
-									{% for entity in entities %}
-										{# TODO: need to change these to ID #}
-										{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
-											<div class="r-box">
-												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
-										
-												<ul class="share-icons">
-													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>		
-															{# TODO: Need to change localhost:8000 to dynamic url path #}											
-															<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
-															<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
-															<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
-														</ul>
-													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
-												</ul>
-											</div>
+								<div class="panel panel-default">
+									<div class="report-group clearfix">
+										<div class="panel-heading" role="tab" id="headingThree">
+											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Issue in Focus Reports</a></h2>
 										</div>
-										{% endif %}
-				        	{% endfor %}
-			        	</div>
+										<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+      										<div class="panel-body">
+												{% for entity in entities %}
+												{# TODO: need to change 'Issue in Focus Reports' to ID #}
+												{% if entity.documenttype == 'Issue in Focus Reports' %}
+												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+													<div class="r-box">
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+												
+														<ul class="share-icons">
+															<li><a href="#share" class="fa fa-share-alt"></a>
+																<ul>		
+																	{# TODO: Need to change localhost:8000 to dynamic url path #}											
+																	<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
+																	<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
+																	<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+																</ul>
+															</li>
+															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+														</ul>
+													</div>
+												</div>
+												{% endif %}
+								        		{% endfor %}
+					        				</div> <!-- /.panel-body -->
+							        	</div><!-- /.collapseThree -->
+						        	</div><!-- /.report-group clearfix -->
+					        	</div> <!-- /.panel panel-default -->
+
+					        	<div class="panel panel-default">
+									<div class="report-group clearfix">
+										<div class="panel-heading" role="tab" id="headingFour">
+											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Others</a></h2>
+										</div>
+										<div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+      										<div class="panel-body">
+												{% for entity in entities %}
+												{# TODO: need to change these to ID #}
+												{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
+												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+													<div class="r-box">
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+												
+														<ul class="share-icons">
+															<li><a href="#share" class="fa fa-share-alt"></a>
+																<ul>		
+																	{# TODO: Need to change localhost:8000 to dynamic url path #}											
+																	<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
+																	<li><a href="https://twitter.com/home?status=http%3A//localhost:8000/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
+																	<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//localhost:8000/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+																</ul>
+															</li>
+															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+														</ul>
+													</div>
+												</div>
+												{% endif %}
+								        	{% endfor %}
+							        	
+      										</div> <!-- /.panel-body -->
+							        	</div><!-- /.collapseFour -->
+						        	</div><!-- /.report-group clearfix -->
+					        	</div> <!-- /.panel panel-default -->
+					        </div> <!-- /#accordion -->
+
 							{% endif %}
 						</div>
 					</div>
