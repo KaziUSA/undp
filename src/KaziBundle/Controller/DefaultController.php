@@ -240,6 +240,26 @@ class DefaultController extends Controller
         ;
     }
 
+    /**
+     * @Route("/about")
+     * @Template()
+     */
+    public function aboutAction()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
 
+    /**
+     * @Route("/contact")
+     * @Template()
+     */
+    public function contactAction()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
 
 }
