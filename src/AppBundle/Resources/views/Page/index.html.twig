@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Page list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Slug</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('page_show', { 'slug': entity.slug }) }}">{{ entity.id }}</a></td>{# id #}
+                <td>{{ entity.slug }}</td>
+                <td>{{ entity.title }}</td>
+                <td>{{ entity.description }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('page_show', { 'slug': entity.slug }) }}">show</a>{# id #}
+                    </li>
+                    <li>
+                        <a href="{{ path('page_edit', { 'slug': entity.slug }) }}">edit</a>{# id #}
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('page_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
