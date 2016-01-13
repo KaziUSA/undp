@@ -8674,4 +8674,12 @@ INSERT INTO `document` (`id`, `name`, `date`, `path`, `status`, `document_type_i
 (26, 'Perception_Survey_R2_Ramechhap', '2015-08-01', 'Perception_Survey_R2_Ramechhap.pdf', 1, 2),
 (27, 'Perception_Survey_R2_Rasuwa', '2015-08-01', 'Perception_Survey_R2_Rasuwa.pdf', 1, 2),
 (28, 'Perception_Survey_R2_Sindhuli', '2015-08-01', 'Perception_Survey_R2_Sindhuli.pdf', 1, 2),
-(29, 'Perception_Survey_R2_Sindhupalchowk', '2015-08-01', 'Perception_Survey_R2_Sindhupalchowk.pdf', 1, 2);
+(29, 'Perception_Survey_R2_Sindhupalchowk', '2015-08-01', 'Perception_Survey_R2_Sindhupalchowk.pdf', 1, 2),
+(30, 'Bhaktapur_Round5 (November)', '2015-11-01', 'Bhaktapur_Round5 (November).pdf', 1, 2),
+(31, 'Dhading_Round5 (November)', '2015-11-01', 'Dhading_Round5 (November).pdf', 1, 2),
+(32, 'Dolakha_Round5 (November)', '2015-11-01', 'Dolakha_Round5 (November).pdf', 1, 2),
+(33, 'Gorkha_Round5 (November)', '2015-11-01', 'Gorkha_Round5 (November).pdf', 1, 2),
+(34, 'Nepal_Children_Consultation_FINAL_lowres', '2015-01-01', 'Nepal_Children_Consultation_FINAL_lowres.pdf', 1, 4),
+(35, 'NPL-YR-Stories-Final-IO-Sep15[2]', '2015-01-01', 'NPL-YR-Stories-Final-IO-Sep15[2].pdf', 1, 4),
+(36, 'PIN - Her Safety Assessment Final', '2015-01-01', 'PIN - Her Safety Assessment Final.pdf', 1, 4),
+(37, 'PIN -Sindhupalchok Girls Assessment Final', '2015-01-01', 'PIN -Sindhupalchok Girls Assessment Final.pdf', 1, 4);
