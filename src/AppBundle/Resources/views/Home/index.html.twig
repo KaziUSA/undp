@@ -1,33 +1,31 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-{% for entity in entities %}
-    <article id="content1" class="ckeditor" contenteditable="true">
-        {{ entity.title | raw}}
-    </article>
-    <article id="content2" class="ckeditor" contenteditable="true">
-        {{ entity.description | raw }}
-    </article>
-{% endfor %}
-    
+    <h1>Page list</h1>
+
+    <table class="records_list table table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.title | raw }}</td>
+                <td>{{ entity.description | raw }}</td>
+                <td>
+                        <a href="{{ path('home_show', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-success">Show</button></a>
+                        <a href="{{ path('home_edit', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-info">Edit</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+            <a href="{{ path('home_new') }}">
+                <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
+            </a>
     {% endblock %}
-     {%block scriptIncludes %}
-     <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
-<script>
-
-$("#content1, #content2").keyup(function()
- {  
-  var name = {id:1, title:$("#content1").html(), description:$("#content2").html()};
-    $.post('{{path('home')}}',               
-        { data_id:name.id,data_title:name.title,data_description:name.description}, 
-            function(response){ 
-            console.log("Request Sent");
-            }
-    );
-
-  return false;
-   
-  });
-</script>
-
-{% endblock %}
