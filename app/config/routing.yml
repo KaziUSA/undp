@@ -18,3 +18,6 @@ phax:
 
 base_url:
     pattern:  /
+
+mremi_contact_form:
+    resource: "@MremiContactBundle/Resources/config/routing.xml"

@@ -104,3 +104,21 @@ vich_uploader:
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
+
+mremi_contact:
+    store_data:            false
+    contact_class:         Mremi\ContactBundle\Model\Contact
+
+    form:
+        type:              mremi_contact
+        name:              contact_form
+        validation_groups: [Default]
+        subject_provider:  mremi_contact.subject_provider.noop
+
+    email:
+        mailer:            mremi_contact.mailer.twig_swift
+        from:              
+            - { address: symfony@undp.kazi.com, name: "UNDP" }
+        to:                
+            - { address: nikesh@kazistudios.com, name: "Nikesh" }
+        template:          MremiContactBundle:Contact:email.txt.twig
