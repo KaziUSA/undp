@@ -22,7 +22,10 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "symfony/process": "^2.8",
         "ircmaxell/password-compat": "*",
-        "phax/phax-bundle": "dev-master"
+        "phax/phax-bundle": "dev-master",
+        "vich/uploader-bundle": "^0.14.0",
+        "egeloen/ckeditor-bundle": "^4.0",
+        "mremi/contact-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

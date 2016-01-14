@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Document edit</h1>
+
+    {{ form(edit_form) }}
+
+
+    <a href="{{ path('document') }}">
+    	<button type="button" class="btn btn-xs btn-info">
+        Back to the list
+      </button>
+    </a>
+
+    {{ form(delete_form) }}
+{% endblock %}

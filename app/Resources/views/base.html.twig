@@ -26,6 +26,8 @@
             <link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
             <link href="/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
             <link href="/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
+            <link href="/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
             <link href="/css/style.css" rel="stylesheet">
         
             
@@ -76,6 +78,16 @@
                         <li class="{% if app.request.get('_route') == 'answer' %} active {% endif %}"><a href="{{ path('answer') }}">All answers</a></li>
                     </ul>
                 </li>
+                <li class="{% if (app.request.get('_route') == 'document') or (app.request.get('_route') == 'document_new') or (app.request.get('_route') == 'document_show') or (app.request.get('_route') == 'document_edit') or (app.request.get('_route') == 'documenttype') %} active {% endif %}">
+                    <a href="#!"><i class="fa fa-book"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="{% if app.request.get('_route') == 'document' %} active {% endif %}"><a href="{{ path('document') }}">Reports</a></li>
+                        <li class="{% if app.request.get('_route') == 'documenttype' %} active {% endif %}"><a href="{{ path('documenttype') }}">Reports Type</a></li>
+                    </ul>
+                </li>
+                <li class="{% if (app.request.get('_route') == 'page') or (app.request.get('_route') == 'page_new') or (app.request.get('_route') == 'show_new') or (app.request.get('_route') == 'page_edit') %} active {% endif %}">
+                    <a href="{{ path('page') }}"><i class="fa fa-book"></i> <span class="nav-label">Pages</span> </a>
+                </li>
             </ul>
             {% endblock %}
         </div>
@@ -108,7 +120,6 @@
 
 
         <div class="wrapper wrapper-content">
-            {% block header %}{% endblock %}
             <div class="row">
             <div class="col-lg-8">
                 <div class="ibox float-e-margins">
@@ -119,10 +130,6 @@
                 
             </div>
             <div class="col-lg-4">
-                
-                    
-                    
-                    
                     {% block sidebar %}
                     <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -184,6 +191,8 @@
                     {% endblock %}
                 
             </div>
+            
+            {% block header %}{% endblock %}
         </div>
             {% block footercontent %}
             
@@ -252,6 +261,10 @@
         
     <!-- Toastr -->
     <script src="/js/plugins/toastr/toastr.min.js"></script>
+
+    <!-- Data picker -->
+    <script src="/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
         
         {%block scriptIncludes %}{% endblock %}
     

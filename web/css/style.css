@@ -7513,3 +7513,16 @@ body.DTTT_Print {
     padding:4px 35px;
     margin-left:4px;
 }
+
+/* FOS Register */
+#fos_user_registration_form > div,
+#form > div,
+#appbundle_document > div {
+  margin-bottom: 15px;
+}
+
+/* ckeditor */
+.ck-title {
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
+}
