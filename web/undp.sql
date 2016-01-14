@@ -8644,7 +8644,8 @@ INSERT INTO `survey_response` (`id`, `survey_id`, `question_id`, `answer_id`) VA
 
 INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`) VALUES
 (1, 'rohit', 'rohit', 'rohit@kazistudios.com', 'rohit@kazistudios.com', 1, 'ro0sql0h9k0gw8cowgsos0coswgwgw8', '$2y$13$ro0sql0h9k0gw8cowgsosuwfsGB59TVHZiV5/iViTo1m6WMA2/nMG', '2016-01-13 13:44:39', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL),
-(2, 'nikesh', 'nikesh', 'nikesh@kazistudios.com', 'nikesh@kazistudios.com', 1, 'hhint8a1xcocgsgc4s4g8kw0wwgs4s4', '$2y$13$hhint8a1xcocgsgc4s4g8eHiK4cb6um3GTftlmi7UrGRXhPvQOLNS', '2016-01-14 16:57:26', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL);
+(2, 'nikesh', 'nikesh', 'nikesh@kazistudios.com', 'nikesh@kazistudios.com', 1, 'hhint8a1xcocgsgc4s4g8kw0wwgs4s4', '$2y$13$hhint8a1xcocgsgc4s4g8eHiK4cb6um3GTftlmi7UrGRXhPvQOLNS', '2016-01-14 16:57:26', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL),
+(3, 'admin', 'admin', 'admin@kazistudios.com', 'admin@kazistudios.com', 1, 'ar7xdka9x0ggkcc40c0oogok0s0k8w8', '$2y$13$ar7xdka9x0ggkcc40c0ooe5HP596f6VQkj5AyOwKXVtcu85vWewBK', '2015-12-22 16:32:20', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL);
 
 
 
