@@ -39,7 +39,7 @@ class DefaultController extends Controller
     /**
      * Finds and displays a Page entity.
      *
-     * @Route("/{slug}", name="show")
+     * @Route("/page/{slug}", name="show")
      * 
      * @Template()
      */
