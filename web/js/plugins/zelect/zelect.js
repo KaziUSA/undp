@@ -114,7 +114,10 @@
       }
 
       function toggle() {
-        $dropdown.toggle()
+        $dropdown.fadeToggle({
+          duration: 800, 
+          easing: 'easeOutQuint', 
+        })
         $zelect.toggleClass('open')
         if ($dropdown.is(':visible')) {
           $search.focus().select()

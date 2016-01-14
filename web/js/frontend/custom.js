@@ -51,7 +51,13 @@ function btnPrevQuestion_Click() {
         $("#form_questions").prop("selectedIndex", selectedIndex - 1);
     }
     //console.log(selectedIndex);
-    $('.zelected').text($('#form_questions option:selected').text());
+     // class="tlt" data-in-effect="bounceInDown"
+     $('.zelected').removeClass('fadeInUp').removeClass('fadeInDown').delay(400)
+      .queue(function(next){
+        $(this).addClass("fadeInDown");
+        $('.zelected').text($('#form_questions option:selected').text());
+        next();
+      });
 }
 function btnNextQuestion_Click() {
     //  Note:  the JQuery "prop" function requires JQuery v1.6 or later
@@ -63,7 +69,13 @@ function btnNextQuestion_Click() {
         $("#form_questions").prop("selectedIndex", selectedIndex + 1);
     }
     //console.log(selectedIndex);
-    $('.zelected').text($('#form_questions option:selected').text());
+    // $('.zelected').removeClass('fadeInDown').removeClass('fadeInUp').addClass('fadeInUp');
+    $('.zelected').removeClass('fadeInDown').removeClass('fadeInUp').delay(400)
+      .queue(function(next){
+        $(this).addClass("fadeInUp");
+        $('.zelected').text($('#form_questions option:selected').text());
+        next();
+      });
 }
 
 $(document).ready(function () {
