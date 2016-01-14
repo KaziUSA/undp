@@ -79,11 +79,14 @@
                     </ul>
                 </li>
                 <li class="{% if (app.request.get('_route') == 'document') or (app.request.get('_route') == 'document_new') or (app.request.get('_route') == 'document_show') or (app.request.get('_route') == 'document_edit') or (app.request.get('_route') == 'documenttype') %} active {% endif %}">
-                    <a href="#!"><i class="fa fa-book"></i> <span class="nav-label">Reports</span> </a>
+                    <a href="#!"><i class="fa fa-book"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li class="{% if app.request.get('_route') == 'document' %} active {% endif %}"><a href="{{ path('document') }}">Reports</a></li>
                         <li class="{% if app.request.get('_route') == 'documenttype' %} active {% endif %}"><a href="{{ path('documenttype') }}">Reports Type</a></li>
                     </ul>
+                </li>
+                <li class="{% if (app.request.get('_route') == 'page') or (app.request.get('_route') == 'page_new') or (app.request.get('_route') == 'show_new') or (app.request.get('_route') == 'page_edit') %} active {% endif %}">
+                    <a href="{{ path('page') }}"><i class="fa fa-book"></i> <span class="nav-label">Pages</span> </a>
                 </li>
             </ul>
             {% endblock %}
