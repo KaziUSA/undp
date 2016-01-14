@@ -25,7 +25,7 @@ class PageController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -35,6 +35,26 @@ class PageController extends Controller
         return array(
             'entities' => $entities,
         );
+        /*$data_id = $request->request->get('data_id');
+        $data_title = $request->request->get('data_title');
+        $data_description = $request->request->get('data_description');
+        $sql= "UPDATE page SET title='$data_title',description='$data_description' WHERE id='$data_id'";
+        //print_r($sql);exit();
+        $em = $this->getDoctrine()->getEntityManager();
+        $connection = $em->getConnection();
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('id', $data_id);
+        $statement->execute();
+        //prepare the response
+        $response = array("code" => 100, "success" => true);
+        
+        $em = $this->getDoctrine()->getManager();
+        //set the entities
+        $entities = $em->getRepository('AppBundle:Page')->findAll();
+        return array(
+            'entities' => $entities,
+            json_encode($response),
+        );*/
     }
     /**
      * Creates a new Page entity.
@@ -104,17 +124,18 @@ class PageController extends Controller
      * Finds and displays a Page entity.
      *
      * @Route("/{slug}", name="page_show")
-     * @Method("GET")
+     * 
      * @Template()
      */
-    public function showAction($slug)//$id
+    public function showAction($slug, Request $request)//$id //removed annotation @Method("GET")
     {
-        $em = $this->getDoctrine()->getManager();
+        /*$em = $this->getDoctrine()->getManager();
         $criteria = array('slug'=> $slug);
-        $id = 2;//TODO: get id from slug
+        
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        $id = $entity_for_id['0']->getId();
 
         $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
-        //print_r($entity);exit();
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Page entity.');
@@ -125,6 +146,40 @@ class PageController extends Controller
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+        );*/
+
+        $data_id = $request->request->get('data_id');
+        $data_title = $request->request->get('data_title');
+        $data_description = $request->request->get('data_description');
+
+        $sql= "UPDATE page SET title='$data_title',description='$data_description' WHERE id='$data_id'";
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $connection = $em->getConnection();
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('id', $data_id);
+        $statement->execute();
+        //prepare the response
+        $response = array("code" => 100, "success" => true);
+        
+        $em = $this->getDoctrine()->getManager();
+        $criteria = array('slug'=> $slug);
+
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        $id = $entity_for_id['0']->getId();
+
+        $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Page entity.');
+        }
+
+        $deleteForm = $this->createDeleteForm($slug);//$id
+
+        return array(
+            'entity' => $entity,
+            'delete_form' => $deleteForm->createView(),
+            json_encode($response),
         );
     }
 
@@ -139,7 +194,9 @@ class PageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $criteria = array('slug'=>$slug);
-        $id = 2;//TODO: get id from slug
+        
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        $id = $entity_for_id['0']->getId();
 
         $entity = $em->getRepository('AppBundle:Page')->find($id);//find($id) - instance of entity
         //print_r($entity);exit();
@@ -187,7 +244,9 @@ class PageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $criteria = array('slug'=>$slug);
-        $id = 2;//TODO: get id from $slug
+
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        $id = $entity_for_id['0']->getId();
 
         $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - instance of entity
 

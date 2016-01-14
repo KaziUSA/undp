@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Page
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\PageRepository")
+ * @UniqueEntity("slug")
  */
 class Page
 {
@@ -24,9 +26,8 @@ class Page
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
-    //TODO: Need to make unique: http://symfony.com/doc/current/reference/constraints/UniqueEntity.html
     private $slug;
 
     /**

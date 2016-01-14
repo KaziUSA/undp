@@ -3,23 +3,22 @@
 {% block body -%}
     <h1>Page list</h1>
 
-    <table class="records_list">
+    <table class="records_list records_list table table-condensed table-hover table-striped">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Slug</th>
                 <th>Title</th>
-                <th>Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
+            <a href="{{ path('page_show', { 'slug': entity.slug }) }}">
             <tr>
-                <td><a href="{{ path('page_show', { 'slug': entity.slug }) }}">{{ entity.id }}</a></td>{# id #}
+                <td><a href="">{{ entity.id }}</a></td>{# id #}
                 <td>{{ entity.slug }}</td>
-                <td>{{ entity.title }}</td>
-                <td>{{ entity.description }}</td>
+                <td>{{ entity.title | raw }}</td>
                 <td>
                 <ul>
                     <li>
@@ -31,15 +30,12 @@
                 </ul>
                 </td>
             </tr>
+            </a>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
             <a href="{{ path('page_new') }}">
-                Create a new entry
+                <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
             </a>
-        </li>
-    </ul>
     {% endblock %}
