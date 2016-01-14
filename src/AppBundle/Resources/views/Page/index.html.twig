@@ -1,0 +1,41 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Page list</h1>
+
+    <table class="records_list records_list table table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Slug</th>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <a href="{{ path('page_show', { 'slug': entity.slug }) }}">
+            <tr>
+                <td><a href="">{{ entity.id }}</a></td>{# id #}
+                <td>{{ entity.slug }}</td>
+                <td>{{ entity.title | raw }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('page_show', { 'slug': entity.slug }) }}">show</a>{# id #}
+                    </li>
+                    <li>
+                        <a href="{{ path('page_edit', { 'slug': entity.slug }) }}">edit</a>{# id #}
+                    </li>
+                </ul>
+                </td>
+            </tr>
+            </a>
+        {% endfor %}
+        </tbody>
+    </table>
+
+            <a href="{{ path('page_new') }}">
+                <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
+            </a>
+    {% endblock %}
