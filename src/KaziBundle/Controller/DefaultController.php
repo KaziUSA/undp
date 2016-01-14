@@ -49,6 +49,11 @@ class DefaultController extends Controller
         $criteria = array('slug'=> $slug);
 
         $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        //print_r($entity_for_id);exit();
+        if(empty($entity_for_id)) {
+            echo 'Page not found! Sorry about that!';
+            exit();
+        }
         $id = $entity_for_id['0']->getId();
 
         $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
