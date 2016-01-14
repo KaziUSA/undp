@@ -7,39 +7,44 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Home;
-use AppBundle\Form\HomeType;
+use AppBundle\Entity\Page;
+use AppBundle\Form\PageType;
 
 class DefaultController extends Controller
 {
 
     /**
-     * Lists all Home entities.
+     * Lists all Page entities.
      *
      * @Route("/")
      * 
      * @Template()
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request)//annotation removed @Method("GET")
     {
-        
         $em = $this->getDoctrine()->getManager();
-        //set the entities
-        $entities = $em->getRepository('AppBundle:Home')->findAll();
+        $criteria = array('slug'=> 'home');//home is the index page
+
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        $id = $entity_for_id['0']->getId();
+
+        $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
+        //print_r($entities);exit();
+
         return array(
-            'entities' => $entities,
+            'entity' => $entity,
         );
     }
     /**
-     * Creates a new Home entity.
+     * Creates a new Page entity.
      *
-     * @Route("/", name="home_create")
+     * @Route("/", name="page_create")
      * @Method("POST")
-     * @Template("AppBundle:Home:new.html.twig")
+     * @Template("AppBundle:Page:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Home();
+        $entity = new Page();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -48,7 +53,7 @@ class DefaultController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('home_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('page_show', array('slug' => $entity->getSlug())));//id
         }
 
         return array(
@@ -58,16 +63,16 @@ class DefaultController extends Controller
     }
 
     /**
-     * Creates a form to create a Home entity.
+     * Creates a form to create a Page entity.
      *
-     * @param Home $entity The entity
+     * @param Page $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Home $entity)
+    private function createCreateForm(Page $entity)
     {
-        $form = $this->createForm(new HomeType(), $entity, array(
-            'action' => $this->generateUrl('home_create'),
+        $form = $this->createForm(new PageType(), $entity, array(
+            'action' => $this->generateUrl('page_create'),
             'method' => 'POST',
         ));
 
@@ -77,15 +82,15 @@ class DefaultController extends Controller
     }
 
     /**
-     * Displays a form to create a new Home entity.
+     * Displays a form to create a new Page entity.
      *
-     * @Route("/new", name="home_new")
+     * @Route("/new", name="page_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Home();
+        $entity = new Page();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -95,49 +100,73 @@ class DefaultController extends Controller
     }
 
     /**
-     * Finds and displays a Home entity.
+     * Finds and displays a Page entity.
      *
-     * @Route("/{id}", name="home_show")
-     * @Method("GET")
+     * @Route("/{slug}", name="page_show")
+     * 
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($slug, Request $request)//$id //removed annotation @Method("GET")
     {
+        $data_id = $request->request->get('data_id');
+        $data_title = $request->request->get('data_title');
+        $data_description = $request->request->get('data_description');
+
+        $sql= "UPDATE page SET title='$data_title',description='$data_description' WHERE id='$data_id'";
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $connection = $em->getConnection();
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('id', $data_id);
+        $statement->execute();
+        //prepare the response
+        $response = array("code" => 100, "success" => true);
+        
         $em = $this->getDoctrine()->getManager();
+        $criteria = array('slug'=> $slug);
 
-        $entity = $em->getRepository('AppBundle:Home')->find($id);
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        $id = $entity_for_id['0']->getId();
 
+        $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
+        
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Home entity.');
+            throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($slug);//$id
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
+            json_encode($response),
         );
     }
 
     /**
-     * Displays a form to edit an existing Home entity.
+     * Displays a form to edit an existing Page entity.
      *
-     * @Route("/{id}/edit", name="home_edit")
+     * @Route("/{slug}/edit", name="page_edit")
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
+    public function editAction($slug)//$id
     {
         $em = $this->getDoctrine()->getManager();
+        $criteria = array('slug'=>$slug);
+        
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        $id = $entity_for_id['0']->getId();
 
-        $entity = $em->getRepository('AppBundle:Home')->find($id);
+        $entity = $em->getRepository('AppBundle:Page')->find($id);//find($id) - instance of entity
+        //print_r($entity);exit();
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Home entity.');
+            throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($slug);
 
         return array(
             'entity'      => $entity,
@@ -147,16 +176,16 @@ class DefaultController extends Controller
     }
 
     /**
-    * Creates a form to edit a Home entity.
+    * Creates a form to edit a Page entity.
     *
-    * @param Home $entity The entity
+    * @param Page $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Home $entity)
+    private function createEditForm(Page $entity)
     {
-        $form = $this->createForm(new HomeType(), $entity, array(
-            'action' => $this->generateUrl('home_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new PageType(), $entity, array(
+            'action' => $this->generateUrl('page_update', array('slug' => $entity->getSlug())),//id
             'method' => 'PUT',
         ));
 
@@ -165,30 +194,34 @@ class DefaultController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Home entity.
+     * Edits an existing Page entity.
      *
-     * @Route("/{id}", name="home_update")
+     * @Route("/{slug}", name="page_update")
      * @Method("PUT")
-     * @Template("AppBundle:Home:edit.html.twig")
+     * @Template("AppBundle:Page:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $slug)//$id
     {
         $em = $this->getDoctrine()->getManager();
+        $criteria = array('slug'=>$slug);
 
-        $entity = $em->getRepository('AppBundle:Home')->find($id);
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        $id = $entity_for_id['0']->getId();
+
+        $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - instance of entity
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Home entity.');
+            throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createDeleteForm($slug);//$id
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('home_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('page_edit', array('slug' => $slug)));//$id
         }
 
         return array(
@@ -198,68 +231,46 @@ class DefaultController extends Controller
         );
     }
     /**
-     * Deletes a Home entity.
+     * Deletes a Page entity.
      *
-     * @Route("/{id}", name="home_delete")
+     * @Route("/{slug}", name="page_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $slug)//$id
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm($slug);//$id
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Home')->find($id);
+            $criteria = array('slug'=>$slug);
+            $entity = $em->getRepository('AppBundle:Page')->findBy($criteria);//$id
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Home entity.');
+                throw $this->createNotFoundException('Unable to find Page entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('home'));
+        return $this->redirect($this->generateUrl('page'));
     }
 
     /**
-     * Creates a form to delete a Home entity by id.
+     * Creates a form to delete a Page entity by slug.
      *
-     * @param mixed $id The entity id
+     * @param mixed $slug The entity slug
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    private function createDeleteForm($slug)//$id
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('home_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('page_delete', array('slug' => $slug)))//$id
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
-
-    /**
-     * @Route("/about")
-     * @Template()
-     */
-    public function aboutAction()
-    { 
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        );
-    }
-
-    /**
-     * @Route("/contact")
-     * @Template()
-     */
-    public function contactAction()
-    { 
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        );
-    }
-
 }

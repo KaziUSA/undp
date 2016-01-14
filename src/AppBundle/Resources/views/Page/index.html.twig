@@ -14,23 +14,16 @@
         </thead>
         <tbody>
         {% for entity in entities %}
-            <a href="{{ path('page_show', { 'slug': entity.slug }) }}">
             <tr>
                 <td><a href="">{{ entity.id }}</a></td>{# id #}
                 <td>{{ entity.slug }}</td>
                 <td>{{ entity.title | raw }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('page_show', { 'slug': entity.slug }) }}">show</a>{# id #}
-                    </li>
-                    <li>
-                        <a href="{{ path('page_edit', { 'slug': entity.slug }) }}">edit</a>{# id #}
-                    </li>
-                </ul>
+                    <a href="{{ path('page_show', { 'slug': entity.slug }) }}"><button type="button" class="btn btn-xs btn-success">Show</button></a>{# id #}
+                
+                    <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="hidden"><button type="button" class="btn btn-xs btn-info">Edit</button></a>{# id #}
                 </td>
             </tr>
-            </a>
         {% endfor %}
         </tbody>
     </table>

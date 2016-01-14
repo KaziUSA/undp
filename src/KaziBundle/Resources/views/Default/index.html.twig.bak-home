@@ -8,21 +8,25 @@
 					<div class="col-lg-9">
 						<div class="banner-caption">
 						 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						 	{% for entity in entities %}
 								<div class="caption-head"><article id="content1" class="ckeditor" contenteditable="true">
 	        						{{ entity.title | raw}}
 	    						</article></div>
 								<p><article id="content2" class="ckeditor" contenteditable="true">
 	        						{{ entity.description | raw }}
 	    						</article></p>
+    						{% endfor %}
     						<input type="button" id="save" class="btn btn-bordered pull-right" value="Save">
 						    
 						 {% else %}
+						    {% for entity in entities %}
 								<div class="caption-head">
 	        						{{ entity.title | raw}}
 	    						</div>
 								<p>
 	        						{{ entity.description | raw }}
 	    						</p>
+    						{% endfor %}
 						 {% endif %}
 						
 							<a href="#" class="btn btn-bordered">
@@ -45,12 +49,12 @@ var i=0, j=0;
 //$("#content1, #content2").keyup(function()
 $('#save').click(function()
  {  
-  var name = {id:{{ entity.id }}, title:$("#content1").html(), description:$("#content2").html()};
+  var name = {id:1, title:$("#content1").html(), description:$("#content2").html()};
   i=i+1;
   $("#loader").removeClass("hide");
   $("#loader").addClass("show");
   console.log("Request Sent");
-	    $.post('{{path('page')}}',               
+	    $.post('{{path('home')}}',               
 	        { data_id:name.id,data_title:name.title,data_description:name.description}, 
 	            function(response){
 	            	j=j+1
