@@ -45,16 +45,24 @@ class CsvController extends Controller
      */
     public function uploadAction()//PhaxAction $phaxAction
     {
-        /*$fileInfo = $this->getCsvData('C:/wamp/www/undp/web/uploads/survey1.xlsx');*/
         
+        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey1.xlsx');
+        $fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         //$fileInfo = $this->getCsvData('uploads/survey2.xlsx');
         //$fileInfo = $this->getCsvData('uploads/survey3.xlsx');
 
         //$fileInfo = '';
+        echo "******************************************************\n";
+        echo "*             WELCOME TO CSV UPLOADER                *\n";
+        echo "*          ==============================            *\n";
+        echo "*                 By Kazi Studios                    *\n"; 
+        echo "******************************************************\n";
         
-        
+        echo "\n";
+        echo "\n";
         //Grabbing the Labels from the CSV
-        /*$titles = array_shift($fileInfo);
+        $titles = array_shift($fileInfo);
+        $count = 1;
         
         foreach ($fileInfo as $row){
             
@@ -84,6 +92,9 @@ class CsvController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($survey);
             $em->flush();
+            
+            echo "Adding Record Count :". $count ."\r";
+            $count++;
             
             // Question 1
             $surveyResponse = new SurveyResponse();
@@ -116,13 +127,17 @@ class CsvController extends Controller
             unset($interviewer);
             
         }
+        
+        echo "\n";
+        echo "CSV upload completed \n";
+        
         echo "FINE TILL HERE";
         exit();
         return $this->redirect($this->generateUrl('survey'));
         
         return array(
                 'fileInfo' => $this->getCsvData('uploads/survey1.xlsx', 'uploaded_form_g54cmb')
-            );*/
+            );
 
         
 
