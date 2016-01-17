@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -56,11 +57,11 @@ class PageController extends Controller
     /**
      * Creates a new Page entity.
      *
-     * @Route("/", name="page_create")
+     * @Route("/create", name="page_create")
      * @Method("POST")
      * @Template("AppBundle:Page:new.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request)//added /create - because new item is not being able to create after implementing ajax post in show page
     {
         $entity = new Page();
         $form = $this->createCreateForm($entity);
@@ -103,13 +104,44 @@ class PageController extends Controller
      * Displays a form to create a new Page entity.
      *
      * @Route("/new", name="page_new")
-     * @Method("GET")
+     * 
      * @Template()
      */
-    public function newAction()
+    public function newAction()//removed @Method("GET") for file upload - banner
     {
         $entity = new Page();
-        $form   = $this->createCreateForm($entity);
+        //$form   = $this->createCreateForm($entity);
+
+        $form = $this->createFormBuilder($entity)
+            //->add('name')
+            ->add('slug', 'text', array( 'attr' => array( 'class' => 'form-control' ) ))
+            //->add('file')
+            ->add('title', 'text', array( 'attr' => array( 'class' => 'form-control') ))
+            ->add('description')
+            ->add('file', 'file', array( 'attr' => array( 'class' => 'form-control' ) ))
+            //->add('date')
+            ->getForm()
+        ;
+
+        if ($this->getRequest()->getMethod() === 'POST') {
+            $form->bind($this->getRequest());
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $entity->upload();
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('page_show', array('slug' => $entity->getSlug())));//id
+
+                /*if(isset($_SESSION['document_upload'])) {
+                    $this->get('session')->getFlashBag()->add('success', 'File uploaded successfully.');
+                    $_SESSION['document_upload'] = '';//remove success message after showing until next upload
+                }*/
+            }
+            else{
+               throw $this->createNotFoundException('Form error');
+            }
+        }
 
         return array(
             'entity' => $entity,
@@ -144,6 +176,7 @@ class PageController extends Controller
         $criteria = array('slug'=> $slug);
 
         $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        //print_r($entity_for_id); exit();
         $id = $entity_for_id['0']->getId();
 
         $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
@@ -170,6 +203,7 @@ class PageController extends Controller
      */
     public function editAction($slug)//$id
     {
+        //TODO: need to edit uploaded banner image
         $em = $this->getDoctrine()->getManager();
         $criteria = array('slug'=>$slug);
         
@@ -251,10 +285,10 @@ class PageController extends Controller
     /**
      * Deletes a Page entity.
      *
-     * @Route("/{slug}", name="page_delete")
-     * @Method("DELETE")
+     * @Route("/{slug}/delete", name="page_delete")
+     * 
      */
-    public function deleteAction(Request $request, $slug)//$id
+    public function deleteAction(Request $request, $slug)//$id - removed @Method("DELETE") for file upload and /delete added after making show page editable using ajax 
     {
         $form = $this->createDeleteForm($slug);//$id
         $form->handleRequest($request);
@@ -262,7 +296,11 @@ class PageController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $criteria = array('slug'=>$slug);
-            $entity = $em->getRepository('AppBundle:Page')->findBy($criteria);//$id
+            
+            $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+            $id = $entity_for_id['0']->getId();
+            
+            $entity = $em->getRepository('AppBundle:Page')->find($id);//$id
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Page entity.');

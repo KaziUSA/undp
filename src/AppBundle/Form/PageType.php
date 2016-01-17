@@ -18,6 +18,7 @@ class PageType extends AbstractType
             ->add('slug')
             ->add('title')
             ->add('description')
+            ->add('file', 'file', array( 'attr' => array( 'class' => 'form-control' ) ))
         ;
     }
     

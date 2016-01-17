@@ -3,7 +3,12 @@
 {% block body -%}
     <h1>Page creation</h1>
 
-    {{ form(form) }}
+    {# form(form) #}
+    <form action="new" method="post" {{ form_enctype(form) }}>
+		    {{ form_widget(form) }}
+		<br>
+		    <input id="JQueryClick" type="submit" value="Upload Document" />
+		</form>
 
         <ul class="record_actions">
     <li>
