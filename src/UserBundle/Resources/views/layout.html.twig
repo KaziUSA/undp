@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <title>UNDP</title>
         <!-- TODO: need to extend base.html.twig or import stylesheets and scripts in only one place -->
         {% block stylesheets %}
             <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css' />
@@ -32,12 +33,10 @@
     <body class="gray-bg">
         <div>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                <a href="{{ path('fos_user_security_logout') }}">
-                    {# 'layout.logout'|trans({}, 'FOSUserBundle') #}Log out
-                </a>
+                Welcome {{ app.user.username }}! |
+                <a href="{{ path('fos_user_security_logout') }}">Log out</a>
             {% else %}
-                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                <!--<a href="{{ path('fos_user_security_login') }}">Login</a>-->
             {% endif %}
         </div>
 
@@ -52,8 +51,10 @@
         {% endif #}
 
         <div>
+            <div class="middle-box text-center loginscreen animated fadeInDown">
             {% block fos_user_content %}
             {% endblock fos_user_content %}
+            </div>
         </div>
 
         <!-- Mainly scripts -->

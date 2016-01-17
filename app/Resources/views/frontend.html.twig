@@ -1,0 +1,108 @@
+<!Doctype html>
+<html>
+	<head>
+		<title>{% block title %}Inter-Agency Common Feedback Project{% endblock %}</title>
+
+		{% block stylesheets %}
+			<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+
+			<link href="/css/bootstrap.min.css" rel="stylesheet">
+			<link href="/css/animate.css" rel="stylesheet">
+
+      <link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+      <link href="/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+      <link href="/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
+
+			<link href="/LESS/style.less" rel="stylesheet/less">
+		{% endblock %}
+		
+	</head>
+	<body style="display: none;">{# to show better page after loading complete #}
+		<nav class="navbar navbar-default clearfix">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="/">
+		      	<img src="/img/frontend/logo.png" alt="">
+		      	<span class="logo-title">
+		      		<span class="logo">Inter-Agency Common Feedback Project</span>
+		      		<span class="logo-slogan">Nepal Earthquake 2015</span>
+		      	</span>
+		      </a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li><a href="{{ path('platform') }}">Platform</a></li>
+
+		        <li><a href="{{ path('data') }}">Data</a></li>
+		        <li><a href="{{ path('reports') }}">Reports</a></li>
+		        <li><a href="/contact">Contact</a></li>
+		        <li><a href="/page/about">About</a></li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+		<div class="clear"></div>
+
+		{% block body %}
+
+		{% endblock %}
+		
+		<footer>
+			<div class="container-fluid">
+				<div class="social-icons clearfix pull-left">
+					<ul>
+						<li class="facebook"><a href="#"></a></li>
+						<li class="youtube"><a href="#"></a></li>
+						<li class="flicker"><a href="#"></a></li>
+						<li class="twitter"><a href="#"></a></li>
+						<li class="wordpress"><a href="#"></a></li>
+					</ul>
+				</div>
+
+				<div class="footer-right">
+					<a href="#">Quake Help Desk</a> &nbsp;|&nbsp; 
+					<a href="#">Quake Help Desk Open mic</a> &nbsp;|&nbsp; 
+					<a href="#">CDAC Network</a>
+				</div>
+			</div>
+		</footer>
+
+    {% block javascripts %}
+    <script src="/js/jquery-2.1.1.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <script src="/js/less.min.js"></script>
+    {# http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js #}
+
+    <script src="/js/plugins/highcharts/highcharts.js"></script>
+    <script src="/js/plugins/highcharts/data.js"></script>
+    <script src="/js/plugins/highcharts/exporting.js"></script>
+	<script src="/js/plugins/highcharts/export-csv.js"></script>
+    <script src="/js/plugins/zelect/zelect.js"></script>
+
+    
+    <!-- Data Tables -->
+    <script src="/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="/js/plugins/dataTables/dataTables.responsive.js"></script>
+    <script src="/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+
+
+    <script src="/js/frontend/custom.js"></script>
+    {% endblock %}
+
+    {%block scriptIncludes %}{% endblock %}
+	</body>
+</html>

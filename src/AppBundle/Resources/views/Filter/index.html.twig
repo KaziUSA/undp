@@ -1,0 +1,354 @@
+{% extends '::frontend.html.twig' %}
+
+{% block body -%}
+<section class="content">
+    <div class="row row-no-padding">
+        <div class="col-sm-3 col-md-3 col-lg-2">
+            <aside>
+                <div class="filter">
+                  <!-- Nav tabs -->
+                  <div class="feedback-tab clearfix">
+                    <div class="tab-head">Feedback Round</div>
+
+                      <ul id="" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active round1"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
+                        <li role="presentation" class="round2"><a href="#round1" aria-controls="profile" role="tab" data-toggle="tab">2</a></li>
+                        <li role="presentation" class="round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab">3</a></li>
+                        <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">4</a></li>
+                      </ul>
+                  </div>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="round1">
+                        <div class="tab-content-wrap">
+                            <div class="filter-title">Filter By</div>
+
+                            <div class="accordion">                                        
+                                    <form action="">
+                                      <div class="ac">              
+                                        {# ac-1 #}
+                                        <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
+                                        <label class="ac-label" for="ac-1">Month</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="month-all" value="" />
+                                                <label for="month-all">All<span></span></label></li>
+                                            <div class="form_months" id="form_months">
+                                                <li><input class="month" type="checkbox" id="month1" value="1" /><label for="month1">January<span></span></label></li><li><input class="month" type="checkbox" id="month2" value="2"/><label for="month2">Feburary<span></span></label></li><li><input class="month" type="checkbox" id="month3" value="3"/><label for="month3">March<span></span></label></li>
+                                            </div>
+                                        </ul><!--/ac-text-->
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-2 #}
+                                        <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
+                                        <label class="ac-label" for="ac-2">District</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="district-all" value="" />
+                                                <label for="district-all">All<span></span></label></li>
+                                            {{ form(form.districts) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-3 #}
+                                        <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
+                                        <label class="ac-label" for="ac-3">Gender</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="gender-all" value="" />
+                                                <label for="gender-all">All<span></span></label></li>
+                                            {{ form(form.gender) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-4 #}
+                                        <input class="ac-input" id="ac-4" name="ac-4" type="checkbox" />
+                                        <label class="ac-label" for="ac-4">Ethnicity</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="ethnicity-all" value="" />
+                                                <label for="ethnicity-all">All<span></span></label></li>
+                                            {{ form(form.ethnicities) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-5 #}
+                                        <input class="ac-input" id="ac-5" name="ac-5" type="checkbox" />
+                                        <label class="ac-label" for="ac-5">Age Group</label>
+                                        
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="age-all" value="" />
+                                                <label for="age-all">All<span></span></label></li>
+                                            {{ form(form.agegroups) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">              
+                                        {# ac-6 #}
+                                        <ul class="checkbox-style">
+                                            <li><input type="checkbox" id="disability" />
+                                            <label for="disability">Disability<span></span></label></li>
+                                        </ul>
+                                      </div><!--/ac-->
+
+                                      <input type="submit" value="Submit" class="btn btn-bordered gray">
+                                  </form>
+
+                            </div><!--/accordion-->
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </aside>
+        </div>
+
+        <div class="col-sm-9 col-md-9 col-lg-10">
+            <!-- main content -->
+            <div class="main-content">
+                <div class="question">
+                    <!--<div class="number">Question 9</div> 
+                    Are your main problems being adressed ?-->
+                    <a href="#" class="next" onclick="btnNextQuestion_Click()"></a>
+                    <a href="#" class="prev" onclick="btnPrevQuestion_Click()"></a>
+
+                    <div id="zelect">{{ form(form.questions) }}</div>
+                </div>
+
+                <div class="chart">
+                    <div class="search"><span>Search</span>  Month / District / Age Group / Gender</div>
+
+                    <div class="high-chart">
+                        <div class="high-chart-wrap">
+                            <div id="canvas" class="chart-container"></div>
+
+                            <!-- <canvas id="canvas" height="140"></canvas> -->
+
+                            <!-- custom legend -->
+                            <div class="legend-box clearfix">
+                                <div class="legend legend1">
+                                    <div class="legend-head">Priority need</div>
+                                    <ul>
+                                        <li>Temporary shelter</li>
+                                        <li>Fresh Food</li>
+                                    </ul>
+                                </div>
+                                <div class="legend legend2">
+                                    <div class="legend-head">Respondents</div>
+                                    <ul>
+                                        <li>1400</li>
+                                    </ul>
+                                </div>
+                                <div class="legend legend3 download">
+                                    <ul>
+                                        <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Report</a></li>
+                                        <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="table1" class="chart-table table-responsive"></div>
+                    </div>
+                </div>
+            </div><!-- /.main-content -->
+        </div>
+    </div>
+</section>
+{% endblock %}
+{%block scriptIncludes %}
+
+<!--<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script type="text/javascript" src="js/exporting.js"></script>-->
+<!-- <script src="js/Chart.HorizontalBar.js"></script> -->
+    <script src="/js/frontend/custom-filter.js"></script>
+    <script>
+    //Ajax call
+    function aButtonPressed(){
+    //store selected question in questions variable
+    var questions=document.getElementById('form_questions').selectedIndex;
+    questions=document.getElementsByTagName("option")[questions].value;
+    //alert(questions);
+    //store checked ages in ageVals array
+    var ageVals = [];
+     $('#form_ages :checked').each(function() {
+       ageVals.push($(this).next("label").text());
+     });
+     //alert(ageVals);
+     //store selected gender in genderVals array
+    var genderVals = [];
+     $('#form_gender :checked').each(function() {
+       genderVals.push($(this).next("label").text());
+     });
+     //alert(genderVals);
+    //store selected ethnicity in ethnicityVals
+    var ethnicityVals = [];
+     $('#form_ethnicities :checked').each(function() {
+       ethnicityVals.push($(this).next("label").text());
+     });
+     //alert(ethnicityVals);
+     //store selected district in districtVals
+     var districtVals = [];
+     $('#form_districts :checked').each(function() {
+       districtVals.push($(this).next("label").text());
+     });
+     //alert(districtVals);
+     //store selected month in monthVals
+     var monthVals = [];
+     $('#form_months :checked').each(function() {
+       monthVals.push($(this).next("label").text());
+     });
+     //alert(monthVals);
+
+    $.post('{{path('myajax')}}',               
+        { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
+        function(response){ 
+            var val=new Array();
+            var dt= new Array();
+            if(response.code == 100 && response.success){
+                console.log(response);
+                console.log(JSON.stringify(response.result.html));
+                //show custom legend on chart if number of items in legend is greater and equal to 4
+                var legend_item_height = 29;
+
+                $('.legend-box').show();
+                /*var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
+                //height of last legend is 15 without margin
+                if(response.result.series.length >= 4) {
+                    $('.legend-box').height(legend_height);
+                    $('.legend-box').show();
+                } else {
+                    $('.legend-box').hide();
+                }*/
+              // easing added from https://github.com/danro/easing-js/blob/master/easing.js
+              Math.customEase = function(pos) {
+                var s = 1.70158;
+                if((pos/=0.5) < 1) return 0.5*(pos*pos*(((s*=(1.525))+1)*pos -s));
+                return 0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos +s) +2);
+              };
+
+                var chart=new Highcharts.chart({
+                chart: {
+                        renderTo: 'canvas',
+                        backgroundColor: '#ffffff',
+                        borderWidth: 0,
+                        height: 514,
+                        plotBorderWidth: 0,
+                        plotShadow: true,
+                        //renderTo: 'container',//#container: Not needed now
+                        spacingRight: 0,
+                        style: {
+                          fontFamily: 'Roboto, Arial, sans-serif',
+                          fontSize: '12px',
+                        },
+
+                        type: 'column',
+                    },
+                    colors:['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459'],
+                    title: {
+                        text: ''//There is no text in design: Answers by the people
+                    },
+                    subtitle: {
+                        text: ''//There is no text in design: Source: UNDP Annual Report
+                    },
+                    xAxis: {
+                        labels: {
+                            style: {'color': '#898989', 'fontSize': '14px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
+                        },
+                        categories: response.result.label,
+                        title: {
+                            enabled: false,
+                            text: response.result.xlabel,// For x-axis label on table
+                            
+                        }                           
+                    },
+                    scrollbar: {
+                        enabled: true
+                    },
+                    yAxis: {
+                        labels: {
+                            style: {'color': '#959595', 'fontSize': '12px'}
+                        },
+                        min: 0,
+                        title: {
+                            text: ''//There is no text in design: People
+                        }
+                    },
+                    /*tooltip: {
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y} people</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },*/
+                    
+                    tooltip: {
+                          formatter: function () {
+                              return this.point.y + ' people says<br>' + 
+                              this.series.name.toLowerCase();
+                                //+ this.point.name.toLowerCase();
+                          }
+                      },
+                    plotOptions: {
+                        column: {
+                            pointPadding: 0,
+                            borderWidth: 0,
+                            groupPadding: 0.2,
+                        }
+                    },
+                    exporting: {
+                        buttons: {
+                            contextButton: {
+                                enabled: false,
+                                verticalAlign: "top",
+                                y: 0,
+                            }
+                        },
+                        type: 'application/pdf',
+                    },
+                    series: response.result.series,
+                     credits: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: response.result.stack
+                        },
+                        series: {
+                            animation: {
+                                duration: 1000,
+                                easing: 'customEase'
+                            }
+                        }
+                    },    	
+                });//Highchart end
+                $('#table1').html(chart.getTable());
+                $('#table1').html(response.result.html);
+                $('#download-report').click(function () {
+                    var chart = $('#canvas').highcharts();
+                    chart.exportChart();
+                });
+
+                $('#table1 table').addClass('table-bordered table');                  
+            }//Ajax success end
+
+        }, "json"); //.post end   
+
+    }; //abuttonpressed end
+
+$(document).ready(function() {     
+  $('button, input[type="submit"]').on('click', function(){aButtonPressed();});
+});
+
+    </script>
+
+{% endblock %}

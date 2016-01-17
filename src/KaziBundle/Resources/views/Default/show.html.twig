@@ -1,0 +1,66 @@
+{% extends '::frontend.html.twig' %}
+
+{% block body -%}
+    <div class="page-title">
+        <h3>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <article id="content1" class="ck-title" contenteditable="true" onclick="onClickToolbarButton()">
+                    {{ entity.title | raw}}
+                </article>
+            {% else %}
+                {{ entity.title | raw}}
+            {% endif %}
+        </h3>
+    </div>
+    <section class="content img-cover about">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-sm-6">
+                    <div class="u-box">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <article id="content2" class="ckeditor" contenteditable="true">
+                                {{ entity.description | raw }}
+                            </article>
+                            <input type="button" id="save" class="btn btn-bordered pull-right" value="Save">
+                        {% else %}
+                            {{ entity.description | raw }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{%block scriptIncludes %}
+<script>
+//quick fix for hiding toolbar for title  
+function onClickToolbarButton() {
+    var bar = document.getElementById("cke_content1");//for #content1
+    if(bar.style.display == "none"){
+        bar.style.display = "none";//block - to show
+    }else{
+        bar.style.display = "none";
+    }
+}
+</script>
+     <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
+<script>
+
+//$("#content1, #content2").keyup(function()
+$('#save').click(function()
+ {  
+  var name = {id:{{ entity.id }}, title:$("#content1").html(), description:$("#content2").html()};//{{ entity.id }}
+    $.post('{{path('page_show', {'slug': entity.slug} )}}',//{{path('page')}} - path: /admin/page/home
+        { data_id:name.id,data_title:name.title,data_description:name.description}, 
+            function(response){ 
+            console.log("Request Sent");
+            }
+    );
+
+  //return false;
+   
+  });
+</script>
+
+{% endblock %}

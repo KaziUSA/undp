@@ -73,7 +73,7 @@ KAZI.util.loading = (function() {
         $('body').append($(mainDiv));
         
         $('#' + options.id).hide();
-    }    
+    };  
     //Getters and Setters
     
     return {
