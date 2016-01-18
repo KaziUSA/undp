@@ -1,7 +1,7 @@
 {% extends 'frontend.html.twig' %}
 
 {% block body %}
-	<section class="content img-cover home">
+	<section class="content img-cover" style="{% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %}">
 		<div class="transparent-grd">
 			<div class="container-fluid">
 				<div class="row">

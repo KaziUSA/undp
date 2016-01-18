@@ -4,16 +4,16 @@ $(document).ready(function() {
       $(".month").prop('checked', $(this).prop("checked"));
     });
     $("#district-all").change(function(){
-      $("#form_districts input[type=checkbox]").prop('checked', $(this).prop("checked"));//add district class in input type checkbox
+      $("#form_districts input[type=checkbox]").prop('checked', $(this).prop("checked"));
     });
     $("#gender-all").change(function(){
-      $("#form_gender input[type=checkbox]").prop('checked', $(this).prop("checked"));//add gender class in input type checkbox
+      $("#form_gender input[type=checkbox]").prop('checked', $(this).prop("checked"));
     });
     $("#ethnicity-all").change(function(){
-      $("#form_ethnicities input[type=checkbox]").prop('checked', $(this).prop("checked"));//add ethnicity class in input type checkbox
+      $("#form_ethnicities input[type=checkbox]").prop('checked', $(this).prop("checked"));
     });
     $("#age-all").change(function(){
-      $("#form_ages input[type=checkbox]").prop('checked', $(this).prop("checked"));//add age class in input type checkbox
+      $("#form_ages input[type=checkbox]").prop('checked', $(this).prop("checked"));
     });
 
 
