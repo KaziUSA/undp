@@ -17,7 +17,7 @@ use AppBundle\Entity\Gender;
 
 
 /**
- * Survey controller.
+ * Platform controller.
  *
  * @Route("/platform")
  */
