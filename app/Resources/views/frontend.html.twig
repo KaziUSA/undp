@@ -42,12 +42,12 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li><a href="{{ path('platform') }}">Platform</a></li>
+		        <li><a href="{{ path('platform') }}" class="{% if app.request.get('_route') == 'platform' %} active {% endif %}">Platform</a></li>
 
-		        <li><a href="{{ path('data') }}">Data</a></li>
-		        <li><a href="{{ path('reports') }}">Reports</a></li>
-		        <li><a href="/contactus">Contact</a></li><!-- /contact -->
-		        <li><a href="/page/about">About</a></li>
+		        <li><a href="{{ path('data') }}" class="{% if app.request.get('_route') == 'data' %} active {% endif %}">Data</a></li>
+		        <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
+		        <li><a href="/contactus" class="{% if app.request.get('_route') == 'kazi_default_contactus' %} active {% endif %}">Contact</a></li><!-- /contact -->
+		        <li><a href="/page/about" class="{% if app.request.get('_route') == 'show' %} active {% endif %}">About</a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
