@@ -176,6 +176,7 @@
     //store selected question in questions variable
     var questions=document.getElementById('form_questions').selectedIndex;
     questions=document.getElementsByTagName("option")[questions].value;
+    if(questions == '') { questions = 1; }//for default chart
     //alert(questions);
     //store checked ages in ageVals array
     var ageVals = [];
@@ -188,6 +189,7 @@
      $('#form_gender :checked').each(function() {
        genderVals.push($(this).next("label").text());
      });
+
      //alert(genderVals);
     //store selected ethnicity in ethnicityVals
     var ethnicityVals = [];
@@ -207,6 +209,14 @@
        monthVals.push($(this).next("label").text());
      });
      //alert(monthVals);
+
+     //for default chart show: on page load
+     //TODO: need to show Jan, Feb, Mar Data if it shows data
+     if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
+      genderVals.push('Female');
+      genderVals.push('Male');
+      $("#form_gender input[type=checkbox]:first-child, #form_gender input[type=checkbox]:nth-child(3)").prop('checked', true);
+     }
 
     $.post('{{path('myajax')}}',               
         { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
@@ -329,7 +339,7 @@
                                 easing: 'customEase'
                             }
                         }
-                    },    	
+                    },      
                 });//Highchart end
                 $('#table1').html(chart.getTable());
                 $('#table1').html(response.result.html);
@@ -347,6 +357,7 @@
 
 $(document).ready(function() {     
   $('button, input[type="submit"]').on('click', function(){aButtonPressed();});
+  aButtonPressed();
 });
 
     </script>
