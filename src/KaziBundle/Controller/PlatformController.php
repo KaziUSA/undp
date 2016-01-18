@@ -36,6 +36,7 @@ class PlatformController extends Controller
 			    'class' => 'AppBundle:Question',
 			    'query_builder' => function(EntityRepository $er) {
 			                         return $er->createQueryBuilder('q')
+			                         		->where('q.number = \'1\' or q.number = \'2\' or q.number = \'3\' or q.number = \'4\' or q.number = \'5\' or q.number = \'6\' or q.number = \'7\' or q.number = \'8\' or q.number = \'9\'')
 			                             ->orderBy('q.id', 'ASC');
 			                     },
 			    'choices_as_values' => false,		    
