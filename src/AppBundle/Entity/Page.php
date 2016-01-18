@@ -21,10 +21,13 @@ class Page
      private $temp;
     /**
      * @Assert\File(
-     * maxSize="10737418240",
+     * maxSize="10737418240"
      * )
      */
     public $file;
+    //TODO: Need to add meme type for images
+    //mimeTypes = {"image/png"},
+    //mimeTypesMessage = "Please upload a valid Image File: jpg, jpeg, png"
 
     /**
      * @var integer

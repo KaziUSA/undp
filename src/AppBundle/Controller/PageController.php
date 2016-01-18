@@ -132,11 +132,6 @@ class PageController extends Controller
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('page_show', array('slug' => $entity->getSlug())));//id
-
-                /*if(isset($_SESSION['document_upload'])) {
-                    $this->get('session')->getFlashBag()->add('success', 'File uploaded successfully.');
-                    $_SESSION['document_upload'] = '';//remove success message after showing until next upload
-                }*/
             }
             else{
                throw $this->createNotFoundException('Form error');
@@ -198,10 +193,10 @@ class PageController extends Controller
      * Displays a form to edit an existing Page entity.
      *
      * @Route("/{slug}/edit", name="page_edit")
-     * @Method("GET")
+     * 
      * @Template()
      */
-    public function editAction($slug)//$id
+    public function editAction($slug)//$id - removed @Method("GET") for file upload
     {
         //TODO: need to edit uploaded banner image
         $em = $this->getDoctrine()->getManager();
@@ -217,7 +212,28 @@ class PageController extends Controller
             throw $this->createNotFoundException('Unable to find Page entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        //$editForm = $this->createEditForm($entity);
+        $editForm = $this->createFormBuilder($entity)
+            //TODO: Need to show the previously uploaded banner image
+            ->add('file', 'file', array( 'attr' => array( 'class' => 'form-control' ) ))
+            ->getForm()
+        ;
+
+        if ($this->getRequest()->getMethod() === 'POST') {
+            $editForm->bind($this->getRequest());
+            if ($editForm->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $entity->upload();
+                $em->persist($entity);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('page_show', array('slug' => $entity->getSlug())));//id
+            }
+            else{
+               throw $this->createNotFoundException('Form error');
+            }
+        }
+
         $deleteForm = $this->createDeleteForm($slug);
 
         return array(
