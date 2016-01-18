@@ -7,6 +7,13 @@
     <article id="content2" class="ckeditor" contenteditable="true">
         {{ entity.description | raw }}
     </article>
+    
+    {% if entity.path != NULL %}
+      <h3>Featured Image</h3>
+      <img src="{{ entity.file_path }}{{ entity.path }}" width="150px">
+      <br><br>
+    {% endif %}
+
     <input type="button" id="save" class="btn btn-bordered pull-right" value="Save">
     
     <a href="{{ path('page') }}">
@@ -14,13 +21,13 @@
         Back to the list
       </button>
     </a>
-    <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="hidden">{# id #}
-      <button type="button" class="btn btn-xs btn-success">
-        Edit - HTML View
-      </button>
-    </a>
     <a href="{{ path('page_new') }}">
         <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
+    </a>
+    <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="">{# id #}
+      <button type="button" class="btn btn-xs btn-success">
+        Change Featured Image
+      </button>
     </a>
 
     {{ form(delete_form) }}

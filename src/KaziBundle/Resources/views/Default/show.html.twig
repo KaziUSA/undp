@@ -12,16 +12,20 @@
             {% endif %}
         </h3>
     </div>
-    <section class="content img-cover about">
+    <section class="content img-cover relative" style="{% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %}">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a>
+        {% endif %}
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-sm-6">
-                    <div class="u-box">
+                    <div class="u-box clearfix">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <article id="content2" class="ckeditor" contenteditable="true">
                                 {{ entity.description | raw }}
                             </article>
                             <input type="button" id="save" class="btn btn-bordered pull-right" value="Save">
+                            <img id="loader" class="hide" src="/img/frontend/loading.GIF">
                         {% else %}
                             {{ entity.description | raw }}
                         {% endif %}
@@ -46,15 +50,24 @@ function onClickToolbarButton() {
 </script>
      <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
 <script>
-
+var i=0, j=0;
 //$("#content1, #content2").keyup(function()
 $('#save').click(function()
  {  
   var name = {id:{{ entity.id }}, title:$("#content1").html(), description:$("#content2").html()};//{{ entity.id }}
+  i=i+1;
+  $("#loader").removeClass("hide");
+  $("#loader").addClass("show");
+  console.log("Request Sent");
     $.post('{{path('page_show', {'slug': entity.slug} )}}',//{{path('page')}} - path: /admin/page/home
         { data_id:name.id,data_title:name.title,data_description:name.description}, 
             function(response){ 
-            console.log("Request Sent");
+            j=j+1
+                    if (j==i){
+                        console.log("hidden");
+                        $("#loader").removeClass("show");
+                        $("#loader").addClass("hide");  
+                    }
             }
     );
 

@@ -37,6 +37,17 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/contactus")
+     * @Template()
+     */
+    public function contactusAction()
+    { 
+        return array(
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        );
+    }
+
+    /**
      * Finds and displays a Page entity.
      *
      * @Route("/page/{slug}", name="show")

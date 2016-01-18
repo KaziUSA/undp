@@ -384,6 +384,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 		padding: 8px;
 	}
 }
+.navbar-default .nav > li > a.active,
 .navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
 	background: none;
 	color: @light-gray;
@@ -521,7 +522,16 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 		}
 	}
 }
-
+.relative {
+	position: relative;
+}
+.edit-link {
+	position: absolute;
+	color: @white;
+	text-shadow: 1px 1px 0 #999;
+	right: 10px;
+	top: 10px;
+}
 //sticky footer
 html {
   position: relative;
@@ -819,6 +829,9 @@ body {
 		color: @white;
 		line-height: 40px;		
 		margin-bottom: 0;
+		p {
+			margin-bottom: 0;
+		}
 	}
 }
 .question {
@@ -1033,7 +1046,7 @@ table.dataTable thead .sorting:after {
 }
 .dataTables_wrapper {
 	position: relative;
-	padding-bottom: 6px;
+	padding-bottom: 3px;
 }
 div.dataTables_info {
 	background: #88d8ef;

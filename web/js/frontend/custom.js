@@ -82,7 +82,8 @@ $(document).ready(function () {
 	$('body').show();//show after loading all elements to appear properly
 
   //custom select
-  $('#zelect select').zelect({ placeholder:'Please select question' });
+  //$('#zelect select').zelect({ placeholder:'Please select question' });
+  $('#zelect select').zelect({ placeholder:'Are your main problems being addressed?' });//for default chart
 
 
   //TODO: align center horizontally the table data having attribute colspan
