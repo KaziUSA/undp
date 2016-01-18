@@ -12,7 +12,7 @@
             {% endif %}
         </h3>
     </div>
-    <section class="content img-cover about">
+    <section class="content img-cover" style="{% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %}">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-sm-6">
