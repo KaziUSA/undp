@@ -64,6 +64,7 @@ class PlatformController extends Controller
 		    'class' => 'AppBundle:District',
 		    'query_builder' => function(EntityRepository $er) {
 		                         return $er->createQueryBuilder('d')
+		                         		->where('d.name = \'Sindhuli\' or d.name = \'Gorkha\' or d.name = \'Bhaktapur\' or d.name = \'Dhading\' or d.name = \'Kathmandu\' or d.name = \'Dolakha\' or d.name = \'Kavrepalanchok\' or d.name = \'Lalitpur\' or d.name = \'Makwanpur\' or d.name = \'Okhaldhunga\' or d.name = \'Nuwakot\' or d.name = \'Ramechhap\' or d.name = \'Rasuwa\' or d.name = \'Sindhupalchowk\' ')
 		                             ->orderBy('d.name', 'ASC');
 		                     },
 		    'choices_as_values' => false,
