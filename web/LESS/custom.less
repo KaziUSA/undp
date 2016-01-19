@@ -1020,15 +1020,27 @@ table.dataTable {
 	}
 }
 a.DTTT_button,
-.dataTables_length,
-.dataTables_filter {
+.dataTables_length {
 	display: none;
+}
+.dataTables_filter {//search
+		position: absolute;
+    right: 15px;
+    top: -35px;
+    z-index: 1;
+    label {
+    	color: white;
+    	input {
+    		color: @gray;
+    		margin-left: 10px;
+    	}
+    }
 }
 a.DTTT_button.DTTT_button_xls {
 	background: url(../img/frontend/icons/icon-download-blue.png) no-repeat 0 0;
 	border: 0;
 	display: block;
-	text-indent: -9999px;
+	//text-indent: -9999px;//remove this for download functionality
 	box-shadow: none;
 }
 div.DTTT_container {
@@ -1052,8 +1064,7 @@ div.dataTables_info {
 	background: #88d8ef;
 	color: #3e7180;
 	font-size: 12px;
-	margin-left: 338px;
-	padding-left: 20px;
+	padding-left: 358px;
 	padding-top: 0;
 	height: 30px;
 	line-height: 30px;
