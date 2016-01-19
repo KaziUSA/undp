@@ -27,6 +27,14 @@
 	border-radius: 10px;
 	color: #919191;
 }
+.ac-label.active {
+  color: #159c02;
+}
+.ac-label.active:after, .ac-input:checked + .ac-label.active:after,
+.ac-label.active:hover:after, .ac-input:checked + .ac-label.active:after {  
+  color: #159c02;
+  border-color: #159c02;
+}
 .ac-label:after, .ac-input:checked + .ac-label:after {
   content: "+";
   font-size: 18px;
