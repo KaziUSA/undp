@@ -125,7 +125,17 @@
                 </div>
 
                 <div class="chart">
-                    <div class="search"><span>Search</span>  Month / District / Age Group / Gender</div>
+                    <div class="search">
+                      <span class="search-title">Search</span>  
+                      <span id="filter-search-key">
+                        <!--Month / District / Age Group / Gender -->
+                        <span id="month-select-text"></span>
+                        <span id="district-select-text"></span>
+                        <span id="gender-select-text"></span>
+                        <span id="ethnicity-select-text"></span>
+                        <span id="age-select-text"></span>
+                      </span>
+                    </div>
 
                     <div class="high-chart">
                         <div class="high-chart-wrap">
@@ -178,45 +188,80 @@
     questions=document.getElementsByTagName("option")[questions].value;
     if(questions == '') { questions = 1; }//for default chart
     //alert(questions);
-    //store checked ages in ageVals array
-    var ageVals = [];
-     $('#form_ages :checked').each(function() {
-       ageVals.push($(this).next("label").text());
-     });
-     //alert(ageVals);
-     //store selected gender in genderVals array
-    var genderVals = [];
-     $('#form_gender :checked').each(function() {
-       genderVals.push($(this).next("label").text());
-     });
-
-     //alert(genderVals);
-    //store selected ethnicity in ethnicityVals
-    var ethnicityVals = [];
-     $('#form_ethnicities :checked').each(function() {
-       ethnicityVals.push($(this).next("label").text());
-     });
-     //alert(ethnicityVals);
-     //store selected district in districtVals
-     var districtVals = [];
-     $('#form_districts :checked').each(function() {
-       districtVals.push($(this).next("label").text());
-     });
-     //alert(districtVals);
      //store selected month in monthVals
      var monthVals = [];
      $('#form_months :checked').each(function() {
        monthVals.push($(this).next("label").text());
      });
      //alert(monthVals);
+     
+     //store selected district in districtVals
+     var districtVals = [];
+     $('#form_districts :checked').each(function() {
+       districtVals.push($(this).next("label").text());
+     });
+     //alert(districtVals);
+     
+     //store selected gender in genderVals array
+    var genderVals = [];
+     $('#form_gender :checked').each(function() {
+       genderVals.push($(this).next("label").text());
+     });
+     //alert(genderVals);
 
+    //store selected ethnicity in ethnicityVals
+    var ethnicityVals = [];
+     $('#form_ethnicities :checked').each(function() {
+       ethnicityVals.push($(this).next("label").text());
+     });
+     //alert(ethnicityVals);
+
+    //store checked ages in ageVals array
+    var ageVals = [];
+     $('#form_ages :checked').each(function() {
+       ageVals.push($(this).next("label").text());
+     });
+     //alert(ageVals);
+ 
      //for default chart show: on page load
-     //TODO: need to show Jan, Feb, Mar Data if it shows data
+     //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
      if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
       genderVals.push('Female');
       genderVals.push('Male');
       $("#form_gender input[type=checkbox]:first-child, #form_gender input[type=checkbox]:nth-child(3)").prop('checked', true);
+      $('#gender-select-text').html('Gender');
      }
+
+     if(monthVals != '') {
+      $('#month-select-text').html('Month /');
+     } else {
+      $('#month-select-text').html('');
+     }
+
+     if(districtVals != '') {
+      $('#district-select-text').html('District /');
+     } else {
+      $('#district-select-text').html('');
+     }
+
+     if(genderVals != '') {
+      $('#gender-select-text').html('Gender /');
+     } else {
+      $('#gender-select-text').html('');
+     }
+
+     if(ethnicityVals != '') {
+      $('#ethnicity-select-text').html('Ethnicity /');
+     } else {
+      $('#ethnicity-select-text').html('');
+     }
+
+     if(ageVals != '') {
+      $('#age-select-text').html('Age');
+     } else {
+      $('#age-select-text').html('');
+     }
+     //prepend with /
 
     $.post('{{path('myajax')}}',               
         { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
