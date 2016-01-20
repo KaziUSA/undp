@@ -28,13 +28,27 @@ class ContactusController extends Controller
     public function indexAction(Request $request)//annotation removed @Method("GET")
     {
         //for frontend homepage only
-        $data_title = $request->request->get('data_title');
-        $data_description = $request->request->get('data_description');
+        $data_name = $request->request->get('data_name');
+        $data_address = $request->request->get('data_address');
+        $data_email = $request->request->get('data_email');
+        $data_phone = $request->request->get('data_phone');
+        $data_message = $request->request->get('data_message');
 
-        /*if(isset($title) || isset($data_description)) {
-            echo $title . $data_description;
-            exit();
-        }*/
+        if(isset($data_name)) {//if there is name
+            $to = "nikesh@kazistudios.com";
+            $subject = "Contact From UNDP Website";
+            
+            $txt = 'Name: ' . $data_name . 
+                '<br>Address: ' . $data_address .
+                '<br>Email: ' . $data_email . 
+                '<br>Phone: ' . $data_phone .
+                '<br>Message: ' . $data_message;
+
+            $headers = "From: symfony@undp.kazi270.com" . "\r\n" .
+            "CC: rohit@kazistudios.com";
+
+            mail($to,$subject,$txt,$headers);
+        }
         $response = array("code" => 100, "success" => true);
 
 

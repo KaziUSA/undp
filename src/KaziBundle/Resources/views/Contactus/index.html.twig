@@ -64,29 +64,34 @@
 <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
 <script>
 var i=0, j=0;
-//$("#content1, #content2").keyup(function()
-$('#submit').click(function()
- {  
-  var name = {title:$("#inputName").val(), description:$("#inputAddress").val()};//$("#inputName").val()-$("#inputAddress").val()
+$('#submit').click(function() {  
+  var mail = {
+    name:$("#inputName").val(), 
+    address:$("#inputAddress").val(),
+    email:$("#inputEmail").val(),
+    phone:$("#inputPhone").val(),
+    message:$("#textMessage").val()
+  };
   i=i+1;
   $("#loader").removeClass("hide");
   $("#loader").addClass("show");
   console.log("Request Sent");
-  console.log(name.title + name.description);
-      $.post('{{path('contactus')}}',               
-          { data_title:name.title,data_description:name.description}, 
-              function(response){
-                j=j+1
-                if (j==i){
-                  console.log("hidden");
-            $("#loader").removeClass("show");
-            $("#loader").addClass("hide");  
-          }
+  console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
 
-              }        
-      );
-      return false;
-  });
+  $.post('{{path('contactus')}}',               
+    { data_name:mail.name, data_address:mail.address, data_email:mail.email, data_phone:mail.phone, data_message:mail.message
+    }, 
+      function(response) {
+        j=j+1
+        if (j==i){
+          console.log("Your message has been sent successfully!");
+          $("#loader").removeClass("show");
+          $("#loader").addClass("hide");  
+        }
+      }        
+  );
+  return false;
+});
 </script>
 
 {% endblock %}
