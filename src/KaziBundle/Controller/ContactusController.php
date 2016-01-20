@@ -49,7 +49,7 @@ class ContactusController extends Controller
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
             // More headers
-            $headers .= "From: <symfony@undp.kazi270.com>" . "\r\n";
+            $headers .= "From: <info@undp.kazi270.com>" . "\r\n";
             //$headers .= "CC: manish@kazistudios.com" . "\r\n";
 
             mail($to,$subject,$txt,$headers);
@@ -58,7 +58,7 @@ class ContactusController extends Controller
 
 
         $em = $this->getDoctrine()->getManager();
-        $criteria = array('slug'=> 'about');//about need to change to contact
+        $criteria = array('slug'=> 'contactus');//about need to change to contact
 
         $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
         $id = $entity_for_id['0']->getId();
