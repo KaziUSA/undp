@@ -38,14 +38,19 @@ class ContactusController extends Controller
             $to = "nikesh@kazistudios.com";
             $subject = "Contact From UNDP Website";
             
-            $txt = 'Name: ' . $data_name . 
-                '<br>Address: ' . $data_address .
-                '<br>Email: ' . $data_email . 
-                '<br>Phone: ' . $data_phone .
-                '<br>Message: ' . $data_message;
+            $txt = '<strong>Name:</strong> ' . $data_name . 
+                '<br><strong>Address:</strong> ' . $data_address .
+                '<br><strong>Email:</strong> ' . $data_email . 
+                '<br><strong>Phone:</strong> ' . $data_phone .
+                '<br><strong>Message:</strong> ' . $data_message;
 
-            $headers = "From: symfony@undp.kazi270.com" . "\r\n" .
-            "CC: rohit@kazistudios.com";
+            // Always set content-type when sending HTML email
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+            // More headers
+            $headers .= "From: <symfony@undp.kazi270.com>" . "\r\n";
+            $headers .= "CC: rohit@kazistudios.com" . "\r\n";
 
             mail($to,$subject,$txt,$headers);
         }
