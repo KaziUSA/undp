@@ -50,7 +50,7 @@ class ContactusController extends Controller
 
             // More headers
             $headers .= "From: <symfony@undp.kazi270.com>" . "\r\n";
-            $headers .= "CC: rohit@kazistudios.com" . "\r\n";
+            $headers .= "CC: manish@kazistudios.com" . "\r\n";
 
             mail($to,$subject,$txt,$headers);
         }

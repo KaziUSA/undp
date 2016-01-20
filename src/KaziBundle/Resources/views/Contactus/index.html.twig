@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="col-lg-5 col-md-5 col-sm-5">
-                    <div class="u-box">
+                    <div class="u-box" id="contact-form">
                         <h3>Please send us a message with feedback or quires.</h3>
 
                         <form class="form-bordered" action="" method="post">
@@ -65,6 +65,8 @@
 <script>
 var i=0, j=0;
 $('#submit').click(function() {  
+  //validate part here
+
   var mail = {
     name:$("#inputName").val(), 
     address:$("#inputAddress").val(),
@@ -84,7 +86,8 @@ $('#submit').click(function() {
       function(response) {
         j=j+1
         if (j==i){
-          console.log("Your message has been sent successfully!");
+          //console.log("Your message has been sent successfully!");
+          $("#contact-form").html("<h3>Your message has been sent successfully! <a href="{{path('contactus')}}">Send message again?</a></h3>");
           $("#loader").removeClass("show");
           $("#loader").addClass("hide");  
         }
