@@ -121,7 +121,7 @@ $('#submit').click(function() {
     message:$("#textMessage").val()
   };
   m=m+1;
-  console.log("Request Sent");
+  //console.log("Request Sent");
   //console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
 
   $.post('{{path('contactus')}}',               
@@ -129,7 +129,7 @@ $('#submit').click(function() {
     }, 
       function(response) {
         n=n+1
-        if (n==i){
+        if (n==m){
           //console.log("Your message has been sent successfully!");
           $("#contact-form").html('<h3>Your message has been sent successfully! <a href="{{path('contactus')}}">Send message again?</a></h3>');
         }

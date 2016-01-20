@@ -52,13 +52,13 @@ $('#save').click(function()
   i=i+1;
   $("#loader").removeClass("hide");
   $("#loader").addClass("show");
-  console.log("Request Sent");
+  //console.log("Request Sent");
 	    $.post('{{path('page')}}',               
 	        { data_id:name.id,data_title:name.title,data_description:name.description}, 
 	            function(response){
 	            	j=j+1
 	            	if (j==i){
-		            	console.log("hidden");
+		            	//console.log("hidden");
 						$("#loader").removeClass("show");
 						$("#loader").addClass("hide");	
 					}
