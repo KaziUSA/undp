@@ -593,6 +593,9 @@ footer, footer a {
 		margin: 15px 0;
 		padding: 15px;
 	}
+	a {
+		color: @white;
+	}
 }
 
 /* Report Page */
@@ -604,6 +607,21 @@ footer, footer a {
 		@media (min-width: 768px) {
 			padding-right: 0;			
 		}
+	}
+}
+.more-report {
+	display: none;
+}
+a.show-more-report {
+	color: @light-gray;
+	display: inline-block;
+	font-weight: bold;
+	margin-bottom: 30px;
+	&:focus {
+		color: @light-gray;
+	}
+	&:hover {
+		color: @gray;
 	}
 }
 .r-box {
@@ -660,7 +678,16 @@ footer, footer a {
 }
 
 /* Contact Page */
-.contact {
+#contact-form {
+	.required {
+		color: #d2232a;
+		display: none;
+		margin-left: 95px;
+		margin-top: 5px;
+		&.message-required {
+			margin-left: 0;
+		}
+	}
 	.form-bordered {
 		.form-group {
 			position: relative;
@@ -813,7 +840,7 @@ body {
 	height: 40px;
 	line-height: 40px;
 	padding: 0 10px;
-	span {
+	span.search-title {
 		font-size: 12px;
 		display: inline-block;
 		font-weight: bold;
@@ -1020,15 +1047,37 @@ table.dataTable {
 	}
 }
 a.DTTT_button,
-.dataTables_length,
-.dataTables_filter {
+.dataTables_length {
 	display: none;
+}
+.dataTables_filter {//search
+		position: absolute;
+    right: 15px;
+    top: -35px;
+    z-index: 1;
+    label {
+    	color: white;
+    	input {
+    		color: @gray;
+    		margin-left: 10px;
+
+    		background: none;
+		    border: 0;
+		    border-bottom: 1px solid #fff !important;
+		    padding: 0;
+		    height: 27px;
+		    color: white;
+		    &.form-control:focus {
+		    	border-color: #ffffff !important;
+		    }
+    	}
+    }
 }
 a.DTTT_button.DTTT_button_xls {
 	background: url(../img/frontend/icons/icon-download-blue.png) no-repeat 0 0;
 	border: 0;
 	display: block;
-	text-indent: -9999px;
+	//text-indent: -9999px;//remove this for download functionality
 	box-shadow: none;
 }
 div.DTTT_container {
@@ -1052,8 +1101,7 @@ div.dataTables_info {
 	background: #88d8ef;
 	color: #3e7180;
 	font-size: 12px;
-	margin-left: 338px;
-	padding-left: 20px;
+	padding-left: 358px;
 	padding-top: 0;
 	height: 30px;
 	line-height: 30px;

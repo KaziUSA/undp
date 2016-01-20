@@ -29,7 +29,7 @@
                                       <div class="ac">              
                                         {# ac-1 #}
                                         <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
-                                        <label class="ac-label" for="ac-1">Month</label>
+                                        <label class="ac-label month-label" for="ac-1">Month</label>
                                         
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="month-all" value="" />
@@ -44,7 +44,7 @@
                                       <div class="ac">              
                                         {# ac-2 #}
                                         <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
-                                        <label class="ac-label" for="ac-2">District</label>
+                                        <label class="ac-label district-label" for="ac-2">District</label>
                                         
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="district-all" value="" />
@@ -57,7 +57,7 @@
                                       <div class="ac">              
                                         {# ac-3 #}
                                         <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
-                                        <label class="ac-label" for="ac-3">Gender</label>
+                                        <label class="ac-label gender-label active" for="ac-3">Gender</label><!-- initially showing active -->
                                         
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="gender-all" value="" />
@@ -70,7 +70,7 @@
                                       <div class="ac">              
                                         {# ac-4 #}
                                         <input class="ac-input" id="ac-4" name="ac-4" type="checkbox" />
-                                        <label class="ac-label" for="ac-4">Ethnicity</label>
+                                        <label class="ac-label ethnicity-label" for="ac-4">Ethnicity</label>
                                         
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="ethnicity-all" value="" />
@@ -83,7 +83,7 @@
                                       <div class="ac">              
                                         {# ac-5 #}
                                         <input class="ac-input" id="ac-5" name="ac-5" type="checkbox" />
-                                        <label class="ac-label" for="ac-5">Age Group</label>
+                                        <label class="ac-label age-label" for="ac-5">Age Group</label>
                                         
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="age-all" value="" />
@@ -125,7 +125,17 @@
                 </div>
 
                 <div class="chart">
-                    <div class="search"><span>Search</span>  Month / District / Age Group / Gender</div>
+                    <div class="search">
+                      <span class="search-title">Search</span>  
+                      <span id="filter-search-key">
+                        <!--Month / District / Age Group / Gender -->
+                        <span id="month-select-text"></span>
+                        <span id="district-select-text"></span>
+                        <span id="gender-select-text"></span>
+                        <span id="ethnicity-select-text"></span>
+                        <span id="age-select-text"></span>
+                      </span>
+                    </div>
 
                     <div class="high-chart">
                         <div class="high-chart-wrap">
@@ -173,193 +183,228 @@
     <script>
     //Ajax call
     function aButtonPressed(){
-    //store selected question in questions variable
-    var questions=document.getElementById('form_questions').selectedIndex;
-    questions=document.getElementsByTagName("option")[questions].value;
-    if(questions == '') { questions = 1; }//for default chart
-    //alert(questions);
-    //store checked ages in ageVals array
-    var ageVals = [];
-     $('#form_ages :checked').each(function() {
-       ageVals.push($(this).next("label").text());
-     });
-     //alert(ageVals);
-     //store selected gender in genderVals array
-    var genderVals = [];
-     $('#form_gender :checked').each(function() {
-       genderVals.push($(this).next("label").text());
-     });
+      //store selected question in questions variable
+      var questions=document.getElementById('form_questions').selectedIndex;
+      questions=document.getElementsByTagName("option")[questions].value;
+      if(questions == '') { questions = 1; }//for default chart
+      //alert(questions);
+       //store selected month in monthVals
+       var monthVals = [];
+       $('#form_months :checked').each(function() {
+         monthVals.push($(this).next("label").text());
+       });
+       //alert(monthVals);
+       
+       //store selected district in districtVals
+       var districtVals = [];
+       $('#form_districts :checked').each(function() {
+         districtVals.push($(this).next("label").text());
+       });
+       //alert(districtVals);
+       
+       //store selected gender in genderVals array
+      var genderVals = [];
+       $('#form_gender :checked').each(function() {
+         genderVals.push($(this).next("label").text());
+       });
+       //alert(genderVals);
 
-     //alert(genderVals);
-    //store selected ethnicity in ethnicityVals
-    var ethnicityVals = [];
-     $('#form_ethnicities :checked').each(function() {
-       ethnicityVals.push($(this).next("label").text());
-     });
-     //alert(ethnicityVals);
-     //store selected district in districtVals
-     var districtVals = [];
-     $('#form_districts :checked').each(function() {
-       districtVals.push($(this).next("label").text());
-     });
-     //alert(districtVals);
-     //store selected month in monthVals
-     var monthVals = [];
-     $('#form_months :checked').each(function() {
-       monthVals.push($(this).next("label").text());
-     });
-     //alert(monthVals);
+      //store selected ethnicity in ethnicityVals
+      var ethnicityVals = [];
+       $('#form_ethnicities :checked').each(function() {
+         ethnicityVals.push($(this).next("label").text());
+       });
+       //alert(ethnicityVals);
 
-     //for default chart show: on page load
-     //TODO: need to show Jan, Feb, Mar Data if it shows data
-     if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
-      genderVals.push('Female');
-      genderVals.push('Male');
-      $("#form_gender input[type=checkbox]:first-child, #form_gender input[type=checkbox]:nth-child(3)").prop('checked', true);
-     }
+      //store checked ages in ageVals array
+      var ageVals = [];
+       $('#form_ages :checked').each(function() {
+         ageVals.push($(this).next("label").text());
+       });
+       //alert(ageVals);
+   
+       //for default chart show: on page load
+       //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
+       if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
+        genderVals.push('Female');
+        genderVals.push('Male');
+        $("#form_gender input[type=checkbox]:first-child, #form_gender input[type=checkbox]:nth-child(3)").prop('checked', true);
+        $('#gender-select-text').html('Gender');
+       }
 
-    $.post('{{path('myajax')}}',               
-        { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
-        function(response){ 
-            var val=new Array();
-            var dt= new Array();
-            if(response.code == 100 && response.success){
-                console.log(response);
-                console.log(JSON.stringify(response.result.html));
-                //show custom legend on chart if number of items in legend is greater and equal to 4
-                var legend_item_height = 29;
+       if(monthVals != '') {
+        $('#month-select-text').html('Month /');
+       } else {
+        $('#month-select-text').html('');
+       }
 
-                $('.legend-box').show();
-                /*var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
-                //height of last legend is 15 without margin
-                if(response.result.series.length >= 4) {
-                    $('.legend-box').height(legend_height);
-                    $('.legend-box').show();
-                } else {
-                    $('.legend-box').hide();
-                }*/
-              // easing added from https://github.com/danro/easing-js/blob/master/easing.js
-              Math.customEase = function(pos) {
-                var s = 1.70158;
-                if((pos/=0.5) < 1) return 0.5*(pos*pos*(((s*=(1.525))+1)*pos -s));
-                return 0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos +s) +2);
-              };
+       if(districtVals != '') {
+        $('#district-select-text').html('District /');
+       } else {
+        $('#district-select-text').html('');
+       }
 
-                var chart=new Highcharts.chart({
-                chart: {
-                        renderTo: 'canvas',
-                        backgroundColor: '#ffffff',
-                        borderWidth: 0,
-                        height: 514,
-                        plotBorderWidth: 0,
-                        plotShadow: true,
-                        //renderTo: 'container',//#container: Not needed now
-                        spacingRight: 0,
-                        style: {
-                          fontFamily: 'Roboto, Arial, sans-serif',
-                          fontSize: '12px',
-                        },
+       if(genderVals != '') {
+        $('#gender-select-text').html('Gender /');
+       } else {
+        $('#gender-select-text').html('');
+       }
 
-                        type: 'column',
-                    },
-                    colors:['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459'],
-                    title: {
-                        text: ''//There is no text in design: Answers by the people
-                    },
-                    subtitle: {
-                        text: ''//There is no text in design: Source: UNDP Annual Report
-                    },
-                    xAxis: {
-                        labels: {
-                            style: {'color': '#898989', 'fontSize': '14px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
-                        },
-                        categories: response.result.label,
-                        title: {
-                            enabled: false,
-                            text: response.result.xlabel,// For x-axis label on table
-                            
-                        }                           
-                    },
-                    scrollbar: {
-                        enabled: true
-                    },
-                    yAxis: {
-                        labels: {
-                            style: {'color': '#959595', 'fontSize': '12px'}
-                        },
-                        min: 0,
-                        title: {
-                            text: ''//There is no text in design: People
-                        }
-                    },
-                    /*tooltip: {
-                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                            '<td style="padding:0"><b>{point.y} people</b></td></tr>',
-                        footerFormat: '</table>',
-                        shared: true,
-                        useHTML: true
-                    },*/
-                    
-                    tooltip: {
-                          formatter: function () {
-                              return this.point.y + ' people says<br>' + 
-                              this.series.name.toLowerCase();
-                                //+ this.point.name.toLowerCase();
+       if(ethnicityVals != '') {
+        $('#ethnicity-select-text').html('Ethnicity /');
+       } else {
+        $('#ethnicity-select-text').html('');
+       }
+
+       if(ageVals != '') {
+        $('#age-select-text').html('Age');
+       } else {
+        $('#age-select-text').html('');
+       }
+       //prepend with /
+
+      $.post('{{path('myajax')}}',               
+          { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
+          function(response){ 
+              var val=new Array();
+              var dt= new Array();
+              if(response.code == 100 && response.success){
+                  console.log(response);
+                  console.log(JSON.stringify(response.result.html));
+                  //show custom legend on chart if number of items in legend is greater and equal to 4
+                  var legend_item_height = 29;
+
+                  $('.legend-box').show();
+                  /*var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
+                  //height of last legend is 15 without margin
+                  if(response.result.series.length >= 4) {
+                      $('.legend-box').height(legend_height);
+                      $('.legend-box').show();
+                  } else {
+                      $('.legend-box').hide();
+                  }*/
+                // easing added from https://github.com/danro/easing-js/blob/master/easing.js
+                Math.customEase = function(pos) {
+                  var s = 1.70158;
+                  if((pos/=0.5) < 1) return 0.5*(pos*pos*(((s*=(1.525))+1)*pos -s));
+                  return 0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos +s) +2);
+                };
+
+                  var chart=new Highcharts.chart({
+                  chart: {
+                          renderTo: 'canvas',
+                          backgroundColor: '#ffffff',
+                          borderWidth: 0,
+                          height: 514,
+                          plotBorderWidth: 0,
+                          plotShadow: true,
+                          //renderTo: 'container',//#container: Not needed now
+                          spacingRight: 0,
+                          style: {
+                            fontFamily: 'Roboto, Arial, sans-serif',
+                            fontSize: '12px',
+                          },
+
+                          type: 'column',
+                      },
+                      colors:['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459'],
+                      title: {
+                          text: ''//There is no text in design: Answers by the people
+                      },
+                      subtitle: {
+                          text: ''//There is no text in design: Source: UNDP Annual Report
+                      },
+                      xAxis: {
+                          labels: {
+                              style: {'color': '#898989', 'fontSize': '14px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
+                          },
+                          categories: response.result.label,
+                          title: {
+                              enabled: false,
+                              text: response.result.xlabel,// For x-axis label on table
+                              
+                          }                           
+                      },
+                      scrollbar: {
+                          enabled: true
+                      },
+                      yAxis: {
+                          labels: {
+                              style: {'color': '#959595', 'fontSize': '12px'}
+                          },
+                          min: 0,
+                          title: {
+                              text: ''//There is no text in design: People
                           }
                       },
-                    plotOptions: {
-                        column: {
-                            pointPadding: 0,
-                            borderWidth: 0,
-                            groupPadding: 0.2,
-                        }
-                    },
-                    exporting: {
-                        buttons: {
-                            contextButton: {
-                                enabled: false,
-                                verticalAlign: "top",
-                                y: 0,
+                      /*tooltip: {
+                          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                              '<td style="padding:0"><b>{point.y} people</b></td></tr>',
+                          footerFormat: '</table>',
+                          shared: true,
+                          useHTML: true
+                      },*/
+                      
+                      tooltip: {
+                            formatter: function () {
+                                return this.point.y + ' people says<br>' + 
+                                this.series.name.toLowerCase();
+                                  //+ this.point.name.toLowerCase();
                             }
                         },
-                        type: 'application/pdf',
-                    },
-                    series: response.result.series,
-                     credits: {
-                        enabled: false
-                    },
-                    plotOptions: {
-                        column: {
-                            stacking: response.result.stack
-                        },
-                        series: {
-                            animation: {
-                                duration: 1000,
-                                easing: 'customEase'
-                            }
-                        }
-                    },      
-                });//Highchart end
-                $('#table1').html(chart.getTable());
-                $('#table1').html(response.result.html);
-                $('#download-report').click(function () {
-                    var chart = $('#canvas').highcharts();
-                    chart.exportChart();
-                });
+                      plotOptions: {
+                          column: {
+                              pointPadding: 0,
+                              borderWidth: 0,
+                              groupPadding: 0.2,
+                          }
+                      },
+                      exporting: {
+                          buttons: {
+                              contextButton: {
+                                  enabled: false,
+                                  verticalAlign: "top",
+                                  y: 0,
+                              }
+                          },
+                          type: 'application/pdf',
+                      },
+                      series: response.result.series,
+                       credits: {
+                          enabled: false
+                      },
+                      plotOptions: {
+                          column: {
+                              stacking: response.result.stack
+                          },
+                          series: {
+                              animation: {
+                                  duration: 1000,
+                                  easing: 'customEase'
+                              }
+                          }
+                      },      
+                  });//Highchart end
+                  $('#table1').html(chart.getTable());
+                  $('#table1').html(response.result.html);
+                  $('#download-report').click(function () {
+                      var chart = $('#canvas').highcharts();
+                      chart.exportChart();
+                  });
 
-                $('#table1 table').addClass('table-bordered table');                  
-            }//Ajax success end
+                  $('#table1 table').addClass('table-bordered table');                  
+              }//Ajax success end
 
-        }, "json"); //.post end   
+          }, "json"); //.post end   
 
     }; //abuttonpressed end
 
 $(document).ready(function() {     
   $('button, input[type="submit"]').on('click', function(){aButtonPressed();});
-  aButtonPressed();
+  aButtonPressed();  
 });
 
-    </script>
+</script>
 
 {% endblock %}

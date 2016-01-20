@@ -9,7 +9,6 @@
             <tr>
                 
                 <th>Date</th>
-                <th>Interviewer</th>
                 <th>Age Group</th>
                 <th>Gender</th>
                 <th>Ethnicity</th>
@@ -26,7 +25,6 @@
             <tr>
                 
                 <td>{% if entity.date %}{{ entity.date|date('M Y') }}{% endif %}</td>
-                <td>{{ entity.interviewer }}</td>
                 <td>{{ entity.age }}</td>
                 <td>{{ entity.gender }}</td>
                 <td>{{ entity.ethnicity }}</td>
@@ -53,8 +51,12 @@
                 "dom": 'T<"clear">lfrtip',
                 "tableTools": {
                     "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+                },
+                "colVis": {
+                    "buttonText": "Change columns"
                 }
             });
+            $('.DTTT_button_xls span').html('&nbsp;');
         });
 
         

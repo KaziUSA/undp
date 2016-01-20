@@ -55,7 +55,7 @@ $('#save').click(function()
     $.post('{{path('page_show', {'slug': entity.slug} )}}',//{{path('page')}} - path: /admin/page/home
         { data_id:name.id,data_title:name.title,data_description:name.description}, 
             function(response){ 
-            console.log("Request Sent");
+            //console.log("Request Sent");
             }
     );
 
