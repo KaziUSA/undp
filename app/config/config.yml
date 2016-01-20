@@ -11,6 +11,7 @@ parameters:
 framework:
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
+    translator: ~ #for /contact
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -118,7 +119,7 @@ mremi_contact:
     email:
         mailer:            mremi_contact.mailer.twig_swift
         from:              
-            - { address: symfony@undp.kazi.com, name: "UNDP" }
+            - { address: symfony@undp.kazi270.com, name: "UNDP" }
         to:                
             - { address: nikesh@kazistudios.com, name: "Nikesh" }
         template:          MremiContactBundle:Contact:email.txt.twig

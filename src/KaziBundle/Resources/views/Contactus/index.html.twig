@@ -1,0 +1,97 @@
+{% extends 'frontend.html.twig' %}
+
+{% block body %}
+    <div class="page-title"><h3>Contact Us</h3></div>
+    <section class="content img-cover contact">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4">
+                    <div class="u-box">
+                        <h3>Our contact information</h3>
+
+                        <p>
+                            Address <br>
+                            street name <br>
+                            Kathmandu, Nepal
+                        </p>
+                        <p>
+                            T. 000.000.00000 <br>
+                            E. info@undp.org
+                        </p>
+                        <p>Location</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                    <div class="u-box">
+                        <h3>Please send us a message with feedback or quires.</h3>
+
+                        <form class="form-bordered" action="" method="post">
+                          <div class="form-group">
+                            <label for="inputName" class="control-label">Name</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="">
+                          </div>
+                          <div class="form-group">
+                            <label for="inputAddress" class="control-label">Address</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="">
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail" class="control-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="">
+                          </div>
+                          <div class="form-group">
+                            <label for="inputPhone" class="control-label">Phone</label>
+                            <input type="text" class="form-control" id="inputPhone" placeholder="">
+                          </div>
+                          <div class="form-group">
+                            <label for="textMessage" class="control-label">Message</label>
+                            <textarea id="textMessage" class="form-control" cols="30" rows="10"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <!--<input type="submit" id="submit" class="btn btn-bordered" value="Submit">-->
+                            <button type="button" id="submit" class="btn btn-bordered">Submit</button>
+                            <img id="loader" class="hide" src="/img/frontend/loading.GIF">
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{%block scriptIncludes %}
+<script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
+<script>
+var i=0, j=0;
+$('#submit').click(function() {  
+  var mail = {
+    name:$("#inputName").val(), 
+    address:$("#inputAddress").val(),
+    email:$("#inputEmail").val(),
+    phone:$("#inputPhone").val(),
+    message:$("#textMessage").val()
+  };
+  i=i+1;
+  $("#loader").removeClass("hide");
+  $("#loader").addClass("show");
+  console.log("Request Sent");
+  console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
+
+  $.post('{{path('contactus')}}',               
+    { data_name:mail.name, data_address:mail.address, data_email:mail.email, data_phone:mail.phone, data_message:mail.message
+    }, 
+      function(response) {
+        j=j+1
+        if (j==i){
+          console.log("Your message has been sent successfully!");
+          $("#loader").removeClass("show");
+          $("#loader").addClass("hide");  
+        }
+      }        
+  );
+  return false;
+});
+</script>
+
+{% endblock %}
