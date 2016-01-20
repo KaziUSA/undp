@@ -78,7 +78,7 @@ $('#submit').click(function() {
   $("#loader").removeClass("hide");
   $("#loader").addClass("show");
   console.log("Request Sent");
-  console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
+  //console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
 
   $.post('{{path('contactus')}}',               
     { data_name:mail.name, data_address:mail.address, data_email:mail.email, data_phone:mail.phone, data_message:mail.message
@@ -87,7 +87,7 @@ $('#submit').click(function() {
         j=j+1
         if (j==i){
           //console.log("Your message has been sent successfully!");
-          $("#contact-form").html("<h3>Your message has been sent successfully! <a href="{{path('contactus')}}">Send message again?</a></h3>");
+          $("#contact-form").html('<h3>Your message has been sent successfully! <a href="{{path('contactus')}}">Send message again?</a></h3>');
           $("#loader").removeClass("show");
           $("#loader").addClass("hide");  
         }
