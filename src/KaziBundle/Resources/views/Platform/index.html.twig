@@ -32,7 +32,7 @@
                                       <div class="ac">
                                         {# ac-1 #}
                                         <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
-                                        <label class="ac-label month-label" for="ac-1">Month</label>
+                                        <label class="ac-label month-label active" for="ac-1">Month</label>
 
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="month-all" value="" />
@@ -60,7 +60,7 @@
                                       <div class="ac">
                                         {# ac-3 #}
                                         <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
-                                        <label class="ac-label gender-label active" for="ac-3">Gender</label><!-- initially showing active -->
+                                        <label class="ac-label gender-label" for="ac-3">Gender</label><!-- initially showing active -->
 
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="gender-all" value="" />
@@ -229,10 +229,11 @@
        //for default chart show: on page load
        //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
        if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
-        genderVals.push('Female');
-        genderVals.push('Male');
-        $("#form_gender input[type=checkbox]:first-child, #form_gender input[type=checkbox]:nth-child(3)").prop('checked', true);
-        $('#gender-select-text').html('Gender');
+        monthVals.push('7');
+        monthVals.push('8');
+        monthVals.push('9');
+        $("input#month-all, #form_months input[type=checkbox]").prop('checked', true);
+        $('#month-select-text').html('Month');
        }
 
        if(monthVals != '') {
