@@ -24,6 +24,7 @@ use Phax\CoreBundle\Model\PhaxReaction;//for phax commandline
 
 class CsvController extends Controller
 {
+    private $count = 0;
     /**
      * @Route("/csv")
      * @Template()
@@ -45,13 +46,10 @@ class CsvController extends Controller
      */
     public function uploadAction()//PhaxAction $phaxAction
     {
+        // USE THIS TO RUN THIS ACTION
+        // sf phax:action CsvController upload  
         
-        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey1.xlsx');
-        $fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
-        //$fileInfo = $this->getCsvData('uploads/survey2.xlsx');
-        //$fileInfo = $this->getCsvData('uploads/survey3.xlsx');
-
-        //$fileInfo = '';
+        
         echo "******************************************************\n";
         echo "*             WELCOME TO CSV UPLOADER                *\n";
         echo "*          ==============================            *\n";
@@ -60,87 +58,23 @@ class CsvController extends Controller
         
         echo "\n";
         echo "\n";
-        //Grabbing the Labels from the CSV
-        $titles = array_shift($fileInfo);
-        $count = 1;
+        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
-        foreach ($fileInfo as $row){
-            
-            //Adding interviewer data
-            $interviewer = $this->addInterviewer($row[0], $row[1]);
-            
-            
-            $survey = new Survey();
-            $survey->setInterviewer($interviewer);
-            $survey->setDate(DateTime::createFromFormat('Y-m-d', $row[2]));
-            
-            $survey->setAge($this->getAgeByData($row[11]));
-            $survey->setGender($this->getGenderByData($row[12]));
-            $survey->setEthnicity($this->getEthnicityByData($row[13]));
-            $survey->setOccupation($this->getOccupationByData($row[15]));
-            if ($row[17] == "no_difficulty"){
-                $survey->setDisability(0);
-            }else{
-                $survey->setDisability(1);
-            }
-            $survey->setTerm(2);
-            $survey->setDistrict($this->getDistrictByData($row[8]));
-            $survey->setVdc($this->getVdcByData($row[9]));
-            $survey->setWard($row[10]);
-            
-            
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($survey);
-            $em->flush();
-            
-            echo "Adding Record Count :". $count ."\r";
-            $count++;
-            
-            // Question 1
-            $surveyResponse = new SurveyResponse();
-            
-            $surveyResponse->setSurvey($survey);
-            $question = $this->getDoctrine()->getRepository('AppBundle:Question')->find(1);
-            $surveyResponse->setQuestion($question);
-            
-            $surveyResponse->setAnswer($this->getAnswer1ByData($row[19]));
-            
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($surveyResponse);
-            $em->flush();
-            
-            // Question 1a
-            $surveyResponse = new SurveyResponse();
-            
-            $surveyResponse->setSurvey($survey);
-            $question = $this->getDoctrine()->getRepository('AppBundle:Question')->find(2);
-            $surveyResponse->setQuestion($question);
-            
-            $surveyResponse->setAnswer($this->getAnswer1aByData($row[20]));
-            
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($surveyResponse);
-            $em->flush();
-            
-            unset($survey);
-            unset($row);
-            unset($interviewer);
-            
-        }
+        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey1.xlsx');
+        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey2.xlsx');
+        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey3.xlsx');
+        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey4.xlsx');
+        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey5.xlsx');
+        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey6.xlsx');
+        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/round4/survey6.xlsx');
+        
         
         echo "\n";
         echo "CSV upload completed \n";
         
-        echo "FINE TILL HERE";
+        
         exit();
-        return $this->redirect($this->generateUrl('survey'));
         
-        return array(
-                'fileInfo' => $this->getCsvData('uploads/survey1.xlsx', 'uploaded_form_g54cmb')
-            );
-
-        
-
         // Return a phax reation with a success or failure notification
         $phaxReaction = new PhaxReaction();
         echo 'Status: ';
@@ -149,6 +83,97 @@ class CsvController extends Controller
         $phaxReaction->setMetaMessage('The file has been uploaded.');
 
         return $phaxReaction;
+    }
+    private function setCsvData($row)
+    {
+     //Adding interviewer data
+        
+            
+            $interviewer = $this->addInterviewer($row[1], 'accountability');
+            $survey = new Survey();
+            $survey->setInterviewer($interviewer);
+            $survey->setDate(DateTime::createFromFormat('Y-m-d', $row[0]));
+            
+            $survey->setAge($this->getAgeByData($row[5]));
+            $survey->setGender($this->getGenderByData($row[6]));
+            $survey->setEthnicity($this->getEthnicityByData($row[7]));
+            $survey->setOccupation($this->getOccupationByData($row[9]));
+            if ($row[11] == "no_difficulty"){
+                $survey->setDisability(0);
+            }else{
+                $survey->setDisability(1);
+            }
+            $survey->setTerm(2);
+            $survey->setDistrict($this->getDistrictByData($row[2]));
+            $survey->setVdc($this->getVdcByData($row[3]));
+            $survey->setWard($row[4]);
+            
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($survey);
+            $em->flush();
+            
+            echo "Adding Record Count :". $this->count ."\r";
+            $this->count++;
+        
+            // Question 1
+            $this->createSurveyResponse($survey, 1, $row[13]);
+            // Question 2
+            $this->createSurveyResponse($survey, 5, $row[20]);
+            // Question 3
+            $this->createSurveyResponse($survey, 8, $row[25]);
+            // Question 4
+            $this->createSurveyResponse($survey, 11, $row[30]);
+            // Question 5
+            $this->createSurveyResponse($survey, 14, $row[40]);
+            // Question 6
+            $this->createSurveyResponse($survey, 17, $row[45]);
+            // Question 7
+            $this->createSurveyResponse($survey, 19, $row[48]);
+            // Question 8
+            $this->createSurveyResponse($survey, 22, $row[53]);
+            // Question 9
+            $this->createSurveyResponse($survey, 23, $row[54]);
+            // Question 10
+            $this->createSurveyResponse($survey, 28, $row[57]);
+            // Question 11
+            $this->createSurveyResponse($survey, 29, $row[58]);
+            // Question 12
+            $this->createSurveyResponse($survey, 30, $row[63]);
+        
+            // Question 1a
+            $surveyResponse = new SurveyResponse();
+            
+            $surveyResponse->setSurvey($survey);
+            $question = $this->getDoctrine()->getRepository('AppBundle:Question')->find(2);
+            $surveyResponse->setQuestion($question);
+            
+            $surveyResponse->setAnswer($this->getAnswer1aByData($row[14]));
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($surveyResponse);
+            $em->flush();
+            
+            unset($survey);
+            unset($row);
+            unset($interviewer);   
+    }
+    
+    private function createSurveyResponse($survey, $questionId, $answer)
+    {
+            $surveyResponse = new SurveyResponse();
+            
+            $surveyResponse->setSurvey($survey);
+        
+            $question = $this->getDoctrine()->getRepository('AppBundle:Question')->find($questionId);
+        
+            $surveyResponse->setQuestion($question);
+            
+            $surveyResponse->setAnswer($this->getAnswer1ByData($answer));
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($surveyResponse);
+            $em->flush();   
     }
     /**
      * Get CSV Data
@@ -173,7 +198,7 @@ class CsvController extends Controller
         $highestRow = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
         
         
-        $fileInfo = array();
+        //$fileInfo = array();
         $rowCount = 0;
         
         
@@ -188,7 +213,7 @@ class CsvController extends Controller
                     
                     //This is converting the second column to Date Format
                     //TODO:: Make sure date format anywhere is captured properly and not just the second column
-                    if (($columnCount == 2) && ($rowCount > 0)){
+                    if (($columnCount == 0) && ($rowCount > 0)){
                         $value = $cell->getValue();
                         $value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
                         
@@ -205,11 +230,16 @@ class CsvController extends Controller
         
                     }
                 }
-                array_push($fileInfo, $row);
+                if ($rowCount > 0)
+                {
+                    $this->setCsvData($row);    
+                }
+                unset($row);
+                //array_push($fileInfo, $row);
                 $rowCount++;
             }
         
-            return $fileInfo;
+            return true;
         }
     /**
      * Adds the interviewer information if it doesn't already exist
@@ -301,7 +331,7 @@ class CsvController extends Controller
         if ($data == "skilled_worker"){
             $id = 2;
         }
-        if ($data == "ngo_worker_bus"){
+        if ($data == "ngo_worker_business"){
             $id = 3;
         }
         if ($data == "government_ser"){
@@ -310,6 +340,11 @@ class CsvController extends Controller
         if ($data == "other"){
             $id = 5;   
         }
+        if ($data == "Others"){
+            $id = 5;   
+        }
+        
+        
         
         $occupation = $this->getDoctrine()
                ->getRepository('AppBundle:Occupation')->find($id);
@@ -335,6 +370,19 @@ class CsvController extends Controller
         return $vdc;
     }
     private function getAnswer1ByData($data){
+        $response = $data[0];
+        $id=0;
+        if ($response == 'd'){
+            $id = 6;   
+        }else{
+         $id = intval($response);   
+        }
+        
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
+    private function getAnswer2ByData($data){
         $response = $data[0];
         $id=0;
         if ($response == 'd'){
