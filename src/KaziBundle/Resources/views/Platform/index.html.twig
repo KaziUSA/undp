@@ -11,10 +11,13 @@
                     <div class="tab-head">Feedback Round</div>
 
                       <ul id="" class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active round1"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
-                        <li role="presentation" class="round2"><a href="#round1" aria-controls="profile" role="tab" data-toggle="tab">2</a></li>
+                        {# <li role="presentation" class="active round1"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
+                        <li role="presentation" class="round2"><a href="#round1" aria-controls="profile" role="tab" data-toggle="tab">2</a></li> #}
                         <li role="presentation" class="round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab">3</a></li>
                         <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">4</a></li>
+                        <li role="presentation" class="round5"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">5</a></li>
+                        <li role="presentation" class="round6"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">6</a></li>
+
                       </ul>
                   </div>
 
@@ -151,13 +154,13 @@
                                         <li>Temporary shelter</li>
                                         <li>Fresh Food</li>
                                     </ul>
-                                </div>
+                                </div> #}
                                 <div class="legend legend2">
                                     <div class="legend-head">Respondents</div>
                                     <ul>
                                         <li>1400</li>
                                     </ul>
-                                </div> #}
+                                </div>
                                 <div class="legend legend3 download">
                                     <ul>
                                         <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Report</a></li>
@@ -393,7 +396,8 @@
                       chart.exportChart();
                   });
 
-                  $('#table1 table').addClass('table-bordered table');                  
+                  $('#table1 table').addClass('table-bordered table');   
+                  $('.legend-box .legend2 ul li').html(response.result.total);              
               }//Ajax success end
 
           }, "json"); //.post end   

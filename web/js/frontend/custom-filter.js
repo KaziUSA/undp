@@ -94,6 +94,14 @@ $(document).ready(function() {
         e.preventDefault();
         $('.form_months#form_months').html('<li><input class="month" type="checkbox" id="month10" value="10" /><label for="month10">October<span></span></label></li><li><input class="month" type="checkbox" id="month11" value="11"/><label for="month11">November<span></span></label></li><li><input class="month" type="checkbox" id="month12" value="12"/><label for="month12">December<span></span></label></li>');
     });
+    $('.nav-tabs li.round5').click(function (e) {
+        e.preventDefault();
+        $('.form_months#form_months').html('<li><input class="month" type="checkbox" id="month11_5" value="11"/><label for="month11_5">November<span></span></label></li><li><input class="month" type="checkbox" id="month12_5" value="12"/><label for="month12_5">December<span></span></label></li>');
+    });
+    $('.nav-tabs li.round6').click(function (e) {
+        e.preventDefault();
+        $('.form_months#form_months').html('<li><input class="month" type="checkbox" id="month1_6" value="10" /><label for="month1_6">January<span></span></label></li>');
+    });
 
     
 });
