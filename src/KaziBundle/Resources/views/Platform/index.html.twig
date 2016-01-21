@@ -24,13 +24,13 @@
                         <div class="tab-content-wrap">
                             <div class="filter-title">Filter By</div>
 
-                            <div class="accordion">                                        
+                            <div class="accordion">
                                     <form action="">
-                                      <div class="ac">              
+                                      <div class="ac">
                                         {# ac-1 #}
                                         <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
                                         <label class="ac-label month-label" for="ac-1">Month</label>
-                                        
+
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="month-all" value="" />
                                                 <label for="month-all">All<span></span></label></li>
@@ -41,11 +41,11 @@
                                       </div><!--/ac-->
 
 
-                                      <div class="ac">              
+                                      <div class="ac">
                                         {# ac-2 #}
                                         <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
                                         <label class="ac-label district-label" for="ac-2">District</label>
-                                        
+
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="district-all" value="" />
                                                 <label for="district-all">All<span></span></label></li>
@@ -54,11 +54,11 @@
                                       </div><!--/ac-->
 
 
-                                      <div class="ac">              
+                                      <div class="ac">
                                         {# ac-3 #}
                                         <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
                                         <label class="ac-label gender-label active" for="ac-3">Gender</label><!-- initially showing active -->
-                                        
+
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="gender-all" value="" />
                                                 <label for="gender-all">All<span></span></label></li>
@@ -67,11 +67,11 @@
                                       </div><!--/ac-->
 
 
-                                      <div class="ac">              
+                                      <div class="ac">
                                         {# ac-4 #}
                                         <input class="ac-input" id="ac-4" name="ac-4" type="checkbox" />
                                         <label class="ac-label ethnicity-label" for="ac-4">Ethnicity</label>
-                                        
+
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="ethnicity-all" value="" />
                                                 <label for="ethnicity-all">All<span></span></label></li>
@@ -80,11 +80,11 @@
                                       </div><!--/ac-->
 
 
-                                      <div class="ac">              
+                                      <div class="ac">
                                         {# ac-5 #}
                                         <input class="ac-input" id="ac-5" name="ac-5" type="checkbox" />
                                         <label class="ac-label age-label" for="ac-5">Age Group</label>
-                                        
+
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="age-all" value="" />
                                                 <label for="age-all">All<span></span></label></li>
@@ -93,7 +93,7 @@
                                       </div><!--/ac-->
 
 
-                                      <div class="ac">              
+                                      <div class="ac">
                                         {# ac-6 #}
                                         <ul class="checkbox-style">
                                             <li><input type="checkbox" id="disability" />
@@ -116,17 +116,17 @@
             <!-- main content -->
             <div class="main-content">
                 <div class="question">
-                    <!--<div class="number">Question 9</div> 
+                    <!--<div class="number">Question 9</div>
                     Are your main problems being adressed ?-->
-                    <a href="#" class="next" onclick="btnNextQuestion_Click()"></a>
-                    <a href="#" class="prev" onclick="btnPrevQuestion_Click()"></a>
+                    <a href="#!" class="next" onclick="btnNextQuestion_Click()"></a>
+                    <a href="#!" class="prev" onclick="btnPrevQuestion_Click()"></a>
 
                     <div id="zelect">{{ form(form.questions) }}</div>
                 </div>
 
                 <div class="chart">
                     <div class="search">
-                      <span class="search-title">Search</span>  
+                      <span class="search-title">Search</span>
                       <span id="filter-search-key">
                         <!--Month / District / Age Group / Gender -->
                         <span id="month-select-text"></span>
@@ -194,14 +194,14 @@
          monthVals.push($(this).next("label").text());
        });
        //alert(monthVals);
-       
+
        //store selected district in districtVals
        var districtVals = [];
        $('#form_districts :checked').each(function() {
          districtVals.push($(this).next("label").text());
        });
        //alert(districtVals);
-       
+
        //store selected gender in genderVals array
       var genderVals = [];
        $('#form_gender :checked').each(function() {
@@ -222,7 +222,7 @@
          ageVals.push($(this).next("label").text());
        });
        //alert(ageVals);
-   
+
        //for default chart show: on page load
        //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
        if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
@@ -263,9 +263,9 @@
        }
        //prepend with /
 
-      $.post('{{path('myajax')}}',               
-          { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals }, 
-          function(response){ 
+      $.post('{{path('myajax')}}',
+          { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals },
+          function(response){
               var val=new Array();
               var dt= new Array();
               if(response.code == 100 && response.success){
@@ -322,8 +322,8 @@
                           title: {
                               enabled: false,
                               text: response.result.xlabel,// For x-axis label on table
-                              
-                          }                           
+
+                          }
                       },
                       scrollbar: {
                           enabled: true
@@ -345,10 +345,10 @@
                           shared: true,
                           useHTML: true
                       },*/
-                      
+
                       tooltip: {
                             formatter: function () {
-                                return this.point.y + ' people says<br>' + 
+                                return this.point.y + ' people says<br>' +
                                 this.series.name.toLowerCase();
                                   //+ this.point.name.toLowerCase();
                             }
@@ -384,7 +384,7 @@
                                   easing: 'customEase'
                               }
                           }
-                      },      
+                      },
                   });//Highchart end
                   $('#table1').html(chart.getTable());
                   $('#table1').html(response.result.html);
@@ -393,16 +393,19 @@
                       chart.exportChart();
                   });
 
-                  $('#table1 table').addClass('table-bordered table');                  
+                  $('#table1 table').addClass('table-bordered table');
               }//Ajax success end
 
-          }, "json"); //.post end   
+          }, "json"); //.post end
 
     }; //abuttonpressed end
 
-$(document).ready(function() {     
-  $('button, input[type="submit"]').on('click', function(){aButtonPressed();});
-  aButtonPressed();  
+$(document).ready(function() {
+  $('button, input[type="submit"], .question .next, .question .prev').on('click', function(){aButtonPressed();});
+  aButtonPressed();
+  $('select#form_questions').change(function() {
+    aButtonPressed();
+  });
 });
 
 </script>
