@@ -83,7 +83,11 @@
 													{% if entity.documenttype == 'National Reports' %}
 													<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
 														<div class="r-box">
-															<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+															<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+															</a>
 													
 															<ul class="share-icons">
 																<li><a href="#share" class="fa fa-share-alt"></a>
@@ -118,7 +122,11 @@
 												{% if entity.documenttype == 'District Reports' %}
 												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %}">
 													<div class="r-box">
-														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+														</a>
 												
 														<ul class="share-icons">
 															<li><a href="#share" class="fa fa-share-alt"></a>
@@ -155,7 +163,11 @@
 												{% if entity.documenttype == 'Issue in Focus Reports' %}
 												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
 													<div class="r-box">
-														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+														</a>
 												
 														<ul class="share-icons">
 															<li><a href="#share" class="fa fa-share-alt"></a>
@@ -189,7 +201,11 @@
 												{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
 												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
 													<div class="r-box">
-														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+														</a>
 												
 														<ul class="share-icons">
 															<li><a href="#share" class="fa fa-share-alt"></a>
