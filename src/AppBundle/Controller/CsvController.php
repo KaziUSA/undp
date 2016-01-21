@@ -66,7 +66,7 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey4.xlsx');
         //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey5.xlsx');
         //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey6.xlsx');
-        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/round4/survey6.xlsx');
+        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/round6/survey6.xlsx');
         
         
         echo "\n";
@@ -117,29 +117,30 @@ class CsvController extends Controller
             $this->count++;
         
             // Question 1
-            $this->createSurveyResponse($survey, 1, $row[13]);
+            $this->createSurveyResponse($survey, 1, $row[12]);
             // Question 2
-            $this->createSurveyResponse($survey, 5, $row[20]);
+            $this->createSurveyResponse($survey, 5, $row[19]);
             // Question 3
-            $this->createSurveyResponse($survey, 8, $row[25]);
+            $this->createSurveyResponse($survey, 8, $row[24]);
             // Question 4
-            $this->createSurveyResponse($survey, 11, $row[30]);
+            $this->createSurveyResponse($survey, 11, $row[29]);
             // Question 5
-            $this->createSurveyResponse($survey, 14, $row[40]);
+            $this->createSurveyResponse($survey, 14, $row[34]);
             // Question 6
-            $this->createSurveyResponse($survey, 17, $row[45]);
+            $this->createSurveyResponse($survey, 17, $row[39]);
             // Question 7
-            $this->createSurveyResponse($survey, 19, $row[48]);
+            $this->createSurveyResponse($survey, 19, $row[42]);
             // Question 8
-            $this->createSurveyResponse($survey, 22, $row[53]);
+            $this->createSurveyResponse($survey, 22, $row[47]);
             // Question 9
-            $this->createSurveyResponse($survey, 23, $row[54]);
+            $this->createSurveyResponse($survey, 23, $row[48]);
             // Question 10
-            $this->createSurveyResponse($survey, 28, $row[57]);
+            $this->createSurveyResponse($survey, 28, $row[51]);
             // Question 11
-            $this->createSurveyResponse($survey, 29, $row[58]);
+            $this->createSurveyResponse($survey, 29, $row[52]);
             // Question 12
-            $this->createSurveyResponse($survey, 30, $row[63]);
+            $this->createSurveyResponse($survey, 30, $row[57]);
+            
         
             // Question 1a
             $surveyResponse = new SurveyResponse();
@@ -328,15 +329,37 @@ class CsvController extends Controller
         if ($data == "farmer_laborer"){
             $id = 1;
         }
+        if ($data == "Farmer/laborer"){
+            $id = 1;
+        }
         if ($data == "skilled_worker"){
+            $id = 2;
+        }
+        if ($data == "Skilled worker (i.e. carpenter)"){
             $id = 2;
         }
         if ($data == "ngo_worker_business"){
             $id = 3;
         }
+        if ($data == "NGO worker/Business"){
+            $id = 3;
+        }
+        if ($data == "ngo_worker_bus"){
+            $id = 3;
+        }
         if ($data == "government_ser"){
             $id = 4;   
         }
+        if ($data == "Government (i.e. teacher, health worker, army)"){
+            $id = 4;   
+        }
+        if (strpos("x".$data,'Government') !== false) {
+            $id = 4;
+        }
+        if ($data == "Government (i.e. teacher, health worker, army)                                 "){
+            $id = 4;   
+        }
+        
         if ($data == "other"){
             $id = 5;   
         }
