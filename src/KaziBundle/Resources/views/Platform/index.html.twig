@@ -38,7 +38,7 @@
                                             <li><input type="checkbox" id="month-all" value="" />
                                                 <label for="month-all">All<span></span></label></li>
                                             <div class="form_months" id="form_months">
-                                                <li><input class="month" type="checkbox" id="month1" value="1" /><label for="month1">January<span></span></label></li><li><input class="month" type="checkbox" id="month2" value="2"/><label for="month2">Feburary<span></span></label></li><li><input class="month" type="checkbox" id="month3" value="3"/><label for="month3">March<span></span></label></li>
+                                                <li><input class="month" type="checkbox" id="month7" value="7" /><label for="month7">July<span></span></label></li><li><input class="month" type="checkbox" id="month8" value="8"/><label for="month8">August<span></span></label></li><li><input class="month" type="checkbox" id="month9" value="9"/><label for="month9">September<span></span></label></li>
                                             </div>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
@@ -229,9 +229,9 @@
        //for default chart show: on page load
        //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
        if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
-        monthVals.push('7');
-        monthVals.push('8');
-        monthVals.push('9');
+        monthVals.push('July');
+        monthVals.push('August');
+        monthVals.push('September');
         $("input#month-all, #form_months input[type=checkbox]").prop('checked', true);
         $('#month-select-text').html('Month');
        }
