@@ -23,7 +23,7 @@ class MyAjaxController extends Controller
 	
 	/**    
      * @Route("/", name="myajax")
-     * @Method("GET")
+     * @Method("POST")
      * @Template()
      */
 	public function indexAction(Request $request){
