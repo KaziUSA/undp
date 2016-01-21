@@ -11,9 +11,9 @@
                     <div class="tab-head">Feedback Round</div>
 
                       <ul id="" class="nav nav-tabs" role="tablist">
-                        {# <li role="presentation" class="active round1"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
+                        {# <li role="presentation" class="round1"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
                         <li role="presentation" class="round2"><a href="#round1" aria-controls="profile" role="tab" data-toggle="tab">2</a></li> #}
-                        <li role="presentation" class="round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab">3</a></li>
+                        <li role="presentation" class="active round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab">3</a></li>
                         <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">4</a></li>
                         <li role="presentation" class="round5"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">5</a></li>
                         <li role="presentation" class="round6"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">6</a></li>
@@ -32,13 +32,13 @@
                                       <div class="ac">
                                         {# ac-1 #}
                                         <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
-                                        <label class="ac-label month-label" for="ac-1">Month</label>
+                                        <label class="ac-label month-label active" for="ac-1">Month</label>
 
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="month-all" value="" />
                                                 <label for="month-all">All<span></span></label></li>
                                             <div class="form_months" id="form_months">
-                                                <li><input class="month" type="checkbox" id="month1" value="1" /><label for="month1">January<span></span></label></li><li><input class="month" type="checkbox" id="month2" value="2"/><label for="month2">Feburary<span></span></label></li><li><input class="month" type="checkbox" id="month3" value="3"/><label for="month3">March<span></span></label></li>
+                                                <li><input class="month" type="checkbox" id="month7" value="7" /><label for="month7">July<span></span></label></li><li><input class="month" type="checkbox" id="month8" value="8"/><label for="month8">August<span></span></label></li><li><input class="month" type="checkbox" id="month9" value="9"/><label for="month9">September<span></span></label></li>
                                             </div>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
@@ -60,7 +60,7 @@
                                       <div class="ac">
                                         {# ac-3 #}
                                         <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
-                                        <label class="ac-label gender-label active" for="ac-3">Gender</label><!-- initially showing active -->
+                                        <label class="ac-label gender-label" for="ac-3">Gender</label><!-- initially showing active -->
 
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="gender-all" value="" />
@@ -229,10 +229,11 @@
        //for default chart show: on page load
        //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
        if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
-        genderVals.push('Female');
-        genderVals.push('Male');
-        $("#form_gender input[type=checkbox]:first-child, #form_gender input[type=checkbox]:nth-child(3)").prop('checked', true);
-        $('#gender-select-text').html('Gender');
+        monthVals.push('July');
+        monthVals.push('August');
+        monthVals.push('September');
+        $("input#month-all, #form_months input[type=checkbox]").prop('checked', true);
+        $('#month-select-text').html('Month');
        }
 
        if(monthVals != '') {
