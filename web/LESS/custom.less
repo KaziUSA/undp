@@ -1053,19 +1053,20 @@ a.DTTT_button,
 .dataTables_filter {//search
 		position: absolute;
     right: 15px;
-    top: -35px;
+    top: -30px;
     z-index: 1;
     label {
     	color: white;
     	input {
     		color: @gray;
+    		font-size: 12px;
     		margin-left: 10px;
 
     		background: none;
 		    border: 0;
 		    border-bottom: 1px solid #fff !important;
 		    padding: 0;
-		    height: 27px;
+		    height: 20px;
 		    color: white;
 		    &.form-control:focus {
 		    	border-color: #ffffff !important;
@@ -1073,17 +1074,40 @@ a.DTTT_button,
     	}
     }
 }
-a.DTTT_button.DTTT_button_xls {
-	background: url(../img/frontend/icons/icon-download-blue.png) no-repeat 0 0;
+a.DTTT_button.DTTT_button_xls, a.DTTT_button.DTTT_button_csv {
 	border: 0;
 	display: block;
 	//text-indent: -9999px;//remove this for download functionality
+	padding-left: 25px;
+	padding-top: 2px;
 	box-shadow: none;
+	span {
+		font-size: 12px;
+	}
+}
+a.DTTT_button.DTTT_button_csv {
+	background: url(../img/frontend/icons/icon-download-white.png) no-repeat 0 0;
+	position: absolute;
+  right: 240px;
+  top: -25px;
+	span {
+		color: @white;
+	}
+}
+a.DTTT_button.DTTT_button_xls {
+	background: url(../img/frontend/icons/icon-download-blue.png) no-repeat 0 0;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	span {
+		color: #3e7180;
+	}
 }
 div.DTTT_container {
+	height: 100%;
 	margin-bottom: 0;
 	position: absolute;
-	bottom: 0;
+	bottom: 4px;
 	right: 10px;
 	z-index: 1;
 }
