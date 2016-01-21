@@ -24,8 +24,7 @@
         "ircmaxell/password-compat": "*",
         "phax/phax-bundle": "dev-master",
         "vich/uploader-bundle": "^0.14.0",
-        "egeloen/ckeditor-bundle": "^4.0",
-        "mremi/contact-bundle": "dev-master"
+        "egeloen/ckeditor-bundle": "^4.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

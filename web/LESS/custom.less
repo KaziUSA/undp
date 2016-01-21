@@ -593,6 +593,9 @@ footer, footer a {
 		margin: 15px 0;
 		padding: 15px;
 	}
+	a {
+		color: @white;
+	}
 }
 
 /* Report Page */
@@ -604,6 +607,21 @@ footer, footer a {
 		@media (min-width: 768px) {
 			padding-right: 0;			
 		}
+	}
+}
+.more-report {
+	display: none;
+}
+a.show-more-report {
+	color: @light-gray;
+	display: inline-block;
+	font-weight: bold;
+	margin-bottom: 30px;
+	&:focus {
+		color: @light-gray;
+	}
+	&:hover {
+		color: @gray;
 	}
 }
 .r-box {
@@ -660,7 +678,16 @@ footer, footer a {
 }
 
 /* Contact Page */
-.contact {
+#contact-form {
+	.required {
+		color: #d2232a;
+		display: none;
+		margin-left: 95px;
+		margin-top: 5px;
+		&.message-required {
+			margin-left: 0;
+		}
+	}
 	.form-bordered {
 		.form-group {
 			position: relative;

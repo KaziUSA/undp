@@ -118,7 +118,9 @@ class PageController extends Controller
             //->add('file')
             ->add('title', 'text', array( 'attr' => array( 'class' => 'form-control') ))
             ->add('description')
-            ->add('file', 'file', array( 'attr' => array( 'class' => 'form-control' ) ))
+            ->add('file', 'file', array( 
+                'required' => false,
+                'attr' => array( 'class' => 'form-control' ) ))
             //->add('date')
             ->getForm()
         ;

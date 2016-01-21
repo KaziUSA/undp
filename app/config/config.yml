@@ -11,6 +11,7 @@ parameters:
 framework:
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
+    translator: ~ #for /contact
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -105,20 +106,3 @@ vich_uploader:
             delete_on_update:   true
             delete_on_remove:   true
 
-mremi_contact:
-    store_data:            false
-    contact_class:         Mremi\ContactBundle\Model\Contact
-
-    form:
-        type:              mremi_contact
-        name:              contact_form
-        validation_groups: [Default]
-        subject_provider:  mremi_contact.subject_provider.noop
-
-    email:
-        mailer:            mremi_contact.mailer.twig_swift
-        from:              
-            - { address: symfony@undp.kazi.com, name: "UNDP" }
-        to:                
-            - { address: nikesh@kazistudios.com, name: "Nikesh" }
-        template:          MremiContactBundle:Contact:email.txt.twig

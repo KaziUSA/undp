@@ -1,0 +1,185 @@
+{% extends 'frontend.html.twig' %}
+
+{% block body %}
+    <div class="page-title">
+        <h3>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <article id="content1" class="ck-title" contenteditable="true" onclick="onClickToolbarButton()">
+                    {{ entity.title | raw}}
+                </article>
+            {% else %}
+                {{ entity.title | raw}}
+            {% endif %}
+        </h3>
+    </div>
+    <section class="content img-cover relative" style="{% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %}">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a>
+        {% endif %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4">
+                    <div class="u-box clearfix">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <article id="content2" class="ckeditor" contenteditable="true">
+                                {{ entity.description | raw }}
+                            </article>
+                            <input type="button" id="save" class="btn btn-bordered pull-right" value="Save">
+                            <img id="loader" class="hide" src="/img/frontend/loading.GIF">
+                        {% else %}
+                            {{ entity.description | raw }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-md-5 col-sm-5">
+                    <div class="u-box" id="contact-form">
+                        <h3>Please send us a message with feedback or quires.</h3>
+
+                        <form class="form-bordered" action="" method="post" autocomplete="off">
+                          <div class="form-group">
+                            <label for="inputName" class="control-label">Name *</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="">
+                            <span class="required name-required">This field is required.</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputAddress" class="control-label">Address *</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="">
+                            <span class="required address-required">This field is required.</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail" class="control-label">Email *</label>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="">
+                            <span class="required email-required">This field is required.</span>
+                            <span class="required good-email-required">Please type valid email address.</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputPhone" class="control-label">Phone *</label>
+                            <input type="text" class="form-control" id="inputPhone" placeholder="">
+                            <span class="required phone-required">This field is required.</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="textMessage" class="control-label">Message *</label>
+                            <textarea id="textMessage" class="form-control" cols="30" rows="10"></textarea>
+                            <span class="required message-required">This field is required.</span>
+                          </div>
+                          <div class="form-group">
+                            <!--<input type="submit" id="submit" class="btn btn-bordered" value="Submit">-->
+                            <button type="button" id="submit" class="btn btn-bordered">Submit</button>
+                          </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{%block scriptIncludes %}
+<script>
+//quick fix for hiding toolbar for title  
+function onClickToolbarButton() {
+    var bar = document.getElementById("cke_content1");//for #content1
+    if(bar.style.display == "none"){
+        bar.style.display = "none";//block - to show
+    }else{
+        bar.style.display = "none";
+    }
+}
+</script>
+<script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
+<script>
+function validateEmail($email) {
+  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+  return emailReg.test( $email );
+}
+
+var i=0, j=0;
+//$("#content1, #content2").keyup(function()
+$('#save').click(function()
+ {  
+  var name = {id:{{ entity.id }}, title:$("#content1").html(), description:$("#content2").html()};//{{ entity.id }}
+  i=i+1;
+  $("#loader").removeClass("hide");
+  $("#loader").addClass("show");
+  console.log("Request Sent");
+    $.post('{{path('page_show', {'slug': entity.slug} )}}',
+        { data_id:name.id,data_title:name.title,data_description:name.description}, 
+            function(response){ 
+            j=j+1
+                    if (j==i){
+                        console.log("hidden");
+                        $("#loader").removeClass("show");
+                        $("#loader").addClass("hide");  
+                    }
+            }
+    );
+
+  //return false;
+   
+  });
+
+//for contact form
+var m=0, n=0;
+$('#submit').click(function() {  
+  var mail = {
+    name:$("#inputName").val(), 
+    address:$("#inputAddress").val(),
+    email:$("#inputEmail").val(),
+    phone:$("#inputPhone").val(),
+    message:$("#textMessage").val()
+  };  
+  //validate part here
+  if(mail.name == '' || mail.address == '' || mail.email == '' || mail.phone == '' || mail.message == '') {
+    if(mail.name == '') {
+      $('.name-required').css({'display':'block'});
+      $("#inputName").focus();
+      return false;
+    }
+    if(mail.address == '') {
+      $('.address-required').css({'display':'block'});
+      $("#inputAddress").focus();
+      return false;
+    }
+    if(mail.email == '') {
+      $('.email-required').css({'display':'block'});
+      $("#inputEmail").focus();
+      return false;
+    }
+    if(!validateEmail(mail.email)) {
+      $('.good-email-required').css({'display':'block'});
+      $("#inputEmail").focus();
+      return false;
+    }
+    if(mail.phone == '') {
+      $('.phone-required').css({'display':'block'});
+      $("#inputPhone").focus();
+      return false;
+    }
+    if(mail.message == '') {
+      $('.message-required').css({'display':'block'});
+      $("#textMessage").focus();
+      return false;
+    }
+  } else {
+    m=m+1;
+    console.log("Request Sent");
+    //console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
+
+    $.post('{{path('contactus')}}',               
+      { data_name:mail.name, data_address:mail.address, data_email:mail.email, data_phone:mail.phone, data_message:mail.message
+      }, 
+        function(response) {
+          n=n+1
+          if (n==m){
+            //console.log("Your message has been sent successfully!");
+            $("#contact-form").html('<h3>Your message has been sent successfully! <a href="{{path('contactus')}}">Send message again?</a></h3>');
+          }
+        }        
+    );
+    return false;
+  }//end else
+});
+</script>
+
+{% endblock %}
