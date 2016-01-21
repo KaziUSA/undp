@@ -471,6 +471,29 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
 		$results = $statement->fetchAll();
     	return $results;
     }
+    /**
+    * Get month,ethnicity,age filtered data(22.MEA)
+    * @return array
+    */    
+    public function getMonthEthnicityAge($que_id,$ans_name,$ethnicity_name,$month_name,$age_name){
+        $sql='SELECT count(*) as count 
+        FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
+        INNER JOIN answer AS a ON sr.answer_id=a.id 
+        INNER JOIN `age` AS ag ON s.age_id=ag.id 
+        INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
+        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename ';
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection(); 
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('ename', $ethnicity_name);
+        $statement->bindValue('qnid', $que_id);
+        $statement->bindValue('name', $ans_name);
+        $statement->bindValue('month', $month_name);
+        $statement->bindValue('agname', $age_name);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }
 
 	/**
     * Get ethnicity,gender,district filtered data(23.DGE)
@@ -497,6 +520,7 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     	return $results;
     }  
 
+    
     /**
     * Get age,gender,district filtered data (24.DGA)
     * @return array
