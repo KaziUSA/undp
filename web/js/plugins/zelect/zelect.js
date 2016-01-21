@@ -169,6 +169,7 @@
   }
 
   function selectBased($select, $list, regexpMatcher, appendItemFn) {
+    var option_index = 0;
     var dummyRegexp = { test: function() { return true } }
     var options = $select.find('option').map(function() { return itemFromOption($(this)) }).get()
 
@@ -180,7 +181,8 @@
       })
     }
     function itemFromOption($option) {
-      return { value: $option.attr('value'), label: $option.text() }
+      option_index = option_index + 1;
+      return { value: $option.attr('value'), label: option_index + '. '+$option.text() }
     }
     function newTerm(term, callback) {
       filter(term)

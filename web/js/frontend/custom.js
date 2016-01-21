@@ -83,7 +83,7 @@ $(document).ready(function () {
 
   //custom select
   //$('#zelect select').zelect({ placeholder:'Please select question' });
-  $('#zelect select').zelect({ placeholder:'Are your main problems being addressed?' });//for default chart
+  $('#zelect select').zelect({ placeholder:'1. Are your main problems being addressed?' });//for default chart
 
 
   //TODO: align center horizontally the table data having attribute colspan
