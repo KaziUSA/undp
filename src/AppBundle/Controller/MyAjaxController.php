@@ -23,7 +23,7 @@ class MyAjaxController extends Controller
 	
 	/**    
      * @Route("/", name="myajax")
-     * @Method("POST")
+     * @Method("GET")
      * @Template()
      */
 	public function indexAction(Request $request){
@@ -35,6 +35,7 @@ class MyAjaxController extends Controller
 		$obj['answer']=array();
 		$obj['count']=array();
 		$obj['series']=array();
+		$obj['label']=array();
 		// $obj['series']['name']=array();
 		// $obj['series']['data']=array();
 		$data_question = $request->request->get('data_question');
@@ -46,7 +47,7 @@ class MyAjaxController extends Controller
 		$colors=['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459','#B0A472','#333332','#D7D1CA','#EB65A0','#982395','#CDCDCD','#CD92BA','#DAFFA6','#85BACD','#B0A472','#D94E67',' #0241E2', '#F7F960'];
 		//$data_question = 1;
 		//$data_age = ['15 - 24','25 - 39','40 - 54'];
-		// $data_gender= ['Male','Female'];
+		 //$data_gender= ['Male','Female'];
 		//$data_ethnicity=['Brahmin','Chhetri','Dalit'];
 		//$data_district=['Kathmandu','Dolakha'];
 		//$data_month=['January','July','August','September'];
@@ -74,6 +75,7 @@ class MyAjaxController extends Controller
 		    	
 		    	$obj['label']=$obj['answer'];
 		    }			 
+			
 		}
 
 		//Only Month filter selected(2.M)
@@ -238,6 +240,12 @@ class MyAjaxController extends Controller
 			}
 			$obj['label']=$data_month;
 			$obj['xlabel']='Month';
+			$i=0;
+			// foreach ($data_month as $month){
+			// 	$obj['label'][$i]['name'][]=$month;
+			// 	$obj['label'][$i]['categories'][]=$data_gender;
+			// 	$i++;
+			// }
 		}
 
 		//Month and Ethnicity filter selected(9.ME)
