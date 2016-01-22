@@ -5,39 +5,55 @@
     <div class="page-title"><h3>Community Perception Survey Report</h3></div>
 
     <table class="records_list table table-condensed table-hover table-striped dataTables">
-        <thead>
-            <tr>
+        {% set excludeColumns = {  1:1, 8:8, 10:10, 12:12, 14:14, 15:15, 16:16, 17:17, 18:18, 19:19, 21:21, 22:22, 23:23, 24:24, 26:26, 27:27, 28:28, 29:29, 31:31, 32:32, 33:33, 34:34, 36:36, 37:37, 38:38, 39:39, 41:41, 44:44, 45:45
+        } %}
+        
+        {% set count = 1  %}
+        
+        {% set numColumns = 10 %}
+        
+        {% for entity in fileInfo %}
+            {% if count == 0 %}
+                {% set count = 1 %}
+            {% elseif count == 1 %}
+        
+            <thead>
+                <tr>
+                    {% set columncount = 0 %}
+                    {% for val in entity %}
+                        {% if columncount in excludeColumns %}
+                    
+                        {% else %}
+                            <th>{{ val }}</a></th>
+                        {% endif %}
+                        {% set columncount = columncount + 1 %}
+                    {% endfor %}
+                    
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+            {% set count = 2  %}
+            
+            {% else %}
+            
                 
-                <th>Date</th>
-                <th>Age Group</th>
-                <th>Gender</th>
-                <th>Ethnicity</th>
-                <th>Occupation</th>
-                <th>Disabled</th>
-                <th>District</th>
-                <th>VDC</th>
-                <th>Ward</th>
-                <th>Term</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                
-                <td>{% if entity.date %}{{ entity.date|date('M Y') }}{% endif %}</td>
-                <td>{{ entity.age }}</td>
-                <td>{{ entity.gender }}</td>
-                <td>{{ entity.ethnicity }}</td>
-                <td>{{ entity.occupation }}</td>
-                <td>
-                    {% if entity.disability == 0 %}NO{% else %}YES{% endif %}                    
-                </td>
-                <td>{{ entity.district }}</td>
-                <td>{{ entity.vdc }}</td>
-                <td>{{ entity.ward }}</td>
-                <td>{{ entity.term }}</td>
-            </tr>
-        {% endfor %}
+            
+                <tr>
+                    {% set columncount = 0 %}
+                    {% for val in entity %}
+                        {% if columncount in excludeColumns %}
+                    
+                        {% else %}
+                            <td>{{ val }}</td>
+                        {% endif %}
+                        {% set columncount = columncount + 1 %}
+                    {% endfor %}
+                </tr>
+            
+            {% endif %}
+        {% endfor %}    
         </tbody>
     </table>
         
