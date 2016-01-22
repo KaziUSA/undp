@@ -274,8 +274,10 @@
               var val=new Array();
               var dt= new Array();
               if(response.code == 100 && response.success){
+                  
                   console.log(response);
                   console.log(JSON.stringify(response.result.html));
+                  console.log(response.result.series); 
                   //show custom legend on chart if number of items in legend is greater and equal to 4
                   var legend_item_height = 29;
 
@@ -392,10 +394,11 @@
                       },
                   });//Highchart end
                    $('.high-chart-wrap').removeClass('hidden');
-                  $('#table1').html(chart.getTable());
-                  if(response.result.html != undefined){                    
+                  //$('#table1').html(chart.getTable()); //Get table from highchart function 
+                  $('#table1').html(response.result.html);
+                  if(response.result.series === undefined){                    
                     $('.high-chart-wrap').addClass('hidden');
-                    $('#table1').html(response.result.html);
+                    
                   }
                   $('#download-report').click(function () {
                       var chart = $('#canvas').highcharts();
