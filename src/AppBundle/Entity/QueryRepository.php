@@ -376,8 +376,33 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     	return $results;
     } 
 
+    
     /**
-    * Get ethnicity,month,district filtered data(18.MDE)
+    * Get gender,month,district filtered data(17.MDG->DGM)
+    * @return array
+    */    
+    public function getMonthDistrictGender($que_id,$ans_name,$district_name,$month_name,$gender_name){
+        $sql='SELECT count(*) as count 
+        FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
+        INNER JOIN answer AS a ON sr.answer_id=a.id 
+        INNER JOIN `gender` AS g ON s.gender_id=g.id 
+        INNER JOIN `district` AS d ON d.id=s.district_id 
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND d.name=:dname ';
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection(); 
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('dname', $district_name);
+        $statement->bindValue('qnid', $que_id);
+        $statement->bindValue('name', $ans_name);
+        $statement->bindValue('month', $month_name);
+        $statement->bindValue('gname', $gender_name);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }  
+
+    /**
+    * Get ethnicity,month,district filtered data(18.MDE->DEM)
     * @return array
     */    
     public function getMonthDistrictEthnicity($que_id,$ans_name,$district_name,$month_name,$ethnicity_name){
@@ -571,6 +596,187 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     	return $results;
     }
 
+   /**
+    * Get age,gender,ethnicity filtered data (26.GEA->EAG)
+    * @return array
+    */
+    public function getAgeEthnicityGender($que_id,$ans_name,$ethnicity_name,$gender_name,$age_name){
+        $sql='SELECT count(*) as count 
+        FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
+        INNER JOIN answer AS a ON sr.answer_id=a.id 
+        INNER JOIN `age` AS ag ON s.age_id=ag.id 
+        INNER JOIN `gender` AS g ON g.id=s.gender_id 
+        INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
+        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND e.name=:ename ';
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection(); 
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('ename', $ethnicity_name);
+        $statement->bindValue('qnid', $que_id);
+        $statement->bindValue('name', $ans_name);
+        $statement->bindValue('gname', $gender_name);
+        $statement->bindValue('agname', $age_name);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }
+    
+    /**
+    * Get district,month,gender,ethnicity filtered data(27.MDGE->DEGM)
+    * @return array
+    */    
+    public function getMDGE($que_id,$ans_name,$ethnicity_name,$gender_name,$month_name,$district_name){
+        $sql='SELECT count(*) as count 
+        FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
+        INNER JOIN answer AS a ON sr.answer_id=a.id 
+        INNER JOIN `gender` AS g ON s.gender_id=g.id 
+        INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
+        INNER JOIN `district` AS d ON d.id=s.district_id
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename AND d.name=:dname';
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection(); 
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('ename', $ethnicity_name);
+        $statement->bindValue('dname', $district_name);
+        $statement->bindValue('qnid', $que_id);
+        $statement->bindValue('name', $ans_name);
+        $statement->bindValue('month', $month_name);
+        $statement->bindValue('gname', $gender_name);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }
+    /**
+    * Get district,month,gender,age filtered data(28.MDGA->DAGM)
+    * @return array
+    */    
+    public function getMDGA($que_id,$ans_name,$age_name,$gender_name,$month_name,$district_name){
+        $sql='SELECT count(*) as count 
+        FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
+        INNER JOIN answer AS a ON sr.answer_id=a.id 
+        INNER JOIN `gender` AS g ON s.gender_id=g.id 
+        INNER JOIN `age` AS ag ON ag.id=s.age_id 
+        INNER JOIN `district` AS d ON d.id=s.district_id
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname AND d.name=:dname';
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection(); 
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('agname', $age_name);
+        $statement->bindValue('dname', $district_name);
+        $statement->bindValue('qnid', $que_id);
+        $statement->bindValue('name', $ans_name);
+        $statement->bindValue('month', $month_name);
+        $statement->bindValue('gname', $gender_name);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }
 
 
+/**
+    * Get age,month,gender,ethnicity filtered data(29.MGEA->EAGM)
+    * @return array
+    */    
+    public function getMGEA($que_id,$ans_name,$age_name,$gender_name,$month_name,$ethnicity_name){
+        $sql='SELECT count(*) as count 
+        FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
+        INNER JOIN answer AS a ON sr.answer_id=a.id 
+        INNER JOIN `gender` AS g ON s.gender_id=g.id 
+        INNER JOIN `age` AS ag ON ag.id=s.age_id 
+        INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname AND e.name=:ename';
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection(); 
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('agname', $age_name);
+        $statement->bindValue('ename', $ethnicity_name);
+        $statement->bindValue('qnid', $que_id);
+        $statement->bindValue('name', $ans_name);
+        $statement->bindValue('month', $month_name);
+        $statement->bindValue('gname', $gender_name);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }
+    /**
+    * Get district,month,age,ethnicity filtered data(30.MDEA->DEAM)
+    * @return array
+    */    
+    public function getMDEA($que_id,$ans_name,$ethnicity_name,$age_name,$month_name,$district_name){
+        $sql='SELECT count(*) as count 
+        FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
+        INNER JOIN answer AS a ON sr.answer_id=a.id 
+        INNER JOIN `age` AS ag ON s.age_id=ag.id 
+        INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
+        INNER JOIN `district` AS d ON d.id=s.district_id
+        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename AND d.name=:dname';
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection(); 
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('ename', $ethnicity_name);
+        $statement->bindValue('dname', $district_name);
+        $statement->bindValue('qnid', $que_id);
+        $statement->bindValue('name', $ans_name);
+        $statement->bindValue('month', $month_name);
+        $statement->bindValue('agname', $age_name);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }
+
+
+/**
+    * Get district,month,age,ethnicity filtered data(31.DGEA->DEAG)
+    * @return array
+    */    
+    public function getDGEA($que_id,$ans_name,$ethnicity_name,$age_name,$gender_name,$district_name){
+        $sql='SELECT count(*) as count 
+        FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
+        INNER JOIN answer AS a ON sr.answer_id=a.id 
+        INNER JOIN `age` AS ag ON s.age_id=ag.id 
+        INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
+        INNER JOIN `district` AS d ON d.id=s.district_id
+        INNER JOIN `gender` AS g ON g.id=s.gender_id
+        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND e.name=:ename AND d.name=:dname';
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection(); 
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('ename', $ethnicity_name);
+        $statement->bindValue('dname', $district_name);
+        $statement->bindValue('qnid', $que_id);
+        $statement->bindValue('name', $ans_name);
+        $statement->bindValue('gname', $gender_name);
+        $statement->bindValue('agname', $age_name);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }
+
+/**
+    * Get age,month,gender,ethnicity filtered data(32.MDGEA->DEAGM)
+    * @return array
+    */    
+    public function getMDGEA($que_id,$ans_name,$age_name,$gender_name,$month_name,$ethnicity_name,$district_name){
+        $sql='SELECT count(*) as count 
+        FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
+        INNER JOIN answer AS a ON sr.answer_id=a.id 
+        INNER JOIN `gender` AS g ON s.gender_id=g.id 
+        INNER JOIN `age` AS ag ON ag.id=s.age_id 
+        INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id
+        INNER JOIN `district` AS d ON d.id=s.district_id
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname AND e.name=:ename AND d.name=:dname';
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection(); 
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('agname', $age_name);
+        $statement->bindValue('ename', $ethnicity_name);
+        $statement->bindValue('qnid', $que_id);
+        $statement->bindValue('name', $ans_name);
+        $statement->bindValue('month', $month_name);
+        $statement->bindValue('gname', $gender_name);
+        $statement->bindValue('dname', $district_name);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }
 }
