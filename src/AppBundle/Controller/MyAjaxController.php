@@ -98,7 +98,7 @@ class MyAjaxController extends Controller
 			$obj['xlabel']='Month';//Set for category name on table created by highchart getTable() method
 			
 			$i=0;					
-			$obj['html']="<table id='' class='table table-bordered'><thead>";			
+			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
 			$obj['html']=$obj['html']."<tr><th>Month</th>";				
 			for($k=0;$k<count($data_month);$k++){
 				$obj['html']=$obj['html']."<th>".$data_month[$k]."</th>";				        
