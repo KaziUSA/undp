@@ -2,12 +2,27 @@
 
 {% block body -%}
     {# TODO: Need to add share button with functionality #}
-    <div class="page-title"><h3>Community Perception Survey Report</h3></div>
+    <div class="page-title">
+        <h3>Community Perception Survey Report</h3>
+        <div class="feedback-round">
+            <div class="customSel">
+                <label>
+                    <select name="round" id="" onchange="if (this.value) window.location.href=this.value">
+                        <option value="1">Round 1</option>
+                        <option value="2">Round 2</option>
+                        <option value="3">Round 3</option>
+                        <option value="4">Round 4</option>
+                        <option value="5">Round 5</option>
+                        <option value="6" selected="selected">Round 6</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
 
     <table class="records_list table table-condensed table-hover table-striped dataTables">
         {# for round 6 #}
-        {% set excludeColumns = {  1:1, 8:8, 10:10, 13:13, 14:14, 15:15, 16:16, 17:17, 18:18, 20:20, 21:21, 22:22, 23:23, 25:25, 26:26, 27:27, 28:28, 30:30, 31:31, 32:32, 33:33, 35:35, 36:36, 37:37, 38:38, 40:40, 41:41, 43:43, 44:44, 45:45, 46:46, 49:49, 50:50, 53:53, 54:54, 55:55, 56:56, 58:58, 59:59, 60:60, 61:61
-        } %}
+        {% set excludeColumns = {   } %}
         
         {% set count = 1  %}
         

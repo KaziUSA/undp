@@ -69,7 +69,7 @@ class MyAjaxController extends Controller
 		unset($num); 		
 		//Any filters not selected	(1.N)	
 		if(!isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){ 			
-		    
+		   $obj['series'][$i]['name']= 'Answers'; 
 		   foreach ($obj['answer'] as $num){		  
 		    	$results = $em->getRepository('AppBundle\Entity\Query')->getBasicArray($data_question,$num,$data_disability,$data_year);
 			 	foreach ($results as $arr){
@@ -81,9 +81,24 @@ class MyAjaxController extends Controller
 		    	//$obj['label']=$obj['answer'];
 		    }			 
 			
-			$obj['html']='<table></table>';
+			
 		    $obj['label']=$obj['answer'];
 			$obj['height']=340;
+			$i=0;					
+			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
+			$obj['html']=$obj['html']."<tr><th>Answers</th><th>No. of Answers</th>";				
+					
+			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			foreach ($obj['answer'] as $ans) {
+				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";					    									       
+				$results= $em->getRepository('AppBundle\Entity\Query')->getBasicArray($data_question,$ans,$data_disability,$data_year);
+				foreach ($results as $arr){		        		
+			    	$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>";			    	 
+	    		}	
+				
+				$obj['html']=$obj['html']."</tr>";
+			}
+			$obj['html']=$obj['html']."</tbody></table>";
 		}
 
 		//Only Month filter selected(2.M)
