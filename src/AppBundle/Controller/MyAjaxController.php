@@ -69,7 +69,7 @@ class MyAjaxController extends Controller
 		unset($num); 		
 		//Any filters not selected	(1.N)	
 		if(!isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){ 			
-		    
+		   $obj['series'][$i]['name']= 'Answers'; 
 		   foreach ($obj['answer'] as $num){		  
 		    	$results = $em->getRepository('AppBundle\Entity\Query')->getBasicArray($data_question,$num,$data_disability,$data_year);
 			 	foreach ($results as $arr){
