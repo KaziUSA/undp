@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 25, 2016 at 06:58 AM
+-- Generation Time: Jan 25, 2016 at 07:05 AM
 -- Server version: 5.6.13
 -- PHP Version: 5.5.30
 
@@ -370,6 +370,57 @@ INSERT INTO `interviewer` (`id`, `name`, `agency`, `phone`, `email`) VALUES
 (328, 'Jivan kunwar', 'accountability', NULL, NULL),
 (329, 'Jivan kunwr', 'accountability', NULL, NULL),
 (330, 'Nabin Thapa', 'accountability', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question`
+--
+
+CREATE TABLE IF NOT EXISTS `question` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `number` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `answer_group_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_B6F7494ED91ED822` (`answer_group_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=31 ;
+
+--
+-- Dumping data for table `question`
+--
+
+INSERT INTO `question` (`id`, `number`, `name`, `answer_group_id`) VALUES
+(1, '1', 'Are your main problems being addressed?', 1),
+(2, '1a', 'What is your biggest problem?', 2),
+(3, '1b', 'What is your second biggest problem?', 2),
+(4, '1c', 'What is your third biggest problem?', 2),
+(5, '2', 'Are you satisfied with what the government is doing for you after the earthquake?', 1),
+(6, '2a', 'What is the first reason you are not satisfied with government?', 3),
+(7, '2b', 'What is the second reason you are not satisfied with government?', 3),
+(8, '3', 'Do you have the information you need to get relief and support?', 1),
+(9, '3a', 'What is the top thing that you need information about?', 4),
+(10, '3b', 'What is the second thing that you need information about?', 4),
+(11, '4', 'Are you satisfied with what NGOs are doing for you after the earthquake?', 1),
+(12, '4a', 'What is the first reason you not satisfied with NGO support?', 5),
+(13, '4b', 'What is the second reason you not satisfied with NGO support?', 5),
+(14, '5', 'Is support provided in a fair way?', 1),
+(15, '5a', 'What is the top reason for you saying that support is not provided fairly?', 6),
+(16, '5b', 'What is the second most important reason for you saying that support is not provided fairly?', 6),
+(17, '6', 'Are you prepared for winter?', 1),
+(18, '6a', 'What is the main reason reason you feel you are not prepared?', 9),
+(19, '7', 'Do you have problems related to children in your household or family in the post-earthquake period?', 1),
+(20, '7a', 'What is the main problem for children?', 7),
+(21, '7b', 'What is the second top problem for children?', 7),
+(22, '8', 'Overall, is the post-earthquake relief effort making progress?', 1),
+(23, '9', 'Do your feel there has been as increase in the environment of tension, or risk of violence or harassment since the earthquake?', 1),
+(24, '9a', 'Who has this increased risk come from?', 8),
+(25, '6', 'Are you prepared for monsoon season?', 1),
+(26, '7', 'Do you feel you have been heard?', 1),
+(27, '9', 'As a woman, are your particular problems being addressed?', 1),
+(28, '10', 'Do you feel that the children in your family are in a safe place while attending school?', 1),
+(29, '11', 'Do you need to rebuild, repair or retrofit your home because of damage caused by earthquakes?', 1),
+(30, '12', 'Do you feel your community has recovered from the earthquake?', 1);
 
 -- --------------------------------------------------------
 
@@ -69062,6 +69113,12 @@ INSERT INTO `survey_response` (`id`, `survey_id`, `question_id`, `answer_id`) VA
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `question`
+--
+ALTER TABLE `question`
+  ADD CONSTRAINT `FK_B6F7494ED91ED822` FOREIGN KEY (`answer_group_id`) REFERENCES `answer_group` (`id`);
 
 --
 -- Constraints for table `survey`
