@@ -1149,7 +1149,7 @@ div.DTTT_container {
 	z-index: 1;
 }
 table.dataTable thead .sorting_asc {
-  background: url('../css/plugins/images/sort_asc_white.png') no-repeat center right;
+  background: url('../css/plugins/images/sort_asc_white.png') no-repeat center right 17px;
 }
 table.dataTable thead .sorting:after {
 	color: @white;
@@ -1268,4 +1268,29 @@ div.dataTables_paginate {
 #loader {
 	float: right;
 	margin: 5px 5px 0 0;
+}
+
+.dataTable th {
+    position: relative;
+    padding-right: 15px !important;
+}
+
+table.dataTable thead .sorting:after, table.dataTable thead .sorting_desc::after, table.dataTable thead .sorting::after{
+    position: absolute !important;
+    right: 0 !important;
+    float: none !important;
+}
+.table-wrap{
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+}
+table.dataTable thead .sorting_asc, th.sorting_desc{
+    background-position: right 8px;
+    padding-right: 25px !important;
+}
+table.dataTable thead .sorting_desc:after{
+	top: 5px;
+	font-size: 14px;
+	right: 10px !important;
 }
