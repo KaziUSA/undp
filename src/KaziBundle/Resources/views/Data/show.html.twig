@@ -20,6 +20,7 @@
         </div>
     </div>
 
+<div class="table-wrap">
     <table class="records_list table table-condensed table-hover table-striped dataTables">
         {% set excludeColumns = {  } %}
 
@@ -87,6 +88,7 @@
         
     {% endblock %}
 {% block scriptIncludes %}
+</div> <!-- /.table-wrap -->
 <script>
         $(document).ready(function() {
             $('.dataTables').dataTable({
