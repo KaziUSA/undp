@@ -142,7 +142,7 @@
                       </span>
                     </div>
 
-                    <div class="high-chart">
+                    <div class="high-chart clearfix">
                         <div class="high-chart-wrap">
                             <div id="canvas" class="chart-container"></div>
 
@@ -165,13 +165,16 @@
                                 </div>
                                 <div class="legend legend3 download">
                                     <ul>
-                                        <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Report</a></li>
-                                       {#  <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li> #}
+
+                                        <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Chart</a></li>
+                                        {# <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li> #}
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div id="table1" class="chart-table table-responsive"></div>
+                        <!-- <div class="download pull-right"><a href="#!" id="download-table"><span class="icon icon-download"></span> Download Table</a></div> -->
                     </div>
                 </div>
             </div><!-- /.main-content -->
@@ -326,7 +329,7 @@
 
                           type: 'column',
                       },
-                      colors:['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459'],
+                      colors:['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'],
                       title: {
                           text: qname//There is no text in design: Answers by the people
                       },
@@ -418,7 +421,22 @@
                   });
 
                   $('#table1 table').addClass('table-bordered table');   
-                  $('.legend-box .legend2 ul li').html(response.result.total);              
+                  $('.legend-box .legend2 ul li').html(response.result.total); 
+                  
+                  //download table
+                  $('.dataTables').dataTable({
+                      "pageLength": 100,
+                      responsive: true,
+                      "dom": 'T<"clear">lfrtip',
+                      "tableTools": {
+                          "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+                      },
+                      "colVis": {
+                          "buttonText": "Change columns"
+                      }
+                  });
+                  $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download');
+
               }//Ajax success end
 
           }, "json"); //.post end
@@ -431,6 +449,11 @@ $(document).ready(function() {
   $('select#form_questions').change(function() {
     aButtonPressed();
   });
+
+
+   
+
+
 });
 
 </script>
