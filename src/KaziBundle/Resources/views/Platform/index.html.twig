@@ -13,10 +13,10 @@
                       <ul id="" class="nav nav-tabs" role="tablist">
                         {# <li role="presentation" class="round1"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
                         <li role="presentation" class="round2"><a href="#round1" aria-controls="profile" role="tab" data-toggle="tab">2</a></li> #}
-                        <li role="presentation" class="active round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab">3</a></li>
-                        <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">4</a></li>
-                        <li role="presentation" class="round5"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">5</a></li>
-                        <li role="presentation" class="round6"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">6</a></li>
+                        <li role="presentation" class="active round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab" value="2015">2015</a></li>
+                        <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab" value="2016">2016</a></li>
+                       {#  <li role="presentation" class="round5"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">5</a></li>
+                        <li role="presentation" class="round6"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab">6</a></li> #}
 
                       </ul>
                   </div>
@@ -32,13 +32,13 @@
                                       <div class="ac">
                                         {# ac-1 #}
                                         <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
-                                        <label class="ac-label month-label active" for="ac-1">Month</label>
+                                        <label class="ac-label month-label" for="ac-1">Month</label>
 
                                         <ul class="ac-text checkbox-style">
                                             <li><input type="checkbox" id="month-all" value="" />
                                                 <label for="month-all">All<span></span></label></li>
                                             <div class="form_months" id="form_months">
-                                                <li><input class="month" type="checkbox" id="month7" value="7" /><label for="month7">July<span></span></label></li><li><input class="month" type="checkbox" id="month8" value="8"/><label for="month8">August<span></span></label></li><li><input class="month" type="checkbox" id="month9" value="9"/><label for="month9">September<span></span></label></li>
+                                                <li><input class="month" type="checkbox" id="month1" value="1" /><label for="month1">January<span></span></label></li><li><input class="month" type="checkbox" id="month2" value="2"/><label for="month2">Feburary<span></span></label></li><li><input class="month" type="checkbox" id="month3" value="3"/><label for="month3">March<span></span></label></li><li><input class="month" type="checkbox" id="month4" value="4" /><label for="month4">April<span></span></label></li><li><input class="month" type="checkbox" id="month5" value="5"/><label for="month5">May<span></span></label></li><li><input class="month" type="checkbox" id="month6" value="6"/><label for="month6">June<span></span></label></li><li><input class="month" type="checkbox" id="month7" value="7" /><label for="month7">July<span></span></label></li><li><input class="month" type="checkbox" id="month8" value="8"/><label for="month8">August<span></span></label></li><li><input class="month" type="checkbox" id="month9" value="9"/><label for="month9">September<span></span></label></li><li><input class="month" type="checkbox" id="month10" value="10" /><label for="month10">October<span></span></label></li><li><input class="month" type="checkbox" id="month11" value="11"/><label for="month11">November<span></span></label></li><li><input class="month" type="checkbox" id="month12" value="12"/><label for="month12">December<span></span></label></li>
                                             </div>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
@@ -99,8 +99,10 @@
                                       <div class="ac">
                                         {# ac-6 #}
                                         <ul class="checkbox-style">
-                                            <li><input type="checkbox" id="disability" />
-                                            <label for="disability">Disability<span></span></label></li>
+                                            <div id="form_disability">
+                                              <li><input type="checkbox" id="disability" />
+                                              <label for="disability">Disability<span></span></label></li>
+                                            </div>
                                         </ul>
                                       </div><!--/ac-->
 
@@ -163,8 +165,10 @@
                                 </div>
                                 <div class="legend legend3 download">
                                     <ul>
+
                                         <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Chart</a></li>
-                                        <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li>
+                                        {# <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li> #}
+
                                     </ul>
                                 </div>
                             </div>
@@ -187,11 +191,16 @@
     <script>
     //Ajax call
     function aButtonPressed(){
+      //store ques name
+      var qname=$("#form_questions option:selected").text();
       //store selected question in questions variable
       var questions=document.getElementById('form_questions').selectedIndex;
       questions=document.getElementsByTagName("option")[questions].value;
       if(questions == '') { questions = 1; }//for default chart
       //alert(questions);
+       //store year in yearVal
+       var yearVal=$('.feedback-tab ul.nav li.active a').attr('value');
+       //alert(yearVal);
        //store selected month in monthVals
        var monthVals = [];
        $('#form_months :checked').each(function() {
@@ -227,15 +236,24 @@
        });
        //alert(ageVals);
 
+       if($('#disability').prop('checked')){
+        disabilityVal="1";
+       }
+       else{
+        disabilityVal="0";
+       }
+       //alert(disabilityVal);
+
        //for default chart show: on page load
        //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
-       if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
-        monthVals.push('July');
-        monthVals.push('August');
-        monthVals.push('September');
-        $("input#month-all, #form_months input[type=checkbox]").prop('checked', true);
-        $('#month-select-text').html('Month');
-       }
+       //TODO: need to fix the height of the total respondants section
+       // if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
+       //  monthVals.push('July');
+       //  monthVals.push('August');
+       //  monthVals.push('September');
+       //  $("input#month-all, #form_months input[type=checkbox]").prop('checked', true);
+       //  $('#month-select-text').html('Month');
+       // }
 
        if(monthVals != '') {
         $('#month-select-text').html('Month /');
@@ -269,12 +287,11 @@
        //prepend with /
 
       $.post('{{path('myajax')}}',
-          { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals },
+          { qname:qname,data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals, data_disability: disabilityVal , data_year: yearVal},
           function(response){
               var val=new Array();
               var dt= new Array();
-              if(response.code == 100 && response.success){
-                  
+              if(response.code == 100 && response.success){                 
                   console.log(response);
                   console.log(JSON.stringify(response.result.html));
                   console.log(response.result.series); 
@@ -316,7 +333,7 @@
                       },
                       colors:['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'],
                       title: {
-                          text: ''//There is no text in design: Answers by the people
+                          text: qname//There is no text in design: Answers by the people
                       },
                       subtitle: {
                           text: ''//There is no text in design: Source: UNDP Annual Report
