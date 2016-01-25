@@ -81,9 +81,24 @@ class MyAjaxController extends Controller
 		    	//$obj['label']=$obj['answer'];
 		    }			 
 			
-			$obj['html']='<table></table>';
+			
 		    $obj['label']=$obj['answer'];
 			$obj['height']=340;
+			$i=0;					
+			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
+			$obj['html']=$obj['html']."<tr><th>Answers</th><th>No. of Answers</th>";				
+					
+			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			foreach ($obj['answer'] as $ans) {
+				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";					    									       
+				$results= $em->getRepository('AppBundle\Entity\Query')->getBasicArray($data_question,$ans,$data_disability,$data_year);
+				foreach ($results as $arr){		        		
+			    	$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>";			    	 
+	    		}	
+				
+				$obj['html']=$obj['html']."</tr>";
+			}
+			$obj['html']=$obj['html']."</tbody></table>";
 		}
 
 		//Only Month filter selected(2.M)
