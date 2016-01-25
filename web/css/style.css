@@ -7518,6 +7518,8 @@ body.DTTT_Print {
 }
 
 /* FOS Register */
+#appbundle_interviewer > div,
+#appbundle_age > div,
 #fos_user_registration_form > div,
 #form > div,
 #appbundle_document > div {

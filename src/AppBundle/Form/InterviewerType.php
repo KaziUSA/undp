@@ -15,10 +15,10 @@ class InterviewerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('agency')
-            ->add('phone')
-            ->add('email')
+            ->add('name', 'text', array( 'attr' => array( 'class' => 'form-control' ) ) )
+            ->add('agency', 'text', array( 'attr' => array( 'class' => 'form-control' ) ) )
+            ->add('phone', 'text', array( 'attr' => array( 'class' => 'form-control' ) ) )
+            ->add('email', 'text', array( 'attr' => array( 'class' => 'form-control' ) ) )
         ;
     }
     
