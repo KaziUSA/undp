@@ -83,15 +83,25 @@
 													{% if entity.documenttype == 'National Reports' %}
 													<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
 														<div class="r-box">
-															<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+															<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+															</a>
 													
 															<ul class="share-icons">
 																<li><a href="#share" class="fa fa-share-alt"></a>
 																	<ul>		
-																		{# TODO: Need to change undp.kazi270.com to dynamic url path #}											
-																		<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
-																		<li><a href="https://twitter.com/home?status=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
-																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
+																		{# TODO: Need to change undp.kazi270.com to dynamic url path #}					
+																		{# TODO: Need to share shareable or clickable link for twitter #}						
+																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}&title=UNDP%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																		
+																		<li><a href="http://twitter.com/intent/tweet?text=UNDP+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fundp.kazi270.com/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+																		{# https://twitter.com/home?status=UNDP%20Report:%20Test%20http://undp.kazi270.com/uploads/documents/{{ entity.path|url_encode }}
+
+																		http://twitter.com/intent/tweet?text=UNDP+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fundp.kazi270.com/uploads/documents/{{ entity.path|replace({' ': '%20'}) }} #}
+
+																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}&title=UNDP%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 																	</ul>
 																</li>
 																<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
@@ -118,16 +128,22 @@
 												{% if entity.documenttype == 'District Reports' %}
 												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %}">
 													<div class="r-box">
-														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+														</a>
 												
 														<ul class="share-icons">
 															<li><a href="#share" class="fa fa-share-alt"></a>
 																<ul>		
-																	{# TODO: Need to change undp.kazi270.com to dynamic url path #}											
-																	<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
-																	<li><a href="https://twitter.com/home?status=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
-																	<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
-																</ul>
+																		{# TODO: Need to change undp.kazi270.com to dynamic url path #}											
+																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}&title=UNDP%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																		
+																		<li><a href="http://twitter.com/intent/tweet?text=UNDP+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fundp.kazi270.com/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}&title=UNDP%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																	</ul>
 															</li>
 															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
 														</ul>
@@ -155,16 +171,22 @@
 												{% if entity.documenttype == 'Issue in Focus Reports' %}
 												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
 													<div class="r-box">
-														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+														</a>
 												
 														<ul class="share-icons">
 															<li><a href="#share" class="fa fa-share-alt"></a>
 																<ul>		
-																	{# TODO: Need to change undp.kazi270.com to dynamic url path #}											
-																	<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
-																	<li><a href="https://twitter.com/home?status=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
-																	<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
-																</ul>
+																		{# TODO: Need to change undp.kazi270.com to dynamic url path #}											
+																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}&title=UNDP%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																		
+																		<li><a href="http://twitter.com/intent/tweet?text=UNDP+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fundp.kazi270.com/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}&title=UNDP%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																	</ul>
 															</li>
 															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
 														</ul>
@@ -189,16 +211,22 @@
 												{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
 												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
 													<div class="r-box">
-														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link"></a>
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+														</a>
 												
 														<ul class="share-icons">
 															<li><a href="#share" class="fa fa-share-alt"></a>
 																<ul>		
-																	{# TODO: Need to change undp.kazi270.com to dynamic url path #}											
-																	<li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}" title="Share on Facebook" class="fa fa-facebook"></a></li>
-																	<li><a href="https://twitter.com/home?status=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}" title="Share on Twitter" class="fa fa-twitter"></a></li>
-																	<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}/&title=&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin"></a></li>
-																</ul>
+																		{# TODO: Need to change undp.kazi270.com to dynamic url path #}											
+																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}&title=UNDP%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																		
+																		<li><a href="http://twitter.com/intent/tweet?text=UNDP+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fundp.kazi270.com/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//undp.kazi270.com/uploads/documents/{{ entity.path }}&title=UNDP%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																	</ul>
 															</li>
 															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
 														</ul>

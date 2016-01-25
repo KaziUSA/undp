@@ -472,6 +472,10 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e411', endColorstr='#0a6c88',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 	opacity: 0.85;
+
+	position: absolute;
+  height: 800px;
+  width: 100%;
 }
 .content {
 	letter-spacing: 1px;
@@ -480,7 +484,8 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 .content.contact,
 .content.about,
 .content.home,
-.transparent-grd {
+.transparent-grd,
+.content-area {
   min-height: 800px;
 }
 .content {
@@ -639,6 +644,30 @@ a.show-more-report {
 		display: block;
 		width: 100%;
 		height: 100%;
+		.reports-overlay {
+			background: #159c02;
+			color: @white;
+			display: none;	
+			height: 100%;
+			width: 100%;
+			.reports-name {
+				display: table-cell;
+				font-size: 16px;
+				line-height: 20px;
+				font-weight: bold;
+				vertical-align: middle;
+				padding: 10px;
+				text-align: center;
+				width: 100%;
+			}
+		}
+	}
+	&:hover {
+		a.report-link {
+			.reports-overlay {
+				display: table;	
+			}
+		}
 	}
 	.share-icons {
 		margin-bottom: 0;
@@ -943,7 +972,7 @@ body {
 	.legend-box {
 		@media (min-width: 600px) {
 			display: none;//if highchart legend height is less than 104px; initially hidden
-			height: 158px;//height of high chart legend with four answer or option
+			height: 188px;//height of high chart legend with four answer or option
 			left: 20%;
 			position: absolute;
 			bottom: 18px;
@@ -993,23 +1022,28 @@ body {
 		}		
 		&.legend3 {
 		}
-		&.download {
-			li {
-				line-height: 20px;
-				margin-bottom: 8px;
-				a {
-					span {
-						float: left;
-						margin: 2px 10px 10px 0;
-					}
-				}
-			}
-		}
 	}
 	.chart-table {
 		padding: 15px 15px 0;	
 	}
 }//end high-chart
+.download {
+	line-height: 20px;
+	li {
+		line-height: 20px;
+		margin-bottom: 8px;
+	}
+	a {
+		color: @gray;
+		span {
+			float: left;
+			margin: 2px 10px 10px 0;
+		}
+	}
+}
+#download-table {
+	margin-right: 15px;
+}
 
 table {
 	margin-bottom: 0;
@@ -1041,6 +1075,9 @@ table {
 }
 
 //dataTable
+table.dataTable tr.child:hover {
+  background: #86d7eb !important;
+}
 table.dataTable {
 	@media (min-width: 800px) {
 		width: 100% !important;
@@ -1053,19 +1090,20 @@ a.DTTT_button,
 .dataTables_filter {//search
 		position: absolute;
     right: 15px;
-    top: -35px;
+    top: -30px;
     z-index: 1;
     label {
     	color: white;
     	input {
     		color: @gray;
+    		font-size: 12px;
     		margin-left: 10px;
 
     		background: none;
 		    border: 0;
 		    border-bottom: 1px solid #fff !important;
 		    padding: 0;
-		    height: 27px;
+		    height: 20px;
 		    color: white;
 		    &.form-control:focus {
 		    	border-color: #ffffff !important;
@@ -1073,17 +1111,40 @@ a.DTTT_button,
     	}
     }
 }
-a.DTTT_button.DTTT_button_xls {
-	background: url(../img/frontend/icons/icon-download-blue.png) no-repeat 0 0;
+a.DTTT_button.DTTT_button_xls, a.DTTT_button.DTTT_button_csv {
 	border: 0;
 	display: block;
 	//text-indent: -9999px;//remove this for download functionality
+	padding-left: 25px;
+	padding-top: 2px;
 	box-shadow: none;
+	span {
+		font-size: 12px;
+	}
+}
+a.DTTT_button.DTTT_button_csv {
+	background: url(../img/frontend/icons/icon-download-white.png) no-repeat 0 0;
+	position: absolute;
+  right: 240px;
+  top: -25px;
+	span {
+		color: @white;
+	}
+}
+a.DTTT_button.DTTT_button_xls {
+	background: url(../img/frontend/icons/icon-download-blue.png) no-repeat 0 0;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	span {
+		color: #3e7180;
+	}
 }
 div.DTTT_container {
+	height: 100%;
 	margin-bottom: 0;
 	position: absolute;
-	bottom: 0;
+	bottom: 4px;
 	right: 10px;
 	z-index: 1;
 }
@@ -1202,4 +1263,9 @@ div.dataTables_paginate {
 			content: "\002b";
 		}
 	}
+}
+
+#loader {
+	float: right;
+	margin: 5px 5px 0 0;
 }
