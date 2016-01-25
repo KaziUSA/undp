@@ -173,6 +173,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div id="table1" class="chart-table table-responsive"></div>
                         <!-- <div class="download pull-right"><a href="#!" id="download-table"><span class="icon icon-download"></span> Download Table</a></div> -->
                     </div>
@@ -428,17 +429,25 @@
                   
                   //download table
                   $('.dataTables').dataTable({
+                      
                       "pageLength": 100,
                       responsive: true,
-                      "dom": 'T<"clear">lfrtip',
                       "tableTools": {
                           "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
                       },
+                      "dom": 'T<"toolbar">lfrtip',
+                      "aoColumnDefs": [ 
+                         { "sTitle": $(".zelected").text(), "aTargets": [ 0 ] }
+                       ],
+                      "stitle":$(".zelected").text(),
                       "colVis": {
                           "buttonText": "Change columns"
                       }
+                      
                   });
+                  // $("div.toolbar").html();
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download');
+                  $('.highcharts-title').hide();
 
               }//Ajax success end
 
@@ -452,7 +461,6 @@ $(document).ready(function() {
   $('select#form_questions').change(function() {
     aButtonPressed();
   });
-
 
    
 
