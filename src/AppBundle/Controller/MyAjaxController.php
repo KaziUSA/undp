@@ -76,7 +76,7 @@ class MyAjaxController extends Controller
 		    		$obj['series'][$i]['name']='Answers';
 		    		$obj['total'] += (int)$arr['count'];
 		    	}    	
-		    	
+		    	$obj['html']='<table></table>';
 		    	$obj['label']=$obj['answer'];
 		    }			 
 			
