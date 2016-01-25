@@ -1024,7 +1024,12 @@ body {
 		}
 	}
 	.chart-table {
-		padding: 15px 15px 0;	
+		padding: 15px 15px 18px;	
+	}
+	.dataTables_info, 
+	.dataTables_paginate,
+	a.DTTT_button.DTTT_button_csv {
+		display: none;
 	}
 }//end high-chart
 .download {
@@ -1131,6 +1136,9 @@ a.DTTT_button.DTTT_button_csv {
 		color: @white;
 	}
 }
+.high-chart a.DTTT_button.DTTT_button_csv {
+	display: none;
+}
 a.DTTT_button.DTTT_button_xls {
 	background: url(../img/frontend/icons/icon-download-blue.png) no-repeat 0 0;
 	position: absolute;
@@ -1147,6 +1155,16 @@ div.DTTT_container {
 	bottom: 4px;
 	right: 10px;
 	z-index: 1;
+}
+.high-chart div.DTTT_container {
+	bottom: -18px;
+	right: 0;	
+	a.DTTT_button.DTTT_button_xls {
+		background: url(../img/frontend/icons/icon-download.png) no-repeat 0 0;
+		span {
+			color: @gray;
+		}
+	}
 }
 table.dataTable thead .sorting_asc {
   background: url('../css/plugins/images/sort_asc_white.png') no-repeat center right;
