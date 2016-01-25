@@ -38,7 +38,7 @@
                                             <li><input type="checkbox" id="month-all" value="" />
                                                 <label for="month-all">All<span></span></label></li>
                                             <div class="form_months" id="form_months">
-                                                <li><input class="month" type="checkbox" id="month1" value="1" /><label for="month1">January<span></span></label></li><li><input class="month" type="checkbox" id="month2" value="2"/><label for="month2">Feburary<span></span></label></li><li><input class="month" type="checkbox" id="month3" value="3"/><label for="month3">March<span></span></label></li><li><input class="month" type="checkbox" id="month4" value="4" /><label for="month4">April<span></span></label></li><li><input class="month" type="checkbox" id="month5" value="5"/><label for="month5">May<span></span></label></li><li><input class="month" type="checkbox" id="month6" value="6"/><label for="month6">June<span></span></label></li><li><input class="month" type="checkbox" id="month7" value="7" /><label for="month7">July<span></span></label></li><li><input class="month" type="checkbox" id="month8" value="8"/><label for="month8">August<span></span></label></li><li><input class="month" type="checkbox" id="month9" value="9"/><label for="month9">September<span></span></label></li><li><input class="month" type="checkbox" id="month10" value="10" /><label for="month10">October<span></span></label></li><li><input class="month" type="checkbox" id="month11" value="11"/><label for="month11">November<span></span></label></li><li><input class="month" type="checkbox" id="month12" value="12"/><label for="month12">December<span></span></label></li>
+                                                <li><input class="month" type="checkbox" id="month7" value="7" /><label for="month7">July<span></span></label></li><li><input class="month" type="checkbox" id="month8" value="8"/><label for="month8">August<span></span></label></li><li><input class="month" type="checkbox" id="month9" value="9"/><label for="month9">September<span></span></label></li><li><input class="month" type="checkbox" id="month10" value="10" /><label for="month10">October<span></span></label></li><li><input class="month" type="checkbox" id="month11" value="11"/><label for="month11">November<span></span></label></li><li><input class="month" type="checkbox" id="month12" value="12"/><label for="month12">December<span></span></label></li>
                                             </div>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
@@ -320,7 +320,7 @@
                           renderTo: 'canvas',
                           backgroundColor: '#ffffff',
                           borderWidth: 0,
-                          height: 514,
+                          height: response.result.height,
                           plotBorderWidth: 0,
                           plotShadow: true,
                           //renderTo: 'container',//#container: Not needed now
@@ -337,9 +337,10 @@
                           text: qname//There is no text in design: Answers by the people
                       },
                       subtitle: {
-                          text: ''//There is no text in design: Source: UNDP Annual Report
+                          text: response.result.grouped//There is no text in design: Source: UNDP Annual Report
                       },
                       xAxis: {
+
                           labels: {
                               style: {'color': '#898989', 'fontSize': '14px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
                           },
