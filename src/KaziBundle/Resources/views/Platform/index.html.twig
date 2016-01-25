@@ -99,8 +99,10 @@
                                       <div class="ac">
                                         {# ac-6 #}
                                         <ul class="checkbox-style">
-                                            <li><input type="checkbox" id="disability" />
-                                            <label for="disability">Disability<span></span></label></li>
+                                            <div id="form_disability">
+                                              <li><input type="checkbox" id="disability" />
+                                              <label for="disability">Disability<span></span></label></li>
+                                            </div>
                                         </ul>
                                       </div><!--/ac-->
 
@@ -164,7 +166,7 @@
                                 <div class="legend legend3 download">
                                     <ul>
                                         <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Report</a></li>
-                                        <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li>
+                                       {#  <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li> #}
                                     </ul>
                                 </div>
                             </div>
@@ -186,6 +188,8 @@
     <script>
     //Ajax call
     function aButtonPressed(){
+      //store ques name
+      var qname=$("#form_questions option:selected").text();
       //store selected question in questions variable
       var questions=document.getElementById('form_questions').selectedIndex;
       questions=document.getElementsByTagName("option")[questions].value;
@@ -226,15 +230,24 @@
        });
        //alert(ageVals);
 
+       if($('#disability').prop('checked')){
+        disabilityVal="1";
+       }
+       else{
+        disabilityVal="0";
+       }
+       //alert(disabilityVal);
+
        //for default chart show: on page load
        //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
-       if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
-        monthVals.push('July');
-        monthVals.push('August');
-        monthVals.push('September');
-        $("input#month-all, #form_months input[type=checkbox]").prop('checked', true);
-        $('#month-select-text').html('Month');
-       }
+       //TODO: need to fix the height of the total respondants section
+       // if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
+       //  monthVals.push('July');
+       //  monthVals.push('August');
+       //  monthVals.push('September');
+       //  $("input#month-all, #form_months input[type=checkbox]").prop('checked', true);
+       //  $('#month-select-text').html('Month');
+       // }
 
        if(monthVals != '') {
         $('#month-select-text').html('Month /');
@@ -268,7 +281,7 @@
        //prepend with /
 
       $.post('{{path('myajax')}}',
-          { data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals },
+          { qname:qname,data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals, data_disability: disabilityVal },
           function(response){
               var val=new Array();
               var dt= new Array();
@@ -315,7 +328,7 @@
                       },
                       colors:['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459'],
                       title: {
-                          text: ''//There is no text in design: Answers by the people
+                          text: qname//There is no text in design: Answers by the people
                       },
                       subtitle: {
                           text: ''//There is no text in design: Source: UNDP Annual Report
