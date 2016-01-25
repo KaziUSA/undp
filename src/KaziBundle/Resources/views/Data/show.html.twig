@@ -1,6 +1,7 @@
 {% extends '::frontend.html.twig' %}
 
 {% block body -%}
+<div class="table-wrap">
     {# TODO: Need to add share button with functionality #}
     <div class="page-title">
         <h3>Community Perception Survey Report - Round {{ slug }}</h3>
@@ -19,8 +20,6 @@
             </div>
         </div>
     </div>
-
-<div class="table-wrap">
     <table class="records_list table table-condensed table-hover table-striped dataTables">
         {% set excludeColumns = {  } %}
 
