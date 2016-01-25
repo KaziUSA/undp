@@ -46,7 +46,7 @@ class MyAjaxController extends Controller
 		$data_month = $request->request->get('data_month');
 		$data_disability=$request->request->get('data_disability');
 		$data_year = $request->request->get('data_year');
-		$colors=['#99bc44','#ff6600','#E23239','#349de7','#FFC33C','#159c02','#88d8ef','#588C73','#D96459','#B0A472','#333332','#D7D1CA','#EB65A0','#982395','#CDCDCD','#CD92BA','#DAFFA6','#85BACD','#B0A472','#D94E67',' #0241E2', '#F7F960'];
+		$colors=['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'];
 		//$data_question = 1;
 		//$data_age = ['15 - 24','25 - 39','40 - 54'];
 		//$data_gender= ['Male','Female'];
@@ -54,6 +54,8 @@ class MyAjaxController extends Controller
 		//$data_district=['Kathmandu','Dolakha'];
 		//$data_month=['January','July','August','September'];
 		//$data_disability=1;
+		//$data_year='2015';
+		$obj['height']=514;
 		//Handle data
 		
 		//Store the answers of the selected question in $obj['answer']\
@@ -68,18 +70,20 @@ class MyAjaxController extends Controller
 		//Any filters not selected	(1.N)	
 		if(!isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){ 			
 		    
-		    foreach ($obj['answer'] as $num){		  
+		   foreach ($obj['answer'] as $num){		  
 		    	$results = $em->getRepository('AppBundle\Entity\Query')->getBasicArray($data_question,$num,$data_disability,$data_year);
 			 	foreach ($results as $arr){
 		        	//array_push($obj['count'], (int)$arr['count']);   
 		    		$obj['series'][$i]['data'][]= (int)$arr['count'];
-		    		$obj['series'][$i]['name']='Answers';
 		    		$obj['total'] += (int)$arr['count'];
 		    	}    	
-		    	$obj['html']='<table></table>';
-		    	$obj['label']=$obj['answer'];
+		    	
+		    	//$obj['label']=$obj['answer'];
 		    }			 
 			
+			$obj['html']='<table></table>';
+		    $obj['label']=$obj['answer'];
+			$obj['height']=340;
 		}
 
 		//Only Month filter selected(2.M)
@@ -353,6 +357,9 @@ class MyAjaxController extends Controller
 			$i=0;
 			$flag=0; // For hiding legend of grouped columns with same name
 			$obj['stack']='normal'; //For stack chart
+			if(count($data_gender)>1){
+				$obj['grouped']='Grouped By Female/Male';
+			}
 			foreach ($data_gender as $gender) {				
 				$j=0;				
 				foreach ($obj['answer'] as $num){	
@@ -549,6 +556,9 @@ class MyAjaxController extends Controller
 			$i=0;
 			$flag=0; // For hiding legend of grouped columns with same name
 			$obj['stack']='normal'; //For stack chart
+			if(count($data_gender)>1){
+				$obj['grouped']='Grouped By Female/Male';
+			}
 			foreach ($data_gender as $gender) {				
 				$j=0;				
 				foreach ($obj['answer'] as $num){	
@@ -652,6 +662,9 @@ class MyAjaxController extends Controller
 			$i=0;
 			$flag=0; // For hiding legend of grouped columns with same name
 			$obj['stack']='normal'; //For stack chart
+			if(count($data_gender)>1){
+				$obj['grouped']='Grouped By Female/Male';
+			}
 			foreach ($data_gender as $gender) {	
 				$j=0;			
 				foreach ($obj['answer'] as $num){	
@@ -684,6 +697,9 @@ class MyAjaxController extends Controller
 		if(isset($data_age) && isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){
 			$i=0;
 			$obj['stack']='normal'; //For stack chart
+			if(count($data_gender)>1){
+				$obj['grouped']='Grouped By Female/Male';
+			}
 			foreach ($data_gender as $gender) {				
 				$j=0;
 				foreach ($obj['answer'] as $num){					
