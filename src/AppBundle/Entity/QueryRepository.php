@@ -27,18 +27,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get basic data of the question and answer count when any filter is not selected(1.N)
     * @return array
     */
-    public function getBasicArray($que_id,$ans_name,$data_disability){
+    public function getBasicArray($que_id,$ans_name,$data_disability,$data_year){
     	$sql= 'SELECT count(*) as count
 			FROM `survey_response` AS sr INNER JOIN answer AS a ON sr.answer_id=a.id 
             INNER JOIN `survey` AS s ON sr.survey_id=s.id
-			WHERE sr.question_id = :qnid AND a.name = :name';
-         if($data_disability==1){
+			WHERE sr.question_id = :qnid AND a.name = :name AND YEAR(s.date)= :yname';
+        
+        if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
        
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();				
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
 		$statement->execute();
@@ -50,17 +51,17 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month filtered data of the question and answer count when only month filter is selected(2.M)
     * @return array
     */
-    public function getMonthFilteredArray($que_id,$ans_name,$month_name,$data_disability){
+    public function getMonthFilteredArray($que_id,$ans_name,$month_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     		FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     		INNER JOIN answer AS a ON sr.answer_id=a.id 
-    		WHERE sr.question_id = :qnid AND MONTHNAME(s.date)=:month AND a.name = :name ';
+    		WHERE sr.question_id = :qnid AND MONTHNAME(s.date)=:month AND a.name = :name AND YEAR(s.date)= :yname';
 		if($data_disability==1){
             $sql=$sql.'AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('month', $month_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -74,18 +75,18 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get district filtered data of the question and answer count when only district filter is selected(3.D)
     * @return array
     */
-    public function getDistrictFilteredArray($que_id,$ans_name,$district_name,$data_disability){
+    public function getDistrictFilteredArray($que_id,$ans_name,$district_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `district` AS d ON s.district_id=d.id 
-    	WHERE d.name=:dname AND sr.question_id = :qnid AND a.name = :name';
+    	WHERE d.name=:dname AND sr.question_id = :qnid AND a.name = :name AND YEAR(s.date)= :yname';
         if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('dname', $district_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -99,18 +100,18 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get gender filtered data of the question and answer count when only gender filter is selected(4.G)
     * @return array
     */
-    public function getGenderFilteredArray($que_id,$ans_name,$gender_name,$data_disability){
+    public function getGenderFilteredArray($que_id,$ans_name,$gender_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `gender` AS g ON s.gender_id=g.id 
-    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name';
+    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND YEAR(s.date)= :yname';
         if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('gname', $gender_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -123,18 +124,18 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get ethnicity filtered data when only ethnicity filter is selected(5.E)
     * @return array
     */
-    public function getEthnicityFilteredArray($que_id,$ans_name,$ethnicity_name,$data_disability){
+    public function getEthnicityFilteredArray($que_id,$ans_name,$ethnicity_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `ethnicity` AS e ON s.ethnicity_id=e.id 
-    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name';
+    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND YEAR(s.date)= :yname';
         if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('ename', $ethnicity_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -147,18 +148,18 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get age filtered data of the question and answer count when only age filter is selected(6.A)
     * @return array
     */
-    public function getAgeFilteredArray($que_id,$ans_name,$age_name,$data_disability){
+    public function getAgeFilteredArray($que_id,$ans_name,$age_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `age` AS ag ON s.age_id=ag.id 
-    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name  ';
+    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND YEAR(s.date)= :yname';
         if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('agname', $age_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -171,15 +172,15 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month and district filtered data when month and district filter is selected(7.MD)
     * @return array
     */
-    public function getMonthDistrict($que_id,$ans_name,$district_name,$month_name,$data_disability){
+    public function getMonthDistrict($que_id,$ans_name,$district_name,$month_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `district` AS d ON s.district_id=d.id 
-    	WHERE d.name=:dname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month';
+    	WHERE d.name=:dname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND YEAR(s.date)= :yname';
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('dname', $district_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -193,18 +194,18 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month and gender filtered data(8.MG)
     * @return array
     */
-    public function getMonthGender($que_id,$ans_name,$month_name,$gender_name,$data_disability){
+    public function getMonthGender($que_id,$ans_name,$month_name,$gender_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count FROM `survey_response` AS sr 
     	INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `gender` AS g ON s.gender_id=g.id 
-    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month';
+    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('gname', $gender_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -219,18 +220,18 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month and ethnicity filtered data(9.ME)
     * @return array
     */
-    public function getMonthEthnicity($que_id,$ans_name,$ethnicity_name,$month_name,$data_disability){
+    public function getMonthEthnicity($que_id,$ans_name,$ethnicity_name,$month_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `ethnicity` AS e ON s.ethnicity_id=e.id 
-    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month';
+    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('ename', $ethnicity_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -244,18 +245,18 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month and age filtered data(10.MA)
     * @return array
     */
-    public function getMonthAge($que_id,$ans_name,$age_name,$month_name,$data_disability){
+    public function getMonthAge($que_id,$ans_name,$age_name,$month_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `age` AS ag ON s.age_id=ag.id 
-    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month';
+    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('agname', $age_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -270,20 +271,20 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month and gender filtered data(11.DG)
     * @return array
     */
-    public function getDistrictGender($que_id,$ans_name,$district_name,$gender_name,$data_disability){
+    public function getDistrictGender($que_id,$ans_name,$district_name,$gender_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr 
     	INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `gender` AS g ON s.gender_id=g.id 
     	INNER JOIN `district` AS d ON d.id=s.district_id 
-    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND d.name= :dname';
+    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND d.name= :dname AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('gname', $gender_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -297,19 +298,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get ethnicity,district filtered data(12.DE)
     * @return array
     */    
-    public function getDistrictEthnicity($que_id,$ans_name,$district_name,$ethnicity_name,$data_disability){
+    public function getDistrictEthnicity($que_id,$ans_name,$district_name,$ethnicity_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `ethnicity` AS e ON s.ethnicity_id=e.id 
     	INNER JOIN `district` AS d ON d.id=s.district_id 
-    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND d.name=:dname ';
+    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND d.name=:dname  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('dname', $district_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);		
@@ -323,19 +324,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get age,district filtered data(13.DA)
     * @return array
     */    
-    public function getDistrictAge($que_id,$ans_name,$district_name,$age_name,$data_disability){
+    public function getDistrictAge($que_id,$ans_name,$district_name,$age_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `age` AS ag ON s.age_id=ag.id 
     	INNER JOIN `district` AS d ON d.id=s.district_id 
-    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND d.name=:dname ';
+    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND d.name=:dname  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('dname', $district_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);		
@@ -349,19 +350,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get ethnicity and gender filtered data when ethnicity and gender filter is selected(14.GE)
     * @return array
     */
-    public function getEthnicityGender($que_id,$ans_name,$ethnicity_name,$gender_name,$data_disability){
+    public function getEthnicityGender($que_id,$ans_name,$ethnicity_name,$gender_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count
     	 FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	 INNER JOIN answer AS a ON sr.answer_id=a.id 
     	 INNER JOIN `ethnicity` AS e ON s.ethnicity_id=e.id 
     	 INNER JOIN `gender` AS g ON g.id=s.gender_id 
-    	 WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname ';
+    	 WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname  AND YEAR(s.date)= :yname';
           if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('ename', $ethnicity_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -375,19 +376,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get age and gender filtered data when age and gender filter is selected(15.GA)
     * @return array
     */
-    public function getAgeGender($que_id,$ans_name,$age_name,$gender_name,$data_disability){
+    public function getAgeGender($que_id,$ans_name,$age_name,$gender_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `age` AS ag ON s.age_id=ag.id 
     	INNER JOIN `gender` AS g ON g.id=s.gender_id 
-    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname ';
+    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('agname', $age_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -401,19 +402,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get age,district filtered data(16.EA)
     * @return array
     */    
-    public function getEthnicityAge($que_id,$ans_name,$ethnicity_name,$age_name,$data_disability){
+    public function getEthnicityAge($que_id,$ans_name,$ethnicity_name,$age_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `age` AS ag ON s.age_id=ag.id 
     	INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
-    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND e.name=:ename ';
+    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND e.name=:ename  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('ename', $ethnicity_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);		
@@ -428,19 +429,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get gender,month,district filtered data(17.MDG->DGM)
     * @return array
     */    
-    public function getMonthDistrictGender($que_id,$ans_name,$district_name,$month_name,$gender_name,$data_disability){
+    public function getMonthDistrictGender($que_id,$ans_name,$district_name,$month_name,$gender_name,$data_disability,$data_year){
         $sql='SELECT count(*) as count 
         FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
         INNER JOIN answer AS a ON sr.answer_id=a.id 
         INNER JOIN `gender` AS g ON s.gender_id=g.id 
         INNER JOIN `district` AS d ON d.id=s.district_id 
-        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND d.name=:dname ';
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND d.name=:dname  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
         $connection = $em->getConnection(); 
-        $statement = $connection->prepare($sql);
+        $statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
         $statement->bindValue('dname', $district_name);
         $statement->bindValue('qnid', $que_id);
         $statement->bindValue('name', $ans_name);
@@ -455,19 +456,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get ethnicity,month,district filtered data(18.MDE->DEM)
     * @return array
     */    
-    public function getMonthDistrictEthnicity($que_id,$ans_name,$district_name,$month_name,$ethnicity_name,$data_disability){
+    public function getMonthDistrictEthnicity($que_id,$ans_name,$district_name,$month_name,$ethnicity_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `ethnicity` AS e ON s.ethnicity_id=e.id 
     	INNER JOIN `district` AS d ON d.id=s.district_id 
-    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND d.name=:dname ';
+    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND d.name=:dname  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('dname', $district_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -482,19 +483,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month,district,age filtered data(19.MDA)
     * @return array
     */    
-    public function getMonthDistrictAge($que_id,$ans_name,$district_name,$month_name,$age_name,$data_disability){
+    public function getMonthDistrictAge($que_id,$ans_name,$district_name,$month_name,$age_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `age` AS ag ON s.age_id=ag.id 
     	INNER JOIN `district` AS d ON d.id=s.district_id 
-    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND d.name=:dname ';
+    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND d.name=:dname  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('dname', $district_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -509,19 +510,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month,gender,ethnicity filtered data(20.MGE)
     * @return array
     */    
-    public function getMonthGenderEthnicity($que_id,$ans_name,$ethnicity_name,$gender_name,$month_name,$data_disability){
+    public function getMonthGenderEthnicity($que_id,$ans_name,$ethnicity_name,$gender_name,$month_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `gender` AS g ON s.gender_id=g.id 
     	INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
-    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename ';
+    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('ename', $ethnicity_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -536,19 +537,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month,gender,age filtered data(21.MGA)
     * @return array
     */    
-    public function getMonthGenderAge($que_id,$ans_name,$age_name,$gender_name,$month_name,$data_disability){
+    public function getMonthGenderAge($que_id,$ans_name,$age_name,$gender_name,$month_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `gender` AS g ON s.gender_id=g.id 
     	INNER JOIN `age` AS ag ON ag.id=s.age_id 
-    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname ';
+    	WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('agname', $age_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -562,19 +563,19 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get month,ethnicity,age filtered data(22.MEA)
     * @return array
     */    
-    public function getMonthEthnicityAge($que_id,$ans_name,$ethnicity_name,$month_name,$age_name,$data_disability){
+    public function getMonthEthnicityAge($que_id,$ans_name,$ethnicity_name,$month_name,$age_name,$data_disability,$data_year){
         $sql='SELECT count(*) as count 
         FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
         INNER JOIN answer AS a ON sr.answer_id=a.id 
         INNER JOIN `age` AS ag ON s.age_id=ag.id 
         INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
-        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename ';
+        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
         $connection = $em->getConnection(); 
-        $statement = $connection->prepare($sql);
+        $statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
         $statement->bindValue('ename', $ethnicity_name);
         $statement->bindValue('qnid', $que_id);
         $statement->bindValue('name', $ans_name);
@@ -589,20 +590,20 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get ethnicity,gender,district filtered data(23.DGE)
     * @return array
     */    
-    public function getEthnicityDistrictGender($que_id,$ans_name,$district_name,$gender_name,$ethnicity_name,$data_disability){
+    public function getEthnicityDistrictGender($que_id,$ans_name,$district_name,$gender_name,$ethnicity_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `ethnicity` AS e ON s.ethnicity_id=e.id 
     	INNER JOIN `gender` AS g ON g.id=s.gender_id 
     	INNER JOIN `district` AS d ON d.id=s.district_id 
-    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND d.name=:dname ';
+    	WHERE e.name=:ename AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND d.name=:dname  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$em = $this->getEntityManager();
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('dname', $district_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -618,20 +619,20 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get age,gender,district filtered data (24.DGA)
     * @return array
     */
-    public function getAgeDistrictGender($que_id,$ans_name,$district_name,$gender_name,$age_name,$data_disability){
+    public function getAgeDistrictGender($que_id,$ans_name,$district_name,$gender_name,$age_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `age` AS ag ON s.age_id=ag.id 
     	INNER JOIN `gender` AS g ON g.id=s.gender_id 
     	INNER JOIN `district` AS d ON d.id=s.district_id 
-    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND d.name=:dname ';
+    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND d.name=:dname  AND YEAR(s.date)= :yname';
 		$em = $this->getEntityManager();
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('dname', $district_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -646,20 +647,20 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get age,gender,district filtered data (25.DEA)
     * @return array
     */
-    public function getDistrictEthnicityAge($que_id,$ans_name,$district_name,$ethnicity_name,$age_name,$data_disability){
+    public function getDistrictEthnicityAge($que_id,$ans_name,$district_name,$ethnicity_name,$age_name,$data_disability,$data_year){
     	$sql='SELECT count(*) as count 
     	FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     	INNER JOIN answer AS a ON sr.answer_id=a.id 
     	INNER JOIN `age` AS ag ON s.age_id=ag.id 
     	INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
     	INNER JOIN `district` AS d ON d.id=s.district_id 
-    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND e.name=:ename AND d.name=:dname ';
+    	WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND e.name=:ename AND d.name=:dname  AND YEAR(s.date)= :yname';
 		$em = $this->getEntityManager();
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
 		$connection = $em->getConnection();	
-		$statement = $connection->prepare($sql);
+		$statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
 		$statement->bindValue('dname', $district_name);
 		$statement->bindValue('qnid', $que_id);
 		$statement->bindValue('name', $ans_name);
@@ -674,20 +675,20 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get age,gender,ethnicity filtered data (26.GEA->EAG)
     * @return array
     */
-    public function getAgeEthnicityGender($que_id,$ans_name,$ethnicity_name,$gender_name,$age_name,$data_disability){
+    public function getAgeEthnicityGender($que_id,$ans_name,$ethnicity_name,$gender_name,$age_name,$data_disability,$data_year){
         $sql='SELECT count(*) as count 
         FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
         INNER JOIN answer AS a ON sr.answer_id=a.id 
         INNER JOIN `age` AS ag ON s.age_id=ag.id 
         INNER JOIN `gender` AS g ON g.id=s.gender_id 
         INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
-        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND e.name=:ename ';
+        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND e.name=:ename  AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
         $connection = $em->getConnection(); 
-        $statement = $connection->prepare($sql);
+        $statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
         $statement->bindValue('ename', $ethnicity_name);
         $statement->bindValue('qnid', $que_id);
         $statement->bindValue('name', $ans_name);
@@ -702,20 +703,20 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get district,month,gender,ethnicity filtered data(27.MDGE->DEGM)
     * @return array
     */    
-    public function getMDGE($que_id,$ans_name,$ethnicity_name,$gender_name,$month_name,$district_name,$data_disability){
+    public function getMDGE($que_id,$ans_name,$ethnicity_name,$gender_name,$month_name,$district_name,$data_disability,$data_year){
         $sql='SELECT count(*) as count 
         FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
         INNER JOIN answer AS a ON sr.answer_id=a.id 
         INNER JOIN `gender` AS g ON s.gender_id=g.id 
         INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
         INNER JOIN `district` AS d ON d.id=s.district_id
-        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename AND d.name=:dname';
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename AND d.name=:dname AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
         $connection = $em->getConnection(); 
-        $statement = $connection->prepare($sql);
+        $statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
         $statement->bindValue('ename', $ethnicity_name);
         $statement->bindValue('dname', $district_name);
         $statement->bindValue('qnid', $que_id);
@@ -730,20 +731,20 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get district,month,gender,age filtered data(28.MDGA->DAGM)
     * @return array
     */    
-    public function getMDGA($que_id,$ans_name,$age_name,$gender_name,$month_name,$district_name,$data_disability){
+    public function getMDGA($que_id,$ans_name,$age_name,$gender_name,$month_name,$district_name,$data_disability,$data_year){
         $sql='SELECT count(*) as count 
         FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
         INNER JOIN answer AS a ON sr.answer_id=a.id 
         INNER JOIN `gender` AS g ON s.gender_id=g.id 
         INNER JOIN `age` AS ag ON ag.id=s.age_id 
         INNER JOIN `district` AS d ON d.id=s.district_id
-        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname AND d.name=:dname';
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname AND d.name=:dname AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
         $connection = $em->getConnection(); 
-        $statement = $connection->prepare($sql);
+        $statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
         $statement->bindValue('agname', $age_name);
         $statement->bindValue('dname', $district_name);
         $statement->bindValue('qnid', $que_id);
@@ -760,20 +761,20 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get age,month,gender,ethnicity filtered data(29.MGEA->EAGM)
     * @return array
     */    
-    public function getMGEA($que_id,$ans_name,$age_name,$gender_name,$month_name,$ethnicity_name,$data_disability){
+    public function getMGEA($que_id,$ans_name,$age_name,$gender_name,$month_name,$ethnicity_name,$data_disability,$data_year){
         $sql='SELECT count(*) as count 
         FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
         INNER JOIN answer AS a ON sr.answer_id=a.id 
         INNER JOIN `gender` AS g ON s.gender_id=g.id 
         INNER JOIN `age` AS ag ON ag.id=s.age_id 
         INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id
-        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname AND e.name=:ename';
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname AND e.name=:ename AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
         $connection = $em->getConnection(); 
-        $statement = $connection->prepare($sql);
+        $statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
         $statement->bindValue('agname', $age_name);
         $statement->bindValue('ename', $ethnicity_name);
         $statement->bindValue('qnid', $que_id);
@@ -788,20 +789,20 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get district,month,age,ethnicity filtered data(30.MDEA->DEAM)
     * @return array
     */    
-    public function getMDEA($que_id,$ans_name,$ethnicity_name,$age_name,$month_name,$district_name,$data_disability){
+    public function getMDEA($que_id,$ans_name,$ethnicity_name,$age_name,$month_name,$district_name,$data_disability,$data_year){
         $sql='SELECT count(*) as count 
         FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
         INNER JOIN answer AS a ON sr.answer_id=a.id 
         INNER JOIN `age` AS ag ON s.age_id=ag.id 
         INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
         INNER JOIN `district` AS d ON d.id=s.district_id
-        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename AND d.name=:dname';
+        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND e.name=:ename AND d.name=:dname AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
         $connection = $em->getConnection(); 
-        $statement = $connection->prepare($sql);
+        $statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
         $statement->bindValue('ename', $ethnicity_name);
         $statement->bindValue('dname', $district_name);
         $statement->bindValue('qnid', $que_id);
@@ -818,7 +819,7 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get district,month,age,ethnicity filtered data(31.DGEA->DEAG)
     * @return array
     */    
-    public function getDGEA($que_id,$ans_name,$ethnicity_name,$age_name,$gender_name,$district_name,$data_disability){
+    public function getDGEA($que_id,$ans_name,$ethnicity_name,$age_name,$gender_name,$district_name,$data_disability,$data_year){
         $sql='SELECT count(*) as count 
         FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
         INNER JOIN answer AS a ON sr.answer_id=a.id 
@@ -826,13 +827,13 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
         INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id 
         INNER JOIN `district` AS d ON d.id=s.district_id
         INNER JOIN `gender` AS g ON g.id=s.gender_id
-        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND e.name=:ename AND d.name=:dname';
+        WHERE ag.name=:agname AND sr.question_id = :qnid AND a.name = :name AND g.name=:gname AND e.name=:ename AND d.name=:dname AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
         $connection = $em->getConnection(); 
-        $statement = $connection->prepare($sql);
+        $statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
         $statement->bindValue('ename', $ethnicity_name);
         $statement->bindValue('dname', $district_name);
         $statement->bindValue('qnid', $que_id);
@@ -848,7 +849,7 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     * Get age,month,gender,ethnicity filtered data(32.MDGEA->DEAGM)
     * @return array
     */    
-    public function getMDGEA($que_id,$ans_name,$age_name,$gender_name,$month_name,$ethnicity_name,$district_name,$data_disability){
+    public function getMDGEA($que_id,$ans_name,$age_name,$gender_name,$month_name,$ethnicity_name,$district_name,$data_disability,$data_year){
         $sql='SELECT count(*) as count 
         FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
         INNER JOIN answer AS a ON sr.answer_id=a.id 
@@ -856,13 +857,13 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
         INNER JOIN `age` AS ag ON ag.id=s.age_id 
         INNER JOIN `ethnicity` AS e ON e.id=s.ethnicity_id
         INNER JOIN `district` AS d ON d.id=s.district_id
-        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname AND e.name=:ename AND d.name=:dname';
+        WHERE g.name=:gname AND sr.question_id = :qnid AND a.name = :name AND MONTHNAME(s.date)=:month AND ag.name=:agname AND e.name=:ename AND d.name=:dname AND YEAR(s.date)= :yname';
          if($data_disability==1){
             $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
         $connection = $em->getConnection(); 
-        $statement = $connection->prepare($sql);
+        $statement = $connection->prepare($sql); $statement->bindValue('yname', $data_year);
         $statement->bindValue('agname', $age_name);
         $statement->bindValue('ename', $ethnicity_name);
         $statement->bindValue('qnid', $que_id);
