@@ -1269,3 +1269,59 @@ div.dataTables_paginate {
 	float: right;
 	margin: 5px 5px 0 0;
 }
+
+.page-title {
+	position: relative;
+}
+.feedback-round {
+	position: absolute;
+	right: 380px;
+	top: 4px;
+}
+/* customSel */
+.customSel {
+	background: #ffffff;
+	border: 1px solid #d3d3d3;
+	height: 25px;
+	line-height: 18px;
+	margin-top: 5px;
+	margin-right: 10px;
+	position: relative;
+	width: 200px;
+	label {
+		display: block;
+	}
+}
+
+	.customSel select {
+		background: #ffffff;
+		border: 0;
+		height: 100%;
+		line-height: 23px;
+		outline: 0;
+		width: 100%;
+		}
+
+	.customSel select:hover {
+		}
+
+.customSel label:after {
+    content: '';
+    width: 25px;
+    height: 23px;
+    position: absolute;
+    display: inline-block;
+    top: 0px;
+    right: 0px;
+    background: url(/img/frontend/icons/custom_sel.png) no-repeat right center white;
+    pointer-events: none;
+
+}
+
+/*target Internet Explorer 9 and Internet Explorer 10:*/
+
+/* @media screen and (min-width:0\0) { 
+    .customSel label:after {
+        display:none;
+    }
+} */
