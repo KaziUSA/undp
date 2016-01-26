@@ -104,6 +104,7 @@ class MyAjaxController extends Controller
 		//Only Month filter selected(2.M)
 		if(!isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && isset($data_month)){
 			$i=0;
+			$obj['total']=0;
 			$obj['stack']='normal'; //For stack chart
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
@@ -127,6 +128,7 @@ class MyAjaxController extends Controller
 				$obj['html']=$obj['html']."<th>".$data_month[$k]."</th>";				        
 			}						
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";				
 				foreach ($data_month as $month) {			       									       
@@ -166,6 +168,7 @@ class MyAjaxController extends Controller
 				$obj['html']=$obj['html']."<th>".$data_district[$k]."</th>";				        
 			}						
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";				
 				foreach ($data_district as $district) {			       									       
@@ -205,6 +208,7 @@ class MyAjaxController extends Controller
 				$obj['html']=$obj['html']."<th>".$data_gender[$k]."</th>";				        
 			}						
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";				
 				foreach ($data_gender as $gender) {			       									       
@@ -246,6 +250,7 @@ class MyAjaxController extends Controller
 				$obj['html']=$obj['html']."<th>".$data_ethnicity[$k]."</th>";				        
 			}						
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";				
 				foreach ($data_ethnicity as $ethnicity) {			       									       
@@ -265,6 +270,7 @@ class MyAjaxController extends Controller
 		//Only age filter selected(6.A)
 		if(isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){
 			$i=0;
+			$obj['total']=0;
 			$obj['stack']='normal'; //For stack chart
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
@@ -287,6 +293,7 @@ class MyAjaxController extends Controller
 				$obj['html']=$obj['html']."<th>".$data_age[$k]."</th>";				        
 			}						
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";				
 				foreach ($data_age as $age) {			       									       
@@ -370,6 +377,7 @@ class MyAjaxController extends Controller
 		//Month and Gender filter selected(8.MG)
 		if(!isset($data_ethnicity) && isset($data_gender) && !isset($data_age) && !isset($data_district) && isset($data_month)){
 			$i=0;
+			$obj['total']=0;
 			$flag=0; // For hiding legend of grouped columns with same name
 			$obj['stack']='normal'; //For stack chart
 			if(count($data_gender)>1){
@@ -422,6 +430,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_month as $month) {					
@@ -569,6 +578,7 @@ class MyAjaxController extends Controller
 		//District and Gender filter selected(11.DG)
 		if(!isset($data_ethnicity) && isset($data_gender) && !isset($data_age) && isset($data_district) && !isset($data_month)){
 			$i=0;
+			$obj['total']=0;
 			$flag=0; // For hiding legend of grouped columns with same name
 			$obj['stack']='normal'; //For stack chart
 			if(count($data_gender)>1){
@@ -688,6 +698,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {					
@@ -711,6 +722,7 @@ class MyAjaxController extends Controller
 		//Gender and Ethnicity filter selected(14.GE)
 		if(isset($data_ethnicity) && isset($data_gender) && !isset($data_age) && !isset($data_district) && !isset($data_month)){
 			$i=0;
+			$obj['total']=0;
 			$flag=0; // For hiding legend of grouped columns with same name
 			$obj['stack']='normal'; //For stack chart
 			if(count($data_gender)>1){
@@ -783,6 +795,7 @@ class MyAjaxController extends Controller
 		//Age and Gender filter selected(15.GA)
 		if(isset($data_age) && isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){
 			$i=0;
+			$obj['total']=0;
 			$obj['stack']='normal'; //For stack chart
 			if(count($data_gender)>1){
 				$obj['grouped']='Grouped By Female/Male';
@@ -868,6 +881,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_ethnicity as $ethnicity) {					
@@ -914,6 +928,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
@@ -965,6 +980,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
@@ -1016,6 +1032,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
@@ -1074,6 +1091,7 @@ class MyAjaxController extends Controller
 				}
 			}
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_ethnicity as $ethnicity) {
@@ -1132,6 +1150,7 @@ class MyAjaxController extends Controller
 				}
 			}
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_age as $age) {
@@ -1180,6 +1199,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_ethnicity as $ethnicity) {
@@ -1229,6 +1249,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
@@ -1279,6 +1300,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
@@ -1329,6 +1351,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {			
@@ -1378,6 +1401,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_ethnicity as $ethnicity) {
@@ -1438,6 +1462,7 @@ class MyAjaxController extends Controller
 				}			
 			}
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
@@ -1499,6 +1524,7 @@ class MyAjaxController extends Controller
 				}			
 			}
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
@@ -1560,6 +1586,7 @@ class MyAjaxController extends Controller
 				}			
 			}
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_ethnicity as $ethnicity) {
@@ -1621,6 +1648,7 @@ class MyAjaxController extends Controller
 				}			
 			}
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
@@ -1682,6 +1710,7 @@ class MyAjaxController extends Controller
 				}			
 			}
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
@@ -1757,6 +1786,7 @@ class MyAjaxController extends Controller
 				}
 			}
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_district as $district) {
