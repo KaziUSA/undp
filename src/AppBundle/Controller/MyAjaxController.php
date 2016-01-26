@@ -430,7 +430,7 @@ class MyAjaxController extends Controller
 				}
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
-			$obj['total']=0;
+			//$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_month as $month) {					
