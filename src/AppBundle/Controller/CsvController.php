@@ -129,7 +129,7 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/'.$file.".xlsx");
+        $this->getCsvData('/var/www/html/web/uploads/'.$file.".xlsx");
         
         
         echo "\n";
