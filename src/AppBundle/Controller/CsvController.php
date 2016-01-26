@@ -154,9 +154,9 @@ class CsvController extends Controller
         
             $interviewer = $this->addInterviewer($row[1], 'accountability');
             $survey = new Survey();
-            $survey->setTerm(2); //MAKE SURE TO CHANGE THIS EVERY TERM
+            $survey->setTerm(1); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
-            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2015-08-15'));
+            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2015-07-15'));
             
             $survey->setAge($this->getAgeByData($row[5]));
         
