@@ -600,6 +600,42 @@ class MyAjaxController extends Controller
 			}
 			$obj['label']=$data_district;
 			$obj['xlabel']='District';
+			$i=0;
+			// foreach ($data_month as $month){
+			// 	$obj['label'][$i]['name'][]=$month;
+			// 	$obj['label'][$i]['categories'][]=$data_gender;
+			// 	$i++;
+			// }
+			$i=0;			
+			$district_span=count($data_gender);				
+			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
+			$obj['html']=$obj['html']."<tr><th>District</th>";
+			for($j=0;$j<count($data_district);$j++){
+				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
+			}
+			
+			$obj['html']=$obj['html']."</tr><tr><th>Gender</th>";			
+			for($i=0;$i<count($data_district);$i++){	
+				for($k=0;$k<count($data_gender);$k++){
+					$obj['html']=$obj['html']."<th>".$data_gender[$k]."</th>";				        
+				}
+			}			
+			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			foreach ($obj['answer'] as $ans) {
+				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
+				foreach ($data_district as $district) {					
+					foreach ($data_gender as $gender) {			       									       
+						$results= $em->getRepository('AppBundle\Entity\Query')->getDistrictGender($data_question,$num,$district,$gender,$data_disability,$data_year);
+						foreach ($results as $arr){		        		
+			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
+
+			    		}	
+					}					
+				}
+				$obj['html']=$obj['html']."</tr>";
+			}
+			$obj['html']=$obj['html']."</tbody></table>";
+
 		}
 
 		//Ethnicity,District Filter selected(12.DE)
@@ -706,6 +742,42 @@ class MyAjaxController extends Controller
 			}
 			$obj['label']=$data_ethnicity;
 			$obj['xlabel']='Ethnicity';
+			$i=0;
+			// foreach ($data_month as $month){
+			// 	$obj['label'][$i]['name'][]=$month;
+			// 	$obj['label'][$i]['categories'][]=$data_gender;
+			// 	$i++;
+			// }
+			$i=0;			
+			$ethnicity_span=count($data_gender);				
+			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
+			$obj['html']=$obj['html']."<tr><th>Ethnicity</th>";
+			for($j=0;$j<count($data_ethnicity);$j++){
+				$obj['html']=$obj['html']."<th colspan='".$ethnicity_span."'>".$data_ethnicity[$j]."</th>";
+			}
+			
+			$obj['html']=$obj['html']."</tr><tr><th>Gender</th>";			
+			for($i=0;$i<count($data_ethnicity);$i++){	
+				for($k=0;$k<count($data_gender);$k++){
+					$obj['html']=$obj['html']."<th>".$data_gender[$k]."</th>";				        
+				}
+			}			
+			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			foreach ($obj['answer'] as $ans) {
+				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
+				foreach ($data_ethnicity as $ethnicity) {					
+					foreach ($data_gender as $gender) {			       									       
+						$results= $em->getRepository('AppBundle\Entity\Query')->getEthnicityGender($data_question,$num,$ethnicity,$gender,$data_disability,$data_year);
+						foreach ($results as $arr){		        		
+			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
+
+			    		}	
+					}					
+				}
+				$obj['html']=$obj['html']."</tr>";
+			}
+			$obj['html']=$obj['html']."</tbody></table>";
+
 		}
 		
 		//Age and Gender filter selected(15.GA)
@@ -741,6 +813,42 @@ class MyAjaxController extends Controller
 			}
 			$obj['label']=$data_age;
 			$obj['xlabel']='Age';
+			$i=0;
+			// foreach ($data_month as $month){
+			// 	$obj['label'][$i]['name'][]=$month;
+			// 	$obj['label'][$i]['categories'][]=$data_gender;
+			// 	$i++;
+			// }
+			$i=0;			
+			$age_span=count($data_gender);				
+			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
+			$obj['html']=$obj['html']."<tr><th>Age</th>";
+			for($j=0;$j<count($data_age);$j++){
+				$obj['html']=$obj['html']."<th colspan='".$age_span."'>".$data_age[$j]."</th>";
+			}
+			
+			$obj['html']=$obj['html']."</tr><tr><th>Gender</th>";			
+			for($i=0;$i<count($data_age);$i++){	
+				for($k=0;$k<count($data_gender);$k++){
+					$obj['html']=$obj['html']."<th>".$data_gender[$k]."</th>";				        
+				}
+			}			
+			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			foreach ($obj['answer'] as $ans) {
+				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
+				foreach ($data_age as $age) {					
+					foreach ($data_gender as $gender) {			       									       
+						$results= $em->getRepository('AppBundle\Entity\Query')->getAgeGender($data_question,$num,$age,$gender,$data_disability,$data_year);
+						foreach ($results as $arr){		        		
+			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
+
+			    		}	
+					}					
+				}
+				$obj['html']=$obj['html']."</tr>";
+			}
+			$obj['html']=$obj['html']."</tbody></table>";
+
 		}
 
 		//Ethnicity,District Filter selected(16.EA)
