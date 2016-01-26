@@ -122,7 +122,7 @@ class DataController extends Controller
                     
                     //This is converting the second column to Date Format
                     //TODO:: Make sure date format anywhere is captured properly and not just the second column
-                    if (($columnCount == 0) && ($rowCount > 0)){
+                    if (($columnCount == 2) && ($rowCount > 2)){
                         $value = $cell->getValue();
                         $value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
                         
@@ -140,9 +140,9 @@ class DataController extends Controller
                     }
                 }
                 /* for debugging or adding css */
-                /*if ($rowCount > 15) {
-                    break;
-                }*/
+                // if ($rowCount > 15) {
+                //     break;
+                // }
                 if ($rowCount > 0)
                 {
                     //$this->setCsvData($row);    
