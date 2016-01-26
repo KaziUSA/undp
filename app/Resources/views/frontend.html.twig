@@ -45,7 +45,7 @@
 		      <ul class="nav navbar-nav">
 		        <li><a href="{{ path('platform') }}" class="{% if app.request.get('_route') == 'platform' %} active {% endif %}">Platform</a></li>
 
-		        <li><a href="{{ path('data') }}" class="{% if app.request.get('_route') == 'data' %} active {% endif %}">Data</a></li>
+		        <li><a href="{{ path('data') }}" class="{% if (app.request.get('_route') == 'data') or (app.request.get('_route') == 'data_show') %} active {% endif %}">Data</a></li>
 		        <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
 		        <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact -->
 		        <li><a href="/page/about" class="{% if app.request.get('_route') == 'show' %} active {% endif %}">About</a></li>
