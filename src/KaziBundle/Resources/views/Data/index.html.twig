@@ -8,12 +8,12 @@
             <div class="customSel">
                 <label>
                     <select name="round" id="" onchange="if (this.value) window.location.href=this.value">
-                        <option value="1">Round 1</option>
-                        <option value="2">Round 2</option>
-                        <option value="3">Round 3</option>
-                        <option value="4">Round 4</option>
-                        <option value="5">Round 5</option>
-                        <option value="6" selected="selected">Round 6</option>
+                        <option value="1">July</option>
+                        <option value="2">August</option>
+                        <option value="3">September</option>
+                        <option value="4">October</option>
+                        <option value="5">November</option>
+                        <option value="6" selected="selected">December</option>
                     </select>
                 </label>
             </div>
@@ -77,11 +77,11 @@
         <li><a href="#share" class="fa fa-share-alt"></a>
             <ul>        
                 {# TODO: Need to change commonfeedback.org to dynamic url path if needed #}                   
-                <li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//commonfeedback.org{{ path('data_show', {'slug': slug} )}}&title=UNDP%20Report%3A%20Round%20{{ slug }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+                <li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//commonfeedback.org{{ path('data' )}}&title=UNDP%20Report%3A%20Round%206" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
                 
-                <li><a href="http://twitter.com/intent/tweet?text=UNDP+Report%3A+Round+{{ slug }}+http%3A//commonfeedback.org{{ path('data_show', {'slug': slug} )}}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+                <li><a href="http://twitter.com/intent/tweet?text=UNDP+Report%3A+Round+6+http%3A//commonfeedback.org{{ path('data' )}}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
 
-                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//commonfeedback.org{{ path('data_show', {'slug': slug} )}}&title=UNDP%20Report%3A%20Round%20{{ slug }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//commonfeedback.org{{ path('data' )}}&title=UNDP%20Report%3A%20Round%206&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
             </ul>
         </li>
     </ul>

@@ -13,6 +13,7 @@ use AppBundle\Entity\Interviewer;
 use AppBundle\Entity\Survey;
 use AppBundle\Entity\Age;
 use AppBundle\Entity\Gender;
+use AppBundle\Entity\Vdc;
 use AppBundle\Entity\Ethnicity;
 use AppBundle\Entity\Question;
 use AppBundle\Entity\Answer;
@@ -111,7 +112,7 @@ class CsvController extends Controller
      * @Route("/upload")
      * @Template()
      */
-    public function uploadAction()//PhaxAction $phaxAction
+    public function uploadAction($file)//PhaxAction $phaxAction
     {
         // USE THIS TO RUN THIS ACTION
         // sf phax:action CsvController upload  
@@ -127,52 +128,55 @@ class CsvController extends Controller
         echo "\n";
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
-        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey1.xlsx');
-        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey2.xlsx');
-        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey3.xlsx');
-        //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey4.xlsx');
-        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey5.xlsx');
-        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey6.xlsx');
-        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/round6/survey6.xlsx');
+        
+        $this->getCsvData('/var/www/html/web/uploads/'.$file.".xlsx");
         
         
         echo "\n";
         echo "CSV upload completed \n";
         
         
-        exit();
         
-        // Return a phax reation with a success or failure notification
         $phaxReaction = new PhaxReaction();
-        echo 'Status: ';
 
         // This will disable the javascript callback
-        $phaxReaction->setMetaMessage('The file has been uploaded.');
+        $phaxReaction->setMetaMessage('New Surveys have been added from : '. $file.".xlsx");
 
         return $phaxReaction;
+
+        
     }
     private function setCsvData($row)
     {
      //Adding interviewer data
         
             
+        
             $interviewer = $this->addInterviewer($row[1], 'accountability');
             $survey = new Survey();
+            $survey->setTerm(2); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
-            $survey->setDate(DateTime::createFromFormat('Y-m-d', $row[0]));
+            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2015-08-15'));
             
             $survey->setAge($this->getAgeByData($row[5]));
+        
             $survey->setGender($this->getGenderByData($row[6]));
+        
             $survey->setEthnicity($this->getEthnicityByData($row[7]));
+        
+            
             $survey->setOccupation($this->getOccupationByData($row[9]));
+        
             if ($row[11] == "no_difficulty"){
                 $survey->setDisability(0);
             }else{
                 $survey->setDisability(1);
             }
-            $survey->setTerm(2);
-            $survey->setDistrict($this->getDistrictByData($row[2]));
-            $survey->setVdc($this->getVdcByData($row[3]));
+            
+            $survey->setDistrict($this->getDistrictByData($row[0]));
+        
+            $survey->setVdc($this->getVdcByData($row[3], $row[0]));
+        
             $survey->setWard($row[4]);
             
             
@@ -180,11 +184,13 @@ class CsvController extends Controller
             $em->persist($survey);
             $em->flush();
             
-            echo "Adding Record Count :". $this->count ."\r";
             $this->count++;
+            echo "Adding Survey Count :". $this->count ."\r";
+            
         
             // Question 1
             $this->createSurveyResponse($survey, 1, $row[12]);
+        
             // Question 2
             $this->createSurveyResponse($survey, 5, $row[19]);
             // Question 3
@@ -194,52 +200,67 @@ class CsvController extends Controller
             // Question 5
             $this->createSurveyResponse($survey, 14, $row[34]);
             // Question 6
-            $this->createSurveyResponse($survey, 17, $row[39]);
+            $this->createSurveyResponse($survey, 25, $row[39]);
             // Question 7
-            $this->createSurveyResponse($survey, 19, $row[42]);
+            $this->createSurveyResponse($survey, 26, $row[40]);
             // Question 8
-            $this->createSurveyResponse($survey, 22, $row[47]);
+            $this->createSurveyResponse($survey, 22, $row[41]);
             // Question 9
-            $this->createSurveyResponse($survey, 23, $row[48]);
+            $this->createSurveyResponse($survey, 27, $row[42]);
+        
             // Question 10
-            $this->createSurveyResponse($survey, 28, $row[51]);
+            //$this->createSurveyResponse($survey, 28, $row[45]);
             // Question 11
-            $this->createSurveyResponse($survey, 29, $row[52]);
+            //$this->createSurveyResponse($survey, 29, $row[52]);
             // Question 12
-            $this->createSurveyResponse($survey, 30, $row[57]);
+            //$this->createSurveyResponse($survey, 30, $row[57]);
             
         
             // Question 1a
-            $surveyResponse = new SurveyResponse();
-            
-            $surveyResponse->setSurvey($survey);
-            $question = $this->getDoctrine()->getRepository('AppBundle:Question')->find(2);
-            $surveyResponse->setQuestion($question);
-            
-            $surveyResponse->setAnswer($this->getAnswer1aByData($row[14]));
-            
             $em = $this->getDoctrine()->getManager();
+            $surveyResponse = new SurveyResponse();
+            $surveyResponse->setSurvey($survey);
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', 2));
+            
+            $surveyResponse->setAnswer($this->getAnswer1aByData($row[13]));
+            
+            
             $em->persist($surveyResponse);
+            
+            // Question 1b
+            $surveyResponse = new SurveyResponse();
+            $surveyResponse->setSurvey($survey);
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', 3));
+            
+            $surveyResponse->setAnswer($this->getAnswer1aByData($row[15]));
+            
+            
+            $em->persist($surveyResponse);
+            
             $em->flush();
             
             unset($survey);
             unset($row);
-            unset($interviewer);   
+            unset($interviewer);  
+            
+        
+            return true;
+        
     }
     
     private function createSurveyResponse($survey, $questionId, $answer)
     {
+            $em = $this->getDoctrine()->getManager();
             $surveyResponse = new SurveyResponse();
             
             $surveyResponse->setSurvey($survey);
+
+            //$question = $this->getDoctrine()->getRepository('AppBundle:Question')->find($questionId);
         
-            $question = $this->getDoctrine()->getRepository('AppBundle:Question')->find($questionId);
-        
-            $surveyResponse->setQuestion($question);
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
             
-            $surveyResponse->setAnswer($this->getAnswer1ByData($answer));
-            
-            $em = $this->getDoctrine()->getManager();
+            $surveyResponse->setAnswer($this->getAnswerByData($answer));
+
             $em->persist($surveyResponse);
             $em->flush();   
     }
@@ -281,7 +302,7 @@ class CsvController extends Controller
                     
                     //This is converting the second column to Date Format
                     //TODO:: Make sure date format anywhere is captured properly and not just the second column
-                    if (($columnCount == 0) && ($rowCount > 0)){
+                    if (($columnCount == 2) && ($rowCount > 0)){
                         $value = $cell->getValue();
                         $value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
                         
@@ -337,9 +358,12 @@ class CsvController extends Controller
         return $interviewer;
     }
     private function getAgeByData($data){
-        $data = str_replace("_", " - ", $data);
+        $data = str_replace("_", "-", $data);
         $response = $data;
         if ($data == "55 - greater"){
+            $response = "55+";
+        }
+        if ($data == "55"){
             $response = "55+";
         }
         if ($data == "refused"){
@@ -349,11 +373,15 @@ class CsvController extends Controller
             $response = "Dont't Know";   
         }
         
+        
+        
         $age = $this->getDoctrine()
                ->getRepository('AppBundle:Age')
                ->findOneBy(array(
                    'name' => $response
                 ));
+        
+
         return $age;
     }
     
@@ -405,6 +433,9 @@ class CsvController extends Controller
         if ($data == "Skilled worker (i.e. carpenter)"){
             $id = 2;
         }
+        if ($data == "skilled_worker__i_e__carpenter"){
+            $id = 2;
+        }
         if ($data == "ngo_worker_business"){
             $id = 3;
         }
@@ -423,6 +454,11 @@ class CsvController extends Controller
         if (strpos("x".$data,'Government') !== false) {
             $id = 4;
         }
+        
+        
+        if ($data == "government_service__i_e__teach"){
+            $id = 4;   
+        }    
         if ($data == "Government (i.e. teacher, health worker, army)                                 "){
             $id = 4;   
         }
@@ -446,9 +482,10 @@ class CsvController extends Controller
                ->findOneBy(array(
                    'name' => $data
                 ));
+        
         return $district;
     }
-    private function getVdcByData($data){
+    private function getVdcByData($data, $district){
         if ($data == "Hetauda Submetropolitan City"){
             $data = "Hetauda Municipality";
         }
@@ -457,9 +494,29 @@ class CsvController extends Controller
                ->findOneBy(array(
                    'name' => $data
                 ));
+        
+        if($vdc)
+            return $vdc;
+        
+        $vdc = new Vdc();
+        $vdc->setName($data);
+        $vdc->setDistrict($district);
+        $vdc->setRegion(' ');
+        $vdc->setDistrictCode('0');
+        $vdc->setCode('0');
+        $vdc->setLat('0');
+        $vdc->setLng('0');
+        $vdc->setShape(' ');
+        
+        
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($vdc);
+        $em->flush();
+        
         return $vdc;
     }
-    private function getAnswer1ByData($data){
+    private function getAnswerByData($data){
         $response = $data[0];
         $id=0;
         if ($response == 'd'){
@@ -472,19 +529,7 @@ class CsvController extends Controller
                ->getRepository('AppBundle:Answer')->find($id);
         return $answer;
     }
-    private function getAnswer2ByData($data){
-        $response = $data[0];
-        $id=0;
-        if ($response == 'd'){
-            $id = 6;   
-        }else{
-         $id = intval($response);   
-        }
-        
-        $answer = $this->getDoctrine()
-               ->getRepository('AppBundle:Answer')->find($id);
-        return $answer;
-    }
+    
     private function getAnswer1aByData($data){
         
         $id=0;
@@ -492,10 +537,67 @@ class CsvController extends Controller
             case "short_term_she":
                 $id = 7;
                 break;
+            case "short_term_shelter__tent_shelter":
+                $id = 7;
+                break;
             case "long_term_shelter__housing":
                 $id = 8;
                 break;
             case "clean_water":
+                $id = 9;
+                break;
+            case "financial_support":
+                $id = 10;
+                break;
+            case "education":
+                $id = 11;
+                break;
+            case "healthcare":
+                $id = 12;
+                break;
+            case "psychosocial_counseling":
+                $id = 13;
+                break;
+            case "seeds_and_fertilizers":
+                $id = 14;
+                break;
+            case "food":
+                $id = 15;
+                break;
+            case "toilets_sanitation":
+                $id = 16;
+                break;
+            case "livelihoods":
+                $id = 17;
+                break;
+            case "housing_inspections":
+                $id = 18;
+                break;
+            case "other":
+                $id = 19;
+                break;
+            default:
+                $id = 0;
+        }
+        
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
+    private function getAnswer2aByData($data){
+        
+        $id=0;
+        switch ($data) {
+            case "building_mater":
+                $id = 7;
+                break;
+            case "cash_for_work":
+                $id = 7;
+                break;
+            case "housing_inspec":
+                $id = 8;
+                break;
+            case "seeds_and_fert":
                 $id = 9;
                 break;
             case "financial_support":
