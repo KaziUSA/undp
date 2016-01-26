@@ -33,7 +33,7 @@ class PageController extends Controller
         $data_title = $request->request->get('data_title');
         $data_description = $request->request->get('data_description');
 
-        $sql= "UPDATE page SET title='$data_title',description='$data_description' WHERE id='$data_id'";
+        $sql= "UPDATE page SET title=\"$data_title\",description=\"$data_description\" WHERE id=\"$data_id\"";
 
         $em = $this->getDoctrine()->getEntityManager();
         $connection = $em->getConnection();
@@ -159,7 +159,7 @@ class PageController extends Controller
         $data_title = $request->request->get('data_title');
         $data_description = $request->request->get('data_description');
 
-        $sql= "UPDATE page SET title='$data_title',description='$data_description' WHERE id='$data_id'";
+        $sql= "UPDATE page SET title=\"$data_title\",description=\"$data_description\" WHERE id=\"$data_id\"";
 
         $em = $this->getDoctrine()->getEntityManager();
         $connection = $em->getConnection();
