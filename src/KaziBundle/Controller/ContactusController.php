@@ -35,7 +35,7 @@ class ContactusController extends Controller
         $data_message = $request->request->get('data_message');
 
         if(isset($data_name)) {//if there is name
-            $to = "nikesh@kazistudios.com";
+            $to = "giovanni.congi@one.un.org";
             $subject = "Contact From UNDP Website";
             
             $txt = '<strong>Name:</strong> ' . $data_name . 
