@@ -190,6 +190,53 @@
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script src="/js/frontend/custom-filter.js"></script>
     <script>
+    //get url parameter
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+    };
+    
+    //get array parameter from url
+    /*url = window.location.href;
+    var paramsList = url.slice(url.indexOf("?")+1,url.length) ;
+    var filteredList =  paramsList.split("&") ;
+
+    // an object to store arrays
+    var objArr = {} ;
+
+    // the below loop is obvious... we just remove the [] and +.. and split into pair of key and value.. and store as an array...
+    for (var i=0, l=filteredList.length; i <l; i +=1 ) {
+      var param = decodeURIComponent(filteredList[i].replace("[]","")).replace(/\+/g," ") ;
+      var pair = param.split(",") ;//=
+      if(!objArr[pair[0]]) {  objArr[pair[0]] = [] ;}
+      objArr[pair[0]].push(pair[1]);
+    }*/
+
+    //convert object array to array
+    /*var array = $.map(objArr, function(value, index) {
+        return [value];
+    });*/
+
+    //clone array
+    function clone(obj){
+        if(obj == null || typeof(obj) != 'object')
+            return obj;
+        var temp = obj.constructor();
+        for(var key in obj)
+            temp[key] = clone(obj[key]);
+        return temp;
+    }
+
     //Ajax call
     function aButtonPressed(){
       //store ques name
@@ -207,7 +254,26 @@
        $('#form_months :checked').each(function() {
          monthVals.push($(this).next("label").text());
        });
-       //alert(monthVals);
+       //alert(monthVals);       
+
+       if(monthVals == '') {
+         urlParamM = getUrlParameter('m');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
+         console.log(urlParamM);
+         if(urlParamM != undefined) {
+           arr = urlParamM.split(',');//convert string to url
+           //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+           monthVals = clone(arr);//clone array
+         }
+         //checking checkbox
+         function logArrayElements(element, index, array) {
+            $('#form_months label').each(function() {   
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+         monthVals.forEach(logArrayElements);
+       }
 
        //store selected district in districtVals
        var districtVals = [];
@@ -216,12 +282,51 @@
        });
        //alert(districtVals);
 
+       if(districtVals == '') {
+         urlParamD = getUrlParameter('d');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
+         console.log(urlParamD);
+         if(urlParamD != undefined) {
+           arr = urlParamD.split(',');//convert string to url
+           //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+           districtVals = clone(arr);//clone array
+         }
+         //checking checkbox
+         function logArrayElements(element, index, array) {
+            $('#form_districts label').each(function() {   
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+         districtVals.forEach(logArrayElements);
+       }
+
        //store selected gender in genderVals array
       var genderVals = [];
        $('#form_gender :checked').each(function() {
          genderVals.push($(this).next("label").text());
        });
        //alert(genderVals);
+
+       if(genderVals == '') {
+         urlParamG = getUrlParameter('g');
+         //from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male
+         if(urlParamG != undefined) {
+           arrG = urlParamG.split(',');//convert string to url
+           //myArr = ['Female','Male'];//custom to test
+           genderVals = clone(arrG);//clone array
+         }         
+         //checking checkbox
+         function logArrayElements(element, index, array) {
+            $('#form_gender label').each(function() {     
+              console.log($(this).text());         
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+         genderVals.forEach(logArrayElements);
+       }
 
       //store selected ethnicity in ethnicityVals
       var ethnicityVals = [];
@@ -230,12 +335,50 @@
        });
        //alert(ethnicityVals);
 
+       if(ethnicityVals == '') {
+         urlParamE = getUrlParameter('e');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&e=Brahmin,Chhetri
+         console.log(urlParamE);
+         if(urlParamE != undefined) {
+           arr = urlParamE.split(',');//convert string to url
+           //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+           ethnicityVals = clone(arr);//clone array
+         }
+         //checking checkbox
+         function logArrayElements(element, index, array) {
+            $('#form_ethnicities label').each(function() {   
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+         ethnicityVals.forEach(logArrayElements);
+       }
+
       //store checked ages in ageVals array
       var ageVals = [];
        $('#form_ages :checked').each(function() {
          ageVals.push($(this).next("label").text());
        });
-       //alert(ageVals);
+       //alert(ageVals);       
+
+       if(ageVals == '') {
+         urlParamA = getUrlParameter('a');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&a=15 - 24,25 - 39
+         console.log(urlParamA);
+         if(urlParamA != undefined) {
+           arr = urlParamA.split(',');//convert string to url
+           //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+           ageVals = clone(arr);//clone array
+         }
+         //checking checkbox
+         function logArrayElements(element, index, array) {
+            $('#form_ages label').each(function() {   
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+         ageVals.forEach(logArrayElements);
+       }
 
        if($('#disability').prop('checked')){
         disabilityVal="1";
@@ -295,9 +438,7 @@
               var val=new Array();
               var dt= new Array();
               if(response.code == 100 && response.success){                 
-                  console.log(response);
-                  console.log(JSON.stringify(response.result.html));
-                  console.log(response.result.series); 
+
                   //show custom legend on chart if number of items in legend is greater and equal to 4
                   var legend_item_height = 29;
 
