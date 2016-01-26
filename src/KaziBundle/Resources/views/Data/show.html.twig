@@ -1,6 +1,7 @@
 {% extends '::frontend.html.twig' %}
 
 {% block body -%}
+<div class="table-wrap">
     {# TODO: Need to add share button with functionality #}
     <div class="page-title">
         <h3>Community Perception Survey Report - Round {{ slug }}</h3>
@@ -19,7 +20,6 @@
             </div>
         </div>
     </div>
-
     <table class="records_list table table-condensed table-hover table-striped dataTables">
         {% set excludeColumns = {  } %}
 
@@ -71,9 +71,23 @@
         {% endfor %}    
         </tbody>
     </table>
+    
+    <ul class="share-icons share-data">
+        <li><a href="#share" class="fa fa-share-alt"></a>
+            <ul>        
+                {# TODO: Need to change commonfeedback.org to dynamic url path if needed #}                   
+                <li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//commonfeedback.org{{ path('data_show', {'slug': slug} )}}&title=UNDP%20Report%3A%20Round%20{{ slug }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+                
+                <li><a href="http://twitter.com/intent/tweet?text=UNDP+Report%3A+Round+{{ slug }}+http%3A//commonfeedback.org{{ path('data_show', {'slug': slug} )}}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//commonfeedback.org{{ path('data_show', {'slug': slug} )}}&title=UNDP%20Report%3A%20Round%20{{ slug }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+            </ul>
+        </li>
+    </ul>
         
     {% endblock %}
 {% block scriptIncludes %}
+</div> <!-- /.table-wrap -->
 <script>
         $(document).ready(function() {
             $('.dataTables').dataTable({

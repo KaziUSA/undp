@@ -139,6 +139,10 @@ class DataController extends Controller
         
                     }
                 }
+                /* for debugging or adding css */
+                /*if ($rowCount > 15) {
+                    break;
+                }*/
                 if ($rowCount > 0)
                 {
                     //$this->setCsvData($row);    
