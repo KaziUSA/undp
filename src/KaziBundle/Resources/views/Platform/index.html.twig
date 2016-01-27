@@ -237,8 +237,16 @@
         return temp;
     }
 
-    //Ajax call
+    //Ajax call    
     function aButtonPressed(){
+      var url = window.location.href;
+      var param = '';
+      var paramM = '';
+      var paramD = '';
+      var paramG = '';
+      var paramE = '';
+      var paramA = '';
+
       //store ques name
       var qname=$("#form_questions option:selected").text();
       //store selected question in questions variable
@@ -254,11 +262,122 @@
        $('#form_months :checked').each(function() {
          monthVals.push($(this).next("label").text());
        });
-       //alert(monthVals);       
+       //alert(monthVals);
 
+       //if somebody has selected the filter - change the url
+       if(monthVals != '') {
+          paramM = 'm='+monthVals;
+       } else {        
+          paramM = '';
+       }
+
+       //store selected district in districtVals
+       var districtVals = [];
+       $('#form_districts :checked').each(function() {
+         districtVals.push($(this).next("label").text());
+       });
+       //alert(districtVals);
+
+       if(districtVals != '') {//if somebody has selected the filter - change the url
+          paramD = 'd='+districtVals;
+       }
+
+
+       //store selected gender in genderVals array
+      var genderVals = [];
+       $('#form_gender :checked').each(function() {
+         genderVals.push($(this).next("label").text());
+       });
+       //alert(genderVals);
+       
+       if(genderVals != '') {//if somebody has selected the filter - change the url
+          paramG = 'g='+genderVals;
+       }
+
+
+      //store selected ethnicity in ethnicityVals
+      var ethnicityVals = [];
+       $('#form_ethnicities :checked').each(function() {
+         ethnicityVals.push($(this).next("label").text());
+       });
+       //alert(ethnicityVals);
+
+       if(ethnicityVals != '') {//if somebody has selected the filter - change the url
+          paramE = 'e='+ethnicityVals;
+       }
+
+      //store checked ages in ageVals array
+      var ageVals = [];
+       $('#form_ages :checked').each(function() {
+         ageVals.push($(this).next("label").text());
+       });
+       //alert(ageVals);       
+
+       if(ageVals != '') {//if somebody has selected the filter - change the url
+          paramA = 'a='+ageVals;
+       }
+
+       if(paramM != '') {
+        param += '?' + paramM;
+
+        if(paramD != '') {
+          param += '&' + paramD;
+        } 
+        if(paramG != '') {
+          param += '&' + paramG;
+        } 
+        if(paramE != '') {
+          param += '&' + paramE;
+        } 
+        if(paramA != '') {
+          param += '&' + paramA;
+        } 
+       } else {
+          if(paramD != '') {
+            param += '?' + paramD;
+
+            if(paramG != '') {
+              param += '&' + paramG;
+            } 
+            if(paramE != '') {
+              param += '&' + paramE;
+            } 
+            if(paramA != '') {
+              param += '&' + paramA;
+            } 
+          } else {
+            if(paramG != '') {
+              param += '?' + paramG;
+
+              if(paramE != '') {
+                param += '&' + paramE;
+              } 
+              if(paramA != '') {
+                param += '&' + paramA;
+              } 
+            } else {
+              if(paramE != '') {
+                param += '?' + paramE;
+
+                if(paramA != '') {
+                  param += '&' + paramA;
+                }
+              } else {
+                if(paramA != '') {
+                  param += '?' + paramA;
+                }
+              }
+            } 
+          }
+        }
+
+        window.history.pushState(url,'',param);
+
+
+
+       //display chart from url
        if(monthVals == '') {
          urlParamM = getUrlParameter('m');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
-         console.log(urlParamM);
          if(urlParamM != undefined) {
            arr = urlParamM.split(',');//convert string to url
            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
@@ -274,17 +393,11 @@
           }
          monthVals.forEach(logArrayElements);
        }
-
-       //store selected district in districtVals
-       var districtVals = [];
-       $('#form_districts :checked').each(function() {
-         districtVals.push($(this).next("label").text());
-       });
-       //alert(districtVals);
+       
 
        if(districtVals == '') {
+          paramD = '';
          urlParamD = getUrlParameter('d');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
-         console.log(urlParamD);
          if(urlParamD != undefined) {
            arr = urlParamD.split(',');//convert string to url
            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
@@ -301,43 +414,9 @@
          districtVals.forEach(logArrayElements);
        }
 
-       //store selected gender in genderVals array
-      var genderVals = [];
-       $('#form_gender :checked').each(function() {
-         genderVals.push($(this).next("label").text());
-       });
-       //alert(genderVals);
-
-       if(genderVals == '') {
-         urlParamG = getUrlParameter('g');
-         //from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male
-         if(urlParamG != undefined) {
-           arrG = urlParamG.split(',');//convert string to url
-           //myArr = ['Female','Male'];//custom to test
-           genderVals = clone(arrG);//clone array
-         }         
-         //checking checkbox
-         function logArrayElements(element, index, array) {
-            $('#form_gender label').each(function() {     
-              console.log($(this).text());         
-              if($(this).text() == element) {
-                $(this).prev("input").prop('checked', true);
-              }
-            });
-          }
-         genderVals.forEach(logArrayElements);
-       }
-
-      //store selected ethnicity in ethnicityVals
-      var ethnicityVals = [];
-       $('#form_ethnicities :checked').each(function() {
-         ethnicityVals.push($(this).next("label").text());
-       });
-       //alert(ethnicityVals);
-
        if(ethnicityVals == '') {
+          paramE = '';
          urlParamE = getUrlParameter('e');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&e=Brahmin,Chhetri
-         console.log(urlParamE);
          if(urlParamE != undefined) {
            arr = urlParamE.split(',');//convert string to url
            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
@@ -354,16 +433,28 @@
          ethnicityVals.forEach(logArrayElements);
        }
 
-      //store checked ages in ageVals array
-      var ageVals = [];
-       $('#form_ages :checked').each(function() {
-         ageVals.push($(this).next("label").text());
-       });
-       //alert(ageVals);       
-
-       if(ageVals == '') {
+       if(genderVals == '') {
+          paramG = '';
+         urlParamG = getUrlParameter('g');
+         //from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male
+         if(urlParamG != undefined) {
+           arrG = urlParamG.split(',');//convert string to url
+           //myArr = ['Female','Male'];//custom to test
+           genderVals = clone(arrG);//clone array
+         }         
+         //checking checkbox
+         function logArrayElements(element, index, array) {
+            $('#form_gender label').each(function() {           
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+         genderVals.forEach(logArrayElements);
+       }
+       if(ageVals == '') {        
+          paramA = '';
          urlParamA = getUrlParameter('a');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&a=15 - 24,25 - 39
-         console.log(urlParamA);
          if(urlParamA != undefined) {
            arr = urlParamA.split(',');//convert string to url
            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
