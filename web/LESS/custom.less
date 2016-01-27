@@ -1370,7 +1370,7 @@ div.dataTables_paginate {
 }
 table.dataTable thead .sorting_asc, th.sorting_desc{
     background-position: right 8px;
-    padding-right: 25px !important;
+    // padding-right: 25px !important;
 }
 // table.dataTable thead .sorting_desc:after{
 // 	top: 5px;
@@ -1386,9 +1386,25 @@ table.dataTable thead .sorting:after {
     position: absolute !important;
     right: 0 !important;
     top: 8px;
+    display: none;
 }
-
-
+table.dataTable thead .sorting{
+	background: url('../img/d-default.png') no-repeat right center;
+}
+table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc{
+	background: url('../img/d-acending.png') no-repeat right center;
+	background-size: 10px;
+}
+table.dataTable thead .sorting_desc{
+	background-image: url('../img/d-decending.png');
+}
+table.dataTable th {
+    padding-right: 25px !important;
+    padding-left: 10px !important;
+}
+.dataTables tr th:first-child {
+    background-image: none !important;
+}
 .page-title {
 	position: relative;
 }
