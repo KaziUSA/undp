@@ -706,7 +706,7 @@ a.show-more-report {
 	}
 	&.share-data {//data page
 		bottom: 41px;
-		right: 123px;
+		right: 150px;
 		li {
 			background: none;
 			a {
@@ -1119,6 +1119,19 @@ a.DTTT_button,
     z-index: 1;
     label {
     	color: white;
+    	&:after{
+		    content: "\e003";
+		    width: 20px;
+		    height: 20px;
+		    display: block;
+		    position: absolute;
+		    top: 0;
+		    right: -8px;
+		    font-family: 'Glyphicons Halflings';
+		    font-style: normal;
+		    -webkit-font-smoothing: antialiased;
+		    -moz-osx-font-smoothing: grayscale;
+			}
     	input {
     		color: @gray;
     		font-size: 12px;
@@ -1150,10 +1163,11 @@ a.DTTT_button.DTTT_button_xls, a.DTTT_button.DTTT_button_csv {
 a.DTTT_button.DTTT_button_csv {
 	background: url(../img/frontend/icons/icon-download-white.png) no-repeat 0 0;
 	position: absolute;
-  right: 240px;
+  right: 160px;
   top: -25px;
 	span {
 		color: @white;
+		white-space: nowrap;
 	}
 }
 .high-chart a.DTTT_button.DTTT_button_csv {
@@ -1166,6 +1180,7 @@ a.DTTT_button.DTTT_button_xls {
 	bottom: 0;
 	span {
 		color: #3e7180;
+		white-space: nowrap;
 	}
 }
 div.DTTT_container {
@@ -1312,12 +1327,14 @@ div.dataTables_paginate {
     position: relative;
     padding-right: 15px !important;
 }
-
-table.dataTable thead .sorting:after, table.dataTable thead .sorting_desc::after, table.dataTable thead .sorting::after{
-    position: absolute !important;
-    right: 0 !important;
-    float: none !important;
+.dataTables th {
+    white-space: nowrap;
 }
+// table.dataTable thead .sorting:after, table.dataTable thead .sorting_desc::after, table.dataTable thead .sorting::after{
+//     position: absolute !important;
+//     right: 0 !important;
+//     float: none !important;
+// }
 .table-wrap{
 	width: 100%;
 	max-width: 100%;
@@ -1327,10 +1344,13 @@ table.dataTable thead .sorting_asc, th.sorting_desc{
     background-position: right 8px;
     padding-right: 25px !important;
 }
+// table.dataTable thead .sorting_desc:after{
+// 	top: 5px;
+// 	font-size: 14px;
+// 	right: 10px !important;
+// }
 table.dataTable thead .sorting_desc:after{
-	top: 5px;
-	font-size: 14px;
-	right: 10px !important;
+	display: none;
 }
 
 table.dataTable thead .sorting:after {
@@ -1346,7 +1366,7 @@ table.dataTable thead .sorting:after {
 }
 .feedback-round {
 	position: absolute;
-	right: 380px;
+	right: 320px;
 	top: 4px;
 }
 /* customSel */
@@ -1389,6 +1409,35 @@ table.dataTable thead .sorting:after {
 
 }
 
+.feedback-round .customSel {
+    background: transparent;
+    border: none;
+    width: 105px;
+}
+
+.feedback-round .customSel label {
+    background: transparent;
+}
+
+.feedback-round .customSel select {
+    background: transparent;
+    color: #FFF;
+    font-size: 12px;
+    width: 105px;
+}
+.feedback-round .customSel select option{
+	color: #343335;
+}
+
+.feedback-round .customSel label:after {
+    background-color: transparent;
+    background-image: none;
+    content: "\e114";
+    font-family: 'Glyphicons Halflings';
+    background: #99BC44;
+    text-align: center;
+    color: #FFF;
+}
 /*target Internet Explorer 9 and Internet Explorer 10:*/
 
 /* @media screen and (min-width:0\0) { 
@@ -1396,3 +1445,4 @@ table.dataTable thead .sorting:after {
         display:none;
     }
 } */
+
