@@ -422,9 +422,9 @@
        var disabilityVal = '';
        if($('#disability').prop('checked')){
         disabilityVal="1";
-       } else {
+       } /*else {
         disabilityVal = "0";
-       }
+       }*/
        //alert(disabilityVal);
 
        if(disabilityVal != '') {//if somebody has selected the filter - change the url
@@ -439,7 +439,7 @@
 
        
 
-      if(monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '') {
+      if(monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '' && disabilityVal == '') {
           //console.log('here');
         //display chart from url
        if(monthVals == '') {
@@ -976,6 +976,8 @@
                   // $("div.toolbar").html();
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download');
                   $('.highcharts-title').hide();
+                  
+                  checkboxChecked();
 
               }//Ajax success end
 
