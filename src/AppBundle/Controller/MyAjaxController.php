@@ -397,6 +397,7 @@ class MyAjaxController extends Controller
 					}
 					foreach ($data_month as $month){				
 						$results= $em->getRepository('AppBundle\Entity\Query')->getMonthGender($data_question,$num,$month,$gender,$data_disability,$data_year);
+
 						foreach ($results as $arr){		        		
 			        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
 			        		$obj['total'] += (int)$arr['count']; 
@@ -431,19 +432,23 @@ class MyAjaxController extends Controller
 			}			
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
 			//$obj['total']=0;
+			
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";
 				foreach ($data_month as $month) {					
 					foreach ($data_gender as $gender) {			       									       
 						$results= $em->getRepository('AppBundle\Entity\Query')->getMonthGender($data_question,$num,$month,$gender,$data_disability,$data_year);
+							
 						foreach ($results as $arr){		        		
+							
 			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
 
-			    		}	
+			    		}
 					}					
 				}
 				$obj['html']=$obj['html']."</tr>";
 			}
+			
 			$obj['html']=$obj['html']."</tbody></table>";
 		}
 
