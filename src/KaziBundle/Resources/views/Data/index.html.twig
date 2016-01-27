@@ -21,6 +21,7 @@
     </div>
 
     <table class="records_list table table-condensed table-hover table-striped dataTables">
+
         {# for round 6 #}
         {% set excludeColumns = {   } %}
         
@@ -34,7 +35,9 @@
             {% elseif count == 1 %}
         
             <thead>
+
                 <tr>
+                <th></th>
                     {% set columncount = 0 %}
                     {% for val in entity %}
                         {% if columncount in excludeColumns %}
@@ -57,11 +60,13 @@
                 
             
                 <tr>
+                <td></td>
                     {% set columncount = 0 %}
                     {% for val in entity %}
                         {% if columncount in excludeColumns %}
                     
                         {% else %}
+                        
                             <td>{{ val }}</td>
                         {% endif %}
                         {% set columncount = columncount + 1 %}

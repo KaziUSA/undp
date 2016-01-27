@@ -56,8 +56,8 @@ class QueryRepository extends \Doctrine\ORM\EntityRepository
     		FROM `survey_response` AS sr INNER JOIN `survey` AS s ON sr.survey_id=s.id 
     		INNER JOIN answer AS a ON sr.answer_id=a.id 
     		WHERE sr.question_id = :qnid AND MONTHNAME(s.date)=:month AND a.name = :name AND YEAR(s.date)= :yname';
-		if($data_disability==1){
-            $sql=$sql.'AND s.disability = 1' ;
+		if($data_disability=='1'){
+            $sql=$sql.' AND s.disability = 1' ;
         }
         $em = $this->getEntityManager();
 		$connection = $em->getConnection();	

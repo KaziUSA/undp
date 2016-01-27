@@ -8,7 +8,7 @@
                 <div class="filter">
                   <!-- Nav tabs -->
                   <div class="feedback-tab clearfix">
-                    <div class="tab-head">Feedback Round</div>
+                    <div class="tab-head">Year</div>
 
                       <ul id="" class="nav nav-tabs" role="tablist">
                         {# <li role="presentation" class="round1"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
@@ -131,7 +131,7 @@
 
                 <div class="chart">
                     <div class="search">
-                      <span class="search-title">Search</span>
+                      <span class="search-title">Filter</span><!--Search-->
                       <span id="filter-search-key">
                         <!--Month / District / Age Group / Gender -->
                         <span id="month-select-text"></span>
@@ -167,7 +167,19 @@
                                     <ul>
 
                                         <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Chart</a></li>
-                                        {# <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li> #}
+                                        <li class="share-icons share-platform"><a href="#!"><span class="icon icon-share"></span> Share Report</a>
+                                          <ul>    
+                                            {# TODO: Need to change cfp.org.np to dynamic url path if needed #}           
+                                            <li class="facebook"><a href="" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+                                            
+                                            <li><a href="" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+                                            {# https://twitter.com/home?status=UNDP%20Report:%20Test%20http://cfp.org.np/uploads/documents/{{ entity.path|url_encode }}
+
+                                            http://twitter.com/intent/tweet?text=UNDP+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }} #}
+
+                                            <li><a href="" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+                                          </ul>
+                                        </li>
 
                                     </ul>
                                 </div>
@@ -302,6 +314,10 @@
       var paramQ = '';
       var paramDis = '';
 
+      var fShare = 'https://www.facebook.com/sharer.php?title=UNDP%20Platform%20&u=http%3A//cfp.org.np/platform/';
+      var tShare = 'http://twitter.com/intent/tweet?text=UNDP+Platform+http%3A%2F%2Fcfp.org.np/platform/';
+      var lShare = 'https://www.linkedin.com/shareArticle?mini=true&title=UNDP%20Platform%20&summary=&source=&url=http%3A//cfp.org.np/platform/';
+
       //store ques name
       var qname=$("#form_questions option:selected").text();
       //store selected question in questions variable
@@ -360,6 +376,8 @@
        //if somebody has selected the filter - change the url
        if(monthVals != '') {
           paramM = 'm='+monthVals;
+       } else {
+        //paramM = '';
        }
 
        //store selected district in districtVals
@@ -371,6 +389,8 @@
 
        if(districtVals != '') {//if somebody has selected the filter - change the url
           paramD = 'd='+districtVals;
+       } else {
+        //paramD = '';
        }
 
 
@@ -383,6 +403,8 @@
        
        if(genderVals != '') {//if somebody has selected the filter - change the url
           paramG = 'g='+genderVals;
+       } else {
+        //paramG = '';
        }
 
 
@@ -395,6 +417,8 @@
 
        if(ethnicityVals != '') {//if somebody has selected the filter - change the url
           paramE = 'e='+ethnicityVals;
+       } else {
+        //paramE = '';
        }
 
       //store checked ages in ageVals array
@@ -406,24 +430,36 @@
 
        if(ageVals != '') {//if somebody has selected the filter - change the url
           paramA = 'a='+ageVals;
+       } else {
+          //paramA = '';
        }
 
        
-       var disabilityVal = '';
+       var disabilityVal;
        if($('#disability').prop('checked')){
-        disabilityVal="1";
-       }
+        disabilityVal=1;
+       } /*else {
+        disabilityVal = "0";
+       }*/
        //alert(disabilityVal);
 
        if(disabilityVal != '') {//if somebody has selected the filter - change the url
           paramDis = 'dis='+disabilityVal;
+       } else {
+        //paramDis = '';
        }
 
 
 
+
+
+       
+
+      if(monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '' && disabilityVal == '') {
+          //console.log('here');
         //display chart from url
        if(monthVals == '') {
-        paramM = '';
+         paramM = '';
          urlParamM = getUrlParameter('m');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
          if(urlParamM != undefined) {
            arr = urlParamM.split(',');//convert string to url
@@ -531,11 +567,11 @@
         urlParamDis = getUrlParameter('dis');
         //console.log(urlParamDis);
         if(urlParamDis != undefined) {
-          disabilityVal = toString(urlParamDis);
+          disabilityVal = urlParamDis;
 
           paramDis = 'dis='+urlParamDis;//disabilityVal in int
          } else {
-          disabilityVal = "0";//if dis is not present in url
+          disabilityVal = 0;//if dis is not present in url
 
           paramDis = 'dis='+disabilityVal;//disabilityVal in int
         //disabilityVal="0";
@@ -549,7 +585,110 @@
        }
 
 
-       //modify the url
+       //modify the url again with some changes
+       if(paramQ != '') {
+        param += '?' + paramQ;
+
+        if(paramM != '') {
+            param += '&' + paramM;
+          }
+        if(paramD != '') {
+          param += '&' + paramD;
+        } 
+        if(paramG != '') {
+          param += '&' + paramG;
+        } 
+        if(paramE != '') {
+          param += '&' + paramE;
+        } 
+        if(paramA != '') {
+          param += '&' + paramA;
+        } 
+        if(paramDis != '') {
+          param += '&' + paramDis;
+        } 
+       } else {//if paramQ == ''
+         if(paramM != '') {
+          param += '&' + paramM;
+
+          if(paramD != '') {
+            param += '&' + paramD;
+          } 
+          if(paramG != '') {
+            param += '&' + paramG;
+          } 
+          if(paramE != '') {
+            param += '&' + paramE;
+          } 
+          if(paramA != '') {
+            param += '&' + paramA;
+          } 
+          if(paramDis != '') {
+            param += '&' + paramDis;
+          } 
+         } else {
+            if(paramD != '') {
+              param += '&' + paramD;
+
+              if(paramG != '') {
+                param += '&' + paramG;
+              } 
+              if(paramE != '') {
+                param += '&' + paramE;
+              } 
+              if(paramA != '') {
+                param += '&' + paramA;
+              } 
+              if(paramDis != '') {
+                param += '&' + paramDis;
+              } 
+            } else {
+              if(paramG != '') {
+                param += '&' + paramG;
+
+                if(paramE != '') {
+                  param += '&' + paramE;
+                } 
+                if(paramA != '') {
+                  param += '&' + paramA;
+                } 
+                if(paramDis != '') {
+                  param += '&' + paramDis;
+                } 
+              } else {
+                if(paramE != '') {
+                  param += '&' + paramE;
+
+                  if(paramA != '') {
+                    param += '&' + paramA;
+                  }
+                  if(paramDis != '') {
+                    param += '&' + paramDis;
+                  } 
+                } else {
+                  if(paramA != '') {
+                    param += '&' + paramA;
+
+                    if(paramDis != '') {
+                      param += '&' + paramDis;
+                    } 
+                  } else {                    
+                    if(paramDis != '') {
+                      param += '&' + paramDis;
+                    } 
+                  }
+                }
+              } 
+            }
+          }//end else paramM
+        }//end else paramQ
+        window.history.pushState(url,'',param);
+        $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
+        $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
+        $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
+     }//end if
+    else {//if the user selects filter: month, district, gender, ethnicity, age
+      //modify the url
        if(paramQ != '') {
         param += '?' + paramQ;
 
@@ -648,8 +787,10 @@
         }//end else paramQ
 
         window.history.pushState(url,'',param);
-
-
+        $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
+        $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
+        $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
+    }
 
 
 
@@ -694,6 +835,15 @@
        } else {
         $('#age-select-text').html('');
        }
+
+       //show or hide search
+       //console.log(disabilityVal);
+       if(monthVals == '' && districtVals == '' && genderVals == '' && ethnicityVals == '' && ageVals == '') {//&& disabilityVal == '0'
+        $('.search .search-title').hide();
+       } else {
+        $('.search .search-title').show();
+       }
+
        //prepend with /
        if(monthVals != '' && districtVals != '' && genderVals != '' && ethnicityVals != '' && ageVals != ''){
        window.location.replace('{{path('data')}}');
@@ -743,7 +893,9 @@
                       },
                       colors:['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'],
                       title: {
-                          text: qname//There is no text in design: Answers by the people
+                          
+                          text: ""
+                          // text: '<span style="font-size:12px">Inter-Agency Common</span><span style="font-size:10px">Feedback Project</span><span style="font-size:8px">Nepal Earthquake 2015</span>'                          
                       },
                       subtitle: {
                           text: response.result.grouped//There is no text in design: Source: UNDP Annual Report
@@ -751,7 +903,7 @@
                       xAxis: {
 
                           labels: {
-                              style: {'color': '#898989', 'fontSize': '14px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
+                              style: {'color': '#898989', 'fontSize': '12px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
                           },
                           categories: response.result.label,
                           title: {
@@ -821,7 +973,17 @@
                           }
                       },
                   });//Highchart end
+                  chart.setTitle({
+                      useHTML: true,
+                      text:"Inter-Agency Common Feedback Project"
+                      }, {
+                      text: "<span>Nepal Earthquake 2015</span>"+"<br><span>"+qname+"</span><br>"
+                  });
+                  
+                  
                    $('.high-chart-wrap').removeClass('hidden');
+                   $('.highcharts-title').hide();                  
+                    $('.highcharts-subtitle').hide();
                   //$('#table1').html(chart.getTable()); //Get table from highchart function 
                   $('#table1').html(response.result.html);
                   if(response.result.series === undefined){                    
@@ -856,7 +1018,8 @@
                   });
                   // $("div.toolbar").html();
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download');
-                  $('.highcharts-title').hide();
+                  
+                  checkboxChecked();
 
               }//Ajax success end
 
