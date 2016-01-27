@@ -190,6 +190,59 @@
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script src="/js/frontend/custom-filter.js"></script>
     <script>
+    //checkbox
+    function checkboxChecked() {
+      var monthVals = [];
+      $('#form_months :checked').each(function() {
+        monthVals.push($(this).next("label").text());
+      });
+      if(monthVals != '') {
+        $('.month-label').addClass('active');
+      } else {
+        $('.month-label').removeClass('active');
+      }
+
+      var districtVals = [];
+      $('#form_districts :checked').each(function() {
+        districtVals.push($(this).next("label").text());
+      });
+      if(districtVals != '') {
+        $('.district-label').addClass('active');
+      } else {
+        $('.district-label').removeClass('active');
+      }
+
+      var genderVals = [];
+      $('#form_gender :checked').each(function() {
+        genderVals.push($(this).next("label").text());
+      });
+      if(genderVals != '') {
+        $('.gender-label').addClass('active');
+      } else {
+        $('.gender-label').removeClass('active');
+      }
+        
+      var ethnicityVals = [];
+        $('#form_ethnicities :checked').each(function() {
+        ethnicityVals.push($(this).next("label").text());
+      });
+      if(ethnicityVals != '') {
+        $('.ethnicity-label').addClass('active');
+      } else {
+        $('.ethnicity-label').removeClass('active');
+      }
+
+      var ageVals = [];
+      $('#form_ages :checked').each(function() {
+        ageVals.push($(this).next("label").text());
+      });
+      if(ageVals != '') {
+        $('.age-label').addClass('active');
+      } else {
+        $('.age-label').removeClass('active');
+      }    
+    }
+
     //get url parameter
     var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -246,14 +299,54 @@
       var paramG = '';
       var paramE = '';
       var paramA = '';
+      var paramQ = '';
+      var paramDis = '';
 
       //store ques name
       var qname=$("#form_questions option:selected").text();
       //store selected question in questions variable
-      var questions=document.getElementById('form_questions').selectedIndex;
-      questions=document.getElementsByTagName("option")[questions].value;
-      if(questions == '') { questions = 1; }//for default chart
+      var questions;
+      /*questions=document.getElementById('form_questions').selectedIndex;
+      questions=document.getElementsByTagName("option")[questions].value;*/
+      /*if(questions == '') { questions = 1; }//for default chart*/
       //alert(questions);
+
+       //display chart from url
+       //if(questions == undefined) {
+        urlParamQ = getUrlParameter('q');
+        if(urlParamQ != 'undefined') {
+
+         //checking checkbox
+          $('#form_questions option').each(function() {   
+            if($(this).val() == urlParamQ) {//if 1 checked
+              //console.log($(this).val());
+              $(this).attr('selected','selected');
+              $('.zelected').text($('#form_questions option:selected').text());
+              //console.log($('#form_questions option:selected').text());
+            }
+          });
+        } else {          
+        }
+          questions=document.getElementById('form_questions').selectedIndex;
+          questions=document.getElementsByTagName("option")[questions].value;
+
+        /*if(urlParamQ != undefined) {
+          //paramQ = '';
+           //questions = toString(urlParamQ);
+         } else {//if dis is not present in url - show question 1 data or selected question filter
+          questions=document.getElementById('form_questions').selectedIndex;
+          questions=document.getElementsByTagName("option")[questions].value;
+          //questions = 1;
+          //question="1";
+         }*/
+
+         console.log(questions);
+        if(questions != '') {
+            paramQ = 'q='+questions;
+         }
+       //}//end questions
+
+
        //store year in yearVal
        var yearVal=$('.feedback-tab ul.nav li.active a').attr('value');
        //alert(yearVal);
@@ -267,8 +360,6 @@
        //if somebody has selected the filter - change the url
        if(monthVals != '') {
           paramM = 'm='+monthVals;
-       } else {        
-          paramM = '';
        }
 
        //store selected district in districtVals
@@ -317,71 +408,29 @@
           paramA = 'a='+ageVals;
        }
 
-       if(paramM != '') {
-        param += '?' + paramM;
+       
+       var disabilityVal = '';
+       if($('#disability').prop('checked')){
+        disabilityVal="1";
+       }
+       //alert(disabilityVal);
 
-        if(paramD != '') {
-          param += '&' + paramD;
-        } 
-        if(paramG != '') {
-          param += '&' + paramG;
-        } 
-        if(paramE != '') {
-          param += '&' + paramE;
-        } 
-        if(paramA != '') {
-          param += '&' + paramA;
-        } 
-       } else {
-          if(paramD != '') {
-            param += '?' + paramD;
-
-            if(paramG != '') {
-              param += '&' + paramG;
-            } 
-            if(paramE != '') {
-              param += '&' + paramE;
-            } 
-            if(paramA != '') {
-              param += '&' + paramA;
-            } 
-          } else {
-            if(paramG != '') {
-              param += '?' + paramG;
-
-              if(paramE != '') {
-                param += '&' + paramE;
-              } 
-              if(paramA != '') {
-                param += '&' + paramA;
-              } 
-            } else {
-              if(paramE != '') {
-                param += '?' + paramE;
-
-                if(paramA != '') {
-                  param += '&' + paramA;
-                }
-              } else {
-                if(paramA != '') {
-                  param += '?' + paramA;
-                }
-              }
-            } 
-          }
-        }
-
-        window.history.pushState(url,'',param);
+       if(disabilityVal != '') {//if somebody has selected the filter - change the url
+          paramDis = 'dis='+disabilityVal;
+       }
 
 
 
-       //display chart from url
+        //display chart from url
        if(monthVals == '') {
+        paramM = '';
          urlParamM = getUrlParameter('m');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
          if(urlParamM != undefined) {
            arr = urlParamM.split(',');//convert string to url
            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
            monthVals = clone(arr);//clone array
+
+           paramM = 'm=' + monthVals;
          }
          //checking checkbox
          function logArrayElements(element, index, array) {
@@ -402,6 +451,8 @@
            arr = urlParamD.split(',');//convert string to url
            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
            districtVals = clone(arr);//clone array
+
+           paramD = 'd='+districtVals;
          }
          //checking checkbox
          function logArrayElements(element, index, array) {
@@ -421,6 +472,8 @@
            arr = urlParamE.split(',');//convert string to url
            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
            ethnicityVals = clone(arr);//clone array
+
+           paramE = 'e='+ethnicityVals;
          }
          //checking checkbox
          function logArrayElements(element, index, array) {
@@ -452,6 +505,7 @@
           }
          genderVals.forEach(logArrayElements);
        }
+
        if(ageVals == '') {        
           paramA = '';
          urlParamA = getUrlParameter('a');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&a=15 - 24,25 - 39
@@ -459,6 +513,7 @@
            arr = urlParamA.split(',');//convert string to url
            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
            ageVals = clone(arr);//clone array
+           paramA = 'a='+ageVals;
          }
          //checking checkbox
          function logArrayElements(element, index, array) {
@@ -471,13 +526,132 @@
          ageVals.forEach(logArrayElements);
        }
 
-       if($('#disability').prop('checked')){
-        disabilityVal="1";
+       if(disabilityVal == '') {
+        paramDis = '';
+        urlParamDis = getUrlParameter('dis');
+        //console.log(urlParamDis);
+        if(urlParamDis != undefined) {
+          disabilityVal = toString(urlParamDis);
+
+          paramDis = 'dis='+urlParamDis;//disabilityVal in int
+         } else {
+          disabilityVal = "0";//if dis is not present in url
+
+          paramDis = 'dis='+disabilityVal;//disabilityVal in int
+        //disabilityVal="0";
+         }
+         //checking checkbox
+        $('#form_disability label').each(function() {   
+          if(urlParamDis == 1) {//if 1 checked//disabilityVal in int
+            $(this).prev("input").prop('checked', true);
+          }
+        });
        }
-       else{
-        disabilityVal="0";
-       }
-       //alert(disabilityVal);
+
+
+       //modify the url
+       if(paramQ != '') {
+        param += '?' + paramQ;
+
+        if(paramM != '') {
+            param += '&' + paramM;
+          }
+        if(paramD != '') {
+          param += '&' + paramD;
+        } 
+        if(paramG != '') {
+          param += '&' + paramG;
+        } 
+        if(paramE != '') {
+          param += '&' + paramE;
+        } 
+        if(paramA != '') {
+          param += '&' + paramA;
+        } 
+        if(paramDis != '') {
+          param += '&' + paramDis;
+        } 
+       } else {//if paramQ == ''
+         if(paramM != '') {
+          param += '?' + paramM;
+
+          if(paramD != '') {
+            param += '&' + paramD;
+          } 
+          if(paramG != '') {
+            param += '&' + paramG;
+          } 
+          if(paramE != '') {
+            param += '&' + paramE;
+          } 
+          if(paramA != '') {
+            param += '&' + paramA;
+          } 
+          if(paramDis != '') {
+            param += '&' + paramDis;
+          } 
+         } else {
+            if(paramD != '') {
+              param += '?' + paramD;
+
+              if(paramG != '') {
+                param += '&' + paramG;
+              } 
+              if(paramE != '') {
+                param += '&' + paramE;
+              } 
+              if(paramA != '') {
+                param += '&' + paramA;
+              } 
+              if(paramDis != '') {
+                param += '&' + paramDis;
+              } 
+            } else {
+              if(paramG != '') {
+                param += '?' + paramG;
+
+                if(paramE != '') {
+                  param += '&' + paramE;
+                } 
+                if(paramA != '') {
+                  param += '&' + paramA;
+                } 
+                if(paramDis != '') {
+                  param += '&' + paramDis;
+                } 
+              } else {
+                if(paramE != '') {
+                  param += '?' + paramE;
+
+                  if(paramA != '') {
+                    param += '&' + paramA;
+                  }
+                  if(paramDis != '') {
+                    param += '&' + paramDis;
+                  } 
+                } else {
+                  if(paramA != '') {
+                    param += '?' + paramA;
+
+                    if(paramDis != '') {
+                      param += '&' + paramDis;
+                    } 
+                  } else {                    
+                    if(paramDis != '') {
+                      param += '?' + paramDis;
+                    } 
+                  }
+                }
+              } 
+            }
+          }//end else paramM
+        }//end else paramQ
+
+        window.history.pushState(url,'',param);
+
+
+
+
 
        //for default chart show: on page load
        //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
@@ -490,6 +664,7 @@
        //  $('#month-select-text').html('Month');
        // }
 
+       //breadcrumb
        if(monthVals != '') {
         $('#month-select-text').html('Month /');
        } else {
@@ -705,7 +880,11 @@ $(document).ready(function() {
     aButtonPressed();
   });
 
-   
+  checkboxChecked();
+  //filter above label highlight
+  $('.ac-text input[type="checkbox"]').change(function(){
+      checkboxChecked();
+  });   
 
 
 });
