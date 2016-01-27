@@ -167,7 +167,19 @@
                                     <ul>
 
                                         <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Chart</a></li>
-                                        {# <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li> #}
+                                        <li class="share-icons share-platform"><a href="#!"><span class="icon icon-share"></span> Share Report</a>
+                                          <ul>    
+                                            {# TODO: Need to change cfp.org.np to dynamic url path if needed #}           
+                                            <li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/platform/&title=UNDP%20Platform%20" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+                                            
+                                            <li><a href="http://twitter.com/intent/tweet?text=UNDP+Platform+http%3A%2F%2Fcfp.org.np/platform/" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+                                            {# https://twitter.com/home?status=UNDP%20Report:%20Test%20http://cfp.org.np/uploads/documents/{{ entity.path|url_encode }}
+
+                                            http://twitter.com/intent/tweet?text=UNDP+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }} #}
+
+                                            <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/platform/&title=UNDP%20Platform%20&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+                                          </ul>
+                                        </li>
 
                                     </ul>
                                 </div>

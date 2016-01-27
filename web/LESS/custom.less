@@ -724,6 +724,35 @@ a.show-more-report {
 			}
 		}
 	}
+	&.share-platform {
+		position: relative;
+		right: 0;
+		li {
+			&:hover {
+				background: none;
+			}
+		}
+		ul {
+			display: none;
+			position: absolute;
+			left: 100px;
+			top: -6px;
+			width: 100px;
+			li {
+				a {
+					color: #159c02 !important;
+					&:before {
+						font-size: 16px;
+					}
+				}
+			}
+		}
+		&:hover {
+			ul {
+				display: block;
+			}
+		}
+	}
 }
 
 /* Contact Page */
