@@ -131,7 +131,7 @@
 
                 <div class="chart">
                     <div class="search">
-                      <span class="search-title">Search</span>
+                      <span class="search-title">Filter</span><!--Search-->
                       <span id="filter-search-key">
                         <!--Month / District / Age Group / Gender -->
                         <span id="month-select-text"></span>
@@ -835,6 +835,15 @@
        } else {
         $('#age-select-text').html('');
        }
+
+       //show or hide search
+       //console.log(disabilityVal);
+       if(monthVals == '' && districtVals == '' && genderVals == '' && ethnicityVals == '' && ageVals == '') {//&& disabilityVal == '0'
+        $('.search .search-title').hide();
+       } else {
+        $('.search .search-title').show();
+       }
+
        //prepend with /
        if(monthVals != '' && districtVals != '' && genderVals != '' && ethnicityVals != '' && ageVals != ''){
        window.location.replace('{{path('data')}}');
