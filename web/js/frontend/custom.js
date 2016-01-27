@@ -78,8 +78,26 @@ function btnNextQuestion_Click() {
       });
 }
 
+function dynamic_height() {
+  var header_height = 95;
+  var footer_height = 42;
+  
+  var winWidth = $(window).width();
+  var winHeight = $(window).height();
+
+  var content_height = winHeight - header_height - footer_height - 3;
+  if(winWidth >= 1200) {
+    $('.content, .transparent-grd').css('min-height', content_height);
+  }
+}
+$(window).resize(function() {
+  dynamic_height();
+});
 $(document).ready(function () {
 	$('body').show();//show after loading all elements to appear properly
+
+  //dynamic height
+  dynamic_height();
 
   //custom select
   $('#zelect select').zelect();
