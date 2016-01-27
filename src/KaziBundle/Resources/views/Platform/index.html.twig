@@ -190,6 +190,59 @@
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script src="/js/frontend/custom-filter.js"></script>
     <script>
+    //checkbox
+    function checkboxChecked() {
+      var monthVals = [];
+      $('#form_months :checked').each(function() {
+        monthVals.push($(this).next("label").text());
+      });
+      if(monthVals != '') {
+        $('.month-label').addClass('active');
+      } else {
+        $('.month-label').removeClass('active');
+      }
+
+      var districtVals = [];
+      $('#form_districts :checked').each(function() {
+        districtVals.push($(this).next("label").text());
+      });
+      if(districtVals != '') {
+        $('.district-label').addClass('active');
+      } else {
+        $('.district-label').removeClass('active');
+      }
+
+      var genderVals = [];
+      $('#form_gender :checked').each(function() {
+        genderVals.push($(this).next("label").text());
+      });
+      if(genderVals != '') {
+        $('.gender-label').addClass('active');
+      } else {
+        $('.gender-label').removeClass('active');
+      }
+        
+      var ethnicityVals = [];
+        $('#form_ethnicities :checked').each(function() {
+        ethnicityVals.push($(this).next("label").text());
+      });
+      if(ethnicityVals != '') {
+        $('.ethnicity-label').addClass('active');
+      } else {
+        $('.ethnicity-label').removeClass('active');
+      }
+
+      var ageVals = [];
+      $('#form_ages :checked').each(function() {
+        ageVals.push($(this).next("label").text());
+      });
+      if(ageVals != '') {
+        $('.age-label').addClass('active');
+      } else {
+        $('.age-label').removeClass('active');
+      }    
+    }
+
     //get url parameter
     var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -818,7 +871,11 @@ $(document).ready(function() {
     aButtonPressed();
   });
 
-   
+  checkboxChecked();
+  //filter above label highlight
+  $('.ac-text input[type="checkbox"]').change(function(){
+      checkboxChecked();
+  });   
 
 
 });

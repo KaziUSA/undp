@@ -18,59 +18,6 @@ $(document).ready(function() {
     });
 
 
-    //filter above label highlight
-    $('.ac-text input[type="checkbox"]').change(function(){
-      var monthVals = [];
-      $('#form_months :checked').each(function() {
-        monthVals.push($(this).next("label").text());
-      });
-      if(monthVals != '') {
-        $('.month-label').addClass('active');
-      } else {
-        $('.month-label').removeClass('active');
-      }
-
-      var districtVals = [];
-      $('#form_districts :checked').each(function() {
-        districtVals.push($(this).next("label").text());
-      });
-      if(districtVals != '') {
-        $('.district-label').addClass('active');
-      } else {
-        $('.district-label').removeClass('active');
-      }
-
-      var genderVals = [];
-      $('#form_gender :checked').each(function() {
-        genderVals.push($(this).next("label").text());
-      });
-      if(genderVals != '') {
-        $('.gender-label').addClass('active');
-      } else {
-        $('.gender-label').removeClass('active');
-      }
-        
-      var ethnicityVals = [];
-        $('#form_ethnicities :checked').each(function() {
-        ethnicityVals.push($(this).next("label").text());
-      });
-      if(ethnicityVals != '') {
-        $('.ethnicity-label').addClass('active');
-      } else {
-        $('.ethnicity-label').removeClass('active');
-      }
-
-      var ageVals = [];
-      $('#form_ages :checked').each(function() {
-        ageVals.push($(this).next("label").text());
-      });
-      if(ageVals != '') {
-        $('.age-label').addClass('active');
-      } else {
-        $('.age-label').removeClass('active');
-      }      
-    });
-
 
     $('.nav-tabs li.round1').click(function (e) {
         e.preventDefault();
