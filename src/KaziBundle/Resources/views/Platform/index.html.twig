@@ -419,9 +419,9 @@
        }
 
        
-       var disabilityVal = '';
+       var disabilityVal;
        if($('#disability').prop('checked')){
-        disabilityVal="1";
+        disabilityVal=1;
        } /*else {
         disabilityVal = "0";
        }*/
@@ -551,11 +551,11 @@
         urlParamDis = getUrlParameter('dis');
         //console.log(urlParamDis);
         if(urlParamDis != undefined) {
-          disabilityVal = toString(urlParamDis);
+          disabilityVal = urlParamDis;
 
           paramDis = 'dis='+urlParamDis;//disabilityVal in int
          } else {
-          disabilityVal = "0";//if dis is not present in url
+          disabilityVal = 0;//if dis is not present in url
 
           paramDis = 'dis='+disabilityVal;//disabilityVal in int
         //disabilityVal="0";
@@ -872,7 +872,7 @@
                       xAxis: {
 
                           labels: {
-                              style: {'color': '#898989', 'fontSize': '14px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
+                              style: {'color': '#898989', 'fontSize': '12px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
                           },
                           categories: response.result.label,
                           title: {
@@ -948,7 +948,11 @@
                       }, {
                       text: "<span>Nepal Earthquake 2015</span>"+"<br><span>"+qname+"</span><br>"
                   });
+                  
+                  
                    $('.high-chart-wrap').removeClass('hidden');
+                   $('.highcharts-title').hide();                  
+                    $('.highcharts-subtitle').hide();
                   //$('#table1').html(chart.getTable()); //Get table from highchart function 
                   $('#table1').html(response.result.html);
                   if(response.result.series === undefined){                    
@@ -983,8 +987,7 @@
                   });
                   // $("div.toolbar").html();
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download');
-                  $('.highcharts-title').hide();                  
-                  $('.highcharts-subtitle').hide();
+                  
                   checkboxChecked();
 
               }//Ajax success end
