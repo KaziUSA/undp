@@ -8,7 +8,7 @@
                 <div class="filter">
                   <!-- Nav tabs -->
                   <div class="feedback-tab clearfix">
-                    <div class="tab-head">Feedback Round</div>
+                    <div class="tab-head">Year</div>
 
                       <ul id="" class="nav nav-tabs" role="tablist">
                         {# <li role="presentation" class="round1"><a href="#round1" aria-controls="home" role="tab" data-toggle="tab">1</a></li>
@@ -862,7 +862,9 @@
                       },
                       colors:['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'],
                       title: {
-                          text: qname//There is no text in design: Answers by the people
+                          
+                          text: ""
+                          // text: '<span style="font-size:12px">Inter-Agency Common</span><span style="font-size:10px">Feedback Project</span><span style="font-size:8px">Nepal Earthquake 2015</span>'                          
                       },
                       subtitle: {
                           text: response.result.grouped//There is no text in design: Source: UNDP Annual Report
@@ -940,6 +942,12 @@
                           }
                       },
                   });//Highchart end
+                  chart.setTitle({
+                      useHTML: true,
+                      text:"Inter-Agency Common Feedback Project"
+                      }, {
+                      text: "<span>Nepal Earthquake 2015</span>"+"<br><span>"+qname+"</span><br>"
+                  });
                    $('.high-chart-wrap').removeClass('hidden');
                   //$('#table1').html(chart.getTable()); //Get table from highchart function 
                   $('#table1').html(response.result.html);
@@ -975,8 +983,8 @@
                   });
                   // $("div.toolbar").html();
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download');
-                  $('.highcharts-title').hide();
-                  
+                  $('.highcharts-title').hide();                  
+                  $('.highcharts-subtitle').hide();
                   checkboxChecked();
 
               }//Ajax success end
