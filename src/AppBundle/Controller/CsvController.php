@@ -26,87 +26,16 @@ use Phax\CoreBundle\Model\PhaxReaction;//for phax commandline
 class CsvController extends Controller
 {
     private $count = 0;
+    private $rowCount = 0;
     /**
      * @Route("/csv")
      * @Template()
      */
     public function indexAction()
     {
-    
-        /*return array(
-            'fileInfo' => $this->getCsvData('uploads/survey1.xlsx')
-            //'fileInfo' => $this->getCsvData('uploads/survey2.xlsx')
-            //'fileInfo' => $this->getCsvData('uploads/survey3.xlsx')
-                
-            );    */
-        $file_name = 'uploads/round5/survey1.xlsx';
-        $sheet_name = '';
-
-        $objReader = PHPExcel_IOFactory::createReaderForFile($file_name);
-        //If specific Sheet is specified then sheet is selected
-        if($sheet_name != null){
-            $objReader->setLoadSheetsOnly(array($sheet_name));
-        }
-        $objReader->setReadDataOnly(true);
-        
-        $objPHPExcel = $objReader->load($file_name);
-        
-        //Getting the number of rows and columns
-        $highestColumm = $objPHPExcel->setActiveSheetIndex(0)->getHighestColumn();
-        $highestRow = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-        
-        
-        $fileInfo = array();
-        $rowCount = 0;
-        
-        
-        foreach ($objPHPExcel->setActiveSheetIndex(0)->getRowIterator() as $row) {
-            $cellIterator = $row->getCellIterator();
-            $cellIterator->setIterateOnlyExistingCells(false);
-            
-            $row = array();
-            $columnCount = 0;
-            foreach ($cellIterator as $cell) {
-                if (!is_null($cell)) {
-                    
-                    //This is converting the second column to Date Format
-                    //TODO:: Make sure date format anywhere is captured properly and not just the second column
-                    if (($columnCount == 0) && ($rowCount > 0)){
-                        $value = $cell->getValue();
-                        $value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
-                        
-                    }else{
-                        $value = $cell->getCalculatedValue();    
-                        if(PHPExcel_Shared_Date::isDateTime($cell)) {
-                            $value = $cell->getValue();    
-                            $value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
-                        }
-                    }
-                    
-                    array_push($row, $value);
-                    $columnCount++;
-        
-                    }
-                }
-                if ($rowCount > 0)
-                {
-                    //$this->setCsvData($row);    
-                    array_push($fileInfo, $row);
-                    //print_r($row);
-                }else{
-                    array_push($fileInfo, $row);
-                }
-                unset($row);
-                //array_push($fileInfo, $row);
-                $rowCount++;
-            }
-        
-
-                //print_r($fileInfo); exit();
-            return array(
-                'fileInfo' => $fileInfo
-                );
+        return array();
     }
+    
 
     /**
      * @Route("/upload")
@@ -129,7 +58,8 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        $this->getCsvData('/var/www/html/web/uploads/'.$file.".xlsx");
+        //$this->getCsvData('/var/www/html/web/uploads/'.$file.".xlsx");
+        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/'.$file.".xlsx");
         
         
         echo "\n";
@@ -146,6 +76,7 @@ class CsvController extends Controller
 
         
     }
+    
     private function setCsvData($row)
     {
      //Adding interviewer data
@@ -154,9 +85,9 @@ class CsvController extends Controller
         
             $interviewer = $this->addInterviewer($row[1], 'accountability');
             $survey = new Survey();
-            $survey->setTerm(2); //MAKE SURE TO CHANGE THIS EVERY TERM
+            $survey->setTerm(6); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
-            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2015-08-15'));
+            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2015-12-15'));
             
             $survey->setAge($this->getAgeByData($row[5]));
         
@@ -200,20 +131,20 @@ class CsvController extends Controller
             // Question 5
             $this->createSurveyResponse($survey, 14, $row[34]);
             // Question 6
-            $this->createSurveyResponse($survey, 25, $row[39]);
+            $this->createSurveyResponse($survey, 17, $row[39]);
             // Question 7
-            $this->createSurveyResponse($survey, 26, $row[40]);
+            $this->createSurveyResponse($survey, 19, $row[42]);
             // Question 8
-            $this->createSurveyResponse($survey, 22, $row[41]);
+            $this->createSurveyResponse($survey, 22, $row[47]);
             // Question 9
-            $this->createSurveyResponse($survey, 27, $row[42]);
+            $this->createSurveyResponse($survey, 23, $row[48]);
         
             // Question 10
-            //$this->createSurveyResponse($survey, 28, $row[45]);
+            $this->createSurveyResponse($survey, 28, $row[51]);
             // Question 11
-            //$this->createSurveyResponse($survey, 29, $row[52]);
+            $this->createSurveyResponse($survey, 29, $row[52]);
             // Question 12
-            //$this->createSurveyResponse($survey, 30, $row[57]);
+            $this->createSurveyResponse($survey, 30, $row[57]);
             
         
             // Question 1a
@@ -330,6 +261,65 @@ class CsvController extends Controller
         
             return true;
         }
+     /**
+     * Fix CSV Data
+     * Takes in a file name to read data from
+     * If sheet_name is specified, then that particular sheet is read
+     * returns a multi-dimentional array with CSV information
+     */
+    private function readCsvData($file_name, $sheet_name = null){
+        $objReader = PHPExcel_IOFactory::createReaderForFile($file_name);
+        
+        //If specific Sheet is specified then sheet is selected
+        if($sheet_name != null){
+            $objReader->setLoadSheetsOnly(array($sheet_name));
+        }
+        
+        $objReader->setReadDataOnly(true);
+        
+        $objPHPExcel = $objReader->load($file_name);
+        
+        //Getting the number of rows and columns
+        $highestColumm = $objPHPExcel->setActiveSheetIndex(0)->getHighestColumn();
+        $highestRow = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+        
+        
+        //$fileInfo = array();
+        $rowCount = 0;
+        
+        
+        foreach ($objPHPExcel->setActiveSheetIndex(0)->getRowIterator() as $row) {
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(false);
+            
+            $row = array();
+            $columnCount = 0;
+            foreach ($cellIterator as $cell) {
+                if (!is_null($cell)) {
+                    
+                    
+                    $value = $cell->getCalculatedValue();    
+                    if(PHPExcel_Shared_Date::isDateTime($cell)) {
+                        $value = $cell->getValue();    
+                        $value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
+                    }
+
+                    array_push($row, $value);
+                    $columnCount++;
+        
+                    }
+                }
+                if ($rowCount > 0)
+                {
+                    $this->fixCsvData($row);    
+                }
+                unset($row);
+                //array_push($fileInfo, $row);
+                $rowCount++;
+            }
+        
+            return true;
+        }
     /**
      * Adds the interviewer information if it doesn't already exist
      */
@@ -360,7 +350,7 @@ class CsvController extends Controller
     private function getAgeByData($data){
         $data = str_replace("_", "-", $data);
         $response = $data;
-        if ($data == "55 - greater"){
+        if ($data == "55-greater"){
             $response = "55+";
         }
         if ($data == "55"){
@@ -629,6 +619,95 @@ class CsvController extends Controller
                 break;
             case "other":
                 $id = 19;
+                break;
+            default:
+                $id = 0;
+        }
+        
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
+    /**
+     * @Route("/fix")
+     * @Template()
+     */
+    public function fixAction($file, $rowCount)//PhaxAction $phaxAction
+    {
+        // USE THIS TO RUN THIS ACTION
+        // sf phax:action CsvController upload  
+        $this->rowCount = $rowCount;
+        
+        echo "******************************************************\n";
+        echo "*             WELCOME TO CSV FIXER                   *\n";
+        echo "*          ==============================            *\n";
+        echo "*                 By Kazi Studios                    *\n"; 
+        echo "******************************************************\n";
+        
+        echo "\n";
+        echo "\n";
+        
+        
+        echo "DONE:";
+        //$this->getCsvData('/var/www/html/web/uploads/'.$file.".xlsx");
+        $this->readCsvData('/Users/shrestha/Sites/undp/web/uploads/'.$file.".xlsx");
+        
+        
+        echo "\n";
+        echo "CSV fix completed \n";
+        
+        
+        
+        $phaxReaction = new PhaxReaction();
+
+        // This will disable the javascript callback
+        $phaxReaction->setMetaMessage('Surveys have been fixed from : '. $file.".xlsx");
+
+        return $phaxReaction;
+    }
+    private function fixCsvData($row)
+    {
+           $answer = $this->getYesNoAnswer($row[43]);
+        
+        $surveyResponse = $this->getDoctrine()
+               ->getRepository('AppBundle:SurveyResponse')
+               ->findOneBy(array(
+                   'question' => 23,
+                   'survey' => $this->rowCount
+                ));
+        $answer = $this->getYesNoAnswer($row[43]);
+        if ($answer){
+        $surveyResponse->setAnswer($answer);
+        
+        
+        $em = $this->getDoctrine()->getManager();
+            $em->persist($surveyResponse);
+            $em->flush();
+        }
+        $this->rowCount++;
+            
+    }
+    private function getYesNoAnswer($data)
+    {
+        $id=0;
+        switch ($data) {
+            case "not_at_all":
+                $id = 1;
+                break;
+            case "not_very_much":
+                $id = 2;
+                break;
+            case "neutral":
+                $id = 3;
+                break;
+            case "somewhat_yes":
+                $id = 4;
+                break;
+            case "completely_yes":
+                $id = 5;
+                break;
+            case "don_t_know":
+                $id = 6;
                 break;
             default:
                 $id = 0;
