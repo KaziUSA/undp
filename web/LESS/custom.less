@@ -210,7 +210,7 @@ label {
 .img-cover {
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: center center;
+	background-position: top center;
 	width: 100%;
 	&.home {
 		background-image: url(../img/frontend/intro.jpg);		
@@ -471,10 +471,9 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	background: linear-gradient(135deg,  rgba(212,228,17,1) 0%,rgba(10,108,136,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e411', endColorstr='#0a6c88',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
-	opacity: 0.85;
+	opacity: 0.75;
 
 	position: absolute;
-  height: 800px;
   width: 100%;
 }
 .content {
@@ -486,7 +485,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 .content.home,
 .transparent-grd,
 .content-area {
-  min-height: 800px;
+  min-height: 509px;
 }
 .content {
   //background-attachment: fixed; //mountain gets hide under header
@@ -494,13 +493,13 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
   .banner-caption {
   	color: @white;
 		font-family: @third-font-family;
-  	margin-top: 260px;
+  	margin-top: 100px;
 		padding-bottom: 20px;
 		.caption-head {
-			font: bold 50px/50px @second-font-family;
+			font: bold 40px/40px @second-font-family;
 			margin-bottom: 25px;
 			p {
-				font: bold 50px/50px @second-font-family;
+				font: bold 40px/40px @second-font-family;
 			}
 		}
 		p {
@@ -721,6 +720,35 @@ a.show-more-report {
 			}
 			&:hover {
 				background: none;
+			}
+		}
+	}
+	&.share-platform {
+		position: relative;
+		right: 0;
+		li {
+			&:hover {
+				background: none;
+			}
+		}
+		ul {
+			display: none;
+			position: absolute;
+			left: 100px;
+			top: -6px;
+			width: 100px;
+			li {
+				a {
+					color: #159c02 !important;
+					&:before {
+						font-size: 16px;
+					}
+				}
+			}
+		}
+		&:hover {
+			ul {
+				display: block;
 			}
 		}
 	}

@@ -131,7 +131,7 @@
 
                 <div class="chart">
                     <div class="search">
-                      <span class="search-title">Search</span>
+                      <span class="search-title">Filter</span><!--Search-->
                       <span id="filter-search-key">
                         <!--Month / District / Age Group / Gender -->
                         <span id="month-select-text"></span>
@@ -167,7 +167,19 @@
                                     <ul>
 
                                         <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Chart</a></li>
-                                        {# <li><a href="#!"><span class="icon icon-share"></span> Share Report</a></li> #}
+                                        <li class="share-icons share-platform"><a href="#!"><span class="icon icon-share"></span> Share Report</a>
+                                          <ul>    
+                                            {# TODO: Need to change cfp.org.np to dynamic url path if needed #}           
+                                            <li class="facebook"><a href="" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+                                            
+                                            <li><a href="" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+                                            {# https://twitter.com/home?status=UNDP%20Report:%20Test%20http://cfp.org.np/uploads/documents/{{ entity.path|url_encode }}
+
+                                            http://twitter.com/intent/tweet?text=UNDP+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }} #}
+
+                                            <li><a href="" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+                                          </ul>
+                                        </li>
 
                                     </ul>
                                 </div>
@@ -301,6 +313,10 @@
       var paramA = '';
       var paramQ = '';
       var paramDis = '';
+
+      var fShare = 'https://www.facebook.com/sharer.php?title=UNDP%20Platform%20&u=http%3A//cfp.org.np/platform/';
+      var tShare = 'http://twitter.com/intent/tweet?text=UNDP+Platform+http%3A%2F%2Fcfp.org.np/platform/';
+      var lShare = 'https://www.linkedin.com/shareArticle?mini=true&title=UNDP%20Platform%20&summary=&source=&url=http%3A//cfp.org.np/platform/';
 
       //store ques name
       var qname=$("#form_questions option:selected").text();
@@ -667,6 +683,9 @@
           }//end else paramM
         }//end else paramQ
         window.history.pushState(url,'',param);
+        $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
+        $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
+        $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
      }//end if
     else {//if the user selects filter: month, district, gender, ethnicity, age
       //modify the url
@@ -768,6 +787,9 @@
         }//end else paramQ
 
         window.history.pushState(url,'',param);
+        $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
+        $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
+        $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
     }
 
 
@@ -813,6 +835,15 @@
        } else {
         $('#age-select-text').html('');
        }
+
+       //show or hide search
+       //console.log(disabilityVal);
+       if(monthVals == '' && districtVals == '' && genderVals == '' && ethnicityVals == '' && ageVals == '') {//&& disabilityVal == '0'
+        $('.search .search-title').hide();
+       } else {
+        $('.search .search-title').show();
+       }
+
        //prepend with /
        if(monthVals != '' && districtVals != '' && genderVals != '' && ethnicityVals != '' && ageVals != ''){
        window.location.replace('{{path('data')}}');
