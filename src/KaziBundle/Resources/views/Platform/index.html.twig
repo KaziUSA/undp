@@ -970,17 +970,49 @@
                           }
                       },
                   });//Highchart end
+                  if(disabilityVal == 1){
+                    V="Disability/";
+                  }else{
+                    V="";
+                  }
+                  if(monthVals != ''){
+                    M="Month/";
+                  }else{
+                    M="";
+                  }
+                  if(districtVals != ''){
+                    D="District/";
+                  }else{
+                    D="";
+                  }
+                  if(genderVals != ''){
+                    G="Gender/";
+                  }else{
+                    G="";
+                  }
+                  if(ethnicityVals != ''){
+                    E="Ethnicity/";              
+                  }else{
+                    E="";
+                  }
+                  if(ageVals != ''){
+                    A="Age/";
+                  }else{
+                    A="";
+                  }
+
                   chart.setTitle({
                       useHTML: true,
                       text:"Inter-Agency Common Feedback Project"
                       }, {
-                      text: "<span>Nepal Earthquake 2015</span>"+"<br><span>"+qname+"</span><br>"
+                      text:"<span>"+qname+"</span><br>For: "+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
+                      align: "left"
                   });
                   
                   
                    $('.high-chart-wrap').removeClass('hidden');
-                   $('.highcharts-title').hide();                  
-                    $('.highcharts-subtitle').hide();
+                   $('.highcharts-title').addClass('hidden');                  
+                    $('.highcharts-subtitle').addClass('hidden');
                   //$('#table1').html(chart.getTable()); //Get table from highchart function 
                   $('#table1').html(response.result.html);
                   if(response.result.series === undefined){                    
