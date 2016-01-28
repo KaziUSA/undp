@@ -347,8 +347,10 @@ class MyAjaxController extends Controller
 			$district_span=count($data_month);				
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
+
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
+
 			}
 			
 			$obj['html']=$obj['html']."</tr><tr><th>Month</th>";			
@@ -364,8 +366,7 @@ class MyAjaxController extends Controller
 					foreach ($data_month as $month) {			       									       
 						$results= $em->getRepository('AppBundle\Entity\Query')->getMonthDistrict($data_question,$ans,$district,$month,$data_disability,$data_year);
 						foreach ($results as $arr){		        		
-			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
-
+			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>";
 			    		}	
 					}					
 				}
