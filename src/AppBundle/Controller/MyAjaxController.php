@@ -106,6 +106,9 @@ class MyAjaxController extends Controller
 			$i=0;
 			$obj['total']=0;
 			$obj['stack']='normal'; //For stack chart
+			if(count($data_month)<3){
+				$obj['stack']='';
+			}
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_month as $month){
@@ -147,6 +150,9 @@ class MyAjaxController extends Controller
 		if(!isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && isset($data_district) && !isset($data_month)){
 			$i=0;
 			$obj['stack']='normal'; //For stack chart
+			if(count($data_district)<3){
+				$obj['stack']='';
+			}
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_district as $district){
@@ -187,6 +193,9 @@ class MyAjaxController extends Controller
 		if(!isset($data_age) && isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){
 			$i=0;
 			$obj['stack']='normal'; //For stack chart
+			if(count($data_gender)<4){
+				$obj['stack']='';
+			}
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_gender as $gender){
@@ -229,6 +238,9 @@ class MyAjaxController extends Controller
 		if(isset($data_ethnicity) && !isset($data_age) && !isset($data_gender) && !isset($data_district) && !isset($data_month)){
 			$i=0;
 			$obj['stack']='normal';	//For stack chart
+			if(count($data_ethnicity)<3){
+				$obj['stack']='';
+			}
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_ethnicity as $ethnicity){
@@ -272,6 +284,9 @@ class MyAjaxController extends Controller
 			$i=0;
 			$obj['total']=0;
 			$obj['stack']='normal'; //For stack chart
+			if(count($data_age)<3){
+				$obj['stack']='';
+			}
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_age as $age){
