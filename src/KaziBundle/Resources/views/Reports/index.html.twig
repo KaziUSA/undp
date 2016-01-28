@@ -10,8 +10,8 @@
 					<div class="filter report">
 					  <!-- Tab panes -->
 					  <div class="tab-content">
-					    <div role="tabpanel" class="tab-pane fade in active" id="round1">
-					    	<div class="tab-content-wrap">
+					    <div role="" class="fade in active" id="">
+					    	<div class="">
 					    		<div class="filter-title">Filter By</div>
 					    		<ul id="month-wise-report" class="checkbox-style">
 							    	<li><input type="checkbox" id="monthall" checked="checked" />
@@ -77,7 +77,7 @@
 											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">National Reports</a></h2>
 										</div>
 										<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      										<div class="panel-body">
+    										<div class="panel-body">
 												{% for entity in entities %}
 													{# TODO: need to change 'National Reports' to ID #}
 													{% if entity.documenttype == 'National Reports' %}
@@ -105,7 +105,7 @@
 														</div>
 													</div>
 													{% endif %}
-									        	{% endfor %}
+									        {% endfor %}
 							        		</div> <!-- /.panel-body -->
 							        	</div><!-- /.collapseOne -->
 						        	</div><!-- /.report-group clearfix -->
@@ -117,9 +117,9 @@
 											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">District Reports</a></h2>
 										</div>
 										<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-      										<div class="panel-body">
-														{% set dist = 1 %}
-      											{% for entity in entities %}
+    										<div class="panel-body">
+												{% set dist = 1 %}
+      									{% for entity in entities %}
 												{# TODO: need to change 'District Reports' to ID #}
 												{% if entity.documenttype == 'District Reports' %}
 												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %}">
@@ -145,12 +145,12 @@
 														</ul>
 													</div>
 												</div>
-													{% set dist = dist + 1 %}
+												{% set dist = dist + 1 %}
 												{% endif %}
-								        	{% endfor %}
-								        	<div class="clear"></div>
-								        	<a href="#!" class="show-more-report">Show More</a>
-      										</div> <!-- /.panel-body -->
+								        {% endfor %}
+								        <div class="clear"></div>
+								        <a href="#!" class="show-more-report">Show More</a>
+      									</div> <!-- /.panel-body -->
 							        	</div><!-- /.collapseTwo -->
 						        	</div><!-- /.report-group clearfix -->
 					        	</div> <!-- /.panel panel-default -->
@@ -189,7 +189,7 @@
 													</div>
 												</div>
 												{% endif %}
-								        		{% endfor %}
+						        		{% endfor %}
 					        				</div> <!-- /.panel-body -->
 							        	</div><!-- /.collapseThree -->
 						        	</div><!-- /.report-group clearfix -->
@@ -229,7 +229,7 @@
 													</div>
 												</div>
 												{% endif %}
-								        	{% endfor %}
+							        	{% endfor %}
 							        	
       										</div> <!-- /.panel-body -->
 							        	</div><!-- /.collapseFour -->
