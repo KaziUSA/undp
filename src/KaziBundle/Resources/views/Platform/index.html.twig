@@ -297,9 +297,14 @@
             temp[key] = clone(obj[key]);
         return temp;
     }
-
+    //check for refresh
+    
+    sessionStorage.setItem("is_reloaded", 1);
     //Ajax call    
     function aButtonPressed(){
+      //sessionStorage.setItem("is_reloaded", 0);
+      //if (Number(sessionStorage.getItem("is_reloaded"))) alert('Reloaded!');
+      //console.log(Number(sessionStorage.getItem("is_reloaded")));
       var url = window.location.href;
       var param = '';
       var paramM = '';
@@ -352,7 +357,7 @@
           //question="1";
          }*/
 
-         console.log(questions);
+        //console.log(questions);
         if(questions != '') {
             paramQ = 'q='+questions;
          }
@@ -373,7 +378,7 @@
        if(monthVals != '') {
           paramM = 'm='+monthVals;
        } else {
-        //paramM = '';
+        paramM = '';
        }
 
        //store selected district in districtVals
@@ -451,21 +456,21 @@
 
        
 
-      if(monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '' && disabilityVal == undefined) {
-          //console.log('here');
+      if(Number(sessionStorage.getItem("is_reloaded")) && monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '' && disabilityVal == undefined) {
+        //console.log('here');
+        
         //display chart from url
-       if(monthVals == '') {
-         paramM = '';
-         urlParamM = getUrlParameter('m');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
-         if(urlParamM != undefined) {
-           arr = urlParamM.split(',');//convert string to url
-           //myArr = ['Bhaktapur','Kathmandu'];//custom to test
-           monthVals = clone(arr);//clone array
-
-           paramM = 'm=' + monthVals;
-         }
-         //checking checkbox
-         function logArrayElements(element, index, array) {
+        if(monthVals == '') {
+          paramM = '';
+          urlParamM = getUrlParameter('m');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
+          if(urlParamM != undefined) {
+            arr = urlParamM.split(',');//convert string to url
+            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+            monthVals = clone(arr);//clone array
+            paramM = 'm=' + monthVals;
+          }
+          //checking checkbox
+          function logArrayElements(element, index, array) {
             $('#form_months label').each(function() {   
               if($(this).text() == element) {
                 $(this).prev("input").prop('checked', true);
@@ -473,140 +478,120 @@
             });
           }
          monthVals.forEach(logArrayElements);
-       }
+        }
        
 
-       if(districtVals == '') {
+        if(districtVals == '') {
           paramD = '';
-         urlParamD = getUrlParameter('d');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
-         if(urlParamD != undefined) {
-           arr = urlParamD.split(',');//convert string to url
-           //myArr = ['Bhaktapur','Kathmandu'];//custom to test
-           districtVals = clone(arr);//clone array
+          urlParamD = getUrlParameter('d');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
+          if(urlParamD != undefined) {
+            arr = urlParamD.split(',');//convert string to url
+            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+            districtVals = clone(arr);//clone array
 
-           paramD = 'd='+districtVals;
-         }
-         //checking checkbox
-         function logArrayElements(element, index, array) {
+            paramD = 'd='+districtVals;
+          }
+          //checking checkbox
+          function logArrayElements(element, index, array) {
             $('#form_districts label').each(function() {   
               if($(this).text() == element) {
                 $(this).prev("input").prop('checked', true);
               }
             });
           }
-         districtVals.forEach(logArrayElements);
-       }
+          districtVals.forEach(logArrayElements);
+        }
 
-       if(ethnicityVals == '') {
+        if(ethnicityVals == '') {
           paramE = '';
-         urlParamE = getUrlParameter('e');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&e=Brahmin,Chhetri
-         if(urlParamE != undefined) {
-           arr = urlParamE.split(',');//convert string to url
-           //myArr = ['Bhaktapur','Kathmandu'];//custom to test
-           ethnicityVals = clone(arr);//clone array
+          urlParamE = getUrlParameter('e');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&e=Brahmin,Chhetri
+          if(urlParamE != undefined) {
+            arr = urlParamE.split(',');//convert string to url
+            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+            ethnicityVals = clone(arr);//clone array
 
-           paramE = 'e='+ethnicityVals;
-         }
-         //checking checkbox
-         function logArrayElements(element, index, array) {
+            paramE = 'e='+ethnicityVals;
+          }
+          //checking checkbox
+          function logArrayElements(element, index, array) {
             $('#form_ethnicities label').each(function() {   
               if($(this).text() == element) {
                 $(this).prev("input").prop('checked', true);
               }
             });
           }
-         ethnicityVals.forEach(logArrayElements);
-       }
+          ethnicityVals.forEach(logArrayElements);
+        }
 
-       if(genderVals == '') {
+        if(genderVals == '') {
           paramG = '';
-         urlParamG = getUrlParameter('g');
-         //from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male
-         if(urlParamG != undefined) {
-           arrG = urlParamG.split(',');//convert string to url
-           //myArr = ['Female','Male'];//custom to test
-           genderVals = clone(arrG);//clone array
-         }         
-         //checking checkbox
-         function logArrayElements(element, index, array) {
+          urlParamG = getUrlParameter('g');
+          //from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male
+          if(urlParamG != undefined) {
+            arrG = urlParamG.split(',');//convert string to url
+            //myArr = ['Female','Male'];//custom to test
+            genderVals = clone(arrG);//clone array
+          }         
+          //checking checkbox
+          function logArrayElements(element, index, array) {
             $('#form_gender label').each(function() {           
               if($(this).text() == element) {
                 $(this).prev("input").prop('checked', true);
               }
             });
           }
-         genderVals.forEach(logArrayElements);
-       }
+          genderVals.forEach(logArrayElements);
+        }
 
-       if(ageVals == '') {        
+        if(ageVals == '') {        
           paramA = '';
-         urlParamA = getUrlParameter('a');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&a=15 - 24,25 - 39
-         if(urlParamA != undefined) {
-           arr = urlParamA.split(',');//convert string to url
-           //myArr = ['Bhaktapur','Kathmandu'];//custom to test
-           ageVals = clone(arr);//clone array
-           paramA = 'a='+ageVals;
-         }
-         //checking checkbox
-         function logArrayElements(element, index, array) {
+          urlParamA = getUrlParameter('a');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&a=15 - 24,25 - 39
+          if(urlParamA != undefined) {
+            arr = urlParamA.split(',');//convert string to url
+            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+            ageVals = clone(arr);//clone array
+            paramA = 'a='+ageVals;
+          }
+          //checking checkbox
+          function logArrayElements(element, index, array) {
             $('#form_ages label').each(function() {   
               if($(this).text() == element) {
                 $(this).prev("input").prop('checked', true);
               }
             });
           }
-         ageVals.forEach(logArrayElements);
-       }
+          ageVals.forEach(logArrayElements);
+        }
 
-       if(disabilityVal == '') {
-        paramDis = '';
-        urlParamDis = getUrlParameter('dis');
-        //console.log(urlParamDis);
-        if(urlParamDis != undefined) {
-          disabilityVal = urlParamDis;
+        if(disabilityVal == '') {
+          paramDis = '';
+          urlParamDis = getUrlParameter('dis');
+          //console.log(urlParamDis);
+          if(urlParamDis != undefined) {
+            disabilityVal = urlParamDis;
 
-          paramDis = 'dis='+urlParamDis;//disabilityVal in int
-         } else {
-          disabilityVal = 0;//if dis is not present in url
-
-          paramDis = 'dis='+disabilityVal;//disabilityVal in int
-        //disabilityVal="0";
-         }
-         //checking checkbox
-        $('#form_disability label').each(function() {   
+            paramDis = 'dis='+urlParamDis;//disabilityVal in int
+          } else {
+            disabilityVal = undefined;//if dis is not present in url
+            paramDis = 'dis='+disabilityVal;//disabilityVal in int
+            //disabilityVal="0";
+          }
+          //checking checkbox
+          $('#form_disability label').each(function() {   
           if(urlParamDis == 1) {//if 1 checked//disabilityVal in int
             $(this).prev("input").prop('checked', true);
           }
-        });
-       }
+          });
+        }
 
 
-       //modify the url again with some changes
-       if(paramQ != '') {
-        param += '?' + paramQ;
+        //modify the url again with some changes
+        if(paramQ != '') {
+         /* param += '?' + paramQ;
 
-        if(paramM != '') {
-            param += '&' + paramM;
-          }
-        if(paramD != '') {
-          param += '&' + paramD;
-        } 
-        if(paramG != '') {
-          param += '&' + paramG;
-        } 
-        if(paramE != '') {
-          param += '&' + paramE;
-        } 
-        if(paramA != '') {
-          param += '&' + paramA;
-        } 
-        if(paramDis != undefined) {
-          param += '&' + paramDis;
-        } 
-       } else {//if paramQ == ''
-         if(paramM != '') {
-          param += '&' + paramM;
-
+          if(paramM != '') {
+              param += '&' + paramM;
+            }
           if(paramD != '') {
             param += '&' + paramD;
           } 
@@ -621,8 +606,29 @@
           } 
           if(paramDis != undefined) {
             param += '&' + paramDis;
+          } */
+        } 
+        else {//if paramQ == ''
+          if(paramM != '') {
+            param += '&' + paramM;
+
+            if(paramD != '') {
+              param += '&' + paramD;
+            } 
+            if(paramG != '') {
+              param += '&' + paramG;
+            } 
+            if(paramE != '') {
+              param += '&' + paramE;
+            } 
+            if(paramA != '') {
+              param += '&' + paramA;
+            } 
+            if(paramDis != undefined) {
+              param += '&' + paramDis;
+            } 
           } 
-         } else {
+          else {
             if(paramD != '') {
               param += '&' + paramD;
 
@@ -638,10 +644,10 @@
               if(paramDis != undefined) {
                 param += '&' + paramDis;
               } 
-            } else {
+            } 
+            else {
               if(paramG != '') {
                 param += '&' + paramG;
-
                 if(paramE != '') {
                   param += '&' + paramE;
                 } 
@@ -651,24 +657,25 @@
                 if(paramDis != undefined) {
                   param += '&' + paramDis;
                 } 
-              } else {
+              } 
+              else {
                 if(paramE != '') {
                   param += '&' + paramE;
-
                   if(paramA != '') {
                     param += '&' + paramA;
                   }
                   if(paramDis != undefined) {
                     param += '&' + paramDis;
                   } 
-                } else {
+                } 
+                else {
                   if(paramA != '') {
                     param += '&' + paramA;
-
                     if(paramDis != undefined) {
                       param += '&' + paramDis;
                     } 
-                  } else {                    
+                  } 
+                  else {                    
                     if(paramDis != undefined) {
                       param += '&' + paramDis;
                     } 
@@ -682,34 +689,16 @@
         $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
         $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
         $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
-     }//end if
-    else {//if the user selects filter: month, district, gender, ethnicity, age
-      //modify the url
-       if(paramQ != '') {
-        param += '?' + paramQ;
+      }//end if
+      else {//if the user selects filter: month, district, gender, ethnicity, age
+        //console.log('filter selected');
+        //modify the url
+        if(paramQ != '') {
+          param += '?' + paramQ;
 
-        if(paramM != '') {
-            param += '&' + paramM;
+          if(paramM != '') {
+              param += '&' + paramM;
           }
-        if(paramD != '') {
-          param += '&' + paramD;
-        } 
-        if(paramG != '') {
-          param += '&' + paramG;
-        } 
-        if(paramE != '') {
-          param += '&' + paramE;
-        } 
-        if(paramA != '') {
-          param += '&' + paramA;
-        } 
-        if(paramDis != undefined) {
-          param += '&' + paramDis;
-        } 
-       } else {//if paramQ == ''
-         if(paramM != '') {
-          param += '?' + paramM;
-
           if(paramD != '') {
             param += '&' + paramD;
           } 
@@ -725,7 +714,28 @@
           if(paramDis != undefined) {
             param += '&' + paramDis;
           } 
-         } else {
+        } 
+        else {//if paramQ == ''
+          if(paramM != '') {
+            param += '?' + paramM;
+
+            if(paramD != '') {
+              param += '&' + paramD;
+            } 
+            if(paramG != '') {
+              param += '&' + paramG;
+            } 
+            if(paramE != '') {
+              param += '&' + paramE;
+            } 
+            if(paramA != '') {
+              param += '&' + paramA;
+            } 
+            if(paramDis != undefined) {
+              param += '&' + paramDis;
+            } 
+          } 
+          else {
             if(paramD != '') {
               param += '?' + paramD;
 
@@ -741,7 +751,8 @@
               if(paramDis != undefined) {
                 param += '&' + paramDis;
               } 
-            } else {
+            } 
+            else {
               if(paramG != '') {
                 param += '?' + paramG;
 
@@ -754,7 +765,8 @@
                 if(paramDis != undefined) {
                   param += '&' + paramDis;
                 } 
-              } else {
+              } 
+              else {
                 if(paramE != '') {
                   param += '?' + paramE;
 
@@ -764,14 +776,16 @@
                   if(paramDis != undefined) {
                     param += '&' + paramDis;
                   } 
-                } else {
+                } 
+                else {
                   if(paramA != '') {
                     param += '?' + paramA;
 
                     if(paramDis != undefined) {
                       param += '&' + paramDis;
                     } 
-                  } else {                    
+                  } 
+                  else {                    
                     if(paramDis != undefined) {
                       param += '?' + paramDis;
                     } 
@@ -786,7 +800,7 @@
         $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
         $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
         $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
-    }
+      }
 
 
 
@@ -906,7 +920,8 @@
                               enabled: false,
                               text: response.result.xlabel,// For x-axis label on table
 
-                          }
+                          },
+                      lineColor: '#E5E5E5'
                       },
                       scrollbar: {
                           enabled: true
@@ -1022,6 +1037,7 @@
 
           }, "json"); //.post end
 
+     sessionStorage.setItem("is_reloaded", 0);
     }; //abuttonpressed end
 
 $(document).ready(function() {
