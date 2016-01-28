@@ -173,9 +173,6 @@
                                             <li class="facebook"><a href="" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
                                             
                                             <li><a href="" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
-                                            {# https://twitter.com/home?status=UNDP%20Report:%20Test%20http://cfp.org.np/uploads/documents/{{ entity.path|url_encode }}
-
-                                            http://twitter.com/intent/tweet?text=UNDP+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }} #}
 
                                             <li><a href="" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
                                           </ul>
@@ -314,9 +311,9 @@
       var paramQ = '';
       var paramDis = '';
 
-      var fShare = 'https://www.facebook.com/sharer.php?title=UNDP%20Platform%20&u=http%3A//cfp.org.np/platform/';
-      var tShare = 'http://twitter.com/intent/tweet?text=UNDP+Platform+http%3A%2F%2Fcfp.org.np/platform/';
-      var lShare = 'https://www.linkedin.com/shareArticle?mini=true&title=UNDP%20Platform%20&summary=&source=&url=http%3A//cfp.org.np/platform/';
+      var fShare = 'https://www.facebook.com/sharer.php?title=Common%20Feedback%20Project%20(CFP)%3A%20Platform%20&u=http%3A//cfp.org.np/platform/';
+      var tShare = 'http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)%3A+Platform+http%3A%2F%2Fcfp.org.np/platform/';
+      var lShare = 'https://www.linkedin.com/shareArticle?mini=true&title=Common%20Feedback%20Project%20(CFP)%3A%20Platform%20&summary=&source=&url=http%3A//cfp.org.np/platform/';
 
       //store ques name
       var qname=$("#form_questions option:selected").text();
@@ -898,7 +895,7 @@
                           // text: '<span style="font-size:12px">Inter-Agency Common</span><span style="font-size:10px">Feedback Project</span><span style="font-size:8px">Nepal Earthquake 2015</span>'                          
                       },
                       subtitle: {
-                          text: response.result.grouped//There is no text in design: Source: UNDP Annual Report
+                          text: response.result.grouped
                       },
                       xAxis: {
 
@@ -1002,7 +999,7 @@
                   $('.dataTables').dataTable({
                       
                       "pageLength": 200,
-                      "responsive": true,
+                      "responsive": false,
                       "tableTools": {
                           "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
                       },

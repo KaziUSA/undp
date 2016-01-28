@@ -409,6 +409,7 @@ class MyAjaxController extends Controller
 				$flag++;				
 			}
 			$obj['label']=$data_month;
+
 			// $obj['xlabel']='Month';
 			// $i=0;
 			// foreach ($data_month as $month){
