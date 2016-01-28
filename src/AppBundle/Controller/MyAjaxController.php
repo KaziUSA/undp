@@ -69,20 +69,23 @@ class MyAjaxController extends Controller
 		unset($num); 		
 		//Any filters not selected	(1.N)	
 		if(!isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){ 			
-		   $obj['series'][$i]['name']= 'Answers'; 
+		   
+		   $i=0;
 		   foreach ($obj['answer'] as $num){		  
+		    	
 		    	$results = $em->getRepository('AppBundle\Entity\Query')->getBasicArray($data_question,$num,$data_disability,$data_year);
 			 	foreach ($results as $arr){
 		        	//array_push($obj['count'], (int)$arr['count']);   
+		    		$obj['series'][$i]['name'][]= $num; 
 		    		$obj['series'][$i]['data'][]= (int)$arr['count'];
 		    		$obj['total'] += (int)$arr['count'];
 		    	}    	
+		    	$i++;
 		    	
-		    	//$obj['label']=$obj['answer'];
 		    }			 
 			
 			
-		    $obj['label']=$obj['answer'];
+		    $obj['label']=' ';
 			$obj['height']=340;
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
