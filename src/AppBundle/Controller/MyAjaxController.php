@@ -347,10 +347,8 @@ class MyAjaxController extends Controller
 			$district_span=count($data_month);				
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
-
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
-
 			}
 			
 			$obj['html']=$obj['html']."</tr><tr><th>Month</th>";			
@@ -366,7 +364,8 @@ class MyAjaxController extends Controller
 					foreach ($data_month as $month) {			       									       
 						$results= $em->getRepository('AppBundle\Entity\Query')->getMonthDistrict($data_question,$ans,$district,$month,$data_disability,$data_year);
 						foreach ($results as $arr){		        		
-			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>";
+			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
+
 			    		}	
 					}					
 				}
@@ -377,39 +376,39 @@ class MyAjaxController extends Controller
 
 		//Month and Gender filter selected(8.MG)
 		if(!isset($data_ethnicity) && isset($data_gender) && !isset($data_age) && !isset($data_district) && isset($data_month)){
-			// $i=0;
-			// $obj['total']=0;
-			// $flag=0; // For hiding legend of grouped columns with same name
-			// $obj['stack']='normal'; //For stack chart
-			// if(count($data_gender)>1){
-			// 	$obj['grouped']='Grouped By Female/Male';
-			// }
-			// foreach ($data_gender as $gender) {				
-			// 	$j=0;				
-			// 	foreach ($obj['answer'] as $num){	
-			// 		$obj['series'][$i]['name']= $num;
-			// 		if($flag==0){						
-			// 			$obj['series'][$i]['id']= $num; 
-			// 		}
-			// 		$obj['series'][$i]['stack']=$gender;
-			// 		$obj['series'][$i]['color']=$colors[$j];//For making the color same on different stacks of grouped columns
-			// 		if($flag>0){										
-			// 			$obj['series'][$i]['linkedTo'] = $num;						
-			// 		}
-			// 		foreach ($data_month as $month){				
-			// 			$results= $em->getRepository('AppBundle\Entity\Query')->getMonthGender($data_question,$num,$month,$gender,$data_disability,$data_year);
+			$i=0;
+			$obj['total']=0;
+			$flag=0; // For hiding legend of grouped columns with same name
+			$obj['stack']='normal'; //For stack chart
+			if(count($data_gender)>1){
+				$obj['grouped']='Grouped By Female/Male';
+			}
+			foreach ($data_gender as $gender) {				
+				$j=0;				
+				foreach ($obj['answer'] as $num){	
+					$obj['series'][$i]['name']= $num;
+					if($flag==0){						
+						$obj['series'][$i]['id']= $num; 
+					}
+					$obj['series'][$i]['stack']=$gender;
+					$obj['series'][$i]['color']=$colors[$j];//For making the color same on different stacks of grouped columns
+					if($flag>0){										
+						$obj['series'][$i]['linkedTo'] = $num;						
+					}
+					foreach ($data_month as $month){				
+						$results= $em->getRepository('AppBundle\Entity\Query')->getMonthGender($data_question,$num,$month,$gender,$data_disability,$data_year);
 
-			// 			foreach ($results as $arr){		        		
-			//         		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-			//         		$obj['total'] += (int)$arr['count']; 
-			//     		}					
-			// 		}				
-			// 		$i++;
-			// 		$j++;
-			// 	}
-			// 	$flag++;				
-			// }
-			// $obj['label']=$data_month;
+						foreach ($results as $arr){		        		
+			        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
+			        		$obj['total'] += (int)$arr['count']; 
+			    		}					
+					}				
+					$i++;
+					$j++;
+				}
+				$flag++;				
+			}
+			$obj['label']=$data_month;
 			// $obj['xlabel']='Month';
 			// $i=0;
 			// foreach ($data_month as $month){
@@ -579,38 +578,38 @@ class MyAjaxController extends Controller
 
 		//District and Gender filter selected(11.DG)
 		if(!isset($data_ethnicity) && isset($data_gender) && !isset($data_age) && isset($data_district) && !isset($data_month)){
-			// $i=0;
-			// $obj['total']=0;
-			// $flag=0; // For hiding legend of grouped columns with same name
-			// $obj['stack']='normal'; //For stack chart
-			// if(count($data_gender)>1){
-			// 	$obj['grouped']='Grouped By Female/Male';
-			// }
-			// foreach ($data_gender as $gender) {				
-			// 	$j=0;				
-			// 	foreach ($obj['answer'] as $num){	
-			// 		$obj['series'][$i]['name']= $num;
-			// 		if($flag==0){						
-			// 			$obj['series'][$i]['id']= $num; 
-			// 		}
-			// 		$obj['series'][$i]['stack']=$gender;
-			// 		$obj['series'][$i]['color']=$colors[$j];//For making the color same on different stacks of grouped columns
-			// 		if($flag>0){										
-			// 			$obj['series'][$i]['linkedTo'] = $num;						
-			// 		}
-			// 		foreach ($data_district as $district){				
-			// 			$results= $em->getRepository('AppBundle\Entity\Query')->getDistrictGender($data_question,$num,$district,$gender,$data_disability,$data_year);
-			// 			foreach ($results as $arr){		        		
-			//         		$obj['series'][$i]['data'][]= (int)$arr['count'];
-			//         		$obj['total'] += (int)$arr['count']; 
-			//     		}					
-			// 		}				
-			// 		$i++;
-			// 		$j++;
-			// 	}
-			// 	$flag++;				
-			// }
-			// $obj['label']=$data_district;
+			$i=0;
+			$obj['total']=0;
+			$flag=0; // For hiding legend of grouped columns with same name
+			$obj['stack']='normal'; //For stack chart
+			if(count($data_gender)>1){
+				$obj['grouped']='Grouped By Female/Male';
+			}
+			foreach ($data_gender as $gender) {				
+				$j=0;				
+				foreach ($obj['answer'] as $num){	
+					$obj['series'][$i]['name']= $num;
+					if($flag==0){						
+						$obj['series'][$i]['id']= $num; 
+					}
+					$obj['series'][$i]['stack']=$gender;
+					$obj['series'][$i]['color']=$colors[$j];//For making the color same on different stacks of grouped columns
+					if($flag>0){										
+						$obj['series'][$i]['linkedTo'] = $num;						
+					}
+					foreach ($data_district as $district){				
+						$results= $em->getRepository('AppBundle\Entity\Query')->getDistrictGender($data_question,$num,$district,$gender,$data_disability,$data_year);
+						foreach ($results as $arr){		        		
+			        		$obj['series'][$i]['data'][]= (int)$arr['count'];
+			        		$obj['total'] += (int)$arr['count']; 
+			    		}					
+					}				
+					$i++;
+					$j++;
+				}
+				$flag++;				
+			}
+			$obj['label']=$data_district;
 			// $obj['xlabel']='District';
 			// $i=0;
 			// foreach ($data_month as $month){
