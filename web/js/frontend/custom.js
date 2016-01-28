@@ -88,7 +88,9 @@ function dynamic_height() {
   var content_height = winHeight - header_height - footer_height - 3;
   if(winWidth >= 1200) {
     $('.content, .transparent-grd').css('min-height', content_height);
+    $('.transparent-grd').height($('.content-area').height());
   }
+  $('.transparent-grd').height($('.content-area').height());
 }
 $(window).resize(function() {
   dynamic_height();

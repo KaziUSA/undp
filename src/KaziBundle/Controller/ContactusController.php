@@ -50,7 +50,8 @@ class ContactusController extends Controller
 
             // More headers
             $headers .= "From: <info@undp.kazi270.com>" . "\r\n";
-            //$headers .= "CC: manish@kazistudios.com" . "\r\n";
+            $headers .= "CC: bronwyn.russel@one.un.org" . "\r\n";
+            $headers .= "Bcc: manish@kazistudios.com"."\r\n";
 
             mail($to,$subject,$txt,$headers);
         }
