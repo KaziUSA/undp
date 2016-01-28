@@ -99,13 +99,13 @@
                                       <div class="ac">
                                         {# ac-6 #}
                                         <ul class="checkbox-style">
-                                            <div id="form_disability">
+                                            <div id="form_disability" style="padding-top:1px;">
                                               <li><input type="checkbox" id="disability" />
                                               <label for="disability">Disability<span></span></label></li>
                                             </div>
                                         </ul>
                                       </div><!--/ac-->
-
+                                      <ul class="ac-text"></ul>
                                       <input type="submit" value="Submit" class="btn btn-bordered gray">
                                   </form>
 
@@ -1001,8 +1001,8 @@
                   //download table
                   $('.dataTables').dataTable({
                       
-                      "pageLength": 100,
-                      responsive: true,
+                      "pageLength": 200,
+                      "responsive": true,
                       "tableTools": {
                           "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
                       },
