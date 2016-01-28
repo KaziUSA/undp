@@ -1024,10 +1024,10 @@
                       align: "left"
                   });
                   
-                  
+                  $('.highcharts-subtitle').hide();
                    $('.high-chart-wrap').removeClass('hidden');
                    $('.highcharts-title').addClass('hidden');                  
-                    $('.highcharts-subtitle').addClass('hidden');
+                    
                   //$('#table1').html(chart.getTable()); //Get table from highchart function 
                   $('#table1').html(response.result.html);
                   if(response.result.series === undefined){                    
