@@ -156,8 +156,8 @@ class PageController extends Controller
     public function showAction($slug, Request $request)//$id //removed annotation @Method("GET")
     {
         $data_id = $request->request->get('data_id');
-        $data_title = $request->request->get('data_title');
-        $data_description = $request->request->get('data_description');
+        $data_title = mysql_real_escape_string($request->request->get('data_title'));
+        $data_description = mysql_real_escape_string($request->request->get('data_description'));
 
         $sql= "UPDATE page SET title=\"$data_title\",description=\"$data_description\" WHERE id=\"$data_id\"";
 
