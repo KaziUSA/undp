@@ -169,7 +169,7 @@
   }
 
   function selectBased($select, $list, regexpMatcher, appendItemFn) {
-    var option_index = 0;
+    //var option_index = 0;//for question number
     var dummyRegexp = { test: function() { return true } }
     var options = $select.find('option').map(function() { return itemFromOption($(this)) }).get()
 
@@ -181,8 +181,8 @@
       })
     }
     function itemFromOption($option) {
-      option_index = option_index + 1;
-      return { value: $option.attr('value'), label: option_index + '. '+$option.text() }
+      //option_index = option_index + 1;
+      return { value: $option.attr('value'), label: $option.text() }//option_index + '. '+
     }
     function newTerm(term, callback) {
       filter(term)

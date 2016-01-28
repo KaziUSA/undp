@@ -88,8 +88,48 @@ function dynamic_height() {
   var content_height = winHeight - header_height - footer_height - 3;
   if(winWidth >= 1200) {
     $('.content, .transparent-grd').css('min-height', content_height);
+    $('.transparent-grd').height($('.content-area').height());
   }
+  $('.transparent-grd').height($('.content-area').height());
 }
+
+
+
+//uncheck all if unchecked any - and check all if checked all
+function checkUncheck(changing, all) {
+  $(changing).change(function() {     
+    if($(all).prop('checked') == true) {
+      var checked = 0;
+
+      if($(this).prop('checked') == false) {
+        checked++;
+      } else if(checked > 0) {
+        checked--;
+      }
+
+      if(checked == 0) {
+        $(all).prop('checked', true);
+      } else {
+        $(all).prop('checked', false);
+      }
+    }
+    else {
+      var forAllChecked = 0;
+
+      $(changing).each(function() {
+        if($(this).prop('checked') == false) {
+          //$('#monthall').prop('checked', false);
+          forAllChecked++;
+        }
+      });
+      
+      if(forAllChecked == 0) {
+        $(all).prop('checked', true);
+      }
+    }
+  }); 
+}
+
 $(window).resize(function() {
   dynamic_height();
 });
@@ -99,6 +139,15 @@ $(document).ready(function () {
   //dynamic height
   dynamic_height();
 
+  //reports page
+  checkUncheck('#month-wise-report .month', '#monthall');    
+
+  //platform page
+  checkUncheck('#form_months input', '#month-all');
+  checkUncheck('#form_districts input', '#district-all');
+  checkUncheck('#form_gender input', '#gender-all');
+  checkUncheck('#form_ethnicities input', '#ethnicity-all');
+  checkUncheck('#form_ages input', '#age-all');
   //custom select
   $('#zelect select').zelect();
   //$('#zelect select').zelect({ placeholder:'Please select question' });

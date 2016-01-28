@@ -451,7 +451,7 @@
 
        
 
-      if(monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '' && disabilityVal == '') {
+      if(monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '' && disabilityVal == undefined) {
           //console.log('here');
         //display chart from url
        if(monthVals == '') {
@@ -600,7 +600,7 @@
         if(paramA != '') {
           param += '&' + paramA;
         } 
-        if(paramDis != '') {
+        if(paramDis != undefined) {
           param += '&' + paramDis;
         } 
        } else {//if paramQ == ''
@@ -619,7 +619,7 @@
           if(paramA != '') {
             param += '&' + paramA;
           } 
-          if(paramDis != '') {
+          if(paramDis != undefined) {
             param += '&' + paramDis;
           } 
          } else {
@@ -635,7 +635,7 @@
               if(paramA != '') {
                 param += '&' + paramA;
               } 
-              if(paramDis != '') {
+              if(paramDis != undefined) {
                 param += '&' + paramDis;
               } 
             } else {
@@ -648,7 +648,7 @@
                 if(paramA != '') {
                   param += '&' + paramA;
                 } 
-                if(paramDis != '') {
+                if(paramDis != undefined) {
                   param += '&' + paramDis;
                 } 
               } else {
@@ -658,18 +658,18 @@
                   if(paramA != '') {
                     param += '&' + paramA;
                   }
-                  if(paramDis != '') {
+                  if(paramDis != undefined) {
                     param += '&' + paramDis;
                   } 
                 } else {
                   if(paramA != '') {
                     param += '&' + paramA;
 
-                    if(paramDis != '') {
+                    if(paramDis != undefined) {
                       param += '&' + paramDis;
                     } 
                   } else {                    
-                    if(paramDis != '') {
+                    if(paramDis != undefined) {
                       param += '&' + paramDis;
                     } 
                   }
@@ -703,7 +703,7 @@
         if(paramA != '') {
           param += '&' + paramA;
         } 
-        if(paramDis != '') {
+        if(paramDis != undefined) {
           param += '&' + paramDis;
         } 
        } else {//if paramQ == ''
@@ -722,7 +722,7 @@
           if(paramA != '') {
             param += '&' + paramA;
           } 
-          if(paramDis != '') {
+          if(paramDis != undefined) {
             param += '&' + paramDis;
           } 
          } else {
@@ -738,7 +738,7 @@
               if(paramA != '') {
                 param += '&' + paramA;
               } 
-              if(paramDis != '') {
+              if(paramDis != undefined) {
                 param += '&' + paramDis;
               } 
             } else {
@@ -751,7 +751,7 @@
                 if(paramA != '') {
                   param += '&' + paramA;
                 } 
-                if(paramDis != '') {
+                if(paramDis != undefined) {
                   param += '&' + paramDis;
                 } 
               } else {
@@ -761,18 +761,18 @@
                   if(paramA != '') {
                     param += '&' + paramA;
                   }
-                  if(paramDis != '') {
+                  if(paramDis != undefined) {
                     param += '&' + paramDis;
                   } 
                 } else {
                   if(paramA != '') {
                     param += '?' + paramA;
 
-                    if(paramDis != '') {
+                    if(paramDis != undefined) {
                       param += '&' + paramDis;
                     } 
                   } else {                    
-                    if(paramDis != '') {
+                    if(paramDis != undefined) {
                       param += '?' + paramDis;
                     } 
                   }
@@ -913,7 +913,8 @@
                       },
                       yAxis: {
                           labels: {
-                              style: {'color': '#959595', 'fontSize': '12px'}
+                              style: {'color': '#959595', 'fontSize': '12px'},
+                               format: '{value}'
                           },
                           min: 0,
                           title: {
@@ -1045,7 +1046,7 @@
                       
                   });
                   // $("div.toolbar").html();
-                  $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download');
+                  $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
                   
                   checkboxChecked();
 
