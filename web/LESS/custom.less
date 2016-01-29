@@ -836,6 +836,12 @@ body {
 	border: 0;
 	color: @white;
 }
+.has-tab{
+	background: @pag-title-bg;
+	.tab-col{
+		padding-left: 10px;
+	}
+}
 .filter {
 	/* Reports page tab */
 	&.report-tab {
@@ -876,6 +882,7 @@ body {
 						border-color: @pag-title-dark-bg transparent;
 						border-width: 7px 7px 0;
     				bottom: -7px;
+    				z-index: 9;
 					}
 				}
 				a {
@@ -1454,19 +1461,66 @@ table.dataTable thead .sorting:after {
     top: 8px;
     display: none;
 }
-table.dataTable thead .sorting{
-	background: url('../img/d-default.png') no-repeat right center;
-}
 table.dataTable thead .sorting:focus{
 	outline: none;
 }
-table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc{
-	background: url('../img/d-acending.png') no-repeat right center;
-	background-size: 15px;
+// table.dataTable thead .sorting{
+// 	background: url('../img/d-default.png') no-repeat right center;
+// }
+// table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc{
+// 	background: url('../img/d-acending.png') no-repeat right center;
+// 	background-size: 15px;
+// }
+// table.dataTable thead .sorting_desc{
+// 	background-image: url('../img/d-decending.png');
+// }
+th.sorting:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 6px;
+    background: url('../img/d-default.png') no-repeat right center;
+    background-size: 100%;
 }
-table.dataTable thead .sorting_desc{
-	background-image: url('../img/d-decending.png');
+
+th.sorting_asc {
+    background: none !important;
 }
+
+th.sorting_asc:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 6px;
+    background: url('../img/d-acending.png') no-repeat right center;
+    background-size: 100%;
+}
+
+th.sorting_desc:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 6px;
+    background: url('../img/d-decending.png') no-repeat right center;
+    background-size: 100%;
+}
+
+.high-chart th.sorting:before, .high-chart th.sorting_asc:before, .high-chart th.sorting_desc:before{
+	right: 10px;
+}
+.records_list th:first-child::before{
+	background: none;
+}
+
 table.dataTable th, table.dataTable td {
     padding-right: 25px;
     padding-left: 25px;

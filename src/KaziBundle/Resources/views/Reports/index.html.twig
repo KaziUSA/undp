@@ -1,7 +1,34 @@
 {% extends 'frontend.html.twig' %}
 
 {% block body -%}
-	<div class="page-title"><h3>Reports Archive</h3></div>
+<div class="row has-tab">
+	<div class="col-sm-3 col-md-3 col-lg-2">
+		<div class="page-title"><h3>Reports Archive</h3></div>
+	</div>
+	<div class="col-sm-9 col-md-9 col-lg-10 tab-col hidden-xs">
+		<div class="filter report-tab">
+		<!-- Nav tabs -->
+		<div class="feedback-tab">
+		  <ul class="nav nav-tabs pull-left" role="tablist">
+		    <li role="presentation" class="active"><a href="#national" class="national" aria-controls="national" role="tab" data-toggle="tab">National Reports</a></li>	    
+		    <li role="presentation" class="dropdown district-text-parent">
+			    <a class="district-text dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+			      District Reports <!-- <span class="caret"></span> -->
+			    </a>
+			    <ul class="dropdown-menu">
+			      <li role="presentation"><a href="#district" class="show-eng-text" aria-controls="district" role="tab" data-toggle="tab">English</a></li>
+			      <li role="presentation"><a href="#district-nep" class="show-nep-text" aria-controls="district" role="tab" data-toggle="tab">Nepali</a></li>
+			    </ul>
+			  </li>
+		    <li role="presentation"><a href="#issue" class="issue" aria-controls="issue" role="tab" data-toggle="tab">Issue in Focus Reports</a></li>						
+		    <li role="presentation"><a href="#others" class="others" aria-controls="others" role="tab" data-toggle="tab">Others</a></li>
+		  </ul>
+		</div>
+
+		</div>
+	</div>
+</div>
+
 	<section class="content report">
 		<div class="row row-no-padding">
 			
@@ -71,23 +98,26 @@
 							{% else %}			
 
 							<div class="filter report-tab">
-							  <!-- Nav tabs -->
-							  <div class="feedback-tab">
-								  <ul class="nav nav-tabs pull-left" role="tablist">
-								    <li role="presentation" class="active"><a href="#national" class="national" aria-controls="national" role="tab" data-toggle="tab">National Reports</a></li>	    
-								    <li role="presentation" class="dropdown district-text-parent">
-									    <a class="district-text dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-									      District Reports <!-- <span class="caret"></span> -->
-									    </a>
-									    <ul class="dropdown-menu">
-									      <li role="presentation"><a href="#district" class="show-eng-text" aria-controls="district" role="tab" data-toggle="tab">English</a></li>
-									      <li role="presentation"><a href="#district-nep" class="show-nep-text" aria-controls="district" role="tab" data-toggle="tab">Nepali</a></li>
-									    </ul>
-									  </li>
-								    <li role="presentation"><a href="#issue" class="issue" aria-controls="issue" role="tab" data-toggle="tab">Issue in Focus Reports</a></li>						
-								    <li role="presentation"><a href="#others" class="others" aria-controls="others" role="tab" data-toggle="tab">Others</a></li>
-								  </ul>
-							  </div>
+								<div class="filter report-tab visible-xs">
+		<!-- Nav tabs -->
+		<div class="feedback-tab">
+		  <ul class="nav nav-tabs pull-left" role="tablist">
+		    <li role="presentation" class="active"><a href="#national" class="national" aria-controls="national" role="tab" data-toggle="tab">National Reports</a></li>	    
+		    <li role="presentation" class="dropdown district-text-parent">
+			    <a class="district-text dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+			      District Reports <!-- <span class="caret"></span> -->
+			    </a>
+			    <ul class="dropdown-menu">
+			      <li role="presentation"><a href="#district" class="show-eng-text" aria-controls="district" role="tab" data-toggle="tab">English</a></li>
+			      <li role="presentation"><a href="#district-nep" class="show-nep-text" aria-controls="district" role="tab" data-toggle="tab">Nepali</a></li>
+			    </ul>
+			  </li>
+		    <li role="presentation"><a href="#issue" class="issue" aria-controls="issue" role="tab" data-toggle="tab">Issue in Focus Reports</a></li>						
+		    <li role="presentation"><a href="#others" class="others" aria-controls="others" role="tab" data-toggle="tab">Others</a></li>
+		  </ul>
+		</div>
+
+		</div>
 
 							  <!-- Tab panes -->
 							  <div class="tab-content">
