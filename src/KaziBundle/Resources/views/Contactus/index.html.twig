@@ -21,7 +21,8 @@
                 <div class="col-lg-3 col-md-4 col-sm-4">
                     <div class="u-box clearfix">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <article id="content2" class="ckeditor" contenteditable="true">
+                        {# TODO: need to make link addable in location or text editable and add class ckeditor #}
+                            <article id="content2"><!--  class="ckeditor" contenteditable="true" -->
                                 {{ entity.description | raw }}
                             </article>
                             <input type="button" id="save" class="btn btn-bordered pull-right" value="Save">
