@@ -277,3 +277,16 @@ $(document).ready(function () {
   };
   $('#container3').highcharts(options3);
 });
+
+$(window).resize(function() {
+  var winHeight = $(window).height();
+  if (winHeight > 520) {
+    $('.main-content').height($(window).height());
+  };
+});
+$(document).ready(function () {
+  var winHeight = $(window).height();
+  if (winHeight > 520) {
+    $('.main-content').height($(window).height());
+  };
+});

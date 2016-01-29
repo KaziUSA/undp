@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-4">
-                    <div class="u-box clearfix">
+                    <div class="u-box c-box-info clearfix">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         {# TODO: need to make link addable in location or text editable and add class ckeditor #}
                             <article id="content2"><!--  class="ckeditor" contenteditable="true" -->
@@ -35,7 +35,7 @@
 
                 <div class="col-lg-5 col-md-5 col-sm-5">
                     <div class="u-box" id="contact-form">
-                        <h3>Please send us a message with feedback or queires.</h3>
+                        <h3>Please send us a message with feedback or queries.</h3>
 
                         <form class="form-bordered" action="" method="post" autocomplete="off">
                           <div class="form-group">
@@ -174,7 +174,7 @@ $('#submit').click(function() {
           n=n+1
           if (n==m){
             //console.log("Your message has been sent successfully!");
-            $("#contact-form").html('<h3>Your message has been sent successfully! <a href="{{path('contactus')}}">Send message again?</a></h3>');
+            $("#contact-form").html('<h3>Your message has been sent successfully! <a classs="btn btn-bordered send-again" href="{{path('contactus')}}">Send message again?</a></h3>');
           }
         }        
     );

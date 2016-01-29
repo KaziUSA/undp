@@ -4,9 +4,16 @@
     <article id="content1" class="ck-title" contenteditable="true" onclick="onClickToolbarButton()">
         {{ entity.title | raw}}
     </article>
+    {# TODO: Need to make contact part editable with adding link for location #}
+    {% if entity.slug == 'contactus' %}
+    <article id="content2">
+        {{ entity.description | raw }}
+    </article>
+    {% else %}
     <article id="content2" class="ckeditor" contenteditable="true">
         {{ entity.description | raw }}
     </article>
+    {% endif %}
     
     {% if entity.path != NULL %}
       <h3>Featured Image</h3>
