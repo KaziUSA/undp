@@ -37,7 +37,7 @@
             <thead>
 
                 <tr>
-                <th></th>
+                <th class="toggle-icon-col"></th>
                     {% set columncount = 0 %}
                     {% for val in entity %}
                         {% if columncount in excludeColumns %}
@@ -60,7 +60,9 @@
                 
             
                 <tr>
-                <td></td>
+                <td class="toggle-icon">
+                    <span class="toogle-data">Show Data</span>
+                </td>
                     {% set columncount = 0 %}
                     {% for val in entity %}
                         {% if columncount in excludeColumns %}
@@ -111,8 +113,11 @@
                 }
             });
             $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
+            
+            // tooltip
+           $('.toggle-icon').hover(function(){
+                $(this).children('.toogle-data').toggle();
+            }); 
         });
-
-        
     </script>
 {% endblock %}

@@ -87,7 +87,7 @@ class MyAjaxController extends Controller
 			
 			$j=$i;
 		    $obj['label']=' ';
-			$obj['height']=340;
+			$obj['height']=510;
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
 			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
