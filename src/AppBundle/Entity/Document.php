@@ -57,6 +57,13 @@ class Document
     private $path;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="language", type="string", length=10, nullable=true)
+     */
+    private $language;
+
+    /**
      * @ORM\ManyToOne(targetEntity="DocumentType", inversedBy="documents")
      * @ORM\JoinColumn(name="document_type_id", referencedColumnName="id")
      */
@@ -190,6 +197,31 @@ class Document
      public function getPath()
     {
         return $this->path;
+            
+    }
+
+     /* Set language
+     *
+     * @param language $language
+     *
+     * @return Document
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+
+        return $language;
+    }
+
+
+    
+    /* Get language
+     *
+     * @return language
+     */
+     public function getLanguage()
+    {
+        return $this->language;
             
     }
 
