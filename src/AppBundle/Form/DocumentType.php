@@ -17,7 +17,12 @@ class DocumentType extends AbstractType
         $builder
             ->add('name', 'text', array('attr'=>array('class'=>'form-control')))
             ->add('date', 'date', array('attr'=>array('class'=>'form-control')))
-            ->add('documenttype')
+            ->add('documenttype')            
+            ->add('language', 'choice', array(
+                'choices'  => array('english' => 'English', 'nepali' => 'Nepali'),
+                // *this line is important*
+                'choices_as_values' => false,
+            ))
         ;
     }
     

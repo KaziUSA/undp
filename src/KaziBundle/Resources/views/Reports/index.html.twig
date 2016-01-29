@@ -51,7 +51,7 @@
 			<div class="col-sm-9 col-md-9 col-lg-10">
 				<!-- main content -->
 				<div class="main-content">
-					<div class="wrapper clearfix">
+					<div class="wrapper clearfix"><!--wrapper remove or not-->
 						<div class="">
 							<!-- <div class="col-lg-3 col-md-4 col-sm-6">
 								<div class="r-box">
@@ -70,172 +70,193 @@
 								</p>
 							{% else %}			
 
-							<div class="panel-group report-acc" id="accordion" role="tablist" aria-multiselectable="true">
-								<div class="panel panel-default">
-									<div class="report-group clearfix">
-										<div class="panel-heading" role="tab" id="headingOne">
-											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">National Reports</a></h2>
-										</div>
-										<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-    										<div class="panel-body">
-												{% for entity in entities %}
-													{# TODO: need to change 'National Reports' to ID #}
-													{% if entity.documenttype == 'National Reports' %}
-													<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
-														<div class="r-box">
-															<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
-																<span class="reports-overlay">
-																	<span class="reports-name">{{ entity.name }}</span>
-																</span>
-															</a>
-													
-															<ul class="share-icons">
-																<li><a href="#share" class="fa fa-share-alt"></a>
-																	<ul>		
-																		{# TODO: Need to change cfp.org.np to dynamic url path if needed #}						
-																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-																		
-																		<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+							<div class="filter report-tab">
+							  <!-- Nav tabs -->
+							  <div class="feedback-tab">
+								  <ul class="nav nav-tabs pull-left" role="tablist">
+								    <li role="presentation" class="active"><a href="#national" class="national" aria-controls="national" role="tab" data-toggle="tab">National Reports</a></li>	    
+								    <li role="presentation" class="dropdown district-text-parent">
+									    <a class="district-text dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+									      District Reports <!-- <span class="caret"></span> -->
+									    </a>
+									    <ul class="dropdown-menu">
+									      <li role="presentation"><a href="#district" class="show-eng-text" aria-controls="district" role="tab" data-toggle="tab">English</a></li>
+									      <li role="presentation"><a href="#district-nep" class="show-nep-text" aria-controls="district" role="tab" data-toggle="tab">Nepali</a></li>
+									    </ul>
+									  </li>
+								    <li role="presentation"><a href="#issue" class="issue" aria-controls="issue" role="tab" data-toggle="tab">Issue in Focus Reports</a></li>						
+								    <li role="presentation"><a href="#others" class="others" aria-controls="others" role="tab" data-toggle="tab">Others</a></li>
+								  </ul>
+							  </div>
 
-																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-																	</ul>
-																</li>
-																<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+							  <!-- Tab panes -->
+							  <div class="tab-content">
+							    <div role="tabpanel" class="tab-pane active" id="national">							    	
+										{% for entity in entities %}
+											{# TODO: need to change 'National Reports' to ID #}
+											{% if entity.documenttype == 'National Reports' %}
+											<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+												<div class="r-box">
+													<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<span class="reports-overlay">
+															<span class="reports-name">{{ entity.name }}</span>
+														</span>
+													</a>
+											
+													<ul class="share-icons">
+														<li><a href="#share" class="fa fa-share-alt"></a>
+															<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path if needed #}						
+																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																
+																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
-														</div>
-													</div>
-													{% endif %}
-									        {% endfor %}
-							        		</div> <!-- /.panel-body -->
-							        	</div><!-- /.collapseOne -->
-						        	</div><!-- /.report-group clearfix -->
-					        	</div> <!-- /.panel panel-default -->
-
-					        	<div class="panel panel-default">
-									<div class="report-group clearfix">
-										<div class="panel-heading" role="tab" id="headingTwo">
-											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">District Reports</a></h2>
-										</div>
-										<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-    										<div class="panel-body">
-												{% set dist = 1 %}
-      									{% for entity in entities %}
-												{# TODO: need to change 'District Reports' to ID #}
-												{% if entity.documenttype == 'District Reports' %}
-												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %}">
-													<div class="r-box">
-														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
-																<span class="reports-overlay">
-																	<span class="reports-name">{{ entity.name }}</span>
-																</span>
-														</a>
-												
-														<ul class="share-icons">
-															<li><a href="#share" class="fa fa-share-alt"></a>
-																<ul>		
-																		{# TODO: Need to change cfp.org.np to dynamic url path #}											
-																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-																		
-																		<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
-
-																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common+Feedback+Project+(CFP)+Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-																	</ul>
-															</li>
-															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
-														</ul>
-													</div>
+														</li>
+														<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+													</ul>
 												</div>
-												{% set dist = dist + 1 %}
-												{% endif %}
-								        {% endfor %}
-								        <div class="clear"></div>
-								        <a href="#!" class="show-more-report">Show More</a>
-      									</div> <!-- /.panel-body -->
-							        	</div><!-- /.collapseTwo -->
-						        	</div><!-- /.report-group clearfix -->
-					        	</div> <!-- /.panel panel-default -->
+											</div>
+											{% endif %}
+						        {% endfor %}
+							    </div>
 
-								<div class="panel panel-default">
-									<div class="report-group clearfix">
-										<div class="panel-heading" role="tab" id="headingThree">
-											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Issue in Focus Reports</a></h2>
+							    <div role="tabpanel" class="tab-pane" id="district">
+							    	{# TODO: need to show only english reports here #}
+							    	{% set dist = 1 %}
+  									{% for entity in entities %}
+										{# TODO: need to change 'District Reports' to ID #}
+										{% if (entity.documenttype == 'District Reports') and ((entity.language == 'english') or (entity.language == '')) %}
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %}">
+											<div class="r-box">
+												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<span class="reports-overlay">
+															<span class="reports-name">{{ entity.name }}</span>
+														</span>
+												</a>
+										
+												<ul class="share-icons">
+													<li><a href="#share" class="fa fa-share-alt"></a>
+														<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path #}											
+																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																
+																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common+Feedback+Project+(CFP)+Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+															</ul>
+													</li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+												</ul>
+											</div>
 										</div>
-										<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
-      										<div class="panel-body">
-												{% for entity in entities %}
-												{# TODO: need to change 'Issue in Focus Reports' to ID #}
-												{% if entity.documenttype == 'Issue in Focus Reports' %}
-												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
-													<div class="r-box">
-														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
-																<span class="reports-overlay">
-																	<span class="reports-name">{{ entity.name }}</span>
-																</span>
-														</a>
-												
-														<ul class="share-icons">
-															<li><a href="#share" class="fa fa-share-alt"></a>
-																<ul>		
-																		{# TODO: Need to change cfp.org.np to dynamic url path #}											
-																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-																		
-																		<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+										{% set dist = dist + 1 %}
+										{% endif %}
+						        {% endfor %}
+						        <div class="clear"></div>
+						        <a href="#!" class="show-more-report">Show More</a>
+							    </div>
 
-																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-																	</ul>
-															</li>
-															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
-														</ul>
-													</div>
-												</div>
-												{% endif %}
-						        		{% endfor %}
-					        				</div> <!-- /.panel-body -->
-							        	</div><!-- /.collapseThree -->
-						        	</div><!-- /.report-group clearfix -->
-					        	</div> <!-- /.panel panel-default -->
+							    <div role="tabpanel" class="tab-pane" id="district-nep">
+							    	{# TODO: need to show only nepali reports here #}
+							    	{% set dist = 1 %}
+  									{% for entity in entities %}
+										{# TODO: need to change 'District Reports' to ID #}
+										{% if (entity.documenttype == 'District Reports') and (entity.language == 'nepali') %}
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report-nep{% endif %}">
+											<div class="r-box">
+												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<span class="reports-overlay">
+															<span class="reports-name">{{ entity.name }}</span>
+														</span>
+												</a>
+										
+												<ul class="share-icons">
+													<li><a href="#share" class="fa fa-share-alt"></a>
+														<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path #}											
+																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																
+																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
 
-					        	<div class="panel panel-default">
-									<div class="report-group clearfix">
-										<div class="panel-heading" role="tab" id="headingFour">
-											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Others</a></h2>
+																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common+Feedback+Project+(CFP)+Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+															</ul>
+													</li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+												</ul>
+											</div>
 										</div>
-										<div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
-      										<div class="panel-body">
-												{% for entity in entities %}
-												{# TODO: need to change these to ID #}
-												{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
-												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
-													<div class="r-box">
-														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
-																<span class="reports-overlay">
-																	<span class="reports-name">{{ entity.name }}</span>
-																</span>
-														</a>
-												
-														<ul class="share-icons">
-															<li><a href="#share" class="fa fa-share-alt"></a>
-																<ul>		
-																		{# TODO: Need to change cfp.org.np to dynamic url path #}											
-																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-																		
-																		<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+										{% set dist = dist + 1 %}
+										{% endif %}
+						        {% endfor %}
+						        <div class="clear"></div>
+						        <a href="#!" class="show-more-report-nep">Show More</a>
+							    </div>
 
-																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-																	</ul>
-															</li>
-															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
-														</ul>
-													</div>
-												</div>
-												{% endif %}
-							        	{% endfor %}
-							        	
-      										</div> <!-- /.panel-body -->
-							        	</div><!-- /.collapseFour -->
-						        	</div><!-- /.report-group clearfix -->
-					        	</div> <!-- /.panel panel-default -->
-					        </div> <!-- /#accordion -->
+							    <div role="tabpanel" class="tab-pane" id="issue">
+							    	{% for entity in entities %}
+										{# TODO: need to change 'Issue in Focus Reports' to ID #}
+										{% if entity.documenttype == 'Issue in Focus Reports' %}
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+											<div class="r-box">
+												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<span class="reports-overlay">
+															<span class="reports-name">{{ entity.name }}</span>
+														</span>
+												</a>
+										
+												<ul class="share-icons">
+													<li><a href="#share" class="fa fa-share-alt"></a>
+														<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path #}											
+																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																
+																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+															</ul>
+													</li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+												</ul>
+											</div>
+										</div>
+										{% endif %}
+				        		{% endfor %}
+							    </div>
+							    <div role="tabpanel" class="tab-pane" id="others">
+							    	{% for entity in entities %}
+										{# TODO: need to change these to ID #}
+										{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+											<div class="r-box">
+												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<span class="reports-overlay">
+															<span class="reports-name">{{ entity.name }}</span>
+														</span>
+												</a>
+										
+												<ul class="share-icons">
+													<li><a href="#share" class="fa fa-share-alt"></a>
+														<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path #}											
+																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																
+																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+															</ul>
+													</li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+												</ul>
+											</div>
+										</div>
+										{% endif %}
+					        	{% endfor %}
+							    </div>
+							  </div>
+
+							</div>
 
 							{% endif %}
 						</div>
@@ -249,19 +270,37 @@
 {% block scriptIncludes %}
 <script>
 	$(document).ready(function() {
-		//show more report
-		$('.show-more-report').click(function() {
-			$('.more-report').toggleClass('show');
+		//district text change
+		$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
+			console.log($(this));
+			
+			$('.district-text').text('District Reports');
+		});
 
-			if($('.more-report').hasClass('show')) {
-				$('.more-report').show();
-				$('.show-more-report').text('Show Less');
-			} else {
-				$('.more-report').hide();
-				$('.show-more-report').text('Show More');
-			}
+		$('.show-eng-text').click(function() {
+			$('.district-text').text('District Reports / English');
+		});
+		$('.show-nep-text').click(function() {
+			$('.district-text').text('District Reports / Nepali');
+		});
+
+		//show more report
+		function show_more(show, showme) {
+			$(show).click(function() {
+				$(showme).toggleClass('show');
+
+				if($(showme).hasClass('show')) {
+					$(showme).show();
+					$(show).text('Show Less');
+				} else {
+					$(showme).hide();
+					$(show).text('Show More');
+				}
+			});
 		}
-		);
+		show_more('.show-more-report', '.more-report');
+		show_more('.show-more-report-nep', '.more-report-nep');
+
 		$("#monthall").change(function(){
       $(".month").prop('checked', $(this).prop("checked"));
       if(!$(this).is(':checked')){

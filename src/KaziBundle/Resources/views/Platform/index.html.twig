@@ -104,6 +104,8 @@
                                               <label for="disability">Disability<span></span></label></li>
                                             </div>
                                         </ul>
+                                        <ul class="ac-text checkbox-style"></ul>
+                                        <ul class="ac-text checkbox-style"></ul>
                                       </div><!--/ac-->
                                       <input type="submit" value="Submit" class="btn btn-bordered gray">
                                   </form>
@@ -908,7 +910,12 @@
 
                           type: 'column',
                       },
-                      colors:['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'],
+                      legend: {
+                          width: 230,
+                          padding:10,
+                          itemWidth: 115
+                      },
+                      colors:['#88d8ef','#339de7','#6e6e6f','#159c02','#99bb42','#e7e7e7','#a1a1a1','#588C73','#D96459'],
                       title: {
                           
                           //text: response.result.grouped
@@ -1094,10 +1101,10 @@
                           "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
                       },
                       "dom": 'T<"toolbar">lfrtip',
-                      "aoColumnDefs": [ 
-                         { "sTitle": qname, "aTargets": [ 0 ] }
-                       ],
-                      "stitle":$(".zelected").text(),
+                      // "aoColumnDefs": [ 
+                      //    { "sTitle": qname, "aTargets": [ 0 ] }
+                      //  ],
+                      //"stitle":$(".zelected").text(),
                       "colVis": {
                           "buttonText": "Change columns"
                       }
@@ -1105,6 +1112,10 @@
                   });
                   // $("div.toolbar").html();
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
+                  /*$('.DTTT_button_xls span').click(function(){
+                      console.log($('.table > thead > tr '));
+                      $('.table > thead > tr ').removeClass('hidden');
+                  });*/
                   
                   checkboxChecked();
 
