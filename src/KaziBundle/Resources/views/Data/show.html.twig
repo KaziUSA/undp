@@ -34,7 +34,6 @@
         
             <thead>
                 <tr>
-                    <th class="toggle-icon-col"></th>
                     {% set columncount = 0 %}
                     {% for val in entity %}
                         {% if columncount in excludeColumns %}
@@ -57,9 +56,6 @@
                 
             
                 <tr>
-                    <td class="toggle-icon">
-                        <span class="toogle-data">Show Data</span>
-                    </td>
                     {% set columncount = 0 %}
                     {% for val in entity %}
                         {% if columncount in excludeColumns %}
@@ -104,15 +100,8 @@
                 "colVis": {
                     "buttonText": "Change columns"
                 }
-                "oLanguage": {
-                    "sSearch": ""
-                }
             });
             $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download');
-            // tooltip
-           $('.toggle-icon').hover(function(){
-                $(this).children('.toogle-data').toggle();
-            }); 
         });
 
         
