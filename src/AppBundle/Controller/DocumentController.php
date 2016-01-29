@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use AppBundle\Entity\Document;
 use AppBundle\Form\DocumentType;
 
@@ -104,6 +105,11 @@ class DocumentController extends Controller
                 //'value' => date('Y-m-d'),
                 )) )
             ->add('documenttype')
+            ->add('language', 'choice', array(
+                'choices'  => array('english' => 'English', 'nepali' => 'Nepali'),
+                // *this line is important*
+                'choices_as_values' => false,
+            ))
             ->getForm()
         ;
 

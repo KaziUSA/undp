@@ -115,6 +115,7 @@ class MyAjaxController extends Controller
 			if(count($data_month)<3){
 				$obj['stack']='';
 			}
+			$m=0;
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_month as $month){
@@ -122,11 +123,12 @@ class MyAjaxController extends Controller
 					foreach ($results as $arr){		        		
 		        		$obj['series'][$i]['data'][]= (int)$arr['count'];   
 		    			$obj['total'] += (int)$arr['count'];
+		    			$m++;
 		    		}					
 				}				
 			$i++;
 			}
-			$j=$i;
+			$j=++$m;
 			$obj['html']='';
 			$obj['label']=$data_month;
 			$obj['xlabel']='Month';//Set for category name on table created by highchart getTable() method
@@ -161,6 +163,7 @@ class MyAjaxController extends Controller
 			if(count($data_district)<3){
 				$obj['stack']='';
 			}
+			$m=0;
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_district as $district){
@@ -168,11 +171,12 @@ class MyAjaxController extends Controller
 					foreach ($results as $arr){		        		
 		        		$obj['series'][$i]['data'][]= (int)$arr['count']; 
 		        		$obj['total'] += (int)$arr['count'];  
+		        		$m++;
 		    		}					
 				}				
 			$i++;
 			}
-			$j=$i;
+			$j=++$m;
 			$obj['label']=$data_district;
 			$obj['xlabel']='District';
 			
@@ -206,18 +210,20 @@ class MyAjaxController extends Controller
 			if(count($data_gender)<4){
 				$obj['stack']='';
 			}
+			$m=0;
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_gender as $gender){
 					$results= $em->getRepository('AppBundle\Entity\Query')->getGenderFilteredArray($data_question,$num,$gender,$data_disability,$data_year);
 					foreach ($results as $arr){		        		
 		        		$obj['series'][$i]['data'][]= (int)$arr['count'];
-		        		$obj['total'] += (int)$arr['count'];   
+		        		$obj['total'] += (int)$arr['count'];  
+		        		$m++; 
 		    		}					
 				}				
 			$i++;
 			}
-			$j=$i;
+			$j=++$m;
 			$obj['label']=$data_gender;
 			$obj['xlabel']='Gender';
 
@@ -253,6 +259,7 @@ class MyAjaxController extends Controller
 			if(count($data_ethnicity)<3){
 				$obj['stack']='';
 			}
+			$m=0;
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_ethnicity as $ethnicity){
@@ -260,11 +267,12 @@ class MyAjaxController extends Controller
 					foreach ($results as $arr){		        		
 		        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
 		        		$obj['total'] += (int)$arr['count']; 
+		        		$m++;
 		    		}					
 				}				
 			$i++;
 			}
-			$j=$i;
+			$j=++$m;
 			$obj['label']=$data_ethnicity;
 			$obj['xlabel']='Ethnicity';
 			
@@ -301,6 +309,7 @@ class MyAjaxController extends Controller
 			if(count($data_age)<3){
 				$obj['stack']='';
 			}
+			$m=0;
 			foreach ($obj['answer'] as $num){	
 				$obj['series'][$i]['name']= $num;  //Alternative to array_push
 				foreach ($data_age as $age){
@@ -308,11 +317,12 @@ class MyAjaxController extends Controller
 					foreach ($results as $arr){		        		
 		        		$obj['series'][$i]['data'][]= (int)$arr['count']; 
 		        		$obj['total'] += (int)$arr['count'];  
+		        		$m++;
 		    		}					
 				}				
 			$i++;
 			}
-			$j=$i;
+			$j=++$m;
 			$obj['label']=$data_age;
 			$obj['xlabel']='Age';
 			
