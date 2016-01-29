@@ -57,6 +57,10 @@ class MyAjaxController extends Controller
 		//$data_disability=1;
 		//$data_year='2015';
 		$obj['height']=514;
+		$obj['xgrouplabel']['style']['color']='#898989';
+		$obj['xgrouplabel']['style']['fontSize']='12px';
+		$obj['xgrouplabel']['style']['fontWeight']='bold';
+		$obj['xgrouplabel']['style']['textTransform']='uppercase';		
 		//Handle data
 		
 		//Store the answers of the selected question in $obj['answer']\
@@ -67,7 +71,8 @@ class MyAjaxController extends Controller
 		foreach ($answers as $num){
 	        array_push($obj['answer'], $num['name']);   
 	    }
-		unset($num); 		
+		unset($num); 
+
 		//Any filters not selected	(1.N)	
 		if(!isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){ 			
 		   
@@ -77,7 +82,7 @@ class MyAjaxController extends Controller
 		    	$results = $em->getRepository('AppBundle\Entity\Query')->getBasicArray($data_question,$num,$data_disability,$data_year);
 			 	foreach ($results as $arr){
 		        	//array_push($obj['count'], (int)$arr['count']);   
-		    		$obj['series'][$i]['name'][]= $num; 
+		    		$obj['series'][$i]['name']= $num; 
 		    		$obj['series'][$i]['data'][]= (int)$arr['count'];
 		    		$obj['total'] += (int)$arr['count'];
 		    	}    	
@@ -86,7 +91,7 @@ class MyAjaxController extends Controller
 		    }			 
 			
 			$j=$i;
-		    $obj['label']=' ';
+		    $obj['label']=[" "];
 			$obj['height']=510;
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
@@ -427,10 +432,7 @@ class MyAjaxController extends Controller
 			$pos=0;
 			$obj['total']=0;
 			$flag=0; // For hiding legend of grouped columns with same name
-			$obj['stack']='normal'; //For stack chart
-			if(count($data_gender)>1){
-				$obj['grouped']='Grouped By Female/Male';
-			}
+			$obj['stack']='normal'; //For stack chart			
 			foreach ($data_gender as $gender) {				
 				$j=0;				
 				foreach ($obj['answer'] as $num){	
@@ -508,6 +510,8 @@ class MyAjaxController extends Controller
 					$i++;
 				}
 			}
+			$obj['xgrouplabel']['style']='';
+			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
 			$i=0;			
 			$gender_span=count($data_month);
 			$j=count($data_month)*count($data_gender);			
@@ -777,6 +781,8 @@ class MyAjaxController extends Controller
 					$i++;
 				}
 			}
+			$obj['xgrouplabel']['style']='';
+			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
 			$i=0;			
 			$gender_span=count($data_district);	
 			$j=count($data_gender)*count($data_district);			
@@ -989,6 +995,8 @@ class MyAjaxController extends Controller
 					$i++;
 				}
 			}
+			$obj['xgrouplabel']['style']='';
+			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
 			$i=0;			
 			$ethnicity_span=count($data_gender);
 			$j=count($data_ethnicity)*count($data_gender);			
@@ -1120,6 +1128,8 @@ class MyAjaxController extends Controller
 					$i++;
 				}
 			}
+			$obj['xgrouplabel']['style']='';
+			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
 			$i=0;
 			// foreach ($data_month as $month){
 			// 	$obj['label'][$i]['name'][]=$month;

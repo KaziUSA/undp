@@ -104,8 +104,6 @@
                                               <label for="disability">Disability<span></span></label></li>
                                             </div>
                                         </ul>
-                                        <ul class="ac-text checkbox-style"></ul>
-                                        <ul class="ac-text checkbox-style"></ul>
                                       </div><!--/ac-->
                                       <input type="submit" value="Submit" class="btn btn-bordered gray">
                                   </form>
@@ -910,12 +908,7 @@
 
                           type: 'column',
                       },
-                      legend: {
-                          width: 230,
-                          padding:10,
-                          itemWidth: 115
-                      },
-                      colors:['#88d8ef','#339de7','#6e6e6f','#159c02','#99bb42','#e7e7e7','#a1a1a1','#588C73','#D96459'],
+                      colors:['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'],
                       title: {
                           
                           //text: response.result.grouped
@@ -927,20 +920,9 @@
                       xAxis: {
 
                           tickLength: 0,
-                          labels: {
-                              style: {'color': '#898989', 'fontSize': '12px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
-                          },
-                        //   labels: { //TODO Designer
-                        //     groupedOptions: [{
-                        //         style: {
-                        //             color: 'red' // set red font for labels in 1st-Level  
-                        //         }
-                        //     }, {
-                        //         rotation: -45, // rotate labels for a 2nd-level
-                        //         align: 'right'
-                        //     }],
-                        //     rotation: 0 // 0-level options aren't changed, use them as always
-                        // },
+                          
+                          labels: response.result.xgrouplabel, //TODO Designer
+                           
                           categories: response.result.label,
                           title: {
                               enabled: false,
@@ -1101,10 +1083,10 @@
                           "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
                       },
                       "dom": 'T<"toolbar">lfrtip',
-                      // "aoColumnDefs": [ 
-                      //    { "sTitle": qname, "aTargets": [ 0 ] }
-                      //  ],
-                      //"stitle":$(".zelected").text(),
+                      "aoColumnDefs": [ 
+                         { "sTitle": qname, "aTargets": [ 0 ] }
+                       ],
+                      "stitle":$(".zelected").text(),
                       "colVis": {
                           "buttonText": "Change columns"
                       }
@@ -1112,10 +1094,6 @@
                   });
                   // $("div.toolbar").html();
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
-                  /*$('.DTTT_button_xls span').click(function(){
-                      console.log($('.table > thead > tr '));
-                      $('.table > thead > tr ').removeClass('hidden');
-                  });*/
                   
                   checkboxChecked();
 
