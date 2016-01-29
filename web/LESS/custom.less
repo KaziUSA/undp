@@ -21,6 +21,7 @@
 @green: #159c02;
 
 @pag-title-bg: #99bc44;
+@pag-title-dark-bg: #149b2c;
 @table-heading-top-bg: @green;
 @table-heading-bottom-bg: #86d7eb;
 @table-body-bg: #e1e1e1;
@@ -592,7 +593,7 @@ footer, footer a {
 
 /* About Page CSS */
 .u-box {
-	background-color: #99bc44;
+	background: @pag-title-bg;
 	color: @white;
 	margin: 60px 0 30px;
 	padding: 30px;
@@ -777,7 +778,7 @@ a.show-more-report {
 			}
 		}
 		label {
-			background-color: #99bc44;
+			background: @pag-title-bg;
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -836,6 +837,40 @@ body {
 	color: @white;
 }
 .filter {
+	/* Reports page tab */
+	&.report-tab {
+		.feedback-tab {
+			background: @pag-title-bg;
+		}
+		.nav .open > a {
+			background: @pag-title-dark-bg;
+		}
+		.dropdown-menu {
+			background: @pag-title-bg;
+			.active {
+				a {
+					&:hover {
+						background-color: @pag-title-dark-bg;
+					}
+				}
+			}
+		}
+		.nav-tabs {
+			li {
+				&:hover {
+					background: @pag-title-dark-bg;
+				}
+				&.active {
+					background: @pag-title-dark-bg;
+					&:before {
+						border-color: @pag-title-dark-bg transparent;
+						border-width: 7px 7px 0;
+    				bottom: -7px;
+					}
+				}
+			}
+		}
+	}
 	&.report {
 		li {
 			margin-bottom: 10px;
