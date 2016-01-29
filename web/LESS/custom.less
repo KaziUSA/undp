@@ -65,7 +65,7 @@
 	background: -moz-linear-gradient(left,  @start_color 0%, @end_color 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(left,  @start_color 0%, @end_color 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to right,  @start_color 0%, @end_color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@start_color', endColorstr='@end_color',GradientType=1 ); /* IE6-9 */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#414042', endColorstr='#242425',GradientType=1 ); /* IE6-9 */
 }
 
 .css-column(@column) {
@@ -617,11 +617,10 @@ footer, footer a {
 		}
 	}
 }
-.more-report, .more-report-nep {
+.more-report {
 	display: none;
 }
-a.show-more-report,
-a.show-more-report-nep {
+a.show-more-report {
 	color: @light-gray;
 	display: inline-block;
 	font-weight: bold;
@@ -840,16 +839,27 @@ body {
 .filter {
 	/* Reports page tab */
 	&.report-tab {
-		.tab-content {
-			/* padding: 30px; */
-			padding: 30px 0 0;
-		}
 		.feedback-tab {
 			background: @pag-title-bg;
 			padding-left: 0;
 		}
 		.nav .open > a {
 			background: @pag-title-dark-bg;
+		}
+		.dropdown-menu {
+			background: @pag-title-bg;
+			box-shadow: none;
+			border-radius: 0;
+			.active {
+				a {
+					&:hover {
+						background-color: @pag-title-dark-bg;
+					}
+				}
+			}
+		}
+		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
+			background-color: @pag-title-dark-bg;
 		}
 		.nav-tabs {
 			li {
@@ -865,35 +875,14 @@ body {
 					&:before {
 						border-color: @pag-title-dark-bg transparent;
 						border-width: 7px 7px 0;
-    				bottom: -6px;
+    				bottom: -7px;
 					}
 				}
 				a {
-					font-size: 15px;
 					padding: 0 17px;
 					margin: 0;
 				}
 			}
-		}
-		.dropdown-menu {
-			background: @pag-title-bg;
-			box-shadow: none;
-			border-radius: 0;
-			li {
-				border-left: 0 !important;
-				border-right: 0 !important;
-			}
-			.active {
-				a {
-					&:hover {
-						background-color: @pag-title-dark-bg;
-					}
-				}
-			}
-		}
-		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover,
-		.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
-			background-color: @pag-title-dark-bg !important;
 		}
 	}
 	&.report {
@@ -921,7 +910,7 @@ body {
 		height: 40px;
 		border: 0;
 		@media (min-width: 1200px) {
-			margin-right: 0px;
+			margin-right: 5px;
 		}
 		li {
 			a {
@@ -945,7 +934,7 @@ body {
 			    width: 0;
 			    height: 0;
 			    position: absolute;
-			    bottom: -6px;
+			    bottom: -7px;
 			    left: 50%;
 			    border-width: 7px 7px 0px 7px;
 			    border-style: solid;
