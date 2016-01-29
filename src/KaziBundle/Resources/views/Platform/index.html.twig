@@ -197,6 +197,7 @@
 <script type="text/javascript" src="js/exporting.js"></script>-->
 <!-- <script src="js/Chart.HorizontalBar.js"></script> -->
     <script src="/js/frontend/custom-filter.js"></script>
+    <script src="/js/plugins/highcharts/grouped-categories.js"></script>
     <script>
     //checkbox
     function checkboxChecked() {
@@ -298,8 +299,9 @@
         return temp;
     }
     //check for refresh
-    
-    sessionStorage.setItem("is_reloaded", 1);
+    var a=0;
+    var b=0;
+    // sessionStorage.setItem("is_reloaded", 1);
     //Ajax call    
     function aButtonPressed(){
       //sessionStorage.setItem("is_reloaded", 0);
@@ -331,7 +333,7 @@
        //display chart from url
        //if(questions == undefined) {
         urlParamQ = getUrlParameter('q');
-        if(urlParamQ != 'undefined') {
+        if(urlParamQ != 'undefined' && b==0) {
 
          //checking checkbox
           $('#form_questions option').each(function() {   
@@ -356,11 +358,13 @@
           //questions = 1;
           //question="1";
          }*/
-
+         b=1;
         //console.log(questions);
         if(questions != '') {
             paramQ = 'q='+questions;
          }
+         console.log(questions);
+
        //}//end questions
 
 
@@ -456,7 +460,7 @@
 
        
 
-      if(Number(sessionStorage.getItem("is_reloaded")) && monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '' && disabilityVal == undefined) {
+      if( a==0 && monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '' && disabilityVal == undefined) {
         //console.log('here');
         
         //display chart from url
@@ -587,7 +591,7 @@
 
         //modify the url again with some changes
         if(paramQ != '') {
-         /* param += '?' + paramQ;
+          param += '?' + paramQ;
 
           if(paramM != '') {
               param += '&' + paramM;
@@ -606,7 +610,7 @@
           } 
           if(paramDis != undefined) {
             param += '&' + paramDis;
-          } */
+          }
         } 
         else {//if paramQ == ''
           if(paramM != '') {
@@ -802,6 +806,8 @@
         $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
       }
 
+      a=1;// detect refresh and button click
+      
 
 
        //for default chart show: on page load
@@ -885,10 +891,11 @@
                 };
 
                   var chart=new Highcharts.chart({
-                  chart: {
+                  chart: {                          
                           renderTo: 'canvas',
                           backgroundColor: '#ffffff',
                           borderWidth: 0,
+                          //spacingTop:35,
                           height: response.result.height,
                           plotBorderWidth: 0,
                           plotShadow: true,
@@ -904,7 +911,7 @@
                       colors:['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'],
                       title: {
                           
-                          text: ""
+                          //text: response.result.grouped
                           // text: '<span style="font-size:12px">Inter-Agency Common</span><span style="font-size:10px">Feedback Project</span><span style="font-size:8px">Nepal Earthquake 2015</span>'                          
                       },
                       subtitle: {
@@ -912,16 +919,28 @@
                       },
                       xAxis: {
 
+                          tickLength: 0,
                           labels: {
                               style: {'color': '#898989', 'fontSize': '12px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
                           },
+                        //   labels: { //TODO Designer
+                        //     groupedOptions: [{
+                        //         style: {
+                        //             color: 'red' // set red font for labels in 1st-Level  
+                        //         }
+                        //     }, {
+                        //         rotation: -45, // rotate labels for a 2nd-level
+                        //         align: 'right'
+                        //     }],
+                        //     rotation: 0 // 0-level options aren't changed, use them as always
+                        // },
                           categories: response.result.label,
                           title: {
                               enabled: false,
                               text: response.result.xlabel,// For x-axis label on table
 
                           },
-                      lineColor: '#E5E5E5'
+                          lineColor: '#E5E5E5'
                       },
                       scrollbar: {
                           enabled: true
@@ -960,6 +979,25 @@
                           }
                       },
                       exporting: {
+                          chartOptions:{
+                               xAxis: {
+                                labels: {
+                                             style: {
+                                                    fontSize: response.result.smallfont,
+                                                }
+                                    }                   
+                      },
+                              chart:{
+                                  spacingTop:35,
+                                  events:{
+                                      load:function(){
+                                          this.renderer.image('http://cfp.org.np/img/frontend/logo-full.png', 10, 3, 120, 30) //TODO logo
+                          .add();
+
+                                      }
+                                  }
+                              }
+                          },
                           buttons: {
                               contextButton: {
                                   enabled: false,
@@ -1017,9 +1055,14 @@
                   }
 
                   chart.setTitle({
-                      useHTML: true,
-                      text:"Inter-Agency Common Feedback Project"
+                      //useHTML: true,
+                      //text:"Inter-Agency Common Feedback Project"
                       }, {
+                        style: {
+                      fontSize: "10px",
+                          color: 'black',
+                          fontWeight: 'normal'
+                      },
                       text:"<span>"+qname+"</span><br>For: "+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
                       align: "left"
                   });
@@ -1069,7 +1112,7 @@
 
           }, "json"); //.post end
 
-     sessionStorage.setItem("is_reloaded", 0);
+     
     }; //abuttonpressed end
 
 $(document).ready(function() {
