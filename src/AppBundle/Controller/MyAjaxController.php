@@ -90,8 +90,8 @@ class MyAjaxController extends Controller
 			$obj['height']=510;
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
-			$obj['html']=$obj['html']."<tr><th>Answers</th><th>No. of Answers</th>";				
+			//$obj['html']=$obj['html']."";
+			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr><tr><th>Answers</th><th>No. of Answers</th>";				
 					
 			$obj['html']=$obj['html']."</tr></thead><tbody>";
 			foreach ($obj['answer'] as $ans) {
