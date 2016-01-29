@@ -617,10 +617,11 @@ footer, footer a {
 		}
 	}
 }
-.more-report {
+.more-report, .more-report-nep {
 	display: none;
 }
-a.show-more-report {
+a.show-more-report,
+a.show-more-report-nep {
 	color: @light-gray;
 	display: inline-block;
 	font-weight: bold;
@@ -839,27 +840,16 @@ body {
 .filter {
 	/* Reports page tab */
 	&.report-tab {
+		.tab-content {
+			/* padding: 30px; */
+			padding: 30px 0 0;
+		}
 		.feedback-tab {
 			background: @pag-title-bg;
 			padding-left: 0;
 		}
 		.nav .open > a {
 			background: @pag-title-dark-bg;
-		}
-		.dropdown-menu {
-			background: @pag-title-bg;
-			box-shadow: none;
-			border-radius: 0;
-			.active {
-				a {
-					&:hover {
-						background-color: @pag-title-dark-bg;
-					}
-				}
-			}
-		}
-		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
-			background-color: @pag-title-dark-bg;
 		}
 		.nav-tabs {
 			li {
@@ -879,10 +869,31 @@ body {
 					}
 				}
 				a {
+					font-size: 15px;
 					padding: 0 17px;
 					margin: 0;
 				}
 			}
+		}
+		.dropdown-menu {
+			background: @pag-title-bg;
+			box-shadow: none;
+			border-radius: 0;
+			li {
+				border-left: 0 !important;
+				border-right: 0 !important;
+			}
+			.active {
+				a {
+					&:hover {
+						background-color: @pag-title-dark-bg;
+					}
+				}
+			}
+		}
+		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover,
+		.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+			background-color: @pag-title-dark-bg !important;
 		}
 	}
 	&.report {
