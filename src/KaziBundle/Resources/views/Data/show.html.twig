@@ -20,9 +20,12 @@
             </div>
         </div>
     </div>
+    
     <table class="records_list table table-condensed table-hover table-striped dataTables">
-        {% set excludeColumns = {  } %}
 
+        {# for round 6 #}
+        {% set excludeColumns = {   } %}
+        
         {% set count = 1  %}
         
         {% set numColumns = 10 %}
@@ -33,7 +36,9 @@
             {% elseif count == 1 %}
         
             <thead>
+
                 <tr>
+                <th class="toggle-icon-col"></th>
                     {% set columncount = 0 %}
                     {% for val in entity %}
                         {% if columncount in excludeColumns %}
@@ -56,11 +61,15 @@
                 
             
                 <tr>
+                <td class="toggle-icon">
+                    <span class="toogle-data">Show Data</span>
+                </td>
                     {% set columncount = 0 %}
                     {% for val in entity %}
                         {% if columncount in excludeColumns %}
                     
                         {% else %}
+                        
                             <td>{{ val }}</td>
                         {% endif %}
                         {% set columncount = columncount + 1 %}
@@ -71,26 +80,26 @@
         {% endfor %}    
         </tbody>
     </table>
-        
+    
     <ul class="share-icons share-data">
         <li><a href="#share" class="fa fa-share-alt"></a>
             <ul>        
                 {# TODO: Need to change commonfeedback.org to dynamic url path if needed #}                   
-                <li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//commonfeedback.org{{ path('data' )}}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20Round%206" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+                <li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//commonfeedback.org{{ path('data_show', { 'slug': slug} )}}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20Round%20{{slug}}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
                 
-                <li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+Round+6+http%3A//commonfeedback.org{{ path('data' )}}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+                <li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+Round+{{slug}}+http%3A//commonfeedback.org{{ path('data_show', { 'slug': slug} )}}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
 
-                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//commonfeedback.org{{ path('data' )}}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20Round%206&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//commonfeedback.org{{ path('data_show', { 'slug': slug} )}}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20Round%20{{slug}}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
             </ul>
         </li>
     </ul>
         
     {% endblock %}
 {% block scriptIncludes %}
-</div> <!-- /.table-wrap -->
 <script>
         $(document).ready(function() {
             $('.dataTables').dataTable({
+                //"autoWidth": false,
                 "pageLength": 100,
                 responsive: true,
                 "dom": 'T<"clear">lfrtip',
@@ -99,11 +108,17 @@
                 },
                 "colVis": {
                     "buttonText": "Change columns"
+                },
+                "oLanguage": {
+                    "sSearch": ""
                 }
             });
-            $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download');
+            $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
+            
+            // tooltip
+           $('.toggle-icon').hover(function(){
+                $(this).children('.toogle-data').toggle();
+            }); 
         });
-
-        
     </script>
 {% endblock %}
