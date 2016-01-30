@@ -1424,7 +1424,8 @@ div.dataTables_paginate {
 }
 // records_list table table-condensed table-hover table-striped dataTables dataTable no-footer collapsed dtr-inline
 table.dataTable tr th {
-    position: relative;
+	position: static;
+    // position: relative;
     padding-right: 25px;
 }
 table.dataTable tr th, table.dataTable tr td {
@@ -1484,9 +1485,9 @@ th.sorting:before {
     width: 20px;
     height: 20px;
     display: block;
-    position: absolute;
-    right: 0;
-    top: 6px;
+    position: static;
+    float: right;
+    margin-right: -25px;
     background: url('../img/d-default.png') no-repeat right center;
     background-size: 100%;
 }
@@ -1500,9 +1501,9 @@ th.sorting_asc:before {
     width: 20px;
     height: 20px;
     display: block;
-    position: absolute;
-    right: 0;
-    top: 6px;
+    position: static;
+    float: right;
+    margin-right: -25px;
     background: url('../img/d-acending.png') no-repeat right center;
     background-size: 100%;
 }
@@ -1512,11 +1513,12 @@ th.sorting_desc:before {
     width: 20px;
     height: 20px;
     display: block;
-    position: absolute;
-    right: 0;
-    top: 6px;
+    position: static;
+    float: right;
+    margin-right: -25px;
     background: url('../img/d-decending.png') no-repeat right center;
     background-size: 100%;
+    margin-top: -3px;
 }
 
 .high-chart th.sorting:before, .high-chart th.sorting_asc:before, .high-chart th.sorting_desc:before{
@@ -1712,7 +1714,9 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child, table.dataTable.dtr-i
 		padding-right: 75px;
     }
 }
-
 tr.row-green th {
     background: #159c02 !important;
+}
+tr th.blank-col {
+    background: none !important;
 }
