@@ -806,7 +806,6 @@
           }//end else paramM
         }//end else paramQ
 
-        
         if ($('html').hasClass('ie9')) {
           // console.log("ie9");
         }else{
@@ -1040,17 +1039,15 @@
                       },
                       exporting: {
                           chartOptions:{
-                              subtitle: {
-                                  //margin: 50,
-
-                        style: {
-                      fontSize: "10px",
-                          color: '#A8A8A8',
-                          fontWeight: 'normal'
-                      },
-                      text:"<span>"+qname+"</span><br>"+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
-                      align: "left"
-                  
+                              title: {
+                                margin:30,
+                                style: {
+                                    fontSize: "10px",
+                                    color: '#A8A8A8',
+                                    fontWeight: 'normal'
+                                },
+                                text:"<span>"+qname+"</span><br>"+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
+                                align: "left"                  
                               },
                               xAxis: {
                                 labels: {
@@ -1060,6 +1057,7 @@
                                 }                   
                               },
                               yAxis: {
+                                alternateGridColor: '#FDFFD5',
                                 tickPixelInterval: 1,
                                 labels: {
                                   style: {
@@ -1067,7 +1065,6 @@
                                   }
                                 }
                               },
-
                               chart:{
                                   spacingTop:55,
                                   events:{
