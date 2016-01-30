@@ -47,7 +47,7 @@ class MyAjaxController extends Controller
 		$data_month = $request->request->get('data_month');
 		$data_disability=$request->request->get('data_disability');
 		$data_year = $request->request->get('data_year');
-		$colors=['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'];
+		$colors=['#88d8ef','#339de7','#6e6e6f','#159c02','#99bb42','#e7e7e7','#a1a1a1','#588C73','#D96459'];
 		//$data_question = 1;
 		//$data_age = ['15 - 24','25 - 39','40 - 54'];
 		//$data_gender= ['Male','Female'];
