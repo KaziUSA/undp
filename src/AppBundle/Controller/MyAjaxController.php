@@ -68,6 +68,9 @@ class MyAjaxController extends Controller
 	        array_push($obj['answer'], $num['name']);   
 	    }
 		unset($num); 		
+
+
+
 		//Any filters not selected	(1.N)	
 		if(!isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){ 			
 		   
@@ -90,12 +93,14 @@ class MyAjaxController extends Controller
 			$obj['height']=510;
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
-			$obj['html']=$obj['html']."<tr><th>Answers</th><th>No. of Answers</th>";				
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th><th></th></tr></thead>";
+
+			$obj['html']=$obj['html']."<tbody><tr><th>Answers</th><th>No. of Answers</th></tr>";				
 					
-			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			//$obj['html']=$obj['html']."";
 			foreach ($obj['answer'] as $ans) {
-				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";					    									       
+				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";	
+				//print_r($ans);				    									       
 				$results= $em->getRepository('AppBundle\Entity\Query')->getBasicArray($data_question,$ans,$data_disability,$data_year);
 				foreach ($results as $arr){		        		
 			    	$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>";			    	 
@@ -104,7 +109,7 @@ class MyAjaxController extends Controller
 				$obj['html']=$obj['html']."</tr>";
 			}
 			//$obj['html']=$obj['html']."";
-			$obj['html']=$obj['html']."<thead class='respondent'><tr><th colspan=".$j.">Respondents: ".$obj['total']."</th></tr></thead></tbody></table>";
+			$obj['html']=$obj['html']."<tr class='respondent hidden'><th>Respondents: ".$obj['total']."</th><td></td></tr></tbody><table>";
 		}
 
 		//Only Month filter selected(2.M)
@@ -135,12 +140,16 @@ class MyAjaxController extends Controller
 			
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th>";
+			for($k=0;$k<count($data_month);$k++){
+				$obj['html']=$obj['html']."<th></th>";				        
+			}
+			$obj['html']=$obj['html']."</tr></thead><tbody>";
 			$obj['html']=$obj['html']."<tr><th>Month</th>";				
 			for($k=0;$k<count($data_month);$k++){
 				$obj['html']=$obj['html']."<th>".$data_month[$k]."</th>";				        
 			}						
-			$obj['html']=$obj['html']."</tr></thead><tbody>";
+			$obj['html']=$obj['html']."</tr>";
 			$obj['total']=0;
 			foreach ($obj['answer'] as $ans) {
 				$obj['html']=$obj['html']."<tr><th>".$ans."</th>";				
@@ -153,7 +162,11 @@ class MyAjaxController extends Controller
 				}
 				$obj['html']=$obj['html']."</tr>";
 			}
-			$obj['html']=$obj['html']."<thead  class='respondent'><tr><th colspan=".$j.">Respondents: ".$obj['total']."</th></tr></thead></tbody></table>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>Respondents: ".$obj['total']."</th>";
+			for($k=0;$k<count($data_month);$k++){
+				$obj['html']=$obj['html']."<th></th>";				        
+			}
+			$obj['html']=$obj['html']."</tr></tbody></table>";
 		}
 
 		//Only District filter selected(3.D)
@@ -182,7 +195,7 @@ class MyAjaxController extends Controller
 			
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";				
 			for($k=0;$k<count($data_district);$k++){
 				$obj['html']=$obj['html']."<th>".$data_district[$k]."</th>";				        
@@ -229,7 +242,7 @@ class MyAjaxController extends Controller
 
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Gender</th>";				
 			for($k=0;$k<count($data_gender);$k++){
 				$obj['html']=$obj['html']."<th>".$data_gender[$k]."</th>";				        
@@ -278,7 +291,7 @@ class MyAjaxController extends Controller
 			
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Ethnicity</th>";				
 			for($k=0;$k<count($data_ethnicity);$k++){
 				$obj['html']=$obj['html']."<th>".$data_ethnicity[$k]."</th>";				        
@@ -328,7 +341,7 @@ class MyAjaxController extends Controller
 			
 			$i=0;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";			
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Age</th>";				
 			for($k=0;$k<count($data_age);$k++){
 				$obj['html']=$obj['html']."<th>".$data_age[$k]."</th>";				        
@@ -389,7 +402,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_district);			
 			$j++;
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -513,7 +526,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_gender);			
 			$j++;				
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Gender</th>";
 			for($j=0;$j<count($data_gender);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$gender_span."'>".$data_gender[$j]."</th>";
@@ -584,7 +597,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_ethnicity);			
 			$j++;	
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Ethnicity</th>";
 			for($j=0;$j<count($data_ethnicity);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$ethnicity_span."'>".$data_ethnicity[$j]."</th>";
@@ -653,7 +666,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_age);			
 			$j++;				
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Age</th>";
 			for($j=0;$j<count($data_age);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$age_span."'>".$data_age[$j]."</th>";
@@ -782,7 +795,7 @@ class MyAjaxController extends Controller
 			$j=count($data_gender)*count($data_district);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Gender</th>";
 			for($j=0;$j<count($data_gender);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$gender_span."'>".$data_gender[$j]."</th>";
@@ -821,7 +834,7 @@ class MyAjaxController extends Controller
 			$j=count($data_district)*count($data_ethnicity);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -859,7 +872,7 @@ class MyAjaxController extends Controller
 			$j=count($data_age)*count($data_district);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -994,7 +1007,7 @@ class MyAjaxController extends Controller
 			$j=count($data_ethnicity)*count($data_gender);			
 			$j++;				
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Ethnicity</th>";
 			for($j=0;$j<count($data_ethnicity);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$ethnicity_span."'>".$data_ethnicity[$j]."</th>";
@@ -1131,7 +1144,7 @@ class MyAjaxController extends Controller
 			$j=count($data_age)*count($data_gender);			
 			$j++;		
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Age</th>";
 			for($j=0;$j<count($data_age);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$age_span."'>".$data_age[$j]."</th>";
@@ -1170,7 +1183,7 @@ class MyAjaxController extends Controller
 			$j=count($data_ethnicity)*count($data_age);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Ethnicity</th>";
 			for($j=0;$j<count($data_ethnicity);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$ethnicity_span."'>".$data_ethnicity[$j]."</th>";
@@ -1214,7 +1227,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_gender)*count($data_district);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -1272,7 +1285,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_ethnicity)*count($data_district);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -1330,7 +1343,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_age)*count($data_district);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -1386,7 +1399,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_gender)*count($data_ethnicity);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Ethnicity</th>";
 			for($j=0;$j<count($data_ethnicity);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$ethnicity_span."'>".$data_ethnicity[$j]."</th>";
@@ -1452,7 +1465,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_gender)*count($data_age);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Age</th>";
 			for($j=0;$j<count($data_age);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$age_span."'>".$data_age[$j]."</th>";
@@ -1517,7 +1530,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_ethnicity)*count($data_age);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Ethnicity</th>";
 			for($j=0;$j<count($data_ethnicity);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$ethnicity_span."'>".$data_ethnicity[$j]."</th>";
@@ -1574,7 +1587,7 @@ class MyAjaxController extends Controller
 			$j++;			
 						
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -1631,7 +1644,7 @@ class MyAjaxController extends Controller
 			$j=count($data_age)*count($data_gender)*count($data_district);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -1688,7 +1701,7 @@ class MyAjaxController extends Controller
 			$j++;			
 			$obj['stack']='normal'; //For stack chart
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -1744,7 +1757,7 @@ class MyAjaxController extends Controller
 			$j=count($data_ethnicity)*count($data_gender)*count($data_age);			
 			$j++;			
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Ethnicity</th>";
 			for($j=0;$j<count($data_ethnicity);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$ethnicity_span."'>".$data_ethnicity[$j]."</th>";
@@ -1803,7 +1816,7 @@ class MyAjaxController extends Controller
 			$j++;			
 						
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -1871,7 +1884,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_gender)*count($data_district)*count($data_age);			
 			$j++;						
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -1939,7 +1952,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_gender)*count($data_age)*count($data_ethnicity);			
 			$j++;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>Ethnicity</th>";
 			for($j=0;$j<count($data_ethnicity);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$ethnicity_span."'>".$data_ethnicity[$j]."</th>";
@@ -2009,7 +2022,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_age)*count($data_district)*count($data_ethnicity);			
 			$j++;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -2077,7 +2090,7 @@ class MyAjaxController extends Controller
 			$j=count($data_age)*count($data_gender)*count($data_district)*count($data_ethnicity);			
 			$j++;						
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
@@ -2147,7 +2160,7 @@ class MyAjaxController extends Controller
 			$j=count($data_month)*count($data_gender)*count($data_district)*count($data_ethnicity)*count($data_age);			
 			$j++;					
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
-			$obj['html']=$obj['html']."<tr><th colspan=".$j.">".$qname."</th></tr>";
+			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th></tr></thead>";
 			$obj['html']=$obj['html']."<tr><th>District</th>";
 			for($i=0;$i<count($data_district);$i++){
 				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$i]."</th>";
