@@ -280,13 +280,13 @@ $(document).ready(function () {
 
 $(window).resize(function() {
   var bodyHeight = $(bodyHeight).height();
-  if (bodyHeight > 520) {
+  if ($(window).height() > 520) {
     $('.main-content').css('min-height', $(bodyHeight).height());
   };
 });
 $(document).ready(function () {
   var bodyHeight = $(bodyHeight).height();
-  if (bodyHeight > 520) {
+  if ($(window).height() > 520) {
     $('.main-content').css('min-height', $(bodyHeight).height());
   };
 });
