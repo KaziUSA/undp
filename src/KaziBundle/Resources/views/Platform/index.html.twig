@@ -363,7 +363,7 @@
         if(questions != '') {
             paramQ = 'q='+questions;
          }
-         console.log(questions);
+         //console.log(questions);
 
        //}//end questions
 
@@ -867,6 +867,7 @@
       $.post('{{path('myajax')}}',
           { qname:qname,data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals, data_disability: disabilityVal , data_year: yearVal},
           function(response){
+            //console.log(response.result.html);
               var val=new Array();
               var dt= new Array();
               if(response.code == 100 && response.success){                 
@@ -889,7 +890,58 @@
                   if((pos/=0.5) < 1) return 0.5*(pos*pos*(((s*=(1.525))+1)*pos -s));
                   return 0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos +s) +2);
                 };
+                //small font for pdf export
+                if(response.result.smallfont){
+                  sf='5px';
+                  //alert(sf);
+                }
+                else{
+                  sf='7px';
+                }
+                if(disabilityVal == 1){
+                    V="Disability/";
+                  }else{
+                    V="";
+                  }
+                  if(monthVals != ''){
+                    M="Month/";
+                  }else{
+                    M="";
+                  }
+                  if(districtVals != ''){
+                    D="District/";
+                  }else{
+                    D="";
+                  }
+                  if(genderVals != ''){
+                    G="Gender/";
+                  }else{
+                    G="";
+                  }
+                  if(ethnicityVals != ''){
+                    E="Ethnicity/";              
+                  }else{
+                    E="";
+                  }
+                  if(ageVals != ''){
+                    A="Age/";
+                  }else{
+                    A="";
+                  }
 
+                  // chart.setTitle({
+                  //     //useHTML: true,
+                  //     //text:"Inter-Agency Common Feedback Project"
+                  //     }, {
+                  //       style: {
+                  //     fontSize: "10px",
+                  //         color: 'black',
+                  //         fontWeight: 'normal'
+                  //     },
+                  //     text:"<span>"+qname+"</span><br>For: "+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
+                  //     align: "left"
+                  // });
+                  
                   var chart=new Highcharts.chart({
                   chart: {                          
                           renderTo: 'canvas',
@@ -976,15 +1028,36 @@
                       },
                       exporting: {
                           chartOptions:{
-                               xAxis: {
-                                labels: {
-                                             style: {
-                                                    fontSize: response.result.smallfont,
-                                                }
-                                    }                   
+                              subtitle: {
+                                  //margin: 50,
+
+                        style: {
+                      fontSize: "10px",
+                          color: '#A8A8A8',
+                          fontWeight: 'normal'
                       },
+                      text:"<span>"+qname+"</span><br>For: "+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
+                      align: "left"
+                  
+                              },
+                              xAxis: {
+                                labels: {
+                                  style: {
+                                    fontSize: sf,
+                                  }
+                                }                   
+                              },
+                              yAxis: {
+                                tickPixelInterval: 1,
+                                labels: {
+                                  style: {
+                                    fontSize: '7px',
+                                  }
+                                }
+                              },
+
                               chart:{
-                                  spacingTop:35,
+                                  spacingTop:55,
                                   events:{
                                       load:function(){
                                           this.renderer.image('http://cfp.org.np/img/frontend/logo-full.png', 10, 3, 120, 30) //TODO logo
@@ -1020,49 +1093,7 @@
                           }
                       },
                   });//Highchart end
-                  if(disabilityVal == 1){
-                    V="Disability/";
-                  }else{
-                    V="";
-                  }
-                  if(monthVals != ''){
-                    M="Month/";
-                  }else{
-                    M="";
-                  }
-                  if(districtVals != ''){
-                    D="District/";
-                  }else{
-                    D="";
-                  }
-                  if(genderVals != ''){
-                    G="Gender/";
-                  }else{
-                    G="";
-                  }
-                  if(ethnicityVals != ''){
-                    E="Ethnicity/";              
-                  }else{
-                    E="";
-                  }
-                  if(ageVals != ''){
-                    A="Age/";
-                  }else{
-                    A="";
-                  }
-
-                  chart.setTitle({
-                      //useHTML: true,
-                      //text:"Inter-Agency Common Feedback Project"
-                      }, {
-                        style: {
-                      fontSize: "10px",
-                          color: 'black',
-                          fontWeight: 'normal'
-                      },
-                      text:"<span>"+qname+"</span><br>For: "+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
-                      align: "left"
-                  });
+                  
                   
                   $('.highcharts-subtitle').hide();
                    $('.high-chart-wrap').removeClass('hidden');

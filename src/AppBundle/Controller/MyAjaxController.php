@@ -60,7 +60,8 @@ class MyAjaxController extends Controller
 		$obj['xgrouplabel']['style']['color']='#898989';
 		$obj['xgrouplabel']['style']['fontSize']='12px';
 		$obj['xgrouplabel']['style']['fontWeight']='bold';
-		$obj['xgrouplabel']['style']['textTransform']='uppercase';		
+		$obj['xgrouplabel']['style']['textTransform']='uppercase';
+		$obj['xgrouplabel']['rotation']=0;		
 		//Handle data
 		
 		//Store the answers of the selected question in $obj['answer']\
@@ -505,13 +506,23 @@ class MyAjaxController extends Controller
 				foreach ($data_month as $month){
 					$obj['label'][$i]['name'][]=$month;
 					foreach ($data_gender as $gender){
-						$obj['label'][$i]['categories'][]=$gender;
+						if($gender=="Male"){
+						$catname="M";
+						}
+						elseif($gender=="Female"){
+							$catname="F";
+						}
+						elseif($gender=="Other"){
+							$catname="O";
+						}
+						$obj['label'][$i]['categories'][]=$catname;
 					}
 					$i++;
 				}
 			}
 			$obj['xgrouplabel']['style']='';
 			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
+			$obj['smallfont']='5px';
 			$i=0;			
 			$gender_span=count($data_month);
 			$j=count($data_month)*count($data_gender);			
@@ -769,20 +780,24 @@ class MyAjaxController extends Controller
 					foreach ($data_gender as $gender){
 						if($gender=="Male"){
 						$catname="M";
-					}
-					elseif($gender=="Female"){
-						$catname="F";
-					}
-					elseif($gender=="Other"){
-						$catname="O";
-					}
-						$obj['label'][$i]['categories'][]=$gender;
+						}
+						elseif($gender=="Female"){
+							$catname="F";
+						}
+						elseif($gender=="Other"){
+							$catname="O";
+						}
+						$obj['label'][$i]['categories'][]=$catname;
 					}
 					$i++;
 				}
 			}
 			$obj['xgrouplabel']['style']='';
+			if(count($data_district)>9 && count($data_gender)>1){
+				$obj['xgrouplabel']['style']['fontSize']='9px';
+			}
 			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
+			$obj['smallfont']='5px';
 			$i=0;			
 			$gender_span=count($data_district);	
 			$j=count($data_gender)*count($data_district);			
@@ -990,13 +1005,14 @@ class MyAjaxController extends Controller
 					elseif($gender=="Other"){
 						$catname="O";
 					}
-						$obj['label'][$i]['categories'][]=$gender;
+						$obj['label'][$i]['categories'][]=$catname;
 					}
 					$i++;
 				}
 			}
 			$obj['xgrouplabel']['style']='';
 			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
+			$obj['smallfont']='5px';
 			$i=0;			
 			$ethnicity_span=count($data_gender);
 			$j=count($data_ethnicity)*count($data_gender);			
@@ -1123,13 +1139,14 @@ class MyAjaxController extends Controller
 					elseif($gender=="Other"){
 						$catname="O";
 					}
-						$obj['label'][$i]['categories'][]=$gender;
+						$obj['label'][$i]['categories'][]=$catname;
 					}
 					$i++;
 				}
 			}
 			$obj['xgrouplabel']['style']='';
 			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
+			$obj['smallfont']='5px';
 			$i=0;
 			// foreach ($data_month as $month){
 			// 	$obj['label'][$i]['name'][]=$month;
