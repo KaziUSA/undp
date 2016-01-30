@@ -1122,17 +1122,27 @@
                           "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
                       },
                       "dom": 'T<"toolbar">lfrtip',
-                      "aoColumnDefs": [ 
-                         { "sTitle": qname, "aTargets": [ 0 ] }
-                       ],
-                      "stitle":$(".zelected").text(),
+                      "ordering": false,
+                      // "columnDefs": [
+                      //   { "bsortable": false, "targets": 0 }
+                      // ],
+                      // "aoColumnDefs": [ 
+                      //    { "sTitle": qname, "aTargets": [ 0 ] }
+                      //  ],
+                      //"stitle":$(".zelected").text(),
+
                       "colVis": {
                           "buttonText": "Change columns"
                       }
                       
                   });
-                  // $("div.toolbar").html();
+                  //$("div.toolbar").html('Download');
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
+                  $('.DTTT_button_xls span, .DTTT_button_csv span').show();
+                  /*$('.DTTT_button_xls span').click(function(){
+                      console.log($('.table > thead > tr '));
+                      $('.table > thead > tr ').removeClass('hidden');
+                  });*/
                   
                   checkboxChecked();
 
