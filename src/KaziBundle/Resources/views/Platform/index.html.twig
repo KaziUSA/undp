@@ -104,8 +104,6 @@
                                               <label for="disability">Disability<span></span></label></li>
                                             </div>
                                         </ul>
-                                        <ul class="ac-text checkbox-style"></ul>
-                                        <ul class="ac-text checkbox-style"></ul>
                                       </div><!--/ac-->
                                       <input type="submit" value="Submit" class="btn btn-bordered gray">
                                   </form>
@@ -911,6 +909,7 @@
 
                           type: 'column',
                       },
+
                       legend: {
                           width: 240,
                           padding:10,
@@ -928,20 +927,9 @@
                       xAxis: {
 
                           tickLength: 0,
-                          labels: {
-                              style: {'color': '#898989', 'fontSize': '12px', 'fontWeight': 'bold', 'textTransform': 'uppercase'}
-                          },
-                        //   labels: { //TODO Designer
-                        //     groupedOptions: [{
-                        //         style: {
-                        //             color: 'red' // set red font for labels in 1st-Level  
-                        //         }
-                        //     }, {
-                        //         rotation: -45, // rotate labels for a 2nd-level
-                        //         align: 'right'
-                        //     }],
-                        //     rotation: 0 // 0-level options aren't changed, use them as always
-                        // },
+                          
+                          labels: response.result.xgrouplabel, //TODO Designer
+                           
                           categories: response.result.label,
                           title: {
                               enabled: false,
@@ -1111,6 +1099,7 @@
                       //    { "sTitle": qname, "aTargets": [ 0 ] }
                       //  ],
                       //"stitle":$(".zelected").text(),
+
                       "colVis": {
                           "buttonText": "Change columns"
                       }
