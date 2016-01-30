@@ -876,7 +876,7 @@
       $.post('{{path('myajax')}}',
           { qname:qname,data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals, data_disability: disabilityVal , data_year: yearVal},
           function(response){
-            //console.log(response.result.html);
+            console.log(response.result.html);
               var val=new Array();
               var dt= new Array();
               if(response.code == 100 && response.success){                 
