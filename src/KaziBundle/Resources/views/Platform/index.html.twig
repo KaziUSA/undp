@@ -689,7 +689,11 @@
             }
           }//end else paramM
         }//end else paramQ
-        window.history.pushState(url,'',param);
+        if ($('html').hasClass('ie9')) {
+          // console.log("ie9");
+        }else{
+          window.history.pushState(url,'',param);
+        }
         $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
         $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
         $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
@@ -800,7 +804,11 @@
           }//end else paramM
         }//end else paramQ
 
-        window.history.pushState(url,'',param);
+        if ($('html').hasClass('ie9')) {
+          // console.log("ie9");
+        }else{
+          window.history.pushState(url,'',param);
+        }
         $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
         $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
         $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
