@@ -281,12 +281,12 @@ $(document).ready(function () {
 $(window).resize(function() {
   var winHeight = $(window).height();
   if (winHeight > 520) {
-    $('.main-content').height($(window).height());
+    $('.main-content').css('min-height', $(window).height());
   };
 });
 $(document).ready(function () {
   var winHeight = $(window).height();
   if (winHeight > 520) {
-    $('.main-content').height($(window).height());
+    $('.main-content').css('min-height', $(window).height());
   };
 });
