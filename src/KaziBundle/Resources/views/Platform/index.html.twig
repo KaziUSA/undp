@@ -689,11 +689,7 @@
             }
           }//end else paramM
         }//end else paramQ
-        if ($('html').hasClass('ie9')) {
-          // console.log("ie9");
-        }else{
-          window.history.pushState(url,'',param);
-        }
+        window.history.pushState(url,'',param);
         $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
         $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
         $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
@@ -804,12 +800,7 @@
           }//end else paramM
         }//end else paramQ
 
-        
-        if ($('html').hasClass('ie9')) {
-          // console.log("ie9");
-        }else{
-          window.history.pushState(url,'',param);
-        }
+        window.history.pushState(url,'',param);
         $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
         $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
         $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
@@ -1038,17 +1029,15 @@
                       },
                       exporting: {
                           chartOptions:{
-                              subtitle: {
-                                  //margin: 50,
-
-                        style: {
-                      fontSize: "10px",
-                          color: '#A8A8A8',
-                          fontWeight: 'normal'
-                      },
-                      text:"<span>"+qname+"</span><br>"+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
-                      align: "left"
-                  
+                              title: {
+                                margin:30,
+                                style: {
+                                    fontSize: "10px",
+                                    color: '#A8A8A8',
+                                    fontWeight: 'normal'
+                                },
+                                text:"<span>"+qname+"</span><br>"+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
+                                align: "left"                  
                               },
                               xAxis: {
                                 labels: {
@@ -1058,6 +1047,7 @@
                                 }                   
                               },
                               yAxis: {
+                                alternateGridColor: '#FDFFD5',
                                 tickPixelInterval: 1,
                                 labels: {
                                   style: {
@@ -1065,7 +1055,6 @@
                                   }
                                 }
                               },
-
                               chart:{
                                   spacingTop:55,
                                   events:{
