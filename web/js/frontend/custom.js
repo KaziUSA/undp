@@ -279,14 +279,14 @@ $(document).ready(function () {
 });
 
 $(window).resize(function() {
-  var winHeight = $(window).height();
-  if (winHeight > 520) {
-    $('.main-content').css('min-height', $(window).height());
+  var bodyHeight = $(bodyHeight).height();
+  if ($(window).height() > 520) {
+    $('.main-content').css('min-height', $(bodyHeight).height());
   };
 });
 $(document).ready(function () {
-  var winHeight = $(window).height();
-  if (winHeight > 520) {
-    $('.main-content').css('min-height', $(window).height());
+  var bodyHeight = $(bodyHeight).height();
+  if ($(window).height() > 520) {
+    $('.main-content').css('min-height', $(bodyHeight).height());
   };
 });

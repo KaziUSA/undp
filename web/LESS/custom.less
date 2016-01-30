@@ -1615,8 +1615,8 @@ table.dataTable th, table.dataTable td {
     text-align: center;
     color: #FFF;
     display: block;
-    height: 13px;
-    top: 4px;
+    height: 22px !important;
+    top: 0px !important;
     background-size: 14px;
 }
 /*target Internet Explorer 9 and Internet Explorer 10:*/
@@ -1699,8 +1699,16 @@ table.dataTable.dtr-inline.collapsed tbody td:first-child, table.dataTable.dtr-i
     text-align: center;
     top: 0px;
     border-left: 1px solid #FFF;
-    height: 40px;
+    height: 100%;
     padding-top: 6px;
     color: #59731a;
     text-transform: uppercase;
+    @media only screen and (max-width : 768px) {
+		display: none;
+	}
+}
+.question #zelect .zelected {
+    @media only screen and (min-width : 768px) {
+		padding-right: 75px;
+    }
 }
