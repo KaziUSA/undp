@@ -1040,13 +1040,23 @@
                       exporting: {
                           chartOptions:{
                               title: {
-                                margin:30,
+                                //margin:30,
                                 style: {
-                                    fontSize: "10px",
+                                    fontSize: "20x",
                                     color: '#A8A8A8',
                                     fontWeight: 'normal'
                                 },
-                                text:"<span>"+qname+"</span><br>"+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
+                                text:"<span>"+qname+"</span><br>",
+                                align: "left"                  
+                              },
+                              subtitle: {
+                                margin:30,
+                                style: {
+                                    fontSize: "7px",
+                                    color: '#A8A8A8',
+                                    fontWeight: 'normal'
+                                },
+                                text: M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
                                 align: "left"                  
                               },
                               xAxis: {
@@ -1057,7 +1067,7 @@
                                 }                   
                               },
                               yAxis: {
-                                alternateGridColor: '#FDFFD5',
+                                gridLineWidth: .1,
                                 tickPixelInterval: 1,
                                 labels: {
                                   style: {
