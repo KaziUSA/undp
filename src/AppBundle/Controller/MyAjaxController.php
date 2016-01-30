@@ -23,7 +23,7 @@ class MyAjaxController extends Controller
 	
 	/**    
      * @Route("/", name="myajax")
-     * @Method("POST")
+     * @Method("GET")
      * @Template()
      */
 	public function indexAction(Request $request){
@@ -48,14 +48,14 @@ class MyAjaxController extends Controller
 		$data_disability=$request->request->get('data_disability');
 		$data_year = $request->request->get('data_year');
 		$colors=['#095d67','#7af2fe','#ffdf8e','#4b98d1','#2c9d48','#30efad','#9bbd3b','#588C73','#D96459'];
-		//$data_question = 1;
+		$data_question = 1;
 		//$data_age = ['15 - 24','25 - 39','40 - 54'];
-		//$data_gender= ['Male','Female'];
-		//$data_ethnicity=['Brahmin','Chhetri','Dalit'];
-		//$data_district=['Kathmandu','Dolakha'];
-		//$data_month=['January','July','August','September'];
+		$data_gender= ['Male','Female'];
+		$data_ethnicity=['Brahmin','Chhetri','Dalit'];
+		$data_district=['Kathmandu','Dolakha'];
+		$data_month=['January','July','August','September'];
 		//$data_disability=1;
-		//$data_year='2015';
+		$data_year='2015';
 		$obj['height']=514;
 		$obj['xgrouplabel']['style']['color']='#898989';
 		$obj['xgrouplabel']['style']['fontSize']='12px';
@@ -2254,22 +2254,42 @@ class MyAjaxController extends Controller
 						
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
 			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th>";
+			for($h=0;$h<count($data_district);$h++){
+				for($i=0;$i<count($data_ethnicity);$i++){
+					for($j=0;$j<count($data_gender);$j++){
+						for($k=0;$k<count($data_month);$k++){
+							$obj['html']=$obj['html']."<th></th>";				        
+						}
+					}
+				}			
+			}
 			$obj['html']=$obj['html']."</tr></thead>";
-			$obj['html']=$obj['html']."<tr><th>District</th>";
+			$obj['html']=$obj['html']."<tbody><tr><th>District</th>";
+			$k=count($data_gender)*count($data_month)*count($data_ethnicity);
 			for($j=0;$j<count($data_district);$j++){
-				$obj['html']=$obj['html']."<th colspan='".$district_span."'>".$data_district[$j]."</th>";
+				$obj['html']=$obj['html']."<th>".$data_district[$j]."</th>";
+				for($h=1;$h<$k;$h++){
+							$obj['html']=$obj['html']."<th></th>";				        
+						}
 			}
 			$obj['html']=$obj['html']."</tr><tr><th>Ethnicity</th>";
+			$k=count($data_gender)*count($data_month);
 			for($i=0;$i<count($data_district);$i++){
 				for($j=0;$j<count($data_ethnicity);$j++){
-					$obj['html']=$obj['html']."<th colspan='".$ethnicity_span."'>".$data_ethnicity[$j]."</th>";
+					$obj['html']=$obj['html']."<th>".$data_ethnicity[$j]."</th>";
+					for($h=1;$h<$k;$h++){
+							$obj['html']=$obj['html']."<th></th>";				        
+						}
 				}
 			}
 			$obj['html']=$obj['html']."</tr><tr><th>Gender</th>";
 			for($i=0;$i<count($data_district);$i++){
 				for($j=0;$j<count($data_ethnicity);$j++){
 					for($k=0;$k<count($data_gender);$k++){
-						$obj['html']=$obj['html']."<th colspan='".$gender_span."'>".$data_gender[$k]."</th>";
+						$obj['html']=$obj['html']."<th>".$data_gender[$k]."</th>";
+						for($h=1;$h<count($data_month);$h++){
+							$obj['html']=$obj['html']."<th></th>";				        
+						}
 					}
 				}
 			}
@@ -2306,6 +2326,15 @@ class MyAjaxController extends Controller
 				$obj['html']=$obj['html']."</tr>";
 			}
 			$obj['html']=$obj['html']."<tr class='hidden'><th>Respondents: ".$obj['total']."</th>";
+			for($h=0;$h<count($data_district);$h++){
+				for($i=0;$i<count($data_ethnicity);$i++){
+					for($j=0;$j<count($data_gender);$j++){
+						for($k=0;$k<count($data_month);$k++){
+							$obj['html']=$obj['html']."<th></th>";				        
+						}
+					}
+				}			
+			}
 			$obj['html']=$obj['html']."</tr></tbody></table>";
 		}
 
