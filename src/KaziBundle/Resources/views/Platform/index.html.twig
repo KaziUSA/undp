@@ -1145,6 +1145,9 @@
                       }
                       
                   });
+                  if($('tr>th').html==""){
+                    $().addClass('blank-col');
+                  }
                   //$("div.toolbar").html('Download');
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
                   $('.DTTT_button_xls span, .DTTT_button_csv span').show();
