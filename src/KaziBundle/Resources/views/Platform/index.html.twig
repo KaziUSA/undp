@@ -214,6 +214,11 @@
     <script src="/js/frontend/custom-filter.js"></script>
     <script src="/js/plugins/highcharts/grouped-categories.js"></script>
     <script>
+    //height of side content
+    function content_height() {
+      var content_height = $('aside > .filter').height();
+      $('.main-content').css({'min-height':content_height});
+    }
     //checkbox
     function checkboxChecked() {
       var monthVals = [];
@@ -1212,7 +1217,12 @@ $(document).ready(function() {
       checkboxChecked();
   });   
 
-
+  content_height();//for side content height
+  $('.ac > input[type="checkbox"]').change(function() {
+    content_height();//for side content height
+    if($(this).prop("checked") == true) {
+    }
+  });
 });
 
 </script>

@@ -821,7 +821,7 @@ a.show-more-report {
 }
 /* Platform Page CSS */
 body {
-	background: #dcdcdc;
+	background: #dcdcdc;//#dcdcdc
 }
 
 //tab fixes
@@ -861,6 +861,9 @@ body {
 			background: @pag-title-bg;
 			box-shadow: none;
 			border-radius: 0;
+			li {
+				border-left: 0 !important;
+			}
 			.active {
 				a {
 					&:hover {
@@ -869,7 +872,9 @@ body {
 				}
 			}
 		}
-		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
+		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover,
+		.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover,
+		.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
 			background-color: @pag-title-dark-bg;
 		}
 		.nav-tabs {
@@ -1036,7 +1041,11 @@ body {
 		right: 55px;
 	}
 }
-
+aside {
+	.filter {
+		background: #dcdcdc;
+	}
+}
 
 .filter {
 	font-size: 14px;
