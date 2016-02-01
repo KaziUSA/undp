@@ -1084,7 +1084,7 @@ body {
 	.legend-box {
 		@media (min-width: 600px) {
 			display: none;//if highchart legend height is less than 104px; initially hidden
-			height: 188px;//height of high chart legend with four answer or option
+			height: 209px;//height of high chart legend with four answer or option
 			left: 20%;
 			position: absolute;
 			bottom: 18px;
@@ -1737,7 +1737,12 @@ tr th.no-border-top {
 tr th.no-border-bottom {
     border-bottom: none !important;
 }
-
+tr.row-grey.odd {
+    background-color: #a1a1a1 !important;
+}
+tr.row-grey.even{
+    background-color: #a1a1a1 !important;
+}
 //loading
 .loading {
 	background: rgba(0, 0, 0, 0.8);
