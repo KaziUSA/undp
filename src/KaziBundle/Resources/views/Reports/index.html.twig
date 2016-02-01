@@ -153,12 +153,13 @@
 							    </div>
 
 							    <div role="tabpanel" class="tab-pane" id="district">
-							    	{# TODO: need to show only english reports here #}
+							    	{# only english reports here #}
 							    	{% set dist = 1 %}
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
+										{# Quickfix: Added district name as class #}
 										{% if (entity.documenttype == 'District Reports') and ((entity.language == 'english') or (entity.language == '')) %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %}">
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %} district {% if 'Bhaktapur' in entity.path %} Bhaktapur {% elseif 'Dhading' in entity.path %} Dhading {% elseif 'Dolakha' in entity.path %} Dolakha {% elseif 'Gorkha' in entity.path %} Gorkha {% elseif 'Kathmandu' in entity.path %} Kathmandu {% elseif ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif 'Lalitpur' in entity.path %} Lalitpur {% elseif 'Makwanpur' in entity.path %} Makwanpur {% elseif 'Nuwakot' in entity.path %} Nuwakot {% elseif 'Okhaldhunga' in entity.path %} Okhaldhunga {% elseif 'Ramechhap' in entity.path %} Ramechhap {% elseif 'Rasuwa' in entity.path %} Rasuwa {% elseif 'Sindhuli' in entity.path %} Sindhuli {% elseif ('Sindhupalchowk' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<span class="reports-overlay">
@@ -196,7 +197,7 @@
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
 										{% if (entity.documenttype == 'District Reports') and (entity.language == 'nepali') %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report-nep{% endif %}">
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report-nep{% endif %} district {% if 'Bhaktapur' in entity.path %} Bhaktapur {% elseif 'Dhading' in entity.path %} Dhading {% elseif 'Dolakha' in entity.path %} Dolakha {% elseif 'Gorkha' in entity.path %} Gorkha {% elseif 'Kathmandu' in entity.path %} Kathmandu {% elseif ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif 'Lalitpur' in entity.path %} Lalitpur {% elseif 'Makwanpur' in entity.path %} Makwanpur {% elseif 'Nuwakot' in entity.path %} Nuwakot {% elseif 'Okhaldhunga' in entity.path %} Okhaldhunga {% elseif 'Ramechhap' in entity.path %} Ramechhap {% elseif 'Rasuwa' in entity.path %} Rasuwa {% elseif 'Sindhuli' in entity.path %} Sindhuli {% elseif ('Sindhupalchowk' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<span class="reports-overlay">
