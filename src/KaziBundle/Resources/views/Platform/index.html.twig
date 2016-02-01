@@ -1,6 +1,18 @@
 {% extends '::frontend.html.twig' %}
 
 {% block body -%}
+<div class="loading hidden">
+  <div id="cssload-loader">
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+</div>
 <section class="content">
     <div class="row row-no-padding">
         <div class="col-sm-3 col-md-3 col-lg-2">
@@ -874,10 +886,12 @@
        if(monthVals != '' && districtVals != '' && genderVals != '' && ethnicityVals != '' && ageVals != ''){
        window.location.replace('{{path('data')}}');
      }
+      //console.log('started');
+      $('.loading').removeClass('hidden');
       $.post('{{path('myajax')}}',
           { qname:qname,data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals, data_disability: disabilityVal , data_year: yearVal},
           function(response){
-            console.log(response.result.html);
+            //console.log(response.result.html);
               var val=new Array();
               var dt= new Array();
               if(response.code == 100 && response.success){                 
@@ -1165,6 +1179,9 @@
                   });*/
                   
                   checkboxChecked();
+
+                  //console.log('success');
+                  $('.loading').addClass('hidden');
 
               }//Ajax success end
 
