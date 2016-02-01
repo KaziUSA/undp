@@ -1,6 +1,18 @@
 {% extends '::frontend.html.twig' %}
 
 {% block body -%}
+<div class="loading hidden">
+  <div id="cssload-loader">
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+</div>
 <section class="content">
     <div class="row row-no-padding">
         <div class="col-sm-3 col-md-3 col-lg-2">
@@ -140,6 +152,7 @@
                         <span id="gender-select-text"></span>
                         <span id="ethnicity-select-text"></span>
                         <span id="age-select-text"></span>
+                        <span id="disable-select-text"></span>
                       </span>
                     </div>
 
@@ -862,9 +875,15 @@
         $('#age-select-text').html('');
        }
 
+       if(disabilityVal == 1) {
+        $('#disable-select-text').html('Disability');
+       } else {
+        $('#disable-select-text').html('');
+       }
+
        //show or hide search
        //console.log(disabilityVal);
-       if(monthVals == '' && districtVals == '' && genderVals == '' && ethnicityVals == '' && ageVals == '') {//&& disabilityVal == '0'
+       if(monthVals == '' && districtVals == '' && genderVals == '' && ethnicityVals == '' && ageVals == '' && disabilityVal != 1) {//&& disabilityVal == '0'
         $('.search .search-title').hide();
        } else {
         $('.search .search-title').show();
@@ -874,10 +893,12 @@
        if(monthVals != '' && districtVals != '' && genderVals != '' && ethnicityVals != '' && ageVals != ''){
        window.location.replace('{{path('data')}}');
      }
+      //console.log('started');
+      $('.loading').removeClass('hidden');
       $.post('{{path('myajax')}}',
           { qname:qname,data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals, data_disability: disabilityVal , data_year: yearVal},
           function(response){
-            console.log(response.result.html);
+            //console.log(response.result.html);
               var val=new Array();
               var dt= new Array();
               if(response.code == 100 && response.success){                 
@@ -974,7 +995,7 @@
 
                       legend: {
                           width: 240,
-                          padding:10,
+                          padding:40,
                           itemWidth: 118
                       },
                       colors:['#88d8ef','#339de7','#6e6e6f','#159c02','#99bb42','#e7e7e7','#a1a1a1','#588C73','#D96459'],
@@ -1038,6 +1059,7 @@
                           }
                       },
                       exporting: {
+                          filename:'Inter-Agency Common Feedback Project',
                           chartOptions:{
                               title: {
                                 //margin:30,
@@ -1165,6 +1187,9 @@
                   });*/
                   
                   checkboxChecked();
+
+                  //console.log('success');
+                  $('.loading').addClass('hidden');
 
               }//Ajax success end
 
