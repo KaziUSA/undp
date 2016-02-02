@@ -77,7 +77,26 @@
 											    </div>
                       </ul><!--/ac-text-->
                     </div><!--/ac-->
-                    
+
+                    <div class="ac">
+                      {# ac-2 #}
+                      <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
+                      <label class="ac-label district-label" for="ac-2">District</label>
+
+                      <ul id="district-wise-report" class="ac-text checkbox-style">          
+										    	<li><input type="checkbox" id="districtall" checked="checked" />
+														<label for="districtall">All<span></span></label></li>
+                          <div class="form_districts" id="form_districts">                   
+											    	<li><input type="checkbox" id="district-Bhaktapur" class="district" checked="checked" />
+															<label for="district-Bhaktapur">Bhaktapur<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Dhading" class="district" checked="checked" />
+															<label for="district-Dhading">Dhading<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Dolakha" class="district" checked="checked" />
+															<label for="district-Dolakha">Dolakha<span></span></label></li>
+											    </div>
+                      </ul><!--/ac-text-->
+                    </div><!--/ac-->
+
 					    		</div>
 					    	</div>
 					    </div>
@@ -165,12 +184,11 @@
 
 							    <div role="tabpanel" class="tab-pane" id="district">
 							    	{# only english reports here #}
-							    	{% set dist = 1 %}
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
 										{# Quickfix: Added district name as class #}
 										{% if (entity.documenttype == 'District Reports') and ((entity.language == 'english') or (entity.language == '')) %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %} district {% if 'Bhaktapur' in entity.path %} Bhaktapur {% elseif 'Dhading' in entity.path %} Dhading {% elseif 'Dolakha' in entity.path %} Dolakha {% elseif 'Gorkha' in entity.path %} Gorkha {% elseif 'Kathmandu' in entity.path %} Kathmandu {% elseif ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif 'Lalitpur' in entity.path %} Lalitpur {% elseif 'Makwanpur' in entity.path %} Makwanpur {% elseif 'Nuwakot' in entity.path %} Nuwakot {% elseif 'Okhaldhunga' in entity.path %} Okhaldhunga {% elseif 'Ramechhap' in entity.path %} Ramechhap {% elseif 'Rasuwa' in entity.path %} Rasuwa {% elseif 'Sindhuli' in entity.path %} Sindhuli {% elseif ('Sindhupalchowk' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} district {% if 'Bhaktapur' in entity.path %} Bhaktapur {% elseif 'Dhading' in entity.path %} Dhading {% elseif 'Dolakha' in entity.path %} Dolakha {% elseif 'Gorkha' in entity.path %} Gorkha {% elseif 'Kathmandu' in entity.path %} Kathmandu {% elseif ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif 'Lalitpur' in entity.path %} Lalitpur {% elseif 'Makwanpur' in entity.path %} Makwanpur {% elseif 'Nuwakot' in entity.path %} Nuwakot {% elseif 'Okhaldhunga' in entity.path %} Okhaldhunga {% elseif 'Ramechhap' in entity.path %} Ramechhap {% elseif 'Rasuwa' in entity.path %} Rasuwa {% elseif 'Sindhuli' in entity.path %} Sindhuli {% elseif ('Sindhupalchowk' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<span class="reports-overlay">
@@ -193,22 +211,17 @@
 												</ul>
 											</div>
 										</div>
-										{% set dist = dist + 1 %}
 										{% endif %}
 						        {% endfor %}
 						        <div class="clear"></div>
-						        {% if dist > 8 %}
-						        <a href="#!" class="show-more-report">Show More</a>
-						        {% endif %}
 							    </div>
 
 							    <div role="tabpanel" class="tab-pane" id="district-nep">
 							    	{# TODO: need to show only nepali reports here #}
-							    	{% set dist = 1 %}
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
 										{% if (entity.documenttype == 'District Reports') and (entity.language == 'nepali') %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report-nep{% endif %} district {% if 'Bhaktapur' in entity.path %} Bhaktapur {% elseif 'Dhading' in entity.path %} Dhading {% elseif 'Dolakha' in entity.path %} Dolakha {% elseif 'Gorkha' in entity.path %} Gorkha {% elseif 'Kathmandu' in entity.path %} Kathmandu {% elseif ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif 'Lalitpur' in entity.path %} Lalitpur {% elseif 'Makwanpur' in entity.path %} Makwanpur {% elseif 'Nuwakot' in entity.path %} Nuwakot {% elseif 'Okhaldhunga' in entity.path %} Okhaldhunga {% elseif 'Ramechhap' in entity.path %} Ramechhap {% elseif 'Rasuwa' in entity.path %} Rasuwa {% elseif 'Sindhuli' in entity.path %} Sindhuli {% elseif ('Sindhupalchowk' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} district {% if 'Bhaktapur' in entity.path %} Bhaktapur {% elseif 'Dhading' in entity.path %} Dhading {% elseif 'Dolakha' in entity.path %} Dolakha {% elseif 'Gorkha' in entity.path %} Gorkha {% elseif 'Kathmandu' in entity.path %} Kathmandu {% elseif ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif 'Lalitpur' in entity.path %} Lalitpur {% elseif 'Makwanpur' in entity.path %} Makwanpur {% elseif 'Nuwakot' in entity.path %} Nuwakot {% elseif 'Okhaldhunga' in entity.path %} Okhaldhunga {% elseif 'Ramechhap' in entity.path %} Ramechhap {% elseif 'Rasuwa' in entity.path %} Rasuwa {% elseif 'Sindhuli' in entity.path %} Sindhuli {% elseif ('Sindhupalchowk' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<span class="reports-overlay">
@@ -231,13 +244,9 @@
 												</ul>
 											</div>
 										</div>
-										{% set dist = dist + 1 %}
 										{% endif %}
 						        {% endfor %}
 						        <div class="clear"></div>
-						        {% if dist > 8 %}
-						        <a href="#!" class="show-more-report-nep">Show More</a>
-						        {% endif %}
 							    </div>
 
 							    <div role="tabpanel" class="tab-pane" id="issue">
@@ -347,15 +356,18 @@
 		show_more('.show-more-report', '.more-report');
 		show_more('.show-more-report-nep', '.more-report-nep');
 
-		$("#monthall").change(function(){
-      $(".month").prop('checked', $(this).prop("checked"));
-      if(!$(this).is(':checked')){
-      	$('.month').hide();
-      }
-      else {
-      	$('.month').show();
-      }
-    });
+		function checkall() {			
+			$("#monthall").change(function(){
+	      $(".month").prop('checked', $(this).prop("checked"));
+	      if(!$(this).is(':checked')){
+	      	$('.month').hide();
+	      }
+	      else {
+	      	$('.month').show();
+	      }
+	    });	
+		}
+		checkall();
 
 		function filter_report(month) {
 			$('#month-wise-report #month'+month).change(function(){
