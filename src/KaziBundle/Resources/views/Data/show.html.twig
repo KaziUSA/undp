@@ -37,7 +37,7 @@
         
             <thead>
 
-                <tr>
+                <tr class="relative">
                 <th class="toggle-icon-col"></th>
                     {% set columncount = 0 %}
                     {% for val in entity %}
@@ -58,11 +58,9 @@
             
             {% else %}
             
-                
-            
-                <tr>
-                <td class="toggle-icon">
-                    <span class="toogle-data">Show Data</span>
+                <tr class="relative">
+                <td class="toggle-icon" title="Show Data">
+                    {#<span class="toogle-data">Show Data</span>#}
                 </td>
                     {% set columncount = 0 %}
                     {% for val in entity %}
