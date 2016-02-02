@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <table class="records_list table table-condensed table-hover table-striped dataTables">
+   <table class="records_list table table-condensed table-hover table-striped dataTables">
 
         {# for round 6 #}
         {% set excludeColumns = {   } %}
@@ -112,10 +112,6 @@
                     "sSearch": ""
                 }
             });
-            // table.buttons( '.DTTT_button_xls' ).trigger({
-            //     alert("you have clicked");
-            // });
-        
             $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
             
             // tooltip
