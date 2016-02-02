@@ -1373,7 +1373,7 @@ class MyAjaxController extends Controller
 
 		}
 
-		//Ethnicity,District Filter selected(16.EA)
+		//Ethnicity,Age Filter selected(16.EA)
 		if(isset($data_ethnicity) && !isset($data_gender) && isset($data_age) && !isset($data_district) && !isset($data_month)){
 			$i=0;			
 			$ethnicity_span=count($data_age);	
@@ -1390,7 +1390,7 @@ class MyAjaxController extends Controller
 			$obj['html']=$obj['html']."<tbody><tr class='row-green'><th>Ethnicity</th>";
 			for($j=0;$j<count($data_ethnicity);$j++){
 				$obj['html']=$obj['html']."<th class='no-border-right'>".$data_ethnicity[$j]."</th>";
-				for($k=0;$k<count($data_age);$k++){
+				for($k=1;$k<count($data_age);$k++){
 					$obj['html']=$obj['html']."<th class='blank-col'></th>";
 				}
 			}

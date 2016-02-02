@@ -31,20 +31,13 @@ class DataController extends Controller
      */
     public function indexAction()
     {
-        /*$em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AppBundle:Survey')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );*/
-
         $file_name = 'uploads/round6/survey.xlsx';
         $sheet_name = 'uploaded_form_ir295a';
         $fileInfo = $this->getCsvData($file_name);
 
         return array(
-            'fileInfo' => $fileInfo,
+            //'round' => 'round6.html.twig',
+            'fileInfo' => $fileInfo
             );
     }
 
@@ -84,6 +77,13 @@ class DataController extends Controller
             'fileInfo' => $fileInfo,
             'slug' => $slug
             );
+
+        /*$round = 'round'.$slug.'.html.twig';
+
+        return array(
+            'slug' => $slug,
+            'round' => $round
+            );*/
     }
 
     /**
@@ -92,7 +92,7 @@ class DataController extends Controller
      * If sheet_name is specified, then that particular sheet is read
      * returns a multi-dimentional array with CSV information
      */
-    private function getCsvData($file_name, $sheet_name = null){
+    private function getCsvData($file_name, $sheet_name = null){//This function is not used
         $objReader = PHPExcel_IOFactory::createReaderForFile($file_name);
         //If specific Sheet is specified then sheet is selected
         if($sheet_name != null){
@@ -140,9 +140,9 @@ class DataController extends Controller
                     }
                 }
                 /* for debugging or adding css */
-                // if ($rowCount > 15) {
-                //     break;
-                // }
+                /*if ($rowCount > 15) {
+                    break;
+                }*/
                 if ($rowCount > 0)
                 {
                     //$this->setCsvData($row);    

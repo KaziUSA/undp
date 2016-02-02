@@ -1968,3 +1968,22 @@ tr.row-grey.even{
 		height: 19px;
 	}
 }
+
+//data Tables clicking row instead of +
+.dataTables .relative th.toggle-icon-col,
+.dataTables .relative td.toggle-icon {
+	position: absolute !important;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+}
+.dataTables .relative th.toggle-icon-col {
+	opacity: 0;
+}
+table.dataTable.dtr-inline.collapsed tbody td:first-child::before, table.dataTable.dtr-inline.collapsed tbody th:first-child::before {
+	border: 0 !important;
+	content: "" !important;
+}
+table.dataTable.dtr-inline.collapsed tbody tr.parent td:first-child::before, table.dataTable.dtr-inline.collapsed tbody tr.parent th:first-child::before {
+	background: none !important;
+}
