@@ -804,7 +804,10 @@ class MyAjaxController extends Controller
 			$pos=0;
 			$obj['total']=0;
 			$flag=0; // For hiding legend of grouped columns with same name
-			$obj['stack']='normal'; //For stack chart			
+			$obj['stack']='normal'; //For stack chart		
+			if(count($data_district)<3){
+				$obj['stack']='';
+			}	
 			foreach ($data_gender as $gender) {				
 				$j=0;				
 				foreach ($obj['answer'] as $num){	
@@ -1066,7 +1069,10 @@ class MyAjaxController extends Controller
 			$pos=0;
 			$obj['total']=0;
 			$flag=0; // For hiding legend of grouped columns with same name
-			$obj['stack']='normal'; //For stack chart			
+			$obj['stack']='normal'; //For stack chart	
+			if(count($data_ethnicity)<3){
+				$obj['stack']='';
+			}			
 			foreach ($data_gender as $gender) {				
 				$j=0;				
 				foreach ($obj['answer'] as $num){	
@@ -1215,7 +1221,10 @@ class MyAjaxController extends Controller
 			$pos=0;
 			$obj['total']=0;
 			$flag=0; // For hiding legend of grouped columns with same name
-			$obj['stack']='normal'; //For stack chart			
+			$obj['stack']='normal'; //For stack chart		
+			if(count($data_age)<3){
+				$obj['stack']='';
+			}		
 			foreach ($data_gender as $gender) {				
 				$j=0;				
 				foreach ($obj['answer'] as $num){	

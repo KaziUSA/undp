@@ -1,0 +1,302 @@
+{% extends 'frontend.html.twig' %}
+
+{% block body -%}
+	<div class="page-title"><h3>Reports Archive</h3></div>
+	<section class="content report">
+		<div class="row row-no-padding">
+			
+			<div class="col-sm-3 col-md-3 col-lg-2">
+				<aside>
+					<div class="filter report">
+					  <!-- Tab panes -->
+					  <div class="tab-content">
+					    <div role="" class="fade in active" id="">
+					    	<div class="">
+					    		<div class="filter-title">Filter By</div>
+					    		<ul id="month-wise-report" class="checkbox-style">
+							    	<li><input type="checkbox" id="monthall" checked="checked" />
+											<label for="monthall">All<span></span></label></li>
+							    	<li><input type="checkbox" id="month01" class="month" checked="checked" />
+											<label for="month01">January<span></span></label></li>
+							    	<li><input type="checkbox" id="month02" class="month" checked="checked" />
+											<label for="month02">Feburary<span></span></label></li>
+							    	<li><input type="checkbox" id="month03" class="month" checked="checked" />
+											<label for="month03">March<span></span></label></li>
+							    	<li><input type="checkbox" id="month04" class="month" checked="checked" />
+											<label for="month04">April<span></span></label></li>
+							    	<li><input type="checkbox" id="month05" class="month" checked="checked" />
+											<label for="month05">May<span></span></label></li>
+							    	<li><input type="checkbox" id="month06" class="month" checked="checked" />
+											<label for="month06">June<span></span></label></li>
+							    	<li><input type="checkbox" id="month07" class="month" checked="checked" />
+											<label for="month07">July<span></span></label></li>
+							    	<li><input type="checkbox" id="month08" class="month" checked="checked" />
+											<label for="month08">August<span></span></label></li>
+							    	<li><input type="checkbox" id="month09" class="month" checked="checked" />
+											<label for="month09">September<span></span></label></li>
+							    	<li><input type="checkbox" id="month10" class="month" checked="checked" />
+											<label for="month10">October<span></span></label></li>
+							    	<li><input type="checkbox" id="month11" class="month" checked="checked" />
+											<label for="month11">November<span></span></label></li>
+							    	<li><input type="checkbox" id="month12" class="month" checked="checked" />
+											<label for="month12">December<span></span></label></li>
+							    </ul>
+					    	</div>
+					    </div>
+					  </div>
+					</div>
+				</aside>
+			</div>
+
+			<div class="col-sm-9 col-md-9 col-lg-10">
+				<!-- main content -->
+				<div class="main-content">
+					<div class="wrapper clearfix">
+						<div class="">
+							<!-- <div class="col-lg-3 col-md-4 col-sm-6">
+								<div class="r-box">
+									<a href="#!" class="report-link"></a>
+							
+									<a href="#download" title="Download" class="icon download"></a>
+									<a href="#share" title="Share" class="icon share"></a>
+								</div>
+							</div> -->
+
+							{% if entities is empty %}
+								<p>There are currently no reports available for download.
+								{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+									<a href="{{ path('document') }}">Upload Reports</a>
+								{% endif %}
+								</p>
+							{% else %}			
+
+							<div class="panel-group report-acc" id="accordion" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-default">
+									<div class="report-group clearfix">
+										<div class="panel-heading" role="tab" id="headingOne">
+											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">National Reports</a></h2>
+										</div>
+										<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+    										<div class="panel-body">
+												{% for entity in entities %}
+													{# TODO: need to change 'National Reports' to ID #}
+													{% if entity.documenttype == 'National Reports' %}
+													<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+														<div class="r-box">
+															<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+															</a>
+													
+															<ul class="share-icons">
+																<li><a href="#share" class="fa fa-share-alt"></a>
+																	<ul>		
+																		{# TODO: Need to change cfp.org.np to dynamic url path if needed #}						
+																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																		
+																		<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																	</ul>
+																</li>
+																<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+															</ul>
+														</div>
+													</div>
+													{% endif %}
+									        {% endfor %}
+							        		</div> <!-- /.panel-body -->
+							        	</div><!-- /.collapseOne -->
+						        	</div><!-- /.report-group clearfix -->
+					        	</div> <!-- /.panel panel-default -->
+
+					        	<div class="panel panel-default">
+									<div class="report-group clearfix">
+										<div class="panel-heading" role="tab" id="headingTwo">
+											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">District Reports</a></h2>
+										</div>
+										<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+    										<div class="panel-body">
+												{% set dist = 1 %}
+      									{% for entity in entities %}
+												{# TODO: need to change 'District Reports' to ID #}
+												{% if entity.documenttype == 'District Reports' %}
+												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %}">
+													<div class="r-box">
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+														</a>
+												
+														<ul class="share-icons">
+															<li><a href="#share" class="fa fa-share-alt"></a>
+																<ul>		
+																		{# TODO: Need to change cfp.org.np to dynamic url path #}											
+																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																		
+																		<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common+Feedback+Project+(CFP)+Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																	</ul>
+															</li>
+															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+														</ul>
+													</div>
+												</div>
+												{% set dist = dist + 1 %}
+												{% endif %}
+								        {% endfor %}
+								        <div class="clear"></div>
+								        <a href="#!" class="show-more-report">Show More</a>
+      									</div> <!-- /.panel-body -->
+							        	</div><!-- /.collapseTwo -->
+						        	</div><!-- /.report-group clearfix -->
+					        	</div> <!-- /.panel panel-default -->
+
+								<div class="panel panel-default">
+									<div class="report-group clearfix">
+										<div class="panel-heading" role="tab" id="headingThree">
+											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Issue in Focus Reports</a></h2>
+										</div>
+										<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+      										<div class="panel-body">
+												{% for entity in entities %}
+												{# TODO: need to change 'Issue in Focus Reports' to ID #}
+												{% if entity.documenttype == 'Issue in Focus Reports' %}
+												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+													<div class="r-box">
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+														</a>
+												
+														<ul class="share-icons">
+															<li><a href="#share" class="fa fa-share-alt"></a>
+																<ul>		
+																		{# TODO: Need to change cfp.org.np to dynamic url path #}											
+																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																		
+																		<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																	</ul>
+															</li>
+															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+														</ul>
+													</div>
+												</div>
+												{% endif %}
+						        		{% endfor %}
+					        				</div> <!-- /.panel-body -->
+							        	</div><!-- /.collapseThree -->
+						        	</div><!-- /.report-group clearfix -->
+					        	</div> <!-- /.panel panel-default -->
+
+					        	<div class="panel panel-default">
+									<div class="report-group clearfix">
+										<div class="panel-heading" role="tab" id="headingFour">
+											<h2><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Others</a></h2>
+										</div>
+										<div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+      										<div class="panel-body">
+												{% for entity in entities %}
+												{# TODO: need to change these to ID #}
+												{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
+												<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+													<div class="r-box">
+														<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+																<span class="reports-overlay">
+																	<span class="reports-name">{{ entity.name }}</span>
+																</span>
+														</a>
+												
+														<ul class="share-icons">
+															<li><a href="#share" class="fa fa-share-alt"></a>
+																<ul>		
+																		{# TODO: Need to change cfp.org.np to dynamic url path #}											
+																		<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																		
+																		<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																		<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																	</ul>
+															</li>
+															<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+														</ul>
+													</div>
+												</div>
+												{% endif %}
+							        	{% endfor %}
+							        	
+      										</div> <!-- /.panel-body -->
+							        	</div><!-- /.collapseFour -->
+						        	</div><!-- /.report-group clearfix -->
+					        	</div> <!-- /.panel panel-default -->
+					        </div> <!-- /#accordion -->
+
+							{% endif %}
+						</div>
+					</div>
+				</div><!-- /.main-content -->
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+	$(document).ready(function() {
+		//show more report
+		$('.show-more-report').click(function() {
+			$('.more-report').toggleClass('show');
+
+			if($('.more-report').hasClass('show')) {
+				$('.more-report').show();
+				$('.show-more-report').text('Show Less');
+			} else {
+				$('.more-report').hide();
+				$('.show-more-report').text('Show More');
+			}
+		}
+		);
+		$("#monthall").change(function(){
+      $(".month").prop('checked', $(this).prop("checked"));
+      if(!$(this).is(':checked')){
+      	$('.month').hide();
+      }
+      else {
+      	$('.month').show();
+      }
+    });
+
+		function filter_report(month) {
+			$('#month-wise-report #month'+month).change(function(){
+				/*$('.month').hide();
+	      $('.month.'+month).show();*/
+	      
+	      //$('.month').hide();
+	      if(!$(this).is(':checked')){
+	      	$('.month.'+month).hide();	
+	      } else {
+	      	$('.month.'+month).show();
+	      }
+	    });
+    }
+    filter_report('01');
+    filter_report('02');
+    filter_report('03');
+    filter_report('04');
+    filter_report('05');
+    filter_report('06');
+    filter_report('07');
+    filter_report('08');
+    filter_report('09');
+    filter_report('10');
+    filter_report('11');
+    filter_report('12');
+	});
+</script>
+{% endblock %}

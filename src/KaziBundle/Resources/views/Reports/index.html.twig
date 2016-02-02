@@ -40,34 +40,86 @@
 					    <div role="" class="fade in active" id="">
 					    	<div class="">
 					    		<div class="filter-title">Filter By</div>
-					    		<ul id="month-wise-report" class="checkbox-style">
-							    	<li><input type="checkbox" id="monthall" checked="checked" />
-											<label for="monthall">All<span></span></label></li>
-							    	<li><input type="checkbox" id="month01" class="month" checked="checked" />
-											<label for="month01">January<span></span></label></li>
-							    	<li><input type="checkbox" id="month02" class="month" checked="checked" />
-											<label for="month02">Feburary<span></span></label></li>
-							    	<li><input type="checkbox" id="month03" class="month" checked="checked" />
-											<label for="month03">March<span></span></label></li>
-							    	<li><input type="checkbox" id="month04" class="month" checked="checked" />
-											<label for="month04">April<span></span></label></li>
-							    	<li><input type="checkbox" id="month05" class="month" checked="checked" />
-											<label for="month05">May<span></span></label></li>
-							    	<li><input type="checkbox" id="month06" class="month" checked="checked" />
-											<label for="month06">June<span></span></label></li>
-							    	<li><input type="checkbox" id="month07" class="month" checked="checked" />
-											<label for="month07">July<span></span></label></li>
-							    	<li><input type="checkbox" id="month08" class="month" checked="checked" />
-											<label for="month08">August<span></span></label></li>
-							    	<li><input type="checkbox" id="month09" class="month" checked="checked" />
-											<label for="month09">September<span></span></label></li>
-							    	<li><input type="checkbox" id="month10" class="month" checked="checked" />
-											<label for="month10">October<span></span></label></li>
-							    	<li><input type="checkbox" id="month11" class="month" checked="checked" />
-											<label for="month11">November<span></span></label></li>
-							    	<li><input type="checkbox" id="month12" class="month" checked="checked" />
-											<label for="month12">December<span></span></label></li>
-							    </ul>
+					    		<div class="accordion">					    			
+                    <div class="ac ac-month">
+                      {# ac-1 #}
+                      <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
+                      <label class="ac-label month-label" for="ac-1">Month</label>
+
+                      <ul id="month-wise-report" class="ac-text checkbox-style">          
+										    	<li><input type="checkbox" id="monthall" checked="checked" />
+														<label for="monthall">All<span></span></label></li>
+                          <div class="form_months" id="form_months">                   
+											    	<li><input type="checkbox" id="month01" class="month" checked="checked" />
+															<label for="month01">January<span></span></label></li>
+											    	<li><input type="checkbox" id="month02" class="month" checked="checked" />
+															<label for="month02">Feburary<span></span></label></li>
+											    	<li><input type="checkbox" id="month03" class="month" checked="checked" />
+															<label for="month03">March<span></span></label></li>
+											    	<li><input type="checkbox" id="month04" class="month" checked="checked" />
+															<label for="month04">April<span></span></label></li>
+											    	<li><input type="checkbox" id="month05" class="month" checked="checked" />
+															<label for="month05">May<span></span></label></li>
+											    	<li><input type="checkbox" id="month06" class="month" checked="checked" />
+															<label for="month06">June<span></span></label></li>
+											    	<li><input type="checkbox" id="month07" class="month" checked="checked" />
+															<label for="month07">July<span></span></label></li>
+											    	<li><input type="checkbox" id="month08" class="month" checked="checked" />
+															<label for="month08">August<span></span></label></li>
+											    	<li><input type="checkbox" id="month09" class="month" checked="checked" />
+															<label for="month09">September<span></span></label></li>
+											    	<li><input type="checkbox" id="month10" class="month" checked="checked" />
+															<label for="month10">October<span></span></label></li>
+											    	<li><input type="checkbox" id="month11" class="month" checked="checked" />
+															<label for="month11">November<span></span></label></li>
+											    	<li><input type="checkbox" id="month12" class="month" checked="checked" />
+															<label for="month12">December<span></span></label></li>
+											    </div>
+                      </ul><!--/ac-text-->
+                    </div><!--/ac-->
+
+                    <div class="ac ac-district" style="display: none;">
+                      {# ac-2 #}
+                      <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
+                      <label class="ac-label district-label" for="ac-2">District</label>
+
+                      <ul id="district-wise-report" class="ac-text checkbox-style">          
+										    	<li><input type="checkbox" id="districtall" checked="checked" />
+														<label for="districtall">All<span></span></label></li>
+                          <div class="form_districts" id="form_districts">                   
+											    	<li><input type="checkbox" id="district-Bhaktapur" class="district" checked="checked" />
+															<label for="district-Bhaktapur">Bhaktapur<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Dhading" class="district" checked="checked" />
+															<label for="district-Dhading">Dhading<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Dolakha" class="district" checked="checked" />
+															<label for="district-Dolakha">Dolakha<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Gorkha" class="district" checked="checked" />
+															<label for="district-Gorkha">Gorkha<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Kathmandu" class="district" checked="checked" />
+															<label for="district-Kathmandu">Kathmandu<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Kavrepalanchowk" class="district" checked="checked" />
+															<label for="district-Kavrepalanchowk">Kavrepalanchowk<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Lalitpur" class="district" checked="checked" />
+															<label for="district-Lalitpur">Lalitpur<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Makwanpur" class="district" checked="checked" />
+															<label for="district-Makwanpur">Makwanpur<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Nuwakot" class="district" checked="checked" />
+															<label for="district-Nuwakot">Nuwakot<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Okhaldhunga" class="district" checked="checked" />
+															<label for="district-Okhaldhunga">Okhaldhunga<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Ramechhap" class="district" checked="checked" />
+															<label for="district-Ramechhap">Ramechhap<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Rasuwa" class="district" checked="checked" />
+															<label for="district-Rasuwa">Rasuwa<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Sindhuli" class="district" checked="checked" />
+															<label for="district-Sindhuli">Sindhuli<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Sindhupalchowk" class="district" checked="checked" />
+															<label for="district-Sindhupalchowk">Sindhupalchowk<span></span></label></li>
+											    </div>
+                      </ul><!--/ac-text-->
+                    </div><!--/ac-->
+
+					    		</div>
 					    	</div>
 					    </div>
 					  </div>
@@ -153,12 +205,12 @@
 							    </div>
 
 							    <div role="tabpanel" class="tab-pane" id="district">
-							    	{# TODO: need to show only english reports here #}
-							    	{% set dist = 1 %}
+							    	{# only english reports here #}
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
+										{# Quickfix: Added district name as class #}
 										{% if (entity.documenttype == 'District Reports') and ((entity.language == 'english') or (entity.language == '')) %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report{% endif %}">
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} district {% if 'Bhaktapur' in entity.path %} Bhaktapur {% elseif 'Dhading' in entity.path %} Dhading {% elseif 'Dolakha' in entity.path %} Dolakha {% elseif 'Gorkha' in entity.path %} Gorkha {% elseif 'Kathmandu' in entity.path %} Kathmandu {% elseif ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif 'Lalitpur' in entity.path %} Lalitpur {% elseif 'Makwanpur' in entity.path %} Makwanpur {% elseif 'Nuwakot' in entity.path %} Nuwakot {% elseif 'Okhaldhunga' in entity.path %} Okhaldhunga {% elseif 'Ramechhap' in entity.path %} Ramechhap {% elseif 'Rasuwa' in entity.path %} Rasuwa {% elseif 'Sindhuli' in entity.path %} Sindhuli {% elseif ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<span class="reports-overlay">
@@ -181,22 +233,17 @@
 												</ul>
 											</div>
 										</div>
-										{% set dist = dist + 1 %}
 										{% endif %}
 						        {% endfor %}
 						        <div class="clear"></div>
-						        {% if dist > 8 %}
-						        <a href="#!" class="show-more-report">Show More</a>
-						        {% endif %}
 							    </div>
 
 							    <div role="tabpanel" class="tab-pane" id="district-nep">
 							    	{# TODO: need to show only nepali reports here #}
-							    	{% set dist = 1 %}
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
 										{% if (entity.documenttype == 'District Reports') and (entity.language == 'nepali') %}
-										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} {% if dist >= 9 %}more-report-nep{% endif %}">
+										<div class="col-lg-3 col-md-4 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }} district {% if 'Bhaktapur' in entity.path %} Bhaktapur {% elseif 'Dhading' in entity.path %} Dhading {% elseif 'Dolakha' in entity.path %} Dolakha {% elseif 'Gorkha' in entity.path %} Gorkha {% elseif 'Kathmandu' in entity.path %} Kathmandu {% elseif ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif 'Lalitpur' in entity.path %} Lalitpur {% elseif 'Makwanpur' in entity.path %} Makwanpur {% elseif 'Nuwakot' in entity.path %} Nuwakot {% elseif 'Okhaldhunga' in entity.path %} Okhaldhunga {% elseif 'Ramechhap' in entity.path %} Ramechhap {% elseif 'Rasuwa' in entity.path %} Rasuwa {% elseif 'Sindhuli' in entity.path %} Sindhuli {% elseif ('Sindhupalchowk' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<span class="reports-overlay">
@@ -219,13 +266,9 @@
 												</ul>
 											</div>
 										</div>
-										{% set dist = dist + 1 %}
 										{% endif %}
 						        {% endfor %}
 						        <div class="clear"></div>
-						        {% if dist > 8 %}
-						        <a href="#!" class="show-more-report-nep">Show More</a>
-						        {% endif %}
 							    </div>
 
 							    <div role="tabpanel" class="tab-pane" id="issue">
@@ -306,9 +349,11 @@
 	$(document).ready(function() {
 		//district text change
 		$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
-			console.log($(this));
-			
+			//console.log($(this));			
 			$('.district-text').text('District Reports');
+
+			$('.ac-month').show();
+			$('.ac-district').hide();
 		});
 
 		$('.show-eng-text').click(function() {
@@ -317,9 +362,13 @@
 		$('.show-nep-text').click(function() {
 			$('.district-text').text('District Reports / Nepali');
 		});
+		$('.show-eng-text, .show-nep-text').click(function() {
+			$('.ac-month').hide();
+			$('.ac-district').show();
+		});
 
-		//show more report
-		function show_more(show, showme) {
+		//show more report: removed this functionality from district tab
+		/*function show_more(show, showme) {
 			$(show).click(function() {
 				$(showme).toggleClass('show');
 
@@ -333,18 +382,24 @@
 			});
 		}
 		show_more('.show-more-report', '.more-report');
-		show_more('.show-more-report-nep', '.more-report-nep');
+		show_more('.show-more-report-nep', '.more-report-nep');*/
 
-		$("#monthall").change(function(){
-      $(".month").prop('checked', $(this).prop("checked"));
-      if(!$(this).is(':checked')){
-      	$('.month').hide();
-      }
-      else {
-      	$('.month').show();
-      }
-    });
+		//check all and uncheck all + show and hide all reports at once
+		function checkall(show, showme) {
+			$(show).change(function(){
+	      $(showme).prop('checked', $(this).prop("checked"));
+	      if(!$(this).is(':checked')){
+	      	$(showme).hide();
+	      }
+	      else {
+	      	$(showme).show();
+	      }
+	    });	
+		}
+		checkall("#monthall", ".month");
+		checkall("#districtall", ".district");
 
+		//show reports month wise individually
 		function filter_report(month) {
 			$('#month-wise-report #month'+month).change(function(){
 				/*$('.month').hide();
@@ -370,6 +425,57 @@
     filter_report('10');
     filter_report('11');
     filter_report('12');
+
+    //show reports district wise
+		function filter_report_district(district) {
+			$('#district-wise-report #district-'+district).change(function(){
+	      if(!$(this).is(':checked')){
+	      	$('.district.'+district).hide();	
+	      	if(district == 'Kavrepalanchowk') {
+	      		$('.district.Kavrepalanchok').hide();	
+	      	}
+	      	if(district == 'Sindhupalchowk') {
+	      		$('.district.Sindhupalchok').hide();	
+	      		$('.district.SIndhupalchowk').hide();	
+	      	}
+	      } else {
+	      	$('.district.'+district).show();
+	      	if(district == 'Kavrepalanchowk') {
+	      		$('.district.Kavrepalanchok').show();	
+	      	}
+	      	if(district == 'Sindhupalchowk') {
+	      		$('.district.Sindhupalchok').show();	
+	      		$('.district.SIndhupalchowk').show();	
+	      	}
+	      }
+	    });
+    }
+    filter_report_district('Bhaktapur');
+    filter_report_district('Dhading');
+    filter_report_district('Dolakha');
+    filter_report_district('Gorkha');
+    filter_report_district('Kathmandu');
+    filter_report_district('Kavrepalanchowk');
+    filter_report_district('Lalitpur');
+    filter_report_district('Makwanpur');
+    filter_report_district('Nuwakot');
+    filter_report_district('Okhaldhunga');
+    filter_report_district('Ramechhap');
+    filter_report_district('Rasuwa');
+    filter_report_district('Sindhuli');
+    filter_report_district('Sindhupalchowk');
+
+    //height of side content
+    function content_height() {
+      var content_height = $('aside > .filter').height();
+      $('.main-content').css({'min-height':content_height});
+    }
+	  content_height();//for main content height
+	  $('.ac > input[type="checkbox"]').change(function() {
+	    content_height();//for side content height
+	    if($(this).prop("checked") == true) {
+	    }
+	  });
 	});
 </script>
 {% endblock %}
