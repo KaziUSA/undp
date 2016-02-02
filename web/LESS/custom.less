@@ -821,7 +821,7 @@ a.show-more-report {
 }
 /* Platform Page CSS */
 body {
-	background: #dcdcdc;
+	background: #dcdcdc;//#dcdcdc
 }
 
 //tab fixes
@@ -861,6 +861,9 @@ body {
 			background: @pag-title-bg;
 			box-shadow: none;
 			border-radius: 0;
+			li {
+				border-left: 0 !important;
+			}
 			.active {
 				a {
 					&:hover {
@@ -869,7 +872,9 @@ body {
 				}
 			}
 		}
-		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
+		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover,
+		.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover,
+		.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
 			background-color: @pag-title-dark-bg;
 		}
 		.nav-tabs {
@@ -893,13 +898,14 @@ body {
 				a {
 					padding: 0 17px;
 					margin: 0;
+					letter-spacing: 0;
 				}
 			}
 		}
 	}
 	&.report {
 		li {
-			margin-bottom: 10px;
+			//margin-bottom: 10px;
 		}
 	}
 	.feedback-tab {
@@ -1036,7 +1042,11 @@ body {
 		right: 55px;
 	}
 }
-
+aside {
+	.filter {
+		background: #dcdcdc;
+	}
+}
 
 .filter {
 	font-size: 14px;
@@ -1075,7 +1085,7 @@ body {
 	@media (min-width: 768px) {
 	}
 	.high-chart-wrap {
-		height: 594px;	
+		height: 504px;	
 		position: relative;
 		#container, #container2, .chart-container {
 			height:514px;
@@ -1084,7 +1094,7 @@ body {
 	.legend-box {
 		@media (min-width: 600px) {
 			display: none;//if highchart legend height is less than 104px; initially hidden
-			height: 209px;//height of high chart legend with four answer or option
+			height: 159px;//height of high chart legend with four answer or option
 			left: 20%;
 			position: absolute;
 			bottom: 18px;

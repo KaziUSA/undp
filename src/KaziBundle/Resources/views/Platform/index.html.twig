@@ -214,6 +214,11 @@
     <script src="/js/frontend/custom-filter.js"></script>
     <script src="/js/plugins/highcharts/grouped-categories.js"></script>
     <script>
+    //height of side content
+    function content_height() {
+      var content_height = $('aside > .filter').height();
+      $('.main-content').css({'min-height':content_height});
+    }
     //checkbox
     function checkboxChecked() {
       var monthVals = [];
@@ -930,32 +935,32 @@
                   sf='7px';
                 }
                 if(disabilityVal == 1){
-                    V="Disability/";
+                    V="Disability /";
                   }else{
                     V="";
                   }
                   if(monthVals != ''){
-                    M="Month/";
+                    M="Month /";
                   }else{
                     M="";
                   }
                   if(districtVals != ''){
-                    D="District/";
+                    D="District /";
                   }else{
                     D="";
                   }
                   if(genderVals != ''){
-                    G="Gender/";
+                    G="Gender /";
                   }else{
                     G="";
                   }
                   if(ethnicityVals != ''){
-                    E="Ethnicity/";              
+                    E="Ethnicity /";              
                   }else{
                     E="";
                   }
                   if(ageVals != ''){
-                    A="Age/";
+                    A="Age /";
                   }else{
                     A="";
                   }
@@ -995,8 +1000,9 @@
 
                       legend: {
                           width: 240,
-                          padding:40,
-                          itemWidth: 118
+                          padding: 70,
+                          itemWidth: 118,
+                          x: -63,
                       },
                       colors:['#88d8ef','#339de7','#6e6e6f','#159c02','#99bb42','#e7e7e7','#a1a1a1','#588C73','#D96459'],
                       title: {
@@ -1211,7 +1217,12 @@ $(document).ready(function() {
       checkboxChecked();
   });   
 
-
+  content_height();//for main content height
+  $('.ac > input[type="checkbox"]').change(function() {
+    content_height();//for side content height
+    if($(this).prop("checked") == true) {
+    }
+  });
 });
 
 </script>
