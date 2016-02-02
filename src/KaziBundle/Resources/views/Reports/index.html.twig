@@ -464,18 +464,6 @@
     filter_report_district('Rasuwa');
     filter_report_district('Sindhuli');
     filter_report_district('Sindhupalchowk');
-
-    //height of side content
-    function content_height() {
-      var content_height = $('aside > .filter').height();
-      $('.main-content').css({'min-height':content_height});
-    }
-	  content_height();//for main content height
-	  $('.ac > input[type="checkbox"]').change(function() {
-	    content_height();//for side content height
-	    if($(this).prop("checked") == true) {
-	    }
-	  });
 	});
 </script>
 {% endblock %}
