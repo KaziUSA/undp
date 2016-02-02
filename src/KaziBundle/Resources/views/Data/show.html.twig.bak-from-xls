@@ -21,9 +21,63 @@
         </div>
     </div>
     
-    {# table data #}
-    {% include round %}
-    {# table data ends #}
+    <table class="records_list table table-condensed table-hover table-striped dataTables">
+
+        {# for round 6 #}
+        {% set excludeColumns = {   } %}
+        
+        {% set count = 1  %}
+        
+        {% set numColumns = 10 %}
+        
+        {% for entity in fileInfo %}
+            {% if count == 0 %}
+                {% set count = 1 %}
+            {% elseif count == 1 %}
+        
+            <thead>
+
+                <tr class="relative">
+                <th class="toggle-icon-col"></th>
+                    {% set columncount = 0 %}
+                    {% for val in entity %}
+                        {% if columncount in excludeColumns %}
+                    
+                        {% else %}
+                            <th>{{ val }}</a></th>
+                        {% endif %}
+                        {% set columncount = columncount + 1 %}
+                    {% endfor %}
+                    
+                    
+                    
+                </tr>
+            </thead>
+            <tbody>
+            {% set count = 2  %}
+            
+            {% else %}
+            
+                <tr class="relative">
+                <td class="toggle-icon" title="Show Data">
+                    {#<span class="toogle-data">Show Data</span>#}
+                </td>
+                    {% set columncount = 0 %}
+                    {% for val in entity %}
+                        {% if columncount in excludeColumns %}
+                    
+                        {% else %}
+                        
+                            <td>{{ val }}</td>
+                        {% endif %}
+                        {% set columncount = columncount + 1 %}
+                    {% endfor %}
+                </tr>
+            
+            {% endif %}
+        {% endfor %}    
+        </tbody>
+    </table>
     
     <ul class="share-icons share-data">
         <li><a href="#share" class="fa fa-share-alt"></a>
