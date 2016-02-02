@@ -141,6 +141,7 @@ $(document).ready(function () {
 
   //reports page
   checkUncheck('#month-wise-report .month', '#monthall');    
+  checkUncheck('#district-wise-report .district', '#districtall');    
 
   //platform page
   checkUncheck('#form_months input', '#month-all');

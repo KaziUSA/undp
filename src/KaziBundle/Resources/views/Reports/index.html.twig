@@ -41,7 +41,7 @@
 					    	<div class="">
 					    		<div class="filter-title">Filter By</div>
 					    		<div class="accordion">					    			
-                    <div class="ac">
+                    <div class="ac ac-month">
                       {# ac-1 #}
                       <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
                       <label class="ac-label month-label" for="ac-1">Month</label>
@@ -78,7 +78,7 @@
                       </ul><!--/ac-text-->
                     </div><!--/ac-->
 
-                    <div class="ac">
+                    <div class="ac ac-district" style="display: none;">
                       {# ac-2 #}
                       <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
                       <label class="ac-label district-label" for="ac-2">District</label>
@@ -93,6 +93,28 @@
 															<label for="district-Dhading">Dhading<span></span></label></li>
 											    	<li><input type="checkbox" id="district-Dolakha" class="district" checked="checked" />
 															<label for="district-Dolakha">Dolakha<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Gorkha" class="district" checked="checked" />
+															<label for="district-Gorkha">Gorkha<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Kathmandu" class="district" checked="checked" />
+															<label for="district-Kathmandu">Kathmandu<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Kavrepalanchowk" class="district" checked="checked" />
+															<label for="district-Kavrepalanchowk">Kavrepalanchowk<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Lalitpur" class="district" checked="checked" />
+															<label for="district-Lalitpur">Lalitpur<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Makwanpur" class="district" checked="checked" />
+															<label for="district-Makwanpur">Makwanpur<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Nuwakot" class="district" checked="checked" />
+															<label for="district-Nuwakot">Nuwakot<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Okhaldhunga" class="district" checked="checked" />
+															<label for="district-Okhaldhunga">Okhaldhunga<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Ramechhap" class="district" checked="checked" />
+															<label for="district-Ramechhap">Ramechhap<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Rasuwa" class="district" checked="checked" />
+															<label for="district-Rasuwa">Rasuwa<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Sindhuli" class="district" checked="checked" />
+															<label for="district-Sindhuli">Sindhuli<span></span></label></li>
+											    	<li><input type="checkbox" id="district-Sindhupalchowk" class="district" checked="checked" />
+															<label for="district-Sindhupalchowk">Sindhupalchowk<span></span></label></li>
 											    </div>
                       </ul><!--/ac-text-->
                     </div><!--/ac-->
@@ -327,9 +349,11 @@
 	$(document).ready(function() {
 		//district text change
 		$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
-			console.log($(this));
-			
+			//console.log($(this));			
 			$('.district-text').text('District Reports');
+
+			$('.ac-month').show();
+			$('.ac-district').hide();
 		});
 
 		$('.show-eng-text').click(function() {
@@ -338,9 +362,13 @@
 		$('.show-nep-text').click(function() {
 			$('.district-text').text('District Reports / Nepali');
 		});
+		$('.show-eng-text, .show-nep-text').click(function() {
+			$('.ac-month').hide();
+			$('.ac-district').show();
+		});
 
-		//show more report
-		function show_more(show, showme) {
+		//show more report: removed this functionality from district tab
+		/*function show_more(show, showme) {
 			$(show).click(function() {
 				$(showme).toggleClass('show');
 
@@ -354,21 +382,24 @@
 			});
 		}
 		show_more('.show-more-report', '.more-report');
-		show_more('.show-more-report-nep', '.more-report-nep');
+		show_more('.show-more-report-nep', '.more-report-nep');*/
 
-		function checkall() {			
-			$("#monthall").change(function(){
-	      $(".month").prop('checked', $(this).prop("checked"));
+		//check all and uncheck all + show and hide all reports at once
+		function checkall(show, showme) {
+			$(show).change(function(){
+	      $(showme).prop('checked', $(this).prop("checked"));
 	      if(!$(this).is(':checked')){
-	      	$('.month').hide();
+	      	$(showme).hide();
 	      }
 	      else {
-	      	$('.month').show();
+	      	$(showme).show();
 	      }
 	    });	
 		}
-		checkall();
+		checkall("#monthall", ".month");
+		checkall("#districtall", ".district");
 
+		//show reports month wise individually
 		function filter_report(month) {
 			$('#month-wise-report #month'+month).change(function(){
 				/*$('.month').hide();
@@ -394,6 +425,55 @@
     filter_report('10');
     filter_report('11');
     filter_report('12');
+
+    //show reports district wise
+		function filter_report_district(district) {
+			$('#district-wise-report #district-'+district).change(function(){
+	      if(!$(this).is(':checked')){
+	      	$('.district.'+district).hide();	
+	      	if(district == 'Kavrepalanchowk') {
+	      		$('.district.Kavrepalanchok').hide();	
+	      	}
+	      	if(district == 'Sindhupalchowk') {
+	      		$('.district.SIndhupalchowk').hide();	
+	      	}
+	      } else {
+	      	$('.district.'+district).show();
+	      	if(district == 'Kavrepalanchowk') {
+	      		$('.district.Kavrepalanchok').show();	
+	      	}
+	      	if(district == 'Sindhupalchowk') {
+	      		$('.district.SIndhupalchowk').show();	
+	      	}
+	      }
+	    });
+    }
+    filter_report_district('Bhaktapur');
+    filter_report_district('Dhading');
+    filter_report_district('Dolakha');
+    filter_report_district('Gorkha');
+    filter_report_district('Kathmandu');
+    filter_report_district('Kavrepalanchowk');
+    filter_report_district('Lalitpur');
+    filter_report_district('Makwanpur');
+    filter_report_district('Nuwakot');
+    filter_report_district('Okhaldhunga');
+    filter_report_district('Ramechhap');
+    filter_report_district('Rasuwa');
+    filter_report_district('Sindhuli');
+    filter_report_district('Sindhupalchowk');
+
+    //height of side content
+    function content_height() {
+      var content_height = $('aside > .filter').height();
+      $('.main-content').css({'min-height':content_height});
+    }
+	  content_height();//for main content height
+	  $('.ac > input[type="checkbox"]').change(function() {
+	    content_height();//for side content height
+	    if($(this).prop("checked") == true) {
+	    }
+	  });
 	});
 </script>
 {% endblock %}
