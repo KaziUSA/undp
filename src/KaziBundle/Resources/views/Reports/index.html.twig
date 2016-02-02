@@ -40,34 +40,45 @@
 					    <div role="" class="fade in active" id="">
 					    	<div class="">
 					    		<div class="filter-title">Filter By</div>
-					    		<ul id="month-wise-report" class="checkbox-style">
-							    	<li><input type="checkbox" id="monthall" checked="checked" />
-											<label for="monthall">All<span></span></label></li>
-							    	<li><input type="checkbox" id="month01" class="month" checked="checked" />
-											<label for="month01">January<span></span></label></li>
-							    	<li><input type="checkbox" id="month02" class="month" checked="checked" />
-											<label for="month02">Feburary<span></span></label></li>
-							    	<li><input type="checkbox" id="month03" class="month" checked="checked" />
-											<label for="month03">March<span></span></label></li>
-							    	<li><input type="checkbox" id="month04" class="month" checked="checked" />
-											<label for="month04">April<span></span></label></li>
-							    	<li><input type="checkbox" id="month05" class="month" checked="checked" />
-											<label for="month05">May<span></span></label></li>
-							    	<li><input type="checkbox" id="month06" class="month" checked="checked" />
-											<label for="month06">June<span></span></label></li>
-							    	<li><input type="checkbox" id="month07" class="month" checked="checked" />
-											<label for="month07">July<span></span></label></li>
-							    	<li><input type="checkbox" id="month08" class="month" checked="checked" />
-											<label for="month08">August<span></span></label></li>
-							    	<li><input type="checkbox" id="month09" class="month" checked="checked" />
-											<label for="month09">September<span></span></label></li>
-							    	<li><input type="checkbox" id="month10" class="month" checked="checked" />
-											<label for="month10">October<span></span></label></li>
-							    	<li><input type="checkbox" id="month11" class="month" checked="checked" />
-											<label for="month11">November<span></span></label></li>
-							    	<li><input type="checkbox" id="month12" class="month" checked="checked" />
-											<label for="month12">December<span></span></label></li>
-							    </ul>
+					    		<div class="accordion">					    			
+                    <div class="ac">
+                      {# ac-1 #}
+                      <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
+                      <label class="ac-label month-label" for="ac-1">Month</label>
+
+                      <ul id="month-wise-report" class="ac-text checkbox-style">          
+										    	<li><input type="checkbox" id="monthall" checked="checked" />
+														<label for="monthall">All<span></span></label></li>
+                          <div class="form_months" id="form_months">                   
+											    	<li><input type="checkbox" id="month01" class="month" checked="checked" />
+															<label for="month01">January<span></span></label></li>
+											    	<li><input type="checkbox" id="month02" class="month" checked="checked" />
+															<label for="month02">Feburary<span></span></label></li>
+											    	<li><input type="checkbox" id="month03" class="month" checked="checked" />
+															<label for="month03">March<span></span></label></li>
+											    	<li><input type="checkbox" id="month04" class="month" checked="checked" />
+															<label for="month04">April<span></span></label></li>
+											    	<li><input type="checkbox" id="month05" class="month" checked="checked" />
+															<label for="month05">May<span></span></label></li>
+											    	<li><input type="checkbox" id="month06" class="month" checked="checked" />
+															<label for="month06">June<span></span></label></li>
+											    	<li><input type="checkbox" id="month07" class="month" checked="checked" />
+															<label for="month07">July<span></span></label></li>
+											    	<li><input type="checkbox" id="month08" class="month" checked="checked" />
+															<label for="month08">August<span></span></label></li>
+											    	<li><input type="checkbox" id="month09" class="month" checked="checked" />
+															<label for="month09">September<span></span></label></li>
+											    	<li><input type="checkbox" id="month10" class="month" checked="checked" />
+															<label for="month10">October<span></span></label></li>
+											    	<li><input type="checkbox" id="month11" class="month" checked="checked" />
+															<label for="month11">November<span></span></label></li>
+											    	<li><input type="checkbox" id="month12" class="month" checked="checked" />
+															<label for="month12">December<span></span></label></li>
+											    </div>
+                      </ul><!--/ac-text-->
+                    </div><!--/ac-->
+                    
+					    		</div>
 					    	</div>
 					    </div>
 					  </div>
