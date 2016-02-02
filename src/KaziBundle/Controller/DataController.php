@@ -31,13 +31,13 @@ class DataController extends Controller
      */
     public function indexAction()
     {
-        $file_name = 'uploads/round6/survey.xlsx';
+        /*$file_name = 'uploads/round6/survey.xlsx';
         $sheet_name = 'uploaded_form_ir295a';
-        $fileInfo = $this->getCsvData($file_name);
+        $fileInfo = $this->getCsvData($file_name);*/
 
         return array(
-            //'round' => 'round6.html.twig',
-            'fileInfo' => $fileInfo
+            'round' => 'round6.html.twig',
+            //'fileInfo' => $fileInfo
             );
     }
 
@@ -50,7 +50,7 @@ class DataController extends Controller
      */
     public function showAction($slug)//$id //removed annotation @Method("GET")
     {
-        $file_name = 'uploads/round'.$slug.'/survey.xlsx';
+        /*$file_name = 'uploads/round'.$slug.'/survey.xlsx';
 
         if($slug == 1) {
             $sheet_name = 'Round 1 Raw data';
@@ -76,14 +76,14 @@ class DataController extends Controller
         return array(
             'fileInfo' => $fileInfo,
             'slug' => $slug
-            );
+            );*/
 
-        /*$round = 'round'.$slug.'.html.twig';
+        $round = 'round'.$slug.'.html.twig';
 
         return array(
             'slug' => $slug,
             'round' => $round
-            );*/
+            );
     }
 
     /**
@@ -140,9 +140,9 @@ class DataController extends Controller
                     }
                 }
                 /* for debugging or adding css */
-                /*if ($rowCount > 15) {
+                if ($rowCount > 15) {
                     break;
-                }*/
+                }
                 if ($rowCount > 0)
                 {
                     //$this->setCsvData($row);    
