@@ -64,6 +64,13 @@ class Document
     private $language;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="district", type="string", length=255, nullable=true)
+     */
+    private $district;
+
+    /**
      * @ORM\ManyToOne(targetEntity="DocumentType", inversedBy="documents")
      * @ORM\JoinColumn(name="document_type_id", referencedColumnName="id")
      */
@@ -222,6 +229,31 @@ class Document
      public function getLanguage()
     {
         return $this->language;
+            
+    }
+
+     /* Set district
+     *
+     * @param district $district
+     *
+     * @return Document
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
+
+        return $district;
+    }
+
+
+    
+    /* Get district
+     *
+     * @return district
+     */
+     public function getDistrict()
+    {
+        return $this->district;
             
     }
 
