@@ -23,6 +23,27 @@ class DocumentType extends AbstractType
                 // *this line is important*
                 'choices_as_values' => false,
             ))
+            ->add('district', 'choice', array(
+                'choices'  => array(
+                    '' => 'Choose district',
+                    'Bhaktapur' => 'Bhaktapur',
+                    'Dhading' => 'Dhading',
+                    'Dolakha' => 'Dolakha',
+                    'Gorkha' => 'Gorkha',
+                    'Kathmandu' => 'Kathmandu',
+                    'Kavrepalanchowk' => 'Kavrepalanchowk',
+                    'Lalitpur' => 'Lalitpur',
+                    'Makwanpur' => 'Makwanpur',
+                    'Nuwakot' => 'Nuwakot',
+                    'Okhaldhunga' => 'Okhaldhunga',
+                    'Ramechhap' => 'Ramechhap',
+                    'Rasuwa' => 'Rasuwa',
+                    'Sindhuli' => 'Sindhuli',
+                    'Sindhupalchowk' => 'Sindhupalchowk',
+                    ),
+                // *this line is important*
+                'choices_as_values' => false,
+            ))
         ;
     }
     
