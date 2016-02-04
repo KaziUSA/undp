@@ -998,7 +998,7 @@
                           type: 'column',
                       },
 
-                      legend: {
+                      legend: {                         
                           width: 240,
                           padding: 70,
                           itemWidth: 118,
@@ -1071,7 +1071,7 @@
                                 //margin:30,
                                 style: {
                                     fontSize: "20x",
-                                    color: '#A8A8A8',
+                                    color: 'black',
                                     fontWeight: 'normal'
                                 },
                                 text:"<span>"+qname+"</span><br>",
@@ -1082,14 +1082,23 @@
                                 align: 'right',
                                 x: 350,
                                 verticalAlign: 'bottom',
-                                y: -170,                               
+                                y: -107,                               
                                 style: {
-                                    fontSize: "",
-                                    color: '#A8A8A8',
+                                    fontSize: "9px",
+                                    color: 'black',
                                     fontWeight: 'normal'
                                 },
                                 text: "<br>Respondents:"+response.result.total+"<br>"+M+D+G+E+A+V,
                                 align: "left"                  
+                              },
+                              legend: {
+                                    floating: true,
+                                    verticalAlign: 'bottom',                                    
+                                    y: 65,
+                                    itemStyle: {
+                                       fontSize: '9px',
+                                       color: 'black'                                     
+                                    },
                               },
                               xAxis: {
                                 labels: {
@@ -1108,10 +1117,11 @@
                                 }
                               },
                               chart:{
+                                  marginBottom: 150,
                                   spacingTop:55,
                                   events:{
                                       load:function(){
-                                          this.renderer.image('http://cfp.org.np/img/frontend/logo-full.png', 10, 3, 120, 30) //TODO logo
+                                          this.renderer.image('http://cfp.org.np/img/header_for_pdf.jpg', 10, 3, 580, 30) //TODO logo
                           .add();
 
                                       }
