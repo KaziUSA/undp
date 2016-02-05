@@ -808,6 +808,10 @@ a.show-more-report {
 			&:focus {
 				border-color: @white !important;
 			}
+			&#captcha1 {
+				text-indent: 180px;
+				margin-bottom: 20px;
+			}
 		}
 		textarea {
 			background: url(../img/frontend/textarea-border.png) repeat 0 0;
@@ -820,6 +824,24 @@ a.show-more-report {
     		padding-top: 8px !important;
     		background-attachment: local;
 		}
+	}
+	.captcha-text {
+		font-size: 16px;
+		margin: 10px 0 0px 0px;
+	}
+	.captcha-img {		
+		background: #99bc44 none repeat scroll 0 0;
+		position: absolute;
+		left: 0;
+		top: 20px;
+		padding-right: 10px;
+	}
+	#imgdiv {
+		display: inline-block;
+		margin: 10px 0 10px 0px;
+	}
+	#reload {
+		cursor: pointer;
 	}
 }
 .c-box-info a:hover{

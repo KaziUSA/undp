@@ -13,7 +13,7 @@ $_SESSION["code"] = $captchanumber;
 
 //Generating CAPTCHA
 $image = imagecreatefromjpeg("bj.jpg");
-$foreground = imagecolorallocate($image, 175, 199, 200); //font color
+$foreground = imagecolorallocate($image, 153, 188, 68); //font color
 imagestring($image, 5, 45, 8, $captchanumber, $foreground);
 header('Content-type: image/png');
 imagepng($image);

@@ -40,13 +40,14 @@ class ContactusController extends Controller
         //$response = array("code" => 1, "success" => false);
 
         if(isset($data_name)) {//if there is name
-            echo $_SESSION["code"] . '-' . $data_captcha;
+            /*echo $_SESSION["code"] . '-' . $data_captcha;
             if ($_SESSION["code"] == $_POST["captcha"]) {
                 echo "Form Submitted successfully....!";
                 //$response = array("code" => 100, "success" => true);
             } else {
                 die("Wrong TEXT Entered");
-            }
+            }*/
+            
             /*$to = "giovanni.congi@one.un.org";
             $subject = "Contact From UNDP Website";
             

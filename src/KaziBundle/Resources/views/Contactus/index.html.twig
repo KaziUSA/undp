@@ -65,8 +65,17 @@
                             <span class="required message-required">This field is required.</span>
                           </div>
                           <div class="form-group">
-                            <div id="imgdiv"><img id="img" src="/captcha/captcha.php" /></div><img id="reload" src="/captcha/reload.png" />
-                            <input id="captcha1" name="captcha" type="text">
+                            <!-- <label for="captcha1" class="control-label">Captcha *</label> -->
+                            <p class="captcha-text">Please enter the letters you see below.</p>
+
+                            <div class="captcha-img">
+                              <div id="imgdiv"><img id="img" src="/captcha/captcha.php" /></div>
+                              <span id="reload" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                            </div>
+                            <!-- <img id="reload" src="/captcha/reload.png" /> -->
+
+                            <input id="captcha1" class="form-control" name="captcha" type="text">
+
                             <span class="required captcha-required">This field is required.</span>
                             <span class="required good-captcha-required">Please type the correct captcha.</span>
 
