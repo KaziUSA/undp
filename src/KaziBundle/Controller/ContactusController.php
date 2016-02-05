@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Page;
 use AppBundle\Form\PageType;
 
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Contactus controller.
  *
@@ -28,14 +30,24 @@ class ContactusController extends Controller
     public function indexAction(Request $request)//annotation removed @Method("GET")
     {
         //for frontend homepage only
-        $data_name = $request->request->get('data_name');
+        /*$data_name = $request->request->get('data_name');
         $data_address = $request->request->get('data_address');
         $data_email = $request->request->get('data_email');
         $data_phone = $request->request->get('data_phone');
         $data_message = $request->request->get('data_message');
+        $data_captcha = $request->request->get('data_captcha');*/
+
+        //$response = array("code" => 1, "success" => false);
 
         if(isset($data_name)) {//if there is name
-            $to = "giovanni.congi@one.un.org";
+            echo $_SESSION["code"] . '-' . $data_captcha;
+            if ($_SESSION["code"] == $_POST["captcha"]) {
+                echo "Form Submitted successfully....!";
+                //$response = array("code" => 100, "success" => true);
+            } else {
+                die("Wrong TEXT Entered");
+            }
+            /*$to = "giovanni.congi@one.un.org";
             $subject = "Contact From UNDP Website";
             
             $txt = '<strong>Name:</strong> ' . $data_name . 
@@ -53,9 +65,8 @@ class ContactusController extends Controller
             $headers .= "CC: bronwyn.russel@one.un.org" . "\r\n";
             $headers .= "Bcc: manish@kazistudios.com"."\r\n";
 
-            mail($to,$subject,$txt,$headers);
+            mail($to,$subject,$txt,$headers);*/
         }
-        $response = array("code" => 100, "success" => true);
 
 
         $em = $this->getDoctrine()->getManager();
@@ -71,6 +82,7 @@ class ContactusController extends Controller
 
         return array(
             'entity' => $entity,
+            //'response' => $response
         );
     }
 }
