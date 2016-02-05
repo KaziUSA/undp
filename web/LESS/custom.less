@@ -864,7 +864,7 @@ body {
 			padding-left: 0;
 		}
 		.nav .open > a {
-			background: @pag-title-dark-bg;
+			background: @pag-title-bg;
 		}
 		.dropdown-menu {
 			background: @pag-title-bg;
@@ -881,10 +881,12 @@ body {
 				}
 			}
 		}
-		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover,
-		.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover,
-		.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+		.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > li > a:hover,
+		.nav-tabs > li > a:hover {
 			background-color: @pag-title-dark-bg;
+		}
+		.dropdown-menu > .active > a:focus, .dropdown-menu > li > a:focus, .nav-tabs > li > a:focus {
+			background-color: @pag-title-bg;
 		}
 		.nav-tabs {
 			li {
@@ -2027,4 +2029,12 @@ table.dataTable {
 }
 .table-responsive {
 	border: 0;
+}
+.open > .dropdown-menu {
+	display: none;
+}
+.dropdown.district-text-parent:hover {
+	ul {
+		display: block;
+	}
 }
