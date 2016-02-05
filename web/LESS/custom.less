@@ -746,6 +746,10 @@ a.show-more-report {
 			left: 100px;
 			top: -6px;
 			width: 100px;
+			@media (max-width: 991px) {
+				top: 100%;
+				left: 15px;
+			}
 			li {
 				a {
 					color: #159c02 !important;
@@ -1090,10 +1094,18 @@ aside {
 	@media (min-width: 768px) {
 	}
 	.high-chart-wrap {
-		height: 504px;	
 		position: relative;
-		#container, #container2, .chart-container {
-			height:514px;
+		@media (min-width: 600px) {
+			height: 504px;				
+			#container, #container2, .chart-container {
+				height:514px;
+			}
+		}
+		@media (max-width: 599px) {
+			.chart-container {
+				height: 460px;
+				overflow: hidden;
+			}
 		}
 	}
 	.legend-box {
@@ -1122,12 +1134,15 @@ aside {
 			width: 27%;
 		}
 		@media (max-width: 991px) {
-			width: 33%;
+			width: 23%;
+		}
+		@media (max-width: 800px) {
+			padding-right: 20px;
 		}
 		@media (max-width: 599px) {
 			width: 100%;
 			margin: 10px 0;
-			padding: 0 15px;
+			padding: 0;
 		}
 		.legend-head {
 			color: @green;
@@ -1152,7 +1167,10 @@ aside {
 		}
 	}
 	.chart-table {
-		padding: 15px 15px 18px;	
+		padding: 15px 15px 28px;	
+		&.table-responsive {
+			padding-bottom: 48px;
+		}
 	}
 	.dataTables_info, 
 	.dataTables_paginate,
@@ -1224,7 +1242,7 @@ a.DTTT_button,
 .dataTables_length {
 	display: none;
 }
-.dataTables_filter {//search
+.dataTables_filter {//search for data page
 		position: absolute;
     right: 15px;
     top: -30px;
@@ -1260,6 +1278,9 @@ a.DTTT_button,
 		    }
     	}
     }
+}
+.high-chart .dataTables_filter {
+	display: none;
 }
 a.DTTT_button.DTTT_button_xls, a.DTTT_button.DTTT_button_csv {
 	border: 0;
@@ -1305,7 +1326,7 @@ div.DTTT_container {
 	float: left;
 }
 .high-chart div.DTTT_container {
-	bottom: -18px;
+	bottom: -28px;
 	left: 0;
 	right: auto;
 	a.DTTT_button.DTTT_button_xls {
@@ -2003,4 +2024,7 @@ table.dataTable.dtr-inline.collapsed tbody tr.parent td:first-child::before, tab
 }
 table.dataTable {
 	margin-bottom: 0 !important;
+}
+.table-responsive {
+	border: 0;
 }
