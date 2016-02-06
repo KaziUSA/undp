@@ -1,5 +1,8 @@
 #map {
-	height: 400px; /* 500px */
+
+	height: 500px; /* 400px */
+
+	width: 670px; /* 800px */
 }
 
 .info {
@@ -304,6 +307,50 @@
   .flex-direction-nav a.flex-prev {
   	background-image: url(../images/arrow-prev.png);
   }
+
 .navbar-header {
     padding: 25px 0px 0px 25px;
+}
+  .graph{
+    min-height:1px;
+    width: auto;
+    padding-right: 7px;
+  padding-left: 7px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  }
+  .index {
+    float: left;
+    width: auto;
+  }
+  .clear {
+    clear: both;
+  }
+  .index-title {
+    width: 75px;
+    float: left;
+  }
+  .index-bar {    
+    height:30px;
+    width:0px;
+    float: left;
+  }
+  .girl{
+    background-color:#ffe0f7;
+  }
+  .boy{
+    background-color:#c0dcff;
+  }
+  .total-tile{
+    background-color:#BF5FFF;
+  }
+
+
+.graph-content {
+  background-color: #ffffff;
+  color: inherit;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 1px 0px;
 }

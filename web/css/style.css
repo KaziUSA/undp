@@ -1514,6 +1514,9 @@ a.list-group-item.active:focus {
   position: relative;
 }
 /* DATATABLES */
+table.dataTable {
+  width: 100% !important;
+}
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc:after,
 table.dataTable thead .sorting_desc,
@@ -7512,4 +7515,19 @@ body.DTTT_Print {
     color:#ffffff;
     padding:4px 35px;
     margin-left:4px;
+}
+
+/* FOS Register */
+#appbundle_interviewer > div,
+#appbundle_age > div,
+#fos_user_registration_form > div,
+#form > div,
+#appbundle_document > div {
+  margin-bottom: 15px;
+}
+
+/* ckeditor */
+.ck-title {
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
 }

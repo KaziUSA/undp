@@ -1,15 +1,33 @@
-<!Doctype html>
-<html>
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+<head>
 	<head>
 		<title>{% block title %}Inter-Agency Common Feedback Project{% endblock %}</title>
 
 		{% block stylesheets %}
-			<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+		
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
 
 			<link href="/css/bootstrap.min.css" rel="stylesheet">
+			<link href="/css/animate.css" rel="stylesheet">
+
+      <link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+      <link href="/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+      <link href="/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
 
 			<link href="/LESS/style.less" rel="stylesheet/less">
 		{% endblock %}
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+
+		<link rel="image_src" type="image/jpeg" href="http://cfp.org.np/img/frontend/logo-share.png" /><!-- for facebook -->
+		<meta property="og:image" content="http://cfp.org.np/img/frontend/logo-share.png" /> <!-- for linked in -->
+		
 	</head>
 	<body style="display: none;">{# to show better page after loading complete #}
 		<nav class="navbar navbar-default clearfix">
@@ -22,17 +40,24 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#"><img src="/img/frontend/logo.png" alt=""></a>
+		      <a class="navbar-brand" href="/">
+		      	<img src="/img/frontend/logo.png" alt="">
+		      	<span class="logo-title">
+		      		<span class="logo">Inter-Agency Common Feedback Project</span>
+		      		<span class="logo-slogan">Nepal Earthquake 2015</span>
+		      	</span>
+		      </a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li><a href="#">Platform</a></li>
-		        <li><a href="#">Data</a></li>
-		        <li><a href="#">Reports</a></li>
-		        <li><a href="#">Contact</a></li>
-		        <li><a href="#">About</a></li>
+		        <li><a href="{{ path('platform') }}" class="{% if app.request.get('_route') == 'platform' %} active {% endif %}">Platform</a></li>
+
+		        <li><a href="{{ path('data') }}" class="{% if (app.request.get('_route') == 'data') or (app.request.get('_route') == 'data_show') %} active {% endif %}">Data</a></li>
+		        <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
+		        <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact -->
+		        <li><a href="/page/about" class="{% if app.request.get('_route') == 'show' %} active {% endif %}">About</a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
@@ -47,31 +72,57 @@
 			<div class="container-fluid">
 				<div class="social-icons clearfix pull-left">
 					<ul>
-						<li class="facebook"><a href="#"></a></li>
-						<li class="youtube"><a href="#"></a></li>
-						<li class="flicker"><a href="#"></a></li>
-						<li class="twitter"><a href="#"></a></li>
-						<li class="wordpress"><a href="#"></a></li>
+						<li class="facebook"><a href="https://www.facebook.com/NepalDRR/" target="_blank"></a></li>
+						<li class="youtube"><a href="https://www.youtube.com/user/NepalRiskReduction1" target="_blank"></a></li>
+						<li class="flicker"><a href="https://www.flickr.com/photos/nepaldrr/" target="_blank"></a></li>
+						<li class="twitter"><a href="https://twitter.com/nepaldrr" target="_blank"></a></li>
+						<li class="wordpress"><a href="https://nepaldrr.wordpress.com/" target="_blank"></a></li>
 					</ul>
 				</div>
 
 				<div class="footer-right">
-					<a href="#">Quake Help Desk</a> &nbsp;|&nbsp; 
-					<a href="#">Quake Help Desk Open mic</a> &nbsp;|&nbsp; 
-					<a href="#">CDAC Network</a>
+					<a href="http://www.quakehelpdesk.org/">Quake Help Desk</a> &nbsp;|&nbsp; 
+					<a href="http://www.quakehelpdesk.org/openmic.php">Quake Help Desk Open mic</a> &nbsp;|&nbsp; 
+					<a href="http://www.cdacnetwork.org/">CDAC Network</a>
 				</div>
 			</div>
 		</footer>
 
     {% block javascripts %}
     <script src="/js/jquery-2.1.1.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 
     <script src="/js/less.min.js"></script>
     {# http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js #}
 
-    <script src="/js/frontend/highcharts.js"></script>
+    <script src="/js/plugins/highcharts/highcharts.js"></script>
+    <script src="/js/plugins/highcharts/data.js"></script>
+    <script src="/js/plugins/highcharts/exporting.js"></script>
+	<script src="/js/plugins/highcharts/export-csv.js"></script>
+    <script src="/js/plugins/zelect/zelect.js"></script>
+
+    
+    <!-- Data Tables -->
+    <script src="/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="/js/plugins/dataTables/dataTables.responsive.js"></script>
+    <script src="/js/plugins/dataTables/dataTables.tableTools.min.js"></script>
+
+
     <script src="/js/frontend/custom.js"></script>
+        <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72934138-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
     {% endblock %}
+
+    {%block scriptIncludes %}{% endblock %}
 	</body>
 </html>

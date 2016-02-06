@@ -63,9 +63,10 @@ class MapController extends Controller
         $properties = array();
         $properties['id'] = $entity->getId();
         $properties['name'] = $entity->getName();
-        $properties['boys'] = 0;
-        $properties['girls'] = 0;
-        $properties['total'] = 11;
+        //TODO: need to fix randum number
+        $properties['boys'] = rand(0, 800);
+        $properties['girls'] =rand(0, 800);
+        $properties['total'] = $properties['girls']+$properties['boys'];
         
         $geoJSON['properties'] = $properties;
         

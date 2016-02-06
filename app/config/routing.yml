@@ -15,3 +15,7 @@ fos_user:
 #phax for commandline calling controller
 phax:
     resource: "@PhaxCoreBundle/Resources/config/routing.yml"
+
+base_url:
+    pattern:  /
+

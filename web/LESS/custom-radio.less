@@ -1,0 +1,39 @@
+/* Custom Radio */
+.filter input[type="radio"] {
+  display: none;
+}
+
+.filter input[type="radio"] + label {
+  width: 100%;
+}
+
+.filter input[type="radio"] + label span {
+  display: inline-block;
+  float: right;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid #898989;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+.filter input[type="radio"] + label span {
+  
+}
+
+.filter input[type="radio"]:checked + label span {
+  background: url(../img/frontend/icons/icon-radio.png) no-repeat center center;
+}
+.checkbox-style [type="checkbox"]:checked + label {
+  color: #159c02;
+}
+
+.filter input[type="radio"] + label span,
+.filter input[type="radio"]:checked + label span {
+  -webkit-transition: background-color 0.4s linear;
+  -o-transition: background-color 0.4s linear;
+  -moz-transition: background-color 0.4s linear;
+  transition: background-color 0.4s linear;
+}

@@ -17,8 +17,8 @@
 {% endblock %}
 
 
-{% block sidebar %}
-
+{% block header %}
+<div class="col-lg-8">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Are your main problems being addressed?</h5>
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                     </div>
-                
+                </div>
 {% endblock %}
 
 
@@ -41,19 +41,17 @@
 	var border_color = "#ccc";//#f7941e: orange
 </script>
 <script type="text/javascript" src="/js/leaflet.js"></script>
-
-<!--script type="text/javascript" src="/js/custom.js"></script -->
+<script type="text/javascript" src="/js/nepal-districts.js"></script>
+<script type="text/javascript" src="/js/custom.js"></script>
 <!-- ChartJS-->
 <script src="/js/plugins/chartJs/Chart.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-   KAZI.map.util.init(); 
-});
+
 var barData = {
         labels: ["Tamang", "Newar", "Muslim", "Janajati", "Gurung", "Dalit", "Chhetri", "Brahmin", "Other"],
         datasets: [
             {
-                label: "No",
+                label: "Yes",
                 fillColor: "rgba(220,220,220,0.5)",
                 strokeColor: "rgba(220,220,220,0.8)",
                 highlightFill: "rgba(220,220,220,0.75)",
@@ -61,7 +59,7 @@ var barData = {
                 data: [{% for num in yes %} {{num}} ,{% endfor %}]
             },
             {
-                label: "Yes",
+                label: "No",
                 fillColor: "rgba(26,179,148,0.5)",
                 strokeColor: "rgba(26,179,148,0.8)",
                 highlightFill: "rgba(26,179,148,0.75)",
@@ -81,10 +79,15 @@ var barData = {
 
     var barOptions = {
         scaleBeginAtZero: true,
-        barShowStroke: false,
-        barValueSpacing: 1,
-        barDatasetSpacing: 0,
+        scaleShowGridLines: true,
+        scaleGridLineColor: "rgba(0,0,0,.05)",
+        scaleGridLineWidth: 1,
+        barShowStroke: true,
+        barStrokeWidth: 2,
+        barValueSpacing: 5,
+        barDatasetSpacing: 1,
         responsive: true,
+        scaleShowLabels: true,
         multiTooltipTemplate: "<%= value %>",
     }
 

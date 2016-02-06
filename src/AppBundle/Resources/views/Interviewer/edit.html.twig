@@ -5,12 +5,8 @@
 
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
         <a href="{{ path('interviewer') }}">
-            Back to the list
+            <button type="button" class="btn btn-xs btn-warning">Back to the list</button>
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    		{{ form(delete_form) }}
 {% endblock %}

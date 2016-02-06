@@ -26,13 +26,15 @@
             <link href="/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
             <link href="/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
             <link href="/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
+            <link href="/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
             <link href="/css/style.css" rel="stylesheet">
         
             
         {% endblock %}
         
         
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
     </head>
     <body role="document" data-ng-app="app" id="app" data-custom-background data-off-canvas-nav class="ng-scope">
     
@@ -43,8 +45,9 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> 
-                    <img src="/img/undp.png" />    
-                        
+                        <a href="/">
+                            <img src="/img/undp.png" />    
+                        </a>
                         
                     </div>
                     <div class="logo-element">
@@ -75,6 +78,16 @@
                         <li class="{% if app.request.get('_route') == 'answergroup' %} active {% endif %}"><a href="{{ path('answergroup') }}">Answers</a></li>
                         <li class="{% if app.request.get('_route') == 'answer' %} active {% endif %}"><a href="{{ path('answer') }}">All answers</a></li>
                     </ul>
+                </li>
+                <li class="{% if (app.request.get('_route') == 'document') or (app.request.get('_route') == 'document_new') or (app.request.get('_route') == 'document_show') or (app.request.get('_route') == 'document_edit') or (app.request.get('_route') == 'documenttype') %} active {% endif %}">
+                    <a href="#!"><i class="fa fa-book"></i> <span class="nav-label">Reports</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="{% if app.request.get('_route') == 'document' %} active {% endif %}"><a href="{{ path('document') }}">Reports</a></li>
+                        <li class="{% if app.request.get('_route') == 'documenttype' %} active {% endif %}"><a href="{{ path('documenttype') }}">Reports Type</a></li>
+                    </ul>
+                </li>
+                <li class="{% if (app.request.get('_route') == 'page') or (app.request.get('_route') == 'page_new') or (app.request.get('_route') == 'show_new') or (app.request.get('_route') == 'page_edit') %} active {% endif %}">
+                    <a href="{{ path('page') }}"><i class="fa fa-book"></i> <span class="nav-label">Pages</span> </a>
                 </li>
             </ul>
             {% endblock %}
@@ -108,7 +121,6 @@
 
 
         <div class="wrapper wrapper-content">
-            {% block header %}{% endblock %}
             <div class="row">
             <div class="col-lg-8">
                 <div class="ibox float-e-margins">
@@ -119,10 +131,6 @@
                 
             </div>
             <div class="col-lg-4">
-                
-                    
-                    
-                    
                     {% block sidebar %}
                     <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -184,6 +192,8 @@
                     {% endblock %}
                 
             </div>
+            
+            {% block header %}{% endblock %}
         </div>
             {% block footercontent %}
             
@@ -252,6 +262,19 @@
         
     <!-- Toastr -->
     <script src="/js/plugins/toastr/toastr.min.js"></script>
+
+    <!-- Data picker -->
+    <script src="/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-72934138-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
         
         {%block scriptIncludes %}{% endblock %}
     

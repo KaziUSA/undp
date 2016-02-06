@@ -2,176 +2,68 @@
 
 namespace KaziBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Page;
+use AppBundle\Form\PageType;
 
 class DefaultController extends Controller
 {
+
     /**
+     * Lists all Page entities.
+     *
      * @Route("/")
+     * 
      * @Template()
      */
-    public function indexAction()
-    { 
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        );
-    }
-
-    /**
-     * @Route("/platform")
-     * @Template()
-     */
-    public function platformAction()
-    { 
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-        );
-    }
-
-    /**
-     * @Route("/chart")
-     * @Template
-     */
-    public function chartAction() { 
-        //copied for backup from indexAction created by Manish Shrestha
-       $sql = "SELECT COUNT(*) as count FROM `survey_response` INNER JOIN `survey` ON survey.id = survey_response.survey_id INNER JOIN ethnicity ON survey.ethnicity_id = ethnicity.id WHERE `answer_id` = :id OR `answer_id` = :id2 GROUP BY survey.ethnicity_id";
-        $em = $this->getDoctrine()->getEntityManager();
-        $connection = $em->getConnection();
-        $statement = $connection->prepare($sql);
-        $statement->bindValue('id', 1);
-        $statement->bindValue('id2', 2);
-        $statement->execute();
-        $results = $statement->fetchAll();
-        
-        
-        $yes = array();
-        
-        foreach ($results as $num){
-            array_push($yes, $num["count"]);   
-        }
-        
-        $statement = $connection->prepare($sql);
-        $statement->bindValue('id', 4);
-        $statement->bindValue('id2', 5);
-        $statement->execute();
-        $negresults = $statement->fetchAll();
-        
-        $no = array();
-        foreach ($negresults as $num){
-            array_push($no, $num["count"]);   
-        }
-        
-        $statement = $connection->prepare($sql);
-        $statement->bindValue('id', 3);
-        $statement->bindValue('id2', 6);
-        $statement->execute();
-        $otherresults = $statement->fetchAll();
-        
-        $other = array();
-        foreach ($otherresults as $num){
-            array_push($other, $num["count"]);   
-        }
-        
-        
-        
-        return array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
-            'yes'=> $yes,
-            'no'  => $no,
-            'other' => $other
-        );
-    }
-
-    /**
-     * @Route("/nepal")
-     * @Template()
-     */
-    public function nepalAction()
-    {
-        
-        $geoJSON = array();
-        $geoJSON['type'] = "FeatureCollection";
-        $features = array();
-        for ($i = 1; $i < 76; $i++){
-               array_push($features, $this->districtJson($i));
-                //$features[$i-1]['properties']['total'] = $features[$i-1]['properties']['id'];
-        }
-        
-        $geoJSON['features'] = $features;
-        
-        $response = new Response();
-        $response->setContent(json_encode($geoJSON));
-        $response->headers->set('Content-Type', 'application/json');
-        
-        return $response;
-    }
-    
-    /**
-     * @Route("/map/{id}", name="district_map")
-     * @Method("GET")
-     * @Template()
-     */
-    public function districtAction($id)
-    {
-       $geoJSON = $this->districtJson($id);
-        
-        $response = new Response();
-        $response->setContent(json_encode($geoJSON));
-        $response->headers->set('Content-Type', 'application/json');
-        
-        return $response;
-    }
-    
-    /**
-     * Prepares district information into JSONArray for all districts
-     */
-    private function districtJson($id)
+    public function indexAction(Request $request)//annotation removed @Method("GET")
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AppBundle:District')->find($id);
-        
-        $geoJSON = array();
-        $geoJSON['type'] = "Feature";
-        $properties = array();
-        $properties['id'] = $entity->getId();
-        $properties['name'] = $entity->getName();
-        $properties['boys'] = 0;
-        $properties['girls'] = 0;
-        $properties['total'] = 11;
-        
-        $geoJSON['properties'] = $properties;
-        
-        $geometry = array();
-        $geometry['type'] = 'Polygon';
-        $geometry['coordinates'] = $this->fixDistrictData($entity->getShape());
-        $geoJSON['geometry'] = $geometry;
+        $criteria = array('slug'=> 'home');//home is the index page
 
-        return $geoJSON;
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        $id = $entity_for_id['0']->getId();
+
+        $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
+        //print_r($entities);exit();
+
+        return array(
+            'entity' => $entity,
+        );
     }
+
     /**
-     * Fixes District Data, parses it and sets it up in an object
-     * Takes in a chunk of shape data
+     * Finds and displays a Page entity.
+     *
+     * @Route("/page/{slug}", name="show")
+     * 
+     * @Template()
      */
-    private function fixDistrictData($shape){
+    public function showAction($slug, Request $request)//$id //removed annotation @Method("GET")
+    {
+        $em = $this->getDoctrine()->getManager();
+        $criteria = array('slug'=> $slug);
 
-        $shape = str_replace('],', ']', $shape);
-        $shape = str_replace('[', '', $shape);
-        //$entity = str_replace('\n', '', $entity);
-        $shape = trim(preg_replace('/\s\s+/', ' ', $shape));
-        
-        $points = str_getcsv($shape, ']');
-        
-        $response = array();
-        foreach($points as $point){
-            $singlePoint = str_getcsv($point);
-            array_push($response, $singlePoint);
+        $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
+        //print_r($entity_for_id);exit();
+        if(empty($entity_for_id)) {
+            echo 'Page not found! Sorry about that!';
+            exit();
         }
-        array_pop($response);
-        return array($response);
-    }
+        $id = $entity_for_id['0']->getId();
 
+        $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
+        
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Page entity.');
+        }
+
+        return array(
+            'entity' => $entity,
+        );
+    }
 }

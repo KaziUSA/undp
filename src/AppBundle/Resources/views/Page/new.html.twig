@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Page creation</h1>
+
+    {# form(form) #}
+    <form action="new" method="post" {{ form_enctype(form) }}>
+		    {{ form_widget(form) }}
+		<br>
+	    <input id="JQueryClick" type="submit" class="btn btn-xs btn-success" value="Update" />
+	</form>
+
+        <a href="{{ path('page') }}">
+            <button type="button" class="btn btn-xs btn-warning">
+            Back to the list
+          </button>
+        </a>
+{% endblock %}

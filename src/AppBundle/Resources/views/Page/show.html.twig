@@ -1,0 +1,74 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <article id="content1" class="ck-title" contenteditable="true" onclick="onClickToolbarButton()">
+        {{ entity.title | raw}}
+    </article>
+    {# TODO: Need to make contact part editable with adding link for location #}
+    {% if entity.slug == 'contactus' %}
+    <article id="content2">
+        {{ entity.description | raw }}
+    </article>
+    {% else %}
+    <article id="content2" class="ckeditor" contenteditable="true">
+        {{ entity.description | raw }}
+    </article>
+    {% endif %}
+    
+    {% if entity.path != NULL %}
+      <h3>Featured Image</h3>
+      <img src="{{ entity.file_path }}{{ entity.path }}" width="150px">
+      <br><br>
+    {% endif %}
+
+    <input type="button" id="save" class="btn btn-bordered pull-right" value="Save">
+    
+    <a href="{{ path('page') }}">
+      <button type="button" class="btn btn-xs btn-warning">
+        Back to the list
+      </button>
+    </a>
+    <a href="{{ path('page_new') }}">
+        <button type="button" class="btn btn-xs btn-success">Create a new entry</button>
+    </a>
+    <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="">{# id #}
+      <button type="button" class="btn btn-xs btn-success">
+        Change Featured Image
+      </button>
+    </a>
+
+    {{ form(delete_form) }}
+{% endblock %}
+
+{%block scriptIncludes %}
+<script>
+//quick fix for hiding toolbar for title  
+function onClickToolbarButton() {
+    var bar = document.getElementById("cke_content1");//for #content1
+    if(bar.style.display == "none"){
+        bar.style.display = "none";//block - to show
+    }else{
+        bar.style.display = "none";
+    }
+}
+</script>
+     <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
+<script>
+
+//$("#content1, #content2").keyup(function()
+$('#save').click(function()
+ {  
+  var name = {id:{{ entity.id }}, title:$("#content1").html(), description:$("#content2").html()};//{{ entity.id }}
+    $.post('{{path('page_show', {'slug': entity.slug} )}}',//{{path('page')}} - path: /admin/page/home
+        { data_id:name.id,data_title:name.title,data_description:name.description}, 
+            function(response){ 
+            //console.log("Request Sent");
+            }
+    );
+
+  //return false;
+   
+  });
+</script>
+
+{% endblock %}

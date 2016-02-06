@@ -52,7 +52,7 @@ CodeMirror.defineMode("nginx", function(config) {
     else if (keywords_important.propertyIsEnumerable(cur)) {
       return "string-2";
     }
-    /**/
+    
 
     var ch = stream.next();
     if (ch == "@") {stream.eatWhile(/[\w\\\-]/); return ret("meta", stream.current());}

@@ -1,0 +1,100 @@
+/* css for accordion */
+.accordion {
+	.ac {
+		margin-bottom: 10px;
+		.ac-text {
+			background: none;
+		}
+	}
+}
+.ac-label {
+  position: relative;
+  padding: 2px 0px;
+  display: block;
+  cursor: pointer;
+  transition: background-color .15s ease-in-out;
+  font-weight: normal;
+}
+
+.ac-input:checked + label, .ac-label:hover {
+  /* background-color: @theme-color;
+  color: @white; */
+}
+
+.ac-label:after, .ac-input:checked + .ac-label:after,
+.ac-label:hover:after, .ac-input:checked + .ac-label:after {	
+	border: 1px solid #898989;
+	border-radius: 10px;
+	color: #919191;
+}
+.ac-label.active {
+  color: #159c02;
+}
+.ac-label.active:after, .ac-input:checked + .ac-label.active:after,
+.ac-label.active:hover:after, .ac-input:checked + .ac-label.active:after {  
+  color: #159c02;
+  border-color: #159c02;
+}
+.ac-label:after, .ac-input:checked + .ac-label:after {
+  content: "+";
+  font-size: 18px;
+  position: absolute;
+  display: block;
+  right: -2px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  line-height: 16px;
+  text-align: center;
+  transition: background-color .15s ease-in-out;
+}
+
+.ac-label:hover:after, .ac-input:checked + .ac-label:after {
+  /* background-color: #b5b5b5; */
+}
+
+.ac-input:checked + .ac-label:after {
+  content: "-";
+}
+
+.ac-input {
+  display: none;
+}
+
+
+.ac-text, .ac-sub-text {
+  opacity: 0;
+  height: 0px;
+  margin-bottom: .5em;
+  transition: opacity .5s ease-in-out;
+  overflow: hidden;
+}
+
+.ac-input:checked ~ .ac-text, .ac-sub .ac-input:checked ~ .ac-sub-text { 
+  opacity: 1;
+  height: auto;
+}
+
+/* sub-level */
+.ac-sub .ac-label {
+  background: none;
+  margin-bottom: 0;
+}
+
+.ac-sub .ac-label:checked {
+  background: none;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.ac-sub .ac-label:after, .ac-sub .ac-input:checked + .ac-label:after {
+  left: 0;
+  background: none;
+}
+
+.ac-sub .ac-input:checked + label, .ac-sub .ac-label:hover {
+  background: none;
+}
+
+.ac-sub-text {
+  padding: 0 1em 0 2em;
+}

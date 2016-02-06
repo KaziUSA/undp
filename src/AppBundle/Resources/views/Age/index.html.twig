@@ -18,7 +18,8 @@
                 <td>{{ entity.name }}</td>
                 <td>
                 
-                       <a href="{{ path('ethnicity_edit', { 'id': entity.id }) }}"><button type="button" class="btn btn-xs btn-success">Edit</button></a>
+                       <a href="{{ path('ethnicity_edit', { 'id': entity.id }) }}">
+                       <button type="button" class="btn btn-xs btn-success">Edit</button></a>
                     
                 </td>
             </tr>
@@ -27,7 +28,7 @@
     </table>
 
             <a href="{{ path('age_new') }}">
-                <button type="button" class="btn btn-xs btn-success">
+                <button type="button" class="btn btn-xs btn-info">
                 Create a new entry
                 </button>
             </a>
