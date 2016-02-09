@@ -36,7 +36,7 @@ class DataController extends Controller
         $fileInfo = $this->getCsvData($file_name);*/
 
         return array(
-            'round' => 'round6.html.twig',
+            'round' => 'round7.html.twig',
             //'fileInfo' => $fileInfo
             );
     }
