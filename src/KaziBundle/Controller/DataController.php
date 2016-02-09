@@ -70,6 +70,9 @@ class DataController extends Controller
         if($slug == 6) {
             $sheet_name = 'uploaded_form_ir295a';
         }
+        if($slug == 7) {
+            $sheet_name = 'uploaded_form_xdn830';
+        }
 
         $fileInfo = $this->getCsvData($file_name, $sheet_name);
 
