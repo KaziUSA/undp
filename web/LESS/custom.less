@@ -591,10 +591,12 @@ footer, footer a {
 	color: #ffffff;
 }
 
-/* About Page CSS */
+/* About Page CSS, Contact Page CSS */
 .u-box {
 	background: @pag-title-bg;
 	color: @white;
+	font-size: 14px;//12
+	line-height: 18px;//14
 	margin: 60px 0 30px;
 	padding: 30px;
 	@media (max-width: 767px) {
@@ -603,6 +605,9 @@ footer, footer a {
 	}
 	a {
 		color: @white;
+	}
+	p {
+		letter-spacing: 0;
 	}
 }
 
@@ -741,6 +746,10 @@ a.show-more-report {
 			left: 100px;
 			top: -6px;
 			width: 100px;
+			@media (max-width: 991px) {
+				top: 100%;
+				left: 15px;
+			}
 			li {
 				a {
 					color: #159c02 !important;
@@ -799,6 +808,10 @@ a.show-more-report {
 			&:focus {
 				border-color: @white !important;
 			}
+			&#captcha1 {
+				text-indent: 180px;
+				margin-bottom: 20px;
+			}
 		}
 		textarea {
 			background: url(../img/frontend/textarea-border.png) repeat 0 0;
@@ -811,6 +824,24 @@ a.show-more-report {
     		padding-top: 8px !important;
     		background-attachment: local;
 		}
+	}
+	.captcha-text {
+		font-size: 16px;
+		margin: 10px 0 0px 0px;
+	}
+	.captcha-img {		
+		background: #99bc44 none repeat scroll 0 0;
+		position: absolute;
+		left: 0;
+		top: 20px;
+		padding-right: 10px;
+	}
+	#imgdiv {
+		display: inline-block;
+		margin: 10px 0 10px 0px;
+	}
+	#reload {
+		cursor: pointer;
 	}
 }
 .c-box-info a:hover{
@@ -855,7 +886,7 @@ body {
 			padding-left: 0;
 		}
 		.nav .open > a {
-			background: @pag-title-dark-bg;
+			background: @pag-title-bg;
 		}
 		.dropdown-menu {
 			background: @pag-title-bg;
@@ -872,10 +903,12 @@ body {
 				}
 			}
 		}
-		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover,
-		.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover,
-		.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+		.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > li > a:hover,
+		.nav-tabs > li > a:hover {
 			background-color: @pag-title-dark-bg;
+		}
+		.dropdown-menu > .active > a:focus, .dropdown-menu > li > a:focus, .nav-tabs > li > a:focus {
+			background-color: @pag-title-dark-bg;//while clicking the menu is focussed so.
 		}
 		.nav-tabs {
 			li {
@@ -1085,10 +1118,18 @@ aside {
 	@media (min-width: 768px) {
 	}
 	.high-chart-wrap {
-		height: 504px;	
 		position: relative;
-		#container, #container2, .chart-container {
-			height:514px;
+		@media (min-width: 600px) {
+			height: 504px;				
+			#container, #container2, .chart-container {
+				height:514px;
+			}
+		}
+		@media (max-width: 599px) {
+			.chart-container {
+				height: 460px;
+				overflow: hidden;
+			}
 		}
 	}
 	.legend-box {
@@ -1117,12 +1158,15 @@ aside {
 			width: 27%;
 		}
 		@media (max-width: 991px) {
-			width: 33%;
+			width: 23%;
+		}
+		@media (max-width: 800px) {
+			padding-right: 20px;
 		}
 		@media (max-width: 599px) {
 			width: 100%;
 			margin: 10px 0;
-			padding: 0 15px;
+			padding: 0;
 		}
 		.legend-head {
 			color: @green;
@@ -1147,7 +1191,10 @@ aside {
 		}
 	}
 	.chart-table {
-		padding: 15px 15px 18px;	
+		padding: 15px 15px 28px;	
+		&.table-responsive {
+			padding-bottom: 48px;
+		}
 	}
 	.dataTables_info, 
 	.dataTables_paginate,
@@ -1219,7 +1266,7 @@ a.DTTT_button,
 .dataTables_length {
 	display: none;
 }
-.dataTables_filter {//search
+.dataTables_filter {//search for data page
 		position: absolute;
     right: 15px;
     top: -30px;
@@ -1255,6 +1302,9 @@ a.DTTT_button,
 		    }
     	}
     }
+}
+.high-chart .dataTables_filter {
+	display: none;
 }
 a.DTTT_button.DTTT_button_xls, a.DTTT_button.DTTT_button_csv {
 	border: 0;
@@ -1300,7 +1350,7 @@ div.DTTT_container {
 	float: left;
 }
 .high-chart div.DTTT_container {
-	bottom: -18px;
+	bottom: -28px;
 	left: 0;
 	right: auto;
 	a.DTTT_button.DTTT_button_xls {
@@ -1440,6 +1490,9 @@ table.dataTable tr th {
 }
 table.dataTable tr th, table.dataTable tr td {
 	padding-left: 20px;
+}
+table.dataTable tr.relative th:nth-child(2), table.dataTable tr.relative td:nth-child(2) {
+	padding-left: 0;
 }
 table.dataTable tr th.toggle-icon-col, table.dataTable tr td.toggle-icon{
 	padding-right: 0px;
@@ -1974,14 +2027,17 @@ tr.row-grey.even{
 .dataTables .relative td.toggle-icon {
 	position: absolute !important;
 	height: 50px;//100%
-	width: 100%;
 	padding: 0;
 }
 .dataTables thead .relative {
 	background: #159c02;
 }
+.dataTables .relative td.toggle-icon {
+	width: 100%;	
+}
 .dataTables .relative th.toggle-icon-col {
 	opacity: 0;
+	width: 1px;
 }
 table.dataTable.dtr-inline.collapsed tbody td:first-child::before, table.dataTable.dtr-inline.collapsed tbody th:first-child::before {
 	border: 0 !important;
@@ -1992,4 +2048,15 @@ table.dataTable.dtr-inline.collapsed tbody tr.parent td:first-child::before, tab
 }
 table.dataTable {
 	margin-bottom: 0 !important;
+}
+.table-responsive {
+	border: 0;
+}
+.open > .dropdown-menu {
+	display: none;
+}
+.dropdown.district-text-parent:hover {
+	ul {
+		display: block;
+	}
 }

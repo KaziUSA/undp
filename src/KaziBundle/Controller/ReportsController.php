@@ -32,7 +32,7 @@ class ReportsController extends Controller
         $em = $this->getDoctrine()->getManager();
         $criteria = array('status'=> 1);
 
-        $entities = $em->getRepository('AppBundle:Document')->findBy($criteria);
+        $entities = $em->getRepository('AppBundle:Document')->findBy($criteria, array('date'=>'desc'));
 
         return array(
             'entities' => $entities,

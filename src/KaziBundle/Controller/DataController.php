@@ -36,7 +36,7 @@ class DataController extends Controller
         $fileInfo = $this->getCsvData($file_name);*/
 
         return array(
-            'round' => 'round6.html.twig',
+            'round' => 'round7.html.twig',
             //'fileInfo' => $fileInfo
             );
     }
@@ -69,6 +69,9 @@ class DataController extends Controller
         }
         if($slug == 6) {
             $sheet_name = 'uploaded_form_ir295a';
+        }
+        if($slug == 7) {
+            $sheet_name = 'uploaded_form_xdn830';
         }
 
         $fileInfo = $this->getCsvData($file_name, $sheet_name);

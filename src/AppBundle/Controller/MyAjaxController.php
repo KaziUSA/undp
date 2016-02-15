@@ -429,7 +429,112 @@ class MyAjaxController extends Controller
 			// }
 			// $obj['label']=$data_district;
 			// $obj['xlabel']='District';
+			if(count($data_district)<4){
+				$i=0;
+				$pos=0;
+				$obj['total']=0;
+				$flag=0; // For hiding legend of grouped columns with same name
+				$obj['stack']='normal'; //For stack chart	
+				if(count($data_month)<3){
+					$obj['stack']='';
+				}			
+				foreach ($data_district as $district) {				
+					$j=0;				
+					foreach ($obj['answer'] as $num){	
+						$obj['series'][$i]['name']= $num;
+						if($flag==0){						
+							$obj['series'][$i]['id']= $num; 
+						}					
+						$obj['series'][$i]['stack']=$district;
+						$obj['series'][$i]['color']=$colors[$j];//For making the color same on different stacks of grouped columns
+						if($flag>0){										
+							$obj['series'][$i]['linkedTo'] = $num;						
+						}
+						foreach ($data_month as $month){				
+							$results= $em->getRepository('AppBundle\Entity\Query')->getMonthDistrict($data_question,$num,$district,$month,$data_disability,$data_year);
 
+							if(count($data_district)==1){
+								foreach ($results as $arr){		        		
+					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
+					        		$obj['total'] += (int)$arr['count']; 
+					    		}
+					    	}
+					    	else{
+					    		if($pos==0){
+					    			foreach ($results as $arr){	
+					    				$obj['series'][$i]['data'][]= (int)$arr['count'];  				        		  
+						        		$obj['total'] += (int)$arr['count']; 
+					    			}
+					    			for($k=0;$k<count($data_district)-1;$k++){
+					    				$obj['series'][$i]['data'][]= 0;
+					    			}
+					    		}
+					    		elseif ($pos==1) {
+					    			$obj['series'][$i]['data'][]= 0;
+
+					    			foreach ($results as $arr){		        		
+						        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
+						        		$obj['total'] += (int)$arr['count']; 
+					    			}
+					    			for($k=0;$k<count($data_district)-2;$k++){
+					    				$obj['series'][$i]['data'][]= 0;
+					    			}	
+					    		}				
+								elseif ($pos==3) {
+					    			$obj['series'][$i]['data'][]= 0;
+					    			$obj['series'][$i]['data'][]= 0;
+					    			foreach ($results as $arr){		        		
+						        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
+						        		$obj['total'] += (int)$arr['count']; 
+					    			}
+					    			for($k=0;$k<count($data_district)-3;$k++){
+					    				$obj['series'][$i]['data'][]= 0;
+					    			}	
+					    		}	
+							}	
+						}				
+						$i++;
+						$j++;
+						
+					}
+					$flag++;
+					$pos++;				
+				}
+				
+
+				// $obj['xlabel']='Month';
+				if(count($data_district)==0){
+					$obj['label']=$data_month;
+				}
+				else{	
+					$i=0;
+					foreach ($data_month as $month){
+						$obj['label'][$i]['name'][]=$month;
+						foreach ($data_district as $district){
+						// if($gender=="Male"){
+						// 	$catname="M";
+						// }
+						// elseif($gender=="Female"){
+						// 	$catname="F";
+						// }
+						// elseif($gender=="Other"){
+						// 	$catname="O";
+						// }
+							$obj['label'][$i]['categories'][]=$district;
+						}
+						$i++;
+					}
+				}
+				$obj['xgrouplabel']['style']='';
+				$obj['xgrouplabel']['style']['color']='#898989';
+				$obj['xgrouplabel']['style']['fontWeight']='bold';
+				$obj['xgrouplabel']['style']['textTransform']='uppercase';
+				if(count($data_month)>4){
+				$obj['xgrouplabel']['style']['fontSize']='9px';
+			}
+				$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='#898989';
+				$obj['smallfont']='5px';
+			}	
 			$i=0;			
 			$district_span=count($data_month);	
 			$j=count($data_month)*count($data_district);			
@@ -487,7 +592,10 @@ class MyAjaxController extends Controller
 			$pos=0;
 			$obj['total']=0;
 			$flag=0; // For hiding legend of grouped columns with same name
-			$obj['stack']='normal'; //For stack chart			
+			$obj['stack']='normal'; //For stack chart
+			if(count($data_month)<3){
+					$obj['stack']='';
+				}					
 			foreach ($data_gender as $gender) {				
 				$j=0;				
 				foreach ($obj['answer'] as $num){	
@@ -552,7 +660,7 @@ class MyAjaxController extends Controller
 			
 
 			// $obj['xlabel']='Month';
-			if(count($data_gender)==1){
+			if(count($data_gender)==0){
 				$obj['label']=$data_month;
 			}
 			else{	
@@ -575,7 +683,13 @@ class MyAjaxController extends Controller
 				}
 			}
 			$obj['xgrouplabel']['style']='';
-			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
+			$obj['xgrouplabel']['style']['color']='#898989';
+			$obj['xgrouplabel']['style']['fontWeight']='bold';
+			$obj['xgrouplabel']['style']['textTransform']='uppercase';
+			if(count($data_month)>9){
+				$obj['xgrouplabel']['style']['fontSize']='9px';
+			}
+			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='#898989';
 			$obj['smallfont']='5px';
 			$i=0;			
 			$gender_span=count($data_month);
@@ -872,7 +986,7 @@ class MyAjaxController extends Controller
 			
 
 			// $obj['xlabel']='District';
-			if(count($data_gender)==1){
+			if(count($data_gender)==0){
 				$obj['label']=$data_district;
 			}
 			else{	
@@ -895,10 +1009,13 @@ class MyAjaxController extends Controller
 				}
 			}
 			$obj['xgrouplabel']['style']='';
-			if(count($data_district)>9 && count($data_gender)>1){
+			$obj['xgrouplabel']['style']['color']='#898989';
+			$obj['xgrouplabel']['style']['fontWeight']='bold';
+			$obj['xgrouplabel']['style']['textTransform']='uppercase';
+			if(count($data_district)>9){
 				$obj['xgrouplabel']['style']['fontSize']='9px';
 			}
-			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
+			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='#898989';
 			$obj['smallfont']='5px';
 			$i=0;			
 			$gender_span=count($data_district);	
@@ -1138,7 +1255,7 @@ class MyAjaxController extends Controller
 			
 
 			// $obj['xlabel']='Ethnicity';
-			if(count($data_gender)==1){
+			if(count($data_gender)==0){
 				$obj['label']=$data_ethnicity;
 			}
 			else{	
@@ -1161,7 +1278,13 @@ class MyAjaxController extends Controller
 				}
 			}
 			$obj['xgrouplabel']['style']='';
-			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
+			$obj['xgrouplabel']['style']['color']='#898989';
+			$obj['xgrouplabel']['style']['fontWeight']='bold';
+			$obj['xgrouplabel']['style']['textTransform']='uppercase';
+			if(count($data_ethnicity)>9){
+				$obj['xgrouplabel']['style']['fontSize']='9px';
+			}
+			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='#898989';
 			$obj['smallfont']='5px';
 			$i=0;			
 			$ethnicity_span=count($data_gender);
@@ -1290,7 +1413,7 @@ class MyAjaxController extends Controller
 			
 
 			// $obj['xlabel']='Age';
-			if(count($data_gender)==1){
+			if(count($data_gender)==0){
 				$obj['label']=$data_age;
 			}
 			else{	
@@ -1313,7 +1436,13 @@ class MyAjaxController extends Controller
 				}
 			}
 			$obj['xgrouplabel']['style']='';
-			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='red';
+			$obj['xgrouplabel']['style']['color']='#898989';
+			$obj['xgrouplabel']['style']['fontWeight']='bold';
+			$obj['xgrouplabel']['style']['textTransform']='uppercase';
+			if(count($data_district)>9){
+				$obj['xgrouplabel']['style']['fontSize']='9px';
+			}
+			$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='#898989';
 			$obj['smallfont']='5px';
 			$i=0;
 			// foreach ($data_month as $month){
