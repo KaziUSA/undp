@@ -40,29 +40,45 @@
                         <form class="form-bordered" action="" method="post" autocomplete="off">
                           <div class="form-group">
                             <label for="inputName" class="control-label">Name *</label>
-                            <input type="text" class="form-control" id="inputName" placeholder="">
+                            <input type="text" class="form-control" id="inputName" name="name" placeholder="">
                             <span class="required name-required">This field is required.</span>
                           </div>
                           <div class="form-group">
                             <label for="inputAddress" class="control-label">Address *</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="">
+                            <input type="text" class="form-control" id="inputAddress" name="address" placeholder="">
                             <span class="required address-required">This field is required.</span>
                           </div>
                           <div class="form-group">
                             <label for="inputEmail" class="control-label">Email *</label>
-                            <input type="email" class="form-control" id="inputEmail" placeholder="">
+                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="">
                             <span class="required email-required">This field is required.</span>
                             <span class="required good-email-required">Please type valid email address.</span>
                           </div>
                           <div class="form-group">
                             <label for="inputPhone" class="control-label">Phone *</label>
-                            <input type="text" class="form-control" id="inputPhone" placeholder="">
+                            <input type="text" class="form-control" id="inputPhone" name="phone" placeholder="">
                             <span class="required phone-required">This field is required.</span>
                           </div>
                           <div class="form-group">
                             <label for="textMessage" class="control-label">Message *</label>
-                            <textarea id="textMessage" class="form-control" cols="30" rows="10"></textarea>
+                            <textarea id="textMessage" name="message" class="form-control" cols="30" rows="10"></textarea>
                             <span class="required message-required">This field is required.</span>
+                          </div>
+                          <div class="form-group">
+                            <!-- <label for="captcha1" class="control-label">Captcha *</label> -->
+                            <p class="captcha-text">Please enter the letters you see below.</p>
+
+                            <div class="captcha-img">
+                              <div id="imgdiv"><img id="img" src="/captcha/captcha.php" /></div>
+                              <span id="reload" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                            </div>
+                            <!-- <img id="reload" src="/captcha/reload.png" /> -->
+
+                            <input id="captcha1" class="form-control" name="captcha" type="text">
+
+                            <span class="required captcha-required">This field is required.</span>
+                            <span class="required good-captcha-required">Please type the correct captcha.</span>
+
                           </div>
                           <div class="form-group">
                             <!--<input type="submit" id="submit" class="btn btn-bordered" value="Submit">-->
@@ -121,66 +137,117 @@ $('#save').click(function()
   });
 
 //for contact form
-var m=0, n=0;
-$('#submit').click(function() {  
-  var mail = {
-    name:$("#inputName").val(), 
-    address:$("#inputAddress").val(),
-    email:$("#inputEmail").val(),
-    phone:$("#inputPhone").val(),
-    message:$("#textMessage").val()
-  };  
-  //validate part here
-  if(mail.name == '' || mail.address == '' || mail.email == '' || mail.phone == '' || mail.message == '') {
-    if(mail.name == '') {
-      $('.name-required').css({'display':'block'});
-      $("#inputName").focus();
-      return false;
-    }
-    if(mail.address == '') {
-      $('.address-required').css({'display':'block'});
-      $("#inputAddress").focus();
-      return false;
-    }
-    if(mail.email == '') {
-      $('.email-required').css({'display':'block'});
-      $("#inputEmail").focus();
-      return false;
-    }
-    if(!validateEmail(mail.email)) {
-      $('.good-email-required').css({'display':'block'});
-      $("#inputEmail").focus();
-      return false;
-    }
-    if(mail.phone == '') {
-      $('.phone-required').css({'display':'block'});
-      $("#inputPhone").focus();
-      return false;
-    }
-    if(mail.message == '') {
-      $('.message-required').css({'display':'block'});
-      $("#textMessage").focus();
-      return false;
-    }
-  } else {
-    m=m+1;
-    console.log("Request Sent");
-    //console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
+$(document).ready(function() {
+  $("#reload").click(function() {  
+    $("img#img").remove();
+    var id = Math.random();
+        $('<img id="img" src="/captcha/captcha.php?id='+id+'"/>').appendTo("#imgdiv");
+     id ='';
+  });
 
-    $.post('{{path('contactus')}}',               
-      { data_name:mail.name, data_address:mail.address, data_email:mail.email, data_phone:mail.phone, data_message:mail.message
-      }, 
-        function(response) {
-          n=n+1
-          if (n==m){
-            //console.log("Your message has been sent successfully!");
-            $("#contact-form").html('<h3>Your message has been sent successfully! <a classs="btn btn-bordered send-again" href="{{path('contactus')}}">Send message again?</a></h3>');
+  var m=0, n=0;
+  $('#submit').click(function() {  
+    var mail = {
+      name:$("#inputName").val(), 
+      address:$("#inputAddress").val(),
+      email:$("#inputEmail").val(),
+      phone:$("#inputPhone").val(),
+      message:$("#textMessage").val(),
+      captcha:$("#captcha1").val(),
+    };  
+    //validate part here
+    if(mail.name == '' || mail.address == '' || mail.email == '' || mail.phone == '' || mail.message == '' || mail.captcha == '') {
+      if(mail.name == '') {
+        $('.name-required').css({'display':'block'});
+        $("#inputName").focus();
+        return false;
+      } else {
+        $('.name-required').css({'display':'none'});
+      }
+      if(mail.address == '') {
+        $('.address-required').css({'display':'block'});
+        $("#inputAddress").focus();
+        return false;
+      } else {
+        $('.address-required').css({'display':'none'});
+      }
+      if(mail.email == '') {
+        $('.email-required').css({'display':'block'});
+        $("#inputEmail").focus();
+        return false;
+      } else {
+        $('.email-required').css({'display':'none'});
+      }
+      if(!validateEmail(mail.email)) {
+        $('.good-email-required').css({'display':'block'});
+        $("#inputEmail").focus();
+        return false;
+      } else {
+        $('.good-email-required').css({'display':'none'});
+      }
+      if(mail.phone == '') {
+        $('.phone-required').css({'display':'block'});
+        $("#inputPhone").focus();
+        return false;
+      } else {
+        $('.phone-required').css({'display':'none'});
+      }
+      if(mail.message == '') {
+        $('.message-required').css({'display':'block'});
+        $("#textMessage").focus();
+        return false;
+      } else {
+        $('.message-required').css({'display':'none'});
+      }
+      if(mail.captcha == '') {
+        $('.captcha-required').css({'display':'block'});
+        $("#captcha1").focus();
+        return false;
+      } else {
+        $('.captcha-required').css({'display':'none'});
+      }
+    } else {
+      m=m+1;
+      console.log("Request Sent");
+      //console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
+
+      /*$.post('{{path('contactus')}}',               
+        { data_name:mail.name, data_address:mail.address, data_email:mail.email, data_phone:mail.phone, data_message:mail.message, data_captcha:mail.captcha
+        }, 
+          function(response) {
+            n=n+1
+            //if(response) {
+              console.log("Your message has been sent successfully!");
+              $("#contact-form").html('<h3>Your message has been sent successfully! <a classs="btn btn-bordered send-again" href="{{path('contactus')}}">Send message again?</a></h3>');
+            } else {
+              console.log('Error');
+              $('.good-captcha-required').css({'display':'block'});
+            }
+          }        
+      );*/
+      var captcha = $("#captcha1").val();
+      var dataString = { name: mail.name, address: mail.address, email: mail.email, phone: mail.phone, message: mail.message, captcha: mail.captcha };
+      $.ajax({
+          type: "POST",
+          url: "/captcha/verify.php",
+          data: dataString,
+          success: function(html) {
+              //alert(html);//what ever echo-ed
+              if(html == 'Incorrect') {
+                //console.log('Error');
+                //alert(html);
+                $('.good-captcha-required').css({'display':'block'});
+              } else {
+                console.log("Your message has been sent successfully!");
+                $("#contact-form").html('<h3>Your message has been sent successfully! <a classs="btn btn-bordered send-again" href="{{path('contactus')}}">Send message again?</a></h3>');  
+              }
           }
-        }        
-    );
-    return false;
-  }//end else
-});
+      });
+      return false;
+    }//end else
+  });
+
+});//end document ready
 </script>
 
 {% endblock %}

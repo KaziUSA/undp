@@ -44,7 +44,7 @@ class CsvController extends Controller
     public function uploadAction($file)//PhaxAction $phaxAction
     {
         // USE THIS TO RUN THIS ACTION
-        // sf phax:action CsvController upload  
+        // sf phax:action CsvController upload  -p file:round7/test1
         
         
         echo "******************************************************\n";
@@ -58,8 +58,8 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        //$this->getCsvData('/var/www/html/web/uploads/'.$file.".xlsx");
-        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/'.$file.".xlsx");
+        $this->getCsvData('/var/www/html/web/uploads/'.$file.".xlsx");
+        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/'.$file.".xlsx");
         
         
         echo "\n";
@@ -85,9 +85,9 @@ class CsvController extends Controller
         
             $interviewer = $this->addInterviewer($row[1], 'accountability');
             $survey = new Survey();
-            $survey->setTerm(6); //MAKE SURE TO CHANGE THIS EVERY TERM
+            $survey->setTerm(7); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
-            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2015-12-15'));
+            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2016-01-15'));
             
             $survey->setAge($this->getAgeByData($row[5]));
         
@@ -96,17 +96,17 @@ class CsvController extends Controller
             $survey->setEthnicity($this->getEthnicityByData($row[7]));
         
             
-            $survey->setOccupation($this->getOccupationByData($row[9]));
+            $survey->setOccupation($this->getOccupationByData(trim($row[9])));
         
-            if ($row[11] == "no_difficulty"){
+            if ($row[11] == "No difficulty"){
                 $survey->setDisability(0);
             }else{
                 $survey->setDisability(1);
             }
             
-            $survey->setDistrict($this->getDistrictByData($row[0]));
+            $survey->setDistrict($this->getDistrictByData($row[2]));
         
-            $survey->setVdc($this->getVdcByData($row[3], $row[0]));
+            $survey->setVdc($this->getVdcByData($row[3], $row[2]));
         
             $survey->setWard($row[4]);
             
@@ -140,11 +140,11 @@ class CsvController extends Controller
             $this->createSurveyResponse($survey, 23, $row[48]);
         
             // Question 10
-            $this->createSurveyResponse($survey, 28, $row[51]);
+            //$this->createSurveyResponse($survey, 28, $row[51]);
             // Question 11
-            $this->createSurveyResponse($survey, 29, $row[52]);
+            //$this->createSurveyResponse($survey, 29, $row[52]);
             // Question 12
-            $this->createSurveyResponse($survey, 30, $row[57]);
+            //$this->createSurveyResponse($survey, 30, $row[57]);
             
         
             // Question 1a
@@ -235,7 +235,7 @@ class CsvController extends Controller
                     //TODO:: Make sure date format anywhere is captured properly and not just the second column
                     if (($columnCount == 2) && ($rowCount > 0)){
                         $value = $cell->getValue();
-                        $value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
+                        //$value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
                         
                     }else{
                         $value = $cell->getCalculatedValue();    
@@ -362,6 +362,10 @@ class CsvController extends Controller
         if ($data == "don - t - know"){
             $response = "Dont't Know";   
         }
+        if ($data == "don-t-know"){
+            $response = "Dont't Know";   
+        }
+        
         
         
         
@@ -417,6 +421,9 @@ class CsvController extends Controller
         if ($data == "Farmer/laborer"){
             $id = 1;
         }
+        if ($data == "Farmer/Laborer"){
+            $id = 1;
+        }
         if ($data == "skilled_worker"){
             $id = 2;
         }
@@ -454,6 +461,9 @@ class CsvController extends Controller
         }
         
         if ($data == "other"){
+            $id = 5;   
+        }
+        if ($data == "Other"){
             $id = 5;   
         }
         if ($data == "Others"){
@@ -527,16 +537,28 @@ class CsvController extends Controller
             case "short_term_she":
                 $id = 7;
                 break;
+            case "Short-term shelter (tent/shelterbox)":
+                $id = 7;
+                break;
             case "short_term_shelter__tent_shelter":
                 $id = 7;
                 break;
             case "long_term_shelter__housing":
                 $id = 8;
                 break;
+            case "Long-term shelter (housing)":
+                $id = 8;
+                break;        
             case "clean_water":
                 $id = 9;
                 break;
+            case "Clean water":
+                $id = 9;
+                break;
             case "financial_support":
+                $id = 10;
+                break;
+            case "Financial support":
                 $id = 10;
                 break;
             case "education":
@@ -545,25 +567,50 @@ class CsvController extends Controller
             case "healthcare":
                 $id = 12;
                 break;
+            case "Healthcare":
+                $id = 12;
+                break;
             case "psychosocial_counseling":
+                $id = 13;
+                break;
+            case "Psychosocial counseling":
                 $id = 13;
                 break;
             case "seeds_and_fertilizers":
                 $id = 14;
                 break;
+            case "Seeds and fertilizers":
+                $id = 14;
+                break;
             case "food":
+                $id = 15;
+                break;
+            case "Food":
                 $id = 15;
                 break;
             case "toilets_sanitation":
                 $id = 16;
                 break;
+            case "Toilets/sanitation":
+                $id=16;
+                break;
             case "livelihoods":
                 $id = 17;
                 break;
+            case "Livelihoods":
+                $id = 17;
+                break;
+            
             case "housing_inspections":
                 $id = 18;
                 break;
+            case "Housing inspections":
+                $id = 18;
+                break;
             case "other":
+                $id = 19;
+                break;
+            case "Other":
                 $id = 19;
                 break;
             default:
@@ -632,11 +679,11 @@ class CsvController extends Controller
      * @Route("/fix")
      * @Template()
      */
-    public function fixAction($file, $rowCount)//PhaxAction $phaxAction
+    public function fixAction($file)//PhaxAction $phaxAction
     {
         // USE THIS TO RUN THIS ACTION
-        // sf phax:action CsvController upload  
-        $this->rowCount = $rowCount;
+        // sf phax:action CsvController fix  
+        $this->rowCount = 0;
         
         echo "******************************************************\n";
         echo "*             WELCOME TO CSV FIXER                   *\n";
@@ -648,7 +695,7 @@ class CsvController extends Controller
         echo "\n";
         
         
-        echo "DONE:";
+        
         //$this->getCsvData('/var/www/html/web/uploads/'.$file.".xlsx");
         $this->readCsvData('/Users/shrestha/Sites/undp/web/uploads/'.$file.".xlsx");
         
@@ -667,24 +714,14 @@ class CsvController extends Controller
     }
     private function fixCsvData($row)
     {
-           $answer = $this->getYesNoAnswer($row[43]);
-        
-        $surveyResponse = $this->getDoctrine()
-               ->getRepository('AppBundle:SurveyResponse')
-               ->findOneBy(array(
-                   'question' => 23,
-                   'survey' => $this->rowCount
-                ));
-        $answer = $this->getYesNoAnswer($row[43]);
-        if ($answer){
-        $surveyResponse->setAnswer($answer);
-        
-        
-        $em = $this->getDoctrine()->getManager();
-            $em->persist($surveyResponse);
-            $em->flush();
+        if (substr($row[11], 0,1) == "Y"){
+            echo 6947+$this->rowCount .", ";   
         }
+        
+        
+        
         $this->rowCount++;
+        return true;
             
     }
     private function getYesNoAnswer($data)

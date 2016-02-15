@@ -808,6 +808,10 @@ a.show-more-report {
 			&:focus {
 				border-color: @white !important;
 			}
+			&#captcha1 {
+				text-indent: 180px;
+				margin-bottom: 20px;
+			}
 		}
 		textarea {
 			background: url(../img/frontend/textarea-border.png) repeat 0 0;
@@ -820,6 +824,24 @@ a.show-more-report {
     		padding-top: 8px !important;
     		background-attachment: local;
 		}
+	}
+	.captcha-text {
+		font-size: 16px;
+		margin: 10px 0 0px 0px;
+	}
+	.captcha-img {		
+		background: #99bc44 none repeat scroll 0 0;
+		position: absolute;
+		left: 0;
+		top: 20px;
+		padding-right: 10px;
+	}
+	#imgdiv {
+		display: inline-block;
+		margin: 10px 0 10px 0px;
+	}
+	#reload {
+		cursor: pointer;
 	}
 }
 .c-box-info a:hover{
@@ -864,7 +886,7 @@ body {
 			padding-left: 0;
 		}
 		.nav .open > a {
-			background: @pag-title-dark-bg;
+			background: @pag-title-bg;
 		}
 		.dropdown-menu {
 			background: @pag-title-bg;
@@ -881,10 +903,12 @@ body {
 				}
 			}
 		}
-		.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover,
-		.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover,
-		.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+		.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > li > a:hover,
+		.nav-tabs > li > a:hover {
 			background-color: @pag-title-dark-bg;
+		}
+		.dropdown-menu > .active > a:focus, .dropdown-menu > li > a:focus, .nav-tabs > li > a:focus {
+			background-color: @pag-title-dark-bg;//while clicking the menu is focussed so.
 		}
 		.nav-tabs {
 			li {
@@ -2027,4 +2051,12 @@ table.dataTable {
 }
 .table-responsive {
 	border: 0;
+}
+.open > .dropdown-menu {
+	display: none;
+}
+.dropdown.district-text-parent:hover {
+	ul {
+		display: block;
+	}
 }
