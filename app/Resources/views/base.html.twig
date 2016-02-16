@@ -44,15 +44,22 @@
             {%block navigation %}
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> 
+                    {#<div class="dropdown profile-element"> 
                         <a href="/">
                             <img src="/img/undp.png" />    
                         </a>
-                        
                     </div>
                     <div class="logo-element">
                         UNDP
-                    </div>
+                    </div>#}
+
+                  <a class="navbar-brand" href="/">
+                    <img src="/img/frontend/logo.png" alt="">
+                    <span class="logo-title">
+                        <span class="logo">Inter-Agency Common Feedback Project</span>
+                        <span class="logo-slogan">Nepal Earthquake 2015</span>
+                    </span>
+                  </a>
                 </li>
                 <li class="{% if (app.request.get('_route') == 'interviewer') or (app.request.get('_route') == 'age') or (app.request.get('_route') == 'gender') or (app.request.get('_route') == 'ethnicity') %} active {% endif %}">
                     <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">USER INFO</span> <span class="fa arrow"></span></a>
@@ -97,11 +104,9 @@
         <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
         <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            
-            <img src="/img/logo.png" width="50px" /><span class="m-r-sm text-muted welcome-message logo-grey">INTER-AGENCY COMMON FEEDBACK PROJECT</span>
-            
-        </div>
+        {#<div class="navbar-header">            
+            <img src="/img/logo.png" width="50px" /><span class="m-r-sm text-muted welcome-message logo-grey">INTER-AGENCY COMMON FEEDBACK PROJECT</span>            
+        </div>#}
             <ul class="nav navbar-top-links navbar-right">
                 
                 <li>
