@@ -1053,7 +1053,7 @@
                       tooltip: {
                             formatter: function () {
                               var pcnt = (this.y / response.result.total) * 100;                              
-                                return this.point.y +' ('+ Highcharts.numberFormat(pcnt) + '%'+') people say<br>' +
+                                return Highcharts.numberFormat(pcnt) +'%'+' ('+ this.point.y + ') people say<br>' +
                                 this.series.name.toLowerCase();
                                   + this.point.name.toLowerCase();
                             }
