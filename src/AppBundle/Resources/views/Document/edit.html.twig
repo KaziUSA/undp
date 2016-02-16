@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Document edit</h1>
 
-    {{ form(edit_form) }}
+    {{ form(edit_form, {'attr': {'novalidate': 'novalidate'}}) }}
 
 
     <a href="{{ path('document') }}">

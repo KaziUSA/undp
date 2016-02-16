@@ -5,7 +5,7 @@
 	<h1>Upload File</h1>
 
 <form action="new" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+    {{ form_widget(form, {'attr': {'novalidate': 'novalidate'}}) }}
 <br>
     <input id="JQueryClick" type="submit" value="Upload Document" />
 </form>
