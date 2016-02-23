@@ -1492,7 +1492,7 @@ table.dataTable tr th, table.dataTable tr td {
 	padding-left: 20px;
 }
 table.dataTable tr.relative th:nth-child(2), table.dataTable tr.relative td:nth-child(2) {
-	padding-left: 0;
+	//padding-left: 0;
 }
 table.dataTable tr th.toggle-icon-col, table.dataTable tr td.toggle-icon{
 	padding-right: 0px;
@@ -2058,5 +2058,98 @@ table.dataTable {
 .dropdown.district-text-parent:hover {
 	ul {
 		display: block;
+	}
+}
+
+/* Fixed table header in data page */
+.page-data .dataTables_wrapper {
+  position: relative;
+}
+.page-data a.DTTT_button.DTTT_button_csv {
+	position: fixed;
+  right: 160px;
+  top: 110px;
+	z-index: 1;
+}
+.page-data .dataTables thead .relative {
+	/* position: fixed;
+	  top: 140px;
+	  z-index: 1; */
+	//Table gets messed if you fixed header
+	/* opacity: 0; */
+  width: 100%;
+}
+.page-data div.DTTT_container {
+	z-index: 2;
+}
+.page-data div.dataTables_info {
+	position: fixed;
+	bottom: 41px;
+	height: 32px;
+	z-index: 1;
+	padding-left: 388px;
+	width: 100%;
+}
+.page-data a.DTTT_button.DTTT_button_xls {
+	position: fixed;
+	bottom: 44px;
+	z-index: 1;
+}
+.page-data .dataTables_filter {
+	position: fixed;
+	top: 110px;
+	z-index: 100;
+}
+.page-data div.dataTables_paginate {
+	bottom: 39px;
+  position: fixed;
+  z-index: 2;
+}
+.page-data .pagination > li > a, 
+.page-data .pagination > li > span {
+	border-top: 0;
+	border-bottom: 0;
+}
+.page-data .header-only {
+	/* position: fixed; */
+}
+.page-data .header-only #DataTables_Table_0 > tbody {
+	/* opacity: 0; */
+}
+
+//fixed header
+/* tr.second {
+	position: fixed;
+} */
+body.page-data {	
+	padding-top: 140px;
+	.dataTables thead tr.second {
+		position: fixed;
+		z-index: 100;
+		width: 100%;
+		top: 140px;
+		th {
+			border-top: 0;
+		}
+	}
+	nav.navbar, 
+	.page-title {
+		position: fixed; width: 100%; z-index: 99;
+	}
+	nav.navbar {
+		top: 0;
+	}
+	.page-title {
+		top: 100px;
+	}
+	.page-data .dataTables_filter,
+	.DTTT_container {
+		z-index: 100;
+	}
+	a.DTTT_button.DTTT_button_csv {
+		right: 170px;
+	}
+	.share-icons, footer {
+		position: fixed;
 	}
 }
