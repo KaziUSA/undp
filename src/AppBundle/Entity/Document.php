@@ -68,7 +68,7 @@ class Document
      *
      * @ORM\Column(name="district", type="string", length=255, nullable=true)
      */
-    private $district;
+    private $district = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="DocumentType", inversedBy="documents")
