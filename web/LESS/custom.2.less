@@ -637,7 +637,8 @@ a.show-more-report {
 		color: @gray;
 	}
 }
-.r-box {
+//reports page
+.grid-view .r-box {
 	background: #88d8ef url(../img/frontend/report-thumb.png) no-repeat center 30%;
 	height: 150px;
 	margin-bottom: 30px;
@@ -678,6 +679,9 @@ a.show-more-report {
 			}
 		}
 	}
+}
+.list-view .r-box {
+
 }
 .share-icons {
 	margin-bottom: 0;
@@ -2153,4 +2157,18 @@ body.page-data {
 	.share-icons, footer {
 		position: fixed;
 	}
+}
+
+//list-view, grid-view
+.tab-view {
+	display: none;//temporary
+	position: absolute;
+	top: 0;
+	right: 0;
+	li {
+		float: left;
+	}
+}
+.filter.report-tab .district-text-parent .dropdown-menu {
+	min-width: 131px;
 }

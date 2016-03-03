@@ -6,7 +6,7 @@
 		<div class="page-title"><h3>Reports Archive</h3></div>
 	</div>
 	<div class="col-sm-9 col-md-9 col-lg-10 tab-col hidden-xs">
-		<div class="filter report-tab">
+		<div class="filter report-tab relative">
 		<!-- Nav tabs -->
 		<div class="feedback-tab">
 		  <ul class="nav nav-tabs pull-left" role="tablist">
@@ -24,6 +24,11 @@
 		    <li role="presentation"><a href="#others" class="others" aria-controls="others" role="tab" data-toggle="tab">Others</a></li>
 		  </ul>
 		</div>
+
+		<ul class="tab-view">
+			<li class="show-grid-view"><a href="#!">Grid View</a></li>
+			<li class="show-list-view"><a href="#!">List View</a></li>
+		</ul>
 
 		</div>
 	</div>
@@ -150,7 +155,7 @@
 							{% else %}			
 
 							<div class="filter report-tab">
-								<div class="filter report-tab visible-xs">
+								<div class="filter report-tab visible-xs relative">
 		<!-- Nav tabs -->
 		<div class="feedback-tab">
 		  <ul class="nav nav-tabs pull-left" role="tablist">
@@ -169,10 +174,15 @@
 		  </ul>
 		</div>
 
+		<ul class="tab-view">
+			<li class="show-grid-view"><a href="#!">Grid View</a></li>
+			<li class="show-list-view"><a href="#!">List View</a></li>
+		</ul>
+
 		</div>
 
 							  <!-- Tab panes -->
-							  <div class="tab-content">
+							  <div class="tab-content grid-view">
 							    <div role="tabpanel" class="tab-pane active" id="national">							    	
 										{% for entity in entities %}
 											{# TODO: need to change 'National Reports' to ID #}
@@ -347,10 +357,18 @@
 {% block scriptIncludes %}
 <script>
 	$(document).ready(function() {
+		//district tab width
+		function district_tab_width() {			
+			var district_text_width = $('.district-text-parent').width()+1;
+			$('.filter.report-tab .district-text-parent .dropdown-menu').css({
+				'min-width': district_text_width+'px',
+			});
+		}
 		//district text change
 		$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
 			//console.log($(this));			
 			$('.district-text').text('District Reports');
+			district_tab_width();
 
 			$('.ac-month').show();
 			$('.ac-district').hide();
@@ -358,9 +376,11 @@
 
 		$('.show-eng-text').click(function() {
 			$('.district-text').text('District Reports / English');
+			district_tab_width();
 		});
 		$('.show-nep-text').click(function() {
 			$('.district-text').text('District Reports / Nepali');
+			district_tab_width();
 		});
 		$('.show-eng-text, .show-nep-text').click(function() {
 			$('.ac-month').hide();
@@ -467,6 +487,32 @@
     filter_report_district('Rasuwa');
     filter_report_district('Sindhuli');
     filter_report_district('Sindhupalchowk');
+
+
+
+	  //show list view
+	  $('.show-list-view').click(function() {
+	  	if($('.main-content .tab-content').hasClass('grid-view')) {
+	    	$('.main-content .tab-content').removeClass('grid-view');
+	    }
+	  	if($('.main-content .tab-content').hasClass('list-view')) {
+	  	} 
+	  	else {
+	    	$('.main-content .tab-content').addClass('list-view');
+	    }
+	  });
+	  
+	  $('.show-grid-view').click(function() {
+	  	if($('.main-content .tab-content').hasClass('list-view')) {
+	    	$('.main-content .tab-content').removeClass('list-view');
+	    }
+
+	  	if($('.main-content .tab-content').hasClass('grid-view')) {
+	  	} 
+	  	else {
+	    	$('.main-content .tab-content').addClass('grid-view');
+	    }
+	  });
 	});
 </script>
 {% endblock %}
