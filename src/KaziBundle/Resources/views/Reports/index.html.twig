@@ -137,7 +137,7 @@
 				<div class="main-content">
 					<div class="wrapper clearfix"><!--wrapper remove or not-->
 						<div class="">
-							<!-- <div class="col-lg-2 col-md-4 col-sm-4">
+							<!-- <div class="col-lg-2 col-md-3 col-sm-4">
 								<div class="r-box">
 									<a href="#!" class="report-link"></a>
 							
@@ -182,16 +182,19 @@
 		</div>
 
 							  <!-- Tab panes -->
-							  <div class="tab-content grid-view">
+							  <div class="tab-content list-view">
 							    <div role="tabpanel" class="tab-pane active" id="national">							    	
 										{% for entity in entities %}
 											{# TODO: need to change 'National Reports' to ID #}
 											{% if entity.documenttype == 'National Reports' %}
-											<div class="col-lg-2 col-md-4 col-sm-4 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+											<div class="col-lg-2 col-md-3 col-sm-4 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
 												<div class="r-box">
 													<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
-															<span class="reports-name">{{ entity.name }}</span>
+															<span class="reports-overlay-table">
+																<span class="reports-name">{{ entity.name }}</span>
+															</span>
 														</span>
 													</a>
 											
@@ -220,11 +223,14 @@
 										{# TODO: need to change 'District Reports' to ID #}
 										{# Quickfix: Added district name as class #}
 										{% if (entity.documenttype == 'District Reports') and ((entity.language == 'english') or (entity.language == '')) %}
-										<div class="col-lg-2 col-md-4 col-sm-4 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
+										<div class="col-lg-2 col-md-3 col-sm-4 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
-															<span class="reports-name">{{ entity.name }}</span>
+															<span class="reports-overlay-table">
+																<span class="reports-name">{{ entity.name }}</span>
+															</span>
 														</span>
 												</a>
 										
@@ -253,11 +259,14 @@
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
 										{% if (entity.documenttype == 'District Reports') and (entity.language == 'nepali') %}
-										<div class="col-lg-2 col-md-4 col-sm-4 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
+										<div class="col-lg-2 col-md-3 col-sm-4 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
-															<span class="reports-name">{{ entity.name }}</span>
+															<span class="reports-overlay-table">
+																<span class="reports-name">{{ entity.name }}</span>
+															</span>
 														</span>
 												</a>
 										
@@ -285,11 +294,14 @@
 							    	{% for entity in entities %}
 										{# TODO: need to change 'Issue in Focus Reports' to ID #}
 										{% if entity.documenttype == 'Issue in Focus Reports' %}
-										<div class="col-lg-2 col-md-4 col-sm-4 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+										<div class="col-lg-2 col-md-3 col-sm-4 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
-															<span class="reports-name">{{ entity.name }}</span>
+															<span class="reports-overlay-table">
+																<span class="reports-name">{{ entity.name }}</span>
+															</span>
 														</span>
 												</a>
 										
@@ -315,11 +327,14 @@
 							    	{% for entity in entities %}
 										{# TODO: need to change these to ID #}
 										{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
-										<div class="col-lg-2 col-md-4 col-sm-4 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+										<div class="col-lg-2 col-md-3 col-sm-4 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
+														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
-															<span class="reports-name">{{ entity.name }}</span>
+															<span class="reports-overlay-table">
+																<span class="reports-name">{{ entity.name }}</span>
+															</span>
 														</span>
 												</a>
 										
@@ -501,7 +516,7 @@
 	    	$('.main-content .tab-content').addClass('list-view');
 	    }
 	  });
-	  
+
 	  $('.show-grid-view').click(function() {
 	  	if($('.main-content .tab-content').hasClass('list-view')) {
 	    	$('.main-content .tab-content').removeClass('list-view');

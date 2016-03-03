@@ -639,13 +639,18 @@ a.show-more-report {
 }
 //reports page
 .grid-view .r-box {
-	background: #88d8ef url(../img/frontend/report-thumb.png) no-repeat center 30%;
-	height: 150px;
+	//background: #88d8ef url(../img/frontend/report-thumb.png) no-repeat center 30%;
+	background: #88d8ef;
+	//height: 150px;
 	margin-bottom: 30px;
 	position: relative;
 	@media (min-width: 768px) {
 		background-size: 50%;
 		margin-right: 30px;
+	}
+	img {
+		width: 100%;
+		height: auto;
 	}
 	&:hover {
 		background-color: #6BC1DA;
@@ -660,6 +665,14 @@ a.show-more-report {
 			display: none;	
 			height: 100%;
 			width: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			.reports-overlay-table {
+				height: 100%;
+				width: 100%;
+				display: table;
+			}
 			.reports-name {
 				display: table-cell;
 				font-size: 16px;
@@ -675,7 +688,8 @@ a.show-more-report {
 	&:hover {
 		a.report-link {
 			.reports-overlay {
-				display: table;	
+				//display: table;	
+				display: block;
 			}
 		}
 	}
@@ -688,18 +702,20 @@ a.show-more-report {
 	position: absolute;
 	bottom: 0;
 	z-index: 1;
-	right: 3px;
+	right: 0px;
 	li {
 		background-color: @white;
 		float: left;
+		margin-right: 4px;
 		a {
 			background-position: center center;
 			background-repeat: no-repeat;
+			color: #3e7180;
 			display: block;
-			height: 33px;
-			line-height: 33px;
+			height: 31px;
+			line-height: 31px;
 			text-align: center;
-			width: 33px;
+			width: 31px;
 			&:before {
 				font-size: 18px;
 			}
@@ -707,8 +723,11 @@ a.show-more-report {
 		ul {
 			display: none;
 			position: absolute;
-			left: -150%;
+			left: -133%;
 			top: 0;
+			li {
+				margin-right: 0;
+			}
 		}
 		&:hover {
 			background-color: #f2f2f2;
@@ -2161,7 +2180,7 @@ body.page-data {
 
 //list-view, grid-view
 .tab-view {
-	display: none;//temporary
+	//display: none;//temporary
 	position: absolute;
 	top: 0;
 	right: 0;
