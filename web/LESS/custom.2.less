@@ -618,7 +618,7 @@ footer, footer a {
 .report {
 	.wrapper {
 		@media (min-width: 768px) {
-			padding-right: 0;			
+			//padding-right: 0;//removed for list-view
 		}
 	}
 }
@@ -693,14 +693,64 @@ a.show-more-report {
 			}
 		}
 	}
+	.share-icons {
+		bottom: 0;
+	}
 }
-.list-view .r-box {
+.list-view {
+	.share-icons {
+		top: 0;
+	}
+	.report-item {
+		float: left;
+		width: 100%;
+		@media screen {
 
+			@media (min-width: 768px) {				
+				width: 48%;
+				margin-right: 4%;
+				&:nth-child(2n) {
+					margin-right: 0;
+				}		
+			}
+
+			@media (min-width: 1200px) {				
+				width: 32%;
+				margin-right: 2%;
+				&:nth-child(2n) {
+					margin-right: 2%;//over-riding 768px css
+				}
+				&:nth-child(3n) {
+					margin-right: 0;
+				}
+			}
+			
+		}
+		.r-box {
+			border-bottom: 1px solid #dcdcdc;
+			height: 40px;
+			margin-bottom: 10px;
+			padding-top: 5px;
+			position: relative;
+			img {
+				display: none;
+			}
+			a {
+				color: #353436;
+			}
+			.share-icons {
+				li {
+					a {
+						color: #3e7180;
+					}
+				}
+			}
+		}
+	}
 }
 .share-icons {
 	margin-bottom: 0;
 	position: absolute;
-	bottom: 0;
 	z-index: 1;
 	right: 0px;
 	li {
@@ -717,13 +767,13 @@ a.show-more-report {
 			text-align: center;
 			width: 31px;
 			&:before {
-				font-size: 18px;
+				font-size: 16px;
 			}
 		}
 		ul {
 			display: none;
 			position: absolute;
-			left: -133%;
+			left: -93px;
 			top: 0;
 			li {
 				margin-right: 0;
@@ -1036,7 +1086,18 @@ body {
 .main-content {
 	background: #ffffff;
 	@media (min-width: 768px) {
-		min-height: 520px;
+		min-height: 525px;//for reports page having few reports
+	}
+	.filter {
+		.feedback-tab {
+			width: 100%;
+			@media (max-width: 767px) {
+				margin-bottom: 15px;
+			}
+		}
+		.tab-content {
+			padding: 0;
+		}
 	}
 }
 .search {
@@ -2180,7 +2241,7 @@ body.page-data {
 
 //list-view, grid-view
 .tab-view {
-	//display: none;//temporary
+	display: none;//temporary
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -2189,5 +2250,5 @@ body.page-data {
 	}
 }
 .filter.report-tab .district-text-parent .dropdown-menu {
-	min-width: 131px;
+	min-width: 146px;
 }
