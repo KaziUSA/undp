@@ -714,7 +714,7 @@ a.show-more-report {
 				}		
 			}
 
-			@media (min-width: 1200px) {				
+			/* @media (min-width: 1200px) {				
 				width: 32%;
 				margin-right: 2%;
 				&:nth-child(2n) {
@@ -723,7 +723,7 @@ a.show-more-report {
 				&:nth-child(3n) {
 					margin-right: 0;
 				}
-			}
+			} */
 			
 		}
 		.r-box {
@@ -1143,22 +1143,46 @@ body {
 		line-height: 40px;
 		margin-right: 20px;
 	}
-	.next, .prev {
-		background-repeat: no-repeat;
-		background-position: center center;
-		border-left: 1px solid #ffffff;
+}
+
+.question .next, 
+.question .prev,
+.tab-view li {
+	background-repeat: no-repeat;
+	background-position: center center;
+	border-left: 1px solid #ffffff;
+	height: 100%;
+	position: absolute;
+	width: 55px;
+	text-indent: -9999px;
+}
+.tab-view li {
+	height: 40px;//100% doesn't work
+	a {
 		height: 100%;
-		position: absolute;
-		width: 55px;
+		width: 100%;
+		display: block;
 	}
-	.next {
-		background-image: url(../img/frontend/icons/arrow-next.png);
-		right: 0;
-	}
-	.prev {
-		background-image: url(../img/frontend/icons/arrow-prev.png);
-		right: 55px;
-	}
+}
+.question .prev,
+.tab-view .show-grid-view {
+	right: 55px;
+}
+.question .next,
+.tab-view .show-list-view {
+	right: 0;
+}
+.question .next {
+	background-image: url(../img/frontend/icons/arrow-next.png);
+}
+.question .prev {
+	background-image: url(../img/frontend/icons/arrow-prev.png);
+}
+.tab-view .show-grid-view {
+	background-image: url(../img/frontend/icons/icon-grid.png);
+}
+.tab-view .show-list-view {
+	background-image: url(../img/frontend/icons/icon-list.png);
 }
 aside {
 	.filter {
@@ -2241,7 +2265,7 @@ body.page-data {
 
 //list-view, grid-view
 .tab-view {
-	display: none;//temporary
+	//display: none;//temporary
 	position: absolute;
 	top: 0;
 	right: 0;
