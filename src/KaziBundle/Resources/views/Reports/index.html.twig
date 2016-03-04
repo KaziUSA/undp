@@ -518,6 +518,12 @@
 	  		$('.report-item').removeClass('col-lg-2 col-md-3 col-sm-4');
 	  	}
 
+	  	if($('.report-item').hasClass('col-lg-6 col-md-6 col-sm-6')) {
+	  	}
+	  	else {
+	  		$('.report-item').addClass('col-lg-6 col-md-6 col-sm-6');
+	  	}
+
 	  	if($('.main-content .tab-content').hasClass('grid-view')) {
 	    	$('.main-content .tab-content').removeClass('grid-view');
 	    }
@@ -529,6 +535,10 @@
 	  });
 
 	  $('.show-grid-view').click(function() {
+	  	if($('.report-item').hasClass('col-lg-6 col-md-6 col-sm-6')) {	  		
+	  		$('.report-item').removeClass('col-lg-6 col-md-6 col-sm-6');
+	  	}
+	  	
 	  	if($('.report-item').hasClass('col-lg-2 col-md-3 col-sm-4')) {
 	  	}
 	  	else {
