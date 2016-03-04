@@ -1,7 +1,7 @@
 {% extends 'frontend.html.twig' %}
 
 {% block body -%}
-<div class="row has-tab">
+<div class="row has-tab row-no-padding">
 	<div class="col-sm-3 col-md-3 col-lg-2">
 		<div class="page-title"><h3>Reports Archive</h3></div>
 	</div>
@@ -9,7 +9,7 @@
 		<div class="filter report-tab relative">
 		<!-- Nav tabs -->
 		<div class="feedback-tab">
-		  <ul class="nav nav-tabs pull-left" role="tablist">
+		  <ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a href="#national" class="national" aria-controls="national" role="tab" data-toggle="tab">National Reports</a></li>	    
 		    <li role="presentation" class="dropdown district-text-parent">
 			    <a class="district-text dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -158,7 +158,7 @@
 								<div class="filter report-tab visible-xs relative">
 		<!-- Nav tabs -->
 		<div class="feedback-tab">
-		  <ul class="nav nav-tabs pull-left" role="tablist">
+		  <ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a href="#national" class="national" aria-controls="national" role="tab" data-toggle="tab">National Reports</a></li>	    
 		    <li role="presentation" class="dropdown district-text-parent">
 			    <a class="district-text dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -182,7 +182,7 @@
 		</div>
 
 							  <!-- Tab panes -->
-							  <div class="tab-content grid-view">
+							  <div class="tab-content">
 							    <div role="tabpanel" class="tab-pane active" id="national">							    	
 										{% for entity in entities %}
 											{# TODO: need to change 'National Reports' to ID #}
@@ -372,35 +372,42 @@
 {% block scriptIncludes %}
 <script>
 	$(document).ready(function() {
-		//district tab width
-		function district_tab_width() {			
-			var district_text_width = $('.district-text-parent').width()+1;
-			$('.filter.report-tab .district-text-parent .dropdown-menu').css({
-				'min-width': district_text_width+'px',
+		var winWidth = $(window).width();
+
+		if(winWidth > 992) {
+
+			//district tab width
+			function district_tab_width() {			
+				var district_text_width = $('.district-text-parent').width()+1;
+				$('.filter.report-tab .district-text-parent .dropdown-menu').css({
+					'min-width': district_text_width+'px',
+				});
+			}
+			//district text change
+			$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
+				//console.log($(this));			
+				$('.district-text').text('District Reports');
+				district_tab_width();
+
+				$('.ac-month').show();
+				$('.ac-district').hide();
 			});
-		}
-		//district text change
-		$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
-			//console.log($(this));			
-			$('.district-text').text('District Reports');
-			district_tab_width();
 
-			$('.ac-month').show();
-			$('.ac-district').hide();
-		});
+			$('.show-eng-text').click(function() {
+				$('.district-text').text('District Reports / English');
+				district_tab_width();
+			});
+			$('.show-nep-text').click(function() {
+				$('.district-text').text('District Reports / Nepali');
+				district_tab_width();
+			});
+			$('.show-eng-text, .show-nep-text').click(function() {
+				$('.ac-month').hide();
+				$('.ac-district').show();
+			});
 
-		$('.show-eng-text').click(function() {
-			$('.district-text').text('District Reports / English');
-			district_tab_width();
-		});
-		$('.show-nep-text').click(function() {
-			$('.district-text').text('District Reports / Nepali');
-			district_tab_width();
-		});
-		$('.show-eng-text, .show-nep-text').click(function() {
-			$('.ac-month').hide();
-			$('.ac-district').show();
-		});
+		}//end if
+
 
 		//show more report: removed this functionality from district tab
 		/*function show_more(show, showme) {
@@ -538,6 +545,14 @@
 	    	$('.main-content .tab-content').addClass('grid-view');
 	    }
 	  });
+
+
+		if(winWidth <= 767) {
+			$('.main-content .tab-content').addClass('list-view');
+		} else {
+			$('.main-content .tab-content').addClass('grid-view');
+		}
+
 	});
 </script>
 {% endblock %}

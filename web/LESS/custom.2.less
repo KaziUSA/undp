@@ -985,10 +985,19 @@ body {
 			background-color: @pag-title-dark-bg;//while clicking the menu is focussed so.
 		}
 		.nav-tabs {
+			float: left;
+			@media (max-width: 600px) {
+				float: none;
+			}
 			li {
-				border-right: 1px solid @white;
-				&:first-child {
-					border-left: 1px solid @white;
+				@media (min-width: 768px) {					
+					border-right: 1px solid @white;
+					&:first-child {
+						border-left: 1px solid @white;
+					}
+				}
+				@media (max-width: 600px) {
+					width: 100%;					
 				}
 				&:hover {
 					background: @pag-title-dark-bg;
@@ -1006,6 +1015,9 @@ body {
 					padding: 0 17px;
 					margin: 0;
 					letter-spacing: 0;
+					@media (max-width: 992px) {
+						padding: 0 10px;
+					}
 				}
 			}
 		}
@@ -1153,19 +1165,25 @@ body {
 	border-left: 1px solid #ffffff;
 	height: 100%;
 	position: absolute;
-	width: 55px;
 	text-indent: -9999px;
 }
+.question .next, 
+.question .prev {
+	width: 55px;	
+}
 .tab-view li {
+	width: 55px;
 	height: 40px;//100% doesn't work
+	@media (max-width: 992px) {
+		width: 40px;
+	}
 	a {
 		height: 100%;
 		width: 100%;
 		display: block;
 	}
 }
-.question .prev,
-.tab-view .show-grid-view {
+.question .prev {
 	right: 55px;
 }
 .question .next,
@@ -1180,6 +1198,10 @@ body {
 }
 .tab-view .show-grid-view {
 	background-image: url(../img/frontend/icons/icon-grid.png);
+	right: 55px;
+	@media (max-width: 992px) {
+		right: 40px;
+	}
 }
 .tab-view .show-list-view {
 	background-image: url(../img/frontend/icons/icon-list.png);
@@ -2269,6 +2291,9 @@ body.page-data {
 	position: absolute;
 	top: 0;
 	right: 0;
+	@media (max-width: 767px) {
+		display: none;
+	}
 	li {
 		float: left;
 	}
