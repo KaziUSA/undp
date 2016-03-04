@@ -374,25 +374,16 @@
 	$(document).ready(function() {
 		var winWidth = $(window).width();
 
-		if(winWidth > 992) {
-
-			//district tab width
-			function district_tab_width() {			
-				var district_text_width = $('.district-text-parent').width()+1;
-				$('.filter.report-tab .district-text-parent .dropdown-menu').css({
-					'min-width': district_text_width+'px',
-				});
-			}
-			//district text change
-			$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
-				//console.log($(this));			
-				$('.district-text').text('District Reports');
-				district_tab_width();
-
-				$('.ac-month').show();
-				$('.ac-district').hide();
+		//district tab width
+		function district_tab_width() {			
+			var district_text_width = $('.district-text-parent').width()+1;
+			$('.filter.report-tab .district-text-parent .dropdown-menu').css({
+				'min-width': district_text_width+'px',
 			});
+		}
 
+		if(winWidth > 992) {
+			//district text change
 			$('.show-eng-text').click(function() {
 				$('.district-text').text('District Reports / English');
 				district_tab_width();
@@ -401,12 +392,21 @@
 				$('.district-text').text('District Reports / Nepali');
 				district_tab_width();
 			});
-			$('.show-eng-text, .show-nep-text').click(function() {
-				$('.ac-month').hide();
-				$('.ac-district').show();
-			});
-
 		}//end if
+		
+		$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
+			//console.log($(this));			
+			$('.district-text').text('District Reports');
+			district_tab_width();
+
+			$('.ac-month').show();
+			$('.ac-district').hide();
+		});
+
+		$('.show-eng-text, .show-nep-text').click(function() {
+			$('.ac-month').hide();
+			$('.ac-district').show();
+		});
 
 
 		//show more report: removed this functionality from district tab
