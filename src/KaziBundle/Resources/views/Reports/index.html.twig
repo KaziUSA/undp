@@ -556,13 +556,17 @@
 	    }
 	  });
 
-
-		/*if(winWidth <= 767) {
-			$('.main-content .tab-content').addClass('list-view');
-		} else {
-			$('.main-content .tab-content').addClass('grid-view');
-		}*/
-
+		content_height();
 	});
+	$(window).resize(function() {
+		content_height();
+	});
+	function content_height() {
+		if(winWidth >= 768) {
+			var winHeight = $(window).height();
+			var content_height = winHeight - 100 - 40 - 42;
+			$('.content, .main-content').css({'min-height': content_height+'px'});
+		}
+	}
 </script>
 {% endblock %}
