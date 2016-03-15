@@ -20,7 +20,7 @@ class Document
     /**
      * @Assert\File(
      * maxSize="10737418240",
-     * mimeTypes = {"application/pdf", "application/x-pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
+     * mimeTypes = {"application/pdf", "application/x-pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"},
      * mimeTypesMessage = "Please upload a valid Document"
      * )
      */
