@@ -18,6 +18,7 @@ $foreground = imagecolorallocate($image, 153, 188, 68); //font color
 //imagestring($image, 5, 45, 8, $captchanumber, $foreground);
 $color = imagecolorallocate($image, 153, 188, 68);//black - 0, 0, 0
 $font = 'WWF.otf';
+putenv('GDFONTPATH=' . realpath('.'));//for no path issue
 imagettftext($image, 20, 0, 45, 25, $color, $font, $captchanumber);
 
 header('Content-type: image/png');
