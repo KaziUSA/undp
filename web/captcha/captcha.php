@@ -3,7 +3,7 @@
 session_start();
 
 //Initializing PHP variable with string
-$captchanumber = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyz';
+$captchanumber = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789abcdefghijklmnpqrstuvwxyz';
 
 //Getting first 6 word after shuffle
 $captchanumber = substr(str_shuffle($captchanumber), 0, 6);
