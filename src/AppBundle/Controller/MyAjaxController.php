@@ -614,14 +614,14 @@ class MyAjaxController extends Controller
 						if(count($data_gender)==1){
 							foreach ($results as $arr){		        		
 				        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-				        		$obj['total'] += (int)$arr['count']; 
+				        		//$obj['total'] += (int)$arr['count']; 
 				    		}
 				    	}
 				    	else{
 				    		if($pos==0){
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-1;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -631,7 +631,7 @@ class MyAjaxController extends Controller
 				    			$obj['series'][$i]['data'][]= 0;
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-2;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -642,7 +642,7 @@ class MyAjaxController extends Controller
 				    			$obj['series'][$i]['data'][]= 0;
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-3;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -728,7 +728,7 @@ class MyAjaxController extends Controller
 						$results= $em->getRepository('AppBundle\Entity\Query')->getMonthGender($data_question,$ans,$month,$gender,$data_disability,$data_year);
 						foreach ($results as $arr){		        		
 			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
-
+			       			$obj['total'] += (int)$arr['count']; 
 			    		}	
 					}					
 				}
@@ -940,14 +940,14 @@ class MyAjaxController extends Controller
 						if(count($data_gender)==1){
 							foreach ($results as $arr){		        		
 				        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-				        		$obj['total'] += (int)$arr['count']; 
+				        		//$obj['total'] += (int)$arr['count']; 
 				    		}
 				    	}
 				    	else{
 				    		if($pos==0){
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-1;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -957,7 +957,7 @@ class MyAjaxController extends Controller
 				    			$obj['series'][$i]['data'][]= 0;
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-2;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -968,7 +968,7 @@ class MyAjaxController extends Controller
 				    			$obj['series'][$i]['data'][]= 0;
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-3;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -1053,7 +1053,7 @@ class MyAjaxController extends Controller
 						$results= $em->getRepository('AppBundle\Entity\Query')->getDistrictGender($data_question,$ans,$district,$gender,$data_disability,$data_year);
 						foreach ($results as $arr){		        		
 			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
-
+			       			$obj['total'] += (int)$arr['count']; 
 			    		}	
 					}					
 				}
@@ -1208,14 +1208,14 @@ class MyAjaxController extends Controller
 						if(count($data_gender)==1){
 							foreach ($results as $arr){		        		
 				        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-				        		$obj['total'] += (int)$arr['count']; 
+				        		
 				    		}
 				    	}
 				    	else{
 				    		if($pos==0){
 				    			foreach ($results as $arr){	
 				    				$obj['series'][$i]['data'][]= (int)$arr['count'];  				        		  
-					        		$obj['total'] += (int)$arr['count']; 
+					        	//	$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-1;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -1226,7 +1226,7 @@ class MyAjaxController extends Controller
 
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-2;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -1237,7 +1237,7 @@ class MyAjaxController extends Controller
 				    			$obj['series'][$i]['data'][]= 0;
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-3;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -1322,7 +1322,7 @@ class MyAjaxController extends Controller
 						$results= $em->getRepository('AppBundle\Entity\Query')->getEthnicityGender($data_question,$ans,$ethnicity,$gender,$data_disability,$data_year);
 						foreach ($results as $arr){		        		
 			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
-
+			       			$obj['total'] += (int)$arr['count']; 
 			    		}	
 					}					
 				}
@@ -1366,14 +1366,14 @@ class MyAjaxController extends Controller
 						if(count($data_gender)==1){
 							foreach ($results as $arr){		        		
 				        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-				        		$obj['total'] += (int)$arr['count']; 
+				        		//$obj['total'] += (int)$arr['count']; 
 				    		}
 				    	}
 				    	else{
 				    		if($pos==0){
 				    			foreach ($results as $arr){	
 				    				$obj['series'][$i]['data'][]= (int)$arr['count'];  				        		  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-1;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -1384,7 +1384,7 @@ class MyAjaxController extends Controller
 
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-2;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -1395,7 +1395,7 @@ class MyAjaxController extends Controller
 				    			$obj['series'][$i]['data'][]= 0;
 				    			foreach ($results as $arr){		        		
 					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
+					        		//$obj['total'] += (int)$arr['count']; 
 				    			}
 				    			for($k=0;$k<count($data_gender)-3;$k++){
 				    				$obj['series'][$i]['data'][]= 0;
@@ -1486,7 +1486,7 @@ class MyAjaxController extends Controller
 						$results= $em->getRepository('AppBundle\Entity\Query')->getAgeGender($data_question,$ans,$age,$gender,$data_disability,$data_year);
 						foreach ($results as $arr){		        		
 			       			$obj['html']=$obj['html']."<td>".(int)$arr['count']."</td>"; 
-
+			       			$obj['total'] += (int)$arr['count']; 
 			    		}	
 					}					
 				}
