@@ -429,137 +429,31 @@ class MyAjaxController extends Controller
 			// }
 			// $obj['label']=$data_district;
 			// $obj['xlabel']='District';
-			if(count($data_district)<4){
-				$i=0;
-				$pos=0;
-				$obj['total']=0;
-				$flag=0; // For hiding legend of grouped columns with same name
-				$obj['stack']='normal'; //For stack chart	
-				if(count($data_month)<3){
-					$obj['stack']='';
-				}			
-				foreach ($data_district as $district) {				
-					$j=0;				
-					foreach ($obj['answer'] as $num){	
-						$obj['series'][$i]['name']= $num;
-						if($flag==0){						
-							$obj['series'][$i]['id']= $num; 
-						}					
-						$obj['series'][$i]['stack']=$district;
-						$obj['series'][$i]['color']=$colors[$j];//For making the color same on different stacks of grouped columns
-						if($flag>0){										
-							$obj['series'][$i]['linkedTo'] = $num;						
-						}
-						foreach ($data_month as $month){				
-							$results= $em->getRepository('AppBundle\Entity\Query')->getMonthDistrict($data_question,$num,$district,$month,$data_disability,$data_year);
-
-							if(count($data_district)==1){
-								foreach ($results as $arr){		        		
-					        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-					        		$obj['total'] += (int)$arr['count']; 
-					    		}
-					    	}
-					    	else{
-					    		if($pos==0){
-					    			foreach ($results as $arr){	
-					    				$obj['series'][$i]['data'][]= (int)$arr['count'];  				        		  
-						        		$obj['total'] += (int)$arr['count']; 
-					    			}
-					    			for($k=0;$k<count($data_district)-1;$k++){
-					    				$obj['series'][$i]['data'][]= 0;
-					    			}
-					    		}
-					    		elseif ($pos==1) {
-					    			$obj['series'][$i]['data'][]= 0;
-
-					    			foreach ($results as $arr){		        		
-						        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-						        		$obj['total'] += (int)$arr['count']; 
-					    			}
-					    			for($k=0;$k<count($data_district)-2;$k++){
-					    				$obj['series'][$i]['data'][]= 0;
-					    			}	
-					    		}				
-								elseif ($pos==3) {
-					    			$obj['series'][$i]['data'][]= 0;
-					    			$obj['series'][$i]['data'][]= 0;
-					    			foreach ($results as $arr){		        		
-						        		$obj['series'][$i]['data'][]= (int)$arr['count'];  
-						        		$obj['total'] += (int)$arr['count']; 
-					    			}
-					    			for($k=0;$k<count($data_district)-3;$k++){
-					    				$obj['series'][$i]['data'][]= 0;
-					    			}	
-					    		}	
-							}	
-						}				
-						$i++;
-						$j++;
-						
-					}
-					$flag++;
-					$pos++;				
-				}
-				
-
-				// $obj['xlabel']='Month';
-				if(count($data_district)==0){
-					$obj['label']=$data_month;
-				}
-				else{	
-					$i=0;
-					foreach ($data_month as $month){
-						$obj['label'][$i]['name'][]=$month;
-						foreach ($data_district as $district){
-						// if($gender=="Male"){
-						// 	$catname="M";
-						// }
-						// elseif($gender=="Female"){
-						// 	$catname="F";
-						// }
-						// elseif($gender=="Other"){
-						// 	$catname="O";
-						// }
-							$obj['label'][$i]['categories'][]=$district;
-						}
-						$i++;
-					}
-				}
-				$obj['xgrouplabel']['style']='';
-				$obj['xgrouplabel']['style']['color']='#898989';
-				$obj['xgrouplabel']['style']['fontWeight']='bold';
-				$obj['xgrouplabel']['style']['textTransform']='uppercase';
-				if(count($data_month)>4){
-				$obj['xgrouplabel']['style']['fontSize']='9px';
-			}
-				$obj['xgrouplabel']['groupedOptions'][0]['style']['color']='#898989';
-				$obj['smallfont']='5px';
-			}	
 			$i=0;			
-			$district_span=count($data_month);	
+			$district_span=count($data_month);			
 			$j=count($data_month)*count($data_district);			
-			$j++;
+			$j++;	
 			$obj['html']="<table id='' class='table table-bordered dataTables'><thead>";
 			$obj['html']=$obj['html']."<tr class='hidden'><th>".$qname."</th>";
 			for($i=0;$i<count($data_district);$i++){	
-			for($k=0;$k<count($data_month);$k++){
-					$obj['html']=$obj['html']."<th></th>";				        
+				for($k=0;$k<count($data_month);$k++){
+					$obj['html']=$obj['html']."<th></th>";
 				}
 			}
 			$obj['html']=$obj['html']."</tr></thead>";
-			$obj['html']=$obj['html']."<tbody><tr class='row-green'><th>District</th>";
+			$obj['html']=$obj['html']."<tbody><tr class='row-green'><th>Ethnicity</th>";
 			for($j=0;$j<count($data_district);$j++){
 				$obj['html']=$obj['html']."<th class='no-border-right'>".$data_district[$j]."</th>";
 				for($k=1;$k<count($data_month);$k++){
-					$obj['html']=$obj['html']."<th class='blank-col'></th>";				        
+					$obj['html']=$obj['html']."<th class='blank-col'></th>";
 				}
 			}
-			$obj['html']=$obj['html']."</tr><tr class='row-green'><th>Month</th>";
-			$m=0;			
+			$m=0;
+			$obj['html']=$obj['html']."</tr><tr class='row-green'><th>Month</th>";			
 			for($i=0;$i<count($data_district);$i++){	
 				for($k=0;$k<count($data_month);$k++){
-					$obj['html']=$obj['html']."<th>".$data_month[$k]."</th>";
-					$m++;				        
+					$obj['html']=$obj['html']."<th>".$data_month[$k]."</th>";				        
+					$m++;
 				}
 			}			
 			$obj['html']=$obj['html']."</tr>";
@@ -579,11 +473,12 @@ class MyAjaxController extends Controller
 			}
 			$obj['html']=$obj['html']."<tr class='row-grey'><th class=' no-border-right'>Respondents: ".$obj['total']."</th>";
 			for($i=0;$i<count($data_district);$i++){	
-			for($k=0;$k<count($data_month);$k++){
-					$obj['html']=$obj['html']."<th class='blank-col'></th>";				        
+				for($k=0;$k<count($data_month);$k++){
+					$obj['html']=$obj['html']."<th class='blank-col'></th>";
 				}
 			}
 			$obj['html']=$obj['html']."</tr></tbody></table>";
+
 		}
 
 		//Month and Gender filter selected(8.MG)
