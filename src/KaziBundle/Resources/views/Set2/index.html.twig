@@ -24,9 +24,9 @@
 
                       <ul id="" class="nav nav-tabs nav-phase2" role="tablist">
                         
-                        <li role="presentation" class="active round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab" value="2016">Livelihood</a></li>
-                        <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab" value="2016">Reconstruction</a></li>
-                          <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab" value="2016">Protection</a></li>
+                        <li role="presentation" class="active round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab" value="livelihood">Livelihood</a></li>
+                        <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab" value="reconstruction">Reconstruction</a></li>
+                          <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab" value="protection">Protection</a></li>
                       </ul>
                   </div>
 
@@ -385,8 +385,9 @@
        //}//end questions
 
 
-       //store year in yearVal
-       var yearVal=$('.feedback-tab ul.nav li.active a').attr('value');
+       //store section
+       var qSection=$('.feedback-tab ul.nav li.active a').attr('value');
+        var yearVal = 2016;
        //alert(yearVal);
        //store selected month in monthVals
        var monthVals = [];

@@ -98,20 +98,7 @@ class Set2Controller extends Controller
 			))
 		    ->getForm();
 		    $choices['gender'] = $form->createView();
-		    //Single choice Month as selectbox
-		 //    $form = $this->createFormbuilder()
-		 //    ->add('agegroups', 'entity',array(
-		 //    'class' => 'AppBundle:Survey',
-		 //    'query_builder' => function(EntityRepository $er) {
-		 //                         return $er->createQueryBuilder('s')
-		 //                             ->orderBy('s.name', 'ASC');
-		 //                     },
-		 //    'choices_as_values' => false,
-		 //    'expanded' => true,
-			// 'multiple' => true	    
-			// ))
-		 //    ->getForm();
-		 //    $choices['district'] = $form;
+		    
 
 		    return array(	
 					//'questions' => $questions,
