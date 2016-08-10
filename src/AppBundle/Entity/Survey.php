@@ -69,6 +69,18 @@ class Survey
     protected $ethnicity;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Cardholder", inversedBy="surveys")
+     * @ORM\JoinColumn(name="cardholder_id", referencedColumnName="id")
+     */
+    protected $cardholder;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Cardtype", inversedBy="surveys")
+     * @ORM\JoinColumn(name="cardtype_id", referencedColumnName="id")
+     */
+    protected $cardtype;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Gender", inversedBy="surveys")
      * @ORM\JoinColumn(name="gender_id", referencedColumnName="id")
      */
@@ -288,6 +300,55 @@ class Survey
         return $this->ethnicity;
     }
 
+    /**
+     * Set cardholder
+     *
+     * @param \AppBundle\Entity\Cardholder $cardholder
+     *
+     * @return Survey
+     */
+    public function setCardholder(\AppBundle\Entity\Cardholder $cardholder = null)
+    {
+        $this->cardholder = $cardholder;
+
+        return $this;
+    }
+
+    /**
+     * Get cardholder
+     *
+     * @return \AppBundle\Cardholder\Cardholder
+     */
+    public function getCardholder()
+    {
+        return $this->cardholder;
+    }
+    
+    
+    
+    /**
+     * Set cardtype
+     *
+     * @param \AppBundle\Entity\Cardtype $cardtype
+     *
+     * @return Survey
+     */
+    public function setCardtype(\AppBundle\Entity\Cardtype $cardtype = null)
+    {
+        $this->cardtype = $cardtype;
+
+        return $this;
+    }
+
+    /**
+     * Get cardtype
+     *
+     * @return \AppBundle\Cardtype\Cardtype
+     */
+    public function getCardtype()
+    {
+        return $this->cardtype;
+    }
     /**
      * Set gender
      *

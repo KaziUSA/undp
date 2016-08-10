@@ -2,42 +2,35 @@
 
 namespace KaziBundle\Controller;
 
-use Doctrine\ORM\EntityRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-//use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Entity\Question;
-use AppBundle\Entity\Age;
-use AppBundle\Entity\District;
-use AppBundle\Entity\Ethnicity;
-use AppBundle\Entity\Gender;
-
-
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 /**
- * Platform controller.
+ * Set2 controller.
  *
- * @Route("/platform")
+ * @Route("/set2")
  */
-class PlatformController extends Controller
+class Set2Controller extends Controller
 {
-	/**
+    /**
 	*
-	*@Route("/", name="platform")	
+	*@Route("/", name="set2")	
 	*@Method("GET")
     *@Template()	
 	*/
-		public function indexAction(){
-			//Question Single Choice as selectbox
+    public function indexAction()
+    {
+        //Question Single Choice as selectbox
 			$form = $this->createFormbuilder()
 		    ->add('questions', 'entity',array(
 			    'class' => 'AppBundle:Question',
 			    'query_builder' => function(EntityRepository $er) {
 			                         return $er->createQueryBuilder('q')
 			                         		->where('q.answer_group = 1')
-                                         ->where('q.id < 31')
+                                         ->where('q.id > 30')
 			                             ->orderBy('q.id', 'ASC');
 			                     },
 			    'choices_as_values' => false,		    
@@ -124,7 +117,6 @@ class PlatformController extends Controller
 					//'questions' => $questions,
 					'form' => $choices
 					); 	
+    }
 
-		}	
-	
 }

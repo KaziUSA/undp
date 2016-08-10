@@ -67,7 +67,8 @@
                         <li class="{% if app.request.get('_route') == 'interviewer' %} active {% endif %}"><a href="{{ path('interviewer') }}">Interviewer</a></li>
                         <li class="{% if app.request.get('_route') == 'age' %} active {% endif %}"><a href="{{ path('age') }}">Age Groups</a></li>
                         <li class="{% if app.request.get('_route') == 'gender' %} active {% endif %}"><a href="{{ path('gender') }}">Gender</a></li>
-                        <li class="{% if app.request.get('_route') == 'ethnicity' %} active {% endif %}"><a href="{{ path('ethnicity') }}">Ethnicity</a></li>                        
+                        <li class="{% if app.request.get('_route') == 'ethnicity' %} active {% endif %}"><a href="{{ path('ethnicity') }}">Ethnicity</a></li>                         <li class="{% if app.request.get('_route') == 'cardholder' %} active {% endif %}"><a href="{{ path('cardholder') }}">Card Holder</a></li>
+                        <li class="{% if app.request.get('_route') == 'cardtype' %} active {% endif %}"><a href="{{ path('cardtype') }}">Card Type</a></li>
                     </ul>
                 </li>
                 <li class="{% if (app.request.get('_route') == 'vdc') or (app.request.get('_route') == 'district') %} active {% endif %}">
