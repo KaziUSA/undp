@@ -1239,10 +1239,20 @@ $(document).ready(function() {
     //This part is for the livelihood/reconstruction/protection tabs
     //By default, only show livelihood questions
     hideReconstruction();
-    
+    $("#livelihoodBtn").click(function(){ 
+        showLivelihood();
+        hideProtection();
+        hideReconstruction();
+    });
     $("#reconstructionBtn").click(function(){ 
-        hideLivelihood(); 
+        hideLivelihood();
+        hideProtection();
         showReconstruction();
+    });
+    $("#protectionBtn").click(function(){ 
+        hideLivelihood();
+        showProtection();
+        hideReconstruction();
     });
     //Hide Livelihood questions
     function hideLivelihood(){
@@ -1283,6 +1293,26 @@ $(document).ready(function() {
         $($('.zelect .dropdown ol li')[11]).show();
         $($('.zelect .dropdown ol li')[12]).show();
         $($('.zelect .dropdown ol li')[13]).show();
+    }
+    //Hide Protection questions
+    function hideProtection(){
+        $($('.zelect .dropdown ol li')[14]).hide();
+        $($('.zelect .dropdown ol li')[15]).hide();
+        $($('.zelect .dropdown ol li')[16]).hide();
+        $($('.zelect .dropdown ol li')[17]).hide();
+        $($('.zelect .dropdown ol li')[18]).hide();
+        $($('.zelect .dropdown ol li')[19]).hide();
+        $($('.zelect .dropdown ol li')[20]).hide();
+    }
+    //Showing Protection questions
+    function showProtection(){
+        $($('.zelect .dropdown ol li')[14]).show();
+        $($('.zelect .dropdown ol li')[15]).show();
+        $($('.zelect .dropdown ol li')[16]).show();
+        $($('.zelect .dropdown ol li')[17]).show();
+        $($('.zelect .dropdown ol li')[18]).show();
+        $($('.zelect .dropdown ol li')[19]).show();
+        $($('.zelect .dropdown ol li')[20]).show();
     }
 });
 
