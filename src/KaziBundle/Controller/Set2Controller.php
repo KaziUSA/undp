@@ -30,7 +30,7 @@ class Set2Controller extends Controller
 			    'query_builder' => function(EntityRepository $er) {
 			                         return $er->createQueryBuilder('q')
 			                         		->where('q.answer_group = 1')
-                                         ->where('q.id > 30')
+                                         ->where('q.id > 35')
 			                             ->orderBy('q.id', 'ASC');
 			                     },
 			    'choices_as_values' => false,		    
