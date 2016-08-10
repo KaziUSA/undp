@@ -124,20 +124,20 @@ class CsvController extends Controller
             
         
             // Question 1
-            $this->createSurveyResponse($survey, 43, $row[16]);
+            $this->createSurveyResponse($survey, 50, $row[110]);
         
             // Question 2
-            $this->createSurveyResponse($survey, 44, $row[33]);
+            $this->createSurveyResponse($survey, 51, $row[113]);
             // Question 3
-            $this->createSurveyResponse($survey, 45, $row[51]);
+            $this->createSurveyResponse($survey, 52, $row[131]);
             // Question 4
-            $this->createSurveyResponse($survey, 46, $row[67]);
+            $this->createSurveyResponse($survey, 53, $row[135]);
             // Question 5
-            $this->createSurveyResponse($survey, 47, $row[86]);
+            $this->createSurveyResponse($survey, 54, $row[150]);
             // Question 6
-            $this->createSurveyResponseYn($survey, 48, $row[90]);
+            $this->createSurveyResponseYn($survey, 55, $row[154]);
             // Question 7
-            $this->createSurveyResponseYn($survey, 49, $row[103]);
+            $this->createSurveyResponseYn($survey, 56, $row[170]);
             // Question 8
             //$this->createSurveyResponseSh($survey, 42, $row[143]);
             
