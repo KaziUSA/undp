@@ -24,9 +24,9 @@
 
                       <ul id="" class="nav nav-tabs nav-phase2" role="tablist">
                         
-                        <li role="presentation" class="active round3"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab" value="livelihood">Livelihood</a></li>
-                        <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab" value="reconstruction">Reconstruction</a></li>
-                          <li role="presentation" class="round4"><a href="#round1" aria-controls="settings" role="tab" data-toggle="tab" value="protection">Protection</a></li>
+                        <li role="presentation" class="active round3"><a href="#round1" id="livelihoodBtn" aria-controls="messages" role="tab" data-toggle="tab" value="livelihood">Livelihood</a></li>
+                        <li role="presentation" class="round4"><a href="#round1" id="reconstructionBtn" aria-controls="settings" role="tab" data-toggle="tab" value="reconstruction">Reconstruction</a></li>
+                          <li role="presentation" class="round4"><a href="#round1" id="protectionBtn" aria-controls="settings" role="tab" data-toggle="tab" value="protection">Protection</a></li>
                       </ul>
                   </div>
 
@@ -355,10 +355,9 @@
          //checking checkbox
           $('#form_questions option').each(function() {   
             if($(this).val() == urlParamQ) {//if 1 checked
-              //console.log($(this).val());
               $(this).attr('selected','selected');
               $('.zelected').text($('#form_questions option:selected').text());
-              //console.log($('#form_questions option:selected').text());
+              
             }
           });
         } else {          
@@ -1236,6 +1235,55 @@ $(document).ready(function() {
     if($(this).prop("checked") == true) {
     }
   });
+    
+    //This part is for the livelihood/reconstruction/protection tabs
+    //By default, only show livelihood questions
+    hideReconstruction();
+    
+    $("#reconstructionBtn").click(function(){ 
+        hideLivelihood(); 
+        showReconstruction();
+    });
+    //Hide Livelihood questions
+    function hideLivelihood(){
+        $($('.zelect .dropdown ol li')[0]).hide();
+        $($('.zelect .dropdown ol li')[1]).hide();
+        $($('.zelect .dropdown ol li')[2]).hide();
+        $($('.zelect .dropdown ol li')[3]).hide();
+        $($('.zelect .dropdown ol li')[4]).hide();
+        $($('.zelect .dropdown ol li')[5]).hide();
+        $($('.zelect .dropdown ol li')[6]).hide();
+    }
+    //Show Livelihood questions
+    function hideLivelihood(){
+        $($('.zelect .dropdown ol li')[0]).show();
+        $($('.zelect .dropdown ol li')[1]).show();
+        $($('.zelect .dropdown ol li')[2]).show();
+        $($('.zelect .dropdown ol li')[3]).show();
+        $($('.zelect .dropdown ol li')[4]).show();
+        $($('.zelect .dropdown ol li')[5]).show();
+        $($('.zelect .dropdown ol li')[6]).show();
+    }
+    //Hide Reconstruction questions
+    function hideReconstruction(){
+        $($('.zelect .dropdown ol li')[7]).hide();
+        $($('.zelect .dropdown ol li')[8]).hide();
+        $($('.zelect .dropdown ol li')[9]).hide();
+        $($('.zelect .dropdown ol li')[10]).hide();
+        $($('.zelect .dropdown ol li')[11]).hide();
+        $($('.zelect .dropdown ol li')[12]).hide();
+        $($('.zelect .dropdown ol li')[13]).hide();
+    }
+    //Showing Reconstruction questions
+    function showReconstruction(){
+        $($('.zelect .dropdown ol li')[7]).show();
+        $($('.zelect .dropdown ol li')[8]).show();
+        $($('.zelect .dropdown ol li')[9]).show();
+        $($('.zelect .dropdown ol li')[10]).show();
+        $($('.zelect .dropdown ol li')[11]).show();
+        $($('.zelect .dropdown ol li')[12]).show();
+        $($('.zelect .dropdown ol li')[13]).show();
+    }
 });
 
 </script>
