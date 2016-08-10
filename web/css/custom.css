@@ -4,7 +4,11 @@
 
 	width: 670px; /* 800px */
 }
-
+@media (min-width: 1200px){
+.filter .nav-phase2 li a{
+  font-size:10px;   
+}
+}
 .info {
   color:#818285;  
 	font-size: 12px;

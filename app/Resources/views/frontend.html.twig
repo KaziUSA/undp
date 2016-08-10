@@ -51,15 +51,62 @@
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav">
-		        <li><a href="{{ path('platform') }}" class="{% if app.request.get('_route') == 'platform' %} active {% endif %}">Platform</a></li>
+	<style>
+	@media (min-width: 768px) {
+  	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,			    	
+  	.dropdown-menu > li > a:hover {
+  		color: #a1a1a1;
+  	}
+  	.dropdown-menu,
+  	.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,
+  	.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+  		background: #39383a;
+  	}		    	
+  	.dropdown-menu {
+  		border-radius: 0;
+  		box-shadow: none;
+  		top: 45px;
+  		min-width: 120px;
+  	}
+  	.dropdown-menu > li > a {
+  		font-size: 14px !important;
+  		font-weight: normal !important;
+  		margin: 5px 15px;
+  	}
+  	.open .dropdown-menu {
+  		display: block;
+  	}
+  	.navbar-default {
+  		/* overflow: inherit; */
+  	}
 
-		        <li><a href="{{ path('data') }}" class="{% if (app.request.get('_route') == 'data') or (app.request.get('_route') == 'data_show') %} active {% endif %}">Data</a></li>
-		        <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
-		        <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact -->
-		        <li><a href="/page/about" class="{% if app.request.get('_route') == 'show' %} active {% endif %}">About</a></li>
-		      </ul>
-		    </div><!-- /.navbar-collapse -->
+  	.navbar-default .navbar-collapse .navbar-nav > li {
+  		margin-right: 15px;
+  		padding-left: 15px;
+  	}
+  	.navbar-default .navbar-collapse .navbar-nav li {
+  		margin-right: 15px;
+  	}
+	}
+	</style>
+  <ul class="nav navbar-nav">
+    <li class="dropdown">
+    	<a href="{{ path('platform') }}" class="dropdown-toggle {% if app.request.get('_route') == 'platform' %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Platform</a>
+    	<ul class="dropdown-menu">
+    		<li><a href="{{ path('platform') }}">Phase 1</a></li>
+    		<li><a href="/set2">Phase 2</a></li>
+    	</ul>
+    </li>
+
+    <li><a href="{{ path('data') }}" class="{% if (app.request.get('_route') == 'data') or (app.request.get('_route') == 'data_show') %} active {% endif %}">Data</a></li>
+    <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
+    <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact -->
+    <li><a href="/page/about" class="{% if app.request.get('_route') == 'show' %} active {% endif %}">About</a></li>
+  </ul>
+</div><!-- /.navbar-collapse -->
+
+
+
 		  </div><!-- /.container-fluid -->
 		</nav>
 		<div class="clear"></div>
@@ -120,6 +167,14 @@
   ga('create', 'UA-72934138-1', 'auto');
   ga('send', 'pageview');
 
+</script>
+<script>
+	//script at the bottom for hover dropdown
+	$('ul.nav li.dropdown').hover(function() {
+	  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+	}, function() {
+	  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+	});
 </script>
     {% endblock %}
 

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SurveyType extends AbstractType
+class HouseholdheadType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,23 +15,7 @@ class SurveyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('interviewer')
-            ->add('date')
-            ->add('term')
-            
-            ->add('age')
             ->add('gender')
-            ->add('ethnicity')
-            ->add('district')
-            ->add('vdc')
-            ->add('ward')
-            ->add('cardholder')
-            ->add('cardtype')
-            
-            
-            ->add('disability')
-            ->add('occupation')
-            
         ;
     }
     
@@ -41,7 +25,7 @@ class SurveyType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Survey'
+            'data_class' => 'AppBundle\Entity\Householdhead'
         ));
     }
 
@@ -50,6 +34,6 @@ class SurveyType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_survey';
+        return 'appbundle_householdhead';
     }
 }
