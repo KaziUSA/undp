@@ -94,6 +94,16 @@ class Document
         $this->file = $file;
         //$avatarExt = pathinfo($file, PATHINFO_BASENAME);
         $avatarExt = $this->file->getClientOriginalName();
+
+        //REVISED BY PRADEEP FOR DUPLICATE FILE REPLACEMENT PROBLEM
+        $avatarExtension = $this->file->getClientOriginalExtension();
+        $firstName = chop($avatarExt, ".".$avatarExtension);
+        $avatarExt = $firstName."-".date("F-j-Y-H-i-s").".".$avatarExtension;
+        //REVISION CODE ENDS HERE
+
+        // $reversAv = strrev($avatarExt);
+
+        // $avatarBase = $avatarExt->
         // check if we have an old image path
         if (isset($this->path)) {
             // store the old name to delete after the update
@@ -317,7 +327,7 @@ class Document
         if (null !== $this->getFile()) {
             // do whatever you want to generate a unique name
             $filename = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename.'.'.$this->getFile()->getExtension();
+            $this->path = $filename.date('F j,Y').'.'.$this->getFile()->getExtension();
         }
     }
 
