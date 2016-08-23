@@ -1259,11 +1259,11 @@ aside {
 	}
 	.high-chart-wrap {
 		position: relative;
-		@media (min-width: 600px) {
 			height: 504px;				
 			#container, #container2, .chart-container {
-				height:514px;
+				height:504px;//514px
 			}
+		@media (min-width: 600px) {
 		}
 		@media (max-width: 599px) {
 			.chart-container {
@@ -1273,20 +1273,23 @@ aside {
 		}
 	}
 	.legend-box {
-		@media (min-width: 600px) {
-			display: none;//if highchart legend height is less than 104px; initially hidden
+		width: 100%;
+		@media (min-width: 1200px) {//1199px
+			// display: none;//if highchart legend height is less than 104px; initially hidden
 			height: 159px;//height of high chart legend with four answer or option
 			left: 40%;
 			position: absolute;
 			bottom: 18px;
-			width: 100%;	
-			margin-left: 145px;	
+			margin-left: 145px;				
+		}
+		@media (min-width: 1199px) {//600px
 		}
 		@media (max-width: 1199px) {
-			left: 25%;
+			left: 0%;//25%
+			padding: 0 25px;
 		}
 		@media (max-width: 599px) {
-			padding: 0 15px;
+			/* padding: 0 15px; */
 		}
 	}
 	.legend {
@@ -1294,7 +1297,7 @@ aside {
 		padding-right: 30px;
 		margin-bottom: 30px;
 		width: 20%;
-		@media (max-width: 1199px) {
+		/* @media (max-width: 1199px) {
 			width: 27%;
 		}
 		@media (max-width: 991px) {
@@ -1302,8 +1305,8 @@ aside {
 		}
 		@media (max-width: 800px) {
 			padding-right: 20px;
-		}
-		@media (max-width: 599px) {
+		} */
+		@media (max-width: 1199px) {//599px
 			width: 100%;
 			margin: 10px 0;
 			padding: 0;
@@ -1342,6 +1345,11 @@ aside {
 		display: none;
 	}
 }//end high-chart
+.legend.download {
+	@media (max-width: 1199px) {
+		margin-top: 40px !important;	
+	}
+}
 .download {
 	line-height: 20px;
 	li {
