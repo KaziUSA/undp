@@ -985,7 +985,7 @@
 
                       legend: {                         
                           width: 240,
-                          padding: 70,
+                          padding: 80,
                           itemWidth: 118,
                           x: -63,
                       },
@@ -1141,7 +1141,20 @@
                       },
                   });//Highchart end
                   
-                  
+                  // console.log(response.result.maxlen);
+                  // console.log(typeof(response.result.maxlen));
+                  // console.log(chart.options.legend.itemWidth);
+                  if(response.result.maxlen > 25){
+                    // chart.legend.itemStyle.width = 250;
+                    chart.options.legend.itemWidth = 250;
+                    // chart.options.legend.height = 200;
+                    // for(var index in this.chart.series) {
+                    //         chart.legend.destroyItem(chart.series[index]);
+                    // }
+                    chart.legend.render()
+                    // $('.highcharts-legend-item span').width(800);
+                  }
+
                   $('.highcharts-subtitle').hide();
                    $('.high-chart-wrap').removeClass('hidden');
                    $('.highcharts-title').addClass('hidden');                  

@@ -63,16 +63,22 @@ class MyAjaxController extends Controller
 		$obj['xgrouplabel']['style']['textTransform']='uppercase';
 		$obj['xgrouplabel']['rotation']=0;		
 		//Handle data
-		
+		$max = 0;
 		//Store the answers of the selected question in $obj['answer']\
 		$em = $this->getDoctrine()->getEntityManager();
 		$connection = $em->getConnection();		
 		//Get all the answer sets of the retrieved question id
 		$answers = $em->getRepository('AppBundle\Entity\Query')->getAnswersArray($data_question);  
 		foreach ($answers as $num){
-	        array_push($obj['answer'], $num['name']);   
+			$ans = $num['name'];
+			$len = strlen($ans);
+			if($len > $max){
+				$max = $len;
+			}
+	        array_push($obj['answer'], $ans);   
 	    }
 		unset($num); 
+		$obj['maxlen'] = $max;
 
 		//Any filters not selected	(1.N)	
 		if(!isset($data_age) && !isset($data_gender) && !isset($data_ethnicity) && !isset($data_district) && !isset($data_month)){ 			
