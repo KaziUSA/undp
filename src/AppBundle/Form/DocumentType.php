@@ -16,6 +16,7 @@ class DocumentType extends AbstractType
     {
         $builder
             ->add('name', 'text', array('attr'=>array('class'=>'form-control')))
+            ->add('file', 'file', array( 'attr' => array( 'class' => 'form-control' ) ))
             ->add('date', 'date', array('attr'=>array('class'=>'form-control')))
             ->add('documenttype')            
             ->add('language', 'choice', array(

@@ -985,8 +985,10 @@
 
                       legend: {                         
                           width: 240,
-                          padding: 70,
+                          padding: 78,
                           itemWidth: 118,
+                          itemMarginTop: 3,
+                          // itemMarginBottom: 1,
                           x: -63,
                       },
                       colors:['#88d8ef','#339de7','#6e6e6f','#159c02','#99bb42','#e7e7e7','#a1a1a1','#588C73','#D96459'],
@@ -1141,7 +1143,24 @@
                       },
                   });//Highchart end
                   
-                  
+                  /** FOR ANSWER LEGENDS WITH LONGER LENGTH */
+                  // console.log(response.result.maxlen);
+                  // console.log(typeof(response.result.maxlen));
+                  // console.log(chart.options.legend.itemWidth);
+                  if(response.result.maxlen > 25){
+                    // chart.legend.itemStyle.width = 250;
+                    chart.options.legend.itemWidth = 250;
+                    // chart.options.legend.padding = 110;
+                    // chart.options.legend.itemMarginTop: 5;
+                    // chart.options.legend.itemMarginBottom: 10;
+                    // chart.options.legend.height = 200;
+                    // for(var index in this.chart.series) {
+                    //         chart.legend.destroyItem(chart.series[index]);
+                    // }
+                    chart.legend.render()
+                    // $('.highcharts-legend-item span').width(800);
+                  }
+
                   $('.highcharts-subtitle').hide();
                    $('.high-chart-wrap').removeClass('hidden');
                    $('.highcharts-title').addClass('hidden');                  
