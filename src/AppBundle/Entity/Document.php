@@ -105,13 +105,16 @@ class Document
 
         // $avatarBase = $avatarExt->
         // check if we have an old image path
-        if (isset($this->path)) {
-            // store the old name to delete after the update
-            $this->temp = $this->path;
-            $this->path = null;
-        } else {
-            $this->path = $avatarExt;
-        }
+        $this->path = $avatarExt;
+
+        
+        // if (isset($this->path)) {
+        //     // store the old name to delete after the update
+        //     $this->temp = $this->path;
+        //     $this->path = null;
+        // } else {
+        //     $this->path = $avatarExt;
+        // }
     }
 
     /**
@@ -326,8 +329,8 @@ class Document
     {
         if (null !== $this->getFile()) {
             // do whatever you want to generate a unique name
-            $filename = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename.'.'.$this->getFile()->getExtension();
+            /*$filename = sha1(uniqid(mt_rand(), true));
+            $this->path = $filename.'.'.$this->getFile()->getExtension();*/
         }
     }
 
