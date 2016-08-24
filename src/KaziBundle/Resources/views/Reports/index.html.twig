@@ -1,19 +1,20 @@
 {% extends 'frontend.html.twig' %}
 
 {% block body -%}
-<div class="row has-tab row-no-padding">
+<!-- <div class="row has-tab row-no-padding">
 	<div class="col-sm-3 col-md-3 col-lg-2">
-		<div class="page-title"><h3>Reports Archive</h3></div>
+		<div class="page-title">
+			<h3>Reports Archive</h3>
+		</div>
 	</div>
 	<div class="col-sm-9 col-md-9 col-lg-10 tab-col hidden-xs">
 		<div class="filter report-tab relative">
-		<!-- Nav tabs -->
 		<div class="feedback-tab">
 		  <ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a href="#national" class="national" aria-controls="national" role="tab" data-toggle="tab">National Reports</a></li>	    
 		    <li role="presentation" class="dropdown district-text-parent">
 			    <a class="district-text dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-			      District Reports <!-- <span class="caret"></span> -->
+			      District Reports
 			    </a>
 			    <ul class="dropdown-menu">
 			      <li role="presentation"><a href="#district" class="show-eng-text" aria-controls="district" role="tab" data-toggle="tab">English</a></li>
@@ -32,29 +33,225 @@
 
 		</div>
 	</div>
-</div>
+</div> -->
 
 	<section class="content report">
 		<div class="row row-no-padding">
 			
 			<div class="col-sm-3 col-md-3 col-lg-2">
 				<aside>
+			      <div class="filter">
+			        <!-- Nav tabs -->
+			        <div class="feedback-tab clearfix" style="background: #99bc44; width: 100%;">
+			          <div class="tab-head">Year</div>
+
+			            <ul id="" class="nav nav-tabs" role="tablist">
+			              <li role="presentation" class="tab-2015"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab" value="2015">2015</a></li>
+			              <li role="presentation" class="active tab-2016"><a href="#round2" aria-controls="settings" role="tab" data-toggle="tab" value="2016">2016</a></li>
+
+			            </ul>
+			        </div>
+
+			        <!-- Tab panes -->
+			        <div class="tab-content">
+			          <div role="tabpanel" class="tab-pane fade in" id="round1">
+			              <div class="tab-content-wrap">
+			                  <div class="filter-title">Filter By</div>
+
+			                  <div class="accordion">
+			                          <form action="">
+			                            <div class="ac ac-month">
+			                              {# ac-1 #}
+			                              <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
+			                              <label class="ac-label month-label" for="ac-1">Month</label>
+
+			                              <ul id="month-wise-report" class="ac-text checkbox-style">          
+																    	<li><input type="checkbox" id="monthall-2015" />
+																				<label for="monthall-2015">All<span></span></label></li>
+						                          <div class="form_months" id="form_months">             
+																	    	<li><input type="checkbox" id="month07-2015" class="month 2015" />
+																					<label for="month07-2015">July<span></span></label></li>
+																	    	<li><input type="checkbox" id="month08-2015" class="month 2015" />
+																					<label for="month08-2015">August<span></span></label></li>
+																	    	<li><input type="checkbox" id="month09-2015" class="month 2015" />
+																					<label for="month09-2015">September<span></span></label></li>
+																	    	<li><input type="checkbox" id="month10-2015" class="month 2015" />
+																					<label for="month10-2015">October<span></span></label></li>
+																	    	<li><input type="checkbox" id="month11-2015" class="month 2015" />
+																					<label for="month11-2015">November<span></span></label></li>
+																	    	<li><input type="checkbox" id="month12-2015" class="month 2015" />
+																					<label for="month12-2015">December<span></span></label></li>      
+																	    </div>
+						                      	</ul><!--/ac-text-->
+			                            </div><!--/ac-->
+
+							                    <div class="ac ac-district" style="display: none;">
+							                      {# ac-2 #}
+							                      <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
+							                      <label class="ac-label district-label" for="ac-2">District</label>
+
+							                      <ul id="district-wise-report" class="ac-text checkbox-style">          
+																	    	<li><input type="checkbox" id="districtall" checked="checked" />
+																					<label for="districtall">All<span></span></label></li>
+							                          <div class="form_districts" id="form_districts">                   
+																		    	<li><input type="checkbox" id="district-Bhaktapur" class="district" checked="checked" />
+																						<label for="district-Bhaktapur">Bhaktapur<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Dhading" class="district" checked="checked" />
+																						<label for="district-Dhading">Dhading<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Dolakha" class="district" checked="checked" />
+																						<label for="district-Dolakha">Dolakha<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Gorkha" class="district" checked="checked" />
+																						<label for="district-Gorkha">Gorkha<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Kathmandu" class="district" checked="checked" />
+																						<label for="district-Kathmandu">Kathmandu<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Kavrepalanchowk" class="district" checked="checked" />
+																						<label for="district-Kavrepalanchowk">Kavrepalanchowk<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Lalitpur" class="district" checked="checked" />
+																						<label for="district-Lalitpur">Lalitpur<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Makwanpur" class="district" checked="checked" />
+																						<label for="district-Makwanpur">Makwanpur<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Nuwakot" class="district" checked="checked" />
+																						<label for="district-Nuwakot">Nuwakot<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Okhaldhunga" class="district" checked="checked" />
+																						<label for="district-Okhaldhunga">Okhaldhunga<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Ramechhap" class="district" checked="checked" />
+																						<label for="district-Ramechhap">Ramechhap<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Rasuwa" class="district" checked="checked" />
+																						<label for="district-Rasuwa">Rasuwa<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Sindhuli" class="district" checked="checked" />
+																						<label for="district-Sindhuli">Sindhuli<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Sindhupalchowk" class="district" checked="checked" />
+																						<label for="district-Sindhupalchowk">Sindhupalchowk<span></span></label></li>
+																		    </div>
+							                      </ul><!--/ac-text-->
+							                    </div><!--/ac-->
+
+
+			                            <!--/ac-->
+			                            <ul class="ac-text"></ul>
+			                            <ul class="ac-text"></ul>
+			                            <!-- <input type="submit" value="Submit" class="btn btn-bordered gray"> -->
+			                        </form>
+
+			                  </div><!--/accordion-->
+			              </div>
+			          </div>
+
+			          <div role="tabpanel" class="tab-pane fade in active" id="round2">
+			              <div class="tab-content-wrap">
+			                  <div class="filter-title">Filter By</div>
+
+			                  <div class="accordion">
+			                          <form action="">
+			                            <div class="ac ac-month">
+			                              {# ac-3 #}
+			                              <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
+			                              <label class="ac-label month-label" for="ac-3">Month</label>
+
+			                              <ul id="month-wise-report" class="ac-text checkbox-style">          
+																    	<li><input type="checkbox" id="monthall-2016" checked="checked" />
+																				<label for="monthall-2016">All<span></span></label></li>
+						                          <div class="form_months" id="form_months">             
+																	    	<li><input type="checkbox" id="month01-2016" class="month 2016" checked="checked" />
+																					<label for="month01-2016">January<span></span></label></li>
+																	    	<li><input type="checkbox" id="month02-2016" class="month 2016" checked="checked" />
+																					<label for="month02-2016">Feburary<span></span></label></li>
+																	    	<li><input type="checkbox" id="month03-2016" class="month 2016" checked="checked" />
+																					<label for="month03-2016">March<span></span></label></li>
+																	    	<li><input type="checkbox" id="month04-2016" class="month 2016" checked="checked" />
+																					<label for="month04-2016">April<span></span></label></li>
+																	    	<li><input type="checkbox" id="month05-2016" class="month 2016" checked="checked" />
+																					<label for="month05-2016">May<span></span></label></li>
+																	    	<li><input type="checkbox" id="month06-2016" class="month 2016" checked="checked" />
+																					<label for="month06-2016">June<span></span></label></li>
+
+																	    	<li><input type="checkbox" id="month07-2016" class="month 2016" checked="checked" />
+																					<label for="month07-2016">July<span></span></label></li>
+																	    	<li><input type="checkbox" id="month08-2016" class="month 2016" checked="checked" />
+																					<label for="month08-2016">August<span></span></label></li>
+																	    	<li><input type="checkbox" id="month09-2016" class="month 2016" checked="checked" />
+																					<label for="month09-2016">September<span></span></label></li>
+																	    	<li><input type="checkbox" id="month10-2016" class="month 2016" checked="checked" />
+																					<label for="month10-2016">October<span></span></label></li>
+																	    	<li><input type="checkbox" id="month11-2016" class="month 2016" checked="checked" />
+																					<label for="month11-2016">November<span></span></label></li>
+																	    	<li><input type="checkbox" id="month12-2016" class="month 2016" checked="checked" />
+																					<label for="month12-2016">December<span></span></label></li>      
+																	    </div>
+						                      	</ul><!--/ac-text-->
+			                            </div><!--/ac-->
+
+							                    <div class="ac ac-district" style="display: none;">
+							                      {# ac-4 #}
+							                      <input class="ac-input" id="ac-4" name="ac-4" type="checkbox" />
+							                      <label class="ac-label district-label" for="ac-4">District</label>
+
+							                      <ul id="district-wise-report" class="ac-text checkbox-style">          
+																	    	<li><input type="checkbox" id="districtall" checked="checked" />
+																					<label for="districtall">All<span></span></label></li>
+							                          <div class="form_districts" id="form_districts">                   
+																		    	<li><input type="checkbox" id="district-Bhaktapur" class="district" checked="checked" />
+																						<label for="district-Bhaktapur">Bhaktapur<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Dhading" class="district" checked="checked" />
+																						<label for="district-Dhading">Dhading<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Dolakha" class="district" checked="checked" />
+																						<label for="district-Dolakha">Dolakha<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Gorkha" class="district" checked="checked" />
+																						<label for="district-Gorkha">Gorkha<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Kathmandu" class="district" checked="checked" />
+																						<label for="district-Kathmandu">Kathmandu<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Kavrepalanchowk" class="district" checked="checked" />
+																						<label for="district-Kavrepalanchowk">Kavrepalanchowk<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Lalitpur" class="district" checked="checked" />
+																						<label for="district-Lalitpur">Lalitpur<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Makwanpur" class="district" checked="checked" />
+																						<label for="district-Makwanpur">Makwanpur<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Nuwakot" class="district" checked="checked" />
+																						<label for="district-Nuwakot">Nuwakot<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Okhaldhunga" class="district" checked="checked" />
+																						<label for="district-Okhaldhunga">Okhaldhunga<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Ramechhap" class="district" checked="checked" />
+																						<label for="district-Ramechhap">Ramechhap<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Rasuwa" class="district" checked="checked" />
+																						<label for="district-Rasuwa">Rasuwa<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Sindhuli" class="district" checked="checked" />
+																						<label for="district-Sindhuli">Sindhuli<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Sindhupalchowk" class="district" checked="checked" />
+																						<label for="district-Sindhupalchowk">Sindhupalchowk<span></span></label></li>
+																		    </div>
+							                      </ul><!--/ac-text-->
+							                    </div><!--/ac-->
+
+
+			                            <!--/ac-->
+			                            <ul class="ac-text"></ul>
+			                            <ul class="ac-text"></ul>
+			                            <!-- <input type="submit" value="Submit" class="btn btn-bordered gray"> -->
+			                        </form>
+
+			                  </div><!--/accordion-->
+			              </div>
+			          </div>
+			        </div>
+			      </div>
+			  </aside>
+				<!-- <aside>
 					<div class="filter report">
-					  <!-- Tab panes -->
+					  Tab panes
 					  <div class="tab-content">
 					    <div role="" class="fade in active" id="">
 					    	<div class="">
 					    		<div class="filter-title">Filter By</div>
 					    		<div class="accordion">					    			
-                    <div class="ac ac-month">
-                      {# ac-1 #}
-                      <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
-                      <label class="ac-label month-label" for="ac-1">Month</label>
-
-                      <ul id="month-wise-report" class="ac-text checkbox-style">          
+				                    <div class="ac ac-month">
+				                      {# ac-1 #}
+				                      <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
+				                      <label class="ac-label month-label" for="ac-1">Month</label>
+				
+				                      <ul id="month-wise-report" class="ac-text checkbox-style">          
 										    	<li><input type="checkbox" id="monthall" checked="checked" />
 														<label for="monthall">All<span></span></label></li>
-                          <div class="form_months" id="form_months">             
+				                          <div class="form_months" id="form_months">             
 											    	<li><input type="checkbox" id="month07" class="month" checked="checked" />
 															<label for="month07">July<span></span></label></li>
 											    	<li><input type="checkbox" id="month08" class="month" checked="checked" />
@@ -80,18 +277,18 @@
 											    	<li><input type="checkbox" id="month06" class="month" checked="checked" />
 															<label for="month06">June<span></span></label></li>
 											    </div>
-                      </ul><!--/ac-text-->
-                    </div><!--/ac-->
-
-                    <div class="ac ac-district" style="display: none;">
-                      {# ac-2 #}
-                      <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
-                      <label class="ac-label district-label" for="ac-2">District</label>
-
-                      <ul id="district-wise-report" class="ac-text checkbox-style">          
+				                      </ul>/ac-text
+				                    </div>/ac
+				
+				                    <div class="ac ac-district" style="display: none;">
+				                      {# ac-2 #}
+				                      <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
+				                      <label class="ac-label district-label" for="ac-2">District</label>
+				
+				                      <ul id="district-wise-report" class="ac-text checkbox-style">          
 										    	<li><input type="checkbox" id="districtall" checked="checked" />
 														<label for="districtall">All<span></span></label></li>
-                          <div class="form_districts" id="form_districts">                   
+				                          <div class="form_districts" id="form_districts">                   
 											    	<li><input type="checkbox" id="district-Bhaktapur" class="district" checked="checked" />
 															<label for="district-Bhaktapur">Bhaktapur<span></span></label></li>
 											    	<li><input type="checkbox" id="district-Dhading" class="district" checked="checked" />
@@ -121,18 +318,46 @@
 											    	<li><input type="checkbox" id="district-Sindhupalchowk" class="district" checked="checked" />
 															<label for="district-Sindhupalchowk">Sindhupalchowk<span></span></label></li>
 											    </div>
-                      </ul><!--/ac-text-->
-                    </div><!--/ac-->
-
+				                      </ul>/ac-text
+				                    </div>/ac
+				
 					    		</div>
 					    	</div>
 					    </div>
 					  </div>
 					</div>
-				</aside>
+				</aside> -->
 			</div>
 
 			<div class="col-sm-9 col-md-9 col-lg-10">
+				<div class="has-tab">
+					<div class="tab-col hidden-xs" style="padding-left: 0;">
+						<div class="filter report-tab relative">
+						<div class="feedback-tab">
+						  <ul class="nav nav-tabs" role="tablist">
+						    <li role="presentation" class="active"><a href="#national" class="national" aria-controls="national" role="tab" data-toggle="tab">National Reports</a></li>	    
+						    <li role="presentation" class="dropdown district-text-parent">
+							    <a class="district-text dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							      District Reports <!-- <span class="caret"></span> -->
+							    </a>
+							    <ul class="dropdown-menu">
+							      <li role="presentation"><a href="#district" class="show-eng-text" aria-controls="district" role="tab" data-toggle="tab">English</a></li>
+							      <li role="presentation"><a href="#district-nep" class="show-nep-text" aria-controls="district" role="tab" data-toggle="tab">Nepali</a></li>
+							    </ul>
+							  </li>
+						    <li role="presentation"><a href="#issue" class="issue" aria-controls="issue" role="tab" data-toggle="tab">Issue in Focus Reports</a></li>						
+						    <li role="presentation"><a href="#others" class="others" aria-controls="others" role="tab" data-toggle="tab">Others</a></li>
+						  </ul>
+						</div>
+
+						<ul class="tab-view">
+							<li class="show-grid-view"><a href="#!">Grid View</a></li>
+							<li class="show-list-view"><a href="#!">List View</a></li>
+						</ul>
+
+						</div>
+					</div>	
+				</div>
 				<!-- main content -->
 				<div class="main-content">
 					<div class="wrapper clearfix"><!--wrapper remove or not-->
@@ -187,7 +412,7 @@
 										{% for entity in entities %}
 											{# TODO: need to change 'National Reports' to ID #}
 											{% if entity.documenttype == 'National Reports' %}
-											<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+											<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
 												<div class="r-box">
 													<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
@@ -294,7 +519,7 @@
 							    	{% for entity in entities %}
 										{# TODO: need to change 'Issue in Focus Reports' to ID #}
 										{% if entity.documenttype == 'Issue in Focus Reports' %}
-										<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+										<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
@@ -327,7 +552,7 @@
 							    	{% for entity in entities %}
 										{# TODO: need to change these to ID #}
 										{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
-										<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} type {{ entity.documenttype }}">
+										<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
@@ -397,6 +622,7 @@
 		$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
 			//console.log($(this));			
 			$('.district-text').text('District Reports');
+			$('aside .feedback-tab .nav-tabs').css({'opacity': '1'});
 			district_tab_width();
 
 			$('.ac-month').show();
@@ -404,6 +630,8 @@
 		});
 
 		$('.show-eng-text, .show-nep-text').click(function() {
+			$('aside .feedback-tab .nav-tabs').css({'opacity': '0'});//no seperate function for 2015, 2016 in case of district reports
+
 			$('.ac-month').hide();
 			$('.ac-district').show();
 		});
@@ -438,8 +666,34 @@
 	      }
 	    });	
 		}
-		checkall("#monthall", ".month");
-		$('#monthall, .month').prop('checked', true);//check all on document load
+		checkall("#monthall-2015", ".month.2015");
+		checkall("#monthall-2016", ".month.2016");
+
+		function show_2016() {
+			$('#monthall-2016, .month.2016').prop('checked', true);//check all on document load
+			$('.month.2016').show();
+			
+			//initially hide that of 2015
+			$('.month.2015').hide();
+		}
+		function show_2015() {
+			$('#monthall-2015, .month.2015').prop('checked', true);//check all on document load
+			$('.month.2015').show();
+
+			//initially hide that of 2016
+			$('.month.2016').hide();			
+		}
+
+		show_2016();
+
+		$('.tab-2015').click(function() {
+			show_2015();
+		});
+		$('.tab-2016').click(function() {
+			show_2016();
+		});
+
+
 		
 		checkall("#districtall", ".district");
 		$('#districtall, .district').prop('checked', true);//check all on document load
@@ -451,25 +705,48 @@
 	      $('.month.'+month).show();*/
 	      
 	      //$('.month').hide();
-	      if(!$(this).is(':checked')){
-	      	$('.month.'+month).hide();	
+
+	      /* 2015 - 2016 */
+	      var hide_report;
+	      if( $(this).hasClass('2015') ) {
+	      	hide_report = '2016';
+	      } 
+	      if( $(this).hasClass('2016') ) {
+	      	hide_report = '2015';
+	      }
+
+	      if(!$(this).is(':checked')){//not checked
+	      	// console.log( hide_report );
+	      	$('.month.'+hide_report).hide();
+
+	      	$('.month.'+month).hide();
 	      } else {
+	      	// console.log( hide_report );
+	      	$('.month.'+hide_report).hide();
+
 	      	$('.month.'+month).show();
 	      }
 	    });
     }
-    filter_report('01');
-    filter_report('02');
-    filter_report('03');
-    filter_report('04');
-    filter_report('05');
-    filter_report('06');
-    filter_report('07');
-    filter_report('08');
-    filter_report('09');
-    filter_report('10');
-    filter_report('11');
-    filter_report('12');
+    filter_report('07-2015');
+    filter_report('08-2015');
+    filter_report('09-2015');
+    filter_report('10-2015');
+    filter_report('11-2015');
+    filter_report('12-2015');
+
+    filter_report('01-2016');
+    filter_report('02-2016');
+    filter_report('03-2016');
+    filter_report('04-2016');
+    filter_report('05-2016');
+    filter_report('06-2016');
+    filter_report('07-2016');
+    filter_report('08-2016');
+    filter_report('09-2016');
+    filter_report('10-2016');
+    filter_report('11-2016');
+    filter_report('12-2016');
 
     //show reports district wise
 		function filter_report_district(district) {
