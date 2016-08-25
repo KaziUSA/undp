@@ -48,8 +48,11 @@ class DataController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($slug)//$id //removed annotation @Method("GET")
+    public function showAction($slug)//$id
     {
+        /* evoke this by curl http://localhost/data/1 -o test1.html.twig */
+
+        /* comment this after use: for phase 1 - generating html from xlxs */
         /*$file_name = 'uploads/round'.$slug.'/survey.xlsx';
 
         if($slug == 1) {
@@ -72,7 +75,12 @@ class DataController extends Controller
         }
         if($slug == 7) {
             $sheet_name = 'uploaded_form_xdn830';
-        }
+        }*/
+
+        /* for phase 2: generating html from xlsx */
+        /*$file_name = 'temp/for-xlsx-to-html/phase2/round2/cleanned-fsl/test3.xlsx';
+
+        $sheet_name = 'Sheet1';
 
         $fileInfo = $this->getCsvData($file_name, $sheet_name);
 
@@ -81,7 +89,42 @@ class DataController extends Controller
             'slug' => $slug
             );*/
 
+        
+        /* comment this after use: for phase 2 - generating html from xlxs */
+        //eg. http://localhost:8000/data/food-security-livelihood
+        /*$file_name = ;
+        $sheet_name = 'Foglio1';
+
+        $fileInfo = $this->getCsvData($file_name, $sheet_name);
+        var_dump($this);exit();
+
+        return array(
+            'fileInfo' => $fileInfo,
+            'slug' => $slug
+            );*/
+
+
+
+        /* for phase 1 - showing data in site */
         $round = 'round'.$slug.'.html.twig';
+
+        return array(
+            'slug' => $slug,
+            'round' => $round
+            );
+    }
+
+    /**
+     * Finds and displays all data from excel
+     *
+     * @Route("/phase2/{slug}", name="data_show_phase2")
+     * @Method("GET")
+     * @Template()
+     */
+    public function showPhase2Action($slug)//$id
+    {
+        /* for phase 1 - showing data in site */
+        $round = 'data/phase2/'.$slug.'.html.twig';
 
         return array(
             'slug' => $slug,

@@ -1,0 +1,82 @@
+{# show.html.twig #}
+{% extends '::frontend.html.twig' %}
+
+{% block bodyclass %}page-data{% endblock %}
+
+{% block body -%}
+<div class="table-wrap">
+    {# TODO: Need to add share button with functionality #}
+    <div class="page-title">
+        <h3>Community Perception Survey Report - Phase II</h3>
+        <div class="feedback-round">
+            <div class="customSel">
+                <label>
+                    <select name="round" id="" onchange="if (this.value) window.location.href=this.value">
+                        <option value="1" {% if slug == 'round1-fsl.html' %}selected="selected"{% endif %}>Round 1 (FSL)</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+    
+    {# table data #}
+    {% include round %}
+    {# table data ends #}
+    
+    <ul class="share-icons share-data">
+        <li><a href="#share" class="fa fa-share-alt"></a>
+            <ul>        
+                {# TODO: Need to change commonfeedback.org to dynamic url path if needed #}                   
+                <li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//commonfeedback.org{{ path('data_show', { 'slug': slug} )}}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20Round%20{{slug}}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+                
+                <li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+Round+{{slug}}+http%3A//commonfeedback.org{{ path('data_show', { 'slug': slug} )}}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//commonfeedback.org{{ path('data_show', { 'slug': slug} )}}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20Round%20{{slug}}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+            </ul>
+        </li>
+    </ul>
+        
+    {% endblock %}
+{% block scriptIncludes %}
+<script>
+        $(document).ready(function() {
+            $('.dataTables').dataTable({
+                //"autoWidth": false,
+                "pageLength": 100,
+                responsive: true,
+                "dom": 'T<"clear">lfrtip',
+                "tableTools": {
+                    "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+                },
+                "colVis": {
+                    "buttonText": "Change columns"
+                },
+                "oLanguage": {
+                    "sSearch": ""
+                }
+            });
+            $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
+            
+            // tooltip
+           $('.toggle-icon').hover(function(){
+                $(this).children('.toogle-data').toggle();
+            }); 
+
+            function table_head() {                
+                //width for fixed header
+                var child_num, th_width;
+                for(child_num = 2; child_num <= 11; child_num++) {                
+                    th_width = $('thead tr.first th:nth-child('+child_num+')').width();
+                    $('thead tr.second th:nth-child('+child_num+')').css({'width':th_width+'px'});
+                    console.log('width:'+th_width);
+                }
+            }
+           setTimeout(function(){
+                table_head();
+            }, 5000);//5,000
+           $('thead tr.second th').click(function() {
+                table_head();
+           });
+        });
+    </script>
+{% endblock %}

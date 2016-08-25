@@ -1,66 +1,9 @@
+{# show.html.twig.bak-from-xls this page is just to convert xlsx to html #}
 {% extends '::frontend.html.twig' %}
 
 {% block body -%}
 <div class="table-wrap">
     {# TODO: Need to add share button with functionality #}
-    <div class="page-title">
-        <h3>Community Perception Survey Report - Round {{ slug }}</h3>
-        <div class="feedback-round">
-            <div class="customSel">
-                <label>
-                    <select name="round" id="" onchange="if (this.value) window.location.href=this.value">
-                        <option value="1" {% if slug == 1 %}selected="selected"{% endif %}>July</option>
-                        <option value="2" {% if slug == 2 %}selected="selected"{% endif %}>August</option>
-                        <option value="3" {% if slug == 3 %}selected="selected"{% endif %}>September</option>
-                        <option value="4" {% if slug == 4 %}selected="selected"{% endif %}>October</option>
-                        <option value="5" {% if slug == 5 %}selected="selected"{% endif %}>November</option>
-                        <option value="6" {% if slug == 6 %}selected="selected"{% endif %}>December</option>
-                    </select>
-                </label>
-            </div>
-        </div>
-    </div>
     
-    <table class="records_list table table-condensed table-hover table-striped dataTables">{# for round 6 #}{% set excludeColumns = {   } %}{% set count = 1  %}{% set numColumns = 10 %}{% for entity in fileInfo %}{% if count == 0 %}{% set count = 1 %}{% elseif count == 1 %}<thead><tr class="relative"><th class="toggle-icon-col"></th>{% set columncount = 0 %}{% for val in entity %}{% if columncount in excludeColumns %}{% else %}<th>{{ val }}</th>{% endif %}{% set columncount = columncount + 1 %}{% endfor %}</tr></thead><tbody>{% set count = 2  %}{% else %}<tr class="relative"><td class="toggle-icon" title="Show Data"></td>{% set columncount = 0 %}{% for val in entity %}{% if columncount in excludeColumns %}{% else %}<td>{{ val }}</td>{% endif %}{% set columncount = columncount + 1 %}{% endfor %}</tr>{% endif %}{% endfor %}</tbody></table>
-    
-    <ul class="share-icons share-data">
-        <li><a href="#share" class="fa fa-share-alt"></a>
-            <ul>        
-                {# TODO: Need to change commonfeedback.org to dynamic url path if needed #}                   
-                <li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//commonfeedback.org{{ path('data_show', { 'slug': slug} )}}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20Round%20{{slug}}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-                
-                <li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+Round+{{slug}}+http%3A//commonfeedback.org{{ path('data_show', { 'slug': slug} )}}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
-
-                <li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//commonfeedback.org{{ path('data_show', { 'slug': slug} )}}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20Round%20{{slug}}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-            </ul>
-        </li>
-    </ul>
-        
-    {% endblock %}
-{% block scriptIncludes %}
-<script>
-        $(document).ready(function() {
-            $('.dataTables').dataTable({
-                //"autoWidth": false,
-                "pageLength": 100,
-                responsive: true,
-                "dom": 'T<"clear">lfrtip',
-                "tableTools": {
-                    "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
-                },
-                "colVis": {
-                    "buttonText": "Change columns"
-                },
-                "oLanguage": {
-                    "sSearch": ""
-                }
-            });
-            $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
-            
-            // tooltip
-           $('.toggle-icon').hover(function(){
-                $(this).children('.toogle-data').toggle();
-            }); 
-        });
-    </script>
+    <table class="records_list table table-condensed table-hover table-striped dataTables">{# for round 6 #}{% set excludeColumns = {   } %}{% set count = 1  %}{% set numColumns = 10 %}{% for entity in fileInfo %}{% if count == 0 %}{% set count = 1 %}{% elseif count == 1 %}<thead><tr class="relative"><th class="toggle-icon-col"></th>{% set columncount = 0 %}{% for val in entity %}{% if columncount in excludeColumns %}{% else %}<th>{{ val }}</th>{% endif %}{% set columncount = columncount + 1 %}{% endfor %}</tr></thead><tbody>{% set count = 2  %}{% else %}<tr class="relative"><td class="toggle-icon" title="Show Data"></td>{% set columncount = 0 %}{% for val in entity %}{% if columncount in excludeColumns %}{% else %}<td>{{ val }}</td>{% endif %}{% set columncount = columncount + 1 %}{% endfor %}</tr>{% endif %}{% endfor %}</tbody></table>        
 {% endblock %}
