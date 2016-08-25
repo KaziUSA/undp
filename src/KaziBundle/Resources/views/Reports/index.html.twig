@@ -1,39 +1,6 @@
 {% extends 'frontend.html.twig' %}
 
 {% block body -%}
-<!-- <div class="row has-tab row-no-padding">
-	<div class="col-sm-3 col-md-3 col-lg-2">
-		<div class="page-title">
-			<h3>Reports Archive</h3>
-		</div>
-	</div>
-	<div class="col-sm-9 col-md-9 col-lg-10 tab-col hidden-xs">
-		<div class="filter report-tab relative">
-		<div class="feedback-tab">
-		  <ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#national" class="national" aria-controls="national" role="tab" data-toggle="tab">National Reports</a></li>	    
-		    <li role="presentation" class="dropdown district-text-parent">
-			    <a class="district-text dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-			      District Reports
-			    </a>
-			    <ul class="dropdown-menu">
-			      <li role="presentation"><a href="#district" class="show-eng-text" aria-controls="district" role="tab" data-toggle="tab">English</a></li>
-			      <li role="presentation"><a href="#district-nep" class="show-nep-text" aria-controls="district" role="tab" data-toggle="tab">Nepali</a></li>
-			    </ul>
-			  </li>
-		    <li role="presentation"><a href="#issue" class="issue" aria-controls="issue" role="tab" data-toggle="tab">Issue in Focus Reports</a></li>						
-		    <li role="presentation"><a href="#others" class="others" aria-controls="others" role="tab" data-toggle="tab">Others</a></li>
-		  </ul>
-		</div>
-
-		<ul class="tab-view">
-			<li class="show-grid-view"><a href="#!">Grid View</a></li>
-			<li class="show-list-view"><a href="#!">List View</a></li>
-		</ul>
-
-		</div>
-	</div>
-</div> -->
 
 	<section class="content report">
 		<div class="row row-no-padding">
@@ -235,98 +202,6 @@
 			        </div>
 			      </div>
 			  </aside>
-				<!-- <aside>
-					<div class="filter report">
-					  Tab panes
-					  <div class="tab-content">
-					    <div role="" class="fade in active" id="">
-					    	<div class="">
-					    		<div class="filter-title">Filter By</div>
-					    		<div class="accordion">					    			
-				                    <div class="ac ac-month">
-				                      {# ac-1 #}
-				                      <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
-				                      <label class="ac-label month-label" for="ac-1">Month</label>
-				
-				                      <ul id="month-wise-report" class="ac-text checkbox-style">          
-										    	<li><input type="checkbox" id="monthall" checked="checked" />
-														<label for="monthall">All<span></span></label></li>
-				                          <div class="form_months" id="form_months">             
-											    	<li><input type="checkbox" id="month07" class="month" checked="checked" />
-															<label for="month07">July<span></span></label></li>
-											    	<li><input type="checkbox" id="month08" class="month" checked="checked" />
-															<label for="month08">August<span></span></label></li>
-											    	<li><input type="checkbox" id="month09" class="month" checked="checked" />
-															<label for="month09">September<span></span></label></li>
-											    	<li><input type="checkbox" id="month10" class="month" checked="checked" />
-															<label for="month10">October<span></span></label></li>
-											    	<li><input type="checkbox" id="month11" class="month" checked="checked" />
-															<label for="month11">November<span></span></label></li>
-											    	<li><input type="checkbox" id="month12" class="month" checked="checked" />
-															<label for="month12">December<span></span></label></li>      
-											    	<li><input type="checkbox" id="month01" class="month" checked="checked" />
-															<label for="month01">January<span></span></label></li>
-											    	<li><input type="checkbox" id="month02" class="month" checked="checked" />
-															<label for="month02">Feburary<span></span></label></li>
-											    	<li><input type="checkbox" id="month03" class="month" checked="checked" />
-															<label for="month03">March<span></span></label></li>
-											    	<li><input type="checkbox" id="month04" class="month" checked="checked" />
-															<label for="month04">April<span></span></label></li>
-											    	<li><input type="checkbox" id="month05" class="month" checked="checked" />
-															<label for="month05">May<span></span></label></li>
-											    	<li><input type="checkbox" id="month06" class="month" checked="checked" />
-															<label for="month06">June<span></span></label></li>
-											    </div>
-				                      </ul>/ac-text
-				                    </div>/ac
-				
-				                    <div class="ac ac-district" style="display: none;">
-				                      {# ac-2 #}
-				                      <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
-				                      <label class="ac-label district-label" for="ac-2">District</label>
-				
-				                      <ul id="district-wise-report" class="ac-text checkbox-style">          
-										    	<li><input type="checkbox" id="districtall" checked="checked" />
-														<label for="districtall">All<span></span></label></li>
-				                          <div class="form_districts" id="form_districts">                   
-											    	<li><input type="checkbox" id="district-Bhaktapur" class="district" checked="checked" />
-															<label for="district-Bhaktapur">Bhaktapur<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Dhading" class="district" checked="checked" />
-															<label for="district-Dhading">Dhading<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Dolakha" class="district" checked="checked" />
-															<label for="district-Dolakha">Dolakha<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Gorkha" class="district" checked="checked" />
-															<label for="district-Gorkha">Gorkha<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Kathmandu" class="district" checked="checked" />
-															<label for="district-Kathmandu">Kathmandu<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Kavrepalanchowk" class="district" checked="checked" />
-															<label for="district-Kavrepalanchowk">Kavrepalanchowk<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Lalitpur" class="district" checked="checked" />
-															<label for="district-Lalitpur">Lalitpur<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Makwanpur" class="district" checked="checked" />
-															<label for="district-Makwanpur">Makwanpur<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Nuwakot" class="district" checked="checked" />
-															<label for="district-Nuwakot">Nuwakot<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Okhaldhunga" class="district" checked="checked" />
-															<label for="district-Okhaldhunga">Okhaldhunga<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Ramechhap" class="district" checked="checked" />
-															<label for="district-Ramechhap">Ramechhap<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Rasuwa" class="district" checked="checked" />
-															<label for="district-Rasuwa">Rasuwa<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Sindhuli" class="district" checked="checked" />
-															<label for="district-Sindhuli">Sindhuli<span></span></label></li>
-											    	<li><input type="checkbox" id="district-Sindhupalchowk" class="district" checked="checked" />
-															<label for="district-Sindhupalchowk">Sindhupalchowk<span></span></label></li>
-											    </div>
-				                      </ul>/ac-text
-				                    </div>/ac
-				
-					    		</div>
-					    	</div>
-					    </div>
-					  </div>
-					</div>
-				</aside> -->
 			</div>
 
 			<div class="col-sm-9 col-md-9 col-lg-10">
@@ -448,7 +323,7 @@
 										{# TODO: need to change 'District Reports' to ID #}
 										{# Quickfix: Added district name as class #}
 										{% if (entity.documenttype == 'District Reports') and ((entity.language == 'english') or (entity.language == '')) %}
-										<div class="report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
+										<div class="report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
@@ -484,7 +359,7 @@
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
 										{% if (entity.documenttype == 'District Reports') and (entity.language == 'nepali') %}
-										<div class="report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %}">
+										<div class="report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
 											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
@@ -622,7 +497,8 @@
 		$('.report-tab .nav-tabs a.national, .report-tab .nav-tabs a.issue, .report-tab .nav-tabs a.others').click(function () {
 			//console.log($(this));			
 			$('.district-text').text('District Reports');
-			$('aside .feedback-tab .nav-tabs').css({'opacity': '1'});
+			// $('aside .feedback-tab .nav-tabs').css({'opacity': '1'});
+
 			district_tab_width();
 
 			$('.ac-month').show();
@@ -630,7 +506,9 @@
 		});
 
 		$('.show-eng-text, .show-nep-text').click(function() {
-			$('aside .feedback-tab .nav-tabs').css({'opacity': '0'});//no seperate function for 2015, 2016 in case of district reports
+			// $('aside .feedback-tab .nav-tabs').css({'opacity': '0'});
+			//no seperate function for 2015, 2016 in case of district reports
+			//there should be 2015, 2016
 
 			$('.ac-month').hide();
 			$('.ac-district').show();
@@ -671,17 +549,17 @@
 
 		function show_2016() {
 			$('#monthall-2016, .month.2016').prop('checked', true);//check all on document load
-			$('.month.2016').show();
+			$('.2016').show();//.month.2016
 			
 			//initially hide that of 2015
-			$('.month.2015').hide();
+			$('.2015').hide();//.month.2015
 		}
 		function show_2015() {
 			$('#monthall-2015, .month.2015').prop('checked', true);//check all on document load
-			$('.month.2015').show();
+			$('.2015').show();//.month.2015
 
 			//initially hide that of 2016
-			$('.month.2016').hide();			
+			$('.2016').hide();//.month.2016
 		}
 
 		show_2016();
