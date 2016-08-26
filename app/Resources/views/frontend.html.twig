@@ -91,10 +91,10 @@
 	</style>
   <ul class="nav navbar-nav">
     <li class="dropdown">
-    	<a href="{{ path('platform') }}" class="dropdown-toggle {% if app.request.get('_route') == 'platform' %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Platform</a>
+    	<a href="{{ path('platform') }}" class="dropdown-toggle {% if (app.request.get('_route') == 'platform') or (app.request.get('_route') == 'set2') %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Platform</a>
     	<ul class="dropdown-menu">
     		<li><a href="{{ path('platform') }}">Phase 1</a></li>
-    		<li><a href="/set2">Phase 2</a></li>
+    		<li><a href="{{ path('set2') }}">Phase 2</a></li>
     	</ul>
     </li>
 
