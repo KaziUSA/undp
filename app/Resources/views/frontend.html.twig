@@ -98,7 +98,13 @@
     	</ul>
     </li>
 
-    <li><a href="{{ path('data') }}" class="{% if (app.request.get('_route') == 'data') or (app.request.get('_route') == 'data_show') %} active {% endif %}">Data</a></li>
+    <li class="dropdown">
+      <a href="{{ path('data') }}" class="dropdown-toggle {% if (app.request.get('_route') == 'data') or (app.request.get('_route') == 'data_show') or (app.request.get('_route') == 'data_show_phase2') %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data</a>
+      <ul class="dropdown-menu">
+        <li><a href="{{ path('data') }}">Phase 1</a></li>
+        <li><a href="{{ path( 'data_show_phase2', {'slug': 'round1-fsl'} ) }}">Phase 2</a></li>
+      </ul>
+    </li>
     <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
     <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact -->
     <li><a href="/page/about" class="{% if app.request.get('_route') == 'show' %} active {% endif %}">About</a></li>

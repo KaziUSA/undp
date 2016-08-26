@@ -1072,7 +1072,7 @@ body {
 				}
 			}
 			&.active {
-				background: #e23239;
+				background: #d2232a;
 				&:before {
 					content: "";
 			    width: 0;
@@ -1082,7 +1082,7 @@ body {
 			    left: 50%;
 			    border-width: 7px 7px 0px 7px;
 			    border-style: solid;
-			    border-color: #e23239 transparent;
+			    border-color: #d2232a transparent;
 			    margin-left: -7px;
 		    }
 			}
@@ -1798,9 +1798,15 @@ table.dataTable th, table.dataTable td {
 .feedback-round .customSel {
     background: transparent;
     border: none;
-    width: 105px;
 }
 
+.feedback-round .customSel,
+.feedback-round .customSel select {
+    width: 105px;	
+    @media (min-width: 992px) {
+    	// width: 195px; //we are displaying that in title either
+    }
+}
 .feedback-round .customSel label {
     background: transparent;
 }
@@ -1809,7 +1815,6 @@ table.dataTable th, table.dataTable td {
     background: transparent;
     color: #FFF;
     font-size: 12px;
-    width: 105px;
     letter-spacing: 1px;
     padding-top: 2px;
     cursor: pointer;
@@ -2290,7 +2295,16 @@ body.page-data {
 		z-index: 999;
 	}
 	.page-title {
+		padding-left: 105px;
 		top: 100px;
+		span.red-bg {
+			background-color: #d2232a;
+	    display: block;
+	    position: absolute;
+	    left: 0px;
+	    padding: 0 10px;
+	    width: 90px;
+		}
 	}
 	.page-data .dataTables_filter,
 	.DTTT_container {

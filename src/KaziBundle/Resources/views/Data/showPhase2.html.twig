@@ -7,12 +7,16 @@
 <div class="table-wrap">
     {# TODO: Need to add share button with functionality #}
     <div class="page-title">
-        <h3>Community Perception Survey Report - Phase II</h3>
+        <h3><span class="red-bg">Phase II</span>Community Perception Survey Report - {{ page_title }}</h3>
         <div class="feedback-round">
             <div class="customSel">
                 <label>
                     <select name="round" id="" onchange="if (this.value) window.location.href=this.value">
-                        <option value="1" {% if slug == 'round1-fsl.html' %}selected="selected"{% endif %}>Round 1 (FSL)</option>
+                        <option value="round1-fsl" {% if slug == 'round1-fsl' %}selected="selected"{% endif %}>Round 1 (FSL)</option>                        
+                        <option value="round1-protection" {% if slug == 'round1-protection' %}selected="selected"{% endif %}>Round 1 (Protection)</option>
+                        <option value="round1-reconstruction" {% if slug == 'round1-reconstruction' %}selected="selected"{% endif %}>Round 1 (Reconstruction)</option>
+                        <option value="round2-fsl" {% if slug == 'round2-fsl' %}selected="selected"{% endif %}>Round 2 (FSL)</option>
+                        <option value="round2-protection" {% if slug == 'round2-protection' %}selected="selected"{% endif %}>Round 2 (Protection)</option>
                     </select>
                 </label>
             </div>

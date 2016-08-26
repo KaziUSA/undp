@@ -124,11 +124,32 @@ class DataController extends Controller
     public function showPhase2Action($slug)//$id
     {
         /* for phase 1 - showing data in site */
-        $round = 'data/phase2/'.$slug.'.html.twig';
+        if($slug != '') {
+            $round = 'data/phase2/'.$slug.'.html.twig';
+
+            if($slug == 'round1-fsl') {
+                $page_title = 'Round 1 (Food Security and Livelihood)';
+            } 
+            else if ($slug == 'round1-protection') {
+                $page_title = 'Round 1 (Protection)';
+            }
+            else if ($slug == 'round1-reconstruction') {
+                $page_title = 'Round 1 (Reconstruction)';
+            }
+            else if ($slug == 'round2-fsl') {
+                $page_title = 'Round 2 (Food Security and Livelihood)';
+            }
+            else if ($slug == 'round2-protection') {
+                $page_title = 'Round 2 (Protection)';
+            }
+        } else {
+            // $round = 'data/phase2/round1-fsl.html.twig';
+        }
 
         return array(
             'slug' => $slug,
-            'round' => $round
+            'round' => $round,
+            'page_title' => $page_title
             );
     }
 
