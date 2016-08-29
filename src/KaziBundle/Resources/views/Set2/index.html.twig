@@ -1251,16 +1251,26 @@ $(document).ready(function() {
         showLivelihood();
         hideProtection();
         hideReconstruction();
+        $('#form_questions').val(35);
+        $('.zelected').text($('#form_questions option:selected').text());
+        aButtonPressed();
+        
     });
     $("#reconstructionBtn").click(function(){ 
         hideLivelihood();
         hideProtection();
         showReconstruction();
+        $('#form_questions').val(43);
+        $('.zelected').text($('#form_questions option:selected').text());
+        aButtonPressed();
     });
     $("#protectionBtn").click(function(){ 
         hideLivelihood();
         showProtection();
         hideReconstruction();
+        $('#form_questions').val(50);
+        $('.zelected').text($('#form_questions option:selected').text());
+        aButtonPressed();
     });
     //Hide Livelihood questions
     function hideLivelihood(){
