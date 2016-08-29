@@ -77,8 +77,12 @@ class DataController extends Controller
             $sheet_name = 'uploaded_form_xdn830';
         }*/
 
+
+        
+        /* comment this after use: for phase 2 - generating html from xlxs */
         /* for phase 2: generating html from xlsx */
-        /*$file_name = 'temp/for-xlsx-to-html/phase2/round2/cleanned-fsl/test3.xlsx';
+        //eg. http://localhost:8000/data/1
+        /*$file_name = 'temp/for-xlsx-to-html/phase2/round2/reconstruction/test5.xlsx';
 
         $sheet_name = 'Sheet1';
 
@@ -88,30 +92,17 @@ class DataController extends Controller
             'fileInfo' => $fileInfo,
             'slug' => $slug
             );*/
-
         
-        /* comment this after use: for phase 2 - generating html from xlxs */
-        //eg. http://localhost:8000/data/food-security-livelihood
-        /*$file_name = ;
-        $sheet_name = 'Foglio1';
-
-        $fileInfo = $this->getCsvData($file_name, $sheet_name);
-        var_dump($this);exit();
-
-        return array(
-            'fileInfo' => $fileInfo,
-            'slug' => $slug
-            );*/
 
 
 
         /* for phase 1 - showing data in site */
-        $round = 'round'.$slug.'.html.twig';
+        /*$round = 'round'.$slug.'.html.twig';
 
         return array(
             'slug' => $slug,
             'round' => $round
-            );
+            );*/
     }
 
     /**
@@ -127,6 +118,8 @@ class DataController extends Controller
         if($slug != '') {
             $round = 'data/phase2/'.$slug.'.html.twig';
 
+            $page_title = '';
+
             if($slug == 'round1-fsl') {
                 $page_title = 'Round 1 (Food Security and Livelihood)';
             } 
@@ -141,6 +134,9 @@ class DataController extends Controller
             }
             else if ($slug == 'round2-protection') {
                 $page_title = 'Round 2 (Protection)';
+            }
+            else if ($slug == 'round2-reconstruction') {
+                $page_title = 'Round 2 (Reconstruction)';
             }
         } else {
             // $round = 'data/phase2/round1-fsl.html.twig';
