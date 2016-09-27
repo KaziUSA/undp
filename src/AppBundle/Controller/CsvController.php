@@ -60,8 +60,8 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        $this->getCsvData('/var/www/html/web/uploads/phase2/round2/FsR2/test'.$file.".xlsx");
-        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase2/round2/FsR2/test'.$file.".xlsx");
+        $this->getCsvData('/var/www/html/web/uploads/phase2/round2/RcR2/test'.$file.".xlsx");
+        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase2/round2/RcR2/test'.$file.".xlsx");
         
         
         echo "\n";
@@ -94,10 +94,10 @@ class CsvController extends Controller
         
             $survey->setGender($this->getGenderByData($row[4]));
         
-            $survey->setEthnicity($this->getEthnicityByData($row[8]));
+            $survey->setEthnicity($this->getEthnicityByData($row[6]));
         
             
-            $survey->setOccupation($this->getOccupationByData(trim($row[10])));
+            $survey->setOccupation($this->getOccupationByData(trim($row[8])));
         
             //if ($row[11] == "No difficulty"){
                 $survey->setDisability(0);
@@ -105,8 +105,8 @@ class CsvController extends Controller
                 //$survey->setDisability(1);
             //}
             
-            $survey->setCardholder($this->getCardholderByData($row[12]));
-            $survey->setCardtype($this->getCardtypeByData ($row[13]));
+            $survey->setCardholder($this->getCardholderByData($row[5]));
+            $survey->setCardtype($this->getCardtypeByData ($row[11]));
             
             $survey->setDistrict($this->getDistrictByData($row[1]));
         
@@ -125,22 +125,22 @@ class CsvController extends Controller
             
         
             // Question 1
-            $this->createSurveyResponse($survey, 35, $row[14]);
+            $this->createSurveyResponseTxt($survey, 43, $row[12]);
         
             // Question 2
-            $this->createSurveyResponse($survey, 36, $row[45]);
+            $this->createSurveyResponseTxt($survey, 44, $row[29]);
             // Question 3
-            $this->createSurveyResponse($survey, 37, $row[59]);
+            $this->createSurveyResponseTxt($survey, 45, $row[47]);
             // Question 4
-            $this->createSurveyResponseYn($survey, 38, $row[85]);
+            $this->createSurveyResponseTxt($survey, 46, $row[63]);
             // Question 5
-            $this->createSurveyResponse($survey, 39, $row[110]);
+            $this->createSurveyResponseTxt($survey, 47, $row[82]);
             // Question 6
-            $this->createSurveyResponse($survey, 40, $row[126]);
+            $this->createSurveyResponseYn($survey, 48, $row[86]);
             // Question 7
-            $this->createSurveyResponseLv($survey, 41, $row[140]);
+            $this->createSurveyResponseYn($survey, 49, $row[99]);
             // Question 8
-            $this->createSurveyResponseSh($survey, 42, $row[143]);
+            //$this->createSurveyResponseSh($survey, 42, $row[143]);
             
             unset($survey);
             unset($row);
@@ -163,6 +163,22 @@ class CsvController extends Controller
             $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
             
             $surveyResponse->setAnswer($this->getAnswerByData($answer));
+
+            $em->persist($surveyResponse);
+            $em->flush();   
+    }
+    private function createSurveyResponseTxt($survey, $questionId, $answer)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $surveyResponse = new SurveyResponse();
+            
+            $surveyResponse->setSurvey($survey);
+
+            //$question = $this->getDoctrine()->getRepository('AppBundle:Question')->find($questionId);
+        
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
+            
+            $surveyResponse->setAnswer($this->getAnswerByDataTxt($answer));
 
             $em->persist($surveyResponse);
             $em->flush();   
@@ -510,6 +526,9 @@ class CsvController extends Controller
         if ($data == "Farmer/Labourer"){
             $id = 1;
         }
+        if ($data == "Farmer/Laborer"){
+            $id = 1;
+        }
         
         if ($data == "skilled_worker"){
             $id = 2;
@@ -641,6 +660,38 @@ class CsvController extends Controller
                ->getRepository('AppBundle:Answer')->find($id);
         return $answer;
     }
+    private function getAnswerByDataTxt($data){
+        $response = $data[0];
+        $id=0;
+        
+        switch ($response) {
+            case "N":
+                $id=1;
+                if($data[4] == "v"){ $id = 2; }
+                if($data[4] == "r"){ $id = 3; }
+                break;
+            case "S":
+                $id = 4;
+                break;
+            case "C":
+                $id = 5;
+                break;
+            case "D":
+                $id = 6;
+                break;
+            case "d":
+                $id = 6;
+                break;
+            case "R":
+                $id = 7;
+                break;
+            default:
+                $id = 0;
+        }
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
     public function getAnswerByYnData($answer){
         $response = $answer[0];
         $id=0;
@@ -663,6 +714,16 @@ class CsvController extends Controller
                 $id = 164;
                 //$id=120;
                 break;
+            case "1":
+                $id = 161;
+                break;
+            case "2":
+                $id = 162;
+                break;
+            case "3":
+                $id = 163;
+                break;
+            
                 default:
                 $id = 0;
         }
