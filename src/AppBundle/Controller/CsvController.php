@@ -60,8 +60,8 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        $this->getCsvData('/var/www/html/web/uploads/phase2/rc/'.$file.".xlsx");
-        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase2/rc/'.$file.".xlsx");
+        $this->getCsvData('/var/www/html/web/uploads/phase2/round2/FsR2/test'.$file.".xlsx");
+        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase2/round2/FsR2/test'.$file.".xlsx");
         
         
         echo "\n";
@@ -86,9 +86,9 @@ class CsvController extends Controller
             
             
             $survey = new Survey();
-            $survey->setTerm(8); //MAKE SURE TO CHANGE THIS EVERY TERM
+            $survey->setTerm(9); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
-            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2016-04-15'));
+            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2016-06-15'));
             
             $survey->setAge($this->getAgeByData($row[3]));
         
@@ -106,11 +106,12 @@ class CsvController extends Controller
             //}
             
             $survey->setCardholder($this->getCardholderByData($row[12]));
-            $survey->setCardtype($this->getCardtypeByData ($row[14]));
+            $survey->setCardtype($this->getCardtypeByData ($row[13]));
             
             $survey->setDistrict($this->getDistrictByData($row[1]));
         
             $survey->setVdc($this->getVdcByData($row[2], $row[1]));
+
         
             $survey->setWard(0);
             
@@ -124,22 +125,22 @@ class CsvController extends Controller
             
         
             // Question 1
-            $this->createSurveyResponse($survey, 50, $row[110]);
+            $this->createSurveyResponse($survey, 35, $row[14]);
         
             // Question 2
-            $this->createSurveyResponse($survey, 51, $row[113]);
+            $this->createSurveyResponse($survey, 36, $row[45]);
             // Question 3
-            $this->createSurveyResponse($survey, 52, $row[131]);
+            $this->createSurveyResponse($survey, 37, $row[59]);
             // Question 4
-            $this->createSurveyResponse($survey, 53, $row[135]);
+            $this->createSurveyResponseYn($survey, 38, $row[85]);
             // Question 5
-            $this->createSurveyResponse($survey, 54, $row[150]);
+            $this->createSurveyResponse($survey, 39, $row[110]);
             // Question 6
-            $this->createSurveyResponseYn($survey, 55, $row[154]);
+            $this->createSurveyResponse($survey, 40, $row[126]);
             // Question 7
-            $this->createSurveyResponseYn($survey, 56, $row[170]);
+            $this->createSurveyResponseLv($survey, 41, $row[140]);
             // Question 8
-            //$this->createSurveyResponseSh($survey, 42, $row[143]);
+            $this->createSurveyResponseSh($survey, 42, $row[143]);
             
             unset($survey);
             unset($row);
@@ -565,6 +566,9 @@ class CsvController extends Controller
             $id = 6;   
         }
         if ($data == "Home maker/ Housewife"){
+            $id = 7;   
+        }
+        if ($data[0] == "H"){
             $id = 7;   
         }
         if ($data == "I don't do anything"){
