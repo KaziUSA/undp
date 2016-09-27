@@ -60,8 +60,8 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        $this->getCsvData('/var/www/html/web/uploads/phase2/round2/RcR2/test'.$file.".xlsx");
-        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase2/round2/RcR2/test'.$file.".xlsx");
+        $this->getCsvData('/var/www/html/web/uploads/phase2/round2/PrR2/test'.$file.".xlsx");
+        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase2/round2/PrR2/test'.$file.".xlsx");
         
         
         echo "\n";
@@ -125,20 +125,20 @@ class CsvController extends Controller
             
         
             // Question 1
-            $this->createSurveyResponseTxt($survey, 43, $row[12]);
+            $this->createSurveyResponse($survey, 50, $row[12]);
         
             // Question 2
-            $this->createSurveyResponseTxt($survey, 44, $row[29]);
+            $this->createSurveyResponse($survey, 51, $row[15]);
             // Question 3
-            $this->createSurveyResponseTxt($survey, 45, $row[47]);
+            $this->createSurveyResponse($survey, 52, $row[33]);
             // Question 4
-            $this->createSurveyResponseTxt($survey, 46, $row[63]);
+            $this->createSurveyResponse($survey, 53, $row[37]);
             // Question 5
-            $this->createSurveyResponseTxt($survey, 47, $row[82]);
+            $this->createSurveyResponse($survey, 54, $row[52]);
             // Question 6
-            $this->createSurveyResponseYn($survey, 48, $row[86]);
+            $this->createSurveyResponseYn($survey, 55, $row[56]);
             // Question 7
-            $this->createSurveyResponseYn($survey, 49, $row[99]);
+            $this->createSurveyResponseYn($survey, 56, $row[72]);
             // Question 8
             //$this->createSurveyResponseSh($survey, 42, $row[143]);
             
@@ -583,6 +583,9 @@ class CsvController extends Controller
         }
         if ($data == "Business"){
             $id = 6;   
+        }
+        if ($data == "Business"){
+            $id = 6;
         }
         if ($data == "Home maker/ Housewife"){
             $id = 7;   
