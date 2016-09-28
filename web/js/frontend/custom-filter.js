@@ -17,7 +17,10 @@ $(document).ready(function() {
       $("#form_ages input[type=checkbox]").prop('checked', $(this).prop("checked"));
     });
 
-
+    $('.nav-tabs li.round0').click(function (e) {
+        //e.preventDefault();
+        //$('.form_months#form_months').html('<li><input class="month" type="checkbox" id="month1_6" value="10" /><label for="month1_6">January<span></span></label></li>');
+    });
 
     $('.nav-tabs li.round1').click(function (e) {
         e.preventDefault();

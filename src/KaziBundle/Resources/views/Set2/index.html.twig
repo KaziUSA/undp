@@ -24,9 +24,9 @@
 
                       <ul id="" class="nav nav-tabs nav-phase2" role="tablist">
                         
-                        <li role="presentation" class="active round3"><a href="#round1" id="livelihoodBtn" aria-controls="messages" role="tab" data-toggle="tab" value="livelihood">Livelihood</a></li>
-                        <li role="presentation" class="round4"><a href="#round1" id="reconstructionBtn" aria-controls="settings" role="tab" data-toggle="tab" value="reconstruction">Reconstruction</a></li>
-                          <li role="presentation" class="round4"><a href="#round1" id="protectionBtn" aria-controls="settings" role="tab" data-toggle="tab" value="protection">Protection</a></li>
+                        <li role="presentation" class="active round0"><a href="#round0" id="livelihoodBtn" aria-controls="messages" role="tab" data-toggle="tab" value="livelihood">Livelihood</a></li>
+                        <li role="presentation" class="round0"><a href="#round0" id="reconstructionBtn" aria-controls="settings" role="tab" data-toggle="tab" value="reconstruction">Reconstruction</a></li>
+                          <li role="presentation" class="round0"><a href="#round0" id="protectionBtn" aria-controls="settings" role="tab" data-toggle="tab" value="protection">Protection</a></li>
                       </ul>
                   </div>
 
@@ -483,9 +483,11 @@
         
         //display chart from url
         if(monthVals == '') {
+            
           paramM = '';
           urlParamM = getUrlParameter('m');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
-          if(urlParamM != undefined) {
+          
+            if(urlParamM != undefined) {
             arr = urlParamM.split(',');//convert string to url
             //myArr = ['Bhaktapur','Kathmandu'];//custom to test
             monthVals = clone(arr);//clone array
@@ -833,19 +835,6 @@
       }
 
       a=1;// detect refresh and button click
-      
-
-
-       //for default chart show: on page load
-       //TODO: need to show Jan, Feb, Mar Data rather than Gender if it shows data
-       //TODO: need to fix the height of the total respondants section
-       // if(genderVals == '' && ageVals == '' && ethnicityVals == '' && districtVals == '' && monthVals == '') {
-       //  monthVals.push('July');
-       //  monthVals.push('August');
-       //  monthVals.push('September');
-       //  $("input#month-all, #form_months input[type=checkbox]").prop('checked', true);
-       //  $('#month-select-text').html('Month');
-       // }
 
        //breadcrumb
        if(monthVals != '') {
@@ -885,8 +874,8 @@
        }
 
        //show or hide search
-       //console.log(disabilityVal);
-       if(monthVals == '' && districtVals == '' && genderVals == '' && ethnicityVals == '' && ageVals == '' && disabilityVal != 1) {//&& disabilityVal == '0'
+       
+       if(monthVals == '' && districtVals == '' && genderVals == '' && ethnicityVals == '' && ageVals == '' && disabilityVal != 1) {
         $('.search .search-title').hide();
        } else {
         $('.search .search-title').show();
@@ -896,11 +885,14 @@
        if(monthVals != '' && districtVals != '' && genderVals != '' && ethnicityVals != '' && ageVals != ''){
        window.location.replace('{{path('data')}}');
      }
-      //console.log('started');
+      
       $('.loading').removeClass('hidden');
+        
       $.post('{{path('myajax')}}',
           { qname:qname,data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals, data_disability: disabilityVal , data_year: yearVal},
+             
           function(response){
+          
             //console.log(response.result.html);
               var val=new Array();
               var dt= new Array();
@@ -910,14 +902,7 @@
                   var legend_item_height = 29;
 
                   $('.legend-box').show();
-                  /*var legend_height = (response.result.series.length - 1) * legend_item_height + 15;
-                  //height of last legend is 15 without margin
-                  if(response.result.series.length >= 4) {
-                      $('.legend-box').height(legend_height);
-                      $('.legend-box').show();
-                  } else {
-                      $('.legend-box').hide();
-                  }*/
+                  
                 // easing added from https://github.com/danro/easing-js/blob/master/easing.js
                 Math.customEase = function(pos) {
                   var s = 1.70158;
@@ -962,19 +947,7 @@
                   }else{
                     A="";
                   }
-
-                  // chart.setTitle({
-                  //     //useHTML: true,
-                  //     //text:"Inter-Agency Common Feedback Project"
-                  //     }, {
-                  //       style: {
-                  //     fontSize: "10px",
-                  //         color: 'black',
-                  //         fontWeight: 'normal'
-                  //     },
-                  //     text:"<span>"+qname+"</span><br>For: "+M+D+G+E+A+V+"<br>Respondents:"+response.result.total+"<br>",
-                  //     align: "left"
-                  // });
+                  
                   
                   var chart=new Highcharts.chart({
                   chart: {                          
@@ -1006,9 +979,7 @@
                       },
                       colors:['#88d8ef','#339de7','#6e6e6f','#159c02','#99bb42','#e7e7e7','#a1a1a1','#588C73','#D96459'],
                       title: {
-                          
-                          //text: response.result.grouped
-                          // text: '<span style="font-size:12px">Inter-Agency Common</span><span style="font-size:10px">Feedback Project</span><span style="font-size:8px">Nepal Earthquake 2015</span>'                          
+                        
                       },
                       subtitle: {
                           text: response.result.grouped
@@ -1041,15 +1012,6 @@
                               text: ''//There is no text in design: People
                           }
                       },
-                      /*tooltip: {
-                          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                              '<td style="padding:0"><b>{point.y} people</b></td></tr>',
-                          footerFormat: '</table>',
-                          shared: true,
-                          useHTML: true
-                      },*/
-
                       tooltip: {
                             formatter: function () {
                               var pcnt = (this.y / response.result.total) * 100;                              
@@ -1156,29 +1118,18 @@
                       },
                   });//Highchart end
                   
-                  /** FOR ANSWER LEGENDS WITH LONGER LENGTH */
-                  // console.log(response.result.maxlen);
-                  // console.log(typeof(response.result.maxlen));
-                  // console.log(chart.options.legend.itemWidth);
+                  
                   if(response.result.maxlen > 25){
-                    // chart.legend.itemStyle.width = 250;
                     chart.options.legend.itemWidth = 250;
-                    // chart.options.legend.padding = 110;
-                    // chart.options.legend.itemMarginTop: 5;
-                    // chart.options.legend.itemMarginBottom: 10;
-                    // chart.options.legend.height = 200;
-                    // for(var index in this.chart.series) {
-                    //         chart.legend.destroyItem(chart.series[index]);
-                    // }
                     chart.legend.render()
-                    // $('.highcharts-legend-item span').width(800);
+                  
                   }
+                  
 
                   $('.highcharts-subtitle').hide();
                    $('.high-chart-wrap').removeClass('hidden');
                    $('.highcharts-title').addClass('hidden');                  
                     
-                  //$('#table1').html(chart.getTable()); //Get table from highchart function 
                   $('#table1').html(response.result.html);
                   if(response.result.series === undefined){                    
                     $('.high-chart-wrap').addClass('hidden');
@@ -1202,14 +1153,6 @@
                       },
                       "dom": 'T<"toolbar">lfrtip',
                       "ordering": false,
-                      // "columnDefs": [
-                      //   { "bsortable": false, "targets": 0 }
-                      // ],
-                      // "aoColumnDefs": [ 
-                      //    { "sTitle": qname, "aTargets": [ 0 ] }
-                      //  ],
-                      //"stitle":$(".zelected").text(),
-
                       "colVis": {
                           "buttonText": "Change columns"
                       }
@@ -1219,14 +1162,9 @@
                   //$("div.toolbar").html('Download');
                   $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
                   $('.DTTT_button_xls span, .DTTT_button_csv span').show();
-                  /*$('.DTTT_button_xls span').click(function(){
-                      console.log($('.table > thead > tr '));
-                      $('.table > thead > tr ').removeClass('hidden');
-                  });*/
                   
                   checkboxChecked();
-
-                  //console.log('success');
+                  
                   $('.loading').addClass('hidden');
 
               }//Ajax success end
