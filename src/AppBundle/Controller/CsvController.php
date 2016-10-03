@@ -38,6 +38,98 @@ class CsvController extends Controller
         return array();
     }
     
+    /**
+     * @Route("/update")
+     * @Template()
+     */
+    public function updateAction()
+    {
+        $phaxReaction = new PhaxReaction();
+        $sheet_name = '';
+        $file_name = '/Users/shrestha/Sites/undp/web/uploads/phase2/round2/FsR2Update.xlsx';
+        $file_name = '/var/www/html/web/uploads/phase2/round2/FsR2Update.xlsx';
+
+        // This will disable the javascript callback
+        $phaxReaction->setMetaMessage('New Surveys is being updated from : '. $file_name);
+        $objReader = PHPExcel_IOFactory::createReaderForFile($file_name);
+        
+        //If specific Sheet is specified then sheet is selected
+        if($sheet_name != null){
+            $objReader->setLoadSheetsOnly(array($sheet_name));
+        }
+        
+        $objReader->setReadDataOnly(true);
+        
+        $objPHPExcel = $objReader->load($file_name);
+        
+        //Getting the number of rows and columns
+        $highestColumm = $objPHPExcel->setActiveSheetIndex(0)->getHighestColumn();
+        $highestRow = $objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+        
+        
+        //$fileInfo = array();
+        $rowCount = 0;
+        
+        
+        foreach ($objPHPExcel->setActiveSheetIndex(0)->getRowIterator() as $row) {
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(false);
+            
+            $row = array();
+            $columnCount = 0;
+            foreach ($cellIterator as $cell) {
+                if (!is_null($cell)) {
+                    
+                    //This is converting the second column to Date Format
+                    //TODO:: Make sure date format anywhere is captured properly and not just the second column
+                    if (($columnCount == 2) && ($rowCount > 0)){
+                        $value = $cell->getValue();
+                        //$value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
+                        
+                    }else{
+                        $value = $cell->getCalculatedValue();    
+                        if(PHPExcel_Shared_Date::isDateTime($cell)) {
+                            $value = $cell->getValue();    
+                            $value = date($format = "Y-m-d", PHPExcel_Shared_Date::ExcelToPHP($value)); 
+                        }
+                    }
+                    
+                    array_push($row, $value);
+                    $columnCount++;
+        
+                    }
+                }
+                if ($rowCount > 0)
+                {
+                    $this->showCsv($row);    
+                }
+                unset($row);
+                //array_push($fileInfo, $row);
+                $rowCount++;
+            }
+
+        return $phaxReaction;
+    }
+    function showCsv($row){
+         $surveyId = $row[0];
+         $em = $this->getDoctrine()->getManager();
+         $repository = $em->getRepository('AppBundle\Entity\SurveyResponse');
+         $surveyResponse = $repository->findOneBy(array('survey' => $row[0], 'question' => 42));
+        echo $surveyResponse->getId() . "\n";
+    if (!$surveyResponse) {
+        throw $this->createNotFoundException(
+            'No survey found for id '.$surveyId
+        );
+    }
+
+    $surveyResponse->setAnswer($this->getAnswerByShData($row[8]));
+    $em->flush();
+
+    //return $this->redirectToRoute('homepage');
+        
+        
+        //echo  $row[0] . ' -- '. $this->getAnswerByShData($row[8])->getId() . "\n";
+    }
 
     /**
      * @Route("/upload")
@@ -786,7 +878,7 @@ class CsvController extends Controller
                 default:
                 $id=0;
         }
-        if($id==95){
+        if($id==139){
             if(substr($answer, 0, 4) == 'Teac'){
                 $id=145;
             }
@@ -831,7 +923,7 @@ class CsvController extends Controller
                 default:
                 $id=0;
         }
-        
+        //return $id;
         $answer = $this->getDoctrine()
                ->getRepository('AppBundle:Answer')->find($id);
         return $answer;
