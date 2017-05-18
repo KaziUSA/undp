@@ -1,0 +1,205 @@
+#map {
+
+	height: 500px; /* 400px */
+
+	width: 670px; /* 800px */
+}
+.info {
+  color:#818285;  
+	font-size: 12px;
+	/*text-transform: uppercase;*/
+}
+.leaflet-top .info {
+    width: 200px;
+    background: #fff;
+}
+.leaflet-info-padding {
+    padding: 15px;	
+}
+.info.leaflet-bottom{
+  padding:10px;
+}
+.info .info-title,
+#slider li,
+.info .district-name,
+.info .legend-title,
+.info .item .value {
+	font-weight: bold;
+	/*text-transform: uppercase;*/
+}
+/* Color */
+.info-title-next,
+.info-title-prev {
+
+}
+
+/* theme-default */
+#slider li:first-child,
+.theme-default .info .info-title,
+.theme-default.info-title-prev,
+.theme-default.info-title-next,
+.theme-default .info .item .value,
+.theme-default .data-type li.active a {
+	/*color: #0099ff;*/
+}
+.theme-default .info .district-name {
+	/*border-left: 2px solid #0099ff;*/
+  text-align: center;
+}
+
+/* theme-blue */
+#slider li:nth-child(2),
+.theme-blue .info .info-title,
+.theme-blue.info-title-prev,
+.theme-blue.info-title-next,
+.theme-blue .info .item .value,
+.theme-blue .data-type li.active a {
+  color: #333399;
+}
+.theme-blue .info .district-name {
+  border-left: 2px solid #333399;
+}
+
+/* theme-green */
+#slider li:nth-child(3),
+.theme-green .info .info-title,
+.theme-green.info-title-prev,
+.theme-green.info-title-next,
+.theme-green .info .item .value,
+.theme-green .data-type li.active a {
+  color: #8dc63f;
+}
+.theme-green .info .district-name {
+  border-left: 2px solid #8dc63f;
+}
+
+/* theme-orange */
+#slider li:last-child,
+.theme-orange .info .info-title,
+.theme-orange.info-title-prev,
+.theme-orange.info-title-next,
+.theme-orange .info .item .value,
+.theme-orange .data-type li.active a {
+  color: #Ff9900;
+}
+.theme-orange .info .district-name {
+  border-left: 2px solid #Ff9900;
+}
+
+.info .info-title,
+#slider .slides li {
+  font-size: 18px;
+	margin: 0 0 25px;
+  padding-bottom: 8px;
+}
+.info-title-next,
+.info-title-prev {
+	font-size: 9px;
+	text-transform: uppercase;
+}
+#slider .slides li {
+	border-bottom: 2px dotted #000;	
+}
+.info .legend-title,
+.info .district-name {
+	color: #000;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 12px;
+}
+.info .district-name {
+	padding-left: 4px;
+}
+.info .item {
+	min-height: 38px;
+	margin-bottom: 20px;
+	position: relative;
+}
+.info .item .label {
+	color: #000;
+	float: left;
+	font-size: 10px;
+	margin-right: 20px;
+	position: absolute;
+	bottom: 0;
+	text-transform: uppercase;
+}
+.info .item .label .icon {
+	background-position: center;
+	background-repeat: no-repeat;
+	display: block;
+	height: 20px;
+	margin-bottom: 5px;
+	width: 10px;
+	margin: 0 auto;
+}
+.info .item .label .label-name {
+	margin-top: 5px;
+}
+.info .item.girls .label .icon {
+	background-image: url(/img/icon-girls.png);
+}
+.info .item.boys .label .icon {
+	background-image: url(/img/icon-boys.png);
+}
+.info .item .value {
+	/*margin-left: 45px;
+	font-size: 45px;
+	line-height: 36px;*/
+}
+.info .hover-district {
+	font-weight: bold;
+	color: #000;
+	font-size: 12px;
+}
+
+.legend {
+	text-align: left;
+	line-height: 18px;
+	color: #555;
+}
+.leaflet-container {
+  /* background: #fff; */
+}
+.legend.leaflet-control {
+	margin: 0 0 10px 10px;
+}
+.legend-title {
+	margin-bottom: 10px;
+}
+.legend-wrap {
+	background: #f8f8f8;
+	padding: 6px 8px;
+}
+.legend-wrap br:first-child {
+	display: none;
+}
+.legend i {
+	width: 18px;
+	height: 18px;
+	float: left;
+	margin-right: 8px;
+	opacity: 0.7;
+}
+
+/* New Style */
+.leaflet-control-attribution {
+	display: none;
+}
+#map .data-type {
+	right: 20px;
+	bottom: 20px;
+	position: absolute;
+	z-index: 1;
+}
+#map .data-type li {
+	display: inline-block;
+	float: left;
+	margin-right: 15px;
+}
+#map .data-type li a {
+	text-decoration: none;
+}
+#map .data-type li a:hover {
+	text-decoration: underline;
+}

@@ -38,10 +38,10 @@
 		info.update = function (props) {
 			
 			this._div.innerHTML = 
-				(props ? '<div class="district-name">' + props.name + '</div><br />' +
-				'<div class="girls item"><div class="label"><div class="icon"></div><div class="label-name">Girls</div></div><div class="value">' + KAZI.util(value,props.girls,"g",props.total) + '%</div></div><div class="clear"></div>'+
-				'<div class="boys item"><div class="label"><div class="icon"></div><div class="label-name">Boys</div></div><div class="value">' + KAZI.util(value,props.boys,"b",props.total) + '%</div></div><div class="clear"></div>'+
-				'<div class="total item"><div class="label"><div class="icon"></div><div class="label-name">Total</div></div><div class="value">' + props.total+ '%</div></div><div class="clear"></div>' : '<div class="hover-district">Hover over a district</div>');//props.girls, props.boys
+				(props ? '<div class="leaflet-info-padding"><div class="district-name">' + props.name + '</div><br />' +
+				/*'<div class="girls item"><div class="label"><div class="icon"></div><div class="label-name">Girls</div></div><div class="value">' + KAZI.util(value,props.girls,"g",props.total) + '%</div></div><div class="clear"></div>'+
+				'<div class="boys item"><div class="label"><div class="icon"></div><div class="label-name">Boys</div></div><div class="value">' + KAZI.util(value,props.boys,"b",props.total) + '%</div></div><div class="clear"></div>'+*/
+				'<div class="total item"><div class="label"></div><div class="value">' + props.total+ '</div></div><div class="clear"></div></div>' : '<div class="hover-district hidden">Hover over a district</div>');//props.girls, props.boys
 			
 		};
 		info.addTo(map);
@@ -67,10 +67,11 @@
 			return {
 				weight: 1,
 				opacity: 1,
-				color: '#5d5d5d',
+				color: '#ccc',//border
 				dashArray: '0',//3
 				fillOpacity: 0.7,
-				fillColor: getColor(feature.properties.total)
+				// fillColor: getColor(feature.properties.total)//bg color
+				fillColor: feature.properties.bgColor
 			};
 		}
 
@@ -104,8 +105,11 @@
 
 		function onEachFeature(feature, layer) {
 			layer.on({
-				mouseover: highlightFeature,
-				mouseout: resetHighlight,
+				click: highlightFeature,
+
+				/*mouseover: highlightFeature,
+				mouseout: resetHighlight,*/
+
 				//click: zoomToFeature //removed movement of map on click
 			});
 		}
@@ -113,6 +117,7 @@
 $.ajax({
   
   url: '/admin/nepal',
+  // url: '/js/issue_reconstruction.json',
   success: function( data ) {
     
       geojson = L.geoJson(data, {style:style, onEachFeature: onEachFeature}).addTo(map);
