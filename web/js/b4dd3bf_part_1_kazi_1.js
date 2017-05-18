@@ -1,0 +1,1 @@
+var KAZI=KAZI||{};KAZI.util=function(){};KAZI.map=function(){};
