@@ -32,7 +32,12 @@
 		<meta property="og:image" content="http://cfp.org.np/img/frontend/logo-share.png" /> <!-- for linked in -->
 		
 	</head>
-	<body class="{% block bodyclass %}{% endblock %}" style="display: none;">{# to show better page after loading complete #}
+	<body class="{% block bodyclass %}{% endblock %}">
+    {# 
+    to show better page after loading complete 
+    - style="display: none;" 
+    - but not on issue page - map won't be loading...
+    #}
 		<nav class="navbar navbar-default clearfix">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
@@ -191,14 +196,15 @@
 	  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 	});
 </script>
-      
-      {% block scriptMap %}
-      {% endblock %}
     
       {% javascripts '@AppBundle/Resources/public/js/*' filter='uglifyjs2' %}
           <script type="text/javascript" src="{{ asset_url }}"></script>
       {% endjavascripts %}
     {% endblock %}
+
+      
+      {% block scriptMap %}
+      {% endblock %}
 
     {% block scriptIncludes %}{% endblock %}
 
