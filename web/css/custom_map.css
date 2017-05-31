@@ -14,7 +14,9 @@
     background: #fff;
 }
 .leaflet-info-padding {
-    padding: 15px;	
+		border-width: 3px;
+		border-style: solid;
+    padding: 10px;	
 }
 .info.leaflet-bottom{
   padding:10px;
