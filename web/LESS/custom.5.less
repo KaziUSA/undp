@@ -622,6 +622,14 @@ footer, footer a {
 		}
 	}
 }
+.survey {
+	.wrapper {
+		padding: 15px;
+	}
+	.page-title {
+		background: #e23239;
+	}
+}
 .more-report {
 	display: none;
 }
@@ -1236,6 +1244,9 @@ aside {
 		label {
 			cursor: pointer;
 		}
+	}
+	&.survey {
+		font-size: 13px;
 	}
 }
 
@@ -2337,4 +2348,25 @@ body.page-data {
 // New style
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover, .dropdown-menu > li > a:hover {
 	color: @white !important;
+}
+
+.nomargin {
+	margin: 0 !important;
+}
+
+body.survey {
+	background: #959595;
+}
+.survey .tab-content li {
+	border-bottom: #a4a4a4;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.survey .tab-content li.current_page_item {
+	background: #707070;
+}
+
+
+.filter.survey .nav-tabs li a {
+	font-size: 11px;
 }

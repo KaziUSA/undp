@@ -100,6 +100,10 @@
 
                 {# issue #}
                 <li class="{% if app.request.get('_route') in [
+                                    'issuetype_index', 
+                                    'issuetype_show',
+                                    'issuetype_edit',
+                                    'issuetype_new',
                                     'issuequestion_index', 
                                     'issuequestion_show',
                                     'issuequestion_edit',
@@ -115,6 +119,12 @@
                                     ] %} active {% endif %}">
                     <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Issue</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuetype_index', 
+                                    'issuetype_show',
+                                    'issuetype_edit',
+                                    'issuetype_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuetype') }}">Issue Type</a></li>
                         <li class="{% if app.request.get('_route') in [
                                     'issuequestion_index', 
                                     'issuequestion_show',

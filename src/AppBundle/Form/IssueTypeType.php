@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class IssueQuestionType extends AbstractType
+class IssueTypeType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,12 +16,6 @@ class IssueQuestionType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('issueType')
-            ->add('keyFindingsMonth')
-            ->add('keyFindings')
-            ->add('infographicsTitle')
-            ->add('hrrp')
-            ->add('districtId')
         ;
     }
     
@@ -31,7 +25,7 @@ class IssueQuestionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\IssueQuestion'
+            'data_class' => 'AppBundle\Entity\IssueType'
         ));
     }
 
@@ -40,6 +34,6 @@ class IssueQuestionType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_issuequestion';
+        return 'appbundle_issuetype';
     }
 }

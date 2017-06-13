@@ -1,9 +1,9 @@
 		//TWEAKING THE MAP
-        var zoom_level = 7.8;//6.8 - previously
+        var zoom_level = 7;//6.8 - previously
 		var index_grades = [0, 10, 20, 50, 100, 200, 500, 1000];//0-10
 		var map = L.map('map', { 
 			scrollWheelZoom: false,
-			zoomControl: true,
+			zoomControl: false,//zoom control
 			dragging: false,
 			}).setView([27.5, 85.3], zoom_level);//28.5, 84.3
 			//originally 7, removed zoom control
@@ -15,7 +15,7 @@
 			id: 'kazi-map',
 		}).addTo(map);
 
-		map.dragging.enable();
+		// map.dragging.enable(); //dragging
 
 
 		// control that shows state info on hover

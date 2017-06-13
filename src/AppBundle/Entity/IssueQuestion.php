@@ -28,6 +28,14 @@ class IssueQuestion
      */
     private $name;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="IssueType", inversedBy="issuequestion")
+     * @ORM\JoinColumn(name="issue_type_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $issueType;
+
+
     /**
      * @var integer
      *
@@ -45,21 +53,21 @@ class IssueQuestion
     /**
      * @var string
      *
-     * @ORM\Column(name="infographics_title", type="string", length=255)
+     * @ORM\Column(name="infographics_title", type="string", length=255, nullable=true)
      */
     private $infographicsTitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="hrrp", type="text")
+     * @ORM\Column(name="hrrp", type="text", nullable=true)
      */
     private $hrrp;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="district_id", type="text")
+     * @ORM\Column(name="district_id", type="text", nullable=true)
      */
     private $districtId;
 
@@ -97,6 +105,32 @@ class IssueQuestion
     {
         return $this->name;
     }
+
+
+    /**
+     * Set issueType
+     *
+     * @param \AppBundle\Entity\IssueType $issueType
+     *
+     * @return issueType
+     */
+    public function setIssueType(\AppBundle\Entity\IssueType $issueType = null)
+    {
+        $this->issueType = $issueType;
+
+        return $this;
+    }
+
+    /**
+     * Get issueType
+     *
+     * @return \AppBundle\Entity\IssueType
+     */
+    public function getIssueType()
+    {
+        return $this->issueType;
+    }
+
 
     /**
      * Set keyFindingsMonth

@@ -1,0 +1,210 @@
+{% extends 'frontend.html.twig' %}
+
+{% block bodyclass %}
+survey
+{% endblock %}
+
+{% block body -%}
+
+	<section class="content survey">
+		<div class="row row-no-padding">
+			
+			<div class="col-sm-3 col-md-3 col-lg-2">
+				<aside>
+			      <div class="filter survey">
+			        <!-- Nav tabs -->
+			        <div class="feedback-tab clearfix" style="">
+
+			            <ul id="" class="nav nav-tabs" role="tablist">
+			              <li role="presentation" class=""><a href="#livelihood" aria-controls="messages" role="tab" data-toggle="tab" value="">Livelihood</a></li>
+
+			              <li role="presentation" class="active"><a href="#reconstruction" aria-controls="settings" role="tab" data-toggle="tab" value="">Reconstruction</a></li>
+
+			              <li role="presentation" class=""><a href="#protection" aria-controls="messages" role="tab" data-toggle="tab" value="">Protection</a></li>
+
+			            </ul>
+			        </div>
+
+			        <!-- Tab panes -->
+			        <div class="tab-content">
+			          <div role="tabpanel" class="tab-pane fade in" id="livelihood">
+			              <div class="tab-content-wrap">
+			              	Question list livelihood
+			              </div>
+			          </div>
+
+			          <div role="tabpanel" class="tab-pane fade in active" id="reconstruction">
+			              <div class="tab-content-wrap">
+	                  	{# {{ dump(issue_questions) }} #}
+			              	{% if issue_questions is not empty %}
+			              	<ul>
+			                  {% for question in issue_questions %}
+			                  	{% if question.issueType.name == 'Reconstruction' %}
+			                  	<li class="{% if question.id == question_detail.id %}active{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
+			                  	{% endif %}
+			                  {% endfor %}
+			                 </ul>
+			              	{% endif %}
+			              </div>
+			          </div>
+
+			          <div role="tabpanel" class="tab-pane fade in" id="protection">
+			              <div class="tab-content-wrap">
+			              	Question list protection
+			              </div>
+			          </div>
+			        </div>
+			      </div>
+			  </aside>
+			</div>
+
+			<div class="col-sm-9 col-md-9 col-lg-10">
+				<div class="page-title">
+					<h3>
+						{{ question_detail.name }}
+					</h3>
+				</div>
+
+				<!-- main content -->
+				<div class="main-content">
+					<div class="wrapper clearfix"><!--wrapper remove or not-->
+
+						<div class="row nomargin">
+							<div class="col-md-8">
+								<div><h2>Key Findings in {{ question_detail.keyFindingsMonth }}</h2></div>	
+								<div>{{ question_detail.keyFindings }}</div>
+							</div>
+
+							<div class="col-md-4">
+								<div id="container-reconstruction" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
+							</div>
+						</div>
+
+						<div class="row nomargin">
+							<div class="col-sm-12">
+								<div><h2>What are people saying?</h2></div>
+								<div>						
+			            <div id="map" class="theme-default">
+			            </div>     
+								</div>
+							</div>
+						</div>
+
+						<div class="row nomargin">
+							<div class="col-md-6">
+								<div class="infographics">
+									<h2>District Highlights</h2>
+									<div class="infographics-list">
+										<span class="icon">ICON</span>
+										<p>Text here</p>
+									</div>
+									<div class="infographics-list">
+										<span class="icon">ICON</span>
+										<p>Text here</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="graphics">
+									<h2>Needs met by ...</h2>
+									img <br>
+									p
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div><!-- /.main-content -->
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="/css/leaflet.css" rel="stylesheet">
+    <link href="/css/custom_map.css" rel="stylesheet">
+    {# custom.css for admin #}
+{% endblock %}
+
+{% block scriptIncludes %}
+
+<script>
+	$(document).ready(function() {
+		var winWidth = $(window).width();
+
+		   
+
+		content_height();
+	});
+	$(window).resize(function() {
+		content_height();
+	});
+	function content_height() {
+		if(winWidth >= 768) {
+			var winHeight = $(window).height();
+			var content_height = winHeight - 100 - 40 - 42;
+			$('.content, .main-content').css({'min-height': content_height+'px'});
+		}
+	}
+</script>
+
+    <script type="text/javascript">
+        //change these variables
+        var theme_color = "#ffffff";//#0099ff
+        var border_color = "#ffffff";//#f7941e: orange
+    </script>
+    <script type="text/javascript" src="/js/leaflet.js"></script>
+    <!--<script type="text/javascript" src="/js/issue_reconstruction.js"></script>-->
+    <!--nepal-districts.js-->
+
+    <script type="text/javascript" src="/js/custom.js"></script>
+
+
+    {# highcharts #}
+    <script type="text/javascript">
+    Highcharts.chart('container-reconstruction', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            legend: {
+            	align: 'center'
+            },
+            title: {
+                text: 'Biggest community reconstruction<br>priority besides houses',
+                // align: 'center',
+                // verticalAlign: 'middle',
+                y: 20
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: false
+                    },
+                    // startAngle: -90,//for half pie
+                    // endAngle: 90,
+                    center: ['50%', '50%'],
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Reconstruction priority',
+                innerSize: '40%',//50%
+                data: [
+                    ['Water supply',   40],
+                    ['Schools',       20],
+                    ['Roads', 10],
+                    ['Hospitals / Health centre',     8]
+                ]
+            }]
+        });
+
+
+    </script>
+{% endblock %}

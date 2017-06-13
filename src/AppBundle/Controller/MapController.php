@@ -25,6 +25,8 @@ class MapController extends Controller
                 $q2_district = [36, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 12];
                 //id = 
                 //if($i == 23)
+                
+                //selected district only
                 if(in_array($i, $q2_district))
                array_push($features, $this->districtJson($i));
 
@@ -71,8 +73,20 @@ class MapController extends Controller
         // $properties['name'] = $properties['id'] . '. ' . $entity->getName();
         $properties['name'] = $entity->getName();
         //TODO: need to fix randum number
+
         $properties['boys'] = rand(0, 800);
         $properties['girls'] =rand(0, 800);
+
+        //Reading csv and setting boys and girls value
+        //adding this - for unicef test map showing for demo
+        /*$handle = fopen("/Users/nikesh/Sites/undp/web/uploads/csv/literacy-2001.csv", "r");
+        while (($data = fgetcsv($handle, 1000, ","))) {
+            if($properties['name'] == $data[0]) {                
+                $properties['boys'] = (float) $data[1];//male
+                $properties['girls'] = (float) $data[2];//female
+            }
+            //others will not have properties boys, girls
+        }*/
 
         /* TODO: Need to ask? Is this been used or just added for demo? */
         /* Need to make dynamic */
@@ -80,7 +94,7 @@ class MapController extends Controller
         //Question: Besides building your home, What is your biggest reconstruction priority?
         if($properties['name'] == 'Sindhupalchowk') {
             /*$properties['total'] = "Fulpingkatti, Sindhupalchowk: There is scarcity of water, due to which it is difficult to reconstruct our house.<br><br>Fulpingkatti, Sindhupalchowk: More priority needs to be given to educational institutes like schools.";*/
-            $properties['total'] = "Fulpingkatti, Sindhupalchowk: It is difficult to reconstruct house due to water shortage.";
+            $properties['total'] = "Fulpingkatti, Sindhupalchowk: It is difficult to reconstruct house due to water shortage.<br><br>HRRP: The issue of water has been raised";
             
             $properties['bgColor'] = "brown";
         } 
