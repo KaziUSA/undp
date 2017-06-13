@@ -207,7 +207,7 @@ class CsvController extends Controller
             echo "Adding Survey Count :". $this->count ."\r";
             
         ////////////////FOOD SECURITY AND LIVELIHOOD QUESTIONS///////////////////
-        /*
+        
             // Question 1
             $this->createSurveyResponse($survey, 57, $row[12]);
         
@@ -230,7 +230,7 @@ class CsvController extends Controller
             // Question 10
             $this->createSurveyResponse($survey, 66, $row[21]);
           
-          */
+          
             unset($survey);
             unset($row);
             unset($interviewer);  
@@ -812,13 +812,24 @@ class CsvController extends Controller
     private function getAnswerByData($data){
         $response = $data[0];
         $id=0;
-        if ($response == 'D'){
-            $id = 6;   
-            
-        }elseif($response == 'd'){
-            $id=6;   
-        }else{
-         $id = intval($response);   
+        switch ($response) {
+            case "D":
+                $id = 6;
+                break;
+            case "N":
+                $id = 1;
+                break;
+            case "S":
+                $id = 4;
+                break;
+            case "C":
+                $id = 5;
+                break;
+                default:
+                $id = 0;    
+        }
+        if($id == 1){
+         if ($data[4] == 'v'){ $id = 2; }
         }
         
         $answer = $this->getDoctrine()
