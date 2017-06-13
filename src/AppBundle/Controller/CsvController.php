@@ -912,7 +912,7 @@ class CsvController extends Controller
         $response = substr($answer, 0, 2);
         $id=0;
         
-        switch ($answer) {
+        switch ($response) {
             case "Be":
                 $id = 193;
                 break;
