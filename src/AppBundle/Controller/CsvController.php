@@ -206,7 +206,8 @@ class CsvController extends Controller
             $this->count++;
             echo "Adding Survey Count :". $this->count ."\r";
             
-        
+        ////////////////FOOD SECURITY AND LIVELIHOOD QUESTIONS///////////////////
+        /*
             // Question 1
             $this->createSurveyResponse($survey, 57, $row[12]);
         
@@ -228,7 +229,8 @@ class CsvController extends Controller
             $this->createSurveyResponseYn($survey, 65, $row[20]);
             // Question 10
             $this->createSurveyResponse($survey, 66, $row[21]);
-            
+          
+          */
             unset($survey);
             unset($row);
             unset($interviewer);  
