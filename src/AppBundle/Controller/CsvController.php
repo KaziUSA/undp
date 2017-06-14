@@ -152,8 +152,8 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        //$this->getCsvData('/var/www/html/web/uploads/phase3/FS-FEB/Food_security'.$file.".xlsx");
-        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase3/FS-FEB/Food_security'.$file.".xlsx");
+        $this->getCsvData('/var/www/html/web/uploads/phase3/FS-FEB/Food_security'.$file.".xlsx");
+        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase3/FS-FEB/Food_security'.$file.".xlsx");
         
         
         echo "\n";
@@ -825,11 +825,15 @@ class CsvController extends Controller
             case "C":
                 $id = 5;
                 break;
+            case "A":
+                $id = 5;
+                break;
                 default:
                 $id = 0;    
         }
         if($id == 1){
          if ($data[4] == 'v'){ $id = 2; }
+         if ($data[4] == 'm'){ $id = 2; }
         }
         
         $answer = $this->getDoctrine()
@@ -967,7 +971,7 @@ class CsvController extends Controller
         $response = substr($answer, 0, 3);
         $id=0;
         
-        switch ($answer) {
+        switch ($response) {
             case "All":
                 $id = 187;
                 break;
