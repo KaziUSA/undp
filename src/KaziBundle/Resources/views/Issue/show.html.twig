@@ -131,9 +131,19 @@ survey
 							</div>
 							<div class="col-md-6">
 								<div class="graphics">
-									<h2>Needs met by ...</h2>
+									{% if question_detail.imageTitle != '' %}
+										<h2>{{ question_detail.imageTitle }}</h2>
+									{% endif %}
+
 									img <br>
-									p
+
+									{% if question_detail.imageDesc != '' %}
+										<p>{{ question_detail.imageDesc }}</p>
+									{% endif %}
+
+									{% if question_detail.imageCredit != '' %}
+										<p>Photo credit: {{ question_detail.imageCredit }}</p>
+									{% endif %}
 								</div>
 							</div>
 						</div>
@@ -183,6 +193,9 @@ survey
     <!--<script type="text/javascript" src="/js/issue_reconstruction.js"></script>-->
     <!--nepal-districts.js-->
 
+    <script>
+    	var question_id = {{ question_detail.id }};
+    </script>
     <script type="text/javascript" src="/js/custom.js"></script>
 
 

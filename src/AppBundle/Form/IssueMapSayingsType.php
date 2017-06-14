@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DistrictType extends AbstractType
+class IssueMapSayingsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,15 @@ class DistrictType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('region')
-            ->add('code')
-            ->add('color')
-            ->add('shape')
+            ->add('issueQuestion')
+            ->add('district')
+            ->add('location')
+            ->add('saying')
+            ->add('hrrp', null, array(
+                'label' => 'HRRP',
+                'required'   => false,
+                )
+            )
         ;
     }
     
@@ -29,7 +33,7 @@ class DistrictType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\District'
+            'data_class' => 'AppBundle\Entity\IssueMapSayings'
         ));
     }
 
@@ -38,6 +42,6 @@ class DistrictType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_district';
+        return 'appbundle_issuemapsayings';
     }
 }

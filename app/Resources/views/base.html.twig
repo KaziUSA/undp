@@ -173,6 +173,12 @@
                                     'issuemapdistricts_edit',
                                     'issuemapdistricts_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuemapdistricts') }}">Issue Map Districts</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuemapsayings_index', 
+                                    'issuemapsayings_show',
+                                    'issuemapsayings_edit',
+                                    'issuemapsayings_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuemapsayings') }}">Issue Map Sayings</a></li>
                     </ul>
                 </li>
             </ul>

@@ -62,6 +62,35 @@ class IssueQuestion
 
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image_title", type="string", length=255, nullable=true)
+     */
+    private $imageTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image_url", type="string", length=255, nullable=true)
+     */
+    private $imageUrl;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image_desc", type="text", nullable=true)
+     */
+    private $imageDesc;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image_credit", type="string", length=255, nullable=true)
+     */
+    private $imageCredit;
+
+
+    /**
      * Get id
      *
      * @return integer
@@ -197,6 +226,103 @@ class IssueQuestion
     public function getIssueMapName()
     {
         return $this->issueMapName;
+    }
+
+    /**
+     * Set imageTitle
+     *
+     * @param string $imageTitle
+     *
+     * @return IssueQuestion
+     */
+    public function setImageTitle($imageTitle)
+    {
+        $this->imageTitle = $imageTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get imageTitle
+     *
+     * @return string
+     */
+    public function getImageTitle()
+    {
+        return $this->imageTitle;
+    }
+
+    /**
+     * Set imageUrl
+     *
+     * @param string $imageUrl
+     *
+     * @return IssueQuestion
+     */
+    public function setImageUrl($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get imageUrl
+     *
+     * @return string
+     */
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
+    }
+
+    /**
+     * Set imageDesc
+     *
+     * @param string $imageDesc
+     *
+     * @return IssueQuestion
+     */
+    public function setImageDesc($imageDesc)
+    {
+        $this->imageDesc = $imageDesc;
+
+        return $this;
+    }
+
+    /**
+     * Get imageDesc
+     *
+     * @return string
+     */
+    public function getImageDesc()
+    {
+        return $this->imageDesc;
+    }
+
+
+    /**
+     * Set imageCredit
+     *
+     * @param string $imageCredit
+     *
+     * @return IssueQuestion
+     */
+    public function setImageCredit($imageCredit)
+    {
+        $this->imageCredit = $imageCredit;
+
+        return $this;
+    }
+
+    /**
+     * Get imageCredit
+     *
+     * @return string
+     */
+    public function getImageCredit()
+    {
+        return $this->imageCredit;
     }
 
     /* To fix: Object of class Proxies\__CG__\AppBundle\Entity\IssueQuestion could not be converted to string"). */

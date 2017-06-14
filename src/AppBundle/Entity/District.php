@@ -42,12 +42,21 @@ class District
      * @ORM\Column(name="code", type="string", length=255)
      */
     private $code;
+
     /**
      * @var string
      *
      * @ORM\Column(name="shape", type="text")
      */
     private $shape;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="color", type="string", length=255)
+     */
+    private $color;
     
     /**
      * @ORM\OneToMany(targetEntity="Survey", mappedBy="district")
@@ -201,5 +210,31 @@ class District
     public function getSurvey()
     {
         return $this->survey;
+    }
+
+
+
+    /**
+     * Set color
+     *
+     * @param string $color
+     *
+     * @return District
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
 }

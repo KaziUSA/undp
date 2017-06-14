@@ -118,7 +118,7 @@
     
 $.ajax({
   
-  url: '/admin/nepal',
+  url: '/admin/nepal/'+question_id,//question_id = 1
   // url: '/js/issue_reconstruction.json',
   success: function( data ) {
     

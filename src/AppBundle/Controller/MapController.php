@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 class MapController extends Controller
 {
     /**
-     * @Route("/nepal")
+     * @Route("/nepal/{question_id}")
      * @Template()
      */
-    public function nepalAction()
+    public function nepalAction($question_id)
     {
         
         //getting district id from IssueMapDistrict
@@ -23,11 +23,17 @@ class MapController extends Controller
         //TODO: Need to make this part dynamic
         //first get question detail - 
         //TODO: so call this using /nepal/{question_id} from issueController
-        $question_id = 1;
+        $question_id = $question_id;//eg. 1 - use this to get issueMapSayings also
         $question_detail = $em->getRepository('AppBundle:IssueQuestion')->findById($question_id);
+        // var_dump($question_detail[0]->getIssueMapName()); exit();
         //var_dump($question_detail[0]->getIssueMapName()->getId());exit();
 
-        $issueMapNameId = $question_detail[0]->getIssueMapName()->getId();
+        if($question_detail[0]->getIssueMapName() != '') {
+            $issueMapNameId = $question_detail[0]->getIssueMapName()->getId();
+        } 
+        else {
+            $issueMapNameId = 1;
+        }
 
         $district = $em->getRepository('AppBundle:IssueMapDistricts')->findByIssueMapName($issueMapNameId);
 
@@ -54,7 +60,7 @@ class MapController extends Controller
                 
                 //selected district only
                 if(in_array($i, $q2_district))
-               array_push($features, $this->districtJson($i));
+               array_push($features, $this->districtJson($i, $question_id));
 
                 //$features[$i-1]['properties']['total'] = $features[$i-1]['properties']['id'];
         }
@@ -87,7 +93,7 @@ class MapController extends Controller
     /**
      * Prepares district information into JSONArray for all districts
      */
-    private function districtJson($id)
+    private function districtJson($id, $question_id)
     {
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('AppBundle:District')->find($id);
@@ -102,6 +108,8 @@ class MapController extends Controller
 
         $properties['boys'] = rand(0, 800);
         $properties['girls'] =rand(0, 800);
+        
+        $properties['bgColor'] = 'black';
 
         //Reading csv and setting boys and girls value
         //adding this - for unicef test map showing for demo
@@ -118,8 +126,7 @@ class MapController extends Controller
         /* Need to make dynamic */
 
         //Question: Besides building your home, What is your biggest reconstruction priority?
-        if($properties['name'] == 'Sindhupalchowk') {
-            /*$properties['total'] = "Fulpingkatti, Sindhupalchowk: There is scarcity of water, due to which it is difficult to reconstruct our house.<br><br>Fulpingkatti, Sindhupalchowk: More priority needs to be given to educational institutes like schools.";*/
+        /*if($properties['name'] == 'Sindhupalchowk') {
             $properties['total'] = "Fulpingkatti, Sindhupalchowk: It is difficult to reconstruct house due to water shortage.<br><br>HRRP: The issue of water has been raised";
             
             $properties['bgColor'] = "brown";
@@ -128,18 +135,35 @@ class MapController extends Controller
             $properties['total'] = "Godawari, Lalitpur: Most of us (Dalit) do not have land ownership documents. Hence, we are excluded from the beneficiary list. We need government cash support.";
             
             $properties['bgColor'] = "yellow";
-        } 
-        else if($properties['name'] == 'Gorkha') {
-            $properties['total'] = "Barpak, Gorkha: I am not included in the beneficiary list though I am a real earthquake victim.";
-            
-            $properties['bgColor'] = "red";
         }
         else {
             // $properties['total'] = $properties['girls']+$properties['boys'];
             $properties['total'] = $properties['name'] . " people saying";
 
             $properties['bgColor'] = "black";
+        }*/
+
+        //pulling people saying here
+        // var_dump($question_id); exit();
+        $em = $this->getDoctrine()->getManager();
+
+        $sayings = $em->getRepository('AppBundle:IssueMapSayings')->findByIssueQuestion($question_id);
+        // var_dump($sayings);
+        foreach ($sayings as $say) {
+            // var_dump($say->getDistrict()->getName());
+            if($properties['name'] == $say->getDistrict()->getName()) {
+                $properties['name'] = $say->getLocation() . ', ' . $say->getDistrict()->getName();
+
+                $properties['total'] = $say->getSaying() . '<br><br>' . $say->getHrrp();
+
+                if($say->getDistrict()->getColor() != '') {
+                    $properties['bgColor'] = $say->getDistrict()->getColor();
+                } 
+            }
         }
+        // exit();
+
+
         
         $geoJSON['properties'] = $properties;
         

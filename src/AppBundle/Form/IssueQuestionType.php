@@ -20,6 +20,10 @@ class IssueQuestionType extends AbstractType
             ->add('keyFindingsMonth')
             ->add('keyFindings')
             ->add('issueMapName')
+            ->add('image_title')
+            ->add('image_url')
+            ->add('image_desc')
+            ->add('image_credit')
         ;
     }
     

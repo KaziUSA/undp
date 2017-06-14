@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueMapSayings</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Issue Question</th>
+                <td>{{ entity.issueQuestion }}</td>
+            </tr>
+            <tr>
+                <th>District</th>
+                <td>{{ entity.district }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ entity.location }}</td>
+            </tr>
+            <tr>
+                <th>Saying</th>
+                <td>{{ entity.saying }}</td>
+            </tr>
+            <tr>
+                <th>Hrrp</th>
+                <td>{{ entity.hrrp }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('issuemapsayings') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('issuemapsayings_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

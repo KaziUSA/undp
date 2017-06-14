@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueMapSayings list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IssueQuestion</th>
+                <th>District</th>
+                <th>Location</th>
+                <th>Saying</th>
+                <th>Hrrp</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('issuemapsayings_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.issueQuestion }}</td>
+                <td>{{ entity.district }}</td>
+                <td>{{ entity.location }}</td>
+                <td>{{ entity.saying }}</td>
+                <td>{{ entity.hrrp }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('issuemapsayings_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('issuemapsayings_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('issuemapsayings_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
