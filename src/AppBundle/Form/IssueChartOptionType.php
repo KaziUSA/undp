@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class IssueInfographicsType extends AbstractType
+class IssueChartOptionType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,13 +15,9 @@ class IssueInfographicsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description')
-            ->add('icon', null, array(
-                'label' => 'Icon / Value',
-                'required'   => false,
-                )
-            )
-            ->add('issueInfographicsTitle')
+            ->add('name')
+            ->add('value')
+            ->add('issueChartQuestion')
         ;
     }
     
@@ -31,7 +27,7 @@ class IssueInfographicsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\IssueInfographics'
+            'data_class' => 'AppBundle\Entity\IssueChartOption'
         ));
     }
 
@@ -40,6 +36,6 @@ class IssueInfographicsType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_issueinfographics';
+        return 'appbundle_issuechartoption';
     }
 }

@@ -17,13 +17,39 @@ class MapController extends Controller
     public function nepalAction()
     {
         
+        //getting district id from IssueMapDistrict
+        $em = $this->getDoctrine()->getManager();
+
+        //TODO: Need to make this part dynamic
+        //first get question detail - 
+        //TODO: so call this using /nepal/{question_id} from issueController
+        $question_id = 1;
+        $question_detail = $em->getRepository('AppBundle:IssueQuestion')->findById($question_id);
+        //var_dump($question_detail[0]->getIssueMapName()->getId());exit();
+
+        $issueMapNameId = $question_detail[0]->getIssueMapName()->getId();
+
+        $district = $em->getRepository('AppBundle:IssueMapDistricts')->findByIssueMapName($issueMapNameId);
+
+        // var_dump($district); exit();
+
+        //Q2. Are your main reconstruction needs being addressed
+        // $q2_district = [36, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 12];
+
+        $q2_district = array();
+
+        foreach ($district as $district_item) {
+            // var_dump($district_item->getDistrict()->getId());
+            array_push($q2_district, $district_item->getDistrict()->getId());
+        }
+        // var_dump($q2_district);
+        // exit();
+
+
         $geoJSON = array();
         $geoJSON['type'] = "FeatureCollection";
         $features = array();
-        for ($i = 1; $i < 76; $i++){
-                //Q2. Are your main reconstruction needs being addressed
-                $q2_district = [36, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 12];
-                //id = 
+        for ($i = 1; $i < 76; $i++){              
                 //if($i == 23)
                 
                 //selected district only

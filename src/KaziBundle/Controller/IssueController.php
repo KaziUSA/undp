@@ -73,9 +73,74 @@ class IssueController extends Controller
         $question_detail = $em->getRepository('AppBundle:IssueQuestion')->findById($id);
         // var_dump($question_detail); exit();
 
+
+
+
+        //get charts questions
+        $chart_question = $em->getRepository('AppBundle:IssueChartQuestion')->findByIssueQuestion($id);
+        // var_dump($chart_question); exit();        
+        
+
+        
+        //now creating proper array
+        $question_option = array();
+
+        $i = 0;
+        foreach ($chart_question as $cq) {
+            // var_dump($cq);
+            $question_option[$i]['id'] = $cq->getId();
+            $question_option[$i]['name'] = $cq->getName();
+
+            
+            //get charts option of each chart question
+            $chart_option = $em->getRepository('AppBundle:IssueChartOption')->findByIssueChartQuestion( $cq->getId() );//TODO: chart question id to be passed
+            // var_dump($chart_option); exit();    
+
+            $question_option[$i]['option'] = (array) $chart_option;
+
+            $i++;
+        }
+        // var_dump($question_option); exit();
+
+
+        
+
+
+        //get infographics title
+        $infographics_title = $em->getRepository('AppBundle:IssueInfographicsTitle')->findByIssueQuestion($id);
+        // var_dump($infographics_title); exit();
+
+
+        //now creating proper array
+        $infographics = array();
+
+        $i = 0;
+        foreach ($infographics_title as $it) {
+            // var_dump($it);
+            $infographics[$i]['id'] = $it->getId();
+            $infographics[$i]['name'] = $it->getName();
+            $infographics[$i]['type'] = $it->getType();
+            /* 1 - Vertical, 2 - Horizontal, 3 - Percentage - vertical */
+
+            
+            //get charts option of each chart question
+            $infographics_list = $em->getRepository('AppBundle:IssueInfographics')->findByIssueInfographicsTitle( $it->getId() );//TODO: chart question id to be passed
+            // var_dump($infographics_list); exit();    
+
+            $infographics[$i]['option'] = (array) $infographics_list;
+
+            $i++;
+        }
+        // var_dump($infographics); exit();
+
+
+
         return array(
             'issue_questions' => $issue_questions,
-            'question_detail' => $question_detail[0],
+            'question_detail' => $question_detail[0],//their will be always single question detail
+            // 'chart_question' => $chart_question,//send final one - chart question option
+            'question_option' => $question_option,
+            'infographics' => $infographics,
         );
 
     }

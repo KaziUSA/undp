@@ -23,10 +23,10 @@ class IssueInfographics
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="IssueQuestion", inversedBy="issuepeople")
-     * @ORM\JoinColumn(name="issue_question_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="IssueInfographicsTitle", inversedBy="issueinfographics")
+     * @ORM\JoinColumn(name="issue_infographics_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $issueQuestion;
+    private $issueInfographicsTitle;
 
     /**
      * @var string
@@ -104,27 +104,27 @@ class IssueInfographics
     
 
     /**
-     * Set issueQuestion
+     * Set issueInfographicsTitle
      *
-     * @param \AppBundle\Entity\IssueQuestion $issueQuestion
+     * @param \AppBundle\Entity\IssueInfographicsTitle $issueInfographicsTitle
      *
-     * @return issueQuestion
+     * @return issueInfographicsTitle
      */
-    public function setIssueQuestion(\AppBundle\Entity\IssueQuestion $issueQuestion = null)
+    public function setIssueInfographicsTitle(\AppBundle\Entity\IssueInfographicsTitle $issueInfographicsTitle = null)
     {
-        $this->issueQuestion = $issueQuestion;
+        $this->issueInfographicsTitle = $issueInfographicsTitle;
 
         return $this;
     }
 
     /**
-     * Get issueQuestion
+     * Get issueInfographicsTitle
      *
-     * @return \AppBundle\Entity\IssueQuestion
+     * @return \AppBundle\Entity\IssueInfographicsTitle
      */
-    public function getIssueQuestion()
+    public function getIssueInfographicsTitle()
     {
-        return $this->issueQuestion;
+        return $this->issueInfographicsTitle;
     }
 }
 

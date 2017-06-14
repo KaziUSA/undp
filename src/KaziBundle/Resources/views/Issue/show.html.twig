@@ -71,12 +71,20 @@ survey
 
 						<div class="row nomargin">
 							<div class="col-md-8">
-								<div><h2>Key Findings in {{ question_detail.keyFindingsMonth }}</h2></div>	
+								<div>
+									<h2>Key Findings in {{ date('2017-' ~ question_detail.keyFindingsMonth ~ '-01') | date ('F') }}
+              	  {# doesn't matter what ever year or day - we just need month #}</h2>
+              	</div>	
+
 								<div>{{ question_detail.keyFindings }}</div>
 							</div>
 
 							<div class="col-md-4">
-								<div id="container-reconstruction" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
+								{# loop here #}
+								{% for qo in question_option %}									
+									<div id="container-issue-question-{{ qo.id }}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
+									
+								{% endfor %}
 							</div>
 						</div>
 
@@ -92,17 +100,34 @@ survey
 
 						<div class="row nomargin">
 							<div class="col-md-6">
-								<div class="infographics">
-									<h2>District Highlights</h2>
-									<div class="infographics-list">
-										<span class="icon">ICON</span>
-										<p>Text here</p>
+								{% for info in infographics %}
+									<div class="infographics infographics-style-{{ info.type }}">
+										{# <h2>District Highlights</h2>
+										<div class="infographics-list">
+											<span class="icon">ICON</span>
+											<p>Text here</p>
+										</div>
+										<div class="infographics-list">
+											<span class="icon">ICON</span>
+											<p>Text here</p>
+										</div> #}
+									
+										<h2>{{ info.name }}</h2>
+										{% for opt in info.option %}
+											<div class="infographics-list">
+												<span class="icon">
+													{{ opt.icon }}
+													{% if info.type == 3 %}
+														%
+													{% endif %}
+												</span>
+												<p>{{ opt.description }}</p>
+											</div>
+										{% endfor %}
+									
 									</div>
-									<div class="infographics-list">
-										<span class="icon">ICON</span>
-										<p>Text here</p>
-									</div>
-								</div>
+									<div class="clear"></div>
+								{% endfor %}
 							</div>
 							<div class="col-md-6">
 								<div class="graphics">
@@ -163,47 +188,58 @@ survey
 
     {# highcharts #}
     <script type="text/javascript">
-    Highcharts.chart('container-reconstruction', {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: 0,
-                plotShadow: false
-            },
-            legend: {
-            	align: 'center'
-            },
-            title: {
-                text: 'Biggest community reconstruction<br>priority besides houses',
-                // align: 'center',
-                // verticalAlign: 'middle',
-                y: 20
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    dataLabels: {
-                        enabled: false
-                    },
-                    // startAngle: -90,//for half pie
-                    // endAngle: 90,
-                    center: ['50%', '50%'],
-                    showInLegend: true
-                }
-            },
-            series: [{
-                type: 'pie',
-                name: 'Reconstruction priority',
-                innerSize: '40%',//50%
-                data: [
-                    ['Water supply',   40],
-                    ['Schools',       20],
-                    ['Roads', 10],
-                    ['Hospitals / Health centre',     8]
-                ]
-            }]
-        });
+    //chartType 1 - pie chart
+    //loop here
+    {% for qo in question_option %}
+	    Highcharts.chart('container-issue-question-{{ qo.id }}', {
+	            chart: {
+	                plotBackgroundColor: null,
+	                plotBorderWidth: 0,
+	                plotShadow: false
+	            },
+	            legend: {
+	            	align: 'center'
+	            },
+	            title: {
+	            		//issueChartQuestion here
+	                text: '{{ qo.name }}',
+	                // align: 'center',
+	                // verticalAlign: 'middle',
+	                y: 20
+	            },
+	            tooltip: {
+	                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	            },
+	            plotOptions: {
+	                pie: {
+	                    dataLabels: {
+	                        enabled: false
+	                    },
+	                    // startAngle: -90,//for half pie
+	                    // endAngle: 90,
+	                    center: ['50%', '50%'],
+	                    showInLegend: true
+	                }
+	            },
+	            series: [{
+	                type: 'pie',
+	                name: '',
+	                innerSize: '40%',//50%
+	                data: [
+	                		//issueChartOption here
+	                    
+	                    /*['Water supply',   40],
+	                    ['Schools',       20],
+	                    ['Roads', 10],
+	                    ['Hospitals / Health centre',     8]*/
+
+	                		{% for opt in qo.option %}
+												['{{ opt.name }}',   {{ opt.value }}],//issue/4 - ' quote issue
+											{% endfor %}
+	                ]
+	            }]
+	    });
+    {% endfor %}
 
 
     </script>

@@ -1,34 +1,32 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>IssueQuestion list</h1>
+    <h1>IssueChartOption list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Keyfindingsmonth</th>
-                <th>Keyfindings</th>
-                <th>IssueMapName</th>
+                <th>Value</th>
+                <th>Issue Chart Question</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('issuequestion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('issuechartoption_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
-                <td>{{ entity.keyFindingsMonth }}</td>
-                <td>{{ entity.keyFindings }}</td>
-                <td>{{ entity.issueMapName }}</td>
+                <td>{{ entity.value }}</td>
+                <td>{{ entity.issuechartquestion }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('issuequestion_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('issuechartoption_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('issuequestion_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('issuechartoption_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -39,7 +37,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('issuequestion_new') }}">
+            <a href="{{ path('issuechartoption_new') }}">
                 Create a new entry
             </a>
         </li>

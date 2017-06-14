@@ -1,0 +1,26 @@
+/* Created by nikesh@kazistudios.com on 13 June 2017 */
+
+
+
+.infographics .infographics-list .icon {
+	background: #f2f2f2;
+	display: inline-block;
+	height: 80px;
+	width: 80px;
+}
+.infographics.infographics-style-1 .infographics-list .icon,
+.infographics.infographics-style-3 .infographics-list .icon { 
+	float: left;
+}
+.infographics.infographics-style-1 .infographics-list,
+.infographics.infographics-style-3 .infographics-list {
+	display: block;
+  clear: both;
+  margin-bottom: 20px;
+  min-height: 80px;
+}
+
+.infographics.infographics-style-2 .infographics-list {
+    float: left;
+    max-width: 33%;
+}

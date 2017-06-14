@@ -19,9 +19,7 @@ class IssueQuestionType extends AbstractType
             ->add('issueType')
             ->add('keyFindingsMonth')
             ->add('keyFindings')
-            ->add('infographicsTitle')
-            ->add('hrrp')
-            ->add('districtId')
+            ->add('issueMapName')
         ;
     }
     

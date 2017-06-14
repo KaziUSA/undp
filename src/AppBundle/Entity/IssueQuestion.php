@@ -50,26 +50,15 @@ class IssueQuestion
      */
     private $keyFindings;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="infographics_title", type="string", length=255, nullable=true)
-     */
-    private $infographicsTitle;
+
+    
+
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="hrrp", type="text", nullable=true)
+     * @ORM\ManyToOne(targetEntity="IssueMapName", inversedBy="issuequestion")
+     * @ORM\JoinColumn(name="issue_map_name_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $hrrp;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="district_id", type="text", nullable=true)
-     */
-    private $districtId;
+    private $issueMapName;
 
 
     /**
@@ -180,76 +169,34 @@ class IssueQuestion
         return $this->keyFindings;
     }
 
+    
+
+
+
+
+
     /**
-     * Set infographicsTitle
+     * Set issueMapName
      *
-     * @param string $infographicsTitle
+     * @param \AppBundle\Entity\IssueMapName $issueMapName
      *
-     * @return IssueQuestion
+     * @return issueMapName
      */
-    public function setInfographicsTitle($infographicsTitle)
+    public function setIssueMapName(\AppBundle\Entity\IssueMapName $issueMapName = null)
     {
-        $this->infographicsTitle = $infographicsTitle;
+        $this->issueMapName = $issueMapName;
 
         return $this;
     }
 
     /**
-     * Get infographicsTitle
+     * Get issueMapName
      *
-     * @return string
+     * @return \AppBundle\Entity\IssueMapName
      */
-    public function getInfographicsTitle()
+    public function getIssueMapName()
     {
-        return $this->infographicsTitle;
-    }
-
-    /**
-     * Set hrrp
-     *
-     * @param string $hrrp
-     *
-     * @return IssueQuestion
-     */
-    public function setHrrp($hrrp)
-    {
-        $this->hrrp = $hrrp;
-
-        return $this;
-    }
-
-    /**
-     * Get hrrp
-     *
-     * @return string
-     */
-    public function getHrrp()
-    {
-        return $this->hrrp;
-    }
-
-    /**
-     * Set districtId
-     *
-     * @param string $districtId
-     *
-     * @return IssueQuestion
-     */
-    public function setDistrictId($districtId)
-    {
-        $this->districtId = $districtId;
-
-        return $this;
-    }
-
-    /**
-     * Get hrrp
-     *
-     * @return string
-     */
-    public function getDistrictId()
-    {
-        return $this->hrrp;
+        return $this->issueMapName;
     }
 
     /* To fix: Object of class Proxies\__CG__\AppBundle\Entity\IssueQuestion could not be converted to string"). */

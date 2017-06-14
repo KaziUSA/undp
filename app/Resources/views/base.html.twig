@@ -132,17 +132,47 @@
                                     'issuequestion_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuequestion') }}">Issue Question</a></li>
                         <li class="{% if app.request.get('_route') in [
+                                    'issuechartquestion_index', 
+                                    'issuechartquestion_show',
+                                    'issuechartquestion_edit',
+                                    'issuechartquestion_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuechartquestion') }}">Issue Chart Question</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuechartoption_index', 
+                                    'issuechartoption_show',
+                                    'issuechartoption_edit',
+                                    'issuechartoption_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuechartoption') }}">Issue Chart Option</a></li>
+                        <li class="{% if app.request.get('_route') in [
                                     'issuepeople_index', 
                                     'issuepeople_show',
                                     'issuepeople_edit',
                                     'issuepeople_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuepeople') }}">Issue People</a></li>
                         <li class="{% if app.request.get('_route') in [
+                                    'issueinfographicstitle_index', 
+                                    'issueinfographicstitle_show',
+                                    'issueinfographicstitle_edit',
+                                    'issueinfographicstitle_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issueinfographicstitle') }}">Issue Infographics Title</a></li>
+                        <li class="{% if app.request.get('_route') in [
                                     'issueinfographics_index', 
                                     'issueinfographics_show',
                                     'issueinfographics_edit',
                                     'issueinfographics_new'
                                     ] %} active {% endif %}"><a href="{{ path('issueinfographics') }}">Issue Infographics</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuemapname_index', 
+                                    'issuemapname_show',
+                                    'issuemapname_edit',
+                                    'issuemapname_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuemapname') }}">Issue Map Name</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuemapdistricts_index', 
+                                    'issuemapdistricts_show',
+                                    'issuemapdistricts_edit',
+                                    'issuemapdistricts_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuemapdistricts') }}">Issue Map Districts</a></li>
                     </ul>
                 </li>
             </ul>
