@@ -1,0 +1,1292 @@
+{% extends '::frontend.html.twig' %}
+
+{% block body -%}
+<div class="loading hidden">
+  <div id="cssload-loader">
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+</div>
+<section class="content">
+    <div class="row row-no-padding">
+        <div class="col-sm-3 col-md-3 col-lg-2">
+            <aside>
+                <div class="filter">
+                  <!-- Nav tabs -->
+                  <div class="feedback-tab clearfix">
+                    
+
+                      <ul id="" class="nav nav-tabs nav-phase2" role="tablist">
+                        
+                        <li role="presentation" class="active round0"><a href="#round0" id="livelihoodBtn" aria-controls="messages" role="tab" data-toggle="tab" value="livelihood">Livelihood</a></li>
+                        <li role="presentation" class="round0"><a href="#round0" id="reconstructionBtn" aria-controls="settings" role="tab" data-toggle="tab" value="reconstruction">Reconstruction</a></li>
+                          <li role="presentation" class="round0"><a href="#round0" id="protectionBtn" aria-controls="settings" role="tab" data-toggle="tab" value="protection">Protection</a></li>
+                      </ul>
+                  </div>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="round1">
+                        <div class="tab-content-wrap">
+                            <div class="filter-title">Filter By</div>
+
+                            <div class="accordion">
+                                    <form action="">
+                                      
+                                        <div class="ac">
+                                        {# ac-1 #}
+                                        <input class="ac-input" id="ac-1" name="ac-1" type="checkbox" />
+                                        <label class="ac-label month-label" for="ac-1">Month</label>
+
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="month-all" value="" />
+                                                <label for="month-all">All<span></span></label></li>
+                                            <div class="form_months" id="form_months">
+                                                <li><input class="month" type="checkbox" id="month5" value="5" /><label for="month5">May<span></span></label></li>
+                                                <li><input class="month" type="checkbox" id="month6" value="6"/><label for="month6">June<span></span></label></li>
+                                            </div>
+                                        </ul><!--/ac-text-->
+                                      </div><!--/ac-->
+
+                                      <div class="ac">
+                                        {# ac-2 #}
+                                        <input class="ac-input" id="ac-2" name="ac-2" type="checkbox" />
+                                        <label class="ac-label district-label" for="ac-2">District</label>
+
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="district-all" value="" />
+                                                <label for="district-all">All<span></span></label></li>
+                                            {{ form(form.districts) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">
+                                        {# ac-3 #}
+                                        <input class="ac-input" id="ac-3" name="ac-3" type="checkbox" />
+                                        <label class="ac-label gender-label" for="ac-3">Gender</label><!-- initially showing active -->
+
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="gender-all" value="" />
+                                                <label for="gender-all">All<span></span></label></li>
+                                            {{ form(form.gender) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">
+                                        {# ac-4 #}
+                                        <input class="ac-input" id="ac-4" name="ac-4" type="checkbox" />
+                                        <label class="ac-label ethnicity-label" for="ac-4">Ethnicity</label>
+
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="ethnicity-all" value="" />
+                                                <label for="ethnicity-all">All<span></span></label></li>
+                                            {{ form(form.ethnicities) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">
+                                        {# ac-5 #}
+                                        <input class="ac-input" id="ac-5" name="ac-5" type="checkbox" />
+                                        <label class="ac-label age-label" for="ac-5">Age Group</label>
+
+                                        <ul class="ac-text checkbox-style">
+                                            <li><input type="checkbox" id="age-all" value="" />
+                                                <label for="age-all">All<span></span></label></li>
+                                            {{ form(form.agegroups) }}
+                                        </ul>
+                                      </div><!--/ac-->
+
+
+                                      <div class="ac">
+                                        {# ac-6 #}
+                                        <ul class="checkbox-style">
+                                            <div id="form_disability" style="padding-top:1px;">
+                                              <li><input type="checkbox" id="disability" />
+                                              <label for="disability">Disability<span></span></label></li>
+                                            </div>
+                                        </ul>
+                                      </div><!--/ac-->
+                                      <ul class="ac-text"></ul>
+                                      <ul class="ac-text"></ul>
+                                      <input type="submit" value="Submit" class="btn btn-bordered gray">
+                                  </form>
+
+                            </div><!--/accordion-->
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </aside>
+        </div>
+
+        <div class="col-sm-9 col-md-9 col-lg-10">
+            <!-- main content -->
+            <div class="main-content">
+                <div class="question">
+                    <!--<div class="number">Question 9</div>
+                    Are your main problems being adressed ?-->
+                    <a href="#!" class="next" onclick="btnNextQuestion_Click()"></a>
+                    <a href="#!" class="prev" onclick="btnPrevQuestion_Click()"></a>
+
+                    <div id="zelect">{{ form(form.questions) }}</div>
+                </div>
+
+                <div class="chart">
+                    <div class="search">
+                      <span class="search-title">Filter</span><!--Search-->
+                      <span id="filter-search-key">
+                        <!--Month / District / Age Group / Gender -->
+                        <span id="month-select-text"></span>
+                        <span id="district-select-text"></span>
+                        <span id="gender-select-text"></span>
+                        <span id="ethnicity-select-text"></span>
+                        <span id="age-select-text"></span>
+                        <span id="disable-select-text"></span>
+                      </span>
+                    </div>
+
+                    <div class="high-chart clearfix">
+                        <div class="high-chart-wrap">
+                            <div id="canvas" style="width:99.5%;" class="chart-container"></div>
+
+                            <!-- <canvas id="canvas" height="140"></canvas> -->
+
+                            <!-- custom legend -->
+                            <div class="legend-box clearfix">
+                                {# <div class="legend legend1">
+                                    <div class="legend-head">Priority need</div>
+                                    <ul>
+                                        <li>Temporary shelter</li>
+                                        <li>Fresh Food</li>
+                                    </ul>
+                                </div> #}
+                                <div class="legend legend2">
+                                    <div class="legend-head">Respondents</div>
+                                    <ul>
+                                        <li>1400</li>
+                                    </ul>
+                                </div>
+                                <div class="legend legend3 download">
+                                    <ul>
+
+                                        <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Chart</a></li>
+                                        <li class="share-icons share-platform"><a href="#!"><span class="icon icon-share"></span> Share Report</a>
+                                          <ul>    
+                                            {# TODO: Need to change cfp.org.np to dynamic url path if needed #}           
+                                            <li class="facebook"><a href="" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+                                            
+                                            <li><a href="" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+                                            <li><a href="" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+                                          </ul>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="table1" class="chart-table table-responsive"></div>
+                        <!-- <div class="download pull-right"><a href="#!" id="download-table"><span class="icon icon-download"></span> Download Table</a></div> -->
+                    </div>
+                </div>
+            </div><!-- /.main-content -->
+        </div>
+    </div>
+</section>
+{% endblock %}
+{%block scriptIncludes %}
+
+<!--<script src="http://code.highcharts.com/stock/highstock.js"></script>
+<script type="text/javascript" src="js/exporting.js"></script>-->
+<!-- <script src="js/Chart.HorizontalBar.js"></script> -->
+    <script src="/js/frontend/custom-filter.js"></script>
+    <script src="/js/plugins/highcharts/grouped-categories.js"></script>
+    <script>
+    //height of side content
+    function content_height() {
+      var content_height = $('aside > .filter').height();
+      $('.main-content').css({'min-height':content_height});
+    }
+    //checkbox
+    function checkboxChecked() {
+      var monthVals = [];
+      $('#form_months :checked').each(function() {
+        monthVals.push($(this).next("label").text());
+      });
+      if(monthVals != '') {
+        $('.month-label').addClass('active');
+      } else {
+        $('.month-label').removeClass('active');
+      }
+
+      var districtVals = [];
+      $('#form_districts :checked').each(function() {
+        districtVals.push($(this).next("label").text());
+      });
+      if(districtVals != '') {
+        $('.district-label').addClass('active');
+      } else {
+        $('.district-label').removeClass('active');
+      }
+
+      var genderVals = [];
+      $('#form_gender :checked').each(function() {
+        genderVals.push($(this).next("label").text());
+      });
+      if(genderVals != '') {
+        $('.gender-label').addClass('active');
+      } else {
+        $('.gender-label').removeClass('active');
+      }
+        
+      var ethnicityVals = [];
+        $('#form_ethnicities :checked').each(function() {
+        ethnicityVals.push($(this).next("label").text());
+      });
+      if(ethnicityVals != '') {
+        $('.ethnicity-label').addClass('active');
+      } else {
+        $('.ethnicity-label').removeClass('active');
+      }
+
+      var ageVals = [];
+      $('#form_ages :checked').each(function() {
+        ageVals.push($(this).next("label").text());
+      });
+      if(ageVals != '') {
+        $('.age-label').addClass('active');
+      } else {
+        $('.age-label').removeClass('active');
+      }    
+    }
+
+    //get url parameter
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+    };
+    
+    //get array parameter from url
+    /*url = window.location.href;
+    var paramsList = url.slice(url.indexOf("?")+1,url.length) ;
+    var filteredList =  paramsList.split("&") ;
+
+    // an object to store arrays
+    var objArr = {} ;
+
+    // the below loop is obvious... we just remove the [] and +.. and split into pair of key and value.. and store as an array...
+    for (var i=0, l=filteredList.length; i <l; i +=1 ) {
+      var param = decodeURIComponent(filteredList[i].replace("[]","")).replace(/\+/g," ") ;
+      var pair = param.split(",") ;//=
+      if(!objArr[pair[0]]) {  objArr[pair[0]] = [] ;}
+      objArr[pair[0]].push(pair[1]);
+    }*/
+
+    //convert object array to array
+    /*var array = $.map(objArr, function(value, index) {
+        return [value];
+    });*/
+
+    //clone array
+    function clone(obj){
+        if(obj == null || typeof(obj) != 'object')
+            return obj;
+        var temp = obj.constructor();
+        for(var key in obj)
+            temp[key] = clone(obj[key]);
+        return temp;
+    }
+    //check for refresh
+    var a=0;
+    var b=0;
+    // sessionStorage.setItem("is_reloaded", 1);
+    //Ajax call    
+    function aButtonPressed(){
+      //sessionStorage.setItem("is_reloaded", 0);
+      //if (Number(sessionStorage.getItem("is_reloaded"))) alert('Reloaded!');
+      //console.log(Number(sessionStorage.getItem("is_reloaded")));
+      var url = window.location.href;
+      var param = '';
+      var paramM = '';
+      var paramD = '';
+      var paramG = '';
+      var paramE = '';
+      var paramA = '';
+      var paramQ = '';
+      var paramDis = '';
+
+      var fShare = 'https://www.facebook.com/sharer.php?title=Common%20Feedback%20Project%20(CFP)%3A%20Platform%20&u=http%3A//cfp.org.np/platform/';
+      var tShare = 'http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)%3A+Platform+http%3A%2F%2Fcfp.org.np/platform/';
+      var lShare = 'https://www.linkedin.com/shareArticle?mini=true&title=Common%20Feedback%20Project%20(CFP)%3A%20Platform%20&summary=&source=&url=http%3A//cfp.org.np/platform/';
+
+      //store ques name
+      var qname=$("#form_questions option:selected").text();
+      //store selected question in questions variable
+      var questions;
+      /*questions=document.getElementById('form_questions').selectedIndex;
+      questions=document.getElementsByTagName("option")[questions].value;*/
+      /*if(questions == '') { questions = 1; }//for default chart*/
+      //alert(questions);
+
+       //display chart from url
+       //if(questions == undefined) {
+        urlParamQ = getUrlParameter('q');
+        if(urlParamQ != 'undefined' && b==0) {
+
+         //checking checkbox
+          $('#form_questions option').each(function() {   
+            if($(this).val() == urlParamQ) {//if 1 checked
+              $(this).attr('selected','selected');
+              $('.zelected').text($('#form_questions option:selected').text());
+              
+            }
+          });
+        } else {          
+        }
+          questions=document.getElementById('form_questions').selectedIndex;
+          questions=document.getElementsByTagName("option")[questions].value;
+
+        /*if(urlParamQ != undefined) {
+          //paramQ = '';
+           //questions = toString(urlParamQ);
+         } else {//if dis is not present in url - show question 1 data or selected question filter
+          questions=document.getElementById('form_questions').selectedIndex;
+          questions=document.getElementsByTagName("option")[questions].value;
+          //questions = 1;
+          //question="1";
+         }*/
+         b=1;
+        //console.log(questions);
+        if(questions != '') {
+            paramQ = 'q='+questions;
+         }
+         //console.log(questions);
+
+       //}//end questions
+
+
+       //store section
+       var qSection=$('.feedback-tab ul.nav li.active a').attr('value');
+        var yearVal = 2017;
+       //alert(yearVal);
+       //store selected month in monthVals
+       var monthVals = [];
+       $('#form_months :checked').each(function() {
+         monthVals.push($(this).next("label").text());
+       });
+       //alert(monthVals);
+
+       //if somebody has selected the filter - change the url
+       if(monthVals != '') {
+          paramM = 'm='+monthVals;
+       } else {
+        paramM = '';
+       }
+
+       //store selected district in districtVals
+       var districtVals = [];
+       $('#form_districts :checked').each(function() {
+         districtVals.push($(this).next("label").text());
+       });
+       //alert(districtVals);
+
+       if(districtVals != '') {//if somebody has selected the filter - change the url
+          paramD = 'd='+districtVals;
+       } else {
+        //paramD = '';
+       }
+
+
+       //store selected gender in genderVals array
+      var genderVals = [];
+       $('#form_gender :checked').each(function() {
+         genderVals.push($(this).next("label").text());
+       });
+       //alert(genderVals);
+       
+       if(genderVals != '') {//if somebody has selected the filter - change the url
+          paramG = 'g='+genderVals;
+       } else {
+        //paramG = '';
+       }
+
+
+      //store selected ethnicity in ethnicityVals
+      var ethnicityVals = [];
+       $('#form_ethnicities :checked').each(function() {
+         ethnicityVals.push($(this).next("label").text());
+       });
+       //alert(ethnicityVals);
+
+       if(ethnicityVals != '') {//if somebody has selected the filter - change the url
+          paramE = 'e='+ethnicityVals;
+       } else {
+        //paramE = '';
+       }
+
+      //store checked ages in ageVals array
+      var ageVals = [];
+       $('#form_ages :checked').each(function() {
+         ageVals.push($(this).next("label").text());
+       });
+       //alert(ageVals);       
+
+       if(ageVals != '') {//if somebody has selected the filter - change the url
+          paramA = 'a='+ageVals;
+       } else {
+          //paramA = '';
+       }
+
+       
+       var disabilityVal;
+       if($('#disability').prop('checked')){
+        disabilityVal=1;
+       } /*else {
+        disabilityVal = "0";
+       }*/
+       //alert(disabilityVal);
+
+       if(disabilityVal != '') {//if somebody has selected the filter - change the url
+          paramDis = 'dis='+disabilityVal;
+       } else {
+        //paramDis = '';
+       }
+
+
+
+
+
+       
+
+      if( a==0 && monthVals == '' && districtVals == '' && ethnicityVals == '' && genderVals == '' && ageVals == '' && disabilityVal == undefined) {
+        //console.log('here');
+        
+        //display chart from url
+        if(monthVals == '') {
+            
+          paramM = '';
+          urlParamM = getUrlParameter('m');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
+          
+            if(urlParamM != undefined) {
+            arr = urlParamM.split(',');//convert string to url
+            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+            monthVals = clone(arr);//clone array
+            paramM = 'm=' + monthVals;
+          }
+          //checking checkbox
+          function logArrayElements(element, index, array) {
+            $('#form_months label').each(function() {   
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+         monthVals.forEach(logArrayElements);
+        }
+       
+
+        if(districtVals == '') {
+          paramD = '';
+          urlParamD = getUrlParameter('d');//from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&=July
+          if(urlParamD != undefined) {
+            arr = urlParamD.split(',');//convert string to url
+            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+            districtVals = clone(arr);//clone array
+
+            paramD = 'd='+districtVals;
+          }
+          //checking checkbox
+          function logArrayElements(element, index, array) {
+            $('#form_districts label').each(function() {   
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+          districtVals.forEach(logArrayElements);
+        }
+
+        if(ethnicityVals == '') {
+          paramE = '';
+          urlParamE = getUrlParameter('e');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&e=Brahmin,Chhetri
+          if(urlParamE != undefined) {
+            arr = urlParamE.split(',');//convert string to url
+            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+            ethnicityVals = clone(arr);//clone array
+
+            paramE = 'e='+ethnicityVals;
+          }
+          //checking checkbox
+          function logArrayElements(element, index, array) {
+            $('#form_ethnicities label').each(function() {   
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+          ethnicityVals.forEach(logArrayElements);
+        }
+
+        if(genderVals == '') {
+          paramG = '';
+          urlParamG = getUrlParameter('g');
+          //from http://localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male
+          if(urlParamG != undefined) {
+            arrG = urlParamG.split(',');//convert string to url
+            //myArr = ['Female','Male'];//custom to test
+            genderVals = clone(arrG);//clone array
+          }         
+          //checking checkbox
+          function logArrayElements(element, index, array) {
+            $('#form_gender label').each(function() {           
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+          genderVals.forEach(logArrayElements);
+        }
+
+        if(ageVals == '') {        
+          paramA = '';
+          urlParamA = getUrlParameter('a');//from localhost:8000/platform/?d=Bhaktapur,Kathmandu&g=Female,Male&m=July,August&a=15 - 24,25 - 39
+          if(urlParamA != undefined) {
+            arr = urlParamA.split(',');//convert string to url
+            //myArr = ['Bhaktapur','Kathmandu'];//custom to test
+            ageVals = clone(arr);//clone array
+            paramA = 'a='+ageVals;
+          }
+          //checking checkbox
+          function logArrayElements(element, index, array) {
+            $('#form_ages label').each(function() {   
+              if($(this).text() == element) {
+                $(this).prev("input").prop('checked', true);
+              }
+            });
+          }
+          ageVals.forEach(logArrayElements);
+        }
+
+        if(disabilityVal == '') {
+          paramDis = '';
+          urlParamDis = getUrlParameter('dis');
+          //console.log(urlParamDis);
+          if(urlParamDis != undefined) {
+            disabilityVal = urlParamDis;
+
+            paramDis = 'dis='+urlParamDis;//disabilityVal in int
+          } else {
+            disabilityVal = undefined;//if dis is not present in url
+            paramDis = 'dis='+disabilityVal;//disabilityVal in int
+            //disabilityVal="0";
+          }
+          //checking checkbox
+          $('#form_disability label').each(function() {   
+          if(urlParamDis == 1) {//if 1 checked//disabilityVal in int
+            $(this).prev("input").prop('checked', true);
+          }
+          });
+        }
+
+
+        //modify the url again with some changes
+        if(paramQ != '') {
+          param += '?' + paramQ;
+
+          if(paramM != '') {
+              param += '&' + paramM;
+            }
+          if(paramD != '') {
+            param += '&' + paramD;
+          } 
+          if(paramG != '') {
+            param += '&' + paramG;
+          } 
+          if(paramE != '') {
+            param += '&' + paramE;
+          } 
+          if(paramA != '') {
+            param += '&' + paramA;
+          } 
+          if(paramDis != undefined) {
+            param += '&' + paramDis;
+          }
+        } 
+        else {//if paramQ == ''
+          if(paramM != '') {
+            param += '&' + paramM;
+
+            if(paramD != '') {
+              param += '&' + paramD;
+            } 
+            if(paramG != '') {
+              param += '&' + paramG;
+            } 
+            if(paramE != '') {
+              param += '&' + paramE;
+            } 
+            if(paramA != '') {
+              param += '&' + paramA;
+            } 
+            if(paramDis != undefined) {
+              param += '&' + paramDis;
+            } 
+          } 
+          else {
+            if(paramD != '') {
+              param += '&' + paramD;
+
+              if(paramG != '') {
+                param += '&' + paramG;
+              } 
+              if(paramE != '') {
+                param += '&' + paramE;
+              } 
+              if(paramA != '') {
+                param += '&' + paramA;
+              } 
+              if(paramDis != undefined) {
+                param += '&' + paramDis;
+              } 
+            } 
+            else {
+              if(paramG != '') {
+                param += '&' + paramG;
+                if(paramE != '') {
+                  param += '&' + paramE;
+                } 
+                if(paramA != '') {
+                  param += '&' + paramA;
+                } 
+                if(paramDis != undefined) {
+                  param += '&' + paramDis;
+                } 
+              } 
+              else {
+                if(paramE != '') {
+                  param += '&' + paramE;
+                  if(paramA != '') {
+                    param += '&' + paramA;
+                  }
+                  if(paramDis != undefined) {
+                    param += '&' + paramDis;
+                  } 
+                } 
+                else {
+                  if(paramA != '') {
+                    param += '&' + paramA;
+                    if(paramDis != undefined) {
+                      param += '&' + paramDis;
+                    } 
+                  } 
+                  else {                    
+                    if(paramDis != undefined) {
+                      param += '&' + paramDis;
+                    } 
+                  }
+                }
+              } 
+            }
+          }//end else paramM
+        }//end else paramQ
+        if ($('html').hasClass('ie9')) {
+          // console.log("ie9");
+        }else{
+          window.history.pushState(url,'',param);
+        }
+        $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
+        $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
+        $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
+      }//end if
+      else {//if the user selects filter: month, district, gender, ethnicity, age
+        //console.log('filter selected');
+        //modify the url
+        if(paramQ != '') {
+          param += '?' + paramQ;
+
+          if(paramM != '') {
+              param += '&' + paramM;
+          }
+          if(paramD != '') {
+            param += '&' + paramD;
+          } 
+          if(paramG != '') {
+            param += '&' + paramG;
+          } 
+          if(paramE != '') {
+            param += '&' + paramE;
+          } 
+          if(paramA != '') {
+            param += '&' + paramA;
+          } 
+          if(paramDis != undefined) {
+            param += '&' + paramDis;
+          } 
+        } 
+        else {//if paramQ == ''
+          if(paramM != '') {
+            param += '?' + paramM;
+
+            if(paramD != '') {
+              param += '&' + paramD;
+            } 
+            if(paramG != '') {
+              param += '&' + paramG;
+            } 
+            if(paramE != '') {
+              param += '&' + paramE;
+            } 
+            if(paramA != '') {
+              param += '&' + paramA;
+            } 
+            if(paramDis != undefined) {
+              param += '&' + paramDis;
+            } 
+          } 
+          else {
+            if(paramD != '') {
+              param += '?' + paramD;
+
+              if(paramG != '') {
+                param += '&' + paramG;
+              } 
+              if(paramE != '') {
+                param += '&' + paramE;
+              } 
+              if(paramA != '') {
+                param += '&' + paramA;
+              } 
+              if(paramDis != undefined) {
+                param += '&' + paramDis;
+              } 
+            } 
+            else {
+              if(paramG != '') {
+                param += '?' + paramG;
+
+                if(paramE != '') {
+                  param += '&' + paramE;
+                } 
+                if(paramA != '') {
+                  param += '&' + paramA;
+                } 
+                if(paramDis != undefined) {
+                  param += '&' + paramDis;
+                } 
+              } 
+              else {
+                if(paramE != '') {
+                  param += '?' + paramE;
+
+                  if(paramA != '') {
+                    param += '&' + paramA;
+                  }
+                  if(paramDis != undefined) {
+                    param += '&' + paramDis;
+                  } 
+                } 
+                else {
+                  if(paramA != '') {
+                    param += '?' + paramA;
+
+                    if(paramDis != undefined) {
+                      param += '&' + paramDis;
+                    } 
+                  } 
+                  else {                    
+                    if(paramDis != undefined) {
+                      param += '?' + paramDis;
+                    } 
+                  }
+                }
+              } 
+            }
+          }//end else paramM
+        }//end else paramQ
+
+        if ($('html').hasClass('ie9')) {
+          // console.log("ie9");
+        }else{
+          window.history.pushState(url,'',param);
+        }
+        $('.share-platform a.fa-facebook').attr('href',fShare+param.replace('&','%26'));
+        $('.share-platform a.fa-twitter').attr('href',tShare+param.replace('&','%26'));
+        $('.share-platform a.fa-linkedin').attr('href',lShare+param.replace('&','%26'));
+      }
+
+      a=1;// detect refresh and button click
+
+       //breadcrumb
+       if(monthVals != '') {
+        $('#month-select-text').html('Month /');
+       } else {
+        $('#month-select-text').html('');
+       }
+
+       if(districtVals != '') {
+        $('#district-select-text').html('District /');
+       } else {
+        $('#district-select-text').html('');
+       }
+
+       if(genderVals != '') {
+        $('#gender-select-text').html('Gender /');
+       } else {
+        $('#gender-select-text').html('');
+       }
+
+       if(ethnicityVals != '') {
+        $('#ethnicity-select-text').html('Ethnicity /');
+       } else {
+        $('#ethnicity-select-text').html('');
+       }
+
+       if(ageVals != '') {
+        $('#age-select-text').html('Age');
+       } else {
+        $('#age-select-text').html('');
+       }
+
+       if(disabilityVal == 1) {
+        $('#disable-select-text').html('Disability');
+       } else {
+        $('#disable-select-text').html('');
+       }
+
+       //show or hide search
+       
+       if(monthVals == '' && districtVals == '' && genderVals == '' && ethnicityVals == '' && ageVals == '' && disabilityVal != 1) {
+        $('.search .search-title').hide();
+       } else {
+        $('.search .search-title').show();
+       }
+
+       //prepend with /
+       if(monthVals != '' && districtVals != '' && genderVals != '' && ethnicityVals != '' && ageVals != ''){
+       window.location.replace('{{path('data')}}');
+     }
+      
+      $('.loading').removeClass('hidden');
+        
+      $.post('{{path('myajax')}}',
+          { qname:qname,data_question:questions,data_age:ageVals,data_gender:genderVals,data_ethnicity:ethnicityVals,data_district:districtVals, data_month:monthVals, data_disability: disabilityVal , data_year: yearVal},
+             
+          function(response){
+          
+            //console.log(response.result.html);
+              var val=new Array();
+              var dt= new Array();
+              if(response.code == 100 && response.success){                 
+
+                  //show custom legend on chart if number of items in legend is greater and equal to 4
+                  var legend_item_height = 29;
+
+                  $('.legend-box').show();
+                  
+                // easing added from https://github.com/danro/easing-js/blob/master/easing.js
+                Math.customEase = function(pos) {
+                  var s = 1.70158;
+                  if((pos/=0.5) < 1) return 0.5*(pos*pos*(((s*=(1.525))+1)*pos -s));
+                  return 0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos +s) +2);
+                };
+                //small font for pdf export
+                if(response.result.smallfont){
+                  sf='5px';
+                  //alert(sf);
+                }
+                else{
+                  sf='7px';
+                }
+                if(disabilityVal == 1){
+                    V="Disability /";
+                  }else{
+                    V="";
+                  }
+                  if(monthVals != ''){
+                    M="Month /";
+                  }else{
+                    M="";
+                  }
+                  if(districtVals != ''){
+                    D="District /";
+                  }else{
+                    D="";
+                  }
+                  if(genderVals != ''){
+                    G="Gender /";
+                  }else{
+                    G="";
+                  }
+                  if(ethnicityVals != ''){
+                    E="Ethnicity /";              
+                  }else{
+                    E="";
+                  }
+                  if(ageVals != ''){
+                    A="Age /";
+                  }else{
+                    A="";
+                  }
+                  
+                  
+                  var chart=new Highcharts.chart({
+                  chart: {                          
+                          renderTo: 'canvas',
+                          backgroundColor: '#ffffff',
+                          borderWidth: 0,
+                          //spacingTop:35,
+                          height: response.result.height,
+                          plotBorderWidth: 0,
+                          plotShadow: true,
+                          orderCellsTop:true,
+                          //renderTo: 'container',//#container: Not needed now
+                          spacingRight: 0,
+                          style: {
+                            fontFamily: 'Roboto, Arial, sans-serif',
+                            fontSize: '12px',
+                          },
+
+                          type: 'column',
+                      },
+
+                      legend: {                         
+                          width: 240,
+                          padding: 78,
+                          itemWidth: 118,
+                          itemMarginTop: 3,
+                          // itemMarginBottom: 1,
+                          x: -63,
+                      },
+                      colors:['#88d8ef','#339de7','#6e6e6f','#159c02','#99bb42','#e7e7e7','#a1a1a1','#588C73','#D96459'],
+                      title: {
+                        
+                      },
+                      subtitle: {
+                          text: response.result.grouped
+                      },
+                      xAxis: {
+
+                          tickLength: 0,
+                          
+                          labels: response.result.xgrouplabel, //TODO Designer
+                           
+                          categories: response.result.label,
+                          title: {
+                              enabled: false,
+                              text: response.result.xlabel,// For x-axis label on table
+
+                          },
+                          lineColor: '#E5E5E5'
+                      },
+                      scrollbar: {
+                          enabled: true
+                      },
+                      yAxis: {
+                          allowDecimals: false,
+                          labels: {
+                              style: {'color': '#959595', 'fontSize': '12px'},
+                               format: '{value}'
+                          },
+                          min: 0,
+                          title: {
+                              text: ''//There is no text in design: People
+                          }
+                      },
+                      tooltip: {
+                            formatter: function () {
+                              var pcnt = (this.y / response.result.total) * 100;                              
+                                return Highcharts.numberFormat(pcnt) +'%'+' ('+ this.point.y + ') people say<br>' +
+                                this.series.name.toLowerCase();
+                                  + this.point.name.toLowerCase();
+                            }
+                        },
+                      plotOptions: {
+                          column: {
+                              pointPadding: 0,
+                              borderWidth: 0,
+                              groupPadding: 0.2,
+                          }
+                      },
+                      exporting: {
+                          filename:'Inter-Agency Common Feedback Project',
+                          chartOptions:{
+                              title: {
+                                //margin:30,
+                                style: {
+                                    fontSize: "20x",
+                                    color: 'black',
+                                    fontWeight: 'normal'
+                                },
+                                text:"<span>"+qname+"</span><br>",
+                                align: "left"                  
+                              },
+                              subtitle: {
+                                floating: true,
+                                align: 'right',
+                                x: 350,
+                                verticalAlign: 'bottom',
+                                y: -102,                               
+                                style: {
+                                    fontSize: "9px",
+                                    color: 'black',
+                                    fontWeight: 'normal'
+                                },
+                                text: "<br>Respondents:"+response.result.total+"<br>"+M+D+G+E+A+V,
+                                align: "left"                  
+                              },
+                              legend: {
+                                    floating: true,
+                                    verticalAlign: 'bottom',                                    
+                                    y: 70,
+                                    itemStyle: {
+                                       fontSize: '9px',
+                                       color: 'black'                                     
+                                    },
+                              },
+                              xAxis: {
+                                labels: {
+                                  style: {
+                                    fontSize: sf,
+                                  }
+                                }                   
+                              },
+                              yAxis: {
+                                gridLineWidth: .1,
+                                tickPixelInterval: 1,
+                                labels: {
+                                  style: {
+                                    fontSize: '7px',
+                                  }
+                                }
+                              },
+                              chart:{
+                                  marginBottom: 150,
+                                  spacingTop:55,
+                                  events:{
+                                      load:function(){
+                                          this.renderer.image('http://cfp.org.np/img/header_for_pdf.jpg', 10, 3, 580, 30) //TODO logo
+                          .add();
+
+                                      }
+                                  }
+                              }
+                          },
+                          buttons: {
+                              contextButton: {
+                                  enabled: false,
+                                  verticalAlign: "top",
+                                  y: 0,
+                              }
+                          },
+                          type: 'application/pdf',
+                      },
+
+                      series: response.result.series,
+                       credits: {
+                          enabled: false
+                      },
+                      plotOptions: {
+                          column: {
+                              stacking: response.result.stack
+                          },
+                          series: {
+                              animation: {
+                                  duration: 1000,
+                                  easing: 'customEase'
+                              }
+                          }
+                      },
+                  });//Highchart end
+                  
+                  
+                  if(response.result.maxlen > 25){
+                    chart.options.legend.itemWidth = 250;
+                    chart.legend.render()
+                  
+                  }
+                  
+
+                  $('.highcharts-subtitle').hide();
+                   $('.high-chart-wrap').removeClass('hidden');
+                   $('.highcharts-title').addClass('hidden');                  
+                    
+                  $('#table1').html(response.result.html);
+                  if(response.result.series === undefined){                    
+                    $('.high-chart-wrap').addClass('hidden');
+                    
+                  }
+                  $('#download-report').click(function () {
+                      var chart = $('#canvas').highcharts();
+                      chart.exportChart();
+                  });
+
+                  $('#table1 table').addClass('table-bordered table');   
+                  $('.legend-box .legend2 ul li').html(response.result.total); 
+                  
+                  //download table
+                  $('.dataTables').dataTable({
+                      
+                      "pageLength": 200,
+                      "responsive": false,
+                      "tableTools": {
+                          "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+                      },
+                      "dom": 'T<"toolbar">lfrtip',
+                      "ordering": false,
+                      "colVis": {
+                          "buttonText": "Change columns"
+                      }
+                      
+                  });
+                  
+                  //$("div.toolbar").html('Download');
+                  $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
+                  $('.DTTT_button_xls span, .DTTT_button_csv span').show();
+                  
+                  checkboxChecked();
+                  
+                  $('.loading').addClass('hidden');
+
+              }//Ajax success end
+
+          }, "json"); //.post end
+
+     
+    }; //abuttonpressed end
+
+$(document).ready(function() {
+  $('button, input[type="submit"], .question .next, .question .prev').on('click', function(){aButtonPressed();});
+  aButtonPressed();
+  $('select#form_questions').change(function() {
+    aButtonPressed();
+  });
+
+  checkboxChecked();
+  //filter above label highlight
+  $('.ac-text input[type="checkbox"]').change(function(){
+      checkboxChecked();
+  });   
+
+  content_height();//for main content height
+  $('.ac > input[type="checkbox"]').change(function() {
+    content_height();//for side content height
+    if($(this).prop("checked") == true) {
+    }
+  });
+    
+    //This part is for the livelihood/reconstruction/protection tabs
+    //By default, only show livelihood questions
+    hideReconstruction();
+    hideProtection();
+    $("#livelihoodBtn").click(function(){ 
+        showLivelihood();
+        hideProtection();
+        hideReconstruction();
+        $('#form_questions').val(35);
+        $('.zelected').text($('#form_questions option:selected').text());
+        aButtonPressed();
+        
+    });
+    $("#reconstructionBtn").click(function(){ 
+        hideLivelihood();
+        hideProtection();
+        showReconstruction();
+        $('#form_questions').val(43);
+        $('.zelected').text($('#form_questions option:selected').text());
+        aButtonPressed();
+    });
+    $("#protectionBtn").click(function(){ 
+        hideLivelihood();
+        showProtection();
+        hideReconstruction();
+        $('#form_questions').val(50);
+        $('.zelected').text($('#form_questions option:selected').text());
+        aButtonPressed();
+    });
+    //Hide Livelihood questions
+    function hideLivelihood(){
+        $($('.zelect .dropdown ol li')[0]).hide();
+        $($('.zelect .dropdown ol li')[1]).hide();
+        $($('.zelect .dropdown ol li')[2]).hide();
+        $($('.zelect .dropdown ol li')[3]).hide();
+        $($('.zelect .dropdown ol li')[4]).hide();
+        $($('.zelect .dropdown ol li')[5]).hide();
+        $($('.zelect .dropdown ol li')[6]).hide();
+        $($('.zelect .dropdown ol li')[7]).hide();
+    }
+    //Show Livelihood questions
+    function showLivelihood(){
+        $($('.zelect .dropdown ol li')[0]).show();
+        $($('.zelect .dropdown ol li')[1]).show();
+        $($('.zelect .dropdown ol li')[2]).show();
+        $($('.zelect .dropdown ol li')[3]).show();
+        $($('.zelect .dropdown ol li')[4]).show();
+        $($('.zelect .dropdown ol li')[5]).show();
+        $($('.zelect .dropdown ol li')[6]).show();
+        $($('.zelect .dropdown ol li')[7]).show();
+    }
+    //Hide Reconstruction questions
+    function hideReconstruction(){
+        $($('.zelect .dropdown ol li')[8]).hide();
+        $($('.zelect .dropdown ol li')[9]).hide();
+        $($('.zelect .dropdown ol li')[10]).hide();
+        $($('.zelect .dropdown ol li')[11]).hide();
+        $($('.zelect .dropdown ol li')[12]).hide();
+        $($('.zelect .dropdown ol li')[13]).hide();
+        $($('.zelect .dropdown ol li')[14]).hide();
+    }
+    //Showing Reconstruction questions
+    function showReconstruction(){
+        $($('.zelect .dropdown ol li')[8]).show();
+        $($('.zelect .dropdown ol li')[9]).show();
+        $($('.zelect .dropdown ol li')[10]).show();
+        $($('.zelect .dropdown ol li')[11]).show();
+        $($('.zelect .dropdown ol li')[12]).show();
+        $($('.zelect .dropdown ol li')[13]).show();
+        $($('.zelect .dropdown ol li')[14]).show();
+    }
+    //Hide Protection questions
+    function hideProtection(){
+        $($('.zelect .dropdown ol li')[15]).hide();
+        $($('.zelect .dropdown ol li')[16]).hide();
+        $($('.zelect .dropdown ol li')[17]).hide();
+        $($('.zelect .dropdown ol li')[18]).hide();
+        $($('.zelect .dropdown ol li')[19]).hide();
+        $($('.zelect .dropdown ol li')[20]).hide();
+        $($('.zelect .dropdown ol li')[21]).hide();
+    }
+    //Showing Protection questions
+    function showProtection(){
+        $($('.zelect .dropdown ol li')[15]).show();
+        $($('.zelect .dropdown ol li')[16]).show();
+        $($('.zelect .dropdown ol li')[17]).show();
+        $($('.zelect .dropdown ol li')[18]).show();
+        $($('.zelect .dropdown ol li')[19]).show();
+        $($('.zelect .dropdown ol li')[20]).show();
+        $($('.zelect .dropdown ol li')[21]).show();
+    }
+});
+
+</script>
+
+{% endblock %}

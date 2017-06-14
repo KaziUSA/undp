@@ -152,8 +152,8 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        $this->getCsvData('/var/www/html/web/uploads/phase2/round2/PrR2/test'.$file.".xlsx");
-        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase2/round2/PrR2/test'.$file.".xlsx");
+        //$this->getCsvData('/var/www/html/web/uploads/phase3/FS-FEB/Food_security'.$file.".xlsx");
+        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase3/FS-FEB/Food_security'.$file.".xlsx");
         
         
         echo "\n";
@@ -178,35 +178,26 @@ class CsvController extends Controller
             
             
             $survey = new Survey();
-            $survey->setTerm(9); //MAKE SURE TO CHANGE THIS EVERY TERM
+            $survey->setTerm(10); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
-            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2016-06-15'));
+            $survey->setDate(DateTime::createFromFormat('Y-m-d', '2017-02-15'));
             
-            $survey->setAge($this->getAgeByData($row[3]));
-        
-            $survey->setGender($this->getGenderByData($row[4]));
-        
-            $survey->setEthnicity($this->getEthnicityByData($row[6]));
-        
-            
-            $survey->setOccupation($this->getOccupationByData(trim($row[8])));
-        
-            //if ($row[11] == "No difficulty"){
+            $survey->setAge($this->getAgeByData($row[2]));
+            $survey->setGender($this->getGenderByData($row[3]));
+            $survey->setEthnicity($this->getEthnicityByData($row[4]));
+            $survey->setOccupation($this->getOccupationByData($row[8]));
+            if ($row[7] == "No difficulty"){
                 $survey->setDisability(0);
-            //}else{
-                //$survey->setDisability(1);
-            //}
+            }else{
+                $survey->setDisability(1);
+            }
+            //$survey->setCardholder($this->getCardholderByData($row[5]));
+            //$survey->setCardtype($this->getCardtypeByData ($row[11]));
             
-            $survey->setCardholder($this->getCardholderByData($row[5]));
-            $survey->setCardtype($this->getCardtypeByData ($row[11]));
-            
-            $survey->setDistrict($this->getDistrictByData($row[1]));
-        
-            $survey->setVdc($this->getVdcByData($row[2], $row[1]));
+            $survey->setDistrict($this->getDistrictByData($row[0]));
+            //$survey->setVdc($this->getVdcByData($row[2], $row[1]));
 
-        
             $survey->setWard(0);
-            
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($survey);
@@ -215,25 +206,31 @@ class CsvController extends Controller
             $this->count++;
             echo "Adding Survey Count :". $this->count ."\r";
             
+        ////////////////FOOD SECURITY AND LIVELIHOOD QUESTIONS///////////////////
         
             // Question 1
-            $this->createSurveyResponse($survey, 50, $row[12]);
+            $this->createSurveyResponse($survey, 57, $row[12]);
         
             // Question 2
-            $this->createSurveyResponse($survey, 51, $row[15]);
+            $this->createSurveyResponseLv($survey, 58, $row[13]);
             // Question 3
-            $this->createSurveyResponse($survey, 52, $row[33]);
+            $this->createSurveyResponseFmT($survey, 59, $row[14]);
             // Question 4
-            $this->createSurveyResponse($survey, 53, $row[37]);
+            $this->createSurveyResponseGfd($survey, 60, $row[15]);
             // Question 5
-            $this->createSurveyResponse($survey, 54, $row[52]);
+            $this->createSurveyResponse($survey, 61, $row[16]);
             // Question 6
-            $this->createSurveyResponseYn($survey, 55, $row[56]);
+            $this->createSurveyResponse($survey, 62, $row[17]);
             // Question 7
-            $this->createSurveyResponseYn($survey, 56, $row[72]);
+            $this->createSurveyResponseSkd($survey, 63, $row[18]);
             // Question 8
-            //$this->createSurveyResponseSh($survey, 42, $row[143]);
-            
+            $this->createSurveyResponse($survey, 64, $row[19]);
+            // Question 9
+            $this->createSurveyResponseYn($survey, 65, $row[20]);
+            // Question 10
+            $this->createSurveyResponse($survey, 66, $row[21]);
+          
+          
             unset($survey);
             unset($row);
             unset($interviewer);  
@@ -299,6 +296,48 @@ class CsvController extends Controller
             $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
             
             $surveyResponse->setAnswer($this->getAnswerByLvData($answer));
+
+            $em->persist($surveyResponse);
+            $em->flush();   
+    }
+    private function createSurveyResponseFmT($survey, $questionId, $answer)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $surveyResponse = new SurveyResponse();
+            
+            $surveyResponse->setSurvey($survey);
+        
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
+            
+            $surveyResponse->setAnswer($this->getAnswerByFmData($answer));
+
+            $em->persist($surveyResponse);
+            $em->flush();   
+    }
+    private function createSurveyResponseGfd($survey, $questionId, $answer)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $surveyResponse = new SurveyResponse();
+            
+            $surveyResponse->setSurvey($survey);
+        
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
+            
+            $surveyResponse->setAnswer($this->getAnswerByGfData($answer));
+
+            $em->persist($surveyResponse);
+            $em->flush();   
+    }
+    private function createSurveyResponseSkd($survey, $questionId, $answer)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $surveyResponse = new SurveyResponse();
+            
+            $surveyResponse->setSurvey($survey);
+        
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
+            
+            $surveyResponse->setAnswer($this->getAnswerBySkData($answer));
 
             $em->persist($surveyResponse);
             $em->flush();   
@@ -621,7 +660,12 @@ class CsvController extends Controller
         if ($data == "Farmer/Laborer"){
             $id = 1;
         }
-        
+        if ($data == "Agriculture"){
+            $id = 1;
+        }
+        if ($data == "Labourer"){
+            $id = 1;
+        }
         if ($data == "skilled_worker"){
             $id = 2;
         }
@@ -631,6 +675,10 @@ class CsvController extends Controller
         if ($data == "skilled_worker__i_e__carpenter"){
             $id = 2;
         }
+        if ($data == "Skilled worker (i.e. carpenter, masons)"){
+            $id = 2;
+        }
+        
         if (strpos("x".$data,'Skilled') !== false) {
             $id = 2;
         }
@@ -646,11 +694,17 @@ class CsvController extends Controller
         if ($data == "NGO worker"){
             $id = 3;
         }
+        if ($data == "I/NGO worker"){
+            $id = 3;
+        }
         if ($data == "government_ser"){
             $id = 4;   
         }
         if ($data == "Government (i.e. teacher, health worker, army)"){
             $id = 4;   
+        }
+        if ($data == "Government job"){
+            $id = 4;
         }
         if (strpos("x".$data,'Government') !== false) {
             $id = 4;
@@ -688,10 +742,26 @@ class CsvController extends Controller
         if ($data == "I don't do anything"){
             $id = 8;   
         }
+        if ($data == "Unemployed"){
+            $id = 8;   
+        }
+        
         if(substr($data, 0,5) == 'I don'){
             $id=8;
         }
         
+        if ($data == "Student"){
+            $id = 9;   
+        }
+        if ($data == "Shopkeeper"){
+            $id = 10;   
+        }
+        if ($data == "Private sector job"){
+            $id = 11;   
+        }
+        if ($data == "Public Sector Job"){
+            $id = 12;   
+        }
         
         
         
@@ -742,13 +812,24 @@ class CsvController extends Controller
     private function getAnswerByData($data){
         $response = $data[0];
         $id=0;
-        if ($response == 'D'){
-            $id = 6;   
-            
-        }elseif($response == 'd'){
-            $id=6;   
-        }else{
-         $id = intval($response);   
+        switch ($response) {
+            case "D":
+                $id = 6;
+                break;
+            case "N":
+                $id = 1;
+                break;
+            case "S":
+                $id = 4;
+                break;
+            case "C":
+                $id = 5;
+                break;
+                default:
+                $id = 0;    
+        }
+        if($id == 1){
+         if ($data[4] == 'v'){ $id = 2; }
         }
         
         $answer = $this->getDoctrine()
@@ -827,6 +908,133 @@ class CsvController extends Controller
                ->getRepository('AppBundle:Answer')->find($id);
         return $answer;
     }
+    public function getAnswerBySkData($answer){
+        $response = substr($answer, 0, 2);
+        $id=0;
+        
+        switch ($response) {
+            case "Be":
+                $id = 193;
+                break;
+            case "Ca":
+                $id = 194;
+                break;
+            case "Co":
+                $id = 195;
+                break;
+            case "Dr":
+                $id = 196;
+                break;
+            case "El":
+                $id = 197;
+                break;
+            case "En":
+                $id = 198;
+                break;
+            case "Ha":
+                $id = 199;
+                break;
+            case "Ma":
+                $id = 200;
+                break;
+            case "Mo":
+                $id = 201;
+                break;
+            case "Ne":
+                $id = 202;
+                break;
+            case "Ot":
+                $id = 203;
+                break;
+            case "Ro":
+                $id = 204;
+                break;
+            case "Ta":
+                $id = 205;
+                break;
+            case "Ot":
+                $id = 206;
+                break;
+                default:
+                $id=0;
+        }
+        
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
+    public function getAnswerByGfData($answer){
+        $response = substr($answer, 0, 3);
+        $id=0;
+        
+        switch ($answer) {
+            case "All":
+                $id = 187;
+                break;
+            case "Hal":
+                $id = 188;
+                break;
+            case "Lit":
+                $id = 189;
+                break;
+            case "Mor":
+                $id = 190;
+                break;
+            case "Mos":
+                $id = 191;
+                break;
+            case "Non":
+                $id = 192;
+                break;
+                default:
+                $id=0;
+        }
+        if($id==180){
+            if(substr($answer, 0, 4) == 'Teac'){
+                $id=181;
+            }
+        }
+        if($id==174){
+            if(substr($answer, 8, 1) == 'u'){
+                $id=175;
+            }
+        }
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
+    public function getAnswerByFmData($answer){
+        
+        $id=0;
+        
+        
+        switch ($answer) {
+            case "Own":
+                $id = 184;
+                break;
+            case "Rent":
+                $id = 185;
+                break;
+            case "No":
+                $id = 186;
+                break;
+                default:
+                $id=0;
+        }
+        if($id==180){
+            if(substr($answer, 0, 4) == 'Teac'){
+                $id=181;
+            }
+        }
+        if($id==174){
+            if(substr($answer, 8, 1) == 'u'){
+                $id=175;
+            }
+        }
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
     public function getAnswerByLvData($answer){
         $response = substr($answer, 0, 2);
         $id=0;
@@ -834,53 +1042,67 @@ class CsvController extends Controller
         
         switch ($response) {
             case "Ag":
-                $id = 137;
+                $id = 165;
                 break;
-            case "Sh":
-                $id = 138;
-                break;
-            case "Te":
-                $id = 139;
-                break;
-            case "Dr":
-                $id = 140;
-                break;
-            case "Gu":
-                $id = 141;
-                break;
-            case "Ta":
-                $id = 142;
-                break;
-            case "Jo":
-                $id = 143;
-                break;
-            case "Go":
-                $id = 144;
+            case "Bu":
+                $id = 166;
                 break;
             case "Ca":
-                $id = 146;
-                break;
-            case "La":
-                $id = 147;
-                break;
-            case "Do":
-                $id = 148;
+                $id = 167;
                 break;
             case "Co":
-                $id = 149;
+                $id = 168;
+                break;
+            case "Do":
+                $id = 169;
+                break;
+            case "Dr":
+                $id = 170;
+                break;
+            case "Go":
+                $id = 171;
+                break;
+            case "Gu":
+                $id = 172;
+                break;
+            case "I/":
+                $id = 173;
+                break;
+            case "Jo":
+                $id = 174;
+                break;
+            case "La":
+                $id = 176;
+                break;
+            case "Ma":
+                $id = 177;
                 break;
             case "No":
-                $id = 150;
+                $id = 182;
                 break;
             case "Ot":
-                $id = 151;
+                $id = 183;
+                break;
+            case "Re":
+                $id = 178;
+                break;
+            case "Ta":
+                $id = 179;
+                break;
+            case "Te":
+                $id = 180;
                 break;
                 default:
                 $id=0;
         }
-        if($id==139){
+        if($id==180){
             if(substr($answer, 0, 4) == 'Teac'){
-                $id=145;
+                $id=181;
+            }
+        }
+        if($id==174){
+            if(substr($answer, 8, 1) == 'u'){
+                $id=175;
             }
         }
         $answer = $this->getDoctrine()

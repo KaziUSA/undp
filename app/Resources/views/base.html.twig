@@ -97,6 +97,44 @@
                 <li class="{% if (app.request.get('_route') == 'page') or (app.request.get('_route') == 'page_new') or (app.request.get('_route') == 'show_new') or (app.request.get('_route') == 'page_edit') %} active {% endif %}">
                     <a href="{{ path('page') }}"><i class="fa fa-book"></i> <span class="nav-label">Pages</span> </a>
                 </li>
+
+                {# issue #}
+                <li class="{% if app.request.get('_route') in [
+                                    'issuequestion_index', 
+                                    'issuequestion_show',
+                                    'issuequestion_edit',
+                                    'issuequestion_new',
+                                    'issuepeople_index', 
+                                    'issuepeople_show',
+                                    'issuepeople_edit',
+                                    'issuepeople_new',
+                                    'issueinfographics_index', 
+                                    'issueinfographics_show',
+                                    'issueinfographics_edit',
+                                    'issueinfographics_new'
+                                    ] %} active {% endif %}">
+                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Issue</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuequestion_index', 
+                                    'issuequestion_show',
+                                    'issuequestion_edit',
+                                    'issuequestion_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuequestion') }}">Issue Question</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuepeople_index', 
+                                    'issuepeople_show',
+                                    'issuepeople_edit',
+                                    'issuepeople_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuepeople') }}">Issue People</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issueinfographics_index', 
+                                    'issueinfographics_show',
+                                    'issueinfographics_edit',
+                                    'issueinfographics_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issueinfographics') }}">Issue Infographics</a></li>
+                    </ul>
+                </li>
             </ul>
             {% endblock %}
         </div>
@@ -272,13 +310,14 @@
     <!-- Data picker -->
     <script src="/js/plugins/datapicker/bootstrap-datepicker.js"></script>
     <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    //Google analytics - commented for 
+  /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-72934138-1', 'auto');
-  ga('send', 'pageview');
+  ga('send', 'pageview');*/
 
 </script>
         

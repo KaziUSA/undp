@@ -1,0 +1,114 @@
+{% extends '::frontend.html.twig' %}
+
+{% block body -%}
+    <div class="page-title">
+        <h3>
+            Issue: Are your main Reconstruction needs being addressed?
+        </h3>
+    </div>
+    <section class="content img-cover relative"> 
+        {# style="{% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %}" #}
+
+        {# {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        Text for logged in user
+        {% endif %} #}
+        <div class="container-fluid">
+            <div class="row">
+                {# <div class="col-lg-5 col-md-6 col-sm-6">
+                    <div class="u-box clearfix">
+                        Text
+                    </div>
+                </div> #}
+
+                {# map here #}
+                <div class="col-sm-12">
+                    <div id="map" class="theme-default">
+                    </div>     
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="container-reconstruction" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="/css/leaflet.css" rel="stylesheet">
+    <link href="/css/custom_map.css" rel="stylesheet">
+    {# custom.css for admin #}
+{% endblock %}
+
+{% block scriptIncludes %}
+    <script type="text/javascript">
+        //change these variables
+        var theme_color = "#ffffff";//#0099ff
+        var border_color = "#ffffff";//#f7941e: orange
+    </script>
+    <script type="text/javascript" src="/js/leaflet.js"></script>
+    <!--<script type="text/javascript" src="/js/issue_reconstruction.js"></script>-->
+    <!--nepal-districts.js-->
+
+    <script type="text/javascript" src="/js/custom.js"></script>
+
+
+    {# highcharts #}
+    <script type="text/javascript">
+    Highcharts.chart('container-reconstruction', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: 0,
+                plotShadow: false
+            },
+            title: {
+                text: 'Browser<br>shares<br>2015',
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 40
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        enabled: true,
+                        distance: -50,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'white'
+                        }
+                    },
+                    startAngle: -90,
+                    endAngle: 90,
+                    center: ['50%', '75%']
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                innerSize: '50%',
+                data: [
+                    ['Firefox',   10.38],
+                    ['IE',       56.33],
+                    ['Chrome', 24.03],
+                    ['Safari',    4.77],
+                    ['Opera',     0.91],
+                    {
+                        name: 'Proprietary or Undetectable',
+                        y: 0.2,
+                        dataLabels: {
+                            enabled: false
+                        }
+                    }
+                ]
+            }]
+        });
+
+
+    </script>
+{% endblock %}

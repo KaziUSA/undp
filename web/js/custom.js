@@ -1,10 +1,12 @@
 		//TWEAKING THE MAP
-        var zoom_level = 6.8;
+        var zoom_level = 7.8;//6.8 - previously
 		var index_grades = [0, 10, 20, 50, 100, 200, 500, 1000];//0-10
 		var map = L.map('map', { 
+			scrollWheelZoom: false,
 			zoomControl: true,
 			dragging: false,
-			}).setView([28.5, 84.3], zoom_level);//originally 7, removed zoom control
+			}).setView([27.5, 85.3], zoom_level);//28.5, 84.3
+			//originally 7, removed zoom control
 
 		L.tileLayer('', {
 			maxZoom: 10,
@@ -38,10 +40,10 @@
 		info.update = function (props) {
 			
 			this._div.innerHTML = 
-				(props ? '<div class="district-name">' + props.name + '</div><br />' +
-				'<div class="girls item"><div class="label"><div class="icon"></div><div class="label-name">Girls</div></div><div class="value">' + KAZI.util(value,props.girls,"g",props.total) + '%</div></div><div class="clear"></div>'+
-				'<div class="boys item"><div class="label"><div class="icon"></div><div class="label-name">Boys</div></div><div class="value">' + KAZI.util(value,props.boys,"b",props.total) + '%</div></div><div class="clear"></div>'+
-				'<div class="total item"><div class="label"><div class="icon"></div><div class="label-name">Total</div></div><div class="value">' + props.total+ '%</div></div><div class="clear"></div>' : '<div class="hover-district">Hover over a district</div>');//props.girls, props.boys
+				(props ? '<div class="leaflet-info-padding" style="border-color: '+ props.bgColor +'"><div class="district-name">' + props.name + '</div><br />' +
+				/*'<div class="girls item"><div class="label"><div class="icon"></div><div class="label-name">Girls</div></div><div class="value">' + KAZI.util(value,props.girls,"g",props.total) + '%</div></div><div class="clear"></div>'+
+				'<div class="boys item"><div class="label"><div class="icon"></div><div class="label-name">Boys</div></div><div class="value">' + KAZI.util(value,props.boys,"b",props.total) + '%</div></div><div class="clear"></div>'+*/
+				'<div class="total item"><div class="label"></div><div class="value">' + props.total+ '</div></div><div class="clear"></div></div>' : '<div class="hover-district hidden">Hover over a district</div>');//props.girls, props.boys
 			
 		};
 		info.addTo(map);
@@ -67,10 +69,11 @@
 			return {
 				weight: 1,
 				opacity: 1,
-				color: '#5d5d5d',
+				color: '#ccc',//border
 				dashArray: '0',//3
-				fillOpacity: 0.7,
-				fillColor: getColor(feature.properties.total)
+				fillOpacity: 1,//0.7
+				// fillColor: getColor(feature.properties.total)//bg color
+				fillColor: feature.properties.bgColor
 			};
 		}
 
@@ -81,7 +84,7 @@
 				weight: 2,//5 - hover border width
 				color: border_color,//border color #666
 				dashArray: '',
-				fillOpacity: 0.7
+				fillOpacity: 1//0.7
 			});
 
 			if (!L.Browser.ie && !L.Browser.opera) {
@@ -104,8 +107,11 @@
 
 		function onEachFeature(feature, layer) {
 			layer.on({
-				mouseover: highlightFeature,
-				mouseout: resetHighlight,
+				click: highlightFeature,
+
+				/*mouseover: highlightFeature,
+				mouseout: resetHighlight,*/
+
 				//click: zoomToFeature //removed movement of map on click
 			});
 		}
@@ -113,6 +119,7 @@
 $.ajax({
   
   url: '/admin/nepal',
+  // url: '/js/issue_reconstruction.json',
   success: function( data ) {
     
       geojson = L.geoJson(data, {style:style, onEachFeature: onEachFeature}).addTo(map);
@@ -150,4 +157,4 @@ $.ajax({
 			return div;
 		};
 
-		legend.addTo(map);
+		//legend.addTo(map); //hide legend
