@@ -48,8 +48,8 @@
                                             <li><input type="checkbox" id="month-all" value="" />
                                                 <label for="month-all">All<span></span></label></li>
                                             <div class="form_months" id="form_months">
-                                                <li><input class="month" type="checkbox" id="month5" value="5" /><label for="month5">May<span></span></label></li>
-                                                <li><input class="month" type="checkbox" id="month6" value="6"/><label for="month6">June<span></span></label></li>
+                                                <li><input class="month" type="checkbox" id="month2" value="2" /><label for="month5">Feb<span></span></label></li>
+                                                
                                             </div>
                                         </ul><!--/ac-text-->
                                       </div><!--/ac-->
@@ -1198,11 +1198,12 @@ $(document).ready(function() {
     //By default, only show livelihood questions
     hideReconstruction();
     hideProtection();
+    showLivelihood();
     $("#livelihoodBtn").click(function(){ 
         showLivelihood();
         hideProtection();
         hideReconstruction();
-        $('#form_questions').val(35);
+        $('#form_questions').val(57);
         $('.zelected').text($('#form_questions option:selected').text());
         aButtonPressed();
         
@@ -1211,7 +1212,7 @@ $(document).ready(function() {
         hideLivelihood();
         hideProtection();
         showReconstruction();
-        $('#form_questions').val(43);
+        $('#form_questions').val(67);
         $('.zelected').text($('#form_questions option:selected').text());
         aButtonPressed();
     });
@@ -1225,34 +1226,10 @@ $(document).ready(function() {
     });
     //Hide Livelihood questions
     function hideLivelihood(){
-        $($('.zelect .dropdown ol li')[0]).hide();
-        $($('.zelect .dropdown ol li')[1]).hide();
-        $($('.zelect .dropdown ol li')[2]).hide();
-        $($('.zelect .dropdown ol li')[3]).hide();
-        $($('.zelect .dropdown ol li')[4]).hide();
-        $($('.zelect .dropdown ol li')[5]).hide();
-        $($('.zelect .dropdown ol li')[6]).hide();
+        
         $($('.zelect .dropdown ol li')[7]).hide();
         $($('.zelect .dropdown ol li')[8]).hide();
         $($('.zelect .dropdown ol li')[9]).hide();
-    }
-    //Show Livelihood questions
-    function showLivelihood(){
-        $($('.zelect .dropdown ol li')[0]).show();
-        $($('.zelect .dropdown ol li')[1]).show();
-        $($('.zelect .dropdown ol li')[2]).show();
-        $($('.zelect .dropdown ol li')[3]).show();
-        $($('.zelect .dropdown ol li')[4]).show();
-        $($('.zelect .dropdown ol li')[5]).show();
-        $($('.zelect .dropdown ol li')[6]).show();
-        $($('.zelect .dropdown ol li')[7]).show();
-        $($('.zelect .dropdown ol li')[8]).show();
-        $($('.zelect .dropdown ol li')[9]).show();
-        
-    }
-    //Hide Reconstruction questions
-    function hideReconstruction(){
-        
         $($('.zelect .dropdown ol li')[10]).hide();
         $($('.zelect .dropdown ol li')[11]).hide();
         $($('.zelect .dropdown ol li')[12]).hide();
@@ -1261,9 +1238,12 @@ $(document).ready(function() {
         $($('.zelect .dropdown ol li')[15]).hide();
         $($('.zelect .dropdown ol li')[16]).hide();
     }
-    //Showing Reconstruction questions
-    function showReconstruction(){
+    //Show Livelihood questions
+    function showLivelihood(){
         
+        $($('.zelect .dropdown ol li')[7]).show();
+        $($('.zelect .dropdown ol li')[8]).show();
+        $($('.zelect .dropdown ol li')[9]).show();
         $($('.zelect .dropdown ol li')[10]).show();
         $($('.zelect .dropdown ol li')[11]).show();
         $($('.zelect .dropdown ol li')[12]).show();
@@ -1271,9 +1251,10 @@ $(document).ready(function() {
         $($('.zelect .dropdown ol li')[14]).show();
         $($('.zelect .dropdown ol li')[15]).show();
         $($('.zelect .dropdown ol li')[16]).show();
+        
     }
-    //Hide Protection questions
-    function hideProtection(){
+    //Hide Reconstruction questions
+    function hideReconstruction(){
         
         $($('.zelect .dropdown ol li')[17]).hide();
         $($('.zelect .dropdown ol li')[18]).hide();
@@ -1282,9 +1263,13 @@ $(document).ready(function() {
         $($('.zelect .dropdown ol li')[21]).hide();
         $($('.zelect .dropdown ol li')[22]).hide();
         $($('.zelect .dropdown ol li')[23]).hide();
+        $($('.zelect .dropdown ol li')[24]).hide();
+        $($('.zelect .dropdown ol li')[25]).hide();
+        $($('.zelect .dropdown ol li')[26]).hide();
+        $($('.zelect .dropdown ol li')[27]).hide();
     }
-    //Showing Protection questions
-    function showProtection(){
+    //Showing Reconstruction questions
+    function showReconstruction(){
         
         $($('.zelect .dropdown ol li')[17]).show();
         $($('.zelect .dropdown ol li')[18]).show();
@@ -1293,6 +1278,32 @@ $(document).ready(function() {
         $($('.zelect .dropdown ol li')[21]).show();
         $($('.zelect .dropdown ol li')[22]).show();
         $($('.zelect .dropdown ol li')[23]).show();
+        $($('.zelect .dropdown ol li')[24]).show();
+        $($('.zelect .dropdown ol li')[25]).show();
+        $($('.zelect .dropdown ol li')[26]).show();
+        $($('.zelect .dropdown ol li')[27]).show();
+    }
+    //Hide Protection questions
+    function hideProtection(){
+        
+        $($('.zelect .dropdown ol li')[0]).hide();
+        $($('.zelect .dropdown ol li')[1]).hide();
+        $($('.zelect .dropdown ol li')[2]).hide();
+        $($('.zelect .dropdown ol li')[3]).hide();
+        $($('.zelect .dropdown ol li')[4]).hide();
+        $($('.zelect .dropdown ol li')[5]).hide();
+        $($('.zelect .dropdown ol li')[6]).hide();
+    }
+    //Showing Protection questions
+    function showProtection(){
+        
+        $($('.zelect .dropdown ol li')[0]).show();
+        $($('.zelect .dropdown ol li')[1]).show();
+        $($('.zelect .dropdown ol li')[2]).show();
+        $($('.zelect .dropdown ol li')[3]).show();
+        $($('.zelect .dropdown ol li')[4]).show();
+        $($('.zelect .dropdown ol li')[5]).show();
+        $($('.zelect .dropdown ol li')[6]).show();
     }
 });
 
