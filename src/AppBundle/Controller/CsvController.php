@@ -253,19 +253,28 @@ class CsvController extends Controller
         ////////////////RECONSTRUCTION QUESTIONS///////////////////
         
             // Question 1
-            $this->createSurveyResponseYn($survey, 78, $row[11]);
+            $this->createSurveyResponseYn($survey, 67, $row[18]);
             // Question 2
-            $this->createSurveyResponseYn($survey, 79, $row[12]);
+            $this->createSurveyResponseYn($survey, 68, $row[19]);
             // Question 3
-            $this->createSurveyResponseYn($survey, 80, $row[13]);
+            $this->createSurveyResponseYn($survey, 69, $row[20]);
             // Question 4
-            $this->createSurveyResponseYn($survey, 81, $row[14]);
+            //$this->createSurveyResponseYn($survey, 70, $row[21]);
             // Question 5
-            $this->createSurveyResponseYn($survey, 82, $row[15]);
+            $this->createSurveyResponseYn($survey, 71, $row[22]);
             // Question 6
-            $this->createSurveyResponseYn($survey, 83, $row[16]);
+            $this->createSurveyResponseYn($survey, 72, $row[23]);
             // Question 7
-            $this->createSurveyResponseYn($survey, 84, $row[17]);
+            $this->createSurveyResponseYn($survey, 73, $row[24]);
+            // Question 8
+            $this->createSurveyResponseYn($survey, 74, $row[25]);
+            // Question 9
+            $this->createSurveyResponseYn($survey, 75, $row[26]);
+            // Question 10
+            $this->createSurveyResponse($survey, 76, $row[27]);
+            // Question 11
+            $this->createSurveyResponseYn($survey, 77, $row[28]);
+        
             unset($survey);
             unset($row);
             unset($interviewer);  
