@@ -178,7 +178,7 @@ class CsvController extends Controller
             
             
             $survey = new Survey();
-            $survey->setTerm(11); //MAKE SURE TO CHANGE THIS EVERY TERM
+            $survey->setTerm(10); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
             $survey->setDate(DateTime::createFromFormat('Y-m-d', '2017-02-15'));
             
