@@ -152,8 +152,8 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        $this->getCsvData('/var/www/html/web/uploads/phase3/P-FEB/Protection_Feb'.$file.".xlsx");
-        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase3/P-FEB/Protection_Feb'.$file.".xlsx");
+        //$this->getCsvData('/var/www/html/web/uploads/phase3/R-FEB/Reconstruction_Feb'.$file.".xlsx");
+        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase3/R-FEB/Reconstruction_Feb'.$file.".xlsx");
         
         
         echo "\n";
@@ -174,18 +174,18 @@ class CsvController extends Controller
     private function setCsvData($row)
     {
             //Adding interviewer data
-            $interviewer = $this->addInterviewer('Accountability', 'accountability');
+            $interviewer = $this->addInterviewer('NDRI', 'NDRI');
             
             
             $survey = new Survey();
-            $survey->setTerm(10); //MAKE SURE TO CHANGE THIS EVERY TERM
+            $survey->setTerm(11); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
             $survey->setDate(DateTime::createFromFormat('Y-m-d', '2017-02-15'));
             
-            $survey->setAge($this->getAgeByData($row[3]));
-            $survey->setGender($this->getGenderByData($row[4]));
-            $survey->setEthnicity($this->getEthnicityByData($row[5]));
-            $survey->setOccupation($this->getOccupationByData($row[7]));
+            $survey->setAge($this->getAgeByData($row[9]));
+            $survey->setGender($this->getGenderByData($row[10]));
+            $survey->setEthnicity($this->getEthnicityByData($row[12]));
+            $survey->setOccupation($this->getOccupationByData($row[14]));
         
             $survey->setDisability(0); //NOT DISABLED
             //if ($row[7] == "No difficulty"){
@@ -197,8 +197,8 @@ class CsvController extends Controller
             //$survey->setCardholder($this->getCardholderByData($row[5]));
             //$survey->setCardtype($this->getCardtypeByData ($row[11]));
             
-            $survey->setDistrict($this->getDistrictByData($row[0]));
-            $survey->setVdc($this->getVdcByData($row[2], $row[2]));
+            $survey->setDistrict($this->getDistrictByData($row[7]));
+            $survey->setVdc($this->getVdcByData($row[2], $row[8]));
 
             $survey->setWard(0);
             
@@ -234,6 +234,23 @@ class CsvController extends Controller
           */
         
         ////////////////PROTECTION QUESTIONS///////////////////
+        /*
+            // Question 1
+            $this->createSurveyResponseYn($survey, 78, $row[11]);
+            // Question 2
+            $this->createSurveyResponseYn($survey, 79, $row[12]);
+            // Question 3
+            $this->createSurveyResponseYn($survey, 80, $row[13]);
+            // Question 4
+            $this->createSurveyResponseYn($survey, 81, $row[14]);
+            // Question 5
+            $this->createSurveyResponseYn($survey, 82, $row[15]);
+            // Question 6
+            $this->createSurveyResponseYn($survey, 83, $row[16]);
+            // Question 7
+            $this->createSurveyResponseYn($survey, 84, $row[17]);
+        */ 
+        ////////////////RECONSTRUCTION QUESTIONS///////////////////
         
             // Question 1
             $this->createSurveyResponseYn($survey, 78, $row[11]);
@@ -249,7 +266,6 @@ class CsvController extends Controller
             $this->createSurveyResponseYn($survey, 83, $row[16]);
             // Question 7
             $this->createSurveyResponseYn($survey, 84, $row[17]);
-            
             unset($survey);
             unset($row);
             unset($interviewer);  
