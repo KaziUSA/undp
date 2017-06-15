@@ -152,8 +152,8 @@ class CsvController extends Controller
         //$fileInfo = $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/survey.xlsx', 'uploaded_form_g54cmb');
         
         
-        $this->getCsvData('/var/www/html/web/uploads/phase3/P-FEB/Protection_Feb'.$file.".xlsx");
-        //$this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase3/P-FEB/Protection_Feb'.$file.".xlsx");
+        //$this->getCsvData('/var/www/html/web/uploads/phase3/P-FEB/Protection_Feb'.$file.".xlsx");
+        $this->getCsvData('/Users/shrestha/Sites/undp/web/uploads/phase3/P-FEB/Protection_Feb'.$file.".xlsx");
         
         
         echo "\n";
@@ -236,19 +236,19 @@ class CsvController extends Controller
         ////////////////PROTECTION QUESTIONS///////////////////
         
             // Question 1
-            $this->createSurveyResponseYn($survey, 50, $row[11]);
+            $this->createSurveyResponseYn($survey, 78, $row[11]);
             // Question 2
-            $this->createSurveyResponseYn($survey, 51, $row[12]);
+            $this->createSurveyResponseYn($survey, 79, $row[12]);
             // Question 3
-            $this->createSurveyResponseYn($survey, 52, $row[13]);
+            $this->createSurveyResponseYn($survey, 80, $row[13]);
             // Question 4
-            $this->createSurveyResponseYn($survey, 53, $row[14]);
+            $this->createSurveyResponseYn($survey, 81, $row[14]);
             // Question 5
-            $this->createSurveyResponseYn($survey, 54, $row[15]);
+            $this->createSurveyResponseYn($survey, 82, $row[15]);
             // Question 6
-            $this->createSurveyResponseYn($survey, 55, $row[16]);
+            $this->createSurveyResponseYn($survey, 83, $row[16]);
             // Question 7
-            $this->createSurveyResponseYn($survey, 56, $row[17]);
+            $this->createSurveyResponseYn($survey, 84, $row[17]);
             
             unset($survey);
             unset($row);
