@@ -181,15 +181,15 @@ class CsvController extends Controller
             $survey->setTerm(11); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
             $survey->setDate(DateTime::createFromFormat('Y-m-d', '2017-02-15'));
-        echo "Got here 0 \n";    
+        
             $survey->setAge($this->getAgeByData($row[9])); 
-        echo "Got here 1 \n";
+        
             $survey->setGender($this->getGenderByData($row[10]));
-        echo "Got here 2 \n";
+        
             $survey->setEthnicity($this->getEthnicityByData($row[12]));
-        echo "Got here 3 \n";
+        
             $survey->setOccupation($this->getOccupationByData($row[14]));
-        echo "Got here 4 \n";
+        
         
             $survey->setDisability(0); //NOT DISABLED
             //if ($row[7] == "No difficulty"){
@@ -202,9 +202,9 @@ class CsvController extends Controller
             //$survey->setCardtype($this->getCardtypeByData ($row[11]));
             
             $survey->setDistrict($this->getDistrictByData($row[7]));
-        echo "Got here 5 \n";
+        
             $survey->setVdc($this->getVdcByData($row[2], $row[8]));
-        echo "Got here 6";
+        
 
             $survey->setWard(0);
             
@@ -736,7 +736,7 @@ class CsvController extends Controller
     private function getOccupationByData($data){
      
         $repository = $this->getDoctrine()->getRepository('AppBundle:Gender');
-        
+        $id=0;
         if ($data == "farmer_laborer"){
             $id = 1;
         }
@@ -839,9 +839,7 @@ class CsvController extends Controller
             $id = 8;   
         }
         
-        if(substr($data, 0,5) == 'I don'){
-            $id=8;
-        }
+        
         
         if ($data == "Student"){
             $id = 9;   
@@ -852,13 +850,19 @@ class CsvController extends Controller
         if ($data == "Private sector job"){
             $id = 11;   
         }
-        if (substr($data, 0, 6) == 'Public'){
-            $id = 11;
-        }
+        
         if ($data == "Public Sector Job"){
             $id = 12;   
         }
         
+        if ($id == 0) {
+            if (substr($data, 0, 6) == 'Public'){
+                $id = 11;
+            }
+            if(substr($data, 0,5) == 'I don'){
+                $id=8;
+            }
+        }
         
         
         $occupation = $this->getDoctrine()
@@ -1081,8 +1085,13 @@ class CsvController extends Controller
                 $id = 0;
         }
         if($id == 215){
-            if($answer[9] == 'b'){ $id = 213; }
-            if($answer[9] == 'd'){ $id = 214; }
+            if ($answer == 'No'){
+                
+            }else{
+                
+                if($answer[9] == 'b'){ $id = 213; }
+                if($answer[9] == 'd'){ $id = 214; }
+            }
         }
         $answer = $this->getDoctrine()
                ->getRepository('AppBundle:Answer')->find($id);
