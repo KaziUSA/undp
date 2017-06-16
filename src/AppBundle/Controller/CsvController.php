@@ -257,11 +257,11 @@ class CsvController extends Controller
             // Question 2
             $this->createSurveyResponseYn($survey, 68, $row[19]);
             // Question 3
-            $this->createSurveyResponseYn($survey, 69, $row[20]);
+            $this->createSurveyResponseCn($survey, 69, $row[20]);
             // Question 4
             //$this->createSurveyResponseYn($survey, 70, $row[21]);
             // Question 5
-            $this->createSurveyResponseYn($survey, 71, $row[22]);
+            $this->createSurveyResponseRcvH($survey, 71, $row[22]);
             // Question 6
             $this->createSurveyResponseYn($survey, 72, $row[23]);
             // Question 7
@@ -271,7 +271,7 @@ class CsvController extends Controller
             // Question 9
             $this->createSurveyResponseYn($survey, 75, $row[26]);
             // Question 10
-            $this->createSurveyResponse($survey, 76, $row[27]);
+            $this->createSurveyResponseCrn($survey, 76, $row[27]);
             // Question 11
             $this->createSurveyResponseYn($survey, 77, $row[28]);
         
@@ -396,6 +396,48 @@ class CsvController extends Controller
             $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
             
             $surveyResponse->setAnswer($this->getAnswerByShData($answer));
+
+            $em->persist($surveyResponse);
+            $em->flush();   
+    }
+    private function createSurveyResponseCn($survey, $questionId, $answer)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $surveyResponse = new SurveyResponse();
+            
+            $surveyResponse->setSurvey($survey);
+        
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
+            
+            $surveyResponse->setAnswer($this->getAnswerByCnData($answer));
+
+            $em->persist($surveyResponse);
+            $em->flush();   
+    }
+    private function createSurveyResponseRcvH($survey, $questionId, $answer)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $surveyResponse = new SurveyResponse();
+            
+            $surveyResponse->setSurvey($survey);
+        
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
+            
+            $surveyResponse->setAnswer($this->getAnswerByRcvHData($answer));
+
+            $em->persist($surveyResponse);
+            $em->flush();   
+    }
+    private function createSurveyResponseCrn($survey, $questionId, $answer)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $surveyResponse = new SurveyResponse();
+            
+            $surveyResponse->setSurvey($survey);
+        
+            $surveyResponse->setQuestion($em->getReference('AppBundle\Entity\Question', $questionId));
+            
+            $surveyResponse->setAnswer($this->getAnswerByCrnData($answer));
 
             $em->persist($surveyResponse);
             $em->flush();   
@@ -952,6 +994,89 @@ class CsvController extends Controller
                 $id = 0;
         }
         
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
+    public function getAnswerByCrnData($answer){
+        $response = $answer[0];
+        $id=0;
+        
+        
+        switch ($response) {
+            case "Y":
+                $id = 212;
+                break;
+            case "N":
+                $id = 215;
+                break;
+            case "D":
+                $id = 216;
+                break;
+            
+                default:
+                $id = 0;
+        }
+        if($id == 215){
+            if($answer[9] == 'b'){ $id = 213; }
+            if($answer[9] == 'd'){ $id = 214; }
+        }
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
+    public function getAnswerByRcvHData($answer){
+        $response = $answer[0];
+        $id=0;
+        
+        
+        switch ($response) {
+            case "Y":
+                $id = 212;
+                break;
+            case "N":
+                $id = 215;
+                break;
+            case "D":
+                $id = 216;
+                break;
+            
+                default:
+                $id = 0;
+        }
+        if($id == 215){
+            if($answer[9] == 'b'){ $id = 213; }
+            if($answer[9] == 'd'){ $id = 214; }
+        }
+        $answer = $this->getDoctrine()
+               ->getRepository('AppBundle:Answer')->find($id);
+        return $answer;
+    }
+    public function getAnswerByCnData($answer){
+        $response = $answer[0];
+        $id=0;
+        
+        
+        switch ($response) {
+            case "D":
+                $id = 207;
+                break;
+            case "H":
+                $id = 208;
+                break;
+            case "N":
+                $id = 210;
+                break;
+            case "P":
+                $id = 211;
+                break;
+            
+                default:
+                $id = 0;
+        }
+        if($id == 208){
+            if($answer[5] == 'n'){ $id = 209; }
+        }
         $answer = $this->getDoctrine()
                ->getRepository('AppBundle:Answer')->find($id);
         return $answer;
