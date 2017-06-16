@@ -1004,22 +1004,48 @@ class CsvController extends Controller
         
         
         switch ($response) {
-            case "Y":
-                $id = 212;
+            case "C":
+                $id = 217;
                 break;
-            case "N":
-                $id = 215;
+            case "E":
+                $id = 218;
+                break;
+            case "G":
+                $id = 219;
+                break;
+            case "H":
+                $id = 220;
+                break;
+            case "I":
+                $id = 221;
+                break;
+            case "R":
+                $id = 222;
+                break;
+            case "S":
+                $id = 224;
+                break;
+            case "T":
+                $id = 225;
+                break;
+            case "W":
+                $id = 226;
                 break;
             case "D":
-                $id = 216;
+                $id = 227;
+                break;
+            case "N":
+                $id = 228;
+                break;
+            case "O":
+                $id = 229;
                 break;
             
                 default:
                 $id = 0;
         }
-        if($id == 215){
-            if($answer[9] == 'b'){ $id = 213; }
-            if($answer[9] == 'd'){ $id = 214; }
+        if($id == 222){
+            if($answer[1] == '0'){ $id = 223; }
         }
         $answer = $this->getDoctrine()
                ->getRepository('AppBundle:Answer')->find($id);
