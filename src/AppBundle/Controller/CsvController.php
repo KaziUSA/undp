@@ -181,11 +181,15 @@ class CsvController extends Controller
             $survey->setTerm(11); //MAKE SURE TO CHANGE THIS EVERY TERM
             $survey->setInterviewer($interviewer);
             $survey->setDate(DateTime::createFromFormat('Y-m-d', '2017-02-15'));
-            
-            $survey->setAge($this->getAgeByData($row[9]));
+        echo "Got here 0 \n";    
+            $survey->setAge($this->getAgeByData($row[9])); 
+        echo "Got here 1 \n";
             $survey->setGender($this->getGenderByData($row[10]));
+        echo "Got here 2 \n";
             $survey->setEthnicity($this->getEthnicityByData($row[12]));
+        echo "Got here 3 \n";
             $survey->setOccupation($this->getOccupationByData($row[14]));
+        echo "Got here 4 \n";
         
             $survey->setDisability(0); //NOT DISABLED
             //if ($row[7] == "No difficulty"){
@@ -198,7 +202,9 @@ class CsvController extends Controller
             //$survey->setCardtype($this->getCardtypeByData ($row[11]));
             
             $survey->setDistrict($this->getDistrictByData($row[7]));
+        echo "Got here 5 \n";
             $survey->setVdc($this->getVdcByData($row[2], $row[8]));
+        echo "Got here 6";
 
             $survey->setWard(0);
             
@@ -797,6 +803,7 @@ class CsvController extends Controller
         }
         
         
+        
         if ($data == "government_service__i_e__teach"){
             $id = 4;   
         }    
@@ -844,6 +851,9 @@ class CsvController extends Controller
         }
         if ($data == "Private sector job"){
             $id = 11;   
+        }
+        if (substr($data, 0, 6) == 'Public'){
+            $id = 11;
         }
         if ($data == "Public Sector Job"){
             $id = 12;   
