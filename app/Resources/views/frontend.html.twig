@@ -16,7 +16,7 @@
 
 			<link href="/css/bootstrap.min.css" rel="stylesheet">
 
-      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+      {# <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" /> #}
 
 			<link href="/css/animate.css" rel="stylesheet">
 
@@ -25,13 +25,15 @@
       <link href="/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
 
 			<link href="/LESS/style.6.less" rel="stylesheet/less">
-      s
+      
       <link rel="stylesheet" type="text/css" href="/css/custom_issue.css">
 		{% endblock %}
 		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
 
 		<link rel="image_src" type="image/jpeg" href="http://cfp.org.np/img/frontend/logo-share.png" /><!-- for facebook -->
 		<meta property="og:image" content="http://cfp.org.np/img/frontend/logo-share.png" /> <!-- for linked in -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		
 	</head>
 	<body class="{% block bodyclass %}{% endblock %}">
@@ -100,6 +102,7 @@
 	}
 	</style>
   <ul class="nav navbar-nav">
+    <li><a href="{{ path('issue') }}" class="{% if app.request.get('_route') == 'issue_show' %} active {% endif %}">Survey</a></li>
     <li class="dropdown">
     	<a href="{{ path('platform') }}" class="dropdown-toggle {% if (app.request.get('_route') == 'platform') or (app.request.get('_route') == 'set2') %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Platform</a>
     	<ul class="dropdown-menu">
@@ -179,6 +182,7 @@
     <script src="/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 
     <script src="/js/frontend/custom.js"></script>
+    <script src="/js/frontend/custom_issue.js"></script>
         <script>
   //Google Analytics commented for debugging
   /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

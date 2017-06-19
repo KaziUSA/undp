@@ -1,6 +1,16 @@
 /* Created by nikesh@kazistudios.com on 13 June 2017 */
 
+.edit-link.edit-static {
+    color: #000;
+    text-shadow: none;
+    position: static;
+}
 
+body.survey {
+	/*font-family: 'Roboto', sans-serif;*/
+	font-size: 13px;
+	line-height: 18px;
+}
 
 .infographics .infographics-list .icon {
 	background: #f2f2f2;
@@ -11,6 +21,7 @@
 .infographics.infographics-style-1 .infographics-list .icon,
 .infographics.infographics-style-3 .infographics-list .icon { 
 	float: left;
+	margin-right: 15px;
 }
 .infographics.infographics-style-1 .infographics-list,
 .infographics.infographics-style-3 .infographics-list {
@@ -23,4 +34,114 @@
 .infographics.infographics-style-2 .infographics-list {
     float: left;
     max-width: 33%;
+}
+
+
+.tab-heading {
+	background: #5d5d5d;
+	padding: 0 15px;
+	min-height: 40px;
+}
+.survey .page-title,
+.tab-heading {
+	color: #ffffff;
+	font-size: 18px;
+	line-height: 40px;
+}
+
+.filter.survey .feedback-tab {
+	padding: 0;
+}
+
+
+body.survey {
+	background: #959595;
+}
+.survey .tab-content {
+	padding: 0;
+}
+.survey .tab-content li {
+  border-bottom: 1px solid #a4a4a4;/*a7a7a7*/
+}
+.survey .tab-content li a {
+  background: #959595;
+  display: block;
+  font-size: 16px;
+	padding: 15px;
+}
+.survey .tab-content li.current_page_item,
+.survey .tab-content li.current_page_item a {
+	background: #707070;
+}
+.survey .tab-content li,
+.survey .tab-content li a,
+.survey .tab-content li.current_page_item, 
+.survey .tab-content li.current_page_item a {
+	color: #ffffff;
+}
+
+
+.filter.survey .nav-tabs li a {
+	font-size: 12px;
+}
+
+.survey .main-content {
+	background: #ebebeb;
+}
+
+.s-box-module {
+    background: #fff;
+    margin-bottom: 10px;
+}
+.s-box-module-border .s-box-right {
+	border-left: 10px solid #ebebeb;
+}
+.s-box-left {
+	margin-right: 10px;
+}
+.s-box {
+	background: #ffffff;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+.s-box-module-border .s-box {
+	margin-bottom: 0px;
+}
+.s-box h2 {
+	font-size: 18px;
+	color: #428d8e;
+}
+
+.survey .graphics img {
+	margin-bottom: 10px;
+}
+.survey .graphics p {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+
+/* News page */
+.news-page {
+    padding: 15px;
+		font-size: 13px;
+}
+
+.news-box-module {
+    width: 25%;
+    float: left;
+    padding-right: 10px;
+}
+.news-box-wrap {
+    background: #fff;
+    height: 100%;
+    padding: 10px;
+}
+
+.news-graphics img, .news-graphics iframe {
+		height: 100%;
+    width: 100%;
+}
+.news-box-module h2 {
+		font-size: 18px;
 }

@@ -10,12 +10,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
- * IssueQuestion
+ * IssueNews
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\IssueQuestionRepository")
+ * @ORM\Entity
  */
-class IssueQuestion
+class IssueNews
 {
     /**
      * @var integer
@@ -33,52 +33,20 @@ class IssueQuestion
      */
     private $name;
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity="IssueType", inversedBy="issuequestion")
-     * @ORM\JoinColumn(name="issue_type_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $issueType;
-
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="key_findings_month", type="integer")
-     */
-    private $keyFindingsMonth;
-
     /**
      * @var string
      *
-     * @ORM\Column(name="key_findings", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $keyFindings;
-
-
-    
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="IssueMapName", inversedBy="issuequestion")
-     * @ORM\JoinColumn(name="issue_map_name_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    private $issueMapName;
-
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image_title", type="string", length=255, nullable=true)
-     */
-    private $imageTitle;
+    private $description;
 
     /**
      * @Assert\File(
      * maxSize="10737418240",
      * mimeTypes = {"image/png",
      *          "image/jpeg",
-     *          "image/jpg"},
+     *          "image/jpg",
+     *          "audio/mpeg"},
      * mimeTypesMessage = "Please upload a valid Image"
      * )
      */
@@ -87,27 +55,39 @@ class IssueQuestion
     /**
      * @var string
      *
-     * @ORM\Column(name="image_url", type="string", length=255, nullable=true)
+     * @ORM\Column(name="imageUrl", type="string", length=255, nullable=true)
      */
     private $imageUrl;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image_desc", type="text", nullable=true)
+     * @ORM\Column(name="audioUrl", type="string", length=255, nullable=true)
      */
-    private $imageDesc;
+    private $audioUrl;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image_credit", type="string", length=255, nullable=true)
+     * @ORM\Column(name="youtubeUrl", type="string", length=255, nullable=true)
      */
-    private $imageCredit;
+    private $youtubeUrl;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="createdDate", type="string", length=255, nullable=true)
+     */
+    private $createdDate;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="updatedDate", type="string", length=255, nullable=true)
+     */
+    private $updatedDate;
 
-    public $file_path = '/../../../uploads/issue/img';
+    public $file_path = '/../../../uploads/issue/news/img';
 
 
     /**
@@ -125,7 +105,7 @@ class IssueQuestion
      *
      * @param string $name
      *
-     * @return IssueQuestion
+     * @return IssueNews
      */
     public function setName($name)
     {
@@ -144,132 +124,79 @@ class IssueQuestion
         return $this->name;
     }
 
-
     /**
-     * Set issueType
+     * Set description
      *
-     * @param \AppBundle\Entity\IssueType $issueType
+     * @param string $description
      *
-     * @return issueType
+     * @return IssueNews
      */
-    public function setIssueType(\AppBundle\Entity\IssueType $issueType = null)
+    public function setDescription($description)
     {
-        $this->issueType = $issueType;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get issueType
-     *
-     * @return \AppBundle\Entity\IssueType
-     */
-    public function getIssueType()
-    {
-        return $this->issueType;
-    }
-
-
-    /**
-     * Set keyFindingsMonth
-     *
-     * @param integer $keyFindingsMonth
-     *
-     * @return IssueQuestion
-     */
-    public function setKeyFindingsMonth($keyFindingsMonth)
-    {
-        $this->keyFindingsMonth = $keyFindingsMonth;
-
-        return $this;
-    }
-
-    /**
-     * Get keyFindingsMonth
-     *
-     * @return integer
-     */
-    public function getKeyFindingsMonth()
-    {
-        return $this->keyFindingsMonth;
-    }
-
-    /**
-     * Set keyFindings
-     *
-     * @param string $keyFindings
-     *
-     * @return IssueQuestion
-     */
-    public function setKeyFindings($keyFindings)
-    {
-        $this->keyFindings = $keyFindings;
-
-        return $this;
-    }
-
-    /**
-     * Get keyFindings
+     * Get description
      *
      * @return string
      */
-    public function getKeyFindings()
+    public function getDescription()
     {
-        return $this->keyFindings;
+        return $this->description;
     }
 
-    
-
-
-
-
-
     /**
-     * Set issueMapName
+     * Set imageUrl
      *
-     * @param \AppBundle\Entity\IssueMapName $issueMapName
+     * @param string $imageUrl
      *
-     * @return issueMapName
+     * @return IssueNews
      */
-    public function setIssueMapName(\AppBundle\Entity\IssueMapName $issueMapName = null)
+    public function setImageUrl($imageUrl)
     {
-        $this->issueMapName = $issueMapName;
+        $this->imageUrl = $imageUrl;
 
         return $this;
     }
 
     /**
-     * Get issueMapName
-     *
-     * @return \AppBundle\Entity\IssueMapName
-     */
-    public function getIssueMapName()
-    {
-        return $this->issueMapName;
-    }
-
-    /**
-     * Set imageTitle
-     *
-     * @param string $imageTitle
-     *
-     * @return IssueQuestion
-     */
-    public function setImageTitle($imageTitle)
-    {
-        $this->imageTitle = $imageTitle;
-
-        return $this;
-    }
-
-    /**
-     * Get imageTitle
+     * Get imageUrl
      *
      * @return string
      */
-    public function getImageTitle()
+    public function getImageUrl()
     {
-        return $this->imageTitle;
+        return $this->imageUrl;
+    }
+
+
+
+
+    /**
+     * Set audioUrl
+     *
+     * @param string $audioUrl
+     *
+     * @return IssueNews
+     */
+    public function setAudioUrl($audioUrl)
+    {
+        $this->audioUrl = $audioUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get audioUrl
+     *
+     * @return string
+     */
+    public function getAudioUrl()
+    {
+        return $this->audioUrl;
     }
 
 
@@ -296,7 +223,15 @@ class IssueQuestion
 
         // $avatarBase = $avatarExt->
         // check if we have an old image path
+
         $this->imageUrl = $avatarExt;
+
+        /*if($avatarExtension == 'jpg' || $avatarExtension == 'png' || $avatarExtension == 'jpeg') {
+            $this->imageUrl = $avatarExt;
+        } elseif($avatarExtension == 'mpeg' || $avatarExtension == 'mp3') {
+            $this->audioUrl = $avatarExt;
+            var_dump($this->audioUrl);
+        }*/
 
         
         /*if (isset($this->path)) {
@@ -306,30 +241,6 @@ class IssueQuestion
         } else {
             $this->path = $avatarExt;
         }*/
-    }
-
-    /**
-     * Set imageUrl
-     *
-     * @param string $imageUrl
-     *
-     * @return IssueQuestion
-     */
-    public function setImageUrl($imageUrl)
-    {
-        $this->imageUrl = $imageUrl;
-
-        return $this;
-    }
-
-    /**
-     * Get imageUrl
-     *
-     * @return string
-     */
-    public function getImageUrl()
-    {
-        return $this->imageUrl;
     }
 
     public function getAbsolutePath()
@@ -357,7 +268,14 @@ class IssueQuestion
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/issue/img';
+        return 'uploads/issue/news/img';
+    }
+
+    protected function getAudioUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../web/uploads/issue/news/audio';
     }
     
     /**
@@ -386,7 +304,25 @@ class IssueQuestion
         // if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
-        $this->getFile()->move($this->getUploadRootDir(), $this->imageUrl);
+
+        //seperate upload directory for img and audio
+        $avatarExtension = $this->file->getClientOriginalExtension();
+        if($avatarExtension == 'jpg' || $avatarExtension == 'png' || $avatarExtension == 'jpeg') {
+            // var_dump($this->getUploadRootDir());
+            // var_dump($this);
+            $this->getFile()->move($this->getUploadRootDir(), $this->imageUrl);
+        } elseif($avatarExtension == 'mpeg' || $avatarExtension == 'mp3') {
+            // var_dump($this->getAudioUploadRootDir());
+            // var_dump($this);
+            // var_dump($this->audioUrl);
+            // var_dump($this->imageUrl);
+            // var_dump($this->file->getClientOriginalName());
+            $this->getFile()->move($this->getAudioUploadRootDir(), $this->imageUrl);
+            //Tried to keep audio in audioUrl column of database
+        }
+        // exit();
+
+        
 
         // check if we have an old image
         if (isset($this->temp)) {
@@ -413,59 +349,76 @@ class IssueQuestion
     }
 
 
-
     /**
-     * Set imageDesc
+     * Set youtubeUrl
      *
-     * @param string $imageDesc
+     * @param string $youtubeUrl
      *
-     * @return IssueQuestion
+     * @return IssueNews
      */
-    public function setImageDesc($imageDesc)
+    public function setYoutubeUrl($youtubeUrl)
     {
-        $this->imageDesc = $imageDesc;
+        $this->youtubeUrl = $youtubeUrl;
 
         return $this;
     }
 
     /**
-     * Get imageDesc
+     * Get youtubeUrl
      *
      * @return string
      */
-    public function getImageDesc()
+    public function getYoutubeUrl()
     {
-        return $this->imageDesc;
+        return $this->youtubeUrl;
     }
 
-
     /**
-     * Set imageCredit
+     * Set createdDate
      *
-     * @param string $imageCredit
+     * @param string $createdDate
      *
-     * @return IssueQuestion
+     * @return IssueNews
      */
-    public function setImageCredit($imageCredit)
+    public function setCreatedDate($createdDate)
     {
-        $this->imageCredit = $imageCredit;
+        $this->createdDate = $createdDate;
 
         return $this;
     }
 
     /**
-     * Get imageCredit
+     * Get createdDate
      *
      * @return string
      */
-    public function getImageCredit()
+    public function getCreatedDate()
     {
-        return $this->imageCredit;
+        return $this->createdDate;
     }
 
-    /* To fix: Object of class Proxies\__CG__\AppBundle\Entity\IssueQuestion could not be converted to string"). */
-    public function __toString() {
-        return $this->name;
+    /**
+     * Set updatedDate
+     *
+     * @param string $updatedDate
+     *
+     * @return IssueNews
+     */
+    public function setUpdatedDate($updatedDate)
+    {
+        $this->updatedDate = $updatedDate;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedDate
+     *
+     * @return string
+     */
+    public function getUpdatedDate()
+    {
+        return $this->updatedDate;
     }
 }
 

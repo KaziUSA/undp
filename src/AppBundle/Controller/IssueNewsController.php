@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\IssuePeople;
-use AppBundle\Form\IssuePeopleType;
+use AppBundle\Entity\IssueNews;
+use AppBundle\Form\IssueNewsType;
 
 /**
- * IssuePeople controller.
+ * IssueNews controller.
  *
- * @Route("/issuepeople")
+ * @Route("/issuenews")
  */
-class IssuePeopleController extends Controller
+class IssueNewsController extends Controller
 {
 
     /**
-     * Lists all IssuePeople entities.
+     * Lists all IssueNews entities.
      *
-     * @Route("/", name="issuepeople")
+     * @Route("/", name="issuenews")
      * @Method("GET")
      * @Template()
      */
@@ -29,31 +29,34 @@ class IssuePeopleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AppBundle:IssuePeople')->findAll();
+        $entities = $em->getRepository('AppBundle:IssueNews')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new IssuePeople entity.
+     * Creates a new IssueNews entity.
      *
-     * @Route("/", name="issuepeople_create")
+     * @Route("/", name="issuenews_create")
      * @Method("POST")
-     * @Template("AppBundle:IssuePeople:new.html.twig")
+     * @Template("AppBundle:IssueNews:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new IssuePeople();
+        $entity = new IssueNews();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            //upload image in directory
+            $entity->upload();
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('issuepeople_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('issuenews_edit', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +66,16 @@ class IssuePeopleController extends Controller
     }
 
     /**
-     * Creates a form to create a IssuePeople entity.
+     * Creates a form to create a IssueNews entity.
      *
-     * @param IssuePeople $entity The entity
+     * @param IssueNews $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(IssuePeople $entity)
+    private function createCreateForm(IssueNews $entity)
     {
-        $form = $this->createForm(new IssuePeopleType(), $entity, array(
-            'action' => $this->generateUrl('issuepeople_create'),
+        $form = $this->createForm(new IssueNewsType(), $entity, array(
+            'action' => $this->generateUrl('issuenews_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +85,15 @@ class IssuePeopleController extends Controller
     }
 
     /**
-     * Displays a form to create a new IssuePeople entity.
+     * Displays a form to create a new IssueNews entity.
      *
-     * @Route("/new", name="issuepeople_new")
+     * @Route("/new", name="issuenews_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new IssuePeople();
+        $entity = new IssueNews();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +103,9 @@ class IssuePeopleController extends Controller
     }
 
     /**
-     * Finds and displays a IssuePeople entity.
+     * Finds and displays a IssueNews entity.
      *
-     * @Route("/{id}", name="issuepeople_show")
+     * @Route("/{id}", name="issuenews_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +113,10 @@ class IssuePeopleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:IssuePeople')->find($id);
+        $entity = $em->getRepository('AppBundle:IssueNews')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find IssuePeople entity.');
+            throw $this->createNotFoundException('Unable to find IssueNews entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +128,9 @@ class IssuePeopleController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing IssuePeople entity.
+     * Displays a form to edit an existing IssueNews entity.
      *
-     * @Route("/{id}/edit", name="issuepeople_edit")
+     * @Route("/{id}/edit", name="issuenews_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,33 +138,48 @@ class IssuePeopleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:IssuePeople')->find($id);
+        $entity = $em->getRepository('AppBundle:IssueNews')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find IssuePeople entity.');
+            throw $this->createNotFoundException('Unable to find IssueNews entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
+        //show the file that has been uploaded or being used
+        //if video url - get the youtube slug
+        $youtubeUrlEmbed = '';
+        if($entity->getYoutubeUrl() != '') {
+            $url = urldecode(rawurldecode($entity->getYoutubeUrl()));
+            # https://www.youtube.com/watch?v=nn5hCEMyE-E
+
+            preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
+            // echo $matches[1];
+            // exit();
+            $youtubeUrlEmbed = 'https://www.youtube.com/embed/' . $matches[1];
+        }
+
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'youtubeUrlEmbed' => $youtubeUrlEmbed,
+
         );
     }
 
     /**
-    * Creates a form to edit a IssuePeople entity.
+    * Creates a form to edit a IssueNews entity.
     *
-    * @param IssuePeople $entity The entity
+    * @param IssueNews $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(IssuePeople $entity)
+    private function createEditForm(IssueNews $entity)
     {
-        $form = $this->createForm(new IssuePeopleType(), $entity, array(
-            'action' => $this->generateUrl('issuepeople_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new IssueNewsType(), $entity, array(
+            'action' => $this->generateUrl('issuenews_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +188,20 @@ class IssuePeopleController extends Controller
         return $form;
     }
     /**
-     * Edits an existing IssuePeople entity.
+     * Edits an existing IssueNews entity.
      *
-     * @Route("/{id}", name="issuepeople_update")
+     * @Route("/{id}", name="issuenews_update")
      * @Method("PUT")
-     * @Template("AppBundle:IssuePeople:edit.html.twig")
+     * @Template("AppBundle:IssueNews:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:IssuePeople')->find($id);
+        $entity = $em->getRepository('AppBundle:IssueNews')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find IssuePeople entity.');
+            throw $this->createNotFoundException('Unable to find IssueNews entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -191,9 +209,12 @@ class IssuePeopleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            //upload image in directory
+            $entity->upload();
+
             $em->flush();
 
-            return $this->redirect($this->generateUrl('issuepeople_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('issuenews_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +224,9 @@ class IssuePeopleController extends Controller
         );
     }
     /**
-     * Deletes a IssuePeople entity.
+     * Deletes a IssueNews entity.
      *
-     * @Route("/{id}", name="issuepeople_delete")
+     * @Route("/{id}", name="issuenews_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +236,21 @@ class IssuePeopleController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:IssuePeople')->find($id);
+            $entity = $em->getRepository('AppBundle:IssueNews')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find IssuePeople entity.');
+                throw $this->createNotFoundException('Unable to find IssueNews entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('issuepeople'));
+        return $this->redirect($this->generateUrl('issuenews'));
     }
 
     /**
-     * Creates a form to delete a IssuePeople entity by id.
+     * Creates a form to delete a IssueNews entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +259,7 @@ class IssuePeopleController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('issuepeople_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('issuenews_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

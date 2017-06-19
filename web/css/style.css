@@ -7601,3 +7601,35 @@ body.DTTT_Print {
   background-color: #d2232a;
   color: #ffffff;
 }
+
+/* Buttons */
+ul.record_actions li {
+    /* float: left; */
+    display: inline-block;
+}
+
+ul.record_actions {
+    clear: right;
+    clear: both;
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin-top: 5px;
+}
+
+ul.record_actions li a {
+    background: #ccc;
+    padding: 2px;
+    color: #333;
+}
+
+button {
+    background: #ccc;
+    border: 0;
+    color: #000;
+}
+form label {
+    width: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

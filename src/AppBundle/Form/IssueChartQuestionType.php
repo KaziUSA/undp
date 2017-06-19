@@ -16,7 +16,13 @@ class IssueChartQuestionType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('chartType')
+            // ->add('chartType')            
+            ->add('chartType', 'choice', array(
+                'choices'  => array(
+                    1  => 'Circle Donut',
+                    2  => 'Semi circle donut',
+                ),
+            ))
             ->add('issueQuestion')
         ;
     }

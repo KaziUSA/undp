@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueNews edit</h1>
+
+    {{ form(edit_form) }}
+
+    <h2>File being used</h2>
+    <p>{{ entity.imageUrl }}</p>
+    {% if '.mp3' in entity.imageUrl %}    	
+    	<audio controls>
+			  {# <source src="horse.ogg" type="audio/ogg"> #}
+			  <source src="/uploads/issue/news/audio/{{ entity.imageUrl }}" type="audio/mpeg">
+				Your browser does not support the audio element.
+			</audio>
+    {% elseif (('.jpeg' in entity.imageUrl) or ('.jpg' in entity.imageUrl) or ('.png' in entity.imageUrl)) %}
+    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" width="200">
+    {% endif %}
+
+    {% if entity.youtubeUrl != '' and youtubeUrlEmbed != '' %}
+    	<iframe width="200" height="130" src="{{ youtubeUrlEmbed }}" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+    
+
+    <ul class="record_actions">
+		    <li>
+		        <a href="{{ path('issuenews') }}">
+		            Back to the list
+		        </a>
+		    </li>
+		    <li>{{ form(delete_form) }}</li>
+		</ul>
+{% endblock %}

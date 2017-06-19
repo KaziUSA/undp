@@ -1,0 +1,57 @@
+{% extends '::frontend.html.twig' %}
+
+{% block body -%}
+	{# News #}
+	<div class="news-page">
+		{# {% dump(entities) %} #}
+		{% for entity in entities %}
+			
+			<div class="news-box-module">
+				<div class="news-box-wrap">
+					{% if entity.imageUrl != '' or entity.youtubeUrlEmbed != '' %}
+						<div class="news-graphics">
+							{% if '.mp3' in entity.imageUrl %}    	
+								<div class="audio">
+						    	<audio controls>
+									  {# <source src="horse.ogg" type="audio/ogg"> #}
+									  <source src="/uploads/issue/news/audio/{{ entity.imageUrl }}" type="audio/mpeg">
+										Your browser does not support the audio element.
+									</audio>
+								</div>
+					    {% elseif (('.jpeg' in entity.imageUrl) or ('.jpg' in entity.imageUrl) or ('.png' in entity.imageUrl)) %}
+					    	<div class="img">
+						    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" width="200">
+						    </div>
+					    {% endif %}
+
+					    {# {{ dump(entity) }} #}
+					    {% if entity.youtubeUrlEmbed != '' %}
+								<div class="video">
+						    	<iframe width="200" height="130" src="{{ entity.youtubeUrlEmbed }}" frameborder="0" allowfullscreen></iframe>
+						    </div>
+					    {% endif %}
+				    </div>
+			  	{% endif %}
+			    <div class="news-body">
+			    	<h2>{{ entity.name }}</h2>
+			    	{{ entity.description | raw }}
+			    	<a href="" class="readmore">Read More</a>
+			    </div>
+		    </div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function(){
+	//equal height of news box
+  equal_height('.news-page', '.news-box-module');  
+  
+  //img, audio, video height equal
+  $('.audio, .video').height($('.img').height());
+  
+});
+</script>
+{% endblock %}

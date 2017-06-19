@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>IssuePeople</h1>
+    <h1>IssueChartOverview</h1>
 
     <table class="record_properties">
         <tbody>
@@ -10,24 +10,29 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Location</th>
-                <td>{{ entity.location }}</td>
+                <th>Issue</th>
+                <td>{{ entity.issueType }}</td>
             </tr>
             <tr>
-                <th>Saying</th>
-                <td>{{ entity.saying }}</td>
+                <th>District</th>
+                <td>{{ entity.district }}</td>
             </tr>
+            <tr>
+                <th>Value</th>
+                <td>{{ entity.value }}</td>
+            </tr>
+            
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('issuepeople') }}">
+        <a href="{{ path('issuechartoverview') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('issuepeople_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('issuechartoverview_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

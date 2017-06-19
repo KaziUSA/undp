@@ -8,6 +8,10 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Date</th>
+                <th>Chart Type</th>
+                <th>Survey Number</th>
+                <th>Survey Detail</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,6 +20,14 @@
             <tr>
                 <td><a href="{{ path('issuetype_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
+                <td>
+                    {% if entity.year != '' and entity.month != '' %}
+                        {{ date(entity.year ~ '-' ~ entity.month ~ '-01') | date ('F Y') }}
+                    {% endif %}
+                </td>
+                <td>{{ entity.chartType }}</td>
+                <td>{{ entity.surveyNumber }}</td>
+                <td>{{ entity.surveyDetail }}</td>
                 <td>
                 <ul>
                     <li>

@@ -40,11 +40,12 @@ class IssueController extends Controller
         //TODO: redirect to latest issue first question
 
 
+        
+        return $this->redirect($this->generateUrl('issue_show', array('id' => '1')));
 
-
-        return array(
+        /*return array(
             'issue_questions' => 'no need to pass anything',
-        );
+        );*/
     }
 
 
@@ -90,6 +91,7 @@ class IssueController extends Controller
             // var_dump($cq);
             $question_option[$i]['id'] = $cq->getId();
             $question_option[$i]['name'] = $cq->getName();
+            $question_option[$i]['chartType'] = $cq->getChartType();
 
             
             //get charts option of each chart question

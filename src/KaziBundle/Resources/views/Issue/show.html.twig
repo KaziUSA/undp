@@ -12,6 +12,7 @@ survey
 			<div class="col-sm-3 col-md-3 col-lg-2">
 				<aside>
 			      <div class="filter survey">
+			      	<div class="tab-heading">Survey Questions</div>
 			        <!-- Nav tabs -->
 			        <div class="feedback-tab clearfix" style="">
 
@@ -40,7 +41,7 @@ survey
 			              	<ul>
 			                  {% for question in issue_questions %}
 			                  	{% if question.issueType.name == 'Reconstruction' %}
-			                  	<li class="{% if question.id == question_detail.id %}active{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
+			                  	<li class="{% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
 			                  	{% endif %}
 			                  {% endfor %}
 			                 </ul>
@@ -60,91 +61,120 @@ survey
 
 			<div class="col-sm-9 col-md-9 col-lg-10">
 				<div class="page-title">
-					<h3>
-						{{ question_detail.name }}
-					</h3>
+					{{ question_detail.name }}
 				</div>
 
 				<!-- main content -->
 				<div class="main-content">
 					<div class="wrapper clearfix"><!--wrapper remove or not-->
+						<div class="s-box-module s-box-module-border">
+							<div class="row nomargin">
+								<div class="col-md-8">
+									<div class="">
+										<div class="s-box">
+											<div>
+												<h2>Key Findings in {{ date('2017-' ~ question_detail.keyFindingsMonth ~ '-01') | date ('F') }}
+			              	  {# doesn't matter what ever year or day - we just need month #}</h2>
+			              	</div>	
 
-						<div class="row nomargin">
-							<div class="col-md-8">
-								<div>
-									<h2>Key Findings in {{ date('2017-' ~ question_detail.keyFindingsMonth ~ '-01') | date ('F') }}
-              	  {# doesn't matter what ever year or day - we just need month #}</h2>
-              	</div>	
+											<div>{{ question_detail.keyFindings | raw }}</div>
+										</div>
+									</div>
+								</div>
 
-								<div>{{ question_detail.keyFindings }}</div>
-							</div>
-
-							<div class="col-md-4">
-								{# loop here #}
-								{% for qo in question_option %}									
-									<div id="container-issue-question-{{ qo.id }}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
-									
-								{% endfor %}
+								<div class="col-md-4">
+									<div class="s-box-right">
+										<div class="s-box">
+											{# loop here #}
+											{% for qo in question_option %}									
+												<div id="container-issue-question-{{ qo.id }}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
+												
+											{% endfor %}
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 
 						<div class="row nomargin">
 							<div class="col-sm-12">
-								<div><h2>What are people saying?</h2></div>
-								<div>						
-			            <div id="map" class="theme-default">
-			            </div>     
+								{# map #}
+								<div class="s-box">
+									<div><h2>What are people saying?</h2></div>
+									<div>						
+				            <div id="map" class="theme-default">
+				            </div>     
+									</div>
 								</div>
 							</div>
 						</div>
 
 						<div class="row nomargin">
 							<div class="col-md-6">
-								{% for info in infographics %}
-									<div class="infographics infographics-style-{{ info.type }}">
-										{# <h2>District Highlights</h2>
-										<div class="infographics-list">
-											<span class="icon">ICON</span>
-											<p>Text here</p>
-										</div>
-										<div class="infographics-list">
-											<span class="icon">ICON</span>
-											<p>Text here</p>
-										</div> #}
-									
-										<h2>{{ info.name }}</h2>
-										{% for opt in info.option %}
-											<div class="infographics-list">
-												<span class="icon">
-													{{ opt.icon }}
-													{% if info.type == 3 %}
-														%
-													{% endif %}
-												</span>
-												<p>{{ opt.description }}</p>
+								<div class="s-box-left">
+									<div class="s-box">
+										{% for info in infographics %}
+											<div class="infographics infographics-style-{{ info.type }}">
+												{# <h2>District Highlights</h2>
+												<div class="infographics-list">
+													<span class="icon">ICON</span>
+													<p>Text here</p>
+												</div>
+												<div class="infographics-list">
+													<span class="icon">ICON</span>
+													<p>Text here</p>
+												</div> #}
+											
+												<h2>{{ info.name }}</h2>
+												{% for opt in info.option %}
+													<div class="infographics-list">
+														<span class="icon">
+															{{ opt.icon }}
+															{% if info.type == 3 %}
+																%
+															{% endif %}
+														</span>
+														<p>{{ opt.description }}</p>
+													</div>
+												{% endfor %}
+											
 											</div>
+											<div class="clear"></div>
 										{% endfor %}
-									
 									</div>
-									<div class="clear"></div>
-								{% endfor %}
+								</div>
+								
+
 							</div>
 							<div class="col-md-6">
-								<div class="graphics">
-									{% if question_detail.imageTitle != '' %}
-										<h2>{{ question_detail.imageTitle }}</h2>
-									{% endif %}
+								<div class="s-box">
+									<div class="graphics">
+										{% if question_detail.imageTitle != '' %}
+											<h2>{{ question_detail.imageTitle }}</h2>
+										{% endif %}
 
-									img <br>
+										{% if question_detail.imageUrl != '' %}
+											<img src="/uploads/issue/img/{{ question_detail.imageUrl }}" class="img-responsive">
+										{% endif %}									
 
-									{% if question_detail.imageDesc != '' %}
-										<p>{{ question_detail.imageDesc }}</p>
-									{% endif %}
+										{% if question_detail.imageDesc != '' %}
+											<p>{{ question_detail.imageDesc }}</p>
+										{% endif %}
 
-									{% if question_detail.imageCredit != '' %}
-										<p>Photo credit: {{ question_detail.imageCredit }}</p>
-									{% endif %}
+										{% if question_detail.imageCredit != '' %}
+											<p>Photo credit: {{ question_detail.imageCredit }}</p>
+										{% endif %}
+									</div>
 								</div>
+							</div>
+						</div>
+
+
+						<div class="row nomargin">
+							<div class="col-sm-12">
+								{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				        <a href="{{ path('issuequestion_edit', { 'id': question_detail.id }) }}" class="edit-link edit-static">Edit This</a>
+				        {% endif %}
 							</div>
 						</div>
 
@@ -201,57 +231,113 @@ survey
 
     {# highcharts #}
     <script type="text/javascript">
-    //chartType 1 - pie chart
+    /*chartType: 1  => 'Circle Donut',
+    2  => 'Semi circle donut',*/
     //loop here
-    {% for qo in question_option %}
-	    Highcharts.chart('container-issue-question-{{ qo.id }}', {
-	            chart: {
-	                plotBackgroundColor: null,
-	                plotBorderWidth: 0,
-	                plotShadow: false
-	            },
-	            legend: {
-	            	align: 'center'
-	            },
-	            title: {
-	            		//issueChartQuestion here
-	                text: '{{ qo.name }}',
-	                // align: 'center',
-	                // verticalAlign: 'middle',
-	                y: 20
-	            },
-	            tooltip: {
-	                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-	            },
-	            plotOptions: {
-	                pie: {
-	                    dataLabels: {
-	                        enabled: false
-	                    },
-	                    // startAngle: -90,//for half pie
-	                    // endAngle: 90,
-	                    center: ['50%', '50%'],
-	                    showInLegend: true
-	                }
-	            },
-	            series: [{
-	                type: 'pie',
-	                name: '',
-	                innerSize: '40%',//50%
-	                data: [
-	                		//issueChartOption here
-	                    
-	                    /*['Water supply',   40],
-	                    ['Schools',       20],
-	                    ['Roads', 10],
-	                    ['Hospitals / Health centre',     8]*/
+    {% for qo in question_option %}    	
+    	{% if qo.chartType == 1 %}
+    		//chartType 1 = Circle Donut
+		    Highcharts.chart('container-issue-question-{{ qo.id }}', {
+		            chart: {
+		                plotBackgroundColor: null,
+		                plotBorderWidth: 0,
+		                plotShadow: false
+		            },
+		            legend: {
+		            	align: 'center'
+		            },
+		            title: {
+		            		//issueChartQuestion here
+		                text: '{{ qo.name }}',
+		                // align: 'center',
+		                // verticalAlign: 'middle',
+		                y: 20
+		            },
+		            tooltip: {
+		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+		            plotOptions: {
+		                pie: {
+		                    dataLabels: {
+		                        enabled: false
+		                    },
+		                    // startAngle: -90,//for half pie
+		                    // endAngle: 90,
+		                    center: ['50%', '50%'],
+		                    showInLegend: true
+		                }
+		            },
+		            series: [{
+		                type: 'pie',
+		                name: '',
+		                innerSize: '40%',//50%
+		                data: [
+		                		//issueChartOption here
+		                    
+		                    /*['Water supply',   40],
+		                    ['Schools',       20],
+		                    ['Roads', 10],
+		                    ['Hospitals / Health centre',     8]*/
 
-	                		{% for opt in qo.option %}
-												['{{ opt.name }}',   {{ opt.value }}],//issue/4 - ' quote issue
-											{% endfor %}
-	                ]
-	            }]
-	    });
+		                		{% for opt in qo.option %}
+													['{{ opt.name }}',   {{ opt.value }}],//issue/4 - ' quote issue
+												{% endfor %}
+		                ]
+		            }]
+		    });
+		  {% elseif qo.chartType == 2 %}
+		  	//chartType 2 = Semi Circle Donut
+		    Highcharts.chart('container-issue-question-{{ qo.id }}', {
+		            chart: {
+		                plotBackgroundColor: null,
+		                plotBorderWidth: 0,
+		                plotShadow: false
+		            },
+		            legend: {
+		            	align: 'center'
+		            },
+		            title: {
+		            		//issueChartQuestion here
+		                text: '{{ qo.name }}',
+		                // align: 'center',
+		                // verticalAlign: 'middle',
+		                y: 20
+		            },
+		            tooltip: {
+		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+		            plotOptions: {
+		                pie: {
+		                    dataLabels: {
+		                        enabled: false
+		                    },
+		                    
+		                    startAngle: -90,//for half pie
+		                    endAngle: 90,//for half pie
+
+		                    center: ['50%', '50%'],
+		                    showInLegend: true
+		                }
+		            },
+		            series: [{
+		                type: 'pie',
+		                name: '',
+		                innerSize: '40%',//50%
+		                data: [
+		                		//issueChartOption here
+		                    
+		                    /*['Water supply',   40],
+		                    ['Schools',       20],
+		                    ['Roads', 10],
+		                    ['Hospitals / Health centre',     8]*/
+
+		                		{% for opt in qo.option %}
+													['{{ opt.name }}',   {{ opt.value }}],//issue/4 - ' quote issue
+												{% endfor %}
+		                ]
+		            }]
+		    });
+	    {% endif %}
     {% endfor %}
 
 

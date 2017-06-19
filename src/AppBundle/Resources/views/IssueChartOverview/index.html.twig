@@ -1,30 +1,32 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>IssuePeople list</h1>
+    <h1>IssueChartOverview list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Location</th>
-                <th>Saying</th>
+                <th>Issue</th>
+                <th>District</th>
+                <th>Value</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('issuepeople_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.location }}</td>
-                <td>{{ entity.saying }}</td>
+                <td><a href="{{ path('issuechartoverview_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.issueType }}</td>
+                <td>{{ entity.district }}</td>
+                <td>{{ entity.value }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('issuepeople_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('issuechartoverview_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('issuepeople_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('issuechartoverview_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -35,7 +37,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('issuepeople_new') }}">
+            <a href="{{ path('issuechartoverview_new') }}">
                 Create a new entry
             </a>
         </li>

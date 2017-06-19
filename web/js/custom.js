@@ -1,11 +1,11 @@
 		//TWEAKING THE MAP
-        var zoom_level = 7;//6.8 - previously
+        var zoom_level = 7.4;//6.8 - previously
 		var index_grades = [0, 10, 20, 50, 100, 200, 500, 1000];//0-10
 		var map = L.map('map', { 
 			scrollWheelZoom: false,
 			zoomControl: false,//zoom control
 			dragging: false,
-			}).setView([27.5, 85.3], zoom_level);//28.5, 84.3
+			}).setView([27.5, 88.3], zoom_level);//28.5, 84.3
 			//originally 7, removed zoom control
 
 		L.tileLayer('', {
@@ -39,11 +39,18 @@
 
 		info.update = function (props) {
 			
+			var people_saying = '';
+			if(props != undefined) {
+				if(props.total != undefined) {
+					people_saying = '<div class="leaflet-info-padding" style="border-color: '+ props.bgColor +'"><div class="district-name">' + props.name + '</div><br />' +
+					/*'<div class="girls item"><div class="label"><div class="icon"></div><div class="label-name">Girls</div></div><div class="value">' + KAZI.util(value,props.girls,"g",props.total) + '%</div></div><div class="clear"></div>'+
+					'<div class="boys item"><div class="label"><div class="icon"></div><div class="label-name">Boys</div></div><div class="value">' + KAZI.util(value,props.boys,"b",props.total) + '%</div></div><div class="clear"></div>'+*/
+					'<div class="total item"><div class="label"></div><div class="value">' + props.total + '</div></div><div class="clear"></div></div>';
+				}
+			}
+
 			this._div.innerHTML = 
-				(props ? '<div class="leaflet-info-padding" style="border-color: '+ props.bgColor +'"><div class="district-name">' + props.name + '</div><br />' +
-				/*'<div class="girls item"><div class="label"><div class="icon"></div><div class="label-name">Girls</div></div><div class="value">' + KAZI.util(value,props.girls,"g",props.total) + '%</div></div><div class="clear"></div>'+
-				'<div class="boys item"><div class="label"><div class="icon"></div><div class="label-name">Boys</div></div><div class="value">' + KAZI.util(value,props.boys,"b",props.total) + '%</div></div><div class="clear"></div>'+*/
-				'<div class="total item"><div class="label"></div><div class="value">' + props.total+ '</div></div><div class="clear"></div></div>' : '<div class="hover-district hidden">Hover over a district</div>');//props.girls, props.boys
+				(props ? people_saying : '<div class="hover-district hidden">Hover over a district</div>');//props.girls, props.boys
 			
 		};
 		info.addTo(map);
@@ -81,8 +88,8 @@
 			var layer = e.target;
 
 			layer.setStyle({
-				weight: 2,//5 - hover border width
-				color: border_color,//border color #666
+				weight: 1,//5 - hover border width
+				color: '#ccc',//border color #666
 				dashArray: '',
 				fillOpacity: 1//0.7
 			});
