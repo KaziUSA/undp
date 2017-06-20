@@ -128,9 +128,11 @@ body.survey {
 }
 
 .news-box-module {
-    width: 25%;
-    float: left;
     padding-right: 10px;
+}
+.news-page .news-box-module {
+    width: 25%;
+    float: left;	
 }
 .news-box-wrap {
     background: #fff;
@@ -144,4 +146,14 @@ body.survey {
 }
 .news-box-module h2 {
 		font-size: 18px;
+}
+.news-body .news-title {
+	color: #428d8e;
+	line-height: 22px;
+}
+.news-graphics {
+    margin-bottom: 15px;
+}
+.news-box-module .readmore {
+	color: #3c888d;
 }

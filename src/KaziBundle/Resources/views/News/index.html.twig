@@ -2,7 +2,7 @@
 
 {% block body -%}
 	{# News #}
-	<div class="news-page">
+	<div class="news-page clearfix">
 		{# {% dump(entities) %} #}
 		{% for entity in entities %}
 			
@@ -33,9 +33,10 @@
 				    </div>
 			  	{% endif %}
 			    <div class="news-body">
-			    	<h2>{{ entity.name }}</h2>
+			    	<h2 class="news-title">{{ entity.name }}</h2>
 			    	{{ entity.description | raw }}
-			    	<a href="" class="readmore">Read More</a>
+
+			    	<a href="{{ path('news_show', {'id': entity.id }) }}" class="readmore">Read More</a>
 			    </div>
 		    </div>
 			</div>

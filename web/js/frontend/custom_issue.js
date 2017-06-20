@@ -1,5 +1,5 @@
 // Select and loop the container element of the elements you want to equalise
-$ = jQuery;
+// $ = jQuery;
 function equal_height(parent_div, child_div) {
   $(parent_div).each(function(){  //'.news-page'
     

@@ -119,6 +119,7 @@
       </ul>
     </li>
     <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
+    <li><a href="{{ path('news') }}" class="{% if app.request.get('_route') == 'news' %} active {% endif %}">News</a></li>
     <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact -->
     <li><a href="/page/about" class="{% if app.request.get('_route') == 'show' %} active {% endif %}">About</a></li>
   </ul>

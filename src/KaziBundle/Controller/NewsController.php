@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use KaziBundle\Helper\NewsHelper;
+
 // use AppBundle\Entity\Document;
 // use AppBundle\Form\DocumentType;
 
@@ -51,16 +53,11 @@ class NewsController extends Controller
 
             //if video url - get the youtube slug
             $youtubeUrlEmbed = '';
+
             if($entity->getYoutubeUrl() != '') {
-                $url = urldecode(rawurldecode($entity->getYoutubeUrl()));
-                # https://www.youtube.com/watch?v=nn5hCEMyE-E
-
-                preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
-                // echo $matches[1];
-                // exit();
-                $youtubeUrlEmbed = 'https://www.youtube.com/embed/' . $matches[1];
-            }  
-
+                $nhelp = new NewsHelper();
+                $youtubeUrlEmbed = $nhelp->getYoutubeUrlEmbed($entity->getYoutubeUrl());
+            }
 
             $entities_final[$i]['youtubeUrlEmbed'] = $youtubeUrlEmbed;
 
@@ -87,6 +84,27 @@ class NewsController extends Controller
      */
     public function showAction($id)//$id 
     {
+        $em = $this->getDoctrine()->getManager();
+        
+        /*$criteria = array('status'=> 1);
 
+        $entities = $em->getRepository('AppBundle:Document')->findBy($criteria, array('date'=>'desc'));*/
+
+        $entity = $em->getRepository('AppBundle:IssueNews')->findById($id);   
+
+        // var_dump($entity);
+        //if video url - get the youtube slug
+        $youtubeUrlEmbed = '';
+
+        if($entity[0]->getYoutubeUrl() != '') {
+            $nhelp = new NewsHelper();
+            $youtubeUrlEmbed = $nhelp->getYoutubeUrlEmbed($entity[0]->getYoutubeUrl());
+        }
+
+        return array(
+            'entity' => $entity[0], //entities
+            'youtubeUrlEmbed' => $youtubeUrlEmbed,
+        );        
     }
+
 }

@@ -1,0 +1,45 @@
+{% extends '::frontend.html.twig' %}
+
+{% block body -%}
+	{# News #}
+	<div class="news-detail-page">
+		<div class="row">
+			<div class="col-sm-9">
+
+				<div class="news-box-module">
+					<div class="news-box-wrap">
+						{% if entity.imageUrl != '' or youtubeUrlEmbed != '' %}
+							<div class="news-graphics">
+								{% if '.mp3' in entity.imageUrl %}    	
+									<div class="audio">
+							    	<audio controls>
+										  {# <source src="horse.ogg" type="audio/ogg"> #}
+										  <source src="/uploads/issue/news/audio/{{ entity.imageUrl }}" type="audio/mpeg">
+											Your browser does not support the audio element.
+										</audio>
+									</div>
+						    {% elseif (('.jpeg' in entity.imageUrl) or ('.jpg' in entity.imageUrl) or ('.png' in entity.imageUrl)) %}
+						    	<div class="img">
+							    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" width="200">
+							    </div>
+						    {% endif %}
+
+						    {# {{ dump(entity) }} #}
+						    {% if youtubeUrlEmbed != '' %}
+									<div class="video">
+							    	<iframe width="200" height="130" src="{{ youtubeUrlEmbed }}" frameborder="0" allowfullscreen></iframe>
+							    </div>
+						    {% endif %}
+					    </div>
+				  	{% endif %}
+				    <div class="news-body">
+				    	<h2 class="news-title">{{ entity.name }}</h2>
+				    	{{ entity.description | raw }}
+				    </div>
+			    </div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
