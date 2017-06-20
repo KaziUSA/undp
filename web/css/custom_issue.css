@@ -1,15 +1,43 @@
 /* Created by nikesh@kazistudios.com on 13 June 2017 */
 
+.nopaddingright {
+	padding-right: 0 !important;
+}
+.marginbottom15 {
+	margin-bottom: 15px;
+}
+
 .edit-link.edit-static {
     color: #000;
     text-shadow: none;
     position: static;
 }
 
+body {
+	background: #ebebeb;
+}
+
 body.survey {
 	/*font-family: 'Roboto', sans-serif;*/
 	font-size: 13px;
 	line-height: 18px;
+}
+
+/* about page */
+.u-box {
+	margin-top: 15px;
+	margin-bottom: 0;
+}
+.u-box-white {
+    background: #fff;
+    color: #333;
+}
+.u-box-white h1,
+.u-box-white h2,
+.u-box-white h3, 
+.u-box-white h4,
+.u-box-white a {
+    color: #408167;
 }
 
 .infographics .infographics-list .icon {

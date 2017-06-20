@@ -6,7 +6,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
 	<head>
-		<title>{% block title %}Inter-Agency Common Feedback Project{% endblock %}</title>
+		<title>{% block title %}{{ project_title }}{% endblock %}</title>
 
 		{% block stylesheets %}
 		
@@ -120,8 +120,8 @@
     </li>
     <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
     <li><a href="{{ path('news') }}" class="{% if app.request.get('_route') == 'news' %} active {% endif %}">News</a></li>
-    <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact -->
-    <li><a href="/page/about" class="{% if app.request.get('_route') == 'show' %} active {% endif %}">About</a></li>
+    {# <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact --> #}
+    <li><a href="{{ path('about') }}" class="{% if app.request.get('_route') == 'about' %} active {% endif %}">About</a></li>
   </ul>
 </div><!-- /.navbar-collapse -->
 

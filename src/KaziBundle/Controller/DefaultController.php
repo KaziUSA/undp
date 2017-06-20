@@ -45,7 +45,10 @@ class DefaultController extends Controller
      */
     public function showAction($slug, Request $request)//$id //removed annotation @Method("GET")
     {
-        $em = $this->getDoctrine()->getManager();
+        exit();//we don't need this now - we have all about, contact and perception in AboutController
+        
+        return array();
+        /*$em = $this->getDoctrine()->getManager();
         $criteria = array('slug'=> $slug);
 
         $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
@@ -64,6 +67,6 @@ class DefaultController extends Controller
 
         return array(
             'entity' => $entity,
-        );
+        );*/
     }
 }
