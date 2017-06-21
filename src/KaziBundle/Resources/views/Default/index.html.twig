@@ -5,10 +5,10 @@
 		<div class="transparent-grd"></div>
 		<div class="content-area relative">
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-      <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a>
+      {# <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a> #}
       {% endif %}
 			<div class="container-fluid">
-				<div class="row">
+				{# <div class="row">
 					<div class="col-lg-8">
 						<div class="banner-caption">
 						 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -35,17 +35,66 @@
 							<img id="loader" class="hide" src="img/frontend/loading.GIF">
 						</div>
 					</div>
+				</div> #}
+
+				{# survey #}
+				<div class="homepage">
+					{# chart #}
+					<div class="u-box u-box-white">
+						<h3>{{ issueType.year }}</h3>
+					</div>
+				</div>
+
+				{# pull 4 news feed #}
+				<div class="news-homepage clearfix">
+					{% for entity in entities_news %}
+						<div class="news-box-module">
+							<div class="news-box-wrap">
+								{% if entity.imageUrl != '' or entity.youtubeUrlEmbed != '' %}
+									<div class="news-graphics">
+										{% if '.mp3' in entity.imageUrl %}    	
+											<div class="audio">
+									    	<audio controls>
+												  {# <source src="horse.ogg" type="audio/ogg"> #}
+												  <source src="/uploads/issue/news/audio/{{ entity.imageUrl }}" type="audio/mpeg">
+													Your browser does not support the audio element.
+												</audio>
+											</div>
+								    {% elseif (('.jpeg' in entity.imageUrl) or ('.jpg' in entity.imageUrl) or ('.png' in entity.imageUrl)) %}
+								    	<div class="img">
+									    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" width="200">
+									    </div>
+								    {% endif %}
+
+								    {# {{ dump(entity) }} #}
+								    {% if entity.youtubeUrlEmbed != '' %}
+											<div class="video">
+									    	<iframe width="200" height="130" src="{{ entity.youtubeUrlEmbed }}" frameborder="0" allowfullscreen></iframe>
+									    </div>
+								    {% endif %}
+							    </div>
+						  	{% endif %}
+						    <div class="news-body">
+						    	<h2 class="news-title">{{ entity.name }}</h2>
+						    	{{ entity.description | raw }}
+
+						    	<a href="{{ path('news_show', {'id': entity.id }) }}" class="readmore">Read More</a>
+						    </div>
+					    </div>
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
 	</section>
 {% endblock %}
-{%block scriptIncludes %}
+
+{% block scriptIncludes %}
 
 <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
 
 <script>
-var i=0, j=0;
+/*var i=0, j=0;
 //$("#content1, #content2").keyup(function()
 $('#save').click(function()
  {  
@@ -68,6 +117,16 @@ $('#save').click(function()
 	    );
 	    return false;
   });
+*/
+
+$(document).ready(function(){
+	//equal height of news box
+  equal_height('.news-homepage', '.news-box-module');  
+  
+  //img, audio, video height equal
+  $('.audio, .video').height($('.img').height());
+  
+});
 </script>
 
 {% endblock %}

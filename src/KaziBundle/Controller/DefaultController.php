@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Page;
 use AppBundle\Form\PageType;
 
+use KaziBundle\Helper\NewsHelper;
+
 class DefaultController extends Controller
 {
 
@@ -31,8 +33,52 @@ class DefaultController extends Controller
         $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
         //print_r($entities);exit();
 
+
+
+        //pull 4 news here
+        $entities_news = $em->getRepository('AppBundle:IssueNews')->findAll();//only four news
+
+        // var_dump($entities_news);exit();
+        $entities_news_final = array();
+
+        $i = 0;
+        foreach ($entities_news as $entity_news) {
+            $entities_news_final[$i]['id'] = $entity_news->getId();
+            $entities_news_final[$i]['name'] = $entity_news->getName();
+            $entities_news_final[$i]['description'] = $entity_news->getDescription();
+            $entities_news_final[$i]['imageUrl'] = $entity_news->getImageUrl();
+
+
+            //if video url - get the youtube slug
+            $youtubeUrlEmbed = '';
+
+            if($entity_news->getYoutubeUrl() != '') {
+                $nhelp = new NewsHelper();
+                $youtubeUrlEmbed = $nhelp->getYoutubeUrlEmbed($entity_news->getYoutubeUrl());
+            }
+
+            $entities_news_final[$i]['youtubeUrlEmbed'] = $youtubeUrlEmbed;
+
+            $i++;  
+        }
+        // $entities_news = array();
+
+
+        //get homepage chart - IssueChartOverview
+        $issueType = $em->getRepository('AppBundle:IssueType')->findById(3);
+        // var_dump($issueType);
+        //TODO: compare chartType of issueType
+
+        $issueChartOverview = $em->getRepository('AppBundle:IssueChartOverview')->findByIssueType(3);
+        // var_dump($issueChartOverview); exit();
+
+
+
         return array(
             'entity' => $entity,
+            'entities_news' => $entities_news_final,//news
+            'issueType' => $issueType[0],
+            'issueChartOverview' => $issueChartOverview,
         );
     }
 
