@@ -7,7 +7,7 @@
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
       {# <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a> #}
       {% endif %}
-			<div class="container-fluid">
+			<div class="container-fluid padding10">
 				{# <div class="row">
 					<div class="col-lg-8">
 						<div class="banner-caption">
@@ -38,10 +38,63 @@
 				</div> #}
 
 				{# survey #}
-				<div class="homepage">
+				<div class="homepage-widget clearfix" style="">
 					{# chart #}
-					<div class="u-box u-box-white">
-						<h3>{{ issueType.year }}</h3>
+					<div class="home-box pull-left" style="">
+						<div class="u-box u-box-white">
+							<h3>{{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} Survey Overview</h3>
+							
+							{# chart #}
+							<div id="container-homepage" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
+						</div>
+					</div>
+					<div class="home-box pull-left">
+						<div class="h-col-25 pull-left">
+							<div class="u-box u-box-white clearfix">
+								<div class="surveyNumber">{{ issueType.surveyNumber }}</div>
+
+								<div class="surveyDetail">{{ issueType.surveyDetail }}</div>
+
+								<div class="surveyWomen">
+									<div class="survey-women-icon">
+										<img src="/img/frontend/icons/home-women.png">
+									</div>
+									{{ issueType.surveyWomen }}%
+								</div>
+								<div class="surveyMen">
+									<div class="survey-men-icon">
+										<img src="/img/frontend/icons/home-men.png">
+									</div>
+									{{ issueType.surveyMen }}%
+								</div>
+							</div>
+						</div>
+						<div class="h-col-75 pull-left">
+							<div class="u-box u-box-white">
+								{# pull 4 news feed #}
+								<div class="news-homepage clearfix">
+									{% set i = 0 %}
+									{% for entity in entities_news %}
+										{% set i = i + 1 %}
+
+										{# show only two #}
+										{% if i <= 2 %}
+										<div class="news-box-module">
+											<div class="news-box-wrap">
+										    <div class="news-body">
+										    	<h2 class="news-title">{{ entity.name }}</h2>
+										    	{{ entity.description | raw }}
+
+										    	<a href="{{ path('news_show', {'id': entity.id }) }}" class="readmore">Read More</a>
+										    </div>
+									    </div>
+										</div>
+										{% endif %}
+
+									{% endfor %}
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -127,6 +180,83 @@ $(document).ready(function(){
   $('.audio, .video').height($('.img').height());
   
 });
+
+
+// according to chart type
+{% if issueType.chartType == 1 %}
+	//chartType 1 = Circle Donut
+
+	//chartType = bar-basic
+	Highcharts.chart('container-homepage', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: ' '
+    },
+    subtitle: {
+        text: ' '
+    },
+    xAxis: {
+        categories: [
+        						//'Africa', 'America', 'Asia', 'Europe', 'Oceania'
+        						{% for opt in issueChartOverview %}
+											'{{ opt.district.name }}',
+										{% endfor %}
+        						],
+        title: {
+            text: null
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: ' ',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+    },
+    tooltip: {
+        // valueSuffix: ' millions'
+    },
+    plotOptions: {
+        bar: {
+            dataLabels: {
+                enabled: true
+            }
+        }
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+        shadow: true
+    },
+    credits: {
+        enabled: false
+    },
+    series: [
+	    //can be added more
+	    {
+	        name: ' ',
+	        data: [
+	        			//107, 31, 635, 203, 2
+	        			107, 31, 635
+	        			/*{% for opt in issueChartOverview %}
+									'{{ opt.value }}',
+								{% endfor %}*/
+	        			]
+	    }
+    ]
+	});
+{% endif %}
 </script>
 
 {% endblock %}

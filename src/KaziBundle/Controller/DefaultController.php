@@ -66,7 +66,7 @@ class DefaultController extends Controller
 
         //get homepage chart - IssueChartOverview
         $issueType = $em->getRepository('AppBundle:IssueType')->findById(3);
-        // var_dump($issueType);
+        // var_dump($issueType[0]); exit();
         //TODO: compare chartType of issueType
 
         $issueChartOverview = $em->getRepository('AppBundle:IssueChartOverview')->findByIssueType(3);

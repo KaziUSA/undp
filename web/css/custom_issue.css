@@ -158,10 +158,17 @@ body.survey {
 .news-box-module {
     padding-right: 10px;
 }
+.news-homepage .news-box-module:nth-child(4n), .news-page .news-box-module:nth-child(4n) {
+    padding-right: 0;
+}
 .news-homepage .news-box-module,
 .news-page .news-box-module {
     width: 25%;
     float: left;	
+}
+.homepage-widget .news-homepage .news-box-module {
+	width: 100%;
+	float: none;
 }
 .news-box-wrap {
     background: #fff;
@@ -185,4 +192,60 @@ body.survey {
 }
 .news-box-module .readmore {
 	color: #3c888d;
+}
+
+/* homepage css */
+.homepage-widget { margin-bottom: 10px}
+.home-box { width: 50%; padding-right: 10px}
+.container-fluid.padding10 {
+	padding: 10px;
+}
+.homepage-widget .u-box-white {
+	margin-top: 0;
+	padding: 10px;
+}
+.h-col-25 {
+	width: 25%;
+	padding-right: 10px;
+}
+.h-col-75 {
+	width: 75%;
+}
+
+.surveyNumber, .surveyDetail {
+    color: #3c888d;
+    line-height: 28px;
+}
+
+.surveyNumber {
+    font-size: 30px;
+}
+
+.surveyDetail {
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+.surveyMen, .surveyWomen {
+    font-size: 30px;
+    line-height: 28px;
+    float: left;
+    width: 50%;
+}
+
+.surveyMen {
+    color: #408167;
+}
+
+.surveyWomen {
+    color: #7fb26a;
+}
+
+.survey-men-icon, .survey-women-icon {
+    height: 50px;
+    margin-bottom: 17px;
+}
+
+.survey-men-icon {
+    padding-top: 7px;
 }
