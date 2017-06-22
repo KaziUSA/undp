@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <th>Description</th>
-                <td>{{ entity.description }}</td>
+                <td>{{ entity.description | raw }}</td>
             </tr>
             <tr>
                 <th>Imageurl</th>
@@ -31,11 +31,11 @@
             </tr>
             <tr>
                 <th>Createddate</th>
-                <td>{{ entity.createdDate }}</td>
+                <td>{{ entity.createdDate | date('Y-m-d h:i:s') }}</td>
             </tr>
             <tr>
                 <th>Updateddate</th>
-                <td>{{ entity.updatedDate }}</td>
+                <td>{{ entity.updatedDate | date('Y-m-d h:i:s') }}</td>
             </tr>
         </tbody>
     </table>

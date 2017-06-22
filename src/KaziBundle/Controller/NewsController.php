@@ -46,9 +46,11 @@ class NewsController extends Controller
         $i = 0;
         foreach ($entities as $entity) {
             $entities_final[$i]['id'] = $entity->getId();
+            $entities_final[$i]['slug'] = $entity->getSlug();
             $entities_final[$i]['name'] = $entity->getName();
             $entities_final[$i]['description'] = $entity->getDescription();
             $entities_final[$i]['imageUrl'] = $entity->getImageUrl();
+            $entities_final[$i]['audioName'] = $entity->getAudioName();
 
 
             //if video url - get the youtube slug
@@ -78,11 +80,11 @@ class NewsController extends Controller
     /**
      * Finds and displays all data from excel
      *
-     * @Route("/{id}", name="news_show")
+     * @Route("/{slug}", name="news_show")
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)//$id 
+    public function showAction($slug)//$slug 
     {
         $em = $this->getDoctrine()->getManager();
         
@@ -90,7 +92,7 @@ class NewsController extends Controller
 
         $entities = $em->getRepository('AppBundle:Document')->findBy($criteria, array('date'=>'desc'));*/
 
-        $entity = $em->getRepository('AppBundle:IssueNews')->findById($id);   
+        $entity = $em->getRepository('AppBundle:IssueNews')->findBySlug($slug);   
 
         // var_dump($entity);
         //if video url - get the youtube slug

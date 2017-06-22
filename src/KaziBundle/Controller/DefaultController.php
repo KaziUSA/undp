@@ -44,9 +44,11 @@ class DefaultController extends Controller
         $i = 0;
         foreach ($entities_news as $entity_news) {
             $entities_news_final[$i]['id'] = $entity_news->getId();
+            $entities_news_final[$i]['slug'] = $entity_news->getSlug();
             $entities_news_final[$i]['name'] = $entity_news->getName();
             $entities_news_final[$i]['description'] = $entity_news->getDescription();
             $entities_news_final[$i]['imageUrl'] = $entity_news->getImageUrl();
+            $entities_news_final[$i]['audioName'] = $entity_news->getAudioName();
 
 
             //if video url - get the youtube slug

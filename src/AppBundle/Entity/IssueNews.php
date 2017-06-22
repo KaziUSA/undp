@@ -29,6 +29,13 @@ class IssueNews
     /**
      * @var string
      *
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -69,6 +76,13 @@ class IssueNews
     /**
      * @var string
      *
+     * @ORM\Column(name="audioName", type="string", length=255, nullable=true)
+     */
+    private $audioName;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="youtubeUrl", type="string", length=255, nullable=true)
      */
     private $youtubeUrl;
@@ -76,14 +90,14 @@ class IssueNews
     /**
      * @var string
      *
-     * @ORM\Column(name="createdDate", type="string", length=255, nullable=true)
+     * @ORM\Column(name="createdDate", type="datetime", length=255, nullable=true)
      */
     private $createdDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="updatedDate", type="string", length=255, nullable=true)
+     * @ORM\Column(name="updatedDate", type="datetime", length=255, nullable=true)
      */
     private $updatedDate;
 
@@ -98,6 +112,30 @@ class IssueNews
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Page
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
@@ -197,6 +235,30 @@ class IssueNews
     public function getAudioUrl()
     {
         return $this->audioUrl;
+    }
+
+    /**
+     * Set audioName
+     *
+     * @param string $audioName
+     *
+     * @return IssueNews
+     */
+    public function setAudioName($audioName)
+    {
+        $this->audioName = $audioName;
+
+        return $this;
+    }
+
+    /**
+     * Get audioName
+     *
+     * @return string
+     */
+    public function getAudioName()
+    {
+        return $this->audioName;
     }
 
 

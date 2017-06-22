@@ -16,6 +16,7 @@ class IssueNewsType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('slug')
             ->add('description', null, array(
                 'attr' => array(
                         'class' => 'ckeditor'
@@ -24,7 +25,13 @@ class IssueNewsType extends AbstractType
             )
             // ->add('imageUrl')
             // ->add('image_url')
-            ->add('file')//image or audio
+            ->add('file', null, array(
+                'attr' => array(
+                        'label' => 'File (Audio or Image)'
+                    )
+                )
+            )//image or audio
+            ->add('audioName')
             // ->add('audioUrl')
             ->add('youtubeUrl')
             //->add('createdDate') //update automatically

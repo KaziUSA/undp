@@ -10,6 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\IssueNews;
 use AppBundle\Form\IssueNewsType;
 
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Validator\Constraints\DateTime;
+
 /**
  * IssueNews controller.
  *
@@ -51,6 +54,9 @@ class IssueNewsController extends Controller
         if ($form->isValid()) {
             //upload image in directory
             $entity->upload();
+            
+            $todays_date = date('Y-m-d');
+            $entity->setCreatedDate( \DateTime::createFromFormat('Y-m-d',$todays_date) );
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -211,6 +217,9 @@ class IssueNewsController extends Controller
         if ($editForm->isValid()) {
             //upload image in directory
             $entity->upload();
+
+            $todays_date = date('Y-m-d');
+            $entity->setUpdatedDate( \DateTime::createFromFormat('Y-m-d',$todays_date) );
 
             $em->flush();
 

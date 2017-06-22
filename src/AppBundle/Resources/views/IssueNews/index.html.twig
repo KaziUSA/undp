@@ -3,17 +3,17 @@
 {% block body -%}
     <h1>IssueNews list</h1>
 
-    <table class="records_list">
+    <table class="{{records_list}}">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Description</th>
-                <th>Imageurl</th>
+                {# <th>Description</th> #}
+                {# <th>Imageurl</th>
                 <th>Audiourl</th>
-                <th>Youtubeurl</th>
+                <th>Youtubeurl</th> #}
                 <th>Createddate</th>
-                <th>Updateddate</th>
+                {# <th>Updateddate</th> #}
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,12 +22,17 @@
             <tr>
                 <td><a href="{{ path('issuenews_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
-                <td>{{ entity.description }}</td>
-                <td>{{ entity.imageUrl }}</td>
+                {# <td>
+                    <p>
+                    {% set entity_description = entity.description|striptags|replace({'&nbsp;': ' '}) %}
+                    {{ entity_description|slice(0, 100)  }}
+                    </p>
+                </td> #}
+                {# <td>{{ entity.imageUrl }}</td>
                 <td>{{ entity.audioUrl }}</td>
-                <td>{{ entity.youtubeUrl }}</td>
+                <td>{{ entity.youtubeUrl }}</td> #}
                 <td>{{ entity.createdDate }}</td>
-                <td>{{ entity.updatedDate }}</td>
+                {# <td>{{ entity.updatedDate }}</td> #}
                 <td>
                 <ul>
                     <li>

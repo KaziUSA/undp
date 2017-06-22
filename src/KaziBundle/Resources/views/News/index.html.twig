@@ -88,7 +88,7 @@
 			    	{# {% endautoescape %} #}
 			    	</p>
 
-			    	<a href="{{ path('news_show', {'id': entity.id }) }}" class="readmore">Read More</a>
+			    	<a href="{{ path('news_show', {'slug': entity.slug }) }}" class="readmore">Read More</a>
 			    </div>
 		    </div>
 			</div>
@@ -112,11 +112,11 @@ $(document).ready(function(){
   	{% if entity.imageUrl != '' or entity.youtubeUrlEmbed != '' %}
 			{% if '.mp3' in entity.imageUrl %}    	
 				{% if i == 0 %}
-					jquery_jplayer('1', 'bg welcome', '{{ entity.imageUrl }}' );
+					jquery_jplayer('1', '{{ entity.audioName }}', '{{ entity.imageUrl }}' );
 
 					{% set i = i + 1 %}
 				{% else %}
-					jquery_jplayer_other('{{ entity.id }}', 'bg welcome', '{{ entity.imageUrl }}' );
+					jquery_jplayer_other('{{ entity.id }}', '{{ entity.audioName }}', '{{ entity.imageUrl }}' );
 				{% endif %}
 			{% endif %}
 		{% endif %}
