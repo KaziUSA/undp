@@ -58,7 +58,7 @@ class IssueQuestionController extends Controller
             $em->flush();
 
             //redirect to edit page instead ... - so that user can go back to previous or next form
-            return $this->redirect($this->generateUrl('issuequestion_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('issuequestion_edit', array('id' => $entity->getId())));
         }
 
         return array(

@@ -31,7 +31,7 @@
                 {# <td>{{ entity.imageUrl }}</td>
                 <td>{{ entity.audioUrl }}</td>
                 <td>{{ entity.youtubeUrl }}</td> #}
-                <td>{{ entity.createdDate }}</td>
+                <td>{{ entity.createdDate | date('Y-m-d h:i:s') }}</td>
                 {# <td>{{ entity.updatedDate }}</td> #}
                 <td>
                 <ul>

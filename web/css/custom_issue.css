@@ -91,23 +91,27 @@ body.survey {
 .survey .tab-content {
 	padding: 0;
 }
-.survey .tab-content li {
+.survey .tab-content li,
+.survey-questions #zelect .dropdown li {
   border-bottom: 1px solid #a4a4a4;/*a7a7a7*/
 }
-.survey .tab-content li a {
+.survey .tab-content li a,
+.survey-questions #zelect .dropdown li {
   background: #959595;
   display: block;
   font-size: 16px;
 	padding: 15px;
 }
 .survey .tab-content li.current_page_item,
-.survey .tab-content li.current_page_item a {
+.survey .tab-content li.current_page_item a,
+.survey-questions #zelect .dropdown li.current {
 	background: #707070;
 }
 .survey .tab-content li,
 .survey .tab-content li a,
 .survey .tab-content li.current_page_item, 
-.survey .tab-content li.current_page_item a {
+.survey .tab-content li.current_page_item a,
+.survey-questions #zelect .dropdown li {
 	color: #ffffff;
 }
 
@@ -393,3 +397,26 @@ body.survey {
 	    bottom: 13px;
 	}
 /* audio control css ends 
+
+/* platform changes css */
+	.survey-questions #zelect .dropdown {
+	    display: block !important;
+	    position: static;
+	    width: 100%;
+	}
+
+	.survey-questions #zelect .zelect {
+	    margin-right: 0;
+	}
+	.survey-questions #zelect .zelected {
+		display: none;
+	}
+	.question {
+		background: #e23239;
+		padding-left: 15px;
+	}
+	.survey-questions-title.question {
+		background: #5d5d5d;
+		border-bottom: 1px solid #a4a4a4;
+	}
+/* platform css ends */
