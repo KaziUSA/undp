@@ -1,5 +1,7 @@
 // Select and loop the container element of the elements you want to equalise
 // $ = jQuery;
+
+//to make equal height
 function equal_height(parent_div, child_div) {
   $(parent_div).each(function(){  //'.news-page'
     
@@ -20,4 +22,53 @@ function equal_height(parent_div, child_div) {
     $(child_div,this).height(highestBox);//'.news-box-module'
                   
   }); 
+}
+
+//jplayer for audio
+function jquery_jplayer(player_id, audio_name, audio_path) {
+  $("#jquery_jplayer_"+player_id).jPlayer({
+    ready: function () {
+      $(this).jPlayer("setMedia", {
+        title: audio_name,
+        // m4a: "http://www.jplayer.org/audio/m4a/Miaow-08-Stirring-of-a-fool.m4a",
+        // oga: "http://www.jplayer.org/audio/ogg/Miaow-08-Stirring-of-a-fool.ogg"
+        mp3: "/uploads/issue/news/audio/" + audio_path
+      });
+    },
+    // swfPath: "../../dist/jplayer",
+    swfPath: "/js/plugins/jplayer",
+    // supplied: "m4a, oga",
+    supplied: "mp3",
+    // cssSelectorAncestor: "", //not needed for 1
+    wmode: "window",
+    globalVolume: true,
+    useStateClassSkin: true,
+    autoBlur: false,
+    smoothPlayBar: true,
+    keyEnabled: true
+  });
+}
+
+function jquery_jplayer_other(player_id, audio_name, audio_path) {
+  $("#jquery_jplayer_"+player_id).jPlayer({
+    ready: function () {
+      $(this).jPlayer("setMedia", {
+        title: audio_name,
+        // m4a: "http://www.jplayer.org/audio/m4a/Miaow-02-Hidden.m4a",
+        // oga: "http://www.jplayer.org/audio/ogg/Miaow-02-Hidden.ogg"
+        mp3: "/uploads/issue/news/audio/" + audio_path
+      });
+    },
+    // swfPath: "../../dist/jplayer",
+    swfPath: "/js/plugins/jplayer",
+    // supplied: "m4a, oga",
+    supplied: "mp3",
+    cssSelectorAncestor: "#jp_container_"+player_id,//player id again
+    wmode: "window",
+    globalVolume: true,
+    useStateClassSkin: true,
+    autoBlur: false,
+    smoothPlayBar: true,
+    keyEnabled: true
+  });
 }
