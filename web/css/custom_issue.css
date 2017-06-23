@@ -87,6 +87,14 @@ body.survey {
 	padding: 0 15px;
 	min-height: 40px;
 }
+
+.survey	.wrapper {
+	padding: 10px;	
+	padding-bottom: 2px;
+}
+.survey .page-title {
+	background: #e23239;
+}
 .survey .page-title,
 .tab-heading {
 	color: #ffffff;
@@ -224,6 +232,9 @@ body.survey {
 	}
 	.news-detail-page .audio {
 		height: 200px;
+	}
+	.news-detail-page .video {
+		height: 500px;
 	}
 	/* on homepage */
 	.news-box-module {
