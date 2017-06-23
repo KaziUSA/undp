@@ -1,5 +1,7 @@
 {% extends '::frontend.html.twig' %}
 
+{% block title %}Platform - Set2 | {{ project_title }}{% endblock %}
+
 {% block body -%}
 <div class="loading hidden">
   <div id="cssload-loader">
@@ -128,16 +130,26 @@
             </aside>
         </div>
 
-        <div class="col-sm-9 col-md-9 col-lg-10">
+        <div class="col-lg-2 col-md-3 col-sm-3 survey-question-col">
+          <div class="survey-questions">
+            <div class="survey-questions-title question">Survey Questions</div>
+            <div class="survey-questions">
+              <div id="zelect">{{ form(form.questions) }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6 col-lg-8">
             <!-- main content -->
             <div class="main-content">
-                <div class="question">
+                <div class="question" id="question-title">
                     <!--<div class="number">Question 9</div>
                     Are your main problems being adressed ?-->
-                    <a href="#!" class="next" onclick="btnNextQuestion_Click()"></a>
-                    <a href="#!" class="prev" onclick="btnPrevQuestion_Click()"></a>
 
-                    <div id="zelect">{{ form(form.questions) }}</div>
+                    {# <a href="#!" class="next" onclick="btnNextQuestion_Click()"></a>
+                    <a href="#!" class="prev" onclick="btnPrevQuestion_Click()"></a> #}
+
+                    {# <div id="zelect">{{ form(form.questions) }}</div> #}
                 </div>
 
                 <div class="chart">
@@ -1175,10 +1187,15 @@
     }; //abuttonpressed end
 
 $(document).ready(function() {
+  //add title
+  $('.question#question-title').text( $('.survey-questions .zelected').text() );
+
   $('button, input[type="submit"], .question .next, .question .prev').on('click', function(){aButtonPressed();});
   aButtonPressed();
   $('select#form_questions').change(function() {
     aButtonPressed();
+    //add title
+    $('.question#question-title').text( $('.survey-questions .zelected').text() );
   });
 
   checkboxChecked();

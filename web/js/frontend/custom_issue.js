@@ -1,27 +1,44 @@
 // Select and loop the container element of the elements you want to equalise
 // $ = jQuery;
 
+$('window').load(function() {
+  //show after complete load
+  $('body').show();
+});
+
+$(document).ready(function() {
+  //zelect on click - platform
+  $('.zelect li').click(function() { 
+    $('.zelect li').removeClass('current'); 
+    $(this).addClass('current'); 
+  });
+});
+
 //to make equal height
 function equal_height(parent_div, child_div) {
-  $(parent_div).each(function(){  //'.news-page'
-    
-    // Cache the highest
-    var highestBox = 0;
-    
-    // Select and loop the elements you want to equalise
-    $(child_div, this).each(function(){//'.news-box-module'
+  var win_width = $(window).width();
+
+  if(win_width >= 768) {
+    $(parent_div).each(function(){  //'.news-page'
       
-      // If this box is higher than the cached highest then store it
-      if($(this).height() > highestBox) {
-        highestBox = $(this).height(); 
-      }
-    
-    });  
-          
-    // Set the height of all those children to whichever was highest 
-    $(child_div,this).height(highestBox);//'.news-box-module'
-                  
-  }); 
+      // Cache the highest
+      var highestBox = 0;
+      
+      // Select and loop the elements you want to equalise
+      $(child_div, this).each(function(){//'.news-box-module'
+        
+        // If this box is higher than the cached highest then store it
+        if($(this).height() > highestBox) {
+          highestBox = $(this).height(); 
+        }
+      
+      });  
+            
+      // Set the height of all those children to whichever was highest 
+      $(child_div,this).height(highestBox);//'.news-box-module'
+                    
+    }); 
+  }
 }
 
 //jplayer for audio

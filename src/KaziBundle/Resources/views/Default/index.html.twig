@@ -72,17 +72,17 @@
 						<div class="h-col-75 pull-left">
 							<div class="u-box u-box-white">
 								{# pull 4 news feed #}
-								<div class="news-homepage clearfix">
+								<div class="news-homepage-featured nopadding clearfix">
 									{% set i = 0 %}
 									{% for entity in entities_news %}
 										{% set i = i + 1 %}
 
 										{# show only two #}
 										{% if i <= 2 %}
-										<div class="news-box-module">
-											<div class="news-box-wrap">
+										<div class="news-box-module nopadding">
+											<div class="news-box-wrap nopadding">
 										    <div class="news-body">
-										    	<h2 class="news-title">{{ entity.name }}</h2>
+										    	<h2 class="news-title"><a href="{{ path('news_show', {'slug': entity.slug }) }}" class="">{{ entity.name }}</a></h2>
 										    	{# {{ entity.description | raw  }} #}
 										    	<p>
 										    	{# {% autoescape false %} #}
@@ -184,7 +184,7 @@
 							    </div>
 						  	{% endif %}
 						    <div class="news-body">
-						    	<h2 class="news-title">{{ entity.name }}</h2>
+						    	<h2 class="news-title"><a href="{{ path('news_show', {'slug': entity.slug }) }}" class="">{{ entity.name }}</a></h2>
 						    	{# {{ entity.description | raw  }} #}
 						    	<p>
 						    	{# {% autoescape false %} #}
@@ -262,6 +262,18 @@ $(document).ready(function(){
   
 });
 
+$(window).resize(function() {
+  //to make equal height of tab on window resize
+  $('.news-box-module, .u-box').css({'height': 'auto'});
+  //equal height of news box
+  equal_height('.news-homepage', '.news-box-module');  
+
+  equal_height('.homepage-widget', '.u-box');  
+  
+  //img, audio, video height equal
+  $('.audio, .video').height($('.img').height());
+});
+
 
 // according to chart type
 {% if issueType.chartType == 1 %}
@@ -307,8 +319,13 @@ $(document).ready(function(){
             dataLabels: {
                 enabled: true
             }
-        }
-    },
+        },
+        /*column: {
+            colorByPoint: true
+        }*/
+    },    
+    /*colors: ['#000000', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a', '#ff0000', '#00ff00', '#0000ff'],*/
     legend: {
         layout: 'vertical',
         align: 'right',
@@ -328,11 +345,11 @@ $(document).ready(function(){
 	    {
 	        name: ' ',
 	        data: [
-	        			//107, 31, 635, 203, 2
-	        			107, 31, 635
-	        			/*{% for opt in issueChartOverview %}
-									'{{ opt.value }}',
-								{% endfor %}*/
+	        			// 107, 31, 635, 203, 2
+	        			// 107, 31, 635
+	        			{% for opt in issueChartOverview %}
+									{{ opt.value }},
+								{% endfor %}
 	        			]
 	    }
     ]

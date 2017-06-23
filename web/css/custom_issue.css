@@ -1,5 +1,13 @@
-/* Created by nikesh@kazistudios.com on 13 June 2017 */
-
+.container-fluid {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.paddingleft10 {
+  padding-left: 10px !important;
+}
+.nopadding {
+	padding: 0 !important;
+}
 .nopaddingleft {
 	padding-left: 0 !important;
 }
@@ -27,9 +35,15 @@ body.survey {
 }
 
 /* about page */
+.about-page .about-section.nopaddingright {
+	padding-right: 10px !important;
+}
 .u-box {
-	margin-top: 15px;
+	margin-top: 10px;
 	margin-bottom: 0;
+}
+.about-page .u-box {
+	margin-bottom: 10px;
 }
 .u-box-white {
     background: #fff;
@@ -163,7 +177,9 @@ body.survey {
 	}
 
 	.news-box-module {
+			font-size: 13px;
 	    padding-right: 10px;
+	    margin-bottom: 10px;
 	}
 	.news-homepage .news-box-module:nth-child(4n), .news-page .news-box-module:nth-child(4n) {
 	    padding-right: 0;
@@ -176,6 +192,9 @@ body.survey {
 	.homepage-widget .news-homepage .news-box-module {
 		width: 100%;
 		float: none;
+	}
+	.news-homepage-featured .news-box-module:first-child {
+	    margin-bottom: 20px;
 	}
 	.news-box-wrap {
 	    background: #fff;
@@ -194,6 +213,9 @@ body.survey {
 		color: #428d8e;
 		line-height: 22px;
 	}
+	.news-body .news-title a {
+		color: #428d8e;
+	}
 	.news-graphics {
 	    margin-bottom: 15px;
 	}
@@ -202,6 +224,10 @@ body.survey {
 	}
 	.news-detail-page .audio {
 		height: 200px;
+	}
+	/* on homepage */
+	.news-box-module {
+	    color: #333333;
 	}
 /* news page ends */
 
@@ -230,6 +256,7 @@ body.survey {
 
 .surveyNumber {
     font-size: 30px;
+    margin-bottom: 10px;
 }
 
 .surveyDetail {
@@ -399,6 +426,14 @@ body.survey {
 /* audio control css ends 
 
 /* platform changes css */
+
+	.filter .nav-tabs li.active {
+	    background: #e23239;
+	}
+
+	.filter .nav-tabs li.active:before {
+	    border-color: #e23239 transparent;
+	}
 	.survey-questions #zelect .dropdown {
 	    display: block !important;
 	    position: static;
@@ -420,3 +455,134 @@ body.survey {
 		border-bottom: 1px solid #a4a4a4;
 	}
 /* platform css ends */
+
+
+/* Nav css */
+	.navbar-default .navbar-collapse .navbar-nav li {
+	    margin: 0 !important;
+	    padding: 0 !important;
+	}
+
+	.navbar-default .navbar-collapse .navbar-nav li a {
+	    margin: 0 25px;
+	}
+
+	.navbar-default .navbar-collapse .navbar-nav > li > a {
+	    padding-bottom: 30px;
+	}
+
+	.navbar-default .navbar-collapse .navbar-nav {
+	    margin-bottom: 0;
+	}
+	.dropdown-menu > li > a {
+	    padding-bottom: 7px !important;
+	}
+/* Nav css ends */
+
+/* Responsive css */
+	@media (min-width: 768px) {
+		.survey-question-col {
+			float: right;
+		}
+	}
+	@media (max-width: 1199px) {
+		.navbar-default .navbar-collapse .navbar-nav li a {
+		    margin: 0 15px;
+		}
+		.surveyMen, .surveyWomen {
+		    font-size: 24px;
+		}
+
+		.survey-men-icon img, .survey-women-icon img {
+		    width: 36px;
+		}
+
+		.survey-men-icon, .survey-women-icon {
+		    margin-bottom: 2px;
+		}
+	}
+	@media (max-width: 991px) {
+		.surveyMen, .surveyWomen {
+		    width: 100%;
+		    text-align: center;
+		}
+		.surveyWomen {
+				margin-bottom: 15px;
+		}
+
+		.surveyDetail {
+		    font-size: 14px;
+		    margin-bottom: 15px;
+		    line-height: 23px;
+		}
+		.news-page .news-body a.readmore,
+		.news-homepage .news-body a.readmore {
+		    display: none;
+		}
+		.h-col-75 {
+		    width: 70%;
+		}
+
+		.h-col-25 {
+		    width: 30%;
+		}
+
+		.filter .feedback-tab {
+		    padding: 0;
+		}
+
+		.filter .nav-phase2 li a {
+		    padding-left: 4px;
+		    padding-right: 4px;
+		}
+	}
+	@media (max-width: 899px) {
+		.navbar-default .navbar-collapse {
+		    float: none;
+		}
+
+		.navbar-default .navbar-collapse .navbar-nav {
+		    margin-top: 40px;
+		}
+	}
+	@media (max-width: 767px) {
+		.navbar-default .navbar-collapse .navbar-nav {
+		    margin-top: 0;
+		}
+
+		.navbar-nav>li>.dropdown-menu {
+		    position: static;
+		    width: 100%;
+		    background: #333;
+		    margin-bottom: 10px;
+		}
+
+		.navbar-default .navbar-collapse .navbar-nav > li > a {
+		    padding-bottom: 10px;
+		    padding-top: 10px;
+		}
+
+		.home-box {
+		    width: 100%;
+		    padding: 0;
+		    margin-bottom: 10px;
+		}
+
+		.news-homepage .news-box-module, .news-page .news-box-module {
+		    width: 100%;
+		    padding: 0;
+		}
+		.homepage-widget {
+		    margin-bottom: 0;
+		}
+
+		.news-homepage .news-box-module {
+		    margin-bottom: 0;
+		}
+
+		.survey-question-col {
+		    margin-top: 10px;
+		    margin-bottom: 10px;
+		}
+	}
+/* Responsive css ends 

@@ -1,5 +1,7 @@
 {% extends '::frontend.html.twig' %}
 
+{% block title %}News | {{ project_title }}{% endblock %}
+
 {% block body -%}
 	{# News #}
 	<div class="news-page clearfix">
@@ -79,7 +81,7 @@
 				    </div>
 			  	{% endif %}
 			    <div class="news-body">
-			    	<h2 class="news-title">{{ entity.name }}</h2>
+			    	<h2 class="news-title"><a href="{{ path('news_show', {'slug': entity.slug }) }}" class="">{{ entity.name }}</a></h2>
 			    	{# {{ entity.description | raw  }} #}
 			    	<p>
 			    	{# {% autoescape false %} #}
@@ -121,6 +123,17 @@ $(document).ready(function(){
 			{% endif %}
 		{% endif %}
   {% endfor %}
+});
+
+
+
+$(window).resize(function() {
+  //to make equal height of tab on window resize
+	//equal height of news box
+  equal_height('.news-page', '.news-box-module');  
+  
+  //img, audio, video height equal
+  $('.audio, .video').height($('.img').height());
 });
 </script>
 {% endblock %}

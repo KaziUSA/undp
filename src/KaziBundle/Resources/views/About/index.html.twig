@@ -1,8 +1,8 @@
 {# pulling about, contactus, perception-survey-methodology #}
 {% extends '::frontend.html.twig' %}
 
-{# TODO: add project title #}
-{% block title %}{{ project_title }}{% endblock %}
+{# TODO: add project title in all page #}
+{% block title %}{{ entity.title | striptags }} | {{ project_title }}{% endblock %}
 
 {% block body -%}
     <div class="page-title hidden">
@@ -18,7 +18,7 @@
         </h3>
     </div>
 
-    <section class="content img-cover relative" style="">
+    <section class="content img-cover relative about-page" style="">
         {# {% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %} #}
             
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -26,7 +26,7 @@
         {% endif %}
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-5 col-md-6 col-sm-6 nopaddingright">
+                <div class="col-lg-5 col-md-6 col-sm-6 nopaddingright about-section">
                     <div class="u-box clearfix">
                         <h3>{{ entity.title | raw}}</h3>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -109,7 +109,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7 col-md-6 col-sm-6">
+                <div class="col-lg-7 col-md-6 col-sm-6 paddingleft10">
                     <div class="u-box u-box-white clearfix marginbottom15">
                         <h3>{{ entity_perception.title | raw }}</h3>
                         {{ entity_perception.description | raw }}
