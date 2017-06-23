@@ -288,6 +288,14 @@ body.survey {
     padding-top: 7px;
 }
 
+@media (max-width: 969px) {
+	.filter.survey .nav-tabs li a {
+		font-size: 10px;
+		padding-left: 3px;
+		padding-right: 3px;
+	}	
+}
+
 
 /* audio control css */
 	.jp-audio {
