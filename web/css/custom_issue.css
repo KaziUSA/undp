@@ -423,10 +423,19 @@ body.survey {
 	    position: absolute;
 	    bottom: 13px;
 	}
-/* audio control css ends 
+/* audio control css ends */
+
+/* reports */
+	.list-view .share-icons li {
+	    background-color: #ebebeb;
+	}
+/* reports css ends */
+
 
 /* platform changes css */
-
+	.main-content {
+		background: #ebebeb;
+	}
 	.filter .nav-tabs li.active {
 	    background: #e23239;
 	}
