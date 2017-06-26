@@ -17,72 +17,86 @@
     <h2>Other Fields</h2>
     <p>Click to edit</p>
 
+    <div class="m-b-30">
     <h3>Issue Chart Question Option</h3>
     {# <p><a href="{{ path('issuechartquestion_edit', {'id': step2_chartQuestion.id }) }}">{{ step2_chartQuestion.name }}</a></p> #}
     {% if question_option is not empty %}
 
         {% for qo in question_option %}
-            <p><a href="{{ path('issuechartquestion_edit', {'id': qo.id }) }}"><strong>{{ qo.name }}</strong></a></p>
-            <ul>
-                {% if qo.option is not empty %}
+            {% if qo.name != '' %}
+                <p><a target="_blank" href="{{ path('issuechartquestion_edit', {'id': qo.id }) }}"><strong>{{ qo.name }}</strong></a></p>
+            {% else %}
+                <p><a target="_blank" href="{{ path('issuechartquestion_new') }}">Create new issue question</a></p>
+            {% endif %}
 
+            
+            {% if qo.option is not empty %}
+                <ul>
                 {% for opt in qo.option %}
-                <li><a href="{{ path('issuechartoption_edit', {'id': opt.id }) }}">{{ opt.name }} - {{ opt.value }}</a></li>
+                <li><a target="_blank" href="{{ path('issuechartoption_edit', {'id': opt.id }) }}">{{ opt.name }} - {{ opt.value }}</a></li>
                 {% endfor %}
-
-                {% else %}
-                    <p><a href="{{ path('issuechartoption_new') }}">Create new issue option</a></p>
-
-                {% endif %}
-            </ul>
+                </ul>
+        
+                <p><a target="_blank" href="{{ path('issuechartoption_new') }}">Create more issue option</a></p>
+            {% else %}
+                <p><a target="_blank" href="{{ path('issuechartoption_new') }}">Create new issue option</a></p>
+            {% endif %}
+            
         {% endfor %}
     {% else %}
-        <p><a href="{{ path('issuechartquestion_new') }}">Create new issue question</a></p>
-        <p><a href="{{ path('issuechartoption_new') }}">Create new issue option</a></p>
+        <p><a target="_blank" href="{{ path('issuechartquestion_new') }}">Create new chart question</a></p>
+        <p><a target="_blank" href="{{ path('issuechartoption_new') }}">Create new chart option</a></p>
     {% endif %}
+    </div>
 
+    <div class="m-b-30">
     <h3>Infographics</h3>    
     {% if infographics is not empty %}
         {% for info in infographics %}
             <div class="infographics infographics-style-{{ info.type }}">        
-                <p><strong><a href="{{ path('issueinfographicstitle_edit', {'id': info.id }) }}">{{ info.name }}</a></p></strong>
+                <p><strong><a target="_blank" href="{{ path('issueinfographicstitle_edit', {'id': info.id }) }}">{{ info.name }}</a></p></strong>
                 
                 {% if info.option is not empty %}
 
-                {% for opt in info.option %}
-                    <div class="infographics-list">
-                        <p><a href="{{ path('issueinfographics_edit', {'id': opt.id }) }}">{{ opt.description }}</a></p>
-                    </div>
-                {% endfor %}
-
+                    {% for opt in info.option %}
+                        <div class="infographics-list">
+                            <p><a target="_blank" href="{{ path('issueinfographics_edit', {'id': opt.id }) }}">{{ opt.description }}</a></p>
+                        </div>
+                    {% endfor %}
+                    <p><a target="_blank" href="{{ path('issueinfographics_new') }}">Create more Infographics</a></p>
                 {% else %}
-                    <p><a href="{{ path('issueinfographics_new') }}">Create new Infographics</a></p>
+                    <p><a target="_blank" href="{{ path('issueinfographics_new') }}">Create new Infographics</a></p>
                 {% endif %}
             
             </div>
             <div class="clear"></div>
         {% endfor %}
     {% else %}
-        <p><a href="{{ path('issueinfographicstitle_new') }}">Create new Infographics title</a></p>
-        <p><a href="{{ path('issueinfographics_new') }}">Create new Infographics</a></p>
+        <p><a target="_blank" href="{{ path('issueinfographicstitle_new') }}">Create new Infographics title</a></p>
+        <p><a target="_blank" href="{{ path('issueinfographics_new') }}">Create new Infographics</a></p>
     {% endif %}
+    </div>
 
+    <div class="m-b-30">
     <h3>People Sayings</h3>
     {% if sayings is not empty %}
         <ul>
             {% for say in sayings %}
-                <li><a href="{{ path('issuemapsayings_edit', {'id': say.id }) }}">{{ say.location }}, {{ say.district.name }}: {{ say.saying }}</a></li>
+                <li><a target="_blank" href="{{ path('issuemapsayings_edit', {'id': say.id }) }}">{{ say.location }}, {{ say.district.name }}: {{ say.saying }}</a></li>
             {% endfor %}
         </ul>
+
+        <p><a target="_blank" href="{{ path('issuemapsayings_new') }}">Create more</a></p>
     {% else %}
-        <p><a href="{{ path('issuemapsayings_new') }}">Create new</a></p>
+        <p><a target="_blank" href="{{ path('issuemapsayings_new') }}">Create new</a></p>
     {% endif %}
+    </div>
 
 
     {# <h2>Information</h2>
     <p>Places you need to add / update the content.</p>
     <ul>
-        <li><a href="{{ path('issuechartquestion') }}">Issue Chart Question</a></li>
+        <li><a target="_blank" href="{{ path('issuechartquestion') }}">Issue Chart Question</a></li>
         <li><a href="{{ path('issuechartoption') }}">Issue Chart Option</a></li>
 
         <li><a href="{{ path('issuemapname') }}">Issue Map Name</a></li>

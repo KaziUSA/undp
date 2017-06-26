@@ -26,9 +26,7 @@ class IssueNewsType extends AbstractType
             // ->add('imageUrl')
             // ->add('image_url')
             ->add('file', null, array(
-                'attr' => array(
-                        'label' => 'File (Audio or Image)'
-                    )
+                'label_format' => 'File (Audio or Image)'
                 )
             )//image or audio
             ->add('audioName')

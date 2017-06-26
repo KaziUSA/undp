@@ -44,14 +44,14 @@ class IssueQuestion
     /**
      * @var integer
      *
-     * @ORM\Column(name="key_findings_month", type="integer")
+     * @ORM\Column(name="key_findings_month", type="integer", nullable=true)
      */
     private $keyFindingsMonth;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="key_findings", type="text")
+     * @ORM\Column(name="key_findings", type="text", nullable=true)
      */
     private $keyFindings;
 

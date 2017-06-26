@@ -50,7 +50,10 @@ class IssueQuestionType extends AbstractType
             ->add('issueMapName')
             ->add('image_title')
             // ->add('image_url')
-            ->add('file')
+            ->add('file', null, array(
+                'label_format' => 'File (Image)'
+                )
+            )
             ->add('image_desc')
             ->add('image_credit')
         ;

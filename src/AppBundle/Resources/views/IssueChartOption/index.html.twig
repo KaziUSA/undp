@@ -14,16 +14,18 @@
             </tr>
         </thead>
         <tbody>
+        {% set i = 0 %}
         {% for entity in entities %}
+            {% set i = i + 1 %}
             <tr>
-                <td><a href="{{ path('issuechartoption_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ i }}</td>
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.value }}</td>
                 <td>{{ entity.issuechartquestion }}</td>
                 <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('issuechartoption_show', { 'id': entity.id }) }}">show</a>
+                    <li class="show-link">
+                        <a href="{{ path('issuechartoption_show', { 'id': entity.id }) }}" class="show">show</a>
                     </li>
                     <li>
                         <a href="{{ path('issuechartoption_edit', { 'id': entity.id }) }}">edit</a>

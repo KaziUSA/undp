@@ -100,82 +100,115 @@
 
                 {# issue #}
 
-                <li class="">
+                <li class="{% if app.request.get('_route') in [
+                                    'issuenews', 
+                                    'issuenews_show',
+                                    'issuenews_edit',
+                                    'issuenews_new'
+                                    ] %} active {% endif %}">
                     <a href="{{ path('issuenews') }}"><i class="fa fa-book"></i> <span class="nav-label">Issue News</span> </a>
                 </li>
 
                 <li class="{% if app.request.get('_route') in [
-                                    'issuetype_index', 
+                                    'issuetype', 
                                     'issuetype_show',
                                     'issuetype_edit',
                                     'issuetype_new',
-                                    'issuequestion_index', 
+                                    'issuechartoverview', 
+                                    'issuechartoverview_show',
+                                    'issuechartoverview_edit',
+                                    'issuechartoverview_new',
+                                    'issuequestion', 
                                     'issuequestion_show',
                                     'issuequestion_edit',
                                     'issuequestion_new',
-                                    'issueinfographics_index', 
+                                    'issuechartquestion', 
+                                    'issuechartquestion_show',
+                                    'issuechartquestion_edit',
+                                    'issuechartquestion_new',
+                                    'issuechartoption', 
+                                    'issuechartoption_show',
+                                    'issuechartoption_edit',
+                                    'issuechartoption_new',
+                                    'issueinfographicstitle', 
+                                    'issueinfographicstitle_show',
+                                    'issueinfographicstitle_edit',
+                                    'issueinfographicstitle_new',
+                                    'issueinfographics', 
                                     'issueinfographics_show',
                                     'issueinfographics_edit',
-                                    'issueinfographics_new'
+                                    'issueinfographics_new',
+                                    'issuemapsayings', 
+                                    'issuemapsayings_show',
+                                    'issuemapsayings_edit',
+                                    'issuemapsayings_new',
+                                    'issuemapname', 
+                                    'issuemapname_show',
+                                    'issuemapname_edit',
+                                    'issuemapname_new',
+                                    'issuemapdistricts', 
+                                    'issuemapdistricts_show',
+                                    'issuemapdistricts_edit',
+                                    'issuemapdistricts_new'
                                     ] %} active {% endif %}">
                     <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Issue</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li class="{% if app.request.get('_route') in [
-                                    'issuetype_index', 
+                                    'issuetype', 
                                     'issuetype_show',
                                     'issuetype_edit',
                                     'issuetype_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuetype') }}">Issue Type</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issuechartoverview_index', 
+                                    'issuechartoverview', 
                                     'issuechartoverview_show',
                                     'issuechartoverview_edit',
                                     'issuechartoverview_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuechartoverview') }}">Issue Chart Overview</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issuequestion_index', 
+                                    'issuequestion', 
                                     'issuequestion_show',
                                     'issuequestion_edit',
                                     'issuequestion_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuequestion') }}">Issue Question</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issuechartquestion_index', 
+                                    'issuechartquestion', 
                                     'issuechartquestion_show',
                                     'issuechartquestion_edit',
                                     'issuechartquestion_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuechartquestion') }}">Issue Chart Question</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issuechartoption_index', 
+                                    'issuechartoption', 
                                     'issuechartoption_show',
                                     'issuechartoption_edit',
                                     'issuechartoption_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuechartoption') }}">Issue Chart Option</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issueinfographicstitle_index', 
+                                    'issueinfographicstitle', 
                                     'issueinfographicstitle_show',
                                     'issueinfographicstitle_edit',
                                     'issueinfographicstitle_new'
                                     ] %} active {% endif %}"><a href="{{ path('issueinfographicstitle') }}">Issue Infographics Title</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issueinfographics_index', 
+                                    'issueinfographics', 
                                     'issueinfographics_show',
                                     'issueinfographics_edit',
                                     'issueinfographics_new'
                                     ] %} active {% endif %}"><a href="{{ path('issueinfographics') }}">Issue Infographics</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issuemapsayings_index', 
+                                    'issuemapsayings', 
                                     'issuemapsayings_show',
                                     'issuemapsayings_edit',
                                     'issuemapsayings_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuemapsayings') }}">Issue Map Sayings</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issuemapname_index', 
+                                    'issuemapname', 
                                     'issuemapname_show',
                                     'issuemapname_edit',
                                     'issuemapname_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuemapname') }}">Issue Map Name</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issuemapdistricts_index', 
+                                    'issuemapdistricts', 
                                     'issuemapdistricts_show',
                                     'issuemapdistricts_edit',
                                     'issuemapdistricts_new'
@@ -393,7 +426,7 @@
     });
     </script>
         
-        {%block scriptIncludes %}{% endblock %}
+        {% block scriptIncludes %}{% endblock %}
     
         
         {% block javascripts %}

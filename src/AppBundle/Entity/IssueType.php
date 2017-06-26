@@ -53,28 +53,28 @@ class IssueType
     /**
      * @var string
      *
-     * @ORM\Column(name="surveyNumber", type="string", length=255)
+     * @ORM\Column(name="surveyNumber", type="string", length=255, nullable=true)
      */
     private $surveyNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surveyDetail", type="string", length=255)
+     * @ORM\Column(name="surveyDetail", type="text", nullable=true)
      */
     private $surveyDetail;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surveyMen", type="string", length=255)
+     * @ORM\Column(name="surveyMen", type="string", length=255, nullable=true)
      */
     private $surveyMen;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surveyWomen", type="string", length=255)
+     * @ORM\Column(name="surveyWomen", type="string", length=255, nullable=true)
      */
     private $surveyWomen;
 

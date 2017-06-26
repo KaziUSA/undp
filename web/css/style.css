@@ -7633,3 +7633,19 @@ form label {
     margin-right: 10px;
     margin-bottom: 10px;
 }
+
+.m-b-30 {
+  margin-bottom: 30px;
+}
+/* show, edit btn */
+table .show-link {
+    display: none;
+}
+
+ul li {
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+}
