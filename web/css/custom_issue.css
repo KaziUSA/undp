@@ -46,6 +46,9 @@
 .about-page .about-section.nopaddingright {
 	padding-right: 10px !important;
 }
+.nopaddingleft.about-perception {
+	padding-left: 15px !important;
+}
 .u-box {
 	margin-top: 10px;
 	margin-bottom: 0;
@@ -152,6 +155,13 @@ body.survey {
   display: block;
   font-size: 16px;
 	padding: 15px;
+}
+@media (max-width: 1199px) {
+	.survey .tab-content li a,
+	.survey-questions #zelect .dropdown li {
+		font-size: 14px;
+		padding: 15px 10px;
+	}
 }
 .survey .tab-content li.current_page_item,
 .survey .tab-content li.current_page_item a,
@@ -495,6 +505,9 @@ body.survey {
 
 
 /* platform changes css */
+	.filter .feedback-tab .tab-head {
+	    padding-left: 15px;
+	}
 	.main-content {
 		background: #ebebeb;
 	}
@@ -529,6 +542,12 @@ body.survey {
 
 
 /* Nav css */
+	li.dropdown.open {
+    background: #000;
+	}
+	li.dropdown.open a {
+	    background: #000 !important;
+	}
 	.navbar-default .navbar-collapse .navbar-nav li {
 	    margin: 0 !important;
 	    padding: 0 !important;
