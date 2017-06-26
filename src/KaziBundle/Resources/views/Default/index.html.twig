@@ -7,7 +7,7 @@
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
       {# <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a> #}
       {% endif %}
-			<div class="container-fluid padding10">
+			<div class="container-fluid padding10 nopaddingbottom">
 				{# <div class="row">
 					<div class="col-lg-8">
 						<div class="banner-caption">
@@ -45,7 +45,7 @@
 							<h3>{{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} Survey Overview</h3>
 							
 							{# chart #}
-							<div id="container-homepage" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
+							<div id="container-homepage" class="container-chart" style=""></div>
 						</div>
 					</div>
 					<div class="home-box pull-left nopaddingright">
@@ -335,7 +335,8 @@ $(window).resize(function() {
         floating: true,
         borderWidth: 1,
         backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-        shadow: true
+        shadow: true,
+        enabled: false //hide year
     },
     credits: {
         enabled: false

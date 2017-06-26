@@ -3,7 +3,7 @@
 
 $('window').load(function() {
   //show after complete load
-  $('body').show();
+  // $('body').show();
 });
 
 $(document).ready(function() {
@@ -12,10 +12,24 @@ $(document).ready(function() {
     $('.zelect li').removeClass('current'); 
     $(this).addClass('current'); 
   });
+
+  $('body').addClass('full-opacity');
+
+  //global equal height
+  equal_height('.parent-height', '.child-height');
+});
+
+$(window).resize(function() {  
+  //global equal height
+  equal_height('.parent-height', '.child-height');
 });
 
 //to make equal height
 function equal_height(parent_div, child_div) {
+  //first make their height auto
+  $(child_div).css({'height': 'auto'});
+  
+
   var win_width = $(window).width();
 
   if(win_width >= 768) {

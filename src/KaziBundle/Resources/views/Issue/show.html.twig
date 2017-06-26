@@ -70,8 +70,8 @@ survey
 				<div class="main-content">
 					<div class="wrapper clearfix"><!--wrapper remove or not-->
 						<div class="s-box-module s-box-module-border">
-							<div class="row nomargin">
-								<div class="col-md-8">
+							<div class="row nomargin parent-height">
+								<div class="col-lg-8 col-sm-6 child-height">
 									<div class="">
 										<div class="s-box">
 											<div>
@@ -84,12 +84,12 @@ survey
 									</div>
 								</div>
 
-								<div class="col-md-4">
-									<div class="s-box-right">
+								<div class="col-lg-4 col-sm-6 child-height s-box-right">
+									<div class="">
 										<div class="s-box">
 											{# loop here #}
 											{% for qo in question_option %}									
-												<div id="container-issue-question-{{ qo.id }}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto;"></div>
+												<div id="container-issue-question-{{ qo.id }}" class="container-chart" style=""></div>
 												
 											{% endfor %}
 										</div>
@@ -98,7 +98,8 @@ survey
 							</div>
 						</div>
 
-						<div class="row nomargin">
+						{# TODO: need to make people saying map responsive #}
+						<div class="row nomargin visible-lg">
 							<div class="col-sm-12">
 								{# map #}
 								<div class="s-box">
@@ -111,61 +112,63 @@ survey
 							</div>
 						</div>
 
-						<div class="row nomargin">
-							<div class="col-md-6">
-								<div class="s-box-left">
-									<div class="s-box">
-										{% for info in infographics %}
-											<div class="infographics infographics-style-{{ info.type }}">
-												{# <h2>District Highlights</h2>
-												<div class="infographics-list">
-													<span class="icon">ICON</span>
-													<p>Text here</p>
-												</div>
-												<div class="infographics-list">
-													<span class="icon">ICON</span>
-													<p>Text here</p>
-												</div> #}
-											
-												<h2>{{ info.name }}</h2>
-												{% for opt in info.option %}
+						<div class="s-box-module s-box-module-border">
+							<div class="row nomargin parent-height">
+								<div class="col-sm-6 child-height">
+									<div class="s-box-left">
+										<div class="s-box">
+											{% for info in infographics %}
+												<div class="infographics infographics-style-{{ info.type }}">
+													{# <h2>District Highlights</h2>
 													<div class="infographics-list">
-														<span class="icon">
-															{{ opt.icon }}
-															{% if info.type == 3 %}
-																%
-															{% endif %}
-														</span>
-														<p>{{ opt.description }}</p>
+														<span class="icon">ICON</span>
+														<p>Text here</p>
 													</div>
-												{% endfor %}
-											
-											</div>
-											<div class="clear"></div>
-										{% endfor %}
+													<div class="infographics-list">
+														<span class="icon">ICON</span>
+														<p>Text here</p>
+													</div> #}
+												
+													<h2>{{ info.name }}</h2>
+													{% for opt in info.option %}
+														<div class="infographics-list">
+															<span class="icon">
+																{{ opt.icon }}
+																{% if info.type == 3 %}
+																	%
+																{% endif %}
+															</span>
+															<p>{{ opt.description }}</p>
+														</div>
+													{% endfor %}
+												
+												</div>
+												<div class="clear"></div>
+											{% endfor %}
+										</div>
 									</div>
+									
+
 								</div>
-								
+								<div class="col-sm-6 child-height s-box-right">
+									<div class="s-box">
+										<div class="graphics">
+											{% if question_detail.imageTitle != '' %}
+												<h2>{{ question_detail.imageTitle }}</h2>
+											{% endif %}
 
-							</div>
-							<div class="col-md-6">
-								<div class="s-box">
-									<div class="graphics">
-										{% if question_detail.imageTitle != '' %}
-											<h2>{{ question_detail.imageTitle }}</h2>
-										{% endif %}
+											{% if question_detail.imageUrl != '' %}
+												<img src="/uploads/issue/img/{{ question_detail.imageUrl }}" class="img-responsive">
+											{% endif %}									
 
-										{% if question_detail.imageUrl != '' %}
-											<img src="/uploads/issue/img/{{ question_detail.imageUrl }}" class="img-responsive">
-										{% endif %}									
+											{% if question_detail.imageDesc != '' %}
+												<p>{{ question_detail.imageDesc }}</p>
+											{% endif %}
 
-										{% if question_detail.imageDesc != '' %}
-											<p>{{ question_detail.imageDesc }}</p>
-										{% endif %}
-
-										{% if question_detail.imageCredit != '' %}
-											<p>Photo credit: {{ question_detail.imageCredit }}</p>
-										{% endif %}
+											{% if question_detail.imageCredit != '' %}
+												<p>Photo credit: {{ question_detail.imageCredit }}</p>
+											{% endif %}
+										</div>
 									</div>
 								</div>
 							</div>
