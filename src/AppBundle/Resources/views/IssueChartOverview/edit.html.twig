@@ -2,7 +2,6 @@
 
 {% block body -%}
     <h1>IssueChartOverview edit</h1>
-    {# <input type="text" id="issueTypeDetails" value="" /> #}
 
     {{ form(edit_form) }}
 
@@ -22,40 +21,7 @@
 {% block scriptIncludes %}
 <script>
 $(document).ready(function() {
-
-	$('#appbundle_issuechartoverview_issueType').change(function() {
-		// $('#issueTypeDetails').html($(this).val());
-
-		var name = { 
-								id: $('#appbundle_issuechartoverview_issueType').val(),
-								};//{{ entity.id }}
-    
-    $.post('{{path('issuechartoverview_edit', {'id': entity.id} )}}',//{{path('page')}} - path: /admin/page/home
-        { 
-        	data_id: name.id 
-        }, 
-        function (response) { 
-        	// console.log("Request Sent");
-
-        	// console.log(response);
-        	$('#issueTypeDetails').val(response.result);
-
-        	if(response.code == 100 && response.success){//dummy check
-	        	if(result) {
-		        	result = response.result;
-		        	
-		        	/*result.forEach(function(object) {
-	                console.log(object);                
-	            });*/
-
-	        	}
-	        }
-        }
-    );
-
-  //return false;
-
-  });
+	ajax_request_response_issueType('#appbundle_issuechartoverview_issueType', '{{path('issuetype_detail', {'id': entity.id} )}}')
   
 });
 </script>

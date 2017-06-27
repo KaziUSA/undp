@@ -80,6 +80,7 @@ function jquery_jplayer(player_id, audio_name, audio_path) {
   });
 }
 
+// to get audio player - except the first one
 function jquery_jplayer_other(player_id, audio_name, audio_path) {
   $("#jquery_jplayer_"+player_id).jPlayer({
     ready: function () {
@@ -103,3 +104,4 @@ function jquery_jplayer_other(player_id, audio_name, audio_path) {
     keyEnabled: true
   });
 }
+

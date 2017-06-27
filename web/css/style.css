@@ -3497,6 +3497,9 @@ body.body-small .footer.fixed {
 .full-width {
   width: 100% !important;
 }
+input.full-width {
+    margin-bottom: 10px;
+}
 .link-block {
   font-size: 12px;
   padding: 10px;
@@ -7648,4 +7651,9 @@ ul li {
 
 ul {
     padding: 0;
+}
+
+/* issuetype detail near dropdown button */
+span#appbundle_issueType_details {
+    margin-left: 8px;
 }

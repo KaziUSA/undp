@@ -10,6 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\IssueType;
 use AppBundle\Form\IssueTypeType;
 
+use AppBundle\Helper\IssueTypeHelper;
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * IssueType controller.
  *
@@ -35,6 +38,30 @@ class IssueTypeController extends Controller
             'entities' => $entities,
         );
     }
+
+    /**
+     * Lists all IssueType entities.
+     *
+     * @Route("/detail", name="issuetype_detail")
+     * @Template()
+     */
+    public function detailAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        #handle the ajax request - to show which issueType is selected
+            $data_id = $request->request->get('data_id');
+            $ith = new IssueTypeHelper();
+            if($data_id != '') {
+                $response = $ith->getIssueTypeDetail($em, $data_id);
+
+                return new Response(json_encode($response));
+            }
+        #end ajax request
+
+        exit();
+        return false;
+    }
+
     /**
      * Creates a new IssueType entity.
      *

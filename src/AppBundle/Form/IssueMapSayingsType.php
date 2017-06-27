@@ -18,10 +18,18 @@ class IssueMapSayingsType extends AbstractType
             ->add('issueQuestion')
             ->add('district')
             ->add('location')
-            ->add('saying')
+            ->add('saying', null, array(
+                'attr' => array(
+                    'class'=>'full-width'
+                    )
+                )
+            )
             ->add('hrrp', null, array(
                 'label' => 'HRRP',
                 'required'   => false,
+                'attr' => array(
+                    'class'=>'full-width'
+                    )
                 )
             )
         ;

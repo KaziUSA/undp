@@ -13,3 +13,13 @@
     </li>
 </ul>
 {% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+	ajax_request_response_issueType('#appbundle_issuechartoverview_issueType', '{{path('issuetype_detail' )}}')
+  
+});
+</script>
+{% endblock %}

@@ -415,16 +415,8 @@
       ga('send', 'pageview');*/
 
     </script>
-    <script>
-    //delete - confirmation
-    $(document).ready(function(){
-      $("#form_submit").click(function(){
-        if (!confirm("Are you sure you want to delete?")){
-          return false;
-        }
-      });
-    });
-    </script>
+
+    <script src="/js/custom_admin.js"></script>
         
         {% block scriptIncludes %}{% endblock %}
     

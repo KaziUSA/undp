@@ -108,6 +108,13 @@
     </ul> #}
 {% endblock %}
 
-{% block scriptIncludes %}
 
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    ajax_request_response_issueType('#appbundle_issuequestion_issueType', '{{path('issuetype_detail' )}}')
+  
+});
+</script>
 {% endblock %}

@@ -90,11 +90,12 @@ class IssueQuestionController extends Controller
      * Displays a form to create a new IssueQuestion entity.
      *
      * @Route("/new", name="issuequestion_new")
-     * @Method("GET")
      * @Template()
+     * @Method("GET")
      */
     public function newAction()
     {
+
         $entity = new IssueQuestion();
         $form   = $this->createCreateForm($entity);
 
@@ -132,12 +133,13 @@ class IssueQuestionController extends Controller
     /**
      * Displays a form to edit an existing IssueQuestion entity.
      *
-     * @Route("/{id}/edit", name="issuequestion_edit")
-     * @Method("GET")
+     * @Route("/{id}/edit", name="issuequestion_edit")     
      * @Template()
+     * @Method("GET")
      */
     public function editAction($id)
     {
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:IssueQuestion')->find($id);
@@ -211,6 +213,7 @@ class IssueQuestionController extends Controller
         $question_id = $id;
         $sayings = $em->getRepository('AppBundle:IssueMapSayings')->findByIssueQuestion($question_id);
         // var_dump($sayings); exit();
+
 
 
         return array(
