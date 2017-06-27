@@ -7,8 +7,9 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>IssueType</th>
                 <th>Name</th>
-                <th>Keyfindingsmonth</th>
+                {# <th>Keyfindingsmonth</th> #}
                 {# <th>Keyfindings</th> #}
                 <th>IssueMapName</th>
                 <th>Actions</th>
@@ -20,8 +21,9 @@
             {% set i = i + 1 %}
             <tr>
                 <td>{{ i }}</td>
+                <td>{{ entity.issueType }} - {{ date( entity.issueType.year ~ '-' ~ entity.issueType.month ~ '-01' ) | date('F Y') }} </td>
                 <td>{{ entity.name }}</td>
-                <td>{{ date('2017-' ~ entity.keyFindingsMonth ~ '-01') | date ('F') }}</td>
+                {# <td>{{ date('2017-' ~ entity.keyFindingsMonth ~ '-01') | date('F') }}</td> #}
                 {# <td>{{ entity.keyFindings }}</td> #}
                 <td>{{ entity.issueMapName }}</td>
                 <td>

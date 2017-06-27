@@ -41,9 +41,16 @@ survey
 	                  	{# {{ dump(issue_questions) }} #}
 			              	{% if issue_questions is not empty %}
 			              	<ul>
+			              		{% set issueType = '' %}
 			                  {% for question in issue_questions %}
 			                  	{% if question.issueType.name == 'Reconstruction' %}
-			                  	<li class="{% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
+			                  		{# adding heading #}
+			                  		{% if issueType != question.issueType.month ~ '-' ~ question.issueType.year %}
+			                  			<li class="issue-month-year"><a href="#!">{{ date(question.issueType.year ~ '-' ~ question.issueType.month ~ '-01') | date('F Y') }}</a></li>
+			                  		{% endif %}
+				                  	{% set issueType = question.issueType.month ~ '-' ~ question.issueType.year %}
+
+				                  	<li class="{% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
 			                  	{% endif %}
 			                  {% endfor %}
 			                 </ul>
