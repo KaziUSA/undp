@@ -6,15 +6,25 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
 	<head>
+    {# Commeted
+    <!-- google analytics and also for tracking buttons clicks --> 
+    <script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-72934138-1");
+    pageTracker._trackPageview();
+    </script>
+    #}
+
+
 		<title>{% block title %}{{ project_title }}{% endblock %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 		{% block stylesheets %}
 		
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
-
-      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
+		  {# commeted for debugging #}
+      {# <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" /> #}
 
 			<link href="/css/bootstrap.min.css" rel="stylesheet">
 
