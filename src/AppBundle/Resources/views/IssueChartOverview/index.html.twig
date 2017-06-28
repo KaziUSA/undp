@@ -20,7 +20,12 @@
             {% set i = i + 1 %}
             <tr>
                 <td>{{ i }}</td>
-                <td>{{ entity.issueType }}</td>
+                <td>
+                    {{ entity.issueType }}
+                    {% if entity.issueType.year != '' and entity.issueType.month != '' %}
+                         - {{ date(entity.issueType.year ~ '-' ~ entity.issueType.month ~ '-01') | date('F Y') }}
+                    {% endif %}
+                </td>
                 <td>{{ entity.district }}</td>
                 <td>{{ entity.value }}</td>
                 <td>
@@ -45,4 +50,13 @@
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

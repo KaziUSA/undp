@@ -26,7 +26,7 @@
             {% if qo.name != '' %}
                 <p><a target="_blank" href="{{ path('issuechartquestion_edit', {'id': qo.id }) }}"><strong>{{ qo.name }}</strong></a></p>
             {% else %}
-                <p><a target="_blank" href="{{ path('issuechartquestion_new') }}">Create new issue question</a></p>
+                {# <p><a target="_blank" href="{{ path('issuechartquestion_new') }}">Create new issue chart question</a></p> #}
             {% endif %}
 
             
@@ -37,15 +37,15 @@
                 {% endfor %}
                 </ul>
         
-                <p><a target="_blank" href="{{ path('issuechartoption_new') }}">Create more issue option</a></p>
+                <p><a target="_blank" href="{{ path('issuechartoption_new', {'id': qo.id}) }}">Create more issue option</a></p>
             {% else %}
-                <p><a target="_blank" href="{{ path('issuechartoption_new') }}">Create new issue option</a></p>
+                <p><a target="_blank" href="{{ path('issuechartoption_new', {'id': qo.id}) }}">Create new issue option</a></p>
             {% endif %}
             
         {% endfor %}
     {% else %}
-        <p><a target="_blank" href="{{ path('issuechartquestion_new') }}">Create new chart question</a></p>
-        <p><a target="_blank" href="{{ path('issuechartoption_new') }}">Create new chart option</a></p>
+        <p><a target="_blank" href="{{ path('issuechartquestion_new', {'id': entity.id}) }}">Create new chart question</a></p>
+        {# <p><a target="_blank" href="{{ path('issuechartoption_new') }}">Create new chart option</a></p> #}
     {% endif %}
     </div>
 
@@ -63,17 +63,17 @@
                             <p><a target="_blank" href="{{ path('issueinfographics_edit', {'id': opt.id }) }}">{{ opt.description }}</a></p>
                         </div>
                     {% endfor %}
-                    <p><a target="_blank" href="{{ path('issueinfographics_new') }}">Create more Infographics</a></p>
+                    <p><a target="_blank" href="{{ path('issueinfographics_new', {'id': info.id}) }}">Create more Infographics</a></p>
                 {% else %}
-                    <p><a target="_blank" href="{{ path('issueinfographics_new') }}">Create new Infographics</a></p>
+                    <p><a target="_blank" href="{{ path('issueinfographics_new', {'id': info.id}) }}">Create new Infographics</a></p>
                 {% endif %}
             
             </div>
             <div class="clear"></div>
         {% endfor %}
     {% else %}
-        <p><a target="_blank" href="{{ path('issueinfographicstitle_new') }}">Create new Infographics title</a></p>
-        <p><a target="_blank" href="{{ path('issueinfographics_new') }}">Create new Infographics</a></p>
+        <p><a target="_blank" href="{{ path('issueinfographicstitle_new', {'id': entity.id}) }}">Create new Infographics title</a></p>
+        {# <p><a target="_blank" href="{{ path('issueinfographics_new') }}">Create new Infographics</a></p> #}
     {% endif %}
     </div>
 
@@ -86,9 +86,9 @@
             {% endfor %}
         </ul>
 
-        <p><a target="_blank" href="{{ path('issuemapsayings_new') }}">Create more</a></p>
+        <p><a target="_blank" href="{{ path('issuemapsayings_new', {'id': entity.id}) }}">Create more</a></p>
     {% else %}
-        <p><a target="_blank" href="{{ path('issuemapsayings_new') }}">Create new</a></p>
+        <p><a target="_blank" href="{{ path('issuemapsayings_new', {'id': entity.id}) }}">Create new</a></p>
     {% endif %}
     </div>
 

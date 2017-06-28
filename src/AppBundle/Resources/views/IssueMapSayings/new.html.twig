@@ -13,3 +13,17 @@
     </li>
 </ul>
 {% endblock %}
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {		
+		//select the option
+    var selected_val = getUrlParameter('id');
+    $('#appbundle_issuemapsayings_issueQuestion').val(selected_val);
+
+		//ajax
+    ajax_request_response_issueType('#appbundle_issuemapsayings_issueQuestion', '{{path('issuequestion_detail' )}}');
+  
+});
+</script>
+{% endblock %}

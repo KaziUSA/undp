@@ -40,7 +40,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         project_title: "Inter-Agency Common Feedback Project"
-        records_list: "table table-condensed table-hover table-striped"
+        #records_list: "table table-condensed table-hover table-striped"
+        records_list: "records_list table table-striped table-bordered table-hover dataTables-example"
 
 # Assetic Configuration
 assetic:

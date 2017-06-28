@@ -14,3 +14,13 @@
     <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    ajax_request_response_issueType('#appbundle_issueinfographicstitle_issueQuestion', '{{path('issuequestion_detail' )}}');
+  
+});
+</script>
+{% endblock %}

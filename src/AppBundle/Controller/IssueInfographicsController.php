@@ -53,7 +53,7 @@ class IssueInfographicsController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('issueinfographics_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('issueinfographics_edit', array('id' => $entity->getId())));
         }
 
         return array(

@@ -11,6 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\IssueQuestion;
 use AppBundle\Form\IssueQuestionType;
 
+use AppBundle\Helper\IssueQuestionHelper;
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * IssueQuestion controller.
  *
@@ -36,6 +39,32 @@ class IssueQuestionController extends Controller
             'entities' => $entities,
         );
     }
+
+
+    /**
+     * Lists all IssueType entities.
+     *
+     * @Route("/detail", name="issuequestion_detail")
+     * @Template()
+     */
+    public function detailAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        #handle the ajax request - to show which issueType is selected
+            $data_id = $request->request->get('data_id');
+            // $data_id = 10;//eg. Are your main reconstruction needs ... is of Reconstruction - Feb 2017
+            $ith = new IssueQuestionHelper();
+            if($data_id != '') {
+                $response = $ith->getIssueQuestionDetail($em, $data_id);
+
+                return new Response(json_encode($response));
+            }
+        #end ajax request
+
+        exit();
+        return false;
+    }
+
     /**
      * Creates a new IssueQuestion entity.
      *

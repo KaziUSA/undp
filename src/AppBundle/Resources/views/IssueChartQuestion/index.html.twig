@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>IssueType</th>
                 <th>Name</th>
                 <th>Charttype</th>
                 <th>IssueQuestion</th>
@@ -20,8 +21,20 @@
             {% set i = i + 1 %}
             <tr>
                 <td>{{ i }}</td>
+                <td>
+                    {{ entity.issueQuestion.issueType }}
+                     - {{ date( entity.issueQuestion.issueType.year ~ '-' ~ entity.issueQuestion.issueType.month ~ '-01' ) | date('F Y') }} 
+                </td>
                 <td>{{ entity.name }}</td>
-                <td>{{ entity.chartType }}</td>
+                <td>
+                    {% if entity.chartType == 1 %}
+                        Circle Donut
+                    {% elseif entity.chartType == 2 %}
+                        Semi circle donut
+                    {% else %}
+                        entity.chartType
+                    {% endif %}
+                </td>
                 <td>{{ entity.issueQuestion }}</td>
                 <td>
                 <ul>
@@ -45,4 +58,13 @@
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

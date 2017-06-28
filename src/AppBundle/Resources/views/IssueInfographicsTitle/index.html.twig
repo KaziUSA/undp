@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>IssueType</th>
                 <th>Name (Issue Question)</th>
                 <th>Type</th>   
                 <th>Actions</th>
@@ -19,8 +20,25 @@
             {% set i = i + 1 %}
             <tr>
                 <td>{{ i }}</td>
+
+                <td>
+                    {{ entity.issueQuestion.issueType }}
+                    {% if entity.issueQuestion.issueType.year != '' and entity.issueQuestion.issueType.month != '' %}
+                     - {{ date( entity.issueQuestion.issueType.year ~ '-' ~ entity.issueQuestion.issueType.month ~ '-01' ) | date('F Y') }} 
+                    {% endif %}
+                </td>
                 <td>{{ entity.name }} ({{ entity.issueQuestion }})</td>
-                <td>{{ entity.type }}</td>
+                <td>
+                    {% if entity.type == 1 %}
+                        Vertical
+                    {% elseif entity.type == 2 %}
+                        Horizontal
+                    {% elseif entity.type == 3 %}
+                        Vertical Percentage
+                    {% else %}
+                        {{ entity.type }}
+                    {% endif %}
+                </td>
                 <td>
                 <ul>
                     <li class="show-link">
@@ -43,4 +61,14 @@
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

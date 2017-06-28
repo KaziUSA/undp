@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>IssueType</th>
                 <th>IssueQuestion</th>
                 <th>District</th>
                 <th>Location</th>
@@ -22,6 +23,12 @@
             {% set i = i + 1 %}
             <tr>
                 <td>{{ i }}</td>
+                <td>
+                    {{ entity.issueQuestion.issueType }}
+                    {% if entity.issueQuestion.issueType.year != '' and entity.issueQuestion.issueType.month != '' %}
+                     - {{ date( entity.issueQuestion.issueType.year ~ '-' ~ entity.issueQuestion.issueType.month ~ '-01' ) | date('F Y') }} 
+                    {% endif %}
+                </td>
                 <td>{{ entity.issueQuestion }}</td>
                 <td>{{ entity.district }}</td>
                 <td>{{ entity.location }}</td>
@@ -49,4 +56,14 @@
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

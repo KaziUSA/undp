@@ -10,6 +10,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\IssueChartQuestion;
 use AppBundle\Form\IssueChartQuestionType;
 
+use AppBundle\Helper\IssueChartQuestionHelper;
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * IssueChartQuestion controller.
  *
@@ -35,6 +38,31 @@ class IssueChartQuestionController extends Controller
             'entities' => $entities,
         );
     }
+
+    /**
+     * Lists all IssueType entities.
+     *
+     * @Route("/detail", name="issuechartquestion_detail")
+     * @Template()
+     */
+    public function detailAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+
+        #handle the ajax request - to show which issueType is selected
+            $data_id = $request->request->get('data_id');
+            // $data_id = 10;//eg. Are your main reconstruction needs ... is of Reconstruction - Feb 2017
+            $ith = new IssueChartQuestionHelper();
+            if($data_id != '') {
+                $response = $ith->getIssueChartQuestionDetail($em, $data_id);
+
+                return new Response(json_encode($response));
+            }
+        #end ajax request
+
+        exit();
+        return false;
+    }
+
     /**
      * Creates a new IssueChartQuestion entity.
      *
@@ -53,7 +81,7 @@ class IssueChartQuestionController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('issuechartquestion_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('issuechartquestion_edit', array('id' => $entity->getId())));
         }
 
         return array(
