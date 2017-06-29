@@ -73,12 +73,18 @@ class IssueController extends Controller
                 array('issueType' => '1')
                 array('month' => 'ASC')
                 );*/
-        // var_dump($issue_questions); exit();
+        // var_dump($issue_questions); exit();        
 
 
         //getting detail of this question id
         $question_detail = $em->getRepository('AppBundle:IssueQuestion')->findById($id);
         // var_dump($question_detail); exit();
+
+        //get distinct issueTypes
+        $issueType_detail = $em->getRepository('AppBundle:IssueType')->findAll();
+        if($id == 1) {
+            // var_dump($issueType_detail); exit();
+        }
 
 
 
@@ -149,6 +155,7 @@ class IssueController extends Controller
             // 'chart_question' => $chart_question,//send final one - chart question option
             'question_option' => $question_option,
             'infographics' => $infographics,
+            'issueType' => $issueType_detail,// for dropdown of issueType (Month year) under eg. Reconstruction tab
         );
 
     }

@@ -32,35 +32,83 @@ survey
 			        <div class="tab-content">
 			          <div role="tabpanel" class="tab-pane fade in" id="livelihood">
 			              <div class="tab-content-wrap">
-			              	Question list livelihood
+			              	{% if issue_questions is not empty %}
+				              	<div id="zelect">
+					              	<select id="issue-Livelihood-year-month-dropdown">
+				                  	{% for it in issueType %}
+				                  		{% if it.name == 'Livelihood' %}
+				                  			<option value="{{ it.year ~ '-' ~ it.month }}">{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+				                  		{% endif %}	
+				                  	{% endfor %}
+					              	</select>
+				              	</div>
+				              	
+				              	{# question list #}
+				              	<ul>
+				                  {% for question in issue_questions %}
+				                  	{% if question.issueType.name == 'Livelihood' %}
+					                  	<li class="Livelihood {{ question.issueType.year ~ '-' ~ question.issueType.month }} {% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
+				                  	{% endif %}
+				                  {% endfor %}
+				                </ul>
+			              	{% endif %}
 			              </div>
 			          </div>
 
 			          <div role="tabpanel" class="tab-pane fade in active" id="reconstruction">
 			              <div class="tab-content-wrap">
-	                  	{# {{ dump(issue_questions) }} #}
 			              	{% if issue_questions is not empty %}
-			              	<ul>
-			              		{% set issueType = '' %}
-			                  {% for question in issue_questions %}
-			                  	{% if question.issueType.name == 'Reconstruction' %}
-			                  		{# adding heading #}
-			                  		{% if issueType != question.issueType.month ~ '-' ~ question.issueType.year %}
-			                  			<li class="issue-month-year"><a href="#!">{{ date(question.issueType.year ~ '-' ~ question.issueType.month ~ '-01') | date('F Y') }}</a></li>
-			                  		{% endif %}
-				                  	{% set issueType = question.issueType.month ~ '-' ~ question.issueType.year %}
+				              	<div id="zelect">
+					              	<select id="issue-Reconstruction-year-month-dropdown">
+				                  	{% for it in issueType %}
+				                  		{% if it.name == 'Reconstruction' %}
+				                  			<option value="{{ it.year ~ '-' ~ it.month }}">{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+				                  		{% endif %}	
+				                  	{% endfor %}
+					              	</select>
+				              	</div>
+				              	
+				              	{# question list #}
+				              	<ul>
+				              		{# {% set issueType = '' %} #}
+				                  {% for question in issue_questions %}
+				                  	{% if question.issueType.name == 'Reconstruction' %}
+				                  		{# adding heading: like April 2017 - this will list all the questions, so their will be alot of question list #}
+				                  		{# {% if issueType != question.issueType.month ~ '-' ~ question.issueType.year %}
+				                  			<li class="issue-month-year"><a href="#!">{{ date(question.issueType.year ~ '-' ~ question.issueType.month ~ '-01') | date('F Y') }}</a></li>
+				                  		{% endif %}
+					                  	{% set issueType = question.issueType.month ~ '-' ~ question.issueType.year %} #}
 
-				                  	<li class="{% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
-			                  	{% endif %}
-			                  {% endfor %}
-			                 </ul>
+					                  	<li class="Reconstruction {{ question.issueType.year ~ '-' ~ question.issueType.month }} {% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
+				                  	{% endif %}
+				                  {% endfor %}
+				                </ul>
 			              	{% endif %}
 			              </div>
 			          </div>
 
 			          <div role="tabpanel" class="tab-pane fade in" id="protection">
 			              <div class="tab-content-wrap">
-			              	Question list protection
+			              	{% if issue_questions is not empty %}
+				              	<div id="zelect">
+					              	<select id="issue-Protection-year-month-dropdown">
+				                  	{% for it in issueType %}
+				                  		{% if it.name == 'Protection' %}
+				                  			<option value="{{ it.year ~ '-' ~ it.month }}">{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+				                  		{% endif %}	
+				                  	{% endfor %}
+					              	</select>
+				              	</div>
+				              	
+				              	{# question list #}
+				              	<ul>
+				                  {% for question in issue_questions %}
+				                  	{% if question.issueType.name == 'Protection' %}
+					                  	<li class="Protection {{ question.issueType.year ~ '-' ~ question.issueType.month }} {% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
+				                  	{% endif %}
+				                  {% endfor %}
+				                </ul>
+			              	{% endif %}
 			              </div>
 			          </div>
 			        </div>
@@ -354,6 +402,11 @@ survey
 	    {% endif %}
     {% endfor %}
 
-
+    // question filter by month year dropdown
+    $('#issue-Reconstruction-year-month-dropdown').change(function() { 
+    	var val = $(this).val(); 
+    	$('.Reconstruction').hide(); 
+    	$('.Reconstruction.'+val).show(); 
+    });
     </script>
 {% endblock %}

@@ -27,8 +27,10 @@
 
 	.edit-link.edit-static {
 	    color: #000;
-	    text-shadow: none;
+	    display: inline-block;
+	    margin-bottom: 8px;
 	    position: static;
+	    text-shadow: none;
 	}
 
 	body {
@@ -138,6 +140,34 @@
 	background: #3e7180;
 }
 
+/* filter of survey */
+	.filter.survey
+	 #zelect .zelect {
+	    width: 100%;
+	}
+
+	.filter.survey
+	 .zelected:after {
+	    content: "View all";
+	    position: absolute;
+	    right: 0px;
+	    width: 75px;
+	    font-size: 9px;
+	    line-height: 13px;
+	    text-align: center;
+	    top: 0px;
+	    border-left: 1px solid #FFF;
+	    height: 100%;
+	    padding-top: 13px;
+	    color: #59731a;
+	    text-transform: uppercase;
+	}
+
+	.filter.survey #zelect {
+	    background: #99bc44;
+	    color: #fff;
+	}
+/* end filter of survey */
 
 body.survey {
 	background: #959595;

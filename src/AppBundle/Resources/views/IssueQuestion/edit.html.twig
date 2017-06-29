@@ -25,6 +25,7 @@
         {% for qo in question_option %}
             {% if qo.name != '' %}
                 <p><a target="_blank" href="{{ path('issuechartquestion_edit', {'id': qo.id }) }}"><strong>{{ qo.name }}</strong></a></p>
+                <p><a target="_blank" href="{{ path('issuechartquestion_new', {'id': entity.id}) }}">Create more issue chart question</a></p>
             {% else %}
                 {# <p><a target="_blank" href="{{ path('issuechartquestion_new') }}">Create new issue chart question</a></p> #}
             {% endif %}
@@ -55,6 +56,8 @@
         {% for info in infographics %}
             <div class="infographics infographics-style-{{ info.type }}">        
                 <p><strong><a target="_blank" href="{{ path('issueinfographicstitle_edit', {'id': info.id }) }}">{{ info.name }}</a></p></strong>
+                
+                <p><a target="_blank" href="{{ path('issueinfographicstitle_new', {'id': entity.id}) }}">Create new Infographics title</a></p>
                 
                 {% if info.option is not empty %}
 
