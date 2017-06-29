@@ -92,6 +92,11 @@
 .infographics.infographics-style-2 .infographics-list {
     float: left;
     max-width: 33%;
+    width: 33%;
+    padding-right: 10px;
+}
+.infographics.infographics-style-2 .infographics-list:last-child {
+	padding-right: 0;
 }
 
 
