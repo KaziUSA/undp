@@ -42,15 +42,18 @@
 					{# chart #}
 					<div class="home-box pull-left" style="">
 						<div class="u-box u-box-white">
+							<div class="u-box-white-padding">
 							<h3>{{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} Survey Overview</h3>
 							
 							{# chart #}
 							<div id="container-homepage" class="container-chart" style=""></div>
+							</div>
 						</div>
 					</div>
 					<div class="home-box pull-left nopaddingright">
 						<div class="h-col-25 pull-left">
 							<div class="u-box u-box-white clearfix">
+								<div class="u-box-white-padding">
 								<div class="surveyNumber">{{ issueType.surveyNumber }}</div>
 
 								<div class="surveyDetail">{{ issueType.surveyDetail }}</div>
@@ -67,20 +70,22 @@
 									</div>
 									{{ issueType.surveyMen }}%
 								</div>
+								</div>
 							</div>
 						</div>
 						<div class="h-col-75 pull-left">
-							<div class="u-box u-box-white">
+							<div class="u-box u-box-white news-homepage-featured nopadding">
+								<div class="u-box-white-padding">
 								{# pull 4 news feed #}
-								<div class="news-homepage-featured nopadding clearfix">
+								<div class="clearfix">
 									{% set i = 0 %}
 									{% for entity in entities_news %}
 										{% set i = i + 1 %}
 
 										{# show only two #}
 										{% if i <= 2 %}
-										<div class="news-box-module nopadding">
-											<div class="news-box-wrap nopadding">
+										<div class="news-box-module ">
+											<div class="news-box-wrap ">
 										    <div class="news-body">
 										    	<h2 class="news-title"><a href="{{ path('news_show', {'slug': entity.slug }) }}" class="">{{ entity.name }}</a></h2>
 										    	{# {{ entity.description | raw  }} #}
@@ -98,6 +103,7 @@
 										{% endif %}
 
 									{% endfor %}
+								</div>
 								</div>
 							</div>
 						</div>
@@ -240,6 +246,9 @@ $(document).ready(function(){
   equal_height('.news-homepage', '.news-box-module');  
 
   equal_height('.homepage-widget', '.u-box');  
+
+  //featured section
+  $('.news-homepage-featured .news-box-module').height(($('.news-homepage-featured').height()-10)/2);
   
   //img, audio, video height equal
   $('.audio, .video').height($('.img').height());
@@ -269,6 +278,9 @@ $(window).resize(function() {
   equal_height('.news-homepage', '.news-box-module');  
 
   equal_height('.homepage-widget', '.u-box');  
+  
+  //featured section
+  $('.news-homepage-featured .news-box-module').height(($('.news-homepage-featured').height()-10)/2);
   
   //img, audio, video height equal
   $('.audio, .video').height($('.img').height());

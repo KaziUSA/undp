@@ -336,7 +336,24 @@ body.survey {
 }
 .homepage-widget .u-box-white {
 	margin-top: 0;
+	padding: 0;
+}
+.homepage-widget .u-box-white .u-box-white-padding {
 	padding: 10px;
+}
+.u-box.u-box-white.news-homepage-featured .u-box-white-padding {
+    padding: 0;
+    background: none;
+}
+.homepage-widget .u-box-white.news-homepage-featured {
+    background: none;
+}
+.news-homepage-featured .news-box-module {
+	padding-right: 0;
+}
+.news-homepage-featured .news-box-module:first-child {
+    margin-bottom: 10px;
+    /* padding: 10px; */
 }
 .h-col-25 {
 	width: 25%;
