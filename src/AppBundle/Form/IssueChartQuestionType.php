@@ -26,6 +26,8 @@ class IssueChartQuestionType extends AbstractType
                 'choices'  => array(
                     1  => 'Circle Donut',
                     2  => 'Semi circle donut',
+                    3  => 'Column Basic',
+                    4  => 'Pyramid'
                 ),
             ))
             ->add('issueQuestion')

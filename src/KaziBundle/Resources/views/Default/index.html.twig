@@ -276,10 +276,10 @@ $(window).resize(function() {
 
 
 // according to chart type
-{% if issueType.chartType == 1 %}
+// {% if issueType.chartType == 1 %}
 	//chartType 1 = Circle Donut
 
-	//chartType = bar-basic
+	//Always on homepage: chartType = bar-basic
 	Highcharts.chart('container-homepage', {
     chart: {
         type: 'bar'
@@ -355,7 +355,8 @@ $(window).resize(function() {
 	    }
     ]
 	});
-{% endif %}
+
+// {% endif %}
 </script>
 
 {% endblock %}

@@ -62,7 +62,12 @@ survey
 					              	<select id="issue-Reconstruction-year-month-dropdown">
 				                  	{% for it in issueType %}
 				                  		{% if it.name == 'Reconstruction' %}
-				                  			<option value="{{ it.year ~ '-' ~ it.month }}">{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+				                  			<option value="{{ it.year ~ '-' ~ it.month }}"
+				                  			{# selected="" #}
+				                  			{% if question_detail.issueType.month == it.month and question_detail.issueType.year == it.year %}
+				                  				selected="selected" 
+				                  			{% endif %}
+				                  			>{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
 				                  		{% endif %}	
 				                  	{% endfor %}
 					              	</select>
@@ -167,6 +172,7 @@ survey
 							</div>
 						</div>
 
+						{% if infographics is not empty or question_detail.imageUrl != '' %}
 						<div class="s-box-module s-box-module-border">
 							<div class="row nomargin parent-height">
 								<div class="col-sm-6 child-height">
@@ -230,6 +236,7 @@ survey
 								</div>
 							</div>
 						</div>
+						{% endif %}
 
 
 						<div class="row nomargin">
@@ -353,56 +360,162 @@ survey
 		  {% elseif qo.chartType == 2 %}
 		  	//chartType 2 = Semi Circle Donut
 		    Highcharts.chart('container-issue-question-{{ qo.id }}', {
-		            chart: {
-		                plotBackgroundColor: null,
-		                plotBorderWidth: 0,
-		                plotShadow: false
-		            },
-		            colors: {{ chart_color | raw }},
-		            legend: {
-		            	align: 'center'
-		            },
-		            title: {
-		            		//issueChartQuestion here
-		                text: '{{ qo.name }}',
-		                // align: 'center',
-		                // verticalAlign: 'middle',
-		                y: 20
-		            },
-		            tooltip: {
-		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-		            },
-		            plotOptions: {
-		                pie: {
-		                    dataLabels: {
-		                        enabled: false
-		                    },
-		                    
-		                    startAngle: -90,//for half pie
-		                    endAngle: 90,//for half pie
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: 0,
+              plotShadow: false
+          },
+          colors: {{ chart_color | raw }},
+          legend: {
+          	align: 'center'
+          },
+          title: {
+          		//issueChartQuestion here
+              text: '{{ qo.name }}',//question name
+              // align: 'center',
+              // verticalAlign: 'middle',
+              y: 20
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  dataLabels: {
+                      enabled: false
+                  },
+                  
+                  startAngle: -90,//for half pie
+                  endAngle: 90,//for half pie
 
-		                    center: ['50%', '50%'],
-		                    showInLegend: true
-		                }
-		            },
-		            series: [{
-		                type: 'pie',
-		                name: '',
-		                innerSize: '40%',//50%
-		                data: [
-		                		//issueChartOption here
-		                    
-		                    /*['Water supply',   40],
-		                    ['Schools',       20],
-		                    ['Roads', 10],
-		                    ['Hospitals / Health centre',     8]*/
+                  center: ['50%', '50%'],
+                  showInLegend: true
+              }
+          },
+          series: [{
+              type: 'pie',
+              name: '',
+              innerSize: '40%',//50%
+              data: [
+              		//issueChartOption here
+                  
+                  /*['Water supply',   40],
+                  ['Schools',       20],
+                  ['Roads', 10],
+                  ['Hospitals / Health centre',     8]*/
 
-		                		{% for opt in qo.option %}
-													["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
-												{% endfor %}
-		                ]
-		            }]
+              		{% for opt in qo.option %}
+										["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
+									{% endfor %}
+              ]
+          }]
 		    });
+		  {% elseif qo.chartType == 3 %} //Column Basic
+		  	Highcharts.chart('container-issue-question-{{ qo.id }}', {
+			    chart: {
+			        type: 'column'
+			    },
+          colors: {{ chart_color | raw }},
+			    title: {
+			        text: '{{ qo.name }}',//question name
+			    },
+			    subtitle: {
+			        text: ''
+			    },
+			    /*xAxis: {
+			        categories: [
+			            'Jan',
+			        ],
+			        crosshair: true
+			    },*/
+			    xAxis: {
+			    	title: {
+			      	text: ' '
+			      }
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: ' '
+			        }
+			    },
+			    tooltip: {
+			        //headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			        headerFormat: ' ',
+			        pointFormat: 
+			        '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+			        footerFormat: '</table>',
+			        //shared: true,
+			        useHTML: true
+			    },
+			    plotOptions: {
+			        column: {
+			            pointPadding: 0.2,
+			            borderWidth: 0
+			        }
+			    },
+			    /*series: [
+			    	{
+			        name: 'Tokyo',
+			        data: [49.9]
+
+			    	}, 
+			    	{
+			        name: 'Berlin',
+			        data: [42.4]
+			    	}
+			    ],*/
+			    series: [
+			    				{% for opt in qo.option %}
+			    				{
+										name: "{{ opt.name | raw }}",
+										data: [ {{ opt.value }} ],//issue/4 - ' quote issue
+			    				},
+									{% endfor %}
+			    ]
+				});
+
+	    {% elseif qo.chartType == 4 %} //pyramid
+
+				Highcharts.chart('container-issue-question-{{ qo.id }}', {
+				    chart: {
+				        type: 'pyramid'
+				    },
+				    colors: {{ chart_color | raw }},
+				    title: {
+				        text: '{{ qo.name }}',//question name
+				        x: -50
+				    },
+				    plotOptions: {
+				        series: {
+				            dataLabels: {
+				                enabled: true,
+				                format: '<b>{point.name}</b> ({point.y:,.0f})',
+				                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+				                softConnector: false
+				            },
+				            center: ['50%', '50%'],
+				            width: '100%'
+				        }
+				    },
+				    legend: {
+				        enabled: true
+				    },
+				    series: [{
+				        name: ' ',
+				        data: [
+				            /*['Website visits',      15654],
+				            ['Downloads',            4064],
+				            ['Requested price list', 1987],
+				            ['Invoice sent',          976],
+				            ['Finalized',             846]*/
+				            {% for opt in qo.option %}
+											["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
+										{% endfor %}
+				        ]
+				    }]
+				});
 	    {% endif %}
     {% endfor %}
 
