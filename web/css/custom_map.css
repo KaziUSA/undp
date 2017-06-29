@@ -20,6 +20,13 @@
 		/*border-width: 3px;
 		border-style: solid;*/
     padding: 10px;	
+    margin-right: 50px;
+}
+@media (max-width: 1024px) {
+	.leaflet-info-padding {
+		margin-left: 20px;
+		margin-right: 0;
+	}
 }
 .info.leaflet-bottom{
   padding:10px;

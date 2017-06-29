@@ -252,6 +252,9 @@ body.survey {
   margin-bottom: 5px;
   text-align: center;
 }
+.no_imageUrl {
+	background: #ebebeb !important;
+}
 
 /* highcharts */
 .container-chart {
@@ -380,6 +383,10 @@ body.survey {
 
 .survey-men-icon {
     padding-top: 7px;
+}
+
+.hrrp {
+    color: #6bb282;
 }
 
 @media (max-width: 969px) and (min-width: 768px) {

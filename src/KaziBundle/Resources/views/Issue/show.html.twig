@@ -154,7 +154,7 @@ survey
 						</div>
 
 						{# TODO: need to make people saying map responsive #}
-						<div class="row nomargin visible-lg">
+						<div class="row nomargin">
 							<div class="col-sm-12">
 								{# map #}
 								<div class="s-box">
@@ -205,8 +205,10 @@ survey
 									
 
 								</div>
-								<div class="col-sm-6 child-height s-box-right">
-									<div class="s-box">
+								
+								{# {% if question_detail.imageUrl != '' %} #}
+								<div class="col-sm-6 child-height s-box-right {% if question_detail.imageUrl == '' %}no_imageUrl{% endif %}">
+									<div class="s-box {% if question_detail.imageUrl == '' %}no_imageUrl{% endif %}">
 										<div class="graphics">
 											{% if question_detail.imageTitle != '' %}
 												<h2>{{ question_detail.imageTitle }}</h2>
@@ -303,6 +305,7 @@ survey
 		                plotBorderWidth: 0,
 		                plotShadow: false
 		            },
+		            colors: {{ chart_color | raw }},
 		            legend: {
 		            	align: 'center'
 		            	// itemWidth: 100,
@@ -342,7 +345,7 @@ survey
 		                    ['Hospitals / Health centre',     8]*/
 
 		                		{% for opt in qo.option %}
-													['{{ opt.name }}',   {{ opt.value }}],//issue/4 - ' quote issue
+													["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
 												{% endfor %}
 		                ]
 		            }]
@@ -355,6 +358,7 @@ survey
 		                plotBorderWidth: 0,
 		                plotShadow: false
 		            },
+		            colors: {{ chart_color | raw }},
 		            legend: {
 		            	align: 'center'
 		            },
@@ -394,7 +398,7 @@ survey
 		                    ['Hospitals / Health centre',     8]*/
 
 		                		{% for opt in qo.option %}
-													['{{ opt.name }}',   {{ opt.value }}],//issue/4 - ' quote issue
+													["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
 												{% endfor %}
 		                ]
 		            }]

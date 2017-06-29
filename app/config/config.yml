@@ -42,6 +42,7 @@ twig:
         project_title: "Inter-Agency Common Feedback Project"
         #records_list: "table table-condensed table-hover table-striped"
         records_list: "records_list table table-striped table-bordered table-hover dataTables-example"
+        chart_color: "['#d4dd64', '#006842', '#85c664', '#f3ec6f', '#009456']"
 
 # Assetic Configuration
 assetic:

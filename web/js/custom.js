@@ -1,11 +1,32 @@
 		//TWEAKING THE MAP
-        var zoom_level = 7.4;//6.8 - previously
+    var zoom_level = 7.6;//6.8 - previously
+
 		var index_grades = [0, 10, 20, 50, 100, 200, 500, 1000];//0-10
+		
+		var setViewY = 27.5;
+		var setViewX = 87.8;
+		var win_width = $(window).width();
+
+		if(win_width <= 1200) {
+			setViewX -= 0.5;
+		}
+		if(win_width <= 1024) {
+			setViewX -= 0.5;
+		}
+		if(win_width <= 980) {
+			zoom_level = 7.4;
+		}
+		if(win_width <= 840) {
+			zoom_level = 7.2;
+		}
+		var setView = [setViewY, setViewX];
+
 		var map = L.map('map', { 
 			scrollWheelZoom: false,
 			zoomControl: false,//zoom control
 			dragging: false,
-			}).setView([27.5, 88.3], zoom_level);//28.5, 84.3
+			keyboard: false,//movement with arrow key
+			}).setView(setView, zoom_level);//28.5 (y), 84.3 (x)
 			//originally 7, removed zoom control
 
 		L.tileLayer('', {
@@ -42,7 +63,7 @@
 			var people_saying = '';
 			if(props != undefined) {
 				if(props.total != undefined) {
-					people_saying = '<div class="leaflet-info-padding" style="border-color: '+ props.bgColor +'"><div class="district-name">' + props.name + '</div><br />' +
+					people_saying = '<div class="leaflet-info-padding" style="border-color: '+ props.bgColor +'"><div class="district-name" style="color: '+ props.bgColor +'">' + props.name + '</div><br />' +
 					/*'<div class="girls item"><div class="label"><div class="icon"></div><div class="label-name">Girls</div></div><div class="value">' + KAZI.util(value,props.girls,"g",props.total) + '%</div></div><div class="clear"></div>'+
 					'<div class="boys item"><div class="label"><div class="icon"></div><div class="label-name">Boys</div></div><div class="value">' + KAZI.util(value,props.boys,"b",props.total) + '%</div></div><div class="clear"></div>'+*/
 					'<div class="total item"><div class="label"></div><div class="value">' + props.total + '</div></div><div class="clear"></div></div>';
@@ -74,9 +95,9 @@
 
 		function style(feature) {
 			return {
-				weight: 1,
+				weight: 2,
 				opacity: 1,
-				color: '#ccc',//border
+				color: '#ffffff',//border
 				dashArray: '0',//3
 				fillOpacity: 1,//0.7
 				// fillColor: getColor(feature.properties.total)//bg color
@@ -88,8 +109,8 @@
 			var layer = e.target;
 
 			layer.setStyle({
-				weight: 1,//5 - hover border width
-				color: '#ccc',//border color #666
+				weight: 2,//5 - hover border width
+				color: '#ffffff',//border color #666
 				dashArray: '',
 				fillOpacity: 1//0.7
 			});

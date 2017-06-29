@@ -109,7 +109,7 @@ class MapController extends Controller
         $properties['boys'] = rand(0, 800);
         $properties['girls'] =rand(0, 800);
         
-        $properties['bgColor'] = 'black';
+        $properties['bgColor'] = '#0b9444';
 
         //Reading csv and setting boys and girls value
         //adding this - for unicef test map showing for demo
@@ -126,22 +126,6 @@ class MapController extends Controller
         /* Need to make dynamic */
 
         //Question: Besides building your home, What is your biggest reconstruction priority?
-        /*if($properties['name'] == 'Sindhupalchowk') {
-            $properties['total'] = "Fulpingkatti, Sindhupalchowk: It is difficult to reconstruct house due to water shortage.<br><br>HRRP: The issue of water has been raised";
-            
-            $properties['bgColor'] = "brown";
-        } 
-        else if($properties['name'] == 'Lalitpur') {
-            $properties['total'] = "Godawari, Lalitpur: Most of us (Dalit) do not have land ownership documents. Hence, we are excluded from the beneficiary list. We need government cash support.";
-            
-            $properties['bgColor'] = "yellow";
-        }
-        else {
-            // $properties['total'] = $properties['girls']+$properties['boys'];
-            $properties['total'] = $properties['name'] . " people saying";
-
-            $properties['bgColor'] = "black";
-        }*/
 
         //pulling people saying here
         // var_dump($question_id); exit();
@@ -154,11 +138,15 @@ class MapController extends Controller
             if($properties['name'] == $say->getDistrict()->getName()) {
                 $properties['name'] = $say->getLocation() . ', ' . $say->getDistrict()->getName();
 
-                $properties['total'] = $say->getSaying() . '<br><br>' . $say->getHrrp();
+                $properties['total'] = $say->getSaying();
 
-                if($say->getDistrict()->getColor() != '') {
+                if($say->getHrrp() != '')
+                $properties['total'] .= '<br><br><div class="hrrp">HRRP: ' . $say->getHrrp() . '</div>';
+
+                /*if($say->getDistrict()->getColor() != '') {
                     $properties['bgColor'] = $say->getDistrict()->getColor();
-                } 
+                } */
+                $properties['bgColor'] = '#349de7';
             }
         }
         // exit();
