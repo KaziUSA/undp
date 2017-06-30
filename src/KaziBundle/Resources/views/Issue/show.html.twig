@@ -395,7 +395,7 @@ survey
           series: [{
               type: 'pie',
               name: '',
-              innerSize: '40%',//50%
+              innerSize: '50%',//50%
               data: [
               		//issueChartOption here
                   
@@ -418,6 +418,7 @@ survey
           colors: {{ chart_color | raw }},
 			    title: {
 			        text: '{{ qo.name }}',//question name
+			        y: 20
 			    },
 			    subtitle: {
 			        text: ''
@@ -476,7 +477,7 @@ survey
 			    ]
 				});
 
-	    {% elseif qo.chartType == 4 %} //pyramid
+	    {% elseif qo.chartType == 4 %} //pyramid - requires highcharts.js and funnel.js
 
 				Highcharts.chart('container-issue-question-{{ qo.id }}', {
 				    chart: {
@@ -485,7 +486,7 @@ survey
 				    colors: {{ chart_color | raw }},
 				    title: {
 				        text: '{{ qo.name }}',//question name
-				        x: -50
+			        	y: 20
 				    },
 				    plotOptions: {
 				        series: {
@@ -515,6 +516,97 @@ survey
 										{% endfor %}
 				        ]
 				    }]
+				});
+			{% elseif qo.chartType == 5 %} //Category - Bar chart
+				Highcharts.chart('container-issue-question-{{ qo.id }}', {
+			    chart: {
+			        type: 'bar'
+			    },
+			    colors: {{ chart_color | raw }},
+			    title: {
+			        text: '{{ qo.name }}',//question name
+			        y: 20
+			    },
+			    subtitle: {
+			        text: ' '
+			    },
+			    xAxis: {
+			        categories: [
+			        						// 'Africa', 'America', 'Asia', 'Europe', 'Oceania'
+			        						{% for opt in qo.option %}
+			        							{% for subopt in opt.suboption %}
+															'{{ subopt.name }}',
+														{% endfor %}
+													{% endfor %}
+			        						],
+			        title: {
+			            text: null
+			        }
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: ' ',
+			            align: 'high'
+			        },
+			        labels: {
+			            overflow: 'justify'
+			        }
+			    },
+			    tooltip: {
+			        // valueSuffix: ' millions'
+			    },
+			    plotOptions: {
+			        bar: {
+			            dataLabels: {
+			                enabled: false,//data labels
+			            }
+			        },
+			        /*column: {
+			            colorByPoint: true
+			        }*/
+			    },
+			    legend: {
+			        /*layout: 'vertical',
+			        align: 'right',
+			        verticalAlign: 'top',
+			        x: -40,
+			        y: 80,
+			        floating: false,
+			        borderWidth: 1,
+			        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+			        shadow: true,*/
+			        enabled: true //hide year
+			    },
+			    credits: {
+			        enabled: false
+			    },
+			    series: [
+				    //can be added more
+				    {#/*{
+				        name: 'Yes',
+				        data: [
+				        			107, 31, 635, 203, 2
+				        			]
+				    },
+				    {
+				        name: 'No',
+				        data: [
+				        			107, 31, 635, 203, 2
+				        			]
+				    }*/#}
+				    {% for opt in qo.option %}
+				    	{
+				    		name: '{{ opt.name }}',
+								data: [
+												// 107, 31, 635, 203, 2,
+												{% for subopt in opt.suboption %}													
+													{{ subopt.value }},
+												{% endfor %}
+											]
+							},
+						{% endfor %}
+			    ]
 				});
 	    {% endif %}
     {% endfor %}

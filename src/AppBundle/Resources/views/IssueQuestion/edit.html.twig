@@ -3,6 +3,8 @@
 {% block body -%}
     <h1>IssueQuestion edit</h1>
 
+    <p><a target="_blank" href="{{ path('issue_show', {'id': entity.id}) }}">View This Page</a></p>
+
     {{ form(edit_form) }}
 
     <ul class="record_actions">
@@ -14,6 +16,7 @@
         <li>{{ form(delete_form) }}</li>
     </ul>
 
+    <div class="edit-helper">
     <h2>Other Fields</h2>
     <p>Click to edit</p>
 
@@ -30,11 +33,28 @@
                 {# <p><a target="_blank" href="{{ path('issuechartquestion_new') }}">Create new issue chart question</a></p> #}
             {% endif %}
 
-            
+
             {% if qo.option is not empty %}
                 <ul>
                 {% for opt in qo.option %}
-                <li><a target="_blank" href="{{ path('issuechartoption_edit', {'id': opt.id }) }}">{{ opt.name }} - {{ opt.value }}</a></li>
+                <li>
+                    <a target="_blank" href="{{ path('issuechartoption_edit', {'id': opt.id }) }}">{{ opt.name }} - {{ opt.value }}</a>
+
+                    {# issuechartsuboption - for category chart only #}
+                    {# question.chartType = 5 is Category - Bar #}
+                    {% if qo.chartType == 5 %}
+                        - <a target="_blank" href="{{ path('issuechartsuboption_new', {'id': opt.id}) }}">Create sub option</a>
+
+                        {# if sub option is created #}
+                        {% if opt.suboption is not empty %}
+                            <ul>
+                            {% for subopt in opt.suboption %}
+                                <li><a href="">{{ subopt.name }} - {{ subopt.value }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endif %}
+                </li>
                 {% endfor %}
                 </ul>
         
@@ -61,12 +81,15 @@
                 
                 {% if info.option is not empty %}
 
+                    <ul>
                     {% for opt in info.option %}
-                        <div class="infographics-list">
-                            <p><a target="_blank" href="{{ path('issueinfographics_edit', {'id': opt.id }) }}">{{ opt.description }}</a></p>
-                        </div>
+                        <li><a target="_blank" href="{{ path('issueinfographics_edit', {'id': opt.id }) }}">{{ opt.description }}</a></li>
                     {% endfor %}
-                    <p><a target="_blank" href="{{ path('issueinfographics_new', {'id': info.id}) }}">Create more Infographics</a></p>
+
+                        <li><a target="_blank" href="{{ path('issueinfographics_new', {'id': info.id}) }}">Create more Infographics</a></li>
+                    </ul>
+
+                    
                 {% else %}
                     <p><a target="_blank" href="{{ path('issueinfographics_new', {'id': info.id}) }}">Create new Infographics</a></p>
                 {% endif %}
@@ -87,11 +110,12 @@
             {% for say in sayings %}
                 <li><a target="_blank" href="{{ path('issuemapsayings_edit', {'id': say.id }) }}">{{ say.location }}, {{ say.district.name }}: {{ say.saying }}</a></li>
             {% endfor %}
+            <li><a target="_blank" href="{{ path('issuemapsayings_new', {'id': entity.id}) }}">Create more</a></li>
         </ul>
 
-        <p><a target="_blank" href="{{ path('issuemapsayings_new', {'id': entity.id}) }}">Create more</a></p>
+        
     {% else %}
-        <p><a target="_blank" href="{{ path('issuemapsayings_new', {'id': entity.id}) }}">Create new</a></p>
+        <p><a target="_blank" href="{{ path('issuemapsayings_new', {'id': entity.id}) }}">Create new sayings</a></p>
     {% endif %}
     </div>
 
@@ -109,6 +133,7 @@
         <li><a href="{{ path('issueinfographicstitle') }}">Issue Infographics Title</a></li>
         <li><a href="{{ path('issueinfographics') }}">Issue Infographics</a></li>
     </ul> #}
+    </div>
 {% endblock %}
 
 

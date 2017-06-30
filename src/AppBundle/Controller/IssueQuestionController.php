@@ -201,11 +201,45 @@ class IssueQuestionController extends Controller
             $chart_option = $em->getRepository('AppBundle:IssueChartOption')->findByIssueChartQuestion( $cq->getId() );//TODO: chart question id to be passed
             // var_dump($chart_option); exit();    
 
-            $question_option[$i]['option'] = (array) $chart_option;
+            // $question_option[$i]['option'] = (array) $chart_option;//TODO: remove this after creating 'option_final'
+
+
+
+
+            $chart_option_arr = (array) $chart_option;
+
+            $question_option[$i]['option'] = array();
+            
+            //debug
+            // if($id == 2) {
+                // $question_option[$i]['option']['suboption'] = array();
+                // get charts sub option too
+                $oi = 0;//option increment
+                foreach ($chart_option_arr as $co) {
+                    // var_dump($co);
+                    $question_option[$i]['option'][$oi]['id'] = $co->getId();
+                    $question_option[$i]['option'][$oi]['name'] = $co->getName();
+                    $question_option[$i]['option'][$oi]['value'] = $co->getValue();
+
+
+                    $chart_sub_option = $em->getRepository('AppBundle:IssueChartSubOption')->findByIssueChartOption( $co->getId() );
+
+                    $question_option[$i]['option'][$oi]['suboption'] = (array) $chart_sub_option;
+
+
+
+                    $oi++;
+                }
+            // }//end if $id == 2
+
+
+
 
             $i++;
         }
-        // var_dump($question_option); exit();
+        if($id == 2) {
+            // var_dump($question_option); exit();
+        }
 
 
 

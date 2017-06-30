@@ -27,7 +27,8 @@ class IssueChartQuestionType extends AbstractType
                     1  => 'Circle Donut',
                     2  => 'Semi circle donut',
                     3  => 'Column Basic',
-                    4  => 'Pyramid'
+                    4  => 'Pyramid',//TODO: Need to work - requires new highcharts.js and funnel.js - not compatible with older platform highcharts
+                    5  => 'Category - Bar Chart',
                 ),
             ))
             ->add('issueQuestion')

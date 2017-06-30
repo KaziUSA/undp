@@ -7687,3 +7687,11 @@ body.DTTT_Print {
         margin-right: 5px;
 
     }
+
+.edit-helper ul {
+    padding-left: 20px;
+}
+
+.edit-helper ul li {
+    list-style: disc;
+}

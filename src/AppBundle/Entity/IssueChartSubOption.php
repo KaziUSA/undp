@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * IssueChartOption
+ * IssueChartSubOption
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class IssueChartOption
+class IssueChartSubOption
 {
     /**
      * @var integer
@@ -23,10 +23,10 @@ class IssueChartOption
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="IssueChartQuestion", inversedBy="issuechartoption")
-     * @ORM\JoinColumn(name="issue_chart_question_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="IssueChartOption", inversedBy="issuechartsuboption")
+     * @ORM\JoinColumn(name="issue_chart_option_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $issueChartQuestion;
+    private $issueChartOption;
 
     /**
      * @var string
@@ -38,7 +38,7 @@ class IssueChartOption
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="string", length=255, nullable=true)
+     * @ORM\Column(name="value", type="string", length=255)
      */
     private $value;
 
@@ -58,7 +58,7 @@ class IssueChartOption
      *
      * @param string $name
      *
-     * @return IssueChartOption
+     * @return IssueChartSubOption
      */
     public function setName($name)
     {
@@ -82,7 +82,7 @@ class IssueChartOption
      *
      * @param string $value
      *
-     * @return IssueChartOption
+     * @return IssueChartSubOption
      */
     public function setValue($value)
     {
@@ -102,33 +102,27 @@ class IssueChartOption
     }
 
     /**
-     * Set issueChartQuestion
+     * Set issueChartOption
      *
-     * @param \AppBundle\Entity\IssueChartQuestion $issueChartQuestion
+     * @param \AppBundle\Entity\IssueChartOption $issueChartOption
      *
-     * @return issueChartQuestion
+     * @return issueChartOption
      */
-    public function setIssueChartQuestion(\AppBundle\Entity\IssueChartQuestion $issueChartQuestion = null)
+    public function setIssueChartOption(\AppBundle\Entity\IssueChartOption $issueChartOption = null)
     {
-        $this->issueChartQuestion = $issueChartQuestion;
+        $this->issueChartOption = $issueChartOption;
 
         return $this;
     }
 
     /**
-     * Get issueChartQuestion
+     * Get issueChartOption
      *
-     * @return \AppBundle\Entity\IssueChartQuestion
+     * @return \AppBundle\Entity\IssueChartOption
      */
-    public function getIssueChartQuestion()
+    public function getIssueChartOption()
     {
-        return $this->issueChartQuestion;
-    }
-    
-
-    /* To fix: Object of class Proxies\__CG__\AppBundle\Entity\... could not be converted to string"). */
-    public function __toString() {
-        return $this->name;
+        return $this->issueChartOption;
     }
 }
 
