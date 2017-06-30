@@ -19,18 +19,18 @@ survey
 			        <div class="feedback-tab clearfix" style="">
 
 			            <ul id="" class="nav nav-tabs" role="tablist">
-			              <li role="presentation" class=""><a href="#livelihood" aria-controls="messages" role="tab" data-toggle="tab" value="">Livelihood</a></li>
+			              <li role="presentation" class="Livelihood-tab-head"><a href="#livelihood" aria-controls="messages" role="tab" data-toggle="tab" value="">Livelihood</a></li>
 
-			              <li role="presentation" class="active"><a href="#reconstruction" aria-controls="settings" role="tab" data-toggle="tab" value="">Reconstruction</a></li>
+			              <li role="presentation" class="active Reconstruction-tab-head"><a href="#reconstruction" aria-controls="settings" role="tab" data-toggle="tab" value="">Reconstruction</a></li>
 
-			              <li role="presentation" class=""><a href="#protection" aria-controls="messages" role="tab" data-toggle="tab" value="">Protection</a></li>
+			              <li role="presentation" class="Protection-tab-head"><a href="#protection" aria-controls="messages" role="tab" data-toggle="tab" value="">Protection</a></li>
 
 			            </ul>
 			        </div>
 
 			        <!-- Tab panes -->
 			        <div class="tab-content">
-			          <div role="tabpanel" class="tab-pane fade in" id="livelihood">
+			          <div role="tabpanel" class="tab-pane fade in Livelihood-tab-content" id="livelihood">
 			              <div class="tab-content-wrap">
 			              	{% if issue_questions is not empty %}
 				              	<div id="zelect">
@@ -55,7 +55,7 @@ survey
 			              </div>
 			          </div>
 
-			          <div role="tabpanel" class="tab-pane fade in active" id="reconstruction">
+			          <div role="tabpanel" class="tab-pane fade in active Reconstruction-tab-content" id="reconstruction">
 			              <div class="tab-content-wrap">
 			              	{% if issue_questions is not empty %}
 				              	<div id="zelect">
@@ -92,7 +92,7 @@ survey
 			              </div>
 			          </div>
 
-			          <div role="tabpanel" class="tab-pane fade in" id="protection">
+			          <div role="tabpanel" class="tab-pane fade in Protection-tab-content" id="protection">
 			              <div class="tab-content-wrap">
 			              	{% if issue_questions is not empty %}
 				              	<div id="zelect">
@@ -194,7 +194,11 @@ survey
 													{% for opt in info.option %}
 														<div class="infographics-list">
 															<span class="icon">
-																{{ opt.icon }}
+																{# {{ opt.icon }} #}
+																{% if opt.imageUrl != '' %}
+																	<img src="/uploads/issue/infographics/{{ opt.imageUrl }}">
+																{% endif %}
+
 																{% if info.type == 3 %}
 																	%
 																{% endif %}
@@ -260,6 +264,15 @@ survey
     <link href="/css/custom_map.css" rel="stylesheet">
     {# custom.css for admin #}
 {% endblock %}
+
+{% block highchartsJs %}
+  {#<script src="/js/plugins/highcharts/highcharts.js"></script>#} {# for platform #}
+
+  <script src="https://code.highcharts.com/highcharts.js"></script> 
+	<script src="/js/plugins/highcharts/funnel.js"></script><!-- for pyramid -->
+{% endblock %}
+
+
 
 {% block scriptIncludes %}
 
@@ -535,7 +548,7 @@ survey
 			        						// 'Africa', 'America', 'Asia', 'Europe', 'Oceania'
 			        						{% for opt in qo.option %}
 			        							{% for subopt in opt.suboption %}
-															'{{ subopt.name }}',
+															"{{ subopt.name | raw }}",
 														{% endfor %}
 													{% endfor %}
 			        						],
@@ -597,7 +610,7 @@ survey
 				    }*/#}
 				    {% for opt in qo.option %}
 				    	{
-				    		name: '{{ opt.name }}',
+				    		name: "{{ opt.name | raw }}",
 								data: [
 												// 107, 31, 635, 203, 2,
 												{% for subopt in opt.suboption %}													
@@ -617,5 +630,26 @@ survey
     	$('.Reconstruction').hide(); 
     	$('.Reconstruction.'+val).show(); 
     });
+
+    //change tab head active
+    $('.survey .nav-tabs li').removeClass('active'); 
+    $('.survey .tab-pane').removeClass('active'); 
+
+    function change_tab_head_active(issueType) {
+    	if($('li.'+ issueType +'').hasClass('current_page_item')) { 
+	    	$('li.'+ issueType +'-tab-head').addClass('active'); 
+	    	$('.tab-pane.'+ issueType +'-tab-content').addClass('active'); 
+	    }
+    }
+    change_tab_head_active('Protection');
+    change_tab_head_active('Livelihood');
+    change_tab_head_active('Reconstruction');
+    
+    /*if($('li.Livelihood').hasClass('current_page_item')) { 
+    	$('li.Livelihood-tab-head').addClass('active'); 
+    }
+    if($('li.Reconstruction').hasClass('current_page_item')) { 
+    	$('li.Reconstruction-tab-head').addClass('active'); 
+    }*/
     </script>
 {% endblock %}

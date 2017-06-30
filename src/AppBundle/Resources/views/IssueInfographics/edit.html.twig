@@ -5,6 +5,11 @@
 
     {{ form(edit_form) }}
 
+    {% if entity.imageUrl != '' %}
+        <p>Chosen image:</p>
+        <img src="/uploads/issue/infographics/{{ entity.imageUrl }}">
+    {% endif %}
+
         <ul class="record_actions">
     <li>
         <a href="{{ path('issueinfographics') }}">

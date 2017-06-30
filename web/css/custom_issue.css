@@ -71,10 +71,14 @@
 }
 
 .infographics .infographics-list .icon {
-	background: #f2f2f2;
+	/*background: #f2f2f2;*/
 	display: inline-block;
 	height: 80px;
+	text-align: center;
 	width: 80px;
+}
+.infographics .infographics-list .icon img {
+	height: 60px;
 }
 .infographics.infographics-style-1 .infographics-list .icon,
 .infographics.infographics-style-3 .infographics-list .icon { 

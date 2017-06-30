@@ -83,7 +83,11 @@
 
                     <ul>
                     {% for opt in info.option %}
-                        <li><a target="_blank" href="{{ path('issueinfographics_edit', {'id': opt.id }) }}">{{ opt.description }}</a></li>
+                        <li>
+                            {% if opt.imageUrl != '' %}
+                            <img src="/uploads/issue/infographics/{{ opt.imageUrl }}">
+                            {% endif %}
+                            <a target="_blank" href="{{ path('issueinfographics_edit', {'id': opt.id }) }}">{{ opt.description }}</a></li>
                     {% endfor %}
 
                         <li><a target="_blank" href="{{ path('issueinfographics_new', {'id': info.id}) }}">Create more Infographics</a></li>
