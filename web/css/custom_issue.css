@@ -80,20 +80,20 @@
 .infographics .infographics-list .icon img {
 	height: 60px;
 }
-.infographics.infographics-style-1 .infographics-list .icon,
-.infographics.infographics-style-3 .infographics-list .icon { 
+.infographics .infographics-list .icon
+/*, .infographics.infographics-style-3 .infographics-list .icon*/ { 
 	float: left;
 	margin-right: 15px;
 }
-.infographics.infographics-style-1 .infographics-list,
-.infographics.infographics-style-3 .infographics-list {
+.infographics .infographics-list
+/*, .infographics.infographics-style-3 .infographics-list*/ {
 	display: block;
   clear: both;
   margin-bottom: 20px;
   min-height: 80px;
 }
 
-.infographics.infographics-style-2 .infographics-list {
+/*.infographics.infographics-style-2 .infographics-list {
     float: left;
     max-width: 33%;
     width: 33%;
@@ -101,7 +101,7 @@
 }
 .infographics.infographics-style-2 .infographics-list:last-child {
 	padding-right: 0;
-}
+}*/
 
 
 .tab-heading {
@@ -227,6 +227,15 @@ body.survey {
 .s-box-module {
     background: #fff;
     margin-bottom: 10px;
+}
+.border-top {
+	border-top: 10px solid #ebebeb;
+}
+.border-right {
+	border-right: 10px solid #ebebeb;
+}
+.border-left {
+	border-left: 10px solid #ebebeb;
 }
 @media (min-width: 768px) {
 	.s-box-module-border .s-box-right {

@@ -92,6 +92,7 @@ class IssueController extends Controller
         //get charts questions
         $chart_question = $em->getRepository('AppBundle:IssueChartQuestion')->findByIssueQuestion($id);
         // var_dump($chart_question); exit();        
+        // var_dump(count($chart_question)); exit();
         
 
         

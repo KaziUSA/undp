@@ -17,13 +17,13 @@ class IssueInfographicsTitleType extends AbstractType
         $builder
             ->add('name')
             // ->add('type')            
-            ->add('type', 'choice', array(
+            /*->add('type', 'choice', array(
                 'choices'  => array(
                     1  => 'Vertical',
                     2  => 'Horizontal',
                     3  => 'Vertical (Percentage)',
                 ),
-            ))
+            ))*/
             ->add('issueQuestion')
         ;
     }

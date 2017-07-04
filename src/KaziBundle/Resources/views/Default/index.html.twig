@@ -297,7 +297,9 @@ $(window).resize(function() {
         type: 'bar'
     },
     title: {
-        text: ' '
+        align: '{{ chart_title_alignment }}',
+        text: ' ',
+        style: {{ chart_title_style | raw }},
     },
     subtitle: {
         text: ' '

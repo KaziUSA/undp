@@ -131,7 +131,14 @@ survey
 					<div class="wrapper clearfix"><!--wrapper remove or not-->
 						<div class="s-box-module s-box-module-border">
 							<div class="row nomargin parent-height">
-								<div class="col-lg-8 col-sm-6 child-height">
+								<div class="
+									{# if there is only one chart #}
+									{% if question_option | length == 1 %}
+										col-lg-8 col-sm-6 child-height
+									{% else %}
+										col-sm-12
+									{% endif %}
+									">
 									<div class="">
 										<div class="s-box">
 											<div>
@@ -144,14 +151,48 @@ survey
 									</div>
 								</div>
 
-								<div class="col-lg-4 col-sm-6 child-height s-box-right">
+								<div class="
+									{# if there is only one chart #}
+									{% if question_option | length == 1 %}
+										col-lg-4 col-sm-6 child-height s-box-right
+									{% else %}
+										col-sm-12 full-width-chart
+									{% endif %}
+									">
 									<div class="">
-										<div class="s-box">
+										<div class="s-box 
+											{% if question_option | length == 1 %}
+											{% else %}
+												nopadding border-top
+											{% endif %}
+											">
 											{# loop here #}
-											{% for qo in question_option %}									
-												<div id="container-issue-question-{{ qo.id }}" class="container-chart" style=""></div>
+											{# {{ question_option | length }} #}
+											<div class="row nomargin">
+											{% set ci = 0 %}
+											{% for qo in question_option %}
+												{% set ci = ci + 1 %}
+												<div class="
+													{# if there is only one chart #}
+													{% if question_option | length == 1 %}
+														col-sm-12
+													{% elseif question_option | length == 2 %}
+														col-sm-6
+														{% if ci == 2 %}
+															border-left
+														{% endif %}
+													{% elseif question_option | length == 3 %}
+														col-sm-4
+														{% if ci == 2 %}
+															border-left border-right
+														{% endif %}
+													{% endif %}
+													">
+													<div id="container-issue-question-{{ qo.id }}" class="container-chart" style=""></div>
+												</div>
 												
-											{% endfor %}
+											{% endfor %}											
+											</div>
 										</div>
 									</div>
 								</div>
@@ -321,9 +362,9 @@ survey
     		//chartType 1 = Circle Donut
 		    Highcharts.chart('container-issue-question-{{ qo.id }}', {
 		            chart: {
-		                plotBackgroundColor: null,
+		                /*plotBackgroundColor: null,
 		                plotBorderWidth: 0,
-		                plotShadow: false
+		                plotShadow: false*/
 		            },
 		            colors: {{ chart_color | raw }},
 		            legend: {
@@ -334,7 +375,8 @@ survey
 		            title: {
 		            		//issueChartQuestion here
 		                text: '{{ qo.name }}',
-		                // align: 'center',
+		                align: '{{ chart_title_alignment }}',
+		                style: {{ chart_title_style | raw }},
 		                // verticalAlign: 'middle',
 		                y: 20
 		            },
@@ -368,15 +410,18 @@ survey
 													["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
 												{% endfor %}
 		                ]
-		            }]
+		            }],
+		            exporting: {
+		            	enabled: {{ chart_exporting }}
+		            }
 		    });
 		  {% elseif qo.chartType == 2 %}
 		  	//chartType 2 = Semi Circle Donut
 		    Highcharts.chart('container-issue-question-{{ qo.id }}', {
           chart: {
-              plotBackgroundColor: null,
+              /*plotBackgroundColor: null,
               plotBorderWidth: 0,
-              plotShadow: false
+              plotShadow: false*/
           },
           colors: {{ chart_color | raw }},
           legend: {
@@ -385,7 +430,8 @@ survey
           title: {
           		//issueChartQuestion here
               text: '{{ qo.name }}',//question name
-              // align: 'center',
+              align: '{{ chart_title_alignment }}',
+              style: {{ chart_title_style | raw }},
               // verticalAlign: 'middle',
               y: 20
           },
@@ -421,7 +467,10 @@ survey
 										["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
 									{% endfor %}
               ]
-          }]
+          }],
+          exporting: {
+          	enabled: {{ chart_exporting }}
+          }
 		    });
 		  {% elseif qo.chartType == 3 %} //Column Basic
 		  	Highcharts.chart('container-issue-question-{{ qo.id }}', {
@@ -430,6 +479,8 @@ survey
 			    },
           colors: {{ chart_color | raw }},
 			    title: {
+              align: '{{ chart_title_alignment }}',
+              style: {{ chart_title_style | raw }},
 			        text: '{{ qo.name }}',//question name
 			        y: 20
 			    },
@@ -487,7 +538,10 @@ survey
 										data: [ {{ opt.value }} ],//issue/4 - ' quote issue
 			    				},
 									{% endfor %}
-			    ]
+			    ],
+          exporting: {
+          	enabled: {{ chart_exporting }}
+          }
 				});
 
 	    {% elseif qo.chartType == 4 %} //pyramid - requires highcharts.js and funnel.js
@@ -498,6 +552,8 @@ survey
 				    },
 				    colors: {{ chart_color | raw }},
 				    title: {
+                align: '{{ chart_title_alignment }}',
+                style: {{ chart_title_style | raw }},
 				        text: '{{ qo.name }}',//question name
 			        	y: 20
 				    },
@@ -528,7 +584,10 @@ survey
 											["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
 										{% endfor %}
 				        ]
-				    }]
+				    }],
+            exporting: {
+            	enabled: {{ chart_exporting }}
+            }
 				});
 			{% elseif qo.chartType == 5 %} //Category - Bar chart
 				Highcharts.chart('container-issue-question-{{ qo.id }}', {
@@ -538,6 +597,8 @@ survey
 			    colors: {{ chart_color | raw }},
 			    title: {
 			        text: '{{ qo.name }}',//question name
+			        align: '{{ chart_title_alignment }}',
+			        style: {{ chart_title_style | raw }},
 			        y: 20
 			    },
 			    subtitle: {
@@ -553,6 +614,8 @@ survey
 													{% endfor %}
 			        						],
 			        title: {
+	                align: '{{ chart_title_alignment }}',
+	                style: {{ chart_title_style | raw }},
 			            text: null
 			        }
 			    },
@@ -619,7 +682,10 @@ survey
 											]
 							},
 						{% endfor %}
-			    ]
+			    ],
+          exporting: {
+          	enabled: {{ chart_exporting }}
+          }
 				});
 	    {% endif %}
     {% endfor %}

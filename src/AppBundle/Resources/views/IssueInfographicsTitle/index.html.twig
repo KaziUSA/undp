@@ -9,7 +9,7 @@
                 <th>Id</th>
                 <th>IssueType</th>
                 <th>Name (Issue Question)</th>
-                <th>Type</th>   
+                {# <th>Type</th>    #}
                 <th>Actions</th>
             </tr>
         </thead>
@@ -28,7 +28,7 @@
                     {% endif %}
                 </td>
                 <td>{{ entity.name }} ({{ entity.issueQuestion }})</td>
-                <td>
+                {# <td>
                     {% if entity.type == 1 %}
                         Vertical
                     {% elseif entity.type == 2 %}
@@ -38,7 +38,7 @@
                     {% else %}
                         {{ entity.type }}
                     {% endif %}
-                </td>
+                </td> #}
                 <td>
                 <ul>
                     <li class="show-link">
