@@ -1,7 +1,7 @@
 {% extends 'frontend.html.twig' %}
 
 {% block body %}
-	<section class="content img-cover" style="{% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %}">
+	<section class="content img-cover" style="{#{% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %}#}">
 		<div class="transparent-grd"></div>
 		<div class="content-area relative">
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -324,12 +324,12 @@ $(window).resize(function() {
         }
     },
     tooltip: {
-        // valueSuffix: ' millions'
+        // valueSuffix: ' millions',
     },
     plotOptions: {
         bar: {
             dataLabels: {
-                enabled: true
+                enabled: false //true - dataLabels
             }
         },
         /*column: {
@@ -356,7 +356,7 @@ $(window).resize(function() {
     series: [
 	    //can be added more
 	    {
-	        name: ' ',
+	        name: '{{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }}',
 	        data: [
 	        			// 107, 31, 635, 203, 2
 	        			// 107, 31, 635
@@ -365,7 +365,10 @@ $(window).resize(function() {
 								{% endfor %}
 	        			]
 	    }
-    ]
+    ],
+    exporting: {
+    	enabled: {{ chart_exporting }}
+    }
 	});
 
 // {% endif %}

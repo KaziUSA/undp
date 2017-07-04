@@ -67,7 +67,7 @@
 .u-box-white h3, 
 .u-box-white h4,
 .u-box-white a {
-    color: #408167;
+    color: #428d8e;
 }
 
 .infographics .infographics-list .icon {
@@ -325,6 +325,9 @@ body.survey {
 	.news-box-module .readmore {
 		color: #3c888d;
 	}
+	.readmore:hover {
+	    color: #d2232a;
+	}
 	.news-detail-page .audio {
 		height: 200px;
 	}
@@ -395,7 +398,7 @@ body.survey {
 }
 
 .surveyMen {
-    color: #408167;
+    color: #428d8e;
 }
 
 .surveyWomen {
