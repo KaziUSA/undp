@@ -59,6 +59,13 @@ class IssueInfographics
      */
     private $imageUrl;//file_image or value (for %)
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="value", type="string", length=255, nullable=true)
+     */
+    private $value;
+
     public $file_path = '/../../../uploads/issue/infographics';
 
 
@@ -268,6 +275,30 @@ class IssueInfographics
     public function getImageUrl()
     {
         return $this->imageUrl;
+    }
+
+    /**
+     * Set value
+     *
+     * @param string $value
+     *
+     * @return IssueInfographics
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }
 

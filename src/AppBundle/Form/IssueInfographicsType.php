@@ -22,6 +22,7 @@ class IssueInfographicsType extends AbstractType
                 'required'   => false,
                 )
             )*/
+            ->add('value')
             ->add('issueInfographicsTitle')
         ;
     }

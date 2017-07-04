@@ -236,12 +236,10 @@ survey
 														<div class="infographics-list">
 															<span class="icon">
 																{# {{ opt.icon }} #}
-																{% if opt.imageUrl != '' %}
+																{% if opt.imageUrl != '' and opt.value == '' %}
 																	<img src="/uploads/issue/infographics/{{ opt.imageUrl }}">
-																{% endif %}
-
-																{% if info.type == 3 %}
-																	%
+																{% else %}
+																	{{ opt.value }} %
 																{% endif %}
 															</span>
 															<p>{{ opt.description }}</p>
@@ -368,14 +366,15 @@ survey
 		            },
 		            colors: {{ chart_color | raw }},
 		            legend: {
-		            	align: 'center'
+		            	align: 'center',
+		            	{{ legendStyle | raw }},
 		            	// itemWidth: 100,
 		            	// floating: false,
 		            },
 		            title: {
 		            		//issueChartQuestion here
 		                text: '{{ qo.name }}',
-		                align: '{{ chart_title_alignment }}',
+		                {{ chart_title_properties | raw }},
 		                style: {{ chart_title_style | raw }},
 		                // verticalAlign: 'middle',
 		                y: 20
@@ -425,12 +424,13 @@ survey
           },
           colors: {{ chart_color | raw }},
           legend: {
-          	align: 'center'
+          	align: 'center',          	
+          	{{ legendStyle | raw }},
           },
           title: {
           		//issueChartQuestion here
               text: '{{ qo.name }}',//question name
-              align: '{{ chart_title_alignment }}',
+              {{ chart_title_properties | raw }},
               style: {{ chart_title_style | raw }},
               // verticalAlign: 'middle',
               y: 20
@@ -479,7 +479,7 @@ survey
 			    },
           colors: {{ chart_color | raw }},
 			    title: {
-              align: '{{ chart_title_alignment }}',
+              {{ chart_title_properties | raw }},
               style: {{ chart_title_style | raw }},
 			        text: '{{ qo.name }}',//question name
 			        y: 20
@@ -503,6 +503,9 @@ survey
 			        title: {
 			            text: ' '
 			        }
+			    },
+			    legend: {			    	          	
+          	{{ legendStyle | raw }},
 			    },
 			    tooltip: {
 			        //headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -552,7 +555,7 @@ survey
 				    },
 				    colors: {{ chart_color | raw }},
 				    title: {
-                align: '{{ chart_title_alignment }}',
+                {{ chart_title_properties | raw }},
                 style: {{ chart_title_style | raw }},
 				        text: '{{ qo.name }}',//question name
 			        	y: 20
@@ -570,7 +573,8 @@ survey
 				        }
 				    },
 				    legend: {
-				        enabled: true
+				        enabled: true,				                  	
+          			{{ legendStyle | raw }},
 				    },
 				    series: [{
 				        name: ' ',
@@ -597,7 +601,7 @@ survey
 			    colors: {{ chart_color | raw }},
 			    title: {
 			        text: '{{ qo.name }}',//question name
-			        align: '{{ chart_title_alignment }}',
+			        {{ chart_title_properties | raw }},
 			        style: {{ chart_title_style | raw }},
 			        y: 20
 			    },
@@ -614,7 +618,7 @@ survey
 													{% endfor %}
 			        						],
 			        title: {
-	                align: '{{ chart_title_alignment }}',
+	                {{ chart_title_properties | raw }},
 	                style: {{ chart_title_style | raw }},
 			            text: null
 			        }
@@ -652,7 +656,8 @@ survey
 			        borderWidth: 1,
 			        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
 			        shadow: true,*/
-			        enabled: true //hide year
+			        enabled: true, //hide year
+			        {{ legendStyle | raw }},
 			    },
 			    credits: {
 			        enabled: false

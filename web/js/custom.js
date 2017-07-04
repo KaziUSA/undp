@@ -3,7 +3,7 @@
 
 		var index_grades = [0, 10, 20, 50, 100, 200, 500, 1000];//0-10
 		
-		var setViewY = 27.5;
+		var setViewY = 27.8;
 		var setViewX = 87.8;
 		var win_width = $(window).width();
 
@@ -112,7 +112,8 @@
 				weight: 2,//5 - hover border width
 				color: '#ffffff',//border color #666
 				dashArray: '',
-				fillOpacity: 1//0.7
+				fillOpacity: 1, //0.7,
+				fillColor: '#e23239' //added color
 			});
 
 			if (!L.Browser.ie && !L.Browser.opera) {
@@ -135,10 +136,10 @@
 
 		function onEachFeature(feature, layer) {
 			layer.on({
-				click: highlightFeature,
+				// click: highlightFeature,
 
-				/*mouseover: highlightFeature,
-				mouseout: resetHighlight,*/
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
 
 				//click: zoomToFeature //removed movement of map on click
 			});
