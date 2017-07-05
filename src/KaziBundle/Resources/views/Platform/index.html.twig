@@ -2,6 +2,10 @@
 
 {% block title %}Platform | {{ project_title }}{% endblock %}
 
+{% block bodyclass %}
+platform-page
+{% endblock %}
+
 {% block body -%}
 <div class="loading hidden">
   <div id="cssload-loader">
@@ -118,14 +122,24 @@
                                               <label for="disability">Disability<span></span></label></li>
                                             </div>
                                         </ul>
-                                      </div><!--/ac-->
+                                      
+                                    
+{% block bodyclass %}
+platform-page
+{% endblock %}<
+                                      /div><!--/ac-->
                                       <ul class="ac-text"></ul>
                                       <ul class="ac-text"></ul>
                                       <input type="submit" value="Submit" class="btn btn-bordered gray" onclick="javascript:pageTracker._trackPageview ('Platform I - Submit');">
                                   </form>
 
                             </div><!--/accordion-->
-                        </div>
+                        
+                      
+{% block bodyclass %}
+platform-page
+{% endblock %}</div>
+
                     </div>
                   </div>
                 </div>

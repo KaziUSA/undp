@@ -2,6 +2,10 @@
 
 {% block title %}Reports | {{ project_title }}{% endblock %}
 
+{% block bodyclass %}
+reports-page
+{% endblock %}
+
 {% block body -%}
 
 	<section class="content report">
@@ -311,7 +315,7 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 														</li>
-														<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+														<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 													</ul>
 												</div>
 											</div>
@@ -347,7 +351,7 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common+Feedback+Project+(CFP)+Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
 											</div>
 										</div>
@@ -383,7 +387,7 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common+Feedback+Project+(CFP)+Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
 											</div>
 										</div>
@@ -418,7 +422,7 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
 											</div>
 										</div>
@@ -451,7 +455,7 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
 											</div>
 										</div>
