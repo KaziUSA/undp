@@ -13,3 +13,12 @@
     </li>
 </ul>
 {% endblock %}
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+	//get the slug
+	get_slug('#appbundle_issuenews_name', '#appbundle_issuenews_slug');	
+});
+</script>
+{% endblock %}

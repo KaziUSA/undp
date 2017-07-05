@@ -88,3 +88,22 @@ var getUrlParameter = function getUrlParameter(sParam) {
             }
         }
     };
+
+//get slug 
+function slugify(text)
+{
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+}
+
+function get_slug(source, dest) {
+    $(source).change(function() {
+        var title = $(this).val();
+        var slug = slugify(title);
+        $(dest).val(slug);
+    });
+}
