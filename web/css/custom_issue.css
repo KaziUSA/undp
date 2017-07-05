@@ -44,6 +44,14 @@
 	}
 /* global css ends */
 
+.navbar-default .navbar-nav li a {
+	color: #a1a1a1 !important;
+}
+
+.navbar-default .nav > li > a.active, .navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
+	color: #ffffff !important;
+}
+
 /* about page */
 .about-page .about-section.nopaddingright {
 	padding-right: 10px !important;
@@ -287,7 +295,7 @@ body.survey {
 
 /* News page */
 	.news-page {
-	    padding: 15px;
+	    padding: 10px;
 			font-size: 13px;
 	}
 
@@ -349,6 +357,9 @@ body.survey {
 	}
 	.readmore:hover {
 	    color: #d2232a;
+	}
+	.news-detail-page {
+	    padding: 10px 10px 3px;
 	}
 	.news-detail-page .audio {
 		height: 200px;
