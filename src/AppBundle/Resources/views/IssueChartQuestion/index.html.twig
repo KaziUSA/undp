@@ -22,8 +22,10 @@
             <tr>
                 <td>{{ i }}</td>
                 <td>
+                    {% if entity.issueQuestion is not null %}
                     {{ entity.issueQuestion.issueType }}
                      - {{ date( entity.issueQuestion.issueType.year ~ '-' ~ entity.issueQuestion.issueType.month ~ '-01' ) | date('F Y') }} 
+                    {% endif %}
                 </td>
                 <td>{{ entity.name }}</td>
                 <td>

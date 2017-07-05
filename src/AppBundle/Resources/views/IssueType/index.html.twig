@@ -9,6 +9,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Date</th>
+                <th>Is homepage</th>
                 {# <th>Chart Type</th> #}
                 <th>Survey Number</th>
                 <th>Survey Detail</th>
@@ -27,6 +28,7 @@
                         {{ date(entity.year ~ '-' ~ entity.month ~ '-01') | date ('F Y') }}
                     {% endif %}
                 </td>
+                <td>{% if entity.isHomepage == 1 %}Yes{% else %}No{% endif %}</td>
                 {# <td>{{ entity.chartType }}</td> #}
                 <td>{{ entity.surveyNumber }}</td>
                 <td>{{ entity.surveyDetail }}</td>

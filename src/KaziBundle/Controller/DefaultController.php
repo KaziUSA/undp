@@ -67,19 +67,24 @@ class DefaultController extends Controller
 
 
         //get homepage chart - IssueChartOverview
-        $issueType = $em->getRepository('AppBundle:IssueType')->findById(3);
+        $issueType = $em->getRepository('AppBundle:IssueType')
+            ->findOneByIsHomepage(1)
+            // ->findById(3)
+            ;
         // var_dump($issueType[0]); exit();
         //TODO: compare chartType of issueType
 
-        $issueChartOverview = $em->getRepository('AppBundle:IssueChartOverview')->findByIssueType(3);
-        // var_dump($issueChartOverview); exit();
+        if(!empty($issueType)) {
+            $issueChartOverview = $em->getRepository('AppBundle:IssueChartOverview')->findByIssueType($issueType->getId());
+            // var_dump($issueChartOverview); exit();
+        }
 
 
 
         return array(
             'entity' => $entity,
             'entities_news' => $entities_news_final,//news
-            'issueType' => $issueType[0],
+            'issueType' => $issueType,
             'issueChartOverview' => $issueChartOverview,
         );
     }

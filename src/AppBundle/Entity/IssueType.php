@@ -78,6 +78,13 @@ class IssueType
      */
     private $surveyWomen;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="isHomepage", type="integer")
+     */
+    private $isHomepage;
+
 
     /**
      * Get id
@@ -284,6 +291,31 @@ class IssueType
     public function getSurveyWomen()
     {
         return $this->surveyWomen;
+    }
+    
+
+    /**
+     * Set isHomepage
+     *
+     * @param string $isHomepage
+     *
+     * @return IssueChartOverview
+     */
+    public function setIsHomepage($isHomepage)
+    {
+        $this->isHomepage = $isHomepage;
+
+        return $this;
+    }
+
+    /**
+     * Get isHomepage
+     *
+     * @return string
+     */
+    public function getIsHomepage()
+    {
+        return $this->isHomepage;
     }
 
     /* To fix: Object of class Proxies\__CG__\AppBundle\Entity\... could not be converted to string"). */

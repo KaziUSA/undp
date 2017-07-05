@@ -46,6 +46,12 @@ class IssueTypeType extends AbstractType
                 ),
                 'data' => 2017
             ))
+            ->add('isHomepage', 'choice', array(
+                'choices'  => array(
+                    0  => 'No',
+                    1  => 'Yes',
+                ),
+            ))
             ->add('chartType', 'choice', array(
                 'choices'  => array(
                     1  => 'Circle Donut',

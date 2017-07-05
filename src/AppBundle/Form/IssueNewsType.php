@@ -23,6 +23,7 @@ class IssueNewsType extends AbstractType
                     )
                 )
             )
+            ->add('source')
             // ->add('imageUrl')
             // ->add('image_url')
             ->add('file', null, array(

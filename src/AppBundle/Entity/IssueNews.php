@@ -90,6 +90,13 @@ class IssueNews
     /**
      * @var string
      *
+     * @ORM\Column(name="source", type="string", length=255, nullable=true)
+     */
+    private $source;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="createdDate", type="datetime", length=255, nullable=true)
      */
     private $createdDate;
@@ -433,6 +440,30 @@ class IssueNews
     public function getYoutubeUrl()
     {
         return $this->youtubeUrl;
+    }
+
+    /**
+     * Set source
+     *
+     * @param string $source
+     *
+     * @return IssueNews
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 
     /**

@@ -78,6 +78,8 @@
 				    	<h2 class="news-title">{{ entity.name }}</h2>
 				    	{{ entity.description | raw }}
 
+				    	<p>Find more at: <a href="{{ entity.source }}" target="_blank" class="readmore external-link">{{ entity.source }}</a></p>
+
 				    	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 				      	<a href="{{ path('issuenews_edit', { 'id': entity.id }) }}" class="readmore">Edit</a>
 				      {% endif %}

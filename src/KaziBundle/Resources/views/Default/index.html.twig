@@ -40,17 +40,20 @@
 				{# survey #}
 				<div class="homepage-widget clearfix" style="">
 					{# chart #}
+					{% if issueType is not null %}
 					<div class="home-box pull-left" style="">
 						<div class="u-box u-box-white">
 							<div class="u-box-white-padding">
-							<h3 class="u-box-title">{{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} Survey Overview</h3>
+							<h3 class="u-box-title">{{ issueType.name }} {{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} Survey Overview</h3>
 							
 							{# chart #}
 							<div id="container-homepage" class="container-chart" style=""></div>
 							</div>
 						</div>
 					</div>
+					{% endif %}
 					<div class="home-box pull-left nopaddingright">
+						{% if issueType is not null %}
 						<div class="h-col-25 pull-left">
 							<div class="u-box u-box-white clearfix">
 								<div class="u-box-white-padding">
@@ -73,6 +76,8 @@
 								</div>
 							</div>
 						</div>
+						{% endif %}
+
 						<div class="h-col-75 pull-left">
 							<div class="u-box u-box-white news-homepage-featured nopadding">
 								<div class="u-box-white-padding">
@@ -287,10 +292,8 @@ $(window).resize(function() {
 });
 
 
-// according to chart type
-// {% if issueType.chartType == 1 %}
-	//chartType 1 = Circle Donut
 
+	{% if issueType is not null %}
 	//Always on homepage: chartType = bar-basic
 	Highcharts.chart('container-homepage', {
     chart: {
@@ -372,8 +375,7 @@ $(window).resize(function() {
     	enabled: {{ chart_exporting }}
     }
 	});
-
-// {% endif %}
+	{% endif %}
 </script>
 
 {% endblock %}
