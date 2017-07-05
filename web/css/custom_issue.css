@@ -49,7 +49,7 @@
 	padding-right: 10px !important;
 }
 .nopaddingleft.about-perception {
-	padding-left: 15px !important;
+	/*padding-left: 15px !important;*/
 }
 .u-box {
 	margin-top: 10px;
@@ -317,12 +317,22 @@ body.survey {
 	    padding: 10px;
 	}
 
-	.news-graphics img, .news-graphics iframe {
+	.news-graphics iframe {
 			height: 100%;
 	    width: 100%;
 	}
+	.news-graphics .img {
+		background-size: cover;
+		background-position: center;
+	}
+	.news-graphics .img img {
+	    opacity: 0;
+	}
 	.news-box-module h2 {
 			font-size: 18px;
+	}
+	.news-body {
+		overflow: hidden;
 	}
 	.news-body .news-title {
 		color: #428d8e;

@@ -67,8 +67,8 @@
 								</div>
 								{% set i = i + 1 %}
 					    {% elseif (('.jpeg' in entity.imageUrl) or ('.jpg' in entity.imageUrl) or ('.png' in entity.imageUrl)) %}
-					    	<div class="img">
-						    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" width="200">
+					    	<div class="img" style="background-image: url( '/uploads/issue/news/img/{{ entity.imageUrl }}' )">
+						    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" width="100%" height="170px">
 						    </div>
 					    {% endif %}
 
@@ -84,10 +84,10 @@
 			    	<h2 class="news-title"><a href="{{ path('news_show', {'slug': entity.slug }) }}" class="">{{ entity.name }}</a></h2>
 			    	{# {{ entity.description | raw  }} #}
 			    	<p>
-			    	{# {% autoescape false %} #}
+			    	{% autoescape false %}
 			    		{% set entity_description = entity.description|striptags|replace({'&nbsp;': ' '}) %}
 			    		{{ entity_description|slice(0, 300)  }}
-			    	{# {% endautoescape %} #}
+			    	{% endautoescape %}
 			    	</p>
 
 			    	<a href="{{ path('news_show', {'slug': entity.slug }) }}" class="readmore">Read More</a>
