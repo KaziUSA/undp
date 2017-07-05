@@ -6,7 +6,7 @@
 	{# News #}
 	<div class="news-detail-page">
 		<div class="row">
-			<div class="col-sm-9">
+			<div class="col-md-offset-2 col-md-8">
 
 				<div class="news-box-module">
 					<div class="news-box-wrap">
@@ -79,7 +79,7 @@
 				    	{{ entity.description | raw }}
 
 				    	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-				      	<a href="{{ path('issuenews_edit', { 'id': entity.id }) }}" class="">Edit</a>
+				      	<a href="{{ path('issuenews_edit', { 'id': entity.id }) }}" class="readmore">Edit</a>
 				      {% endif %}
 				    </div>
 			    </div>

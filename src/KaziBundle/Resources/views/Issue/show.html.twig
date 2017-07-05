@@ -146,7 +146,15 @@ survey
 			              	  {# doesn't matter what ever year or day - we just need month #}</h2>
 			              	</div>	
 
-											<div>{{ question_detail.keyFindings | raw }}</div>
+											<div class="
+												{# if there is only one chart #}
+												{% if question_option | length == 1 %}
+												{% else %}
+													two-column-paragraph
+												{% endif %}
+												">
+												{{ question_detail.keyFindings | raw }}
+											</div>
 										</div>
 									</div>
 								</div>
@@ -160,10 +168,10 @@ survey
 									{% endif %}
 									">
 									<div class="">
-										<div class="s-box 
+										<div class="s-box nopadding
 											{% if question_option | length == 1 %}
 											{% else %}
-												nopadding border-top
+												border-top
 											{% endif %}
 											">
 											{# loop here #}
@@ -236,8 +244,12 @@ survey
 														<div class="infographics-list">
 															<span class="icon">
 																{# {{ opt.icon }} #}
-																{% if opt.imageUrl != '' and opt.value == '' %}
-																	<img src="/uploads/issue/infographics/{{ opt.imageUrl }}">
+																{% if opt.value == '' %}
+																	{% if opt.imageUrl != '' %}
+																		<img src="/uploads/issue/infographics/{{ opt.imageUrl }}">
+																	{% else %}
+																		<img src="/img/frontend/icons/default-infographics.png">
+																	{% endif %}
 																{% else %}
 																	{{ opt.value }} %
 																{% endif %}
@@ -363,6 +375,7 @@ survey
 		                /*plotBackgroundColor: null,
 		                plotBorderWidth: 0,
 		                plotShadow: false*/
+		                {{ chart_properties | raw }}
 		            },
 		            colors: {{ chart_color | raw }},
 		            legend: {
@@ -421,6 +434,7 @@ survey
               /*plotBackgroundColor: null,
               plotBorderWidth: 0,
               plotShadow: false*/
+              {{ chart_properties | raw }}
           },
           colors: {{ chart_color | raw }},
           legend: {
@@ -447,7 +461,7 @@ survey
                   startAngle: -90,//for half pie
                   endAngle: 90,//for half pie
 
-                  center: ['50%', '50%'],
+                  center: ['50%', '70%'],
                   showInLegend: true
               }
           },
@@ -475,7 +489,8 @@ survey
 		  {% elseif qo.chartType == 3 %} //Column Basic
 		  	Highcharts.chart('container-issue-question-{{ qo.id }}', {
 			    chart: {
-			        type: 'column'
+			        type: 'column',
+		          {{ chart_properties | raw }}
 			    },
           colors: {{ chart_color | raw }},
 			    title: {
@@ -551,7 +566,8 @@ survey
 
 				Highcharts.chart('container-issue-question-{{ qo.id }}', {
 				    chart: {
-				        type: 'pyramid'
+				        type: 'pyramid',
+				        {{ chart_properties | raw }}
 				    },
 				    colors: {{ chart_color | raw }},
 				    title: {
@@ -569,7 +585,7 @@ survey
 				                softConnector: false
 				            },
 				            center: ['50%', '50%'],
-				            width: '100%'
+				            width: '80%'
 				        }
 				    },
 				    legend: {
@@ -596,7 +612,8 @@ survey
 			{% elseif qo.chartType == 5 %} //Category - Bar chart
 				Highcharts.chart('container-issue-question-{{ qo.id }}', {
 			    chart: {
-			        type: 'bar'
+			        type: 'bar',
+			        {{ chart_properties | raw }}
 			    },
 			    colors: {{ chart_color | raw }},
 			    title: {

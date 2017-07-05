@@ -48,8 +48,10 @@
                         <h3>{{ entity_contactus.title | raw }}</h3>
                         {{ entity_contactus.description | raw }}
 
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         {# show edit link #}
                         <p><a href="{{ path('page_show', {'slug': entity_contactus.slug}) }}">Edit</a></p>
+                        {% endif %}
 
 
                         <div id="contact-form" style="margin-top: 40px;">
@@ -114,8 +116,10 @@
                         <h3>{{ entity_perception.title | raw }}</h3>
                         {{ entity_perception.description | raw }}
 
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         {# show edit link #}
                         <p><a href="{{ path('page_show', {'slug': entity_perception.slug}) }}">Edit</a></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
