@@ -200,7 +200,7 @@
 						    	<p>
 						    	{% autoescape false %}
 						    		{% set entity_description = entity.description|striptags|replace({'&nbsp;': ' '}) %}
-						    		{{ entity_description|slice(0, 300)  }}
+						    		{{ entity_description|slice(0, 160)  }}
 						    	{% endautoescape %}
 						    	</p>
 
