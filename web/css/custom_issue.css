@@ -312,7 +312,7 @@ body.survey {
 
 /* News page */
 	.news-page {
-	    padding: 10px;
+	    padding: 10px 10px 0;
 			font-size: 13px;
 	}
 
@@ -630,6 +630,9 @@ body.survey {
 	}
 	.main-content {
 		background: #ebebeb;
+	}
+	.filter .nav-tabs li a {
+		font-size: 14px;
 	}
 	.filter .nav-tabs li.active {
 	    background: #e23239;
