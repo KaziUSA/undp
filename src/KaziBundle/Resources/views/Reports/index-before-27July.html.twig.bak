@@ -385,12 +385,12 @@ reports-page
 
 							  <!-- Tab panes -->
 							  <div class="tab-content clearfix list-view">
-							    <div role="tabpanel" class="tab-pane active parent-height" id="national">							    	
+							    <div role="tabpanel" class="tab-pane active" id="national">							    	
 										{% for entity in entities %}
 											{# TODO: need to change 'National Reports' to ID #}
 											{% if entity.documenttype == 'National Reports' %}
-											<div class="child-height report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
-												{# <div class="r-box">
+											<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
+												<div class="r-box">
 													<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -402,7 +402,8 @@ reports-page
 											
 													<ul class="share-icons">
 														<li><a href="#share" class="fa fa-share-alt"></a>
-															<ul>							
+															<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path if needed #}						
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -412,38 +413,8 @@ reports-page
 														</li>
 														<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 													</ul>
-												</div> #}												
-											
-												{# news-box-module #}
-												<div class="news-box-module">
-													<div class="news-box-wrap">
-														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
-														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
-														    	<ul class="share-icons">
-																		<li><a href="#share" class="fa fa-share-alt"></a>
-																			<ul>							
-																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-																				
-																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
-
-																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-																			</ul>
-																		</li>
-																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
-																	</ul>
-														    </div>
-												    </div>
-												  	
-												    <div class="news-body">
-												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
-												    	<p>{{ entity.description }}</p>
-												    	<a href="{{ path('document_edit', {id: entity.id}) }}" class="readmore">Edit</a>
-												    </div>
-											    </div>
 												</div>
-												{# end news-box-module #}
-											</div> 
+											</div>
 											{% endif %}
 						        {% endfor %}
 							    </div>
@@ -454,8 +425,8 @@ reports-page
 										{# TODO: need to change 'District Reports' to ID #}
 										{# Quickfix: Added district name as class #}
 										{% if (entity.documenttype == 'District Reports') and ((entity.language == 'english') or (entity.language == '')) %}
-										<div class="parent-height report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
-											{# <div class="r-box">
+										<div class="report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
+											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -467,7 +438,8 @@ reports-page
 										
 												<ul class="share-icons">
 													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>							
+														<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path #}											
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -477,35 +449,7 @@ reports-page
 													</li>
 													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
-											</div> #}
-											{# news-box-module #}
-												<div class="news-box-module">
-													<div class="news-box-wrap">
-														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
-														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
-														    	<ul class="share-icons">
-																		<li><a href="#share" class="fa fa-share-alt"></a>
-																			<ul>							
-																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-																				
-																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
-
-																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-																			</ul>
-																		</li>
-																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
-																	</ul>
-														    </div>
-												    </div>
-												  	
-												    <div class="news-body">
-												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
-												    	<p>{{ entity.description }}</p>
-												    </div>
-											    </div>
-												</div>
-												{# end news-box-module #}
+											</div>
 										</div>
 										{% endif %}
 						        {% endfor %}
@@ -517,8 +461,8 @@ reports-page
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
 										{% if (entity.documenttype == 'District Reports') and (entity.language == 'nepali') %}
-										<div class="parent-height report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
-											{# <div class="r-box">
+										<div class="report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
+											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -530,7 +474,8 @@ reports-page
 										
 												<ul class="share-icons">
 													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>							
+														<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path #}											
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -540,35 +485,7 @@ reports-page
 													</li>
 													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
-											</div> #}
-											{# news-box-module #}
-												<div class="news-box-module">
-													<div class="news-box-wrap">
-														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
-														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
-														    	<ul class="share-icons">
-																		<li><a href="#share" class="fa fa-share-alt"></a>
-																			<ul>							
-																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-																				
-																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
-
-																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-																			</ul>
-																		</li>
-																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
-																	</ul>
-														    </div>
-												    </div>
-												  	
-												    <div class="news-body">
-												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
-												    	<p>{{ entity.description }}</p>
-												    </div>
-											    </div>
-												</div>
-												{# end news-box-module #}
+											</div>
 										</div>
 										{% endif %}
 						        {% endfor %}
@@ -579,8 +496,8 @@ reports-page
 							    	{% for entity in entities %}
 										{# TODO: need to change 'Issue in Focus Reports' to ID #}
 										{% if entity.documenttype == 'Issue in Focus Reports' %}
-										<div class="parent-height report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
-											{# <div class="r-box">
+										<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
+											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -592,7 +509,8 @@ reports-page
 										
 												<ul class="share-icons">
 													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>							
+														<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path #}											
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -602,35 +520,7 @@ reports-page
 													</li>
 													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
-											</div> #}
-											{# news-box-module #}
-												<div class="news-box-module">
-													<div class="news-box-wrap">
-														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
-														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
-														    	<ul class="share-icons">
-																		<li><a href="#share" class="fa fa-share-alt"></a>
-																			<ul>							
-																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-																				
-																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
-
-																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-																			</ul>
-																		</li>
-																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
-																	</ul>
-														    </div>
-												    </div>
-												  	
-												    <div class="news-body">
-												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
-												    	<p>{{ entity.description }}</p>
-												    </div>
-											    </div>
-												</div>
-												{# end news-box-module #}
+											</div>
 										</div>
 										{% endif %}
 				        		{% endfor %}
@@ -639,8 +529,8 @@ reports-page
 							    	{% for entity in entities %}
 										{# TODO: need to change these to ID #}
 										{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
-										<div class="parent-height report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
-											{# <div class="r-box">
+										<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
+											<div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -652,7 +542,8 @@ reports-page
 										
 												<ul class="share-icons">
 													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>							
+														<ul>		
+																{# TODO: Need to change cfp.org.np to dynamic url path #}											
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -662,35 +553,7 @@ reports-page
 													</li>
 													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
-											</div> #}
-											{# news-box-module #}
-												<div class="news-box-module">
-													<div class="news-box-wrap">
-														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
-														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
-														    	<ul class="share-icons">
-																		<li><a href="#share" class="fa fa-share-alt"></a>
-																			<ul>							
-																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
-																				
-																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
-
-																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
-																			</ul>
-																		</li>
-																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
-																	</ul>
-														    </div>
-												    </div>
-												  	
-												    <div class="news-body">
-												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
-												    	<p>{{ entity.description }}</p>
-												    </div>
-											    </div>
-												</div>
-												{# end news-box-module #}
+											</div>
 										</div>
 										{% endif %}
 					        	{% endfor %}
@@ -934,13 +797,11 @@ reports-page
     filter_report_district('Sindhupalchowk');
 
 
-    //equal height
-		equal_height('.list-view .parent-height', '.child-height .news-body');
 
 	  //show list view
 	  $('.show-list-view').click(function() {	  	
-	  	if($('.report-item').hasClass('col-md-3 col-sm-4')) {//col-lg-2 
-	  		$('.report-item').removeClass('col-md-3 col-sm-4');//col-lg-2 
+	  	if($('.report-item').hasClass('col-lg-2 col-md-3 col-sm-4')) {	  		
+	  		$('.report-item').removeClass('col-lg-2 col-md-3 col-sm-4');
 	  	}
 
 	  	if($('.report-item').hasClass('col-lg-6 col-md-6 col-sm-6')) {
@@ -957,9 +818,6 @@ reports-page
 	  	else {
 	    	$('.main-content .tab-content').addClass('list-view');
 	    }
-
-	    //equal height
-  		equal_height('.list-view .parent-height', '.child-height .news-body');
 	  });
 
 	  $('.show-grid-view').click(function() {
@@ -967,10 +825,10 @@ reports-page
 	  		$('.report-item').removeClass('col-lg-6 col-md-6 col-sm-6');
 	  	}
 	  	
-	  	if($('.report-item').hasClass('col-md-3 col-sm-4')) {//col-lg-2 
+	  	if($('.report-item').hasClass('col-lg-2 col-md-3 col-sm-4')) {
 	  	}
 	  	else {
-	  		$('.report-item').addClass('col-md-3 col-sm-4');//col-lg-2 
+	  		$('.report-item').addClass('col-lg-2 col-md-3 col-sm-4');
 	  	}
 
 	  	if($('.main-content .tab-content').hasClass('list-view')) {
@@ -982,9 +840,6 @@ reports-page
 	  	else {
 	    	$('.main-content .tab-content').addClass('grid-view');
 	    }
-
-	    //equal height
-  		equal_height('.parent-height', '.child-height');
 	  });
 
 		content_height();

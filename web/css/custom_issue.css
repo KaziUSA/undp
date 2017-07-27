@@ -702,6 +702,76 @@ body.survey {
 	}
 /* Nav css ends */
 
+/* Report page */
+	.news-box-module {
+	    height: 100%;
+	}
+	.report-item {
+	    padding-bottom: 10px;
+	}
+	.report-item p {
+		margin-bottom: 0;
+	}
+	.report-item .news-graphics .img {
+		background-color: #88d8ef;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 40%; 
+		position: relative;
+	}
+	.report-item .share-icons {
+		bottom: 0;
+	}
+	.list-view .news-graphics .img img {
+	    display: none;
+	}
+
+	.list-view .report-item,
+	.grid-view .report-item .news-body {
+		height: auto !important;
+	}
+	.list-view .report-item p {
+	    display: none;
+	}
+
+	.list-view .news-body .news-title {
+	    font-size: 14px;
+	    line-height: 18px;
+	    margin-bottom: 10px;
+	}
+
+	.list-view .news-box-wrap {
+	    background: none;
+	}
+
+	.list-view .news-graphics {
+	    margin: 0;
+	}
+
+	.list-view .news-box-wrap {
+	    padding: 0;
+	}
+	.list-view .news-body {
+	    border-bottom: 1px solid #dcdcdc;
+	}
+	.report .grid-view .readmore {
+		display: block;
+		margin-top: 10px;
+	}
+	.report .list-view .readmore {
+		display: none;
+	}
+	.report .wrapper {
+  		padding: 10px;
+	    padding-right: 0;
+	    padding-bottom: 0;
+	}
+	.share-icons li a:hover,
+	.u-box-white a:hover {
+	    color: #d2232a;
+	}
+/* Report page ends */
+
 /* Responsive css */
 	@media (min-width: 768px) {
 		.survey-question-col {
