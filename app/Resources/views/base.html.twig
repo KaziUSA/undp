@@ -99,14 +99,31 @@
                 </li>
 
                 {# issue #}
-
                 <li class="{% if app.request.get('_route') in [
                                     'issuenews', 
                                     'issuenews_show',
                                     'issuenews_edit',
-                                    'issuenews_new'
+                                    'issuenews_new',
+                                    'issuenewstype', 
+                                    'issuenewstype_show',
+                                    'issuenewstype_edit',
+                                    'issuenewstype_new'
                                     ] %} active {% endif %}">
-                    <a href="{{ path('issuenews') }}"><i class="fa fa-book"></i> <span class="nav-label">Issue News</span> </a>
+                    <a href="#"><i class="fa fa-book"></i> <span class="nav-label">News</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuenews', 
+                                    'issuenews_show',
+                                    'issuenews_edit',
+                                    'issuenews_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuenews') }}">News</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuenewstype', 
+                                    'issuenewstype_show',
+                                    'issuenewstype_edit',
+                                    'issuenewstype_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuenewstype') }}">News Type</a></li>
+                    </ul>
                 </li>
 
                 <li class="{% if app.request.get('_route') in [
