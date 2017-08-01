@@ -418,7 +418,15 @@ reports-page
 												<div class="news-box-module">
 													<div class="news-box-wrap">
 														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
 														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
 														    	<ul class="share-icons">
 																		<li><a href="#share" class="fa fa-share-alt"></a>
@@ -482,7 +490,15 @@ reports-page
 												<div class="news-box-module">
 													<div class="news-box-wrap">
 														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
 														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
 														    	<ul class="share-icons">
 																		<li><a href="#share" class="fa fa-share-alt"></a>
@@ -545,7 +561,15 @@ reports-page
 												<div class="news-box-module">
 													<div class="news-box-wrap">
 														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
 														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
 														    	<ul class="share-icons">
 																		<li><a href="#share" class="fa fa-share-alt"></a>
@@ -607,7 +631,15 @@ reports-page
 												<div class="news-box-module">
 													<div class="news-box-wrap">
 														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
 														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
 														    	<ul class="share-icons">
 																		<li><a href="#share" class="fa fa-share-alt"></a>
@@ -667,7 +699,15 @@ reports-page
 												<div class="news-box-module">
 													<div class="news-box-wrap">
 														<div class="news-graphics">
-													    	<div class="img" style="background-image: url('/img/frontend/report-thumb.png');">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
 														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
 														    	<ul class="share-icons">
 																		<li><a href="#share" class="fa fa-share-alt"></a>

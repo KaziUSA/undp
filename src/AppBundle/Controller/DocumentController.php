@@ -99,6 +99,7 @@ class DocumentController extends Controller
             ->add('name', 'text', array( 'attr' => array( 'class' => 'form-control' ) ))
             //->add('file')
             ->add('file', 'file', array( 'attr' => array( 'class' => 'form-control' ) ))
+            ->add('imgFile', 'file', array( 'attr' => array( 'class' => 'form-control' ) ))
             //->add('date')
             ->add('date', 'date', array( 'attr' => array( //text
                 'class' => 'form-control',//date
@@ -138,7 +139,10 @@ class DocumentController extends Controller
             $form->bind($this->getRequest());
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getEntityManager();
+                
                 $document->upload();
+                $document->uploadImgUrl();
+
                 $em->persist($document);
                 $em->flush();
 
@@ -249,6 +253,10 @@ class DocumentController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+                // $document->upload();
+                // $document->uploadImg();
+
             $em->flush();
 
         return $this->redirect($this->generateUrl('document_show', array('id' => $id)));

@@ -14,6 +14,14 @@
                 <td>{{ entity.name }}</td>
             </tr>
             <tr>
+                <th>Name</th>
+                <td>
+                    {% if entity.issueNewsType is not null %}
+                        {{ entity.issueNewsType }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <th>Description</th>
                 <td>{{ entity.description | raw }}</td>
             </tr>

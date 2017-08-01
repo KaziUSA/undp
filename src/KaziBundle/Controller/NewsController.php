@@ -21,16 +21,31 @@ use KaziBundle\Helper\NewsHelper;
  */
 class NewsController extends Controller
 {
+    /**
+     * Lists all Document entities.
+     *
+     * @Route("/", name="news")     
+     * @Method("GET")
+     * @Template()
+     */
+    public function indexAction() //
+    {
+        $em = $this->getDoctrine()->getManager();
+        // exit();
+        return $this->redirect($this->generateUrl('news_type', array('id' => '1')));
 
+        return array(
+            // 'entities' => $entities_final, //entities
+        );
+    }
 
     /**
      * Lists all Document entities.
      *
-     * @Route("/", name="news")
-     * @Method("GET")
+     * @Route("/type/{id}", name="news_type")     
      * @Template()
      */
-    public function indexAction()
+    public function newsAction($id) //* @Method("GET") removed
     {
         $em = $this->getDoctrine()->getManager();
         
@@ -38,7 +53,13 @@ class NewsController extends Controller
 
         $entities = $em->getRepository('AppBundle:Document')->findBy($criteria, array('date'=>'desc'));*/
 
-        $entities = $em->getRepository('AppBundle:IssueNews')->findAll();
+        // if($id != '' and $id != 3) {
+            $entities = $em->getRepository('AppBundle:IssueNews')->findByIssueNewsType($id);
+        /*}
+        else {
+            $entities = $em->getRepository('AppBundle:IssueNews')->findAll();
+        }*/
+
 
         // var_dump($entities);exit();
         $entities_final = array();
@@ -67,12 +88,15 @@ class NewsController extends Controller
         }
         // var_dump($entities_final); exit();
 
+        $issueNewsType = $em->getRepository('AppBundle:IssueNewsType')->findAll();
         
 
         
 
         return array(
             'entities' => $entities_final, //entities
+            'issueNewsType' => $issueNewsType,
+            'currentNewsType' => $id,
         );
     }
 

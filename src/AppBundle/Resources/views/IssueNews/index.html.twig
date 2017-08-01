@@ -12,6 +12,7 @@
                 {# <th>Imageurl</th>
                 <th>Audiourl</th>
                 <th>Youtubeurl</th> #}
+                <th>Type</th>
                 <th>Createddate</th>
                 {# <th>Updateddate</th> #}
                 <th>Actions</th>
@@ -34,6 +35,11 @@
                 {# <td>{{ entity.imageUrl }}</td>
                 <td>{{ entity.audioUrl }}</td>
                 <td>{{ entity.youtubeUrl }}</td> #}
+                <td>
+                    {% if entity.issueNewsType is not null %}
+                        {{ entity.issueNewsType }}
+                    {% endif %}
+                </td>
                 <td>{{ entity.createdDate | date('Y-m-d h:i:s') }}</td>
                 {# <td>{{ entity.updatedDate }}</td> #}
                 <td>
