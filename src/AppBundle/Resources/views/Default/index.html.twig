@@ -47,7 +47,10 @@
 <!-- ChartJS-->
 <script src="/js/plugins/chartJs/Chart.min.js"></script>
 <script type="text/javascript">
-
+$(document).ready(function() {
+    //map removed as it is used in issue question
+    $('#map').parent().parent().parent().hide();
+});
 var barData = {
         labels: ["Tamang", "Newar", "Muslim", "Janajati", "Gurung", "Dalit", "Chhetri", "Brahmin", "Other"],
         datasets: [
