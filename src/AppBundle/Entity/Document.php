@@ -27,6 +27,17 @@ class Document
     public $file;
 
     /**
+     * @Assert\File(
+     * maxSize="10737418240",
+     * mimeTypes = {"image/png",
+     *          "image/jpeg",
+     *          "image/jpg"},
+     * mimeTypesMessage = "Please upload a valid Image"
+     * )
+     */
+    public $imgFile;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -45,7 +56,7 @@ class Document
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -62,6 +73,13 @@ class Document
      * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
     private $path;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imgUrl", type="string", length=255, nullable=true)
+     */
+    private $imgUrl;
 
     /**
      * @var string
@@ -90,6 +108,7 @@ class Document
      */
     private $status=1;
     public $file_path = '/../../../uploads/documents/';
+    public $img_file_path = '/../../../uploads/documents/thumbs/';
 
     public function getFile()
     {
@@ -114,13 +133,53 @@ class Document
         // check if we have an old image path
         $this->path = $avatarExt;
 
-        
+        // var_dump($this->path);
+        // exit();
+
         /*if (isset($this->path)) {
             // store the old name to delete after the update
             $this->temp = $this->path;
             $this->path = null;
         } else {
             $this->path = $avatarExt;
+        }*/
+    }
+
+
+
+    public function getImgFile()
+    {
+        return $this->imgFile;
+    }
+
+    public function setImgFile(UploadedFile $imgFile = null)
+    {
+        $this->imgFile = $imgFile;
+        //$avatarExt = pathinfo($imgFile, PATHINFO_BASENAME);
+        $avatarExt = $this->imgFile->getClientOriginalName();
+
+        //REVISED BY PRADEEP FOR DUPLICATE FILE REPLACEMENT PROBLEM
+        $avatarExtension = $this->imgFile->getClientOriginalExtension();
+        $firstName = chop($avatarExt, ".".$avatarExtension);
+        $avatarExt = $firstName."-".date("F-j-Y-H-i-s").".".$avatarExtension;
+        //REVISION CODE ENDS HERE
+
+        // $reversAv = strrev($avatarExt);
+
+        // $avatarBase = $avatarExt->
+        // check if we have an old image imgUrl
+        $this->imgUrl = $avatarExt;
+        
+        /*var_dump($this->imgUrl);
+        exit();*/
+
+        
+        /*if (isset($this->imgUrl)) {
+            // store the old name to delete after the update
+            $this->temp = $this->imgUrl;
+            $this->imgUrl = null;
+        } else {
+            $this->imgUrl = $avatarExt;
         }*/
     }
 
@@ -251,6 +310,31 @@ class Document
             
     }
 
+     /* Set path
+     *
+     * @param path $imgUrl
+     *
+     * @return Document
+     */
+    public function setImgUrl($imgUrl)
+    {
+        $this->imgUrl = $imgUrl;
+
+        return $this;
+    }
+
+
+    
+    /* Get imgUrl
+     *
+     * @return imgUrl
+     */
+     public function getImgUrl()
+    {
+        return $this->imgUrl;
+            
+    }
+
      /* Set language
      *
      * @param language $language
@@ -323,6 +407,13 @@ class Document
         return $this->type;
             
     }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
+    }
     
     public function getAbsolutePath()
     {
@@ -336,13 +427,6 @@ class Document
         return null === $this->path
             ? null
             : $this->getUploadDir().'/'.$this->path;
-    }
-
-    protected function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__.'/../../../web/'.$this->getUploadDir();
     }
 
     protected function getUploadDir()
@@ -378,6 +462,12 @@ class Document
         // if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
+
+        if(isset($this->path)) {
+            var_dump($this->path);
+        }
+        var_dump($this->getUploadRootDir() );
+
         $this->getFile()->move($this->getUploadRootDir(), $this->path);
 
         // check if we have an old image
@@ -398,8 +488,99 @@ class Document
      */
     public function removeUpload()
     {
-         $file = $this->getAbsolutePath(); 
+        $file = $this->getAbsolutePath(); 
         if ($file) {
+            $this->status=0;
+        }
+    }
+
+    protected function getUploadRootDirImgUrl()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../web/'.$this->getUploadDirImgUrl();
+    }
+    
+    public function getAbsoluteImgUrl()
+    {
+        return null === $this->imgUrl
+            ? null
+            : $this->getUploadRootDirImgUrl().'/'.$this->imgUrl;
+    }
+
+    public function getWebImgUrl()
+    {
+        return null === $this->imgUrl
+            ? null
+            : $this->getUploadDirImgUrl().'/'.$this->imgUrl;
+    }
+
+    protected function getUploadDirImgUrl()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/documents/thumbs';
+    }
+    
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUploadImgUrl()
+    {
+        if (null !== $this->getImgFile()) {
+            // do whatever you want to generate a unique name
+            /*$filename = sha1(uniqid(mt_rand(), true));
+            $this->path = $filename.'.'.$this->getFile()->getExtension();*/
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function uploadImgUrl()
+    {
+        if (null === $this->getImgFile()) {
+            return;
+        }
+
+        // if there is an error when moving the file, an exception will
+        // be automatically thrown by move(). This will properly prevent
+        // the entity from being persisted to the database on error
+        
+        if(isset($this->imgUrl)) {
+            var_dump($this->imgUrl);
+        }
+        var_dump($this->getUploadRootDirImgUrl() );
+        // exit();
+
+
+        $this->getImgFile()->move($this->getUploadRootDirImgUrl(), $this->imgUrl);
+
+        /*var_dump($this->temp);
+        exit();*/
+
+        // check if we have an old image
+        if (isset($this->tempImgUrl)) {//TOKNOW: can we use single tempImgUrl...
+            // delete the old image
+            unlink($this->getUploadRootDirImgUrl().'/'.$this->tempImgUrl);
+            // clear the tempImgUrl image path
+            $this->tempImgUrl = null;
+        }
+        $this->imgFile = null;
+
+        //for flashbag message
+        $_SESSION["document_upload"] = "1";
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUploadImgUrl()
+    {
+        $imgFile = $this->getAbsolutePathImgUrl(); 
+        if ($imgFile) {
             $this->status=0;
         }
     }

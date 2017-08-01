@@ -71,7 +71,14 @@ class DefaultController extends Controller
             ->findOneByIsHomepage(1)
             // ->findById(3)
             ;
-        // var_dump($issueType[0]); exit();
+
+        /*var_dump($issueType->getId()); 
+        exit();*/
+
+        $issueQuestion = $em->getRepository('AppBundle:IssueQuestion')
+            ->findOneByIssueType($issueType->getId());
+        // var_dump($issueQuestion->getId()); exit();
+
         //TODO: compare chartType of issueType
 
         if(!empty($issueType)) {
@@ -86,6 +93,7 @@ class DefaultController extends Controller
             'entities_news' => $entities_news_final,//news
             'issueType' => $issueType,
             'issueChartOverview' => $issueChartOverview,
+            'issueQuestionId' => $issueQuestion->getId(),
         );
     }
 

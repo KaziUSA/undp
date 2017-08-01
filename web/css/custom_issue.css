@@ -5,6 +5,9 @@
 	.two-column-paragraph {
 		column-count: 2;
 	}
+	.background-size-100 {
+		background-size: 100% !important;
+	}
 	@media (min-width: 768px) {
 		body {
 			margin-bottom: 42px;
@@ -315,11 +318,22 @@ body.survey {
 	    padding: 10px 10px 0;
 			font-size: 13px;
 	}
+	.news-page-title .feedback-round {
+	    right: 10px;
+	}
+
+	.page-title.news-page-title {
+	    padding: 0 10px;
+	}
 
 	.news-box-module {
 			font-size: 13px;
 	    padding-right: 10px;
 	    margin-bottom: 10px;
+	}
+
+	.news-homepage .news-box-module {
+		margin-bottom: 0;
 	}
 	.news-homepage .news-box-module:nth-child(4n), .news-page .news-box-module:nth-child(4n) {
 	    padding-right: 0;
@@ -391,6 +405,19 @@ body.survey {
 	/* on homepage */
 	.news-box-module {
 	    color: #333333;
+	}
+	@media(min-width: 768px) {
+		.news-homepage-featured .news-graphics {
+		    width: 50%;
+		    float: left;
+		    margin-right: 10px;
+		    margin-bottom: 0;
+		    height: 100%;
+		}
+
+		.news-homepage-featured .news-graphics .img img, .news-homepage-featured .news-graphics .img {
+		    height: 100%;
+		}
 	}
 /* news page ends */
 
@@ -838,6 +865,35 @@ body.survey {
 		}
 	}
 	@media (max-width: 767px) {
+		.homepage-widget .home-box:first-child {
+		    margin-bottom: 10px;
+		}
+		.surveyMen, .surveyWomen {
+			width: 50%;
+		}
+		.home-box .h-col-25,
+		.home-box .h-col-75 {
+			width: 100%;
+			padding-right: 0; 
+		}
+		.homepage-widget .u-box-white.news-homepage-featured {
+			margin-top: 10px;
+		}
+		.news-homepage-featured .news-box-module:last-child {
+	    margin-bottom: 0;
+		}
+
+		.news-homepage-featured  .news-box-module {
+		    height: auto !important;
+		}
+
+		.news-homepage-featured .news-body a.readmore {
+		    display: none;
+		}
+		.news-homepage-featured .news-box-module:first-child {
+			margin-bottom: 0;
+		}
+
 		.navbar-default .navbar-collapse .navbar-nav {
 		    margin-top: 0;
 		}
@@ -857,7 +913,7 @@ body.survey {
 		.home-box {
 		    width: 100%;
 		    padding: 0;
-		    margin-bottom: 10px;
+		    /*margin-bottom: 10px;*/
 		}
 
 		.news-homepage .news-box-module, .news-page .news-box-module {

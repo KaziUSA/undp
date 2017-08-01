@@ -41,6 +41,12 @@ class IssueNews
     private $name;
 
     /**
+     * @ORM\ManyToOne(targetEntity="IssueNewsType", inversedBy="issuenews")
+     * @ORM\JoinColumn(name="issue_news_type_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $issueNewsType;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -512,6 +518,30 @@ class IssueNews
     public function getUpdatedDate()
     {
         return $this->updatedDate;
+    }
+
+    /**
+     * Set issueNewsType
+     *
+     * @param \AppBundle\Entity\IssueNewsType $issueNewsType
+     *
+     * @return issueNewsType
+     */
+    public function setIssueNewsType(\AppBundle\Entity\IssueNewsType $issueNewsType = null)
+    {
+        $this->issueNewsType = $issueNewsType;
+
+        return $this;
+    }
+
+    /**
+     * Get issueNewsType
+     *
+     * @return \AppBundle\Entity\IssueNewsType
+     */
+    public function getIssueNewsType()
+    {
+        return $this->issueNewsType;
     }
 }
 

@@ -17,6 +17,7 @@ class IssueNewsType extends AbstractType
         $builder
             ->add('name')
             ->add('slug')
+            ->add('issueNewsType')
             ->add('description', null, array(
                 'attr' => array(
                         'class' => 'ckeditor'

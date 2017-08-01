@@ -7,7 +7,7 @@
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
       {# <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a> #}
       {% endif %}
-			<div class="container-fluid padding10 nopaddingbottom">
+			<div class="container-fluid padding10">
 				{# <div class="row">
 					<div class="col-lg-8">
 						<div class="banner-caption">
@@ -44,11 +44,11 @@
 					<div class="home-box pull-left" style="">
 						<div class="u-box u-box-white">
 							<div class="u-box-white-padding">
-							{# TODO: need to change link #}
-							<h3 class="u-box-title"><a href="http://cfp.org.np/issue/9">{{ issueType.name }} {{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} Survey Overview</a></h3>
+							{# one issueQuestion link http://cfp.org.np/issue/9 #}
+							<h3 class="u-box-title"><a href="{{ path('issue_show', {'id': issueQuestionId}) }}">{{ issueType.name }} {{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} Survey Overview</a></h3>
 							
 							{# chart #}
-							<div id="container-homepage" class="container-chart" style=""></div>
+							<a href="{{ path('issue_show', {'id': issueQuestionId}) }}"><div id="container-homepage" class="container-chart" style=""></div></a>
 							</div>
 						</div>
 					</div>
@@ -91,7 +91,76 @@
 										{# show only two #}
 										{% if i <= 2 %}
 										<div class="news-box-module ">
-											<div class="news-box-wrap ">
+											<div class="news-box-wrap clearfix">
+
+												{% if entity.imageUrl != '' or entity.youtubeUrlEmbed != '' %}
+													<div class="news-graphics">
+														{% if '.mp3' in entity.imageUrl %}    	
+															{# <div class="audio">
+													    	<audio controls>
+																  <source src="/uploads/issue/news/audio/{{ entity.imageUrl }}" type="audio/mpeg">
+																	Your browser does not support the audio element.
+																</audio>
+															</div> #}
+															
+															{# first one should be 1 #}
+															<div class="audio">
+																<div id="jquery_jplayer_{% if i == 0 %}1{% else %}{{ entity.id }}{% endif %}" class="jp-jplayer"></div>
+																<div id="jp_container_{% if i == 0 %}1{% else %}{{ entity.id }}{% endif %}" class="jp-audio" role="application" aria-label="media player">
+																	<div class="jp-type-single">
+																		
+																		<div class="jp-details">
+																			<div class="jp-title" aria-label="title">&nbsp;</div>
+																		</div>
+
+																		<div class="jp-volume-controls">
+																			<button class="jp-mute" role="button" tabindex="0">mute</button>
+																			<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+																			<div class="jp-volume-bar">
+																				<div class="jp-volume-bar-value"></div>
+																			</div>
+																		</div>
+																		
+																		<div class="jp-gui jp-interface">
+																			<div class="jp-controls-holder">
+																				<div class="jp-controls">
+																					<button class="jp-play" role="button" tabindex="0">play</button>
+																					<button class="jp-stop" role="button" tabindex="0">stop</button>
+																				</div>
+																				<div class="jp-progress">
+																					<div class="jp-seek-bar">
+																						<div class="jp-play-bar"></div>
+																					</div>
+																				</div>
+																				<div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+																				<div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+																				<div class="jp-toggles">
+																					<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="jp-no-solution">
+																			<span>Update Required</span>
+																			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+																		</div>
+																	</div>
+																</div>
+															</div>
+															{% set i = i + 1 %}
+												    {% elseif (('.jpeg' in entity.imageUrl) or ('.jpg' in entity.imageUrl) or ('.png' in entity.imageUrl)) %}
+												    	<div class="img" style="background-image: url( '/uploads/issue/news/img/{{ entity.imageUrl }}' )">
+													    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" width="100%" height="170px">
+													    </div>
+												    {% endif %}
+
+												    {# {{ dump(entity) }} #}
+												    {% if entity.youtubeUrlEmbed != '' %}
+															<div class="video">
+													    	<iframe width="200" height="130" src="{{ entity.youtubeUrlEmbed }}" frameborder="0" allowfullscreen></iframe>
+													    </div>
+												    {% endif %}
+											    </div>
+										  	{% endif %}
 										    <div class="news-body">
 										    	<h2 class="news-title"><a href="{{ path('news_show', {'slug': entity.slug }) }}" class="">{{ entity.name }}</a></h2>
 										    	{# {{ entity.description | raw  }} #}
@@ -118,7 +187,9 @@
 
 				{# pull 4 news feed #}
 				<div class="news-homepage clearfix">
-					{% set i = 0 %}
+					{# we don't want audio player of id begin with 0 #}
+					{# {% set i = 0 %} #}
+
 					{% set ni = 0 %}
 					{% for entity in entities_news %}
 						{% set ni = ni + 1 %}
