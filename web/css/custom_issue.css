@@ -1,3 +1,4 @@
+.filter .nav-phase2 li a { font-size: 10px !important; }
 /* global css */
 	.highcharts-credits {
 	    display: none;
@@ -801,6 +802,9 @@ body.survey {
 	    color: #d2232a;
 	}
 /* Report page ends */
+
+/* platform */
+.high-chart-wrap { overflow: hidden !important; }
 
 /* Responsive css */
 	@media (min-width: 768px) {
