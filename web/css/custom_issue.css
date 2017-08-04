@@ -404,6 +404,9 @@ body.survey {
 	.news-detail-page .video {
 		height: 500px;
 	}
+	.news-homepage .video {
+		height: 170px !important;
+	}
 	/* on homepage */
 	.news-box-module {
 	    color: #333333;
