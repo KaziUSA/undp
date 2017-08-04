@@ -36,7 +36,12 @@ class DefaultController extends Controller
 
 
         //pull 4 news here
-        $entities_news = $em->getRepository('AppBundle:IssueNews')->findAll();//only four news
+        $entities_news = $em->getRepository('AppBundle:IssueNews')
+            ->findBy( 
+                array(), 
+                array('id' => 'DESC') 
+                );
+            // ->findAll();//only four news
 
         // var_dump($entities_news);exit();
         $entities_news_final = array();

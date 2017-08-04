@@ -751,6 +751,7 @@ reports-page
 {% block scriptIncludes %}
 <script>
 	$(document).ready(function() {
+
 		var winWidth = $(window).width();
 
 		//district tab width
@@ -1028,6 +1029,10 @@ reports-page
 	  });
 
 		content_height();
+
+		
+		//show grid view first
+		$('.show-grid-view').trigger('click');	
 	});
 	$(window).resize(function() {
 		content_height();

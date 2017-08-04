@@ -52,12 +52,13 @@ class IssueTypeType extends AbstractType
                     1  => 'Yes',
                 ),
             ))
-            ->add('chartType', 'choice', array(
+            ->add('title')
+            /*->add('chartType', 'choice', array(
                 'choices'  => array(
                     1  => 'Circle Donut',
                     2  => 'Semi circle donut',
                 ),
-            ))
+            ))*/
             ->add('surveyNumber')
             ->add('surveyDetail')
             ->add('surveyMen')

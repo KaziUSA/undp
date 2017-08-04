@@ -45,7 +45,15 @@
 						<div class="u-box u-box-white">
 							<div class="u-box-white-padding">
 							{# one issueQuestion link http://cfp.org.np/issue/9 #}
-							<h3 class="u-box-title"><a href="{{ path('issue_show', {'id': issueQuestionId}) }}">{{ issueType.name }} {{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} Survey Overview</a></h3>
+							<h3 class="u-box-title">
+								<a href="{{ path('issue_show', {'id': issueQuestionId}) }}">{{ issueType.name }} {{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} 
+								{% if issueType.title is not null %}
+									- {{ issueType.title }}
+								{% else %}
+									Survey Overview
+								{% endif %}
+								</a>
+							</h3>
 							
 							{# chart #}
 							<a href="{{ path('issue_show', {'id': issueQuestionId}) }}"><div id="container-homepage" class="container-chart" style=""></div></a>

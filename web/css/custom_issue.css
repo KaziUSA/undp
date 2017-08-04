@@ -354,6 +354,7 @@ body.survey {
 	    background: #fff;
 	    height: 100%;
 	    padding: 10px;
+	    overflow: hidden; /* added for homepage */
 	}
 
 	.news-graphics iframe {
@@ -647,6 +648,9 @@ body.survey {
 /* reports */
 	.list-view .share-icons li {
 	    background-color: #ebebeb;
+	}
+	.reports-page .news-graphics .img img {
+	    height: 230px;
 	}
 /* reports css ends */
 

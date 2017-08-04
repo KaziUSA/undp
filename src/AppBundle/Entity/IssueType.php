@@ -46,7 +46,7 @@ class IssueType
     /**
      * @var integer
      *
-     * @ORM\Column(name="chartType", type="integer")
+     * @ORM\Column(name="chartType", type="integer", nullable=true)
      */
     private $chartType;
 
@@ -84,6 +84,13 @@ class IssueType
      * @ORM\Column(name="isHomepage", type="integer")
      */
     private $isHomepage;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
+     */
+    private $title;
 
 
     /**
@@ -316,6 +323,30 @@ class IssueType
     public function getIsHomepage()
     {
         return $this->isHomepage;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return IssueChartOverview
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /* To fix: Object of class Proxies\__CG__\AppBundle\Entity\... could not be converted to string"). */
