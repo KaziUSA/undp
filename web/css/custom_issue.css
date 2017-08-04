@@ -799,6 +799,9 @@ body.survey {
 	}
 /* Report page ends */
 
+/* platform */
+.high-chart-wrap { overflow: hidden !important; }
+
 /* Responsive css */
 	@media (min-width: 768px) {
 		.survey-question-col {
