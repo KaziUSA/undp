@@ -37,7 +37,12 @@ survey
 					              	<select id="issue-Livelihood-year-month-dropdown">
 				                  	{% for it in issueType %}
 				                  		{% if it.name == 'Livelihood' %}
-				                  			<option value="{{ it.year ~ '-' ~ it.month }}">{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+				                  			<option value="{{ it.year ~ '-' ~ it.month }}"
+                                                                        {# selected="" #}
+                                                                        {% if question_detail.issueType.month == it.month and question_detail.issueType.year == it.year %}
+                                                                                selected="selected"
+                                                                        {% endif %}
+                                                                        >{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
 				                  		{% endif %}	
 				                  	{% endfor %}
 					              	</select>
@@ -99,7 +104,12 @@ survey
 					              	<select id="issue-Protection-year-month-dropdown">
 				                  	{% for it in issueType %}
 				                  		{% if it.name == 'Protection' %}
-				                  			<option value="{{ it.year ~ '-' ~ it.month }}">{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+				                  			<option value="{{ it.year ~ '-' ~ it.month }}"
+                                                                        {# selected="" #}
+                                                                        {% if question_detail.issueType.month == it.month and question_detail.issueType.year == it.year %}
+                                                                                selected="selected"
+                                                                        {% endif %}
+                                                                        >{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
 				                  		{% endif %}	
 				                  	{% endfor %}
 					              	</select>
