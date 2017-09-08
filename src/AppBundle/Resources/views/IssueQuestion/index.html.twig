@@ -21,7 +21,14 @@
             {% set i = i + 1 %}
             <tr>
                 <td>{{ i }}</td>
-                <td>{{ entity.issueType }} - {{ date( entity.issueType.year ~ '-' ~ entity.issueType.month ~ '-01' ) | date('F Y') }} </td>
+                <td>
+			{{ entity.issueType }} - 
+			{% if entity.issueType is defined %}
+			{% if entity.issueType is not empty %}
+			{{ date( entity.issueType.year ~ '-' ~ entity.issueType.month ~ '-01' ) | date('F Y') }}
+			{% endif %}
+			{% endif %}	
+		</td>
                 <td>{{ entity.name }}</td>
                 {# <td>{{ date('2017-' ~ entity.keyFindingsMonth ~ '-01') | date('F') }}</td> #}
                 {# <td>{{ entity.keyFindings }}</td> #}

@@ -713,11 +713,17 @@ survey
     {% endfor %}
 
     // question filter by month year dropdown
-    $('#issue-Reconstruction-year-month-dropdown').change(function() { 
+    function year_month_dropdown(issueType) {
+	$('#issue-'+issueType+'-year-month-dropdown').change(function() { 
     	var val = $(this).val(); 
-    	$('.Reconstruction').hide(); 
-    	$('.Reconstruction.'+val).show(); 
-    });
+    	$('.'+issueType).hide(); 
+    	$('.'+issueType+'.'+val).show(); 
+    	});
+	}//end function
+
+	year_month_dropdown('Reconstruction');
+	year_month_dropdown('Livelihood');
+	year_month_dropdown('Protection');
 
     //change tab head active
     $('.survey .nav-tabs li').removeClass('active'); 
