@@ -29,8 +29,8 @@ class Set2Controller extends Controller
 			    'class' => 'AppBundle:Question',
 			    'query_builder' => function(EntityRepository $er) {
 			                         return $er->createQueryBuilder('q')
-			                         		->where('q.answer_group = 1')
                                          ->where('q.id > 34')
+                                         ->andWhere('q.id < 57')
 			                             ->orderBy('q.id', 'ASC');
 			                     },
 			    'choices_as_values' => false,		    

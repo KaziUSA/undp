@@ -1,0 +1,290 @@
+{# pulling about, contactus, perception-survey-methodology #}
+{% extends '::frontend.html.twig' %}
+
+{# TODO: add project title in all page #}
+{% block title %}{{ entity.title | striptags }} | {{ project_title }}{% endblock %}
+
+{% block body -%}
+    <div class="page-title hidden">
+        <h3>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {# <article id="content1" class="ck-title" contenteditable="true" onclick="onClickToolbarButton()">
+                    {{ entity.title | raw}}
+                </article> #}
+                {{ entity.title | raw}}
+            {% else %}
+                {{ entity.title | raw}}
+            {% endif %}
+        </h3>
+    </div>
+
+    <section class="content img-cover relative about-page" style="">
+        {# {% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %} #}
+            
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {# <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a> #}
+        {% endif %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-sm-6 nopaddingright about-section">
+                    <div class="u-box clearfix">
+                        <h3>{{ entity.title | raw}}</h3>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            {# <article id="content2" class="ckeditor" contenteditable="true">
+                                {{ entity.description | raw }}
+                            </article>
+                            <input type="button" id="save" class="btn btn-bordered pull-right" value="Save">
+                            <img id="loader" class="hide" src="/img/frontend/loading.GIF"> #}
+                            {{ entity.description | raw }}
+
+                            {# show edit link #}
+                            <p><a href="{{ path('page_show', {'slug': entity.slug}) }}">Edit</a></p>
+                        {% else %}
+                            {{ entity.description | raw }}
+                        {% endif %}
+                    </div>
+
+                    <div class="u-box clearfix" class="marginbottom15">
+                        <h3>{{ entity_contactus.title | raw }}</h3>
+                        {{ entity_contactus.description | raw }}
+
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {# show edit link #}
+                        <p><a href="{{ path('page_show', {'slug': entity_contactus.slug}) }}">Edit</a></p>
+                        {% endif %}
+
+
+                        <div id="contact-form" style="margin-top: 40px;">
+
+                        <h3>Please send us a message with feedback or queries.</h3>
+
+                        <form class="form-bordered" action="" method="post" autocomplete="off">
+                          <div class="form-group">
+                            <label for="inputName" class="control-label">Name *</label>
+                            <input type="text" class="form-control" id="inputName" name="name" placeholder="">
+                            <span class="required name-required">This field is required.</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputAddress" class="control-label">Address *</label>
+                            <input type="text" class="form-control" id="inputAddress" name="address" placeholder="">
+                            <span class="required address-required">This field is required.</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputEmail" class="control-label">Email *</label>
+                            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="">
+                            <span class="required email-required">This field is required.</span>
+                            <span class="required good-email-required">Please type valid email address.</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputPhone" class="control-label">Phone *</label>
+                            <input type="text" class="form-control" id="inputPhone" name="phone" placeholder="">
+                            <span class="required phone-required">This field is required.</span>
+                          </div>
+                          <div class="form-group">
+                            <label for="textMessage" class="control-label">Message *</label>
+                            <textarea id="textMessage" name="message" class="form-control" cols="30" rows="10"></textarea>
+                            <span class="required message-required">This field is required.</span>
+                          </div>
+                          <div class="form-group">
+                            <!-- <label for="captcha1" class="control-label">Captcha *</label> -->
+                            <p class="captcha-text">Please enter the letters you see below.</p>
+
+                            <div class="captcha-img">
+                              <div id="imgdiv"><img id="img" src="/captcha/captcha.php" /></div>
+                              <span id="reload" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                            </div>
+                            <!-- <img id="reload" src="/captcha/reload.png" /> -->
+
+                            <input id="captcha1" class="form-control" name="captcha" type="text">
+
+                            <span class="required captcha-required">This field is required.</span>
+                            <span class="required good-captcha-required">Please type the correct captcha.</span>
+
+                          </div>
+                          <div class="form-group">
+                            <!--<input type="submit" id="submit" class="btn btn-bordered" value="Submit">-->
+                            <button type="button" id="submit" class="btn btn-bordered">Submit</button>
+                          </div>
+                        </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7 col-md-6 col-sm-6 nopaddingleft about-perception">
+                    <div class="u-box u-box-white clearfix marginbottom15">
+                        <h3>{{ entity_perception.title | raw }}</h3>
+                        {{ entity_perception.description | raw }}
+
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {# show edit link #}
+                        <p><a href="{{ path('page_show', {'slug': entity_perception.slug}) }}">Edit</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{%block scriptIncludes %}
+<script>
+//quick fix for hiding toolbar for title  
+/*function onClickToolbarButton() {
+    var bar = document.getElementById("cke_content1");//for #content1
+    if(bar.style.display == "none"){
+        bar.style.display = "none";//block - to show
+    }else{
+        bar.style.display = "none";
+    }
+}*/
+</script>
+<script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
+<script>
+/*var i=0, j=0;
+//$("#content1, #content2").keyup(function()
+$('#save').click(function()
+ {  
+  var name = {id:{{ entity.id }}, title:$("#content1").html(), description:$("#content2").html()};//{{ entity.id }}
+  i=i+1;
+  $("#loader").removeClass("hide");
+  $("#loader").addClass("show");
+  //console.log("Request Sent");
+    $.post('{{path('page_show', {'slug': entity.slug} )}}',//{{path('page')}} - path: /admin/page/home
+        { data_id:name.id,data_title:name.title,data_description:name.description}, 
+            function(response){ 
+            j=j+1
+                    if (j==i){
+                        //console.log("hidden");
+                        $("#loader").removeClass("show");
+                        $("#loader").addClass("hide");  
+                    }
+            }
+    );
+
+  //return false;
+   
+  });*/
+
+
+
+//for contact form
+function validateEmail($email) {
+  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+  return emailReg.test( $email );
+}
+$(document).ready(function() {
+  $("#reload").click(function() {  
+    $("img#img").remove();
+    var id = Math.random();
+        $('<img id="img" src="/captcha/captcha.php?id='+id+'"/>').appendTo("#imgdiv");
+     id ='';
+  });
+
+  var m=0, n=0;
+  $('#submit').click(function() {  
+    var mail = {
+      name:$("#inputName").val(), 
+      address:$("#inputAddress").val(),
+      email:$("#inputEmail").val(),
+      phone:$("#inputPhone").val(),
+      message:$("#textMessage").val(),
+      captcha:$("#captcha1").val(),
+    };  
+    //validate part here
+    if(mail.name == '' || mail.address == '' || mail.email == '' || mail.phone == '' || mail.message == '' || mail.captcha == '') {
+      if(mail.name == '') {
+        $('.name-required').css({'display':'block'});
+        $("#inputName").focus();
+        return false;
+      } else {
+        $('.name-required').css({'display':'none'});
+      }
+      if(mail.address == '') {
+        $('.address-required').css({'display':'block'});
+        $("#inputAddress").focus();
+        return false;
+      } else {
+        $('.address-required').css({'display':'none'});
+      }
+      if(mail.email == '') {
+        $('.email-required').css({'display':'block'});
+        $("#inputEmail").focus();
+        return false;
+      } else {
+        $('.email-required').css({'display':'none'});
+      }
+      if(!validateEmail(mail.email)) {
+        $('.good-email-required').css({'display':'block'});
+        $("#inputEmail").focus();
+        return false;
+      } else {
+        $('.good-email-required').css({'display':'none'});
+      }
+      if(mail.phone == '') {
+        $('.phone-required').css({'display':'block'});
+        $("#inputPhone").focus();
+        return false;
+      } else {
+        $('.phone-required').css({'display':'none'});
+      }
+      if(mail.message == '') {
+        $('.message-required').css({'display':'block'});
+        $("#textMessage").focus();
+        return false;
+      } else {
+        $('.message-required').css({'display':'none'});
+      }
+      if(mail.captcha == '') {
+        $('.captcha-required').css({'display':'block'});
+        $("#captcha1").focus();
+        return false;
+      } else {
+        $('.captcha-required').css({'display':'none'});
+      }
+    } else {
+      m=m+1;
+      console.log("Request Sent");
+      //console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
+
+      {#/*$.post('{{path('contactus')}}',               
+        { data_name:mail.name, data_address:mail.address, data_email:mail.email, data_phone:mail.phone, data_message:mail.message, data_captcha:mail.captcha
+        }, 
+          function(response) {
+            n=n+1
+            //if(response) {
+              console.log("Your message has been sent successfully!");
+              $("#contact-form").html('<h3>Your message has been sent successfully! <a classs="btn btn-bordered send-again" href="{{path('contactus')}}">Send message again?</a></h3>');
+            } else {
+              console.log('Error');
+              $('.good-captcha-required').css({'display':'block'});
+            }
+          }        
+      );*/#}
+
+      var captcha = $("#captcha1").val();
+      var dataString = { name: mail.name, address: mail.address, email: mail.email, phone: mail.phone, message: mail.message, captcha: mail.captcha };
+      $.ajax({
+          type: "POST",
+          url: "/captcha/verify.php",
+          data: dataString,
+          success: function(html) {
+              //alert(html);//what ever echo-ed
+              if(html == 'Incorrect') {
+                //console.log('Error');
+                //alert(html);
+                $('.good-captcha-required').css({'display':'block'});
+              } else {
+                console.log("Your message has been sent successfully!");
+                $("#contact-form").html('<h3>Your message has been sent successfully! <a classs="btn btn-bordered send-again" href="{{path('about')}}">Send message again?</a></h3>');  
+              }
+          }
+      });
+      return false;
+    }//end else
+  });
+
+});//end document ready
+</script>
+
+{% endblock %}

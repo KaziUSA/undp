@@ -1,0 +1,759 @@
+{% extends 'frontend.html.twig' %}
+
+{% block bodyclass %}
+survey
+{% endblock %}
+
+{% block title %}Survey - {{ question_detail.name }} | {{ project_title }}{% endblock %}
+
+{% block body -%}
+
+	<section class="content survey">
+		<div class="row row-no-padding">
+			
+			<div class="col-sm-3 col-md-3 col-lg-3">
+				<aside>
+			      <div class="filter survey">
+			      	<div class="tab-heading">Survey Questions</div>
+			        <!-- Nav tabs -->
+			        <div class="feedback-tab clearfix" style="">
+
+			            <ul id="" class="nav nav-tabs" role="tablist">
+			              <li role="presentation" class="Livelihood-tab-head"><a href="#livelihood" aria-controls="messages" role="tab" data-toggle="tab" value="">Livelihood</a></li>
+
+			              <li role="presentation" class="active Reconstruction-tab-head"><a href="#reconstruction" aria-controls="settings" role="tab" data-toggle="tab" value="">Reconstruction</a></li>
+
+			              <li role="presentation" class="Protection-tab-head"><a href="#protection" aria-controls="messages" role="tab" data-toggle="tab" value="">Protection</a></li>
+
+			            </ul>
+			        </div>
+
+			        <!-- Tab panes -->
+			        <div class="tab-content">
+			          <div role="tabpanel" class="tab-pane fade in Livelihood-tab-content" id="livelihood">
+			              <div class="tab-content-wrap">
+			              	{% if issue_questions is not empty %}
+				              	<div id="zelect">
+					              	<select id="issue-Livelihood-year-month-dropdown">
+				                  	{% for it in issueType %}
+				                  		{% if it.name == 'Livelihood' %}
+				                  			<option value="{{ it.year ~ '-' ~ it.month }}"
+                                                                        {# selected="" #}
+                                                                        {% if question_detail.issueType.month == it.month and question_detail.issueType.year == it.year %}
+                                                                                selected="selected"
+                                                                        {% endif %}
+                                                                        >{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+				                  		{% endif %}	
+				                  	{% endfor %}
+					              	</select>
+				              	</div>
+				              	
+				              	{# question list #}
+				              	<ul>
+				                  {% for question in issue_questions %}
+				                  	{% if question.issueType.name == 'Livelihood' %}
+					                  	<li class="Livelihood {{ question.issueType.year ~ '-' ~ question.issueType.month }} {% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
+				                  	{% endif %}
+				                  {% endfor %}
+				                </ul>
+			              	{% endif %}
+			              </div>
+			          </div>
+
+			          <div role="tabpanel" class="tab-pane fade in active Reconstruction-tab-content" id="reconstruction">
+			              <div class="tab-content-wrap">
+			              	{% if issue_questions is not empty %}
+				              	<div id="zelect">
+					              	<select id="issue-Reconstruction-year-month-dropdown">
+				                  	{% for it in issueType %}
+				                  		{% if it.name == 'Reconstruction' %}
+				                  			<option value="{{ it.year ~ '-' ~ it.month }}"
+				                  			{# selected="" #}
+				                  			{% if question_detail.issueType.month == it.month and question_detail.issueType.year == it.year %}
+				                  				selected="selected" 
+				                  			{% endif %}
+				                  			>{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+				                  		{% endif %}	
+				                  	{% endfor %}
+					              	</select>
+				              	</div>
+				              	
+				              	{# question list #}
+				              	<ul>
+				              		{# {% set issueType = '' %} #}
+				                  {% for question in issue_questions %}
+				                  	{% if question.issueType.name == 'Reconstruction' %}
+				                  		{# adding heading: like April 2017 - this will list all the questions, so their will be alot of question list #}
+				                  		{# {% if issueType != question.issueType.month ~ '-' ~ question.issueType.year %}
+				                  			<li class="issue-month-year"><a href="#!">{{ date(question.issueType.year ~ '-' ~ question.issueType.month ~ '-01') | date('F Y') }}</a></li>
+				                  		{% endif %}
+					                  	{% set issueType = question.issueType.month ~ '-' ~ question.issueType.year %} #}
+
+					                  	<li class="Reconstruction {{ question.issueType.year ~ '-' ~ question.issueType.month }} {% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
+				                  	{% endif %}
+				                  {% endfor %}
+				                </ul>
+			              	{% endif %}
+			              </div>
+			          </div>
+
+			          <div role="tabpanel" class="tab-pane fade in Protection-tab-content" id="protection">
+			              <div class="tab-content-wrap">
+			              	{% if issue_questions is not empty %}
+				              	<div id="zelect">
+					              	<select id="issue-Protection-year-month-dropdown">
+				                  	{% for it in issueType %}
+				                  		{% if it.name == 'Protection' %}
+				                  			<option value="{{ it.year ~ '-' ~ it.month }}"
+                                                                        {# selected="" #}
+                                                                        {% if question_detail.issueType.month == it.month and question_detail.issueType.year == it.year %}
+                                                                                selected="selected"
+                                                                        {% endif %}
+                                                                        >{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+				                  		{% endif %}	
+				                  	{% endfor %}
+					              	</select>
+				              	</div>
+				              	
+				              	{# question list #}
+				              	<ul>
+				                  {% for question in issue_questions %}
+				                  	{% if question.issueType.name == 'Protection' %}
+					                  	<li class="Protection {{ question.issueType.year ~ '-' ~ question.issueType.month }} {% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
+				                  	{% endif %}
+				                  {% endfor %}
+				                </ul>
+			              	{% endif %}
+			              </div>
+			          </div>
+			        </div>
+			      </div>
+			  </aside>
+			</div>
+
+			<div class="col-sm-9 col-md-9 col-lg-9">
+				<div class="page-title">
+					{{ question_detail.name }}
+				</div>
+
+				<!-- main content -->
+				<div class="main-content">
+					<div class="wrapper clearfix"><!--wrapper remove or not-->
+						<div class="s-box-module s-box-module-border">
+							<div class="row nomargin parent-height">
+								<div class="
+									{# if there is only one chart #}
+									{% if question_option | length == 1 %}
+										col-lg-8 col-sm-6 child-height
+									{% else %}
+										col-sm-12
+									{% endif %}
+									">
+									<div class="">
+										<div class="s-box">
+											<div>
+												<h2>Key Findings in {{ date('2017-' ~ question_detail.keyFindingsMonth ~ '-01') | date ('F') }}
+			              	  {# doesn't matter what ever year or day - we just need month #}</h2>
+			              	</div>	
+
+											<div class="
+												{# if there is only one chart #}
+												{% if question_option | length == 1 %}
+												{% else %}
+													two-column-paragraph
+												{% endif %}
+												">
+												{{ question_detail.keyFindings | raw }}
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="
+									{# if there is only one chart #}
+									{% if question_option | length == 1 %}
+										col-lg-4 col-sm-6 child-height s-box-right
+									{% else %}
+										col-sm-12 full-width-chart
+									{% endif %}
+									">
+									<div class="">
+										<div class="s-box nopadding
+											{% if question_option | length == 1 %}
+											{% else %}
+												border-top
+											{% endif %}
+											">
+											{# loop here #}
+											{# {{ question_option | length }} #}
+											<div class="row nomargin">
+											{% set ci = 0 %}
+											{% for qo in question_option %}
+												{% set ci = ci + 1 %}
+												<div class="
+													{# if there is only one chart #}
+													{% if question_option | length == 1 %}
+														col-sm-12
+													{% elseif question_option | length == 2 %}
+														col-sm-6
+														{% if ci == 2 %}
+															border-left
+														{% endif %}
+													{% elseif question_option | length == 3 %}
+														col-sm-4
+														{% if ci == 2 %}
+															border-left border-right
+														{% endif %}
+													{% endif %}
+													">
+													<div id="container-issue-question-{{ qo.id }}" class="container-chart" style=""></div>
+												</div>
+												
+											{% endfor %}											
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{# TODO: need to make people saying map responsive #}
+						<div class="row nomargin">
+							<div class="col-sm-12">
+								{# map #}
+								<div class="s-box">
+									<div><h2>What are people saying?</h2></div>
+									<div>						
+				            <div id="map" class="theme-default">
+				            </div>     
+									</div>
+								</div>
+							</div>
+						</div>
+
+						{% if infographics is not empty or question_detail.imageUrl != '' %}
+						<div class="s-box-module s-box-module-border">
+							<div class="row nomargin parent-height">
+								<div class="col-sm-6 child-height">
+									<div class="s-box-left">
+										<div class="s-box">
+											{% for info in infographics %}
+												<div class="infographics infographics-style-{{ info.type }}">
+													{# <h2>District Highlights</h2>
+													<div class="infographics-list">
+														<span class="icon">ICON</span>
+														<p>Text here</p>
+													</div>
+													<div class="infographics-list">
+														<span class="icon">ICON</span>
+														<p>Text here</p>
+													</div> #}
+												
+													<h2>{{ info.name }}</h2>
+													{% for opt in info.option %}
+														<div class="infographics-list">
+															<span class="icon">
+																{# {{ opt.icon }} #}
+																{% if opt.value == '' %}
+																	{% if opt.imageUrl != '' %}
+																		<img src="/uploads/issue/infographics/{{ opt.imageUrl }}">
+																	{% else %}
+																		<img src="/img/frontend/icons/default-infographics.png">
+																	{% endif %}
+																{% else %}
+																	{{ opt.value }} %
+																{% endif %}
+															</span>
+															<p>{{ opt.description }}</p>
+														</div>
+													{% endfor %}
+												
+												</div>
+												<div class="clear"></div>
+											{% endfor %}
+										</div>
+									</div>
+									
+
+								</div>
+								
+								{# {% if question_detail.imageUrl != '' %} #}
+								<div class="col-sm-6 child-height s-box-right {% if question_detail.imageUrl == '' %}no_imageUrl{% endif %}">
+									<div class="s-box {% if question_detail.imageUrl == '' %}no_imageUrl{% endif %}">
+										<div class="graphics">
+											{% if question_detail.imageTitle != '' %}
+												<h2>{{ question_detail.imageTitle }}</h2>
+											{% endif %}
+
+											{% if question_detail.imageUrl != '' %}
+												<img src="/uploads/issue/img/{{ question_detail.imageUrl }}" class="img-responsive">
+											{% endif %}									
+
+											{% if question_detail.imageDesc != '' %}
+												<p>{{ question_detail.imageDesc }}</p>
+											{% endif %}
+
+											{% if question_detail.imageCredit != '' %}
+												<p>Photo credit: {{ question_detail.imageCredit }}</p>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+
+
+						<div class="row nomargin">
+							<div class="col-sm-12">
+								{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				        <a href="{{ path('issuequestion_edit', { 'id': question_detail.id }) }}" class="edit-link edit-static">Edit This</a>
+				        {% endif %}
+							</div>
+						</div>
+
+					</div>
+				</div><!-- /.main-content -->
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="/css/leaflet.css" rel="stylesheet">
+    <link href="/css/custom_map.css" rel="stylesheet">
+    {# custom.css for admin #}
+{% endblock %}
+
+{% block highchartsJs %}
+  {#<script src="/js/plugins/highcharts/highcharts.js"></script>#} {# for platform #}
+
+  <script src="https://code.highcharts.com/highcharts.js"></script> 
+	<script src="/js/plugins/highcharts/funnel.js"></script><!-- for pyramid -->
+{% endblock %}
+
+
+
+{% block scriptIncludes %}
+
+<script>
+	$(document).ready(function() {
+		var winWidth = $(window).width();
+
+		   
+
+		// content_height();
+	});
+	$(window).resize(function() {
+		// content_height();
+	});
+	function content_height() {
+		if(winWidth >= 768) {
+			var winHeight = $(window).height();
+			var content_height = winHeight - 100 - 40 - 42;
+			$('.content, .main-content').css({'min-height': content_height+'px'});
+		}
+	}
+</script>
+
+    <script type="text/javascript">
+        //change these variables
+        var theme_color = "#ffffff";//#0099ff
+        var border_color = "#ffffff";//#f7941e: orange
+    </script>
+    <script type="text/javascript" src="/js/leaflet.js"></script>
+    <!--<script type="text/javascript" src="/js/issue_reconstruction.js"></script>-->
+    <!--nepal-districts.js-->
+
+    <script>
+    	var question_id = {{ question_detail.id }};
+    </script>
+    <script type="text/javascript" src="/js/custom.js"></script>
+
+
+    {# highcharts #}
+    <script type="text/javascript">
+    /*chartType: 1  => 'Circle Donut',
+    2  => 'Semi circle donut',*/
+    //loop here
+    {% for qo in question_option %}    	
+    	{% if qo.chartType == 1 %}
+    		//chartType 1 = Circle Donut
+		    Highcharts.chart('container-issue-question-{{ qo.id }}', {
+		            chart: {
+		                /*plotBackgroundColor: null,
+		                plotBorderWidth: 0,
+		                plotShadow: false*/
+		                {{ chart_properties | raw }}
+		            },
+		            colors: {{ chart_color | raw }},
+		            legend: {
+		            	align: 'center',
+		            	{{ legendStyle | raw }},
+		            	// itemWidth: 100,
+		            	// floating: false,
+		            },
+		            title: {
+		            		//issueChartQuestion here
+		                text: '{{ qo.name }}',
+		                {{ chart_title_properties | raw }},
+		                style: {{ chart_title_style | raw }},
+		                // verticalAlign: 'middle',
+		                
+		            },
+		            tooltip: {
+		                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		            },
+		            plotOptions: {
+		                pie: {
+		                    dataLabels: {
+		                        enabled: false
+		                    },
+		                    // startAngle: -90,//for half pie
+		                    // endAngle: 90,
+		                    center: ['50%', '50%'],
+		                    showInLegend: true
+		                }
+		            },
+		            series: [{
+		                type: 'pie',
+		                name: '',
+		                innerSize: '40%',//50%
+		                data: [
+		                		//issueChartOption here
+		                    
+		                    /*['Water supply',   40],
+		                    ['Schools',       20],
+		                    ['Roads', 10],
+		                    ['Hospitals / Health centre',     8]*/
+
+		                		{% for opt in qo.option %}
+													["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
+												{% endfor %}
+		                ]
+		            }],
+		            exporting: {
+		            	enabled: {{ chart_exporting }}
+		            }
+		    });
+		  {% elseif qo.chartType == 2 %}
+		  	//chartType 2 = Semi Circle Donut
+		    Highcharts.chart('container-issue-question-{{ qo.id }}', {
+          chart: {
+              /*plotBackgroundColor: null,
+              plotBorderWidth: 0,
+              plotShadow: false*/
+              {{ chart_properties | raw }}
+          },
+          colors: {{ chart_color | raw }},
+          legend: {
+          	align: 'center',          	
+          	{{ legendStyle | raw }},
+          },
+          title: {
+          		//issueChartQuestion here
+              text: '{{ qo.name }}',//question name
+              {{ chart_title_properties | raw }},
+              style: {{ chart_title_style | raw }},
+              // verticalAlign: 'middle',
+              
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  dataLabels: {
+                      enabled: false
+                  },
+                  
+                  startAngle: -90,//for half pie
+                  endAngle: 90,//for half pie
+
+                  center: ['50%', '70%'],
+                  showInLegend: true
+              }
+          },
+          series: [{
+              type: 'pie',
+              name: '',
+              innerSize: '50%',//50%
+              data: [
+              		//issueChartOption here
+                  
+                  /*['Water supply',   40],
+                  ['Schools',       20],
+                  ['Roads', 10],
+                  ['Hospitals / Health centre',     8]*/
+
+              		{% for opt in qo.option %}
+										["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
+									{% endfor %}
+              ]
+          }],
+          exporting: {
+          	enabled: {{ chart_exporting }}
+          }
+		    });
+		  {% elseif qo.chartType == 3 %} //Column Basic
+		  	Highcharts.chart('container-issue-question-{{ qo.id }}', {
+			    chart: {
+			        type: 'column',
+		          {{ chart_properties | raw }}
+			    },
+          colors: {{ chart_color | raw }},
+			    title: {
+              {{ chart_title_properties | raw }},
+              style: {{ chart_title_style | raw }},
+			        text: '{{ qo.name }}',//question name
+			        
+			    },
+			    subtitle: {
+			        text: ''
+			    },
+			    /*xAxis: {
+			        categories: [
+			            'Jan',
+			        ],
+			        crosshair: true
+			    },*/
+			    xAxis: {
+			    	title: {
+			      	text: ' '
+			      }
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: ' '
+			        }
+			    },
+			    legend: {			    	          	
+          	{{ legendStyle | raw }},
+			    },
+			    tooltip: {
+			        //headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+			        headerFormat: ' ',
+			        pointFormat: 
+			        '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+			        footerFormat: '</table>',
+			        //shared: true,
+			        useHTML: true
+			    },
+			    plotOptions: {
+			        column: {
+			            pointPadding: 0.2,
+			            borderWidth: 0
+			        }
+			    },
+			    /*series: [
+			    	{
+			        name: 'Tokyo',
+			        data: [49.9]
+
+			    	}, 
+			    	{
+			        name: 'Berlin',
+			        data: [42.4]
+			    	}
+			    ],*/
+			    series: [
+			    				{% for opt in qo.option %}
+			    				{
+										name: "{{ opt.name | raw }}",
+										data: [ {{ opt.value }} ],//issue/4 - ' quote issue
+			    				},
+									{% endfor %}
+			    ],
+          exporting: {
+          	enabled: {{ chart_exporting }}
+          }
+				});
+
+	    {% elseif qo.chartType == 4 %} //pyramid - requires highcharts.js and funnel.js
+
+				Highcharts.chart('container-issue-question-{{ qo.id }}', {
+				    chart: {
+				        type: 'pyramid',
+				        {{ chart_properties | raw }}
+				    },
+				    colors: {{ chart_color | raw }},
+				    title: {
+                {{ chart_title_properties | raw }},
+                style: {{ chart_title_style | raw }},
+				        text: '{{ qo.name }}',//question name
+			        	
+				    },
+				    plotOptions: {
+				        series: {
+				            dataLabels: {
+				                enabled: true,
+				                format: '<b>{point.name}</b> ({point.y:,.0f})',
+				                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+				                softConnector: false
+				            },
+				            center: ['50%', '50%'],
+				            width: '80%'
+				        }
+				    },
+				    legend: {
+				        enabled: true,				                  	
+          			{{ legendStyle | raw }},
+				    },
+				    series: [{
+				        name: ' ',
+				        data: [
+				            /*['Website visits',      15654],
+				            ['Downloads',            4064],
+				            ['Requested price list', 1987],
+				            ['Invoice sent',          976],
+				            ['Finalized',             846]*/
+				            {% for opt in qo.option %}
+											["{{ opt.name | raw }}",   {{ opt.value }}],//issue/4 - ' quote issue
+										{% endfor %}
+				        ]
+				    }],
+            exporting: {
+            	enabled: {{ chart_exporting }}
+            }
+				});
+			{% elseif qo.chartType == 5 %} //Category - Bar chart
+				Highcharts.chart('container-issue-question-{{ qo.id }}', {
+			    chart: {
+			        type: 'bar',
+			        {{ chart_properties | raw }}
+			    },
+			    colors: {{ chart_color | raw }},
+			    title: {
+			        text: '{{ qo.name }}',//question name
+			        {{ chart_title_properties | raw }},
+			        style: {{ chart_title_style | raw }},
+			        
+			    },
+			    subtitle: {
+			        text: ' '
+			    },
+			    xAxis: {
+			        categories: [
+			        						// 'Africa', 'America', 'Asia', 'Europe', 'Oceania'
+			        						{% for opt in qo.option %}
+			        							{% for subopt in opt.suboption %}
+															"{{ subopt.name | raw }}",
+														{% endfor %}
+													{% endfor %}
+			        						],
+			        title: {
+	                {{ chart_title_properties | raw }},
+	                style: {{ chart_title_style | raw }},
+			            text: null
+			        }
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: ' ',
+			            align: 'high'
+			        },
+			        labels: {
+			            overflow: 'justify'
+			        }
+			    },
+			    tooltip: {
+			        // valueSuffix: ' millions'
+			    },
+			    plotOptions: {
+			        bar: {
+			            dataLabels: {
+			                enabled: false,//data labels
+			            }
+			        },
+			        /*column: {
+			            colorByPoint: true
+			        }*/
+			    },
+			    legend: {
+			        /*layout: 'vertical',
+			        align: 'right',
+			        verticalAlign: 'top',
+			        x: -40,
+			        y: 80,
+			        floating: false,
+			        borderWidth: 1,
+			        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+			        shadow: true,*/
+			        enabled: true, //hide year
+			        {{ legendStyle | raw }},
+			    },
+			    credits: {
+			        enabled: false
+			    },
+			    series: [
+				    //can be added more
+				    {#/*{
+				        name: 'Yes',
+				        data: [
+				        			107, 31, 635, 203, 2
+				        			]
+				    },
+				    {
+				        name: 'No',
+				        data: [
+				        			107, 31, 635, 203, 2
+				        			]
+				    }*/#}
+				    {% for opt in qo.option %}
+				    	{
+				    		name: "{{ opt.name | raw }}",
+								data: [
+												// 107, 31, 635, 203, 2,
+												{% for subopt in opt.suboption %}													
+													{{ subopt.value }},
+												{% endfor %}
+											]
+							},
+						{% endfor %}
+			    ],
+          exporting: {
+          	enabled: {{ chart_exporting }}
+          }
+				});
+	    {% endif %}
+    {% endfor %}
+
+    // question filter by month year dropdown
+    function year_month_dropdown(issueType) {
+	$('#issue-'+issueType+'-year-month-dropdown').change(function() { 
+    	var val = $(this).val(); 
+    	$('.'+issueType).hide(); 
+    	$('.'+issueType+'.'+val).show(); 
+    	});
+	}//end function
+
+	year_month_dropdown('Reconstruction');
+	year_month_dropdown('Livelihood');
+	year_month_dropdown('Protection');
+
+    //change tab head active
+    $('.survey .nav-tabs li').removeClass('active'); 
+    $('.survey .tab-pane').removeClass('active'); 
+
+    function change_tab_head_active(issueType) {
+    	if($('li.'+ issueType +'').hasClass('current_page_item')) { 
+	    	$('li.'+ issueType +'-tab-head').addClass('active'); 
+	    	$('.tab-pane.'+ issueType +'-tab-content').addClass('active'); 
+	    }
+    }
+    change_tab_head_active('Protection');
+    change_tab_head_active('Livelihood');
+    change_tab_head_active('Reconstruction');
+    
+    /*if($('li.Livelihood').hasClass('current_page_item')) { 
+    	$('li.Livelihood-tab-head').addClass('active'); 
+    }
+    if($('li.Reconstruction').hasClass('current_page_item')) { 
+    	$('li.Reconstruction-tab-head').addClass('active'); 
+    }*/
+    </script>
+{% endblock %}

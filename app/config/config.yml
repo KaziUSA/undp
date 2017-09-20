@@ -38,6 +38,17 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        project_title: "Inter-Agency Common Feedback Project"
+        #records_list: "table table-condensed table-hover table-striped"
+        records_list: "records_list table table-striped table-bordered table-hover dataTables-example"
+        chart_color: "['#d4dd64', '#006842', '#85c664', '#f3ec6f', '#009456']"
+        chart_exporting: "false"
+        # chart_title_alignment: "left"
+        chart_title_style: '{ "color": "#428d8e", "fontSize": "18px" }'
+        chart_title_properties: 'align: "left", widthAdjust: 0, y: 20'
+        legendStyle: 'borderRadius: 0, symbolRadius: 0, lineHeight: 24, itemMarginTop: 5, itemStyle: { "color": "#428d8e", "fontSize": "10px", "fontWeight": "normal" }'
+        chart_properties: 'style: { fontFamily: "Roboto" }'
 
 # Assetic Configuration
 assetic:

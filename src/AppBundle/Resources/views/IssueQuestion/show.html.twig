@@ -15,23 +15,16 @@
             </tr>
             <tr>
                 <th>Keyfindingsmonth</th>
-                <td>{{ entity.keyFindingsMonth }}</td>
+                <td>{{ date('2017-' ~ entity.keyFindingsMonth ~ '-01') | date ('F') }}</td>
+                {# doesn't matter what ever year or day - we just need month #}
             </tr>
             <tr>
                 <th>Keyfindings</th>
-                <td>{{ entity.keyFindings }}</td>
+                <td>{{ entity.keyFindings | raw }}</td>
             </tr>
             <tr>
-                <th>Infographicstitle</th>
-                <td>{{ entity.infographicsTitle }}</td>
-            </tr>
-            <tr>
-                <th>Hrrp</th>
-                <td>{{ entity.hrrp }}</td>
-            </tr>
-            <tr>
-                <th>Districtid</th>
-                <td>{{ entity.districtId }}</td>
+                <th>IssueMapName</th>
+                <td>{{ entity.issueMapName }}</td>
             </tr>
         </tbody>
     </table>

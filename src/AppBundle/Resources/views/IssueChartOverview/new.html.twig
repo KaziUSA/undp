@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueChartOverview creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('issuechartoverview') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+	ajax_request_response_issueType('#appbundle_issuechartoverview_issueType', '{{path('issuetype_detail' )}}')
+  
+});
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueChartQuestion creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('issuechartquestion') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+		//select the option
+    var selected_val = getUrlParameter('id');
+    $('#appbundle_issuechartquestion_issueQuestion').val(selected_val);
+
+
+		//ajax
+    ajax_request_response_issueType('#appbundle_issuechartquestion_issueQuestion', '{{path('issuequestion_detail' )}}');
+  
+});
+</script>
+{% endblock %}

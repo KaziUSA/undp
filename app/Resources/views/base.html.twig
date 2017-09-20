@@ -100,39 +100,136 @@
 
                 {# issue #}
                 <li class="{% if app.request.get('_route') in [
-                                    'issuequestion_index', 
+                                    'issuenews', 
+                                    'issuenews_show',
+                                    'issuenews_edit',
+                                    'issuenews_new',
+                                    'issuenewstype', 
+                                    'issuenewstype_show',
+                                    'issuenewstype_edit',
+                                    'issuenewstype_new'
+                                    ] %} active {% endif %}">
+                    <a href="#"><i class="fa fa-book"></i> <span class="nav-label">News</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuenews', 
+                                    'issuenews_show',
+                                    'issuenews_edit',
+                                    'issuenews_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuenews') }}">News</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuenewstype', 
+                                    'issuenewstype_show',
+                                    'issuenewstype_edit',
+                                    'issuenewstype_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuenewstype') }}">News Type</a></li>
+                    </ul>
+                </li>
+
+                <li class="{% if app.request.get('_route') in [
+                                    'issuetype', 
+                                    'issuetype_show',
+                                    'issuetype_edit',
+                                    'issuetype_new',
+                                    'issuechartoverview', 
+                                    'issuechartoverview_show',
+                                    'issuechartoverview_edit',
+                                    'issuechartoverview_new',
+                                    'issuequestion', 
                                     'issuequestion_show',
                                     'issuequestion_edit',
                                     'issuequestion_new',
-                                    'issuepeople_index', 
-                                    'issuepeople_show',
-                                    'issuepeople_edit',
-                                    'issuepeople_new',
-                                    'issueinfographics_index', 
+                                    'issuechartquestion', 
+                                    'issuechartquestion_show',
+                                    'issuechartquestion_edit',
+                                    'issuechartquestion_new',
+                                    'issuechartoption', 
+                                    'issuechartoption_show',
+                                    'issuechartoption_edit',
+                                    'issuechartoption_new',
+                                    'issueinfographicstitle', 
+                                    'issueinfographicstitle_show',
+                                    'issueinfographicstitle_edit',
+                                    'issueinfographicstitle_new',
+                                    'issueinfographics', 
                                     'issueinfographics_show',
                                     'issueinfographics_edit',
-                                    'issueinfographics_new'
+                                    'issueinfographics_new',
+                                    'issuemapsayings', 
+                                    'issuemapsayings_show',
+                                    'issuemapsayings_edit',
+                                    'issuemapsayings_new',
+                                    'issuemapname', 
+                                    'issuemapname_show',
+                                    'issuemapname_edit',
+                                    'issuemapname_new',
+                                    'issuemapdistricts', 
+                                    'issuemapdistricts_show',
+                                    'issuemapdistricts_edit',
+                                    'issuemapdistricts_new'
                                     ] %} active {% endif %}">
                     <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Issue</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li class="{% if app.request.get('_route') in [
-                                    'issuequestion_index', 
+                                    'issuetype', 
+                                    'issuetype_show',
+                                    'issuetype_edit',
+                                    'issuetype_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuetype') }}">Issue Type</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuechartoverview', 
+                                    'issuechartoverview_show',
+                                    'issuechartoverview_edit',
+                                    'issuechartoverview_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuechartoverview') }}">Issue Chart Overview</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuequestion', 
                                     'issuequestion_show',
                                     'issuequestion_edit',
                                     'issuequestion_new'
                                     ] %} active {% endif %}"><a href="{{ path('issuequestion') }}">Issue Question</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issuepeople_index', 
-                                    'issuepeople_show',
-                                    'issuepeople_edit',
-                                    'issuepeople_new'
-                                    ] %} active {% endif %}"><a href="{{ path('issuepeople') }}">Issue People</a></li>
+                                    'issuechartquestion', 
+                                    'issuechartquestion_show',
+                                    'issuechartquestion_edit',
+                                    'issuechartquestion_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuechartquestion') }}">Issue Chart Question</a></li>
                         <li class="{% if app.request.get('_route') in [
-                                    'issueinfographics_index', 
+                                    'issuechartoption', 
+                                    'issuechartoption_show',
+                                    'issuechartoption_edit',
+                                    'issuechartoption_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuechartoption') }}">Issue Chart Option</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issueinfographicstitle', 
+                                    'issueinfographicstitle_show',
+                                    'issueinfographicstitle_edit',
+                                    'issueinfographicstitle_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issueinfographicstitle') }}">Issue Infographics Title</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issueinfographics', 
                                     'issueinfographics_show',
                                     'issueinfographics_edit',
                                     'issueinfographics_new'
                                     ] %} active {% endif %}"><a href="{{ path('issueinfographics') }}">Issue Infographics</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuemapsayings', 
+                                    'issuemapsayings_show',
+                                    'issuemapsayings_edit',
+                                    'issuemapsayings_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuemapsayings') }}">Issue Map Sayings</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuemapname', 
+                                    'issuemapname_show',
+                                    'issuemapname_edit',
+                                    'issuemapname_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuemapname') }}">Issue Map Name</a></li>
+                        <li class="{% if app.request.get('_route') in [
+                                    'issuemapdistricts', 
+                                    'issuemapdistricts_show',
+                                    'issuemapdistricts_edit',
+                                    'issuemapdistricts_new'
+                                    ] %} active {% endif %}"><a href="{{ path('issuemapdistricts') }}">Issue Map Districts</a></li>
                     </ul>
                 </li>
             </ul>
@@ -309,19 +406,36 @@
 
     <!-- Data picker -->
     <script src="/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+    {# ckeditor #}
+    <script>
+    //quick fix for hiding toolbar for title  
+    function onClickToolbarButton() {
+        var bar = document.getElementById("cke_content1");//for #content1
+        if(bar.style.display == "none"){
+            bar.style.display = "none";//block - to show
+        }else{
+            bar.style.display = "none";
+        }
+    }
+    </script>
+    <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
+
     <script>
     //Google analytics - commented for 
-  /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-72934138-1', 'auto');
-  ga('send', 'pageview');*/
+      ga('create', 'UA-72934138-1', 'auto');
+      ga('send', 'pageview');*/
 
-</script>
+    </script>
+
+    <script src="/js/custom_admin.js"></script>
         
-        {%block scriptIncludes %}{% endblock %}
+        {% block scriptIncludes %}{% endblock %}
     
         
         {% block javascripts %}

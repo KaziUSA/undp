@@ -49,11 +49,14 @@ class IssueInfographicsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            //upload image in directory
+            $entity->upload();
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('issueinfographics_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('issueinfographics_edit', array('id' => $entity->getId())));
         }
 
         return array(
@@ -191,6 +194,9 @@ class IssueInfographicsController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+            //upload image in directory
+            $entity->upload();
+            
             $em->flush();
 
             return $this->redirect($this->generateUrl('issueinfographics_edit', array('id' => $id)));

@@ -6,17 +6,29 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 <head>
 	<head>
-		<title>{% block title %}Inter-Agency Common Feedback Project{% endblock %}</title>
+    {# Commented for debugging #}
+    <!-- google analytics and also for tracking buttons clicks --> 
+    <script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-72934138-1");
+    pageTracker._trackPageview();
+    </script>
+   
 
+
+		<title>{% block title %}{{ project_title }}{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 		{% block stylesheets %}
 		
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
-
+		  {# commeted for debugging #}
+      <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
       <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
 
 			<link href="/css/bootstrap.min.css" rel="stylesheet">
 
-      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+      {# <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" /> #}
 
 			<link href="/css/animate.css" rel="stylesheet">
 
@@ -24,15 +36,21 @@
       <link href="/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
       <link href="/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
 
-			<link href="/LESS/style.6.less" rel="stylesheet/less">
+      <link rel="stylesheet" type="text/css" href="/css/plugins/jPlayer/jplayer.css">
+
+			<link href="/LESS/style.7.less" rel="stylesheet/less">
+      
+      <link rel="stylesheet" type="text/css" href="/css/custom_issue.css">
 		{% endblock %}
 		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
 
 		<link rel="image_src" type="image/jpeg" href="http://cfp.org.np/img/frontend/logo-share.png" /><!-- for facebook -->
 		<meta property="og:image" content="http://cfp.org.np/img/frontend/logo-share.png" /> <!-- for linked in -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		
 	</head>
-	<body class="{% block bodyclass %}{% endblock %}">
+	<body class="{% block bodyclass %}{% endblock %}" style="opacity: 0;">{#display: none; #}
     {# 
     to show better page after loading complete 
     - style="display: none;" 
@@ -98,11 +116,13 @@
 	}
 	</style>
   <ul class="nav navbar-nav">
+    <li><a href="{{ path('issue') }}" class="{% if app.request.get('_route') == 'issue_show' %} active {% endif %}">Survey</a></li>
     <li class="dropdown">
     	<a href="{{ path('platform') }}" class="dropdown-toggle {% if (app.request.get('_route') == 'platform') or (app.request.get('_route') == 'set2') %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Platform</a>
     	<ul class="dropdown-menu">
-    		<li><a href="{{ path('platform') }}">Phase 1</a></li>
-    		<li><a href="{{ path('set2') }}">Phase 2</a></li>
+    		<li><a href="{{ path('platform') }}">2015</a></li>
+    		<li><a href="{{ path('set2') }}">2016</a></li>
+            <li><a href="{{ path('set3') }}">2017</a></li>
     	</ul>
     </li>
 
@@ -114,8 +134,9 @@
       </ul>
     </li>
     <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
-    <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact -->
-    <li><a href="/page/about" class="{% if app.request.get('_route') == 'show' %} active {% endif %}">About</a></li>
+    <li><a href="{{ path('news') }}" class="{% if (app.request.get('_route') == 'news') or (app.request.get('_route') == 'news_show') %} active {% endif %}">News</a></li>
+    {# <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact --> #}
+    <li><a href="{{ path('about') }}" class="{% if app.request.get('_route') == 'about' %} active {% endif %}">About</a></li>
   </ul>
 </div><!-- /.navbar-collapse -->
 
@@ -133,7 +154,8 @@
 			<div class="container-fluid">
 				<div class="social-icons clearfix pull-left">
 					<ul>
-						<li class="facebook"><a href="https://www.facebook.com/NepalDRR/" target="_blank"></a></li>
+            {# https://www.facebook.com/NepalDRR/ #}
+						<li class="facebook"><a href="https://www.facebook.com/CFPNepal1/" target="_blank"></a></li>
 						<li class="youtube"><a href="https://www.youtube.com/channel/UCya6Oazk4JAYa40X2GP-Feg" target="_blank"></a></li>
 						<li class="flicker"><a href="https://www.flickr.com/photos/nepaldrr/" target="_blank"></a></li>
 						<li class="twitter"><a href="https://twitter.com/nepaldrr" target="_blank"></a></li>
@@ -142,7 +164,7 @@
 				</div>
 
 				<div class="footer-right">
-					<a href="http://www.quakehelpdesk.org/">Quake Help Desk</a> &nbsp;|&nbsp; 
+					{# <a href="http://www.quakehelpdesk.org/">Quake Help Desk</a> &nbsp;|&nbsp;  #}
 					<a href="http://www.quakehelpdesk.org/openmic.php">Quake Help Desk Open mic</a> &nbsp;|&nbsp; 
 					<a href="http://www.cdacnetwork.org/">CDAC Network</a>
 				</div>
@@ -157,7 +179,13 @@
     <script src="/js/less.min.js"></script>
     {# http://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js #}
 
-    <script src="/js/plugins/highcharts/highcharts.js"></script>
+    {% block highchartsJs %}
+      <script src="/js/plugins/highcharts/highcharts.js"></script> {# for platform #}
+    {% endblock %}
+
+    {#<script src="https://code.highcharts.com/highcharts.js"></script> 
+  <script src="/js/plugins/highcharts/funnel.js"></script><!-- for pyramid -->#}
+  
     <script src="/js/plugins/highcharts/data.js"></script>
     <script src="/js/plugins/highcharts/exporting.js"></script>
 	<script src="/js/plugins/highcharts/export-csv.js"></script>
@@ -176,7 +204,10 @@
     <script src="/js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
     <script src="/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 
+    <script src="/js/plugins/jplayer/jplayer.min.js"></script>
+
     <script src="/js/frontend/custom.js"></script>
+    <script src="/js/frontend/custom_issue.js"></script>
         <script>
   //Google Analytics commented for debugging
   /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -1,5 +1,11 @@
 {% extends 'frontend.html.twig' %}
 
+{% block title %}Reports | {{ project_title }}{% endblock %}
+
+{% block bodyclass %}
+reports-page
+{% endblock %}
+
 {% block body -%}
 
 	<section class="content report">
@@ -14,7 +20,8 @@
 
 			            <ul id="" class="nav nav-tabs" role="tablist">
 			              <li role="presentation" class="tab-2015"><a href="#round1" aria-controls="messages" role="tab" data-toggle="tab" value="2015">2015</a></li>
-			              <li role="presentation" class="active tab-2016"><a href="#round2" aria-controls="settings" role="tab" data-toggle="tab" value="2016">2016</a></li>
+			              <li role="presentation" class="tab-2016"><a href="#round2" aria-controls="settings" role="tab" data-toggle="tab" value="2016">2016</a></li>
+                            <li role="presentation" class="active tab-2017"><a href="#round3" aria-controls="settings" role="tab" data-toggle="tab" value="2017">2017</a></li>
 
 			            </ul>
 			        </div>
@@ -104,7 +111,7 @@
 			              </div>
 			          </div>
 
-			          <div role="tabpanel" class="tab-pane fade in active" id="round2">
+			          <div role="tabpanel" class="tab-pane fade in" id="round2">
 			              <div class="tab-content-wrap">
 			                  <div class="filter-title">Filter By</div>
 
@@ -152,6 +159,101 @@
 							                      {# ac-4 #}
 							                      <input class="ac-input" id="ac-4" name="ac-4" type="checkbox" />
 							                      <label class="ac-label district-label" for="ac-4">District</label>
+
+							                      <ul id="district-wise-report" class="ac-text checkbox-style">          
+																	    	<li><input type="checkbox" id="districtall" checked="checked" />
+																					<label for="districtall">All<span></span></label></li>
+							                          <div class="form_districts" id="form_districts">                   
+																		    	<li><input type="checkbox" id="district-Bhaktapur" class="district" checked="checked" />
+																						<label for="district-Bhaktapur">Bhaktapur<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Dhading" class="district" checked="checked" />
+																						<label for="district-Dhading">Dhading<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Dolakha" class="district" checked="checked" />
+																						<label for="district-Dolakha">Dolakha<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Gorkha" class="district" checked="checked" />
+																						<label for="district-Gorkha">Gorkha<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Kathmandu" class="district" checked="checked" />
+																						<label for="district-Kathmandu">Kathmandu<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Kavrepalanchowk" class="district" checked="checked" />
+																						<label for="district-Kavrepalanchowk">Kavrepalanchowk<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Lalitpur" class="district" checked="checked" />
+																						<label for="district-Lalitpur">Lalitpur<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Makwanpur" class="district" checked="checked" />
+																						<label for="district-Makwanpur">Makwanpur<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Nuwakot" class="district" checked="checked" />
+																						<label for="district-Nuwakot">Nuwakot<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Okhaldhunga" class="district" checked="checked" />
+																						<label for="district-Okhaldhunga">Okhaldhunga<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Ramechhap" class="district" checked="checked" />
+																						<label for="district-Ramechhap">Ramechhap<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Rasuwa" class="district" checked="checked" />
+																						<label for="district-Rasuwa">Rasuwa<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Sindhuli" class="district" checked="checked" />
+																						<label for="district-Sindhuli">Sindhuli<span></span></label></li>
+																		    	<li><input type="checkbox" id="district-Sindhupalchowk" class="district" checked="checked" />
+																						<label for="district-Sindhupalchowk">Sindhupalchowk<span></span></label></li>
+																		    </div>
+							                      </ul><!--/ac-text-->
+							                    </div><!--/ac-->
+
+
+			                            <!--/ac-->
+			                            <ul class="ac-text"></ul>
+			                            <ul class="ac-text"></ul>
+			                            <!-- <input type="submit" value="Submit" class="btn btn-bordered gray"> -->
+			                        </form>
+
+			                  </div><!--/accordion-->
+			              </div>
+			          </div>
+                    <div role="tabpanel" class="tab-pane fade in active" id="round3">
+			              <div class="tab-content-wrap">
+			                  <div class="filter-title">Filter By</div>
+
+			                  <div class="accordion">
+			                          <form action="">
+			                            <div class="ac ac-month">
+			                              {# ac-5 #}
+			                              <input class="ac-input" id="ac-5" name="ac-5" type="checkbox" />
+			                              <label class="ac-label month-label" for="ac-5">Month</label>
+
+			                              <ul id="month-wise-report" class="ac-text checkbox-style">          
+																    	<li><input type="checkbox" id="monthall-2017" checked="checked" />
+																				<label for="monthall-2017">All<span></span></label></li>
+						                          <div class="form_months" id="form_months">             
+																	    	<li><input type="checkbox" id="month01-2017" class="month 2017" checked="checked" />
+																					<label for="month01-2017">January<span></span></label></li>
+																	    	<li><input type="checkbox" id="month02-2017" class="month 2017" checked="checked" />
+																					<label for="month02-2017">Feburary<span></span></label></li>
+																	    	<li><input type="checkbox" id="month03-2017" class="month 2017" checked="checked" />
+																					<label for="month03-2017">March<span></span></label></li>
+																	    	<li><input type="checkbox" id="month04-2017" class="month 2017" checked="checked" />
+																					<label for="month04-2017">April<span></span></label></li>
+																	    	<li><input type="checkbox" id="month05-2017" class="month 2017" checked="checked" />
+																					<label for="month05-2017">May<span></span></label></li>
+																	    	<li><input type="checkbox" id="month06-2017" class="month 2017" checked="checked" />
+																					<label for="month06-2017">June<span></span></label></li>
+
+																	    	<li><input type="checkbox" id="month07-2017" class="month 2017" checked="checked" />
+																					<label for="month07-2017">July<span></span></label></li>
+																	    	<li><input type="checkbox" id="month08-2017" class="month 2017" checked="checked" />
+																					<label for="month08-2017">August<span></span></label></li>
+																	    	<li><input type="checkbox" id="month09-2017" class="month 2017" checked="checked" />
+																					<label for="month09-2017">September<span></span></label></li>
+																	    	<li><input type="checkbox" id="month10-2017" class="month 2017" checked="checked" />
+																					<label for="month10-2017">October<span></span></label></li>
+																	    	<li><input type="checkbox" id="month11-2017" class="month 2017" checked="checked" />
+																					<label for="month11-2017">November<span></span></label></li>
+																	    	<li><input type="checkbox" id="month12-2017" class="month 2017" checked="checked" />
+																					<label for="month12-2017">December<span></span></label></li>      
+																	    </div>
+						                      	</ul><!--/ac-text-->
+			                            </div><!--/ac-->
+
+							                    <div class="ac ac-district" style="display: none;">
+							                      {# ac-6 #}
+							                      <input class="ac-input" id="ac-6" name="ac-6" type="checkbox" />
+							                      <label class="ac-label district-label" for="ac-6">District</label>
 
 							                      <ul id="district-wise-report" class="ac-text checkbox-style">          
 																	    	<li><input type="checkbox" id="districtall" checked="checked" />
@@ -283,12 +385,12 @@
 
 							  <!-- Tab panes -->
 							  <div class="tab-content clearfix list-view">
-							    <div role="tabpanel" class="tab-pane active" id="national">							    	
+							    <div role="tabpanel" class="tab-pane active parent-height" id="national">							    	
 										{% for entity in entities %}
 											{# TODO: need to change 'National Reports' to ID #}
 											{% if entity.documenttype == 'National Reports' %}
-											<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
-												<div class="r-box">
+											<div class="child-height report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
+												{# <div class="r-box">
 													<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -300,8 +402,7 @@
 											
 													<ul class="share-icons">
 														<li><a href="#share" class="fa fa-share-alt"></a>
-															<ul>		
-																{# TODO: Need to change cfp.org.np to dynamic url path if needed #}						
+															<ul>							
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -309,10 +410,48 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 														</li>
-														<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+														<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 													</ul>
+												</div> #}												
+											
+												{# news-box-module #}
+												<div class="news-box-module">
+													<div class="news-box-wrap">
+														<div class="news-graphics">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
+														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
+														    	<ul class="share-icons">
+																		<li><a href="#share" class="fa fa-share-alt"></a>
+																			<ul>							
+																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																				
+																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																			</ul>
+																		</li>
+																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
+																	</ul>
+														    </div>
+												    </div>
+												  	
+												    <div class="news-body">
+												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
+												    	<p>{{ entity.description }}</p>
+												    	<a href="{{ path('document_edit', {id: entity.id}) }}" class="readmore">Edit</a>
+												    </div>
+											    </div>
 												</div>
-											</div>
+												{# end news-box-module #}
+											</div> 
 											{% endif %}
 						        {% endfor %}
 							    </div>
@@ -323,8 +462,8 @@
 										{# TODO: need to change 'District Reports' to ID #}
 										{# Quickfix: Added district name as class #}
 										{% if (entity.documenttype == 'District Reports') and ((entity.language == 'english') or (entity.language == '')) %}
-										<div class="report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
-											<div class="r-box">
+										<div class="parent-height report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
+											{# <div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -336,8 +475,7 @@
 										
 												<ul class="share-icons">
 													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>		
-																{# TODO: Need to change cfp.org.np to dynamic url path #}											
+														<ul>							
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -345,9 +483,45 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common+Feedback+Project+(CFP)+Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
-											</div>
+											</div> #}
+											{# news-box-module #}
+												<div class="news-box-module">
+													<div class="news-box-wrap">
+														<div class="news-graphics">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
+														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
+														    	<ul class="share-icons">
+																		<li><a href="#share" class="fa fa-share-alt"></a>
+																			<ul>							
+																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																				
+																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																			</ul>
+																		</li>
+																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
+																	</ul>
+														    </div>
+												    </div>
+												  	
+												    <div class="news-body">
+												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
+												    	<p>{{ entity.description }}</p>
+												    </div>
+											    </div>
+												</div>
+												{# end news-box-module #}
 										</div>
 										{% endif %}
 						        {% endfor %}
@@ -359,8 +533,8 @@
   									{% for entity in entities %}
 										{# TODO: need to change 'District Reports' to ID #}
 										{% if (entity.documenttype == 'District Reports') and (entity.language == 'nepali') %}
-										<div class="report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
-											<div class="r-box">
+										<div class="parent-height report-item col-lg-6 col-md-6 col-sm-6 type {{ entity.documenttype }} district {% if ('Bhaktapur' in entity.district) or ('Bhaktapur' in entity.path) %} Bhaktapur {% elseif ('Dhading' in entity.district) or ('Dhading' in entity.path) %} Dhading {% elseif ('Dolakha' in entity.district) or ('Dolakha' in entity.path) %} Dolakha {% elseif ('Gorkha' in entity.district) or ('Gorkha' in entity.path) %} Gorkha {% elseif ('Kathmandu' in entity.district) or ('Kathmandu' in entity.path) %} Kathmandu {% elseif ('Kavrepalanchowk' in entity.district) or ('Kavrepalanchok' in entity.path) or ('Kavrepalanchowk' in entity.path) %} Kavrepalanchok {% elseif ('Lalitpur' in entity.district) or ('Lalitpur' in entity.path) %} Lalitpur {% elseif ('Makwanpur' in entity.district) or ('Makwanpur' in entity.path) %} Makwanpur {% elseif ('Nuwakot' in entity.district) or ('Nuwakot' in entity.path) %} Nuwakot {% elseif ('Okhaldhunga' in entity.district) or ('Okhaldhunga' in entity.path) %} Okhaldhunga {% elseif ('Ramechhap' in entity.district) or ('Ramechhap' in entity.path) %} Ramechhap {% elseif ('Rasuwa' in entity.district) or ('Rasuwa' in entity.path) %} Rasuwa {% elseif ('Sindhuli' in entity.district) or ('Sindhuli' in entity.path) %} Sindhuli {% elseif ('Sindhupalchowk' in entity.district) or ('Sindhupalchowk' in entity.path) or ('Sindhupalchok' in entity.path) or ('SIndhupalchowk' in entity.path) %} Sindhupalchowk {% endif %} {{ entity.date | date('Y') }}">
+											{# <div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -372,8 +546,7 @@
 										
 												<ul class="share-icons">
 													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>		
-																{# TODO: Need to change cfp.org.np to dynamic url path #}											
+														<ul>							
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -381,9 +554,45 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common+Feedback+Project+(CFP)+Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
-											</div>
+											</div> #}
+											{# news-box-module #}
+												<div class="news-box-module">
+													<div class="news-box-wrap">
+														<div class="news-graphics">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
+														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
+														    	<ul class="share-icons">
+																		<li><a href="#share" class="fa fa-share-alt"></a>
+																			<ul>							
+																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																				
+																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																			</ul>
+																		</li>
+																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
+																	</ul>
+														    </div>
+												    </div>
+												  	
+												    <div class="news-body">
+												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
+												    	<p>{{ entity.description }}</p>
+												    </div>
+											    </div>
+												</div>
+												{# end news-box-module #}
 										</div>
 										{% endif %}
 						        {% endfor %}
@@ -394,8 +603,8 @@
 							    	{% for entity in entities %}
 										{# TODO: need to change 'Issue in Focus Reports' to ID #}
 										{% if entity.documenttype == 'Issue in Focus Reports' %}
-										<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
-											<div class="r-box">
+										<div class="parent-height report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
+											{# <div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -407,8 +616,7 @@
 										
 												<ul class="share-icons">
 													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>		
-																{# TODO: Need to change cfp.org.np to dynamic url path #}											
+														<ul>							
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -416,9 +624,45 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
-											</div>
+											</div> #}
+											{# news-box-module #}
+												<div class="news-box-module">
+													<div class="news-box-wrap">
+														<div class="news-graphics">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
+														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
+														    	<ul class="share-icons">
+																		<li><a href="#share" class="fa fa-share-alt"></a>
+																			<ul>							
+																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																				
+																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																			</ul>
+																		</li>
+																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
+																	</ul>
+														    </div>
+												    </div>
+												  	
+												    <div class="news-body">
+												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
+												    	<p>{{ entity.description }}</p>
+												    </div>
+											    </div>
+												</div>
+												{# end news-box-module #}
 										</div>
 										{% endif %}
 				        		{% endfor %}
@@ -427,8 +671,8 @@
 							    	{% for entity in entities %}
 										{# TODO: need to change these to ID #}
 										{% if (entity.documenttype != 'National Reports') and (entity.documenttype != 'District Reports') and (entity.documenttype != 'Issue in Focus Reports') %}
-										<div class="report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
-											<div class="r-box">
+										<div class="parent-height report-item col-lg-6 col-md-6 col-sm-6 month {{ entity.date | date('m') }} {{ entity.date | date('Y') }} {{ entity.date | date('m') }}-{{ entity.date | date('Y') }} type {{ entity.documenttype }}">
+											{# <div class="r-box">
 												<a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="report-link">
 														<img src="/img/frontend/report-thumb.jpg" alt="">
 														<span class="reports-overlay">
@@ -440,8 +684,7 @@
 										
 												<ul class="share-icons">
 													<li><a href="#share" class="fa fa-share-alt"></a>
-														<ul>		
-																{# TODO: Need to change cfp.org.np to dynamic url path #}											
+														<ul>							
 																<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
 																
 																<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '+'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
@@ -449,9 +692,45 @@
 																<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
 															</ul>
 													</li>
-													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download"></a></li>
+													<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
 												</ul>
-											</div>
+											</div> #}
+											{# news-box-module #}
+												<div class="news-box-module">
+													<div class="news-box-wrap">
+														<div class="news-graphics">
+
+																{% if entity.imgUrl != '' %}
+																	{% set thumb = '/uploads/documents/thumbs/' ~ entity.imgUrl %}
+																	{% set backgroundSize = 'background-size-100' %}
+																{% else %}
+																	{% set thumb = '/img/frontend/report-thumb.png' %}
+																	{% set backgroundSize = 'background-size-40' %}
+																{% endif %}
+													    	<div class="img {{ backgroundSize }}" style="background-image: url({{ thumb }});">
+														    	<img src="/img/frontend/report-thumb.png" width="100%" height="170px">
+														    	<ul class="share-icons">
+																		<li><a href="#share" class="fa fa-share-alt"></a>
+																			<ul>							
+																				<li class="facebook"><a href="https://www.facebook.com/sharer.php?u=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}" title="Share on Facebook" class="fa fa-facebook" target="_blank"></a></li>
+																				
+																				<li><a href="http://twitter.com/intent/tweet?text=Common+Feedback+Project+(CFP)+Report%3A+{{ entity.name|replace({' ': '+'}) }}+http%3A%2F%2Fcfp.org.np/uploads/documents/{{ entity.path|replace({' ': '%20'}) }}" title="Share on Twitter" class="fa fa-twitter" target="_blank"></a></li>
+
+																				<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A//cfp.org.np/uploads/documents/{{ entity.path }}&title=Common%20Feedback%20Project%20(CFP)%20Report%3A%20{{ entity.name }}&summary=&source=" title="Share on LinkedIn" class="fa fa-linkedin" target="_blank"></a></li>
+																			</ul>
+																		</li>
+																		<li><a href="{{ entity.file_path }}{{ entity.path }}" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}" class="fa fa-download" onclick="javascript:pageTracker._trackPageview ('Reports - Download');"></a></li>
+																	</ul>
+														    </div>
+												    </div>
+												  	
+												    <div class="news-body">
+												    	<h2 class="news-title"><a href="{{ entity.file_path }}{{ entity.path }}" class="" title="Download: {{ entity.name }} - {{ entity.date | date('Y-M-d') }}">{{ entity.name }}</a></h2>
+												    	<p>{{ entity.description }}</p>
+												    </div>
+											    </div>
+												</div>
+												{# end news-box-module #}
 										</div>
 										{% endif %}
 					        	{% endfor %}
@@ -472,6 +751,7 @@
 {% block scriptIncludes %}
 <script>
 	$(document).ready(function() {
+
 		var winWidth = $(window).width();
 
 		//district tab width
@@ -546,13 +826,22 @@
 		}
 		checkall("#monthall-2015", ".month.2015");
 		checkall("#monthall-2016", ".month.2016");
+        checkall("#monthall-2017", ".month.2017");
+        function show_2017() {
+			$('#monthall-2017, .month.2017').prop('checked', true);//check all on document load
+			$('.2017').show();//.month.2015
 
+			//initially hide that of 2016
+			$('.2016').hide();//.month.2016
+            $('.2015').hide();//.month.2015
+		}
 		function show_2016() {
 			$('#monthall-2016, .month.2016').prop('checked', true);//check all on document load
 			$('.2016').show();//.month.2016
 			
 			//initially hide that of 2015
 			$('.2015').hide();//.month.2015
+            $('.2017').hide();//.month.2017
 		}
 		function show_2015() {
 			$('#monthall-2015, .month.2015').prop('checked', true);//check all on document load
@@ -560,15 +849,19 @@
 
 			//initially hide that of 2016
 			$('.2016').hide();//.month.2016
+            $('.2017').hide();//.month.2017
 		}
 
-		show_2016();
+		show_2017();
 
 		$('.tab-2015').click(function() {
 			show_2015();
 		});
 		$('.tab-2016').click(function() {
 			show_2016();
+		});
+        $('.tab-2017').click(function() {
+			show_2017();
 		});
 
 
@@ -591,6 +884,9 @@
 	      } 
 	      if( $(this).hasClass('2016') ) {
 	      	hide_report = '2015';
+	      }
+          if( $(this).hasClass('2017') ) {
+	      	hide_report = '2016';
 	      }
 
 	      if(!$(this).is(':checked')){//not checked
@@ -625,6 +921,19 @@
     filter_report('10-2016');
     filter_report('11-2016');
     filter_report('12-2016');
+        
+    filter_report('01-2017');
+    filter_report('02-2017');
+    filter_report('03-2017');
+    filter_report('04-2017');
+    filter_report('05-2017');
+    filter_report('06-2017');
+    filter_report('07-2017');
+    filter_report('08-2017');
+    filter_report('09-2017');
+    filter_report('10-2017');
+    filter_report('11-2017');
+    filter_report('12-2017');
 
     //show reports district wise
 		function filter_report_district(district) {
@@ -666,11 +975,13 @@
     filter_report_district('Sindhupalchowk');
 
 
+    //equal height
+		equal_height('.list-view .parent-height', '.child-height .news-body');
 
 	  //show list view
 	  $('.show-list-view').click(function() {	  	
-	  	if($('.report-item').hasClass('col-lg-2 col-md-3 col-sm-4')) {	  		
-	  		$('.report-item').removeClass('col-lg-2 col-md-3 col-sm-4');
+	  	if($('.report-item').hasClass('col-md-3 col-sm-4')) {//col-lg-2 
+	  		$('.report-item').removeClass('col-md-3 col-sm-4');//col-lg-2 
 	  	}
 
 	  	if($('.report-item').hasClass('col-lg-6 col-md-6 col-sm-6')) {
@@ -687,6 +998,9 @@
 	  	else {
 	    	$('.main-content .tab-content').addClass('list-view');
 	    }
+
+	    //equal height
+  		equal_height('.list-view .parent-height', '.child-height .news-body');
 	  });
 
 	  $('.show-grid-view').click(function() {
@@ -694,10 +1008,10 @@
 	  		$('.report-item').removeClass('col-lg-6 col-md-6 col-sm-6');
 	  	}
 	  	
-	  	if($('.report-item').hasClass('col-lg-2 col-md-3 col-sm-4')) {
+	  	if($('.report-item').hasClass('col-md-3 col-sm-4')) {//col-lg-2 
 	  	}
 	  	else {
-	  		$('.report-item').addClass('col-lg-2 col-md-3 col-sm-4');
+	  		$('.report-item').addClass('col-md-3 col-sm-4');//col-lg-2 
 	  	}
 
 	  	if($('.main-content .tab-content').hasClass('list-view')) {
@@ -709,9 +1023,16 @@
 	  	else {
 	    	$('.main-content .tab-content').addClass('grid-view');
 	    }
+
+	    //equal height
+  		equal_height('.parent-height', '.child-height');
 	  });
 
 		content_height();
+
+		
+		//show grid view first
+		$('.show-grid-view').trigger('click');	
 	});
 	$(window).resize(function() {
 		content_height();
@@ -725,3 +1046,4 @@
 	}
 </script>
 {% endblock %}
+

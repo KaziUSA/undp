@@ -18,6 +18,7 @@ class DistrictType extends AbstractType
             ->add('name')
             ->add('region')
             ->add('code')
+            ->add('color')
             ->add('shape')
         ;
     }

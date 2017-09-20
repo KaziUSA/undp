@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueChartOverview list</h1>
+
+    <table class="{{records_list}}">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Issue</th>
+                <th>District</th>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% set i = 0 %}
+        {% for entity in entities %}
+            {% set i = i + 1 %}
+            <tr>
+                <td>{{ i }}</td>
+                <td>
+                    {{ entity.issueType }}
+                    {% if entity.issueType.year != '' and entity.issueType.month != '' %}
+                         - {{ date(entity.issueType.year ~ '-' ~ entity.issueType.month ~ '-01') | date('F Y') }}
+                    {% endif %}
+                </td>
+                <td>{{ entity.district }}</td>
+                <td>{{ entity.value }}</td>
+                <td>
+                <ul>
+                    <li class="show-link">
+                        <a href="{{ path('issuechartoverview_show', { 'id': entity.id }) }}" class="show">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('issuechartoverview_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('issuechartoverview_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

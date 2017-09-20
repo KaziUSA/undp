@@ -3,25 +3,40 @@
 {% block body -%}
     <h1>IssueInfographics list</h1>
 
-    <table class="records_list">
+    <table class="{{records_list}}">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>IssueType</th>
                 <th>Description</th>
-                <th>Icon</th>
+                {# <th>Icon</th> #}
+                <th>IssueInfographicsTitle</th>
+                <th>IssueQuestion</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
+        
+        {% set i = 0 %}
         {% for entity in entities %}
+            {% set i = i + 1 %}
             <tr>
-                <td><a href="{{ path('issueinfographics_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ i }}</td>
+                <td>
+                    {{ entity.issueInfographicsTitle.issueQuestion.issueType }}
+                    
+                    {% if entity.issueInfographicsTitle.issueQuestion.issueType.year != '' and entity.issueInfographicsTitle.issueQuestion.issueType.month != '' %}
+                     - {{ date( entity.issueInfographicsTitle.issueQuestion.issueType.year ~ '-' ~ entity.issueInfographicsTitle.issueQuestion.issueType.month ~ '-01' ) | date('F Y') }} 
+                    {% endif %}
+                </td>
                 <td>{{ entity.description }}</td>
-                <td>{{ entity.icon }}</td>
+                {# <td>{{ entity.icon }}</td> #}
+                <td>{{ entity.issueInfographicsTitle }}</td>
+                <td>{{ entity.issueInfographicsTitle.issueQuestion }}</td>
                 <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('issueinfographics_show', { 'id': entity.id }) }}">show</a>
+                    <li class="show-link">
+                        <a href="{{ path('issueinfographics_show', { 'id': entity.id }) }}" class="show">show</a>
                     </li>
                     <li>
                         <a href="{{ path('issueinfographics_edit', { 'id': entity.id }) }}">edit</a>
@@ -40,4 +55,14 @@
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

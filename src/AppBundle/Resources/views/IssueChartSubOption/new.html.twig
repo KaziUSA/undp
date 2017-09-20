@@ -1,0 +1,26 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueChartSubOption creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('issuechartsuboption') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+		//select the option
+    var selected_val = getUrlParameter('id');
+    $('#appbundle_issuechartsuboption_issueChartOption').val(selected_val);  
+});
+</script>
+{% endblock %}

@@ -5,6 +5,11 @@
 
     {{ form(edit_form) }}
 
+    {% if entity.imageUrl != '' %}
+        <p>Chosen image:</p>
+        <img src="/uploads/issue/infographics/{{ entity.imageUrl }}">
+    {% endif %}
+
         <ul class="record_actions">
     <li>
         <a href="{{ path('issueinfographics') }}">
@@ -13,4 +18,14 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+{% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    ajax_request_response_issueType('#appbundle_issueinfographics_issueInfographicsTitle', '{{path('issueinfographicstitle_detail' )}}');
+  
+});
+</script>
 {% endblock %}

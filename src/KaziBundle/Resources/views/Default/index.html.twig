@@ -1,14 +1,14 @@
 {% extends 'frontend.html.twig' %}
 
 {% block body %}
-	<section class="content img-cover" style="{% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %}">
+	<section class="content img-cover" style="{#{% if entity.path != NULL %}background-image: url({{ entity.file_path }}{{ entity.path }});{% endif %}#}">
 		<div class="transparent-grd"></div>
 		<div class="content-area relative">
 			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-      <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a>
+      {# <a href="{{ path('page_edit', { 'slug': entity.slug }) }}" class="edit-link">Edit Featured Image</a> #}
       {% endif %}
-			<div class="container-fluid">
-				<div class="row">
+			<div class="container-fluid padding10">
+				{# <div class="row">
 					<div class="col-lg-8">
 						<div class="banner-caption">
 						 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -35,17 +35,273 @@
 							<img id="loader" class="hide" src="img/frontend/loading.GIF">
 						</div>
 					</div>
+				</div> #}
+
+				{# survey #}
+				<div class="homepage-widget clearfix" style="">
+					{# chart #}
+					{% if issueType is not null %}
+					<div class="home-box pull-left" style="">
+						<div class="u-box u-box-white">
+							<div class="u-box-white-padding">
+							{# one issueQuestion link http://cfp.org.np/issue/9 #}
+							<h3 class="u-box-title">
+								<a href="{{ path('issue_show', {'id': issueQuestionId}) }}">{{ issueType.name }} {{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }} 
+								{% if issueType.title is not null %}
+									- {{ issueType.title }}
+								{% else %}
+									Survey Overview
+								{% endif %}
+								</a>
+							</h3>
+							
+							{# chart #}
+							<a href="{{ path('issue_show', {'id': issueQuestionId}) }}"><div id="container-homepage" class="container-chart" style=""></div></a>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					<div class="home-box pull-left nopaddingright">
+						{% if issueType is not null %}
+						<div class="h-col-25 pull-left">
+							<div class="u-box u-box-white clearfix">
+								<div class="u-box-white-padding">
+								<div class="surveyNumber">{{ issueType.surveyNumber }}</div>
+
+								<div class="surveyDetail">{{ issueType.surveyDetail }}</div>
+
+								<div class="surveyWomen">
+									<div class="survey-women-icon">
+										<img src="/img/frontend/icons/home-women.png">
+									</div>
+									{{ issueType.surveyWomen }}%
+								</div>
+								<div class="surveyMen">
+									<div class="survey-men-icon">
+										<img src="/img/frontend/icons/home-men.png">
+									</div>
+									{{ issueType.surveyMen }}%
+								</div>
+								</div>
+							</div>
+						</div>
+						{% endif %}
+
+						<div class="h-col-75 pull-left">
+							<div class="u-box u-box-white news-homepage-featured nopadding">
+								<div class="u-box-white-padding">
+								{# pull 4 news feed #}
+								<div class="clearfix">
+									{% set i = 0 %}
+									{% for entity in entities_news %}
+										{% set i = i + 1 %}
+
+										{# show only two #}
+										{% if i <= 2 %}
+										<div class="news-box-module ">
+											<div class="news-box-wrap clearfix">
+
+												{% if entity.imageUrl != '' or entity.youtubeUrlEmbed != '' %}
+													<div class="news-graphics">
+														{% if '.mp3' in entity.imageUrl %}    	
+															{# <div class="audio">
+													    	<audio controls>
+																  <source src="/uploads/issue/news/audio/{{ entity.imageUrl }}" type="audio/mpeg">
+																	Your browser does not support the audio element.
+																</audio>
+															</div> #}
+															
+															{# first one should be 1 #}
+															<div class="audio">
+																<div id="jquery_jplayer_{% if i == 0 %}1{% else %}{{ entity.id }}{% endif %}" class="jp-jplayer"></div>
+																<div id="jp_container_{% if i == 0 %}1{% else %}{{ entity.id }}{% endif %}" class="jp-audio" role="application" aria-label="media player">
+																	<div class="jp-type-single">
+																		
+																		<div class="jp-details">
+																			<div class="jp-title" aria-label="title">&nbsp;</div>
+																		</div>
+
+																		<div class="jp-volume-controls">
+																			<button class="jp-mute" role="button" tabindex="0">mute</button>
+																			<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+																			<div class="jp-volume-bar">
+																				<div class="jp-volume-bar-value"></div>
+																			</div>
+																		</div>
+																		
+																		<div class="jp-gui jp-interface">
+																			<div class="jp-controls-holder">
+																				<div class="jp-controls">
+																					<button class="jp-play" role="button" tabindex="0">play</button>
+																					<button class="jp-stop" role="button" tabindex="0">stop</button>
+																				</div>
+																				<div class="jp-progress">
+																					<div class="jp-seek-bar">
+																						<div class="jp-play-bar"></div>
+																					</div>
+																				</div>
+																				<div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+																				<div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+																				<div class="jp-toggles">
+																					<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="jp-no-solution">
+																			<span>Update Required</span>
+																			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+																		</div>
+																	</div>
+																</div>
+															</div>
+															{% set i = i + 1 %}
+												    {% elseif (('.jpeg' in entity.imageUrl) or ('.jpg' in entity.imageUrl) or ('.png' in entity.imageUrl)) %}
+												    	<div class="img" style="background-image: url( '/uploads/issue/news/img/{{ entity.imageUrl }}' )">
+													    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" width="100%" height="170px">
+													    </div>
+												    {% endif %}
+
+												    {# {{ dump(entity) }} #}
+												    {% if entity.youtubeUrlEmbed != '' %}
+															<div class="video">
+													    	<iframe width="200" height="130" src="{{ entity.youtubeUrlEmbed }}" frameborder="0" allowfullscreen></iframe>
+													    </div>
+												    {% endif %}
+											    </div>
+										  	{% endif %}
+										    <div class="news-body">
+										    	<h2 class="news-title"><a href="{{ path('news_show', {'slug': entity.slug }) }}" class="">{{ entity.name }}</a></h2>
+										    	{# {{ entity.description | raw  }} #}
+										    	<p>
+										    	{% autoescape false %}
+										    		{% set entity_description = entity.description|striptags|replace({'&nbsp;': ' '}) %}
+										    		{{ entity_description|slice(0, 251)  }}
+										    	{% endautoescape %}
+										    	</p>
+
+										    	<a href="{{ path('news_show', {'slug': entity.slug }) }}" class="readmore" onclick="javascript:pageTracker._trackPageview ('News - Readmore');">Read More</a>
+										    </div>
+									    </div>
+										</div>
+										{% endif %}
+
+									{% endfor %}
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{# pull 4 news feed #}
+				<div class="news-homepage clearfix">
+					{# we don't want audio player of id begin with 0 #}
+					{# {% set i = 0 %} #}
+
+					{% set ni = 0 %}
+					{% for entity in entities_news %}
+						{% set ni = ni + 1 %}
+						{# copied from issuenews/index.html #}
+						{# show only 4 #}
+						{% if ni >= 3 and ni <= 6 %}
+						<div class="news-box-module">
+							<div class="news-box-wrap">
+								{% if entity.imageUrl != '' or entity.youtubeUrlEmbed != '' %}
+									<div class="news-graphics">
+										{% if '.mp3' in entity.imageUrl %}    	
+											{# <div class="audio">
+									    	<audio controls>
+												  <source src="/uploads/issue/news/audio/{{ entity.imageUrl }}" type="audio/mpeg">
+													Your browser does not support the audio element.
+												</audio>
+											</div> #}
+											
+											{# first one should be 1 #}
+											<div class="audio">
+												<div id="jquery_jplayer_{% if i == 0 %}1{% else %}{{ entity.id }}{% endif %}" class="jp-jplayer"></div>
+												<div id="jp_container_{% if i == 0 %}1{% else %}{{ entity.id }}{% endif %}" class="jp-audio" role="application" aria-label="media player">
+													<div class="jp-type-single">
+														
+														<div class="jp-details">
+															<div class="jp-title" aria-label="title">&nbsp;</div>
+														</div>
+
+														<div class="jp-volume-controls">
+															<button class="jp-mute" role="button" tabindex="0">mute</button>
+															<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+															<div class="jp-volume-bar">
+																<div class="jp-volume-bar-value"></div>
+															</div>
+														</div>
+														
+														<div class="jp-gui jp-interface">
+															<div class="jp-controls-holder">
+																<div class="jp-controls">
+																	<button class="jp-play" role="button" tabindex="0">play</button>
+																	<button class="jp-stop" role="button" tabindex="0">stop</button>
+																</div>
+																<div class="jp-progress">
+																	<div class="jp-seek-bar">
+																		<div class="jp-play-bar"></div>
+																	</div>
+																</div>
+																<div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+																<div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+																<div class="jp-toggles">
+																	<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+																</div>
+															</div>
+														</div>
+														<div class="jp-no-solution">
+															<span>Update Required</span>
+															To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+														</div>
+													</div>
+												</div>
+											</div>
+											{% set i = i + 1 %}
+								    {% elseif (('.jpeg' in entity.imageUrl) or ('.jpg' in entity.imageUrl) or ('.png' in entity.imageUrl)) %}
+								    	<div class="img" style="background-image: url( '/uploads/issue/news/img/{{ entity.imageUrl }}' )">
+									    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" width="100%" height="170px">
+									    </div>
+								    {% endif %}
+
+								    {# {{ dump(entity) }} #}
+								    {% if entity.youtubeUrlEmbed != '' %}
+											<div class="video">
+									    	<iframe width="200" height="130" src="{{ entity.youtubeUrlEmbed }}" frameborder="0" allowfullscreen></iframe>
+									    </div>
+								    {% endif %}
+							    </div>
+						  	{% endif %}
+						    <div class="news-body">
+						    	<h2 class="news-title"><a href="{{ path('news_show', {'slug': entity.slug }) }}" class="">{{ entity.name }}</a></h2>
+						    	{# {{ entity.description | raw  }} #}
+						    	<p>
+						    	{% autoescape false %}
+						    		{% set entity_description = entity.description|striptags|replace({'&nbsp;': ' '}) %}
+						    		{{ entity_description|slice(0, 160)  }}
+						    	{% endautoescape %}
+						    	</p>
+
+						    	<a href="{{ path('news_show', {'slug': entity.slug }) }}" class="readmore" onclick="javascript:pageTracker._trackPageview ('News - Readmore');">Read More</a>
+						    </div>
+					    </div>
+						</div>
+						{% endif %}
+					{% endfor %}
 				</div>
 			</div>
 		</div>
 	</section>
 {% endblock %}
-{%block scriptIncludes %}
+
+{% block scriptIncludes %}
 
 <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
 
 <script>
-var i=0, j=0;
+/*var i=0, j=0;
 //$("#content1, #content2").keyup(function()
 $('#save').click(function()
  {  
@@ -68,6 +324,138 @@ $('#save').click(function()
 	    );
 	    return false;
   });
+*/
+
+$(document).ready(function(){
+	//equal height of news box
+  equal_height('.news-homepage', '.news-box-module');  
+
+  equal_height('.homepage-widget', '.u-box');  
+
+  //featured section
+  $('.news-homepage-featured .news-box-module').height(($('.news-homepage-featured').height()-10)/2);
+  
+  //img, audio, video height equal
+  $('.audio, .video').height($('.img').height());
+
+  //audio
+  {% set i = 0 %}
+  {% for entity in entities_news %}  	
+  	{% if entity.imageUrl != '' or entity.youtubeUrlEmbed != '' %}
+			{% if '.mp3' in entity.imageUrl %}    	
+				{% if i == 0 %}
+					jquery_jplayer('1', '{{ entity.audioName }}', '{{ entity.imageUrl }}' );
+
+					{% set i = i + 1 %}
+				{% else %}
+					jquery_jplayer_other('{{ entity.id }}', '{{ entity.audioName }}', '{{ entity.imageUrl }}' );
+				{% endif %}
+			{% endif %}
+		{% endif %}
+  {% endfor %}
+  
+});
+
+$(window).resize(function() {
+  //to make equal height of tab on window resize
+  $('.news-box-module, .u-box').css({'height': 'auto'});
+  //equal height of news box
+  equal_height('.news-homepage', '.news-box-module');  
+
+  equal_height('.homepage-widget', '.u-box');  
+  
+  //featured section
+  $('.news-homepage-featured .news-box-module').height(($('.news-homepage-featured').height()-10)/2);
+  
+  //img, audio, video height equal
+  $('.audio, .video').height($('.img').height());
+});
+
+
+
+	{% if issueType is not null %}
+	//Always on homepage: chartType = bar-basic
+	Highcharts.chart('container-homepage', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        {{ chart_title_properties | raw }},
+        text: ' ',
+        style: {{ chart_title_style | raw }},
+    },
+    subtitle: {
+        text: ' '
+    },
+    xAxis: {
+        categories: [
+        						//'Africa', 'America', 'Asia', 'Europe', 'Oceania'
+        						{% for opt in issueChartOverview %}
+											'{{ opt.district.name }}',
+										{% endfor %}
+        						],
+        title: {
+            text: null
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: ' ',
+            align: 'high'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+    },
+    tooltip: {
+        // valueSuffix: ' millions',
+    },
+    plotOptions: {
+        bar: {
+            dataLabels: {
+                enabled: false //true - dataLabels
+            }
+        },
+        /*column: {
+            colorByPoint: true
+        }*/
+    },    
+    /*colors: ['#000000', '#0d233a', '#8bbc21', '#910000', '#1aadce', 
+    '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a', '#ff0000', '#00ff00', '#0000ff'],*/
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+        shadow: true,
+        enabled: false //hide year
+    },
+    credits: {
+        enabled: false
+    },
+    series: [
+	    //can be added more
+	    {
+	        name: '{{ date(issueType.year ~ '-' ~ issueType.month ~ '-01') | date ('F Y') }}',
+	        data: [
+	        			// 107, 31, 635, 203, 2
+	        			// 107, 31, 635
+	        			{% for opt in issueChartOverview %}
+									{{ opt.value }},
+								{% endfor %}
+	        			]
+	    }
+    ],
+    exporting: {
+    	enabled: {{ chart_exporting }}
+    }
+	});
+	{% endif %}
 </script>
 
 {% endblock %}

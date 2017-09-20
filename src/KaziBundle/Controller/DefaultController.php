@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Page;
 use AppBundle\Form\PageType;
 
+use KaziBundle\Helper\NewsHelper;
+
 class DefaultController extends Controller
 {
 
@@ -31,8 +33,72 @@ class DefaultController extends Controller
         $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
         //print_r($entities);exit();
 
+
+
+        //pull 4 news here
+        $entities_news = $em->getRepository('AppBundle:IssueNews')
+            ->findBy( 
+                array(), 
+                array('id' => 'DESC') 
+                );
+            // ->findAll();//only four news
+
+        // var_dump($entities_news);exit();
+        $entities_news_final = array();
+
+        $i = 0;
+        foreach ($entities_news as $entity_news) {
+            $entities_news_final[$i]['id'] = $entity_news->getId();
+            $entities_news_final[$i]['slug'] = $entity_news->getSlug();
+            $entities_news_final[$i]['name'] = $entity_news->getName();
+            $entities_news_final[$i]['description'] = $entity_news->getDescription();
+            $entities_news_final[$i]['imageUrl'] = $entity_news->getImageUrl();
+            $entities_news_final[$i]['audioName'] = $entity_news->getAudioName();
+
+
+            //if video url - get the youtube slug
+            $youtubeUrlEmbed = '';
+
+            if($entity_news->getYoutubeUrl() != '') {
+                $nhelp = new NewsHelper();
+                $youtubeUrlEmbed = $nhelp->getYoutubeUrlEmbed($entity_news->getYoutubeUrl());
+            }
+
+            $entities_news_final[$i]['youtubeUrlEmbed'] = $youtubeUrlEmbed;
+
+            $i++;  
+        }
+        // $entities_news = array();
+
+
+        //get homepage chart - IssueChartOverview
+        $issueType = $em->getRepository('AppBundle:IssueType')
+            ->findOneByIsHomepage(1)
+            // ->findById(3)
+            ;
+
+        /*var_dump($issueType->getId()); 
+        exit();*/
+
+        $issueQuestion = $em->getRepository('AppBundle:IssueQuestion')
+            ->findOneByIssueType($issueType->getId());
+        // var_dump($issueQuestion->getId()); exit();
+
+        //TODO: compare chartType of issueType
+
+        if(!empty($issueType)) {
+            $issueChartOverview = $em->getRepository('AppBundle:IssueChartOverview')->findByIssueType($issueType->getId());
+            // var_dump($issueChartOverview); exit();
+        }
+
+
+
         return array(
             'entity' => $entity,
+            'entities_news' => $entities_news_final,//news
+            'issueType' => $issueType,
+            'issueChartOverview' => $issueChartOverview,
+            'issueQuestionId' => $issueQuestion->getId(),
         );
     }
 
@@ -45,7 +111,10 @@ class DefaultController extends Controller
      */
     public function showAction($slug, Request $request)//$id //removed annotation @Method("GET")
     {
-        $em = $this->getDoctrine()->getManager();
+        exit();//we don't need this now - we have all about, contact and perception in AboutController
+        
+        return array();
+        /*$em = $this->getDoctrine()->getManager();
         $criteria = array('slug'=> $slug);
 
         $entity_for_id = $em->getRepository('AppBundle:Page')->findBy($criteria);
@@ -64,6 +133,6 @@ class DefaultController extends Controller
 
         return array(
             'entity' => $entity,
-        );
+        );*/
     }
 }

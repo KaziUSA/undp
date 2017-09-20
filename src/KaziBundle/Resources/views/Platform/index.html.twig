@@ -1,5 +1,11 @@
 {% extends '::frontend.html.twig' %}
 
+{% block title %}Platform | {{ project_title }}{% endblock %}
+
+{% block bodyclass %}
+platform-page
+{% endblock %}
+
 {% block body -%}
 <div class="loading hidden">
   <div id="cssload-loader">
@@ -14,10 +20,10 @@
 </div>
 </div>
 <section class="content">
-    <div class="row row-no-padding">
+    <div class="row row-no-padding parent-height">
         <div class="col-sm-3 col-md-3 col-lg-2">
             <aside>
-                <div class="filter">
+                <div class="filter child-height">
                   <!-- Nav tabs -->
                   <div class="feedback-tab clearfix">
                     <div class="tab-head">Year</div>
@@ -116,30 +122,46 @@
                                               <label for="disability">Disability<span></span></label></li>
                                             </div>
                                         </ul>
+                                      
+                                    
+
                                       </div><!--/ac-->
                                       <ul class="ac-text"></ul>
                                       <ul class="ac-text"></ul>
-                                      <input type="submit" value="Submit" class="btn btn-bordered gray">
+                                      <input type="submit" value="Submit" class="btn btn-bordered gray" onclick="javascript:pageTracker._trackPageview ('Platform I - Submit');">
                                   </form>
 
                             </div><!--/accordion-->
-                        </div>
+                        
+              </div>
+
                     </div>
                   </div>
                 </div>
             </aside>
         </div>
 
-        <div class="col-sm-9 col-md-9 col-lg-10">
+        <div class="col-lg-3 col-md-3 col-sm-3 survey-question-col">
+          <div class="survey-questions child-height">
+            <div class="survey-questions-title question">Survey Questions</div>
+            <div class="survey-questions">
+              <div id="zelect">{{ form(form.questions) }}</div>
+            </div>
+          </div>
+        </div>  
+
+        <div class="col-sm-6 col-md-6 col-lg-7">
             <!-- main content -->
-            <div class="main-content">
-                <div class="question">
+            <div class="main-content child-height">
+                <div class="question" id="question-title">
                     <!--<div class="number">Question 9</div>
                     Are your main problems being adressed ?-->
-                    <a href="#!" class="next" onclick="btnNextQuestion_Click()"></a>
-                    <a href="#!" class="prev" onclick="btnPrevQuestion_Click()"></a>
 
-                    <div id="zelect">{{ form(form.questions) }}</div>
+                    {# <a href="#!" class="next" onclick="btnNextQuestion_Click()"></a>
+                    <a href="#!" class="prev" onclick="btnPrevQuestion_Click()"></a> #}
+
+                    {# <div id="zelect">{{ form(form.questions) }}</div> #}
+                    {# only question name here #}
                 </div>
 
                 <div class="chart">
@@ -180,7 +202,7 @@
                                 <div class="legend legend3 download">
                                     <ul>
 
-                                        <li><a href="#!" id="download-report"><span class="icon icon-download"></span> Download Chart</a></li>
+                                        <li><a href="#!" id="download-report"><span class="icon icon-download" onclick="javascript:pageTracker._trackPageview ('Platform I - Download Chart');"></span> Download Chart</a></li>
                                         <li class="share-icons share-platform"><a href="#!"><span class="icon icon-share"></span> Share Report</a>
                                           <ul>    
                                             {# TODO: Need to change cfp.org.np to dynamic url path if needed #}           
@@ -981,7 +1003,7 @@
                   var chart=new Highcharts.chart({
                   chart: {                          
                           renderTo: 'canvas',
-                          backgroundColor: '#ffffff',
+                          backgroundColor: '#ebebeb',
                           borderWidth: 0,
                           //spacingTop:35,
                           height: response.result.height,
@@ -999,9 +1021,9 @@
                       },
 
                       legend: {                         
-                          width: 240,
+                          width: 460,//240
                           padding: 70,
-                          itemWidth: 118,
+                          itemWidth: 218,//118
                           x: -63,
                       },
                       colors:['#88d8ef','#339de7','#6e6e6f','#159c02','#99bb42','#e7e7e7','#a1a1a1','#588C73','#D96459'],
@@ -1220,10 +1242,19 @@
     }; //abuttonpressed end
 
 $(document).ready(function() {
+  //add title
+  $('.question#question-title').text( $('.survey-questions .zelected').text() );
+
   $('button, input[type="submit"], .question .next, .question .prev').on('click', function(){aButtonPressed();});
   aButtonPressed();
   $('select#form_questions').change(function() {
     aButtonPressed();
+
+    //add title
+    $('.question#question-title').text( $('.survey-questions .zelected').text() );
+
+    //scroll to top
+    window.scrollTo(0,0);
   });
 
   checkboxChecked();

@@ -106,10 +106,6 @@ function onClickToolbarButton() {
 </script>
 <script type="text/javascript" src="/bundles/ivoryckeditor/ckeditor.js"></script>
 <script>
-function validateEmail($email) {
-  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-  return emailReg.test( $email );
-}
 
 var i=0, j=0;
 //$("#content1, #content2").keyup(function()
@@ -134,120 +130,7 @@ $('#save').click(function()
 
   //return false;
    
-  });
-
-//for contact form
-$(document).ready(function() {
-  $("#reload").click(function() {  
-    $("img#img").remove();
-    var id = Math.random();
-        $('<img id="img" src="/captcha/captcha.php?id='+id+'"/>').appendTo("#imgdiv");
-     id ='';
-  });
-
-  var m=0, n=0;
-  $('#submit').click(function() {  
-    var mail = {
-      name:$("#inputName").val(), 
-      address:$("#inputAddress").val(),
-      email:$("#inputEmail").val(),
-      phone:$("#inputPhone").val(),
-      message:$("#textMessage").val(),
-      captcha:$("#captcha1").val(),
-    };  
-    //validate part here
-    if(mail.name == '' || mail.address == '' || mail.email == '' || mail.phone == '' || mail.message == '' || mail.captcha == '') {
-      if(mail.name == '') {
-        $('.name-required').css({'display':'block'});
-        $("#inputName").focus();
-        return false;
-      } else {
-        $('.name-required').css({'display':'none'});
-      }
-      if(mail.address == '') {
-        $('.address-required').css({'display':'block'});
-        $("#inputAddress").focus();
-        return false;
-      } else {
-        $('.address-required').css({'display':'none'});
-      }
-      if(mail.email == '') {
-        $('.email-required').css({'display':'block'});
-        $("#inputEmail").focus();
-        return false;
-      } else {
-        $('.email-required').css({'display':'none'});
-      }
-      if(!validateEmail(mail.email)) {
-        $('.good-email-required').css({'display':'block'});
-        $("#inputEmail").focus();
-        return false;
-      } else {
-        $('.good-email-required').css({'display':'none'});
-      }
-      if(mail.phone == '') {
-        $('.phone-required').css({'display':'block'});
-        $("#inputPhone").focus();
-        return false;
-      } else {
-        $('.phone-required').css({'display':'none'});
-      }
-      if(mail.message == '') {
-        $('.message-required').css({'display':'block'});
-        $("#textMessage").focus();
-        return false;
-      } else {
-        $('.message-required').css({'display':'none'});
-      }
-      if(mail.captcha == '') {
-        $('.captcha-required').css({'display':'block'});
-        $("#captcha1").focus();
-        return false;
-      } else {
-        $('.captcha-required').css({'display':'none'});
-      }
-    } else {
-      m=m+1;
-      console.log("Request Sent");
-      //console.log(mail.name + mail.address + mail.email + mail.phone + mail.message);
-
-      /*$.post('{{path('contactus')}}',               
-        { data_name:mail.name, data_address:mail.address, data_email:mail.email, data_phone:mail.phone, data_message:mail.message, data_captcha:mail.captcha
-        }, 
-          function(response) {
-            n=n+1
-            //if(response) {
-              console.log("Your message has been sent successfully!");
-              $("#contact-form").html('<h3>Your message has been sent successfully! <a classs="btn btn-bordered send-again" href="{{path('contactus')}}">Send message again?</a></h3>');
-            } else {
-              console.log('Error');
-              $('.good-captcha-required').css({'display':'block'});
-            }
-          }        
-      );*/
-      var captcha = $("#captcha1").val();
-      var dataString = { name: mail.name, address: mail.address, email: mail.email, phone: mail.phone, message: mail.message, captcha: mail.captcha };
-      $.ajax({
-          type: "POST",
-          url: "/captcha/verify.php",
-          data: dataString,
-          success: function(html) {
-              //alert(html);//what ever echo-ed
-              if(html == 'Incorrect') {
-                //console.log('Error');
-                //alert(html);
-                $('.good-captcha-required').css({'display':'block'});
-              } else {
-                console.log("Your message has been sent successfully!");
-                $("#contact-form").html('<h3>Your message has been sent successfully! <a classs="btn btn-bordered send-again" href="{{path('contactus')}}">Send message again?</a></h3>');  
-              }
-          }
-      });
-      return false;
-    }//end else
-  });
-
-});//end document ready
+});
 </script>
 
 {% endblock %}

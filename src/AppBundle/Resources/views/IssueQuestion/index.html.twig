@@ -3,33 +3,40 @@
 {% block body -%}
     <h1>IssueQuestion list</h1>
 
-    <table class="records_list">
+    <table class="{{records_list}}">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>IssueType</th>
                 <th>Name</th>
-                <th>Keyfindingsmonth</th>
-                <th>Keyfindings</th>
-                <th>Infographicstitle</th>
-                <th>Hrrp</th>
-                <th>Districtid</th>
+                {# <th>Keyfindingsmonth</th> #}
+                {# <th>Keyfindings</th> #}
+                <th>IssueMapName</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
+        {% set i = 0 %}
         {% for entity in entities %}
+            {% set i = i + 1 %}
             <tr>
-                <td><a href="{{ path('issuequestion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ i }}</td>
+                <td>
+			{{ entity.issueType }} - 
+			{% if entity.issueType is defined %}
+			{% if entity.issueType is not empty %}
+			{{ date( entity.issueType.year ~ '-' ~ entity.issueType.month ~ '-01' ) | date('F Y') }}
+			{% endif %}
+			{% endif %}	
+		</td>
                 <td>{{ entity.name }}</td>
-                <td>{{ entity.keyFindingsMonth }}</td>
-                <td>{{ entity.keyFindings }}</td>
-                <td>{{ entity.infographicsTitle }}</td>
-                <td>{{ entity.hrrp }}</td>
-                <td>{{ entity.districtId }}</td>
+                {# <td>{{ date('2017-' ~ entity.keyFindingsMonth ~ '-01') | date('F') }}</td> #}
+                {# <td>{{ entity.keyFindings }}</td> #}
+                <td>{{ entity.issueMapName }}</td>
                 <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('issuequestion_show', { 'id': entity.id }) }}">show</a>
+                    <li class="show-link">
+                        <a href="{{ path('issuequestion_show', { 'id': entity.id }) }}" class="show">show</a>
                     </li>
                     <li>
                         <a href="{{ path('issuequestion_edit', { 'id': entity.id }) }}">edit</a>
@@ -41,11 +48,21 @@
         </tbody>
     </table>
 
-        <ul>
+    <ul>
         <li>
             <a href="{{ path('issuequestion_new') }}">
                 Create a new entry
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

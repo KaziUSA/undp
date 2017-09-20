@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueNews creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('issuenews') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+	//get the slug
+	get_slug('#appbundle_issuenews_name', '#appbundle_issuenews_slug');	
+
+    //select 1 ie untitled
+    $('#appbundle_issuenews_issueNewsType').val(1);
+});
+</script>
+{% endblock %}

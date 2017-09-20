@@ -1,0 +1,74 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueInfographicsTitle list</h1>
+
+    <table class="{{records_list}}">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IssueType</th>
+                <th>Name (Issue Question)</th>
+                {# <th>Type</th>    #}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% set i = 0 %}
+        {% for entity in entities %}
+            {% set i = i + 1 %}
+            <tr>
+                <td>{{ i }}</td>
+
+                <td>
+                    {{ entity.issueQuestion.issueType }}
+                    {% if entity.issueQuestion.issueType.year != '' and entity.issueQuestion.issueType.month != '' %}
+                     - {{ date( entity.issueQuestion.issueType.year ~ '-' ~ entity.issueQuestion.issueType.month ~ '-01' ) | date('F Y') }} 
+                    {% endif %}
+                </td>
+                <td>{{ entity.name }} ({{ entity.issueQuestion }})</td>
+                {# <td>
+                    {% if entity.type == 1 %}
+                        Vertical
+                    {% elseif entity.type == 2 %}
+                        Horizontal
+                    {% elseif entity.type == 3 %}
+                        Vertical Percentage
+                    {% else %}
+                        {{ entity.type }}
+                    {% endif %}
+                </td> #}
+                <td>
+                <ul>
+                    <li class="show-link">
+                        <a href="{{ path('issueinfographicstitle_show', { 'id': entity.id }) }}" class="show">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('issueinfographicstitle_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('issueinfographicstitle_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

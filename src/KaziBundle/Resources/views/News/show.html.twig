@@ -1,0 +1,101 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}News - {{ entity.name }} | {{ project_title }}{% endblock %}
+
+{% block body -%}
+	{# News #}
+	<div class="news-detail-page">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+
+				<div class="news-box-module">
+					<div class="news-box-wrap">
+						{% if entity.imageUrl != '' or youtubeUrlEmbed != '' %}
+							<div class="news-graphics">
+								{% if '.mp3' in entity.imageUrl %}    	
+									<div class="audio">
+							    	{# <audio controls>
+										  <source src="/uploads/issue/news/audio/{{ entity.imageUrl }}" type="audio/mpeg">
+											Your browser does not support the audio element.
+										</audio> #}
+										<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+										<div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+											<div class="jp-type-single">
+												
+												<div class="jp-details">
+													<div class="jp-title" aria-label="title">&nbsp;</div>
+												</div>
+
+												<div class="jp-volume-controls">
+													<button class="jp-mute" role="button" tabindex="0">mute</button>
+													<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+													<div class="jp-volume-bar">
+														<div class="jp-volume-bar-value"></div>
+													</div>
+												</div>
+
+												<div class="jp-gui jp-interface">
+													<div class="jp-controls-holder">
+														<div class="jp-controls">
+															<button class="jp-play" role="button" tabindex="0">play</button>
+															<button class="jp-stop" role="button" tabindex="0">stop</button>
+														</div>
+														<div class="jp-progress">
+															<div class="jp-seek-bar">
+																<div class="jp-play-bar"></div>
+															</div>
+														</div>
+														<div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+														<div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+														<div class="jp-toggles">
+															<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+														</div>
+													</div>
+												</div>
+												
+												<div class="jp-no-solution">
+													<span>Update Required</span>
+													To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+												</div>
+											</div>
+										</div>
+									</div>
+						    {% elseif (('.jpeg' in entity.imageUrl) or ('.jpg' in entity.imageUrl) or ('.png' in entity.imageUrl)) %}
+						    	<div class="img">
+							    	<img src="/uploads/issue/news/img/{{ entity.imageUrl }}" class="img-responsive full-opacity">
+							    </div>
+						    {% endif %}
+
+						    {# {{ dump(entity) }} #}
+						    {% if youtubeUrlEmbed != '' %}
+									<div class="video">
+							    	<iframe width="200" height="130" src="{{ youtubeUrlEmbed }}" frameborder="0" allowfullscreen></iframe>
+							    </div>
+						    {% endif %}
+					    </div>
+				  	{% endif %}
+				    <div class="news-body">
+				    	<h2 class="news-title">{{ entity.name }}</h2>
+				    	{{ entity.description | raw }}
+
+				    	{% if entity.source != '' %}
+				    		<p>Find more at: <a href="{{ entity.source }}" target="_blank" class="readmore external-link">{{ entity.source }}</a></p>
+				    	{% endif %}
+
+				    	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				      	<a href="{{ path('issuenews_edit', { 'id': entity.id }) }}" class="readmore">Edit</a>
+				      {% endif %}
+				    </div>
+			    </div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+	jquery_jplayer('1', '{{ entity.audioName }}', '{{ entity.imageUrl }}' );
+</script>
+{% endblock %}

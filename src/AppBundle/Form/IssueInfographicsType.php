@@ -16,8 +16,14 @@ class IssueInfographicsType extends AbstractType
     {
         $builder
             ->add('description')
-            ->add('icon')
-            ->add('issueQuestion')
+            ->add('file')
+            /*->add('imageUrl', null, array(
+                'label' => 'Icon / Value',
+                'required'   => false,
+                )
+            )*/
+            ->add('value')
+            ->add('issueInfographicsTitle')
         ;
     }
     

@@ -1,0 +1,69 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueMapSayings list</h1>
+
+    <table class="{{records_list}}">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IssueType</th>
+                <th>IssueQuestion</th>
+                <th>District</th>
+                <th>Location</th>
+                <th>Saying</th>
+                <th>Hrrp</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% set i = 0 %}
+        {% for entity in entities %}
+            {% set i = i + 1 %}
+            <tr>
+                <td>{{ i }}</td>
+                <td>
+                    {{ entity.issueQuestion.issueType }}
+                    {% if entity.issueQuestion.issueType.year != '' and entity.issueQuestion.issueType.month != '' %}
+                     - {{ date( entity.issueQuestion.issueType.year ~ '-' ~ entity.issueQuestion.issueType.month ~ '-01' ) | date('F Y') }} 
+                    {% endif %}
+                </td>
+                <td>{{ entity.issueQuestion }}</td>
+                <td>{{ entity.district }}</td>
+                <td>{{ entity.location }}</td>
+                <td>{{ entity.saying }}</td>
+                <td>{{ entity.hrrp }}</td>
+                <td>
+                <ul>
+                    <li class="show-link">
+                        <a href="{{ path('issuemapsayings_show', { 'id': entity.id }) }}" class="show">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('issuemapsayings_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('issuemapsayings_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

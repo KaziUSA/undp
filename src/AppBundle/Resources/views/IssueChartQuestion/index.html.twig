@@ -1,0 +1,78 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueChartQuestion list</h1>
+
+    <table class="{{records_list}}">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IssueType</th>
+                <th>Name</th>
+                <th>Charttype</th>
+                <th>IssueQuestion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% set i = 0 %}
+        {% for entity in entities %}
+            {% set i = i + 1 %}
+            <tr>
+                <td>{{ i }}</td>
+                <td>
+                    {% if entity.issueQuestion is not null %}
+                    {{ entity.issueQuestion.issueType }}
+                     - {{ date( entity.issueQuestion.issueType.year ~ '-' ~ entity.issueQuestion.issueType.month ~ '-01' ) | date('F Y') }} 
+                    {% endif %}
+                </td>
+                <td>{{ entity.name }}</td>
+                <td>
+                    {% if entity.chartType == 1 %}
+                        Circle Donut
+                    {% elseif entity.chartType == 2 %}
+                        Semi circle donut
+                    {% elseif entity.chartType == 3 %}
+                        Column Basic
+                    {% elseif entity.chartType == 4 %}
+                        Pyramid
+                    {% elseif entity.chartType == 5 %}
+                        Category - Bar Chart
+                    {% else %}
+                        entity.chartType
+                    {% endif %}
+                </td>
+                <td>{{ entity.issueQuestion }}</td>
+                <td>
+                <ul>
+                    <li class="show-link">
+                        <a href="{{ path('issuechartquestion_show', { 'id': entity.id }) }}" class="show">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('issuechartquestion_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('issuechartquestion_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}

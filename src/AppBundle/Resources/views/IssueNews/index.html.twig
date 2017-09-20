@@ -1,0 +1,67 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueNews list</h1>
+
+    <table class="{{records_list}}">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                {# <th>Description</th> #}
+                {# <th>Imageurl</th>
+                <th>Audiourl</th>
+                <th>Youtubeurl</th> #}
+                <th>Type</th>
+                <th>Createddate</th>
+                {# <th>Updateddate</th> #}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        {% set i = 0 %}
+        {% for entity in entities %}
+            {% set i = i + 1 %}
+            <tr>
+                <td>{{ i }}</td>
+                <td>{{ entity.name }}</td>
+                {# <td>
+                    <p>
+                    {% set entity_description = entity.description|striptags|replace({'&nbsp;': ' '}) %}
+                    {{ entity_description|slice(0, 100)  }}
+                    </p>
+                </td> #}
+                {# <td>{{ entity.imageUrl }}</td>
+                <td>{{ entity.audioUrl }}</td>
+                <td>{{ entity.youtubeUrl }}</td> #}
+                <td>
+                    {% if entity.issueNewsType is not null %}
+                        {{ entity.issueNewsType }}
+                    {% endif %}
+                </td>
+                <td>{{ entity.createdDate | date('Y-m-d h:i:s') }}</td>
+                {# <td>{{ entity.updatedDate }}</td> #}
+                <td>
+                <ul>
+                    {# <li class="show-link">
+                        <a href="{{ path('issuenews_show', { 'id': entity.id }) }}" class="show">show</a>
+                    </li> #}
+                    <li>
+                        <a href="{{ path('issuenews_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('issuenews_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

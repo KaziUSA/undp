@@ -3497,6 +3497,9 @@ body.body-small .footer.fixed {
 .full-width {
   width: 100% !important;
 }
+input.full-width {
+    margin-bottom: 10px;
+}
 .link-block {
   font-size: 12px;
   padding: 10px;
@@ -7600,4 +7603,95 @@ body.DTTT_Print {
 .nav > li > a:focus, .nav > li > a:hover {
   background-color: #d2232a;
   color: #ffffff;
+}
+
+/* Buttons */
+ul.record_actions li {
+    /* float: left; */
+    display: inline-block;
+}
+
+ul.record_actions {
+    clear: right;
+    clear: both;
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin-top: 5px;
+}
+
+ul.record_actions li a {
+    background: #ccc;
+    padding: 2px;
+    color: #333;
+}
+
+button {
+    background: #ccc;
+    border: 0;
+    color: #000;
+}
+form label {
+    width: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.m-b-30 {
+  margin-bottom: 30px;
+}
+/* show, edit btn */
+table .show-link {
+    display: none;
+}
+
+ul li {
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+}
+
+/* issuetype detail near dropdown button */
+span#appbundle_issueType_details {
+    margin-left: 8px;
+}
+
+/* dataTables css */
+body.DTTT_Print {
+        background: #fff;
+
+    }
+    .DTTT_Print #page-wrapper {
+        margin: 0;
+        background:#fff;
+    }
+
+    button.DTTT_button, div.DTTT_button, a.DTTT_button {
+        border: 1px solid #e7eaec;
+        background: #fff;
+        color: #676a6c;
+        box-shadow: none;
+        padding: 6px 8px;
+    }
+    button.DTTT_button:hover, div.DTTT_button:hover, a.DTTT_button:hover {
+        border: 1px solid #d2d2d2;
+        background: #fff;
+        color: #676a6c;
+        box-shadow: none;
+        padding: 6px 8px;
+    }
+
+    .dataTables_filter label {
+        margin-right: 5px;
+
+    }
+
+.edit-helper ul {
+    padding-left: 20px;
+}
+
+.edit-helper ul li {
+    list-style: disc;
 }

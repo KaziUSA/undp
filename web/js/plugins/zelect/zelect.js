@@ -309,11 +309,11 @@
       return true
     }
     function onMouseEnter() {
-      if (skipMouseEvent) {
+      /*if (skipMouseEvent) {
         skipMouseEvent = false
         return
       }
-      set($(this))
+      set($(this))*/
     }
     function itemTop($item) {
       return $item.offset().top - $list.offset().top

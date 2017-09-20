@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>IssueChartOption list</h1>
+
+    <table class="{{records_list}}">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IssueType</th>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Issue Chart Question</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set i = 0 %}
+        {% for entity in entities %}
+            {% set i = i + 1 %}
+            <tr>
+                <td>{{ i }}</td>                
+                <td>
+                    {{ entity.issueChartQuestion.issueQuestion.issueType }}
+                    {% if entity.issueChartQuestion.issueQuestion.issueType.year != '' and entity.issueChartQuestion.issueQuestion.issueType.month != '' %}
+                     - {{ date( entity.issueChartQuestion.issueQuestion.issueType.year ~ '-' ~ entity.issueChartQuestion.issueQuestion.issueType.month ~ '-01' ) | date('F Y') }} 
+                    {% endif %}
+                </td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.value }}</td>
+                <td>{{ entity.issuechartquestion }}</td>
+                <td>
+                <ul>
+                    <li class="show-link">
+                        <a href="{{ path('issuechartoption_show', { 'id': entity.id }) }}" class="show">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('issuechartoption_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('issuechartoption_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block scriptIncludes %}
+<script>
+$(document).ready(function() {
+    //datatables
+    getDatatables();
+});        
+</script>
+{% endblock %}
