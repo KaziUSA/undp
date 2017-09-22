@@ -88,7 +88,17 @@ class DefaultController extends Controller
 
         if(!empty($issueType)) {
             $issueChartOverview = $em->getRepository('AppBundle:IssueChartOverview')->findByIssueType($issueType->getId());
-            // var_dump($issueChartOverview); exit();
+            for($i = 0; $i < count($issueChartOverview); $i++) {
+                        $temp = $issureChartOverview[$i];
+                        for($j = $i + 1; $j < count($issueChartOverview); $j++) {
+                                if(strcasecmp($issueChartOverview[$i]->getDistrict()->getName(), $issueChartOverview[$j]->getDistrict()->getName()) > 0){
+                                        $temp = $issueChartOverview[$i];
+                                        $issueChartOverview[$i] = $issueChartOverview[$j];
+                                        $issueChartOverview[$j] = $temp;
+                                }
+                        }
+                }//end for
+		// var_dump($issueChartOverview); exit();
         }
 
 
