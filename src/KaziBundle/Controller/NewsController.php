@@ -122,10 +122,13 @@ class NewsController extends Controller
         //if video url - get the youtube slug
         $youtubeUrlEmbed = '';
 
-        if($entity[0]->getYoutubeUrl() != '') {
+        //var_dump($entity); exit();
+	if($entity[0] != '') {
+	if($entity[0]->getYoutubeUrl() != '') {
             $nhelp = new NewsHelper();
             $youtubeUrlEmbed = $nhelp->getYoutubeUrlEmbed($entity[0]->getYoutubeUrl());
         }
+	}
 
         return array(
             'entity' => $entity[0], //entities
