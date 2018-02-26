@@ -78,21 +78,22 @@ class DataController extends Controller
         }*/
 
 
-        
+        /**************** PHASE II **************/ 
         /* comment this after use: for phase 2 - generating html from xlxs */
         /* for phase 2: generating html from xlsx */
         //eg. http://localhost:8000/data/1
-        /*$file_name = 'temp/for-xlsx-to-html/phase2/round2/reconstruction/test5.xlsx';
+        //$file_name = 'temp/for-xlsx-to-html/phase2/round2/reconstruction/test5.xlsx';
+/*	$file_name = 'temp/for-xlsx-to-html/phase2/round3/round3-reconstruction.xlsx';
 
-        $sheet_name = 'Sheet1';
+        $sheet_name = 'Reconstruction_september';
 
         $fileInfo = $this->getCsvData($file_name, $sheet_name);
 
         return array(
             'fileInfo' => $fileInfo,
             'slug' => $slug
-            );*/
-        
+            );
+*/        
 
 
 
@@ -137,6 +138,17 @@ class DataController extends Controller
             }
             else if ($slug == 'round2-reconstruction') {
                 $page_title = 'Round 2 (Reconstruction)';
+            }
+
+            //phase 2 - round 3
+            else if ($slug == 'round3-fsl') {
+                $page_title = 'Round 3 (Food Security and Livelihood)';
+            }
+            else if ($slug == 'round3-protection') {
+                $page_title = 'Round 3 (Protection)';
+            }
+            else if ($slug == 'round3-reconstruction') {
+                $page_title = 'Round 3 (Reconstruction)';
             }
         } else {
             // $round = 'data/phase2/round1-fsl.html.twig';
