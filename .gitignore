@@ -11,5 +11,5 @@
 /web/bundles/
 .project
 .settings
-/web/uploads_bak
+/web/uploads
 .DS_Store
