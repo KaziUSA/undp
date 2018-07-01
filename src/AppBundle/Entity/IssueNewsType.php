@@ -28,7 +28,6 @@ class IssueNewsType
      */
     private $name;
 
-
     /**
      * Get id
      *

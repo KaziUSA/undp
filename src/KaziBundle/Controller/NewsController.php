@@ -54,7 +54,13 @@ class NewsController extends Controller
         $entities = $em->getRepository('AppBundle:Document')->findBy($criteria, array('date'=>'desc'));*/
 
         // if($id != '' and $id != 3) {
-            $entities = $em->getRepository('AppBundle:IssueNews')->findByIssueNewsType($id);
+            $entities = $em->getRepository('AppBundle:IssueNews')
+            ->findBy(
+                 array('issueNewsType'=> $id), 
+                 array('createdDate' => 'desc')
+            );
+            // ->findByIssueNewsType($id);
+
         /*}
         else {
             $entities = $em->getRepository('AppBundle:IssueNews')->findAll();
