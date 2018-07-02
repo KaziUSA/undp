@@ -68,11 +68,8 @@ class IssueController extends Controller
 
         //getting all issue questions
         $issue_questions = $em->getRepository('AppBundle:IssueQuestion')
+        // ->findBy(array(),array(),10, null);
             ->findAll();
-            /*->findBy(
-                array('issueType' => '1')
-                array('month' => 'ASC')
-                );*/
         // var_dump($issue_questions); exit();        
 
 

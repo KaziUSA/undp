@@ -51,10 +51,8 @@ survey
 				              	{# question list #}
 				              	<ul>
 				                  {% for question in issue_questions %}
-				                  	{% if question.issueType != null %}
 				                  	{% if question.issueType.name == 'Livelihood' %}
 					                  	<li class="Livelihood {{ question.issueType.year ~ '-' ~ question.issueType.month }} {% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
-				                  	{% endif %}
 				                  	{% endif %}
 				                  {% endfor %}
 				                </ul>
@@ -84,7 +82,6 @@ survey
 				              	<ul>
 				              		{# {% set issueType = '' %} #}
 				                  {% for question in issue_questions %}
-				                  	{% if question.issueType %}
 				                  	{% if question.issueType.name == 'Reconstruction' %}
 				                  		{# adding heading: like April 2017 - this will list all the questions, so their will be alot of question list #}
 				                  		{# {% if issueType != question.issueType.month ~ '-' ~ question.issueType.year %}
@@ -93,7 +90,6 @@ survey
 					                  	{% set issueType = question.issueType.month ~ '-' ~ question.issueType.year %} #}
 
 					                  	<li class="Reconstruction {{ question.issueType.year ~ '-' ~ question.issueType.month }} {% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
-				                  	{% endif %}
 				                  	{% endif %}
 				                  {% endfor %}
 				                </ul>
@@ -122,10 +118,8 @@ survey
 				              	{# question list #}
 				              	<ul>
 				                  {% for question in issue_questions %}
-				                  	{% if question.issueType %}
 				                  	{% if question.issueType.name == 'Protection' %}
 					                  	<li class="Protection {{ question.issueType.year ~ '-' ~ question.issueType.month }} {% if question.id == question_detail.id %}current_page_item{% endif %}"><a href="{{ path( 'issue_show', {'id': question.id } ) }}">{{ question.name }}</a></li>
-				                  	{% endif %}
 				                  	{% endif %}
 				                  {% endfor %}
 				                </ul>
