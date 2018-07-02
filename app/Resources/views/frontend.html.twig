@@ -41,6 +41,29 @@
 			<link href="/LESS/style.7.less" rel="stylesheet/less">
       
       <link rel="stylesheet" type="text/css" href="/css/custom_issue.css">
+
+      <style>
+        a#ToolTables_DataTables_Table_0_4 {
+            display: block !important;
+        }
+
+        a#ToolTables_DataTables_Table_0_4 {
+            color: #3e7180 !important;
+            font-weight: bold !important;
+        }
+
+        .DTTT_container {
+            position: fixed !important;
+            bottom: 43px !important;
+            left: auto !important;
+            right: 0 !important;
+            z-index: 99999 !important;
+            width: 70px !important;
+            height: 30px !important;
+            /* background: #f00 !important; */
+            line-height: 31px !important;
+        }
+      </style>
 		{% endblock %}
 		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
 
@@ -122,15 +145,18 @@
     	<ul class="dropdown-menu">
     		<li><a href="{{ path('platform') }}">2015</a></li>
     		<li><a href="{{ path('set2') }}">2016</a></li>
-            <li><a href="{{ path('set3') }}">2017</a></li>
+        <li><a href="{{ path('set3') }}">2017</a></li>
+        <li><a href="{{ path('set4') }}">2018</a></li>
     	</ul>
     </li>
 
     <li class="dropdown">
       <a href="{{ path('data') }}" class="dropdown-toggle {% if (app.request.get('_route') == 'data') or (app.request.get('_route') == 'data_show') or (app.request.get('_route') == 'data_show_phase2') %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data</a>
       <ul class="dropdown-menu">
-        <li><a href="{{ path('data') }}">Phase 1</a></li>
-        <li><a href="{{ path( 'data_show_phase2', {'slug': 'round1-fsl'} ) }}">Phase 2</a></li>
+        <li><a href="{{ path('data') }}">2015</a></li>
+        <li><a href="{{ path( 'data_show_phase2', {'slug': 'round1-fsl'} ) }}">2016</a></li>
+        <li><a href="{{ path( 'data_show_phase2', {'slug': 'round1-fsl'} ) }}">2017</a></li>
+        <li><a href="{{ path( 'data_show_phase2', {'slug': 'round1-fsl'} ) }}">2018</a></li>
       </ul>
     </li>
     <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>

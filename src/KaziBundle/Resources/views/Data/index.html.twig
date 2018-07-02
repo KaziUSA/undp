@@ -65,14 +65,20 @@
                 },
                 "fnDrawCallback": function( oSettings ) {
                   console.log( 'DataTables has redrawn the table' );
-
-
-                    
-                }
+                },
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: 'Save current page',
+                        exportOptions: {
+                            modifier: {
+                                page: 'current'
+                            }
+                        }
+                    }
+                ]
             });
-            // table.buttons( '.DTTT_button_xls' ).trigger({
-            //     alert("you have clicked");
-            // });
         
             $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
             

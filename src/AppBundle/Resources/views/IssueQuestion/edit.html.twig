@@ -112,7 +112,9 @@
     {% if sayings is not empty %}
         <ul>
             {% for say in sayings %}
+            {% if  say.district %}
                 <li><a target="_blank" href="{{ path('issuemapsayings_edit', {'id': say.id }) }}">{{ say.location }}, {{ say.district.name }}: {{ say.saying }}</a></li>
+            {% endif %}
             {% endfor %}
             <li><a target="_blank" href="{{ path('issuemapsayings_new', {'id': entity.id}) }}">Create more</a></li>
         </ul>

@@ -38,11 +38,11 @@ survey
 				                  	{% for it in issueType %}
 				                  		{% if it.name == 'Livelihood' %}
 				                  			<option value="{{ it.year ~ '-' ~ it.month }}"
-                                                                        {# selected="" #}
-                                                                        {% if question_detail.issueType.month == it.month and question_detail.issueType.year == it.year %}
-                                                                                selected="selected"
-                                                                        {% endif %}
-                                                                        >{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
+                                            {# selected="" #}
+                                            {% if question_detail.issueType.month == it.month and question_detail.issueType.year == it.year %}
+                                                    selected="selected"
+                                            {% endif %}
+                                            >{{ date(it.year ~ '-' ~ it.month ~ '-01') | date('F Y') }}</option>
 				                  		{% endif %}	
 				                  	{% endfor %}
 					              	</select>
@@ -68,7 +68,7 @@ survey
 				              	<div id="zelect">
 					              	<select id="issue-Reconstruction-year-month-dropdown">
 				                  	{% for it in issueType %}
-				                  		{% if it.name == 'Reconstruction' %}
+				                  		{% if it.name == 'Reconstruction' or it.name == 'Reconstruction_FSL_Protection' %}
 				                  			<option value="{{ it.year ~ '-' ~ it.month }}"
 				                  			{# selected="" #}
 				                  			{% if question_detail.issueType.month == it.month and question_detail.issueType.year == it.year %}
@@ -85,7 +85,7 @@ survey
 				              		{# {% set issueType = '' %} #}
 				                  {% for question in issue_questions %}
 				                  	{% if question.issueType %}
-				                  	{% if question.issueType.name == 'Reconstruction' %}
+				                  	{% if question.issueType.name == 'Reconstruction' or question.issueType.name == 'Reconstruction_FSL_Protection' %}
 				                  		{# adding heading: like April 2017 - this will list all the questions, so their will be alot of question list #}
 				                  		{# {% if issueType != question.issueType.month ~ '-' ~ question.issueType.year %}
 				                  			<li class="issue-month-year"><a href="#!">{{ date(question.issueType.year ~ '-' ~ question.issueType.month ~ '-01') | date('F Y') }}</a></li>

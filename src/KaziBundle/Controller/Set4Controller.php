@@ -9,15 +9,15 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 /**
- * Set3 controller.
+ * Set4 controller.
  *
- * @Route("/set3")
+ * @Route("/set4")
  */
-class Set3Controller extends Controller
+class Set4Controller extends Controller
 {
     /**
 	*
-	*@Route("/", name="set3")	
+	*@Route("/", name="set4")	
 	*@Method("GET")
     *@Template()	
 	*/
@@ -29,8 +29,8 @@ class Set3Controller extends Controller
 			    'class' => 'AppBundle:Question',
 			    'query_builder' => function(EntityRepository $er) {
 			                         return $er->createQueryBuilder('q')
-                                         ->where('q.id > 56')
-                                         ->andWhere('q.id < 78')
+			                             
+                                         ->where('q.id > 77')
                                          ->orderBy('q.id', 'ASC');
 			                     },
 			    'choices_as_values' => false,		    
