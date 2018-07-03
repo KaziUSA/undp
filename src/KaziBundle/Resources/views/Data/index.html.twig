@@ -8,16 +8,28 @@
     <div class="page-title">
         <h3><span class="red-bg">Phase I</span>Community Perception Survey Report - Round 1</h3>
         <div class="feedback-round">
-            <div class="customSel">
+            <div class="customSel" style="float: left;">
                 <label>
-                    <select name="round" id="" onchange="if (this.value) window.location.href=this.value">
-                        <option value="1">July</option>
-                        <option value="2">August</option>
-                        <option value="3">September</option>
-                        <option value="4">October</option>
-                        <option value="5">November</option>
-                        <option value="6">December</option>
-                        <option value="7" selected="selected">January</option>
+                    <select name="round" class="round_year">
+                        <option value="16" selected>2016</option>
+                    </select>
+                </label>
+            </div>
+            <div class="customSel" style="float: left;">
+                <label>
+                    <select name="round" class="round_month">
+                        <option value="1" selected>January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
                     </select>
                 </label>
             </div>
@@ -47,63 +59,110 @@
         
     {% endblock %}
 {% block scriptIncludes %}
+<script src="/js/moment.min.js"></script>
 <script>
-        $(document).ready(function() {
-            $('.dataTables').dataTable({
-                //"autoWidth": false,
-                "pageLength": 100,
-                responsive: true,
-                "dom": 'T<"clear">lfrtip',
-                "tableTools": {
-                    "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
-                },
-                "colVis": {
-                    "buttonText": "Change columns"
-                },
-                "oLanguage": {
-                    "sSearch": ""
-                },
-                "fnDrawCallback": function( oSettings ) {
-                  console.log( 'DataTables has redrawn the table' );
-                },
-                dom: '<"html5buttons"B>lTfgitp',
-                buttons: [
-                    {
-                        extend: 'excel',
-                        text: 'Save current page',
-                        exportOptions: {
-                            modifier: {
-                                page: 'current'
-                            }
+    $(document).ready(function() {
+        table = $('.dataTables').DataTable({
+            //"autoWidth": false,
+            "pageLength": 100,
+            responsive: true,
+            "dom": 'T<"clear">lfrtip',
+            "tableTools": {
+                "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+            },
+            "colVis": {
+                "buttonText": "Change columns"
+            },
+            "oLanguage": {
+                "sSearch": ""
+            },
+            "fnDrawCallback": function( oSettings ) {
+              console.log( 'DataTables has redrawn the table' );
+            },
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                {
+                    extend: 'excel',
+                    text: 'Save current page',
+                    exportOptions: {
+                        modifier: {
+                            page: 'current'
                         }
                     }
-                ]
-            });
-        
-            $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
-            
-            // tooltip
-           $('.toggle-icon').hover(function(){
-                $(this).children('.toogle-data').toggle();
-            }); 
-
-          
-
-            function table_head() {                
-                //width for fixed header
-                var child_num, th_width;
-                for(child_num = 2; child_num <= 11; child_num++) {                
-                    th_width = $('thead tr.first th:nth-child('+child_num+')').width();
-                    $('thead tr.second th:nth-child('+child_num+')').css({'width':th_width+'px'});
-                    console.log('width:'+th_width);
                 }
-            }
-           setTimeout(function(){
-                table_head();
-            }, 5000);//5,000
-           $('thead tr.second th').click(function() {
-                table_head();
-           });
+            ]
         });
-    </script>
+    
+        $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
+        
+        // tooltip
+        $('.toggle-icon').hover(function(){
+            $(this).children('.toogle-data').toggle();
+        }); 
+
+        function table_head() {                
+            //width for fixed header
+            var child_num, th_width;
+            for(child_num = 2; child_num <= 11; child_num++) {                
+                th_width = $('thead tr.first th:nth-child('+child_num+')').width();
+                $('thead tr.second th:nth-child('+child_num+')').css({'width':th_width+'px'});
+                // console.log('width:'+th_width);
+            }
+        }
+        setTimeout(function(){
+            table_head();
+            }, 5000);//5,000
+        $('thead tr.second th').click(function() {
+            table_head();
+        });
+
+        // Bootstrap datepicker
+        // $('.input-daterange input').each(function() {
+        //   $(this).datepicker('clearDates');
+        // });
+
+        // // Set up your table
+        // table = $('#my-table').DataTable({
+        //   paging: false,
+        //   info: false
+        // });
+
+        
+
+        $.fn.dataTable.ext.search.push(
+          function(settings, data, dataIndex) {
+            var min = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '01';
+            var max = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '28';
+
+            var createdAt = data[1] || 0; // Our date column in the table
+
+            if (
+              (min == "" || max == "") ||
+              (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
+            ) {
+              return true;
+            }
+            return false;
+          }
+        );
+
+        // Extend dataTables search
+        $('.round_month').on('change', function() {
+            // var date = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '01';
+            // var min = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '01';
+            // var max = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '30';
+            
+            var year = $('.round_year').val();
+            var month = $('.round_month').val();
+            var day = '1';
+
+            var FirstDay = new Date(year, month - 1, 1).getDate();
+            var LastDay = new Date(year, month, 0).getDate();
+
+
+            console.log(FirstDay)
+            console.log(LastDay)
+        });
+    });
+</script>
 {% endblock %}

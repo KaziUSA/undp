@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Data list</h1>
+    <a href="{{ path('data_new') }}">
+        <button type="button" class="btn btn-xs btn-info">
+        Create a new entry
+        </button>
+    </a>
+
+    <table class="records_list table table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>File</th>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                
+                <td>{{ entity.title }}</td>
+                <td>
+                    <a href="/data_files/{{ entity.file }}" download>{{ entity.file }}</a>
+                </td>
+                <td>{{ entity.year }}</td>
+                <td>{{ entity.month }}</td>
+                <td>
+                
+                       <a href="{{ path('data_edit', { 'id': entity.id }) }}">
+                       <button type="button" class="btn btn-xs btn-success">Edit</button></a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+            
+    {% endblock %}
