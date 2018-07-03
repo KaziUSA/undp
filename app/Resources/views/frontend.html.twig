@@ -150,15 +150,8 @@
     	</ul>
     </li>
 
-    <li class="dropdown">
-      <a href="{{ path('data') }}" class="dropdown-toggle {% if (app.request.get('_route') == 'data') or (app.request.get('_route') == 'data_show') or (app.request.get('_route') == 'data_show_phase2') %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data</a>
-      <ul class="dropdown-menu">
-        <li><a href="{{ path('data') }}">2015</a></li>
-        <li><a href="{{ path( 'data_show_phase2', {'slug': 'round1-fsl'} ) }}">2016</a></li>
-        <li><a href="{{ path( 'data_show_phase2', {'slug': 'round1-fsl'} ) }}">2017</a></li>
-        <li><a href="{{ path( 'data_show_phase2', {'slug': 'round1-fsl'} ) }}">2018</a></li>
-      </ul>
-    </li>
+  
+    <li><a href="{{ path('data') }}" class="{% if app.request.get('_route') == 'data' %} active {% endif %}">Data</a></li>
     <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
     <li><a href="{{ path('news') }}" class="{% if (app.request.get('_route') == 'news') or (app.request.get('_route') == 'news_show') %} active {% endif %}">News</a></li>
     {# <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact --> #}

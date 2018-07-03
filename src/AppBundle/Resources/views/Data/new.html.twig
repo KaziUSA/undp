@@ -6,19 +6,20 @@
     	<form action="/admin/data/store" method="POST" enctype="multipart/form-data">
     		<div class="form-group">
     			<label for="">Title</label>
-    			<input type="text" name="title" class="form-control" placeholder="Title">
+    			<input type="text" name="title" class="form-control" placeholder="Title" required>
     		</div>
 
     		<div class="form-group">
     			<label for="">File</label>
-    			<input type="file" name="file" class="form-control">
+    			<input type="file" name="file" class="form-control" required>
     		</div>
 
     		<div class="row">
     			<div class="col-md-6">
     				<div class="form-group">
     					<label for="">Year</label>
-    					<select name="year" class="form-control">
+    					<select name="year" class="form-control" required>
+    						<option value="">Select year</option>
     						<option value="2015">2015</option>
     						<option value="2016">2016</option>
     						<option value="2017">2017</option>
@@ -29,8 +30,9 @@
     			<div class="col-md-6">
     				<div class="form-group">
     					<label for="">Month</label>
-    					<select name="month" class="form-control">
-    						<option value="01" selected>January</option>
+    					<select name="month" class="form-control" required>
+    						<option value="">Select month</option>
+    						<option value="01">January</option>
     						<option value="02">February</option>
     						<option value="03">March</option>
     						<option value="04">April</option>

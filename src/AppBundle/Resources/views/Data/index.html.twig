@@ -21,8 +21,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                
-                <td>{{ entity.title }}</td>
+                <td style="width: 400px;">{{ entity.title }}</td>
                 <td>
                     <a href="/data_files/{{ entity.file }}" download>{{ entity.file }}</a>
                 </td>
@@ -30,9 +29,13 @@
                 <td>{{ entity.month }}</td>
                 <td>
                 
-                       <a href="{{ path('data_edit', { 'id': entity.id }) }}">
-                       <button type="button" class="btn btn-xs btn-success">Edit</button></a>
-                    
+                    <a href="{{ path('data_edit', { 'id': entity.id }) }}" style="float: left; margin-right: 10px;">
+                    <button type="button" class="btn btn-xs btn-success">Edit</button></a>
+                        
+                    <form action="/admin/data/{{ entity.id }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
                 </td>
             </tr>
         {% endfor %}

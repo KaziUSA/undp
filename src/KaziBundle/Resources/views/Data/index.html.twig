@@ -4,46 +4,69 @@
 {% block title %}Phase I | Community Perception Survey Report - Round 1 | {{ project_title }}{% endblock %}
 
 {% block body -%}
-    {# TODO: Need to add share button with functionality #}
-    <div class="page-title">
-        <h3><span class="red-bg">Phase I</span>Community Perception Survey Report - Round 1</h3>
-        <div class="feedback-round">
-            <div class="customSel" style="float: left;">
-                <label>
-                    <select name="round" class="round_year">
-                        <option value="16" selected>2016</option>
+<div class="page-title">
+    <h3><span class="red-bg">Data</span>Inter agency common feedback project datas</h3>
+</div>
+    <div class="container-fluid" style="margin-top: 20px;">
+    <div class="">
+        <div class="col-md-2 col-md-offset-1">
+            <h3>Filter</h3>
+            <form action="">
+                <div class="form-group">
+                    <label for="">Year</label>
+                    <select name="year" class="form-control">
+                        <option value="">2018</option>
+                        <option value="">2018</option>
+                        <option value="">2018</option>
+                        <option value="">2018</option>
                     </select>
-                </label>
-            </div>
-            <div class="customSel" style="float: left;">
-                <label>
-                    <select name="round" class="round_month">
-                        <option value="1" selected>January</option>
-                        <option value="2">February</option>
-                        <option value="3">March</option>
-                        <option value="4">April</option>
-                        <option value="5">May</option>
-                        <option value="6">June</option>
-                        <option value="7">July</option>
-                        <option value="8">August</option>
-                        <option value="9">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
-                    </select>
-                </label>
-            </div>
-        </div>
-    </div>
+                </div>
 
-    {# table data #}
-    <div class="table-container">
-        <div class="fixed-table-header">          
-            {% include round %}  
+                <div class="form-group">
+                    <label for="">Month</label>
+                    <select name="year" class="form-control">
+                        <option value="">2018</option>
+                        <option value="">2018</option>
+                        <option value="">2018</option>
+                        <option value="">2018</option>
+                    </select>
+                </div>
+
+                <button>Filter</button>
+            </form>    
+        </div>
+
+        <div class="col-md-8">
+            <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</h3>
+            {% for data in datas %}
+            <div class="row">
+              <div class="col-sm-6 col-md-8">
+                <div class="thumbnail">
+                  <div class="caption">
+                    <h3>{{ data.title }} - {{ data.month }} {{ data.year }}</h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a href="/data_files/{{ data.file }}">
+                      <div class="caption clearfix">
+                        <i class="fa fa-download pull-left" style="margin-right: .3em;font-size: 30px;padding: 12px 8px 0px 8px;"></i>
+                        <div class="pull-left">
+                            <h3>Download data</h3>
+                            <p style="margin:0;">XLS</p>
+                        </div>
+
+                      </div>
+                    </a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
-    {# table data ends #}
-    
+    </div>
     <ul class="share-icons share-data">
         <li><a href="#share" class="fa fa-share-alt"></a>
             <ul>        
@@ -59,110 +82,5 @@
         
     {% endblock %}
 {% block scriptIncludes %}
-<script src="/js/moment.min.js"></script>
-<script>
-    $(document).ready(function() {
-        table = $('.dataTables').DataTable({
-            //"autoWidth": false,
-            "pageLength": 100,
-            responsive: true,
-            "dom": 'T<"clear">lfrtip',
-            "tableTools": {
-                "sSwfPath": "/js/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
-            },
-            "colVis": {
-                "buttonText": "Change columns"
-            },
-            "oLanguage": {
-                "sSearch": ""
-            },
-            "fnDrawCallback": function( oSettings ) {
-              console.log( 'DataTables has redrawn the table' );
-            },
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: [
-                {
-                    extend: 'excel',
-                    text: 'Save current page',
-                    exportOptions: {
-                        modifier: {
-                            page: 'current'
-                        }
-                    }
-                }
-            ]
-        });
-    
-        $('.DTTT_button_xls span, .DTTT_button_csv span').html('Download Table');
-        
-        // tooltip
-        $('.toggle-icon').hover(function(){
-            $(this).children('.toogle-data').toggle();
-        }); 
-
-        function table_head() {                
-            //width for fixed header
-            var child_num, th_width;
-            for(child_num = 2; child_num <= 11; child_num++) {                
-                th_width = $('thead tr.first th:nth-child('+child_num+')').width();
-                $('thead tr.second th:nth-child('+child_num+')').css({'width':th_width+'px'});
-                // console.log('width:'+th_width);
-            }
-        }
-        setTimeout(function(){
-            table_head();
-            }, 5000);//5,000
-        $('thead tr.second th').click(function() {
-            table_head();
-        });
-
-        // Bootstrap datepicker
-        // $('.input-daterange input').each(function() {
-        //   $(this).datepicker('clearDates');
-        // });
-
-        // // Set up your table
-        // table = $('#my-table').DataTable({
-        //   paging: false,
-        //   info: false
-        // });
-
-        
-
-        $.fn.dataTable.ext.search.push(
-          function(settings, data, dataIndex) {
-            var min = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '01';
-            var max = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '28';
-
-            var createdAt = data[1] || 0; // Our date column in the table
-
-            if (
-              (min == "" || max == "") ||
-              (moment(createdAt).isSameOrAfter(min) && moment(createdAt).isSameOrBefore(max))
-            ) {
-              return true;
-            }
-            return false;
-          }
-        );
-
-        // Extend dataTables search
-        $('.round_month').on('change', function() {
-            // var date = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '01';
-            // var min = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '01';
-            // var max = $('.round_year').val() + '-' + $('.round_month').val() + '-' + '30';
-            
-            var year = $('.round_year').val();
-            var month = $('.round_month').val();
-            var day = '1';
-
-            var FirstDay = new Date(year, month - 1, 1).getDate();
-            var LastDay = new Date(year, month, 0).getDate();
-
-
-            console.log(FirstDay)
-            console.log(LastDay)
-        });
-    });
-</script>
+<script></script>
 {% endblock %}

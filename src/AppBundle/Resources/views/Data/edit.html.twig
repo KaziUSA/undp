@@ -3,45 +3,46 @@
 {% block body -%}
     <h1>Data creation</h1>
 
-    	<form action="/admin/data/store" method="POST" enctype="multipart/form-data">
+    	<form action="/admin/data/{{ entity.id }}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="PUT">
     		<div class="form-group">
     			<label for="">Title</label>
-    			<input type="text" name="title" class="form-control" placeholder="Title" value="{{ entity.title }}">
+    			<input type="text" name="title" class="form-control" placeholder="Title" value="{{ entity.title }}" required>
     		</div>
 
     		<div class="form-group">
     			<label for="">File</label>
-    			<input type="file" name="file" class="form-control">
+    			<input type="file" name="file" class="form-control"> <span>data_files/{{ entity.file }}</span>
     		</div>
 
     		<div class="row">
     			<div class="col-md-6">
     				<div class="form-group">
     					<label for="">Year</label>
-    					<select name="year" class="form-control">
-    						<option value="2015">2015</option>
-    						<option value="2016">2016</option>
-    						<option value="2017">2017</option>
-    						<option value="2018">2018</option>
+    					<select name="year" class="form-control" required>
+    						<option value="2015" {% if entity.year == '2015'%} selected {% endif %}>2015</option>
+    						<option value="2016" {% if entity.year == '2016'%} selected {% endif %}>2016</option>
+    						<option value="2017" {% if entity.year == '2017'%} selected {% endif %}>2017</option>
+    						<option value="2018" {% if entity.year == '2018'%} selected {% endif %}>2018</option>
     					</select>
     				</div>
     			</div>
     			<div class="col-md-6">
     				<div class="form-group">
     					<label for="">Month</label>
-    					<select name="month" class="form-control">
-    						<option value="01" selected>January</option>
-    						<option value="02">February</option>
-    						<option value="03">March</option>
-    						<option value="04">April</option>
-    						<option value="05">May</option>
-    						<option value="06">June</option>
-    						<option value="07">July</option>
-    						<option value="08">August</option>
-    						<option value="09">September</option>
-    						<option value="10">October</option>
-    						<option value="11">November</option>
-    						<option value="12">December</option>
+    					<select name="month" class="form-control" required>
+    						<option value="01" {% if entity.month == '01'%} selected {% endif %}>January</option>
+    						<option value="02" {% if entity.month == '02'%} selected {% endif %}>February</option>
+    						<option value="03" {% if entity.month == '03'%} selected {% endif %}>March</option>
+    						<option value="04" {% if entity.month == '04'%} selected {% endif %}>April</option>
+    						<option value="05" {% if entity.month == '05'%} selected {% endif %}>May</option>
+    						<option value="06" {% if entity.month == '06'%} selected {% endif %}>June</option>
+    						<option value="07" {% if entity.month == '07'%} selected {% endif %}>July</option>
+    						<option value="08" {% if entity.month == '08'%} selected {% endif %}>August</option>
+    						<option value="09" {% if entity.month == '09'%} selected {% endif %}>September</option>
+    						<option value="10" {% if entity.month == '10'%} selected {% endif %}>October</option>
+    						<option value="11" {% if entity.month == '11'%} selected {% endif %}>November</option>
+    						<option value="12" {% if entity.month == '12'%} selected {% endif %}>December</option>
     					</select>
     				</div>
     			</div>

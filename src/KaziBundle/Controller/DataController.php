@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Survey;
+use AppBundle\Entity\Data;
 use AppBundle\Form\SurveyType;
 
 use PHPExcel;
@@ -35,10 +36,12 @@ class DataController extends Controller
         $sheet_name = 'uploaded_form_ir295a';
         $fileInfo = $this->getCsvData($file_name);*/
 
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('AppBundle:Data')->findAll();
+
         return array(
-            'round' => 'round7.html.twig',
-            //'fileInfo' => $fileInfo
-            );
+            'datas' => $entities,
+        );
     }
 
     /**

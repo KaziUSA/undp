@@ -20,7 +20,7 @@ class DataController extends Controller
     /**
      * Lists all Age entities.
      *
-     * @Route("/", name="data")
+     * @Route("/", name="admin_data")
      * @Method("GET")
      * @Template()
      */
@@ -53,10 +53,6 @@ class DataController extends Controller
      */
     public function createAction(Request $request)
     {
-        // var_dump($request->request->get('title'));
-
-         // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to your action: index(EntityManagerInterface $entityManager)
         $entityManager = $this->getDoctrine()->getManager();
 
         //Save File
@@ -79,7 +75,7 @@ class DataController extends Controller
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
-        return $this->redirect($this->generateUrl('data'));
+        return $this->redirect($this->generateUrl('admin_data'));
     }
 
     /**
@@ -197,72 +193,55 @@ class DataController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $entityManager = $this->getDoctrine()->getManager();
+        $data = $entityManager->getRepository(Data::class)->find($id);
 
-        $entity = $em->getRepository('AppBundle:Age')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Age entity.');
+        if (!$data) {
+            throw $this->createNotFoundException(
+                'No data found for id '.$id
+            );
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
+        //Save File
+        $file = $request->files->get('file');
+        if(!empty($file)) {
+            $fileName = time() ."-". $file->getClientOriginalName();
+            $fileName = str_replace(' ', '-', $fileName);
+            $image = '/data_files/' .$fileName;
+            $upload_success= $file->move('data_files', $fileName);
 
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('age_edit', array('id' => $id)));
+            $data->setFile($request->request->get('file'));
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+        //Save data
+        $data->setTitle($request->request->get('title'));
+        $data->setYear($request->request->get('year'));
+        $data->setMonth($request->request->get('month'));
+        $entityManager->flush();
+
+        return $this->redirect($this->generateUrl('admin_data'));
+
     }
+
     /**
      * Deletes a Age entity.
      *
-     * @Route("/{id}", name="age_delete")
+     * @Route("/{id}", name="data_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AppBundle:Data')->find($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Age')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Age entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Data entity.');
         }
 
-        return $this->redirect($this->generateUrl('age'));
+        $em->remove($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_data'));
     }
 
-    /**
-     * Creates a form to delete a Age entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('age_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete',
-                'attr' => array( 'class' => 'btn btn-xs btn-success' )
-                ))
-            ->getForm()
-        ;
-    }
 }
