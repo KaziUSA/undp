@@ -41,30 +41,11 @@
 			<link href="/LESS/style.7.less" rel="stylesheet/less">
       
       <link rel="stylesheet" type="text/css" href="/css/custom_issue.css">
+    {% endblock %}
 
-      <style>
-        a#ToolTables_DataTables_Table_0_4 {
-            display: block !important;
-        }
-
-        a#ToolTables_DataTables_Table_0_4 {
-            color: #3e7180 !important;
-            font-weight: bold !important;
-        }
-
-        .DTTT_container {
-            position: fixed !important;
-            bottom: 43px !important;
-            left: auto !important;
-            right: 0 !important;
-            z-index: 99999 !important;
-            width: 70px !important;
-            height: 30px !important;
-            /* background: #f00 !important; */
-            line-height: 31px !important;
-        }
-      </style>
+    {% block extra_stylesheets %}
 		{% endblock %}
+    
 		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
 
 		<link rel="image_src" type="image/jpeg" href="http://cfp.org.np/img/frontend/logo-share.png" /><!-- for facebook -->

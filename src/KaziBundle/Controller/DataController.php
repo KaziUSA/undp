@@ -45,6 +45,30 @@ class DataController extends Controller
     }
 
     /**
+     * Lists all data from excel.
+     *
+     * @Route("/filter", name="data_filter")
+     * @Method("GET")
+     * @Template()
+     */
+    public function filterAction(Request $request) {
+        $year = $request->query->get('year');
+        $month = $request->query->get('month');
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Data');
+            if(!empty($month)){   
+                $datas = $repo->findBy(array('year' => $year, 'month' => $month));
+                
+            } else {
+                $datas = $repo->findBy(array('year' => $year));
+            }
+
+        return compact('datas','year', 'month');
+
+    }
+
+    /**
      * Finds and displays all data from excel
      *
      * @Route("/{slug}", name="data_show")
