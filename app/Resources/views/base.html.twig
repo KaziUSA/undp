@@ -94,7 +94,7 @@
                         <li class="{% if app.request.get('_route') == 'documenttype' %} active {% endif %}"><a href="{{ path('documenttype') }}">Reports Type</a></li>
                     </ul>
                 </li>
-                <li class="{% if (app.request.get('_route') == 'data') or (app.request.get('_route') == 'data_new') or (app.request.get('_route') == 'data_new') or (app.request.get('_route') == 'data_edit') %} active {% endif %}">
+                <li class="{% if (app.request.get('_route') == 'admin_data') or (app.request.get('_route') == 'data_new') or (app.request.get('_route') == 'data_new') or (app.request.get('_route') == 'data_edit') %} active {% endif %}">
                     <a href="{{ path('data') }}"><i class="fa fa-book"></i> <span class="nav-label">Data</span> </a>
                 </li>
                 <li class="{% if (app.request.get('_route') == 'page') or (app.request.get('_route') == 'page_new') or (app.request.get('_route') == 'show_new') or (app.request.get('_route') == 'page_edit') %} active {% endif %}">
