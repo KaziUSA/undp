@@ -65,6 +65,7 @@ class DataController extends Controller
         //Save to database
         $data = new Data();
         $data->setTitle($request->request->get('title'));
+        $data->setDescription($request->request->get('description'));
         $data->setFile($fileName);
         $data->setYear($request->request->get('year'));
         $data->setMonth($request->request->get('month'));
@@ -215,6 +216,7 @@ class DataController extends Controller
 
         //Save data
         $data->setTitle($request->request->get('title'));
+        $data->setDescription($request->request->get('description'));
         $data->setYear($request->request->get('year'));
         $data->setMonth($request->request->get('month'));
         $entityManager->flush();

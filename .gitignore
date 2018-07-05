@@ -12,4 +12,5 @@
 .project
 .settings
 /web/uploads
+/web/data_files
 .DS_Store

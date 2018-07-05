@@ -5,7 +5,7 @@
 
 {% block body -%}
     <div class="page-title">
-        <h3><span class="red-bg">Data</span>Inter agency common feedback project datas</h3>
+        <h3><span class="red-bg">DATA</span></h3>
     </div>
     <div class="container-fluid" style="margin-top: 20px;">
         <div class="">
@@ -24,7 +24,7 @@
                     </div>
                 
                 
-                    <div class="form-group">
+                    {#<div class="form-group">
                         <label for="">Month</label>
                         <select name="month" class="form-control">
                             <option value="">Select month</option>
@@ -41,7 +41,7 @@
                             <option value="11">November</option>
                             <option value="12">December</option>
                         </select>
-                    </div>
+                    </div>#}
 
                     <button class="btn btn-primary">Filter</button>
                 </form>    
@@ -52,9 +52,9 @@
                 {% for data in datas %}
                 <div class="row">
                   <div class="col-sm-6 col-md-8">
-                    <div class="thumbnail">
+                    <div class="thumbnail" style="min-height: 78px;">
                       <div class="caption">
-                        <h3>{{ data.title }} - {{ data.month }} {{ data.year }}</h3>
+                        <h3>{{ data.title }}</h3>
                       </div>
                     </div>
                   </div>

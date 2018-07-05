@@ -32,6 +32,13 @@ class Data
     /**
      * @var string
      *
+     * @ORM\Column(name="description", type="text", length=10000)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="file", type="string", length=255)
      */
     private $file;
@@ -83,6 +90,30 @@ class Data
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Age
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
