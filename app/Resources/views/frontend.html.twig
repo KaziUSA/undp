@@ -134,6 +134,7 @@
   
     <li><a href="{{ path('data') }}" class="{% if app.request.get('_route') == 'data' %} active {% endif %}">Data</a></li>
     <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
+    <li><a href="{{ path('visualization') }}" class="{% if app.request.get('_route') == 'visualization' %} active {% endif %}">Visualization</a></li>
     <li><a href="{{ path('news') }}" class="{% if (app.request.get('_route') == 'news') or (app.request.get('_route') == 'news_show') %} active {% endif %}">News</a></li>
     {# <li><a href="{{ path('contactus') }}" class="{% if app.request.get('_route') == 'contactus' %} active {% endif %}">Contact</a></li><!-- /contact --> #}
     <li><a href="{{ path('about') }}" class="{% if app.request.get('_route') == 'about' %} active {% endif %}">About</a></li>
