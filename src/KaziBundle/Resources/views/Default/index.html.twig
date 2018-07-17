@@ -57,6 +57,7 @@
 							
 							{# chart #}
 							<a href="{{ path('issue_show', {'id': issueQuestionId}) }}"><div id="container-homepage" class="container-chart" style=""></div></a>
+
 							</div>
 						</div>
 					</div>
@@ -83,6 +84,8 @@
 									{{ issueType.surveyMen }}%
 								</div>
 								</div>
+
+
 							</div>
 						</div>
 						{% endif %}
@@ -91,13 +94,30 @@
 							<div class="u-box u-box-white news-homepage-featured nopadding">
 								<div class="u-box-white-padding">
 								{# pull 4 news feed #}
-								<div class="clearfix">
+								<div class="clearfix">									
+									<div class="u-box u-box-white clearfix" style="height: 450px;">
+										<div class="u-box-white-padding">
+											<div class="surveyDetail"><a href="/visualization">Visualization</a></div>
+
+											<div class="">
+												<div class="">
+													<a href="/visualization">
+													<img src="/img/visualization.png" class="img img-responsive">
+													</a>
+												</div>
+											</div>
+										</div>
+
+
+									</div>
+
+									<div style="display: none;">
 									{% set i = 0 %}
 									{% for entity in entities_news %}
 										{% set i = i + 1 %}
 
 										{# show only two #}
-										{% if i <= 2 %}
+										{% if i <= 1 %}
 										<div class="news-box-module ">
 											<div class="news-box-wrap clearfix">
 
@@ -186,6 +206,7 @@
 										{% endif %}
 
 									{% endfor %}
+									</div>
 								</div>
 								</div>
 							</div>
