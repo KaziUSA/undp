@@ -944,4 +944,14 @@ body.survey {
 		    margin-bottom: 10px;
 		}
 	}
+
+.news-box-module {
+  padding-bottom: 10px;
+}
+
+.no-image-background {
+	background-size: 100px !important;
+    background-repeat: no-repeat;
+    background-color: #88d8ef;
+}
 /* Responsive css ends 
