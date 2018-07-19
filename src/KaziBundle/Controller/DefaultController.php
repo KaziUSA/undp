@@ -31,8 +31,6 @@ class DefaultController extends Controller
         $id = $entity_for_id['0']->getId();
 
         $entity = $em->getRepository('AppBundle:Page')->find($id);//$id - id with key 'o' error
-        //print_r($entities);exit();
-
 
 
         //pull 4 news here
@@ -102,6 +100,11 @@ class DefaultController extends Controller
         }
 
 
+        $criteria = array('status'=> 1);
+        $latest_reports = $em->getRepository('AppBundle:Document')
+            ->findBy($criteria, array('date'=>'desc'), $limit = 4);
+        // \Doctrine\Common\Util\Debug::dump($entities);
+
 
         return array(
             'entity' => $entity,
@@ -109,6 +112,7 @@ class DefaultController extends Controller
             'issueType' => $issueType,
             'issueChartOverview' => $issueChartOverview,
             'issueQuestionId' => $issueQuestion->getId(),
+            'latest_reports' => $latest_reports
         );
     }
 
