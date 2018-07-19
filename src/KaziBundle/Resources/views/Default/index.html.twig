@@ -220,7 +220,7 @@
 				{# pull 4 reports feed #}
 				<div class="news-homepage clearfix">
 					{% for latest_report in latest_reports %}
-						<div class="news-box-module" style="margin-bottom: 10px;">
+						<div class="news-box-module">
 							<div class="news-box-wrap">
 								<div class="news-graphics">
 									{% if latest_report.imgUrl != '' %}
@@ -263,7 +263,7 @@
 						{# copied from issuenews/index.html #}
 						{# show only 4 #}
 						{% if ni >= 3 and ni <= 6 %}
-						<div class="news-box-module" style="margin-bottom: 10px;">
+						<div class="news-box-module">
 							<div class="news-box-wrap">
 								{% if entity.imageUrl != '' or entity.youtubeUrlEmbed != '' %}
 									<div class="news-graphics">
