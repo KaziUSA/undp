@@ -462,11 +462,14 @@ class Document
         // if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
-
+        var_dump('test');
+        exit;
+        
         if(isset($this->path)) {
             var_dump($this->path);
         }
-        var_dump($this->getUploadRootDir() );
+
+        var_dump($this->getUploadRootDir());
 
         $this->getFile()->move($this->getUploadRootDir(), $this->path);
 
