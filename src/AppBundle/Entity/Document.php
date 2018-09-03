@@ -467,8 +467,6 @@ class Document
             var_dump($this->path);
         }
 
-        var_dump($this->getUploadRootDir());
-
         $this->getFile()->move($this->getUploadRootDir(), $this->path);
 
         // check if we have an old image
