@@ -211,7 +211,7 @@ class DataController extends Controller
             $image = '/data_files/' .$fileName;
             $upload_success= $file->move('data_files', $fileName);
 
-            $data->setFile($request->request->get('file'));
+            $data->setFile($fileName);
         }
 
         //Save data
