@@ -121,17 +121,6 @@
 	</style>
   <ul class="nav navbar-nav">
     <li><a href="{{ path('issue') }}" class="{% if app.request.get('_route') == 'issue_show' %} active {% endif %}">Survey</a></li>
-    <li class="dropdown">
-    	<a href="{{ path('platform') }}" class="dropdown-toggle {% if (app.request.get('_route') == 'platform') or (app.request.get('_route') == 'set2') %} active {% endif %}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Platform</a>
-    	<ul class="dropdown-menu">
-    		<li><a href="{{ path('platform') }}">2015</a></li>
-    		<li><a href="{{ path('set2') }}">2016</a></li>
-        <li><a href="{{ path('set3') }}">2017</a></li>
-        <li><a href="{{ path('set4') }}">2018</a></li>
-    	</ul>
-    </li>
-
-  
     <li><a href="{{ path('data') }}" class="{% if app.request.get('_route') == 'data' %} active {% endif %}">Data</a></li>
     <li><a href="{{ path('reports') }}" class="{% if app.request.get('_route') == 'reports' %} active {% endif %}">Reports</a></li>
     <li><a href="{{ path('visualization') }}" class="{% if app.request.get('_route') == 'visualization' %} active {% endif %}">Visualization</a></li>
